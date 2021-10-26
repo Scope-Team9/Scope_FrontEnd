@@ -2,35 +2,62 @@ import React from "react";
 import styled from "styled-components";
 
 const Text = props => {
-  const { bold, color, size, children, margin, _onClick } = props;
-
-  const styles = { bold: bold, color: color, size: size, margin };
+  const {
+    children,
+    color,
+    size,
+    bold,
+    align,
+    margin,
+    padding,
+    family,
+    border,
+    _onClick,
+    cursor,
+    hover,
+  } = props;
+  const styles = {
+    color,
+    size,
+    bold,
+    align,
+    margin,
+    padding,
+    family,
+    border,
+    cursor,
+  };
   return (
-    <P {...styles} onClick={_onClick}>
+    <ElText {...styles} onClick={_onClick}>
       {children}
-    </P>
+    </ElText>
   );
 };
 
 Text.defaultProps = {
   children: null,
+  color: null,
+  size: null,
   bold: false,
-  color: "#222831",
-  size: "14px",
+  align: null,
   margin: false,
+  padding: false,
+  family: false, //폰트 타입
+  border: null,
   _onClick: () => {},
+  cursor: null,
 };
 
-const P = styled.p`
-  display: block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-
+const ElText = styled.span`
   color: ${props => props.color};
   font-size: ${props => props.size};
-  font-weight: ${props => (props.bold ? "600" : "400")};
-  ${props => (props.margin ? `margin: ${props.margin};` : "")}
+  font-weight: ${props => (props.bold ? "bold" : "400")};
+  text-align: ${props => props.align};
+  margin: ${props => props.margin};
+  padding: ${props => props.padding};
+  family: ${props => props.family};
+  border: ${props => props.border};
+  cursor: ${props => props.cursor};
 `;
 
 export default Text;

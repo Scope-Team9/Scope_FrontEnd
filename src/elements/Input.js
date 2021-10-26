@@ -1,29 +1,52 @@
 import React from "react";
 import styled from "styled-components";
-
-import { Text, Grid } from "./Index";
+import { Grid, Text } from "./Index";
 
 const Input = props => {
   const {
     label,
     placeholder,
     _onChange,
+    onSubmit,
     type,
     multiLine,
+    edit,
     value,
-    is_submit,
-    onSubmit,
-    _onkeyup,
-    _onkeydown,
+    margin,
+    width,
+    padding,
+    height,
+    border,
+    borderRadius,
+    bg,
+    backgroundImage,
+    backgroundColor,
+    innerRef,
+    inputFocusOutline,
+    inputFocusBorder,
+    inputFocusBoxShadow,
+    fontSize,
   } = props;
-
+  const styles = {
+    padding,
+    height,
+    border,
+    borderRadius,
+    bg,
+    backgroundImage,
+    inputFocusOutline,
+    inputFocusBorder,
+    inputFocusBoxShadow,
+    fontSize,
+  };
   if (multiLine) {
     return (
       <Grid>
         {label && <Text margin='0px'>{label}</Text>}
         <ElTextarea
-          rows={10}
+          backgroundColor={backgroundColor}
           value={value}
+          rows={10}
           placeholder={placeholder}
           onChange={_onChange}
         ></ElTextarea>
@@ -31,27 +54,52 @@ const Input = props => {
     );
   }
 
-  return (
-    <React.Fragment>
+  if (edit) {
+    return (
       <Grid>
         {label && <Text margin='0px'>{label}</Text>}
-        {is_submit ? (
-          <ElInput
-            type={type}
-            placeholder={placeholder}
-            onChange={_onChange}
-            value={value}
-            onKeyPress={e => {
-              if (e.key === "Enter") {
-                onSubmit(e);
-              }
-            }}
-          />
-        ) : (
-          <ElInput type={type} placeholder={placeholder} onChange={_onChange} />
-        )}
+        <ElInput
+          {...styles}
+          backgroundColor={backgroundColor}
+          width={width}
+          margin={margin}
+          type={type}
+          placeholder={placeholder}
+          onChange={_onChange}
+          ref={innerRef}
+          onKeyPress={e => {
+            console.log(e.key);
+            if (e.key === "Enter") {
+              console.log("pass");
+              onSubmit(e);
+            }
+          }}
+        />
       </Grid>
-    </React.Fragment>
+    );
+  }
+
+  return (
+    <Grid>
+      {label && <Text margin='0px'>{label}</Text>}
+      <ElInput
+        {...styles}
+        backgroundColor={backgroundColor}
+        width={width}
+        margin={margin}
+        type={type}
+        placeholder={placeholder}
+        onChange={_onChange}
+        ref={innerRef}
+        onKeyPress={e => {
+          console.log(e.key);
+          if (e.key === "Enter") {
+            console.log("pass");
+            onSubmit(e);
+          }
+        }}
+      />
+    </Grid>
   );
 };
 
@@ -61,23 +109,50 @@ Input.defaultProps = {
   placeholder: "텍스트를 입력해주세요.",
   type: "text",
   value: "",
+  margin: 0,
+  padding: false,
+  width: "100%",
+  height: false,
+  border: false,
+  borderRadius: false,
+  bg: false,
+  backgroundImage: false,
   is_submit: false,
-  onSubmit: () => {},
   _onChange: () => {},
+  onSubmit: () => {},
 };
 
 const ElTextarea = styled.textarea`
-  border: 1px solid #212121;
-  width: 100%;
-  padding: 12px 4px;
+  margin: ${props => props.margin};
+  border: ${props => props.border};
+  width: ${props => props.width};
+  height: ${props => props.height};
+  border-radius: ${props => props.borderRadius};
+  background: ${props => props.bg};
+  padding: ${props => props.padding};
+  backgroundimage: ${props => props.backgroundImage};
   box-sizing: border-box;
+  background-color: ${props => props.backgroundColor};
 `;
 
 const ElInput = styled.input`
-  border: 1px solid #212121;
-  width: 100%;
-  padding: 12px 4px;
+  margin: ${props => props.margin};
+  border: ${props => props.border};
+  width: ${props => props.width};
+  height: ${props => props.height};
+  border-radius: ${props => props.borderRadius};
+  background: ${props => props.bg};
+  padding: ${props => props.padding};
+  backgroundimage: ${props => props.backgroundImage};
   box-sizing: border-box;
+  border-radius: 5px;
+  background-color: ${props => props.backgroundColor};
+  font-size: ${props => props.fontSize};
+  &:focus {
+    outline: ${props => props.inputFocusOutline};
+    border: ${props => props.inputFocusBorder};
+    box-shadow: ${props => props.inputFocusBoxShadow};
+  }
 `;
 
 export default Input;
