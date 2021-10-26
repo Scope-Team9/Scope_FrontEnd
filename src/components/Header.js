@@ -9,7 +9,7 @@ const Header = () => {
       <Grid
         width='100vw'
         height='60px'
-        boxShadow='rgba(0, 0, 0, 0.1) 0px 2px 12px;'
+        boxShadow='rgba(0, 0, 0, 0.1) 0px 2px 10px;'
         display='flex'
         justifyContent='space-between'
         alignItems='center'
