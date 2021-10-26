@@ -1,15 +1,15 @@
 import React from "react";
-import { Grid } from "../elements/Index";
+import { Grid, Button } from "../elements/Index";
 import HeaderLeft from "../components/HeaderLeft";
-import UserInfoModal from "./UserInfoModal";
+import HeaderRight from "./HeaderRight";
 
 const Header = () => {
   return (
     <>
       <Grid
         width='100vw'
-        height='50px'
-        boxShadow='rgba(0, 0, 0, 0.1) 0px 2px 12px;'
+        height='60px'
+        boxShadow='rgba(0, 0, 0, 0.1) 0px 2px 10px;'
         display='flex'
         justifyContent='space-between'
         alignItems='center'
@@ -17,13 +17,13 @@ const Header = () => {
         top='0'
         left='0'
         bg='#fff'
-        padding='0 0px 0 12px'
+        padding='20px'
       >
-        <Grid>
+        <Grid width='auto' height='auto'>
           <HeaderLeft />
         </Grid>
-        <Grid>
-          <UserInfoModal />
+        <Grid width='auto' height='auto'>
+          <HeaderRight />
         </Grid>
       </Grid>
     </>
