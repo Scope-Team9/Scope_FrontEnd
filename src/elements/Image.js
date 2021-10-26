@@ -87,6 +87,7 @@ const MainImage = styled.div`
 
 const MainInner = styled.div`
   width: 100%;
+  margin: auto;
   min-width: 25rem;
   position: relative;
   padding-top: 20%;

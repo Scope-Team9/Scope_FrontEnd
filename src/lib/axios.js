@@ -1,10 +1,10 @@
 import axios from "axios";
 import { setCookie } from "../shared/Cookie";
-import { history } from "../redux/ConfigureStore";
+import { history } from "../redux/configureStore";
 
 const instance = axios.create({
-  // baseURL: 'http://localhost:4000',
-  baseURL: "http://13.125.243.106:8080",
+  baseURL: "http://localhost:4000",
+  // baseURL: "http://13.125.243.106:8080",
   headers: {
     "content-type": "application/json; charset=UTF-8",
     accept: "application/json",
@@ -13,7 +13,7 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use(
-  (config) => {
+  config => {
     const cookie = document.cookie;
     console.log(cookie);
     if (cookie === "") {
@@ -33,136 +33,141 @@ instance.interceptors.request.use(
     };
     return config;
   },
-  (err) => {
+  err => {
     console.log(err);
   }
 );
 
-instance.interceptors.response.use(
-  (success) => {
-    console.log(success);
-    const response = success.data;
-    console.log(response.token);
+// instance.interceptors.response.use(
+//   (success) => {
+//     console.log(success);
+//     const response = success.data;
+//     console.log(response.token);
 
-    if (
-      response.statusCode === 200 &&
-      response.responseMessage === "로그인 성공"
-    ) {
-      let userCookie = success.data.token;
-      console.log(userCookie);
-      setCookie("user_id", userCookie, 30);
-      window.alert("로그인성공");
-      history.push("/main");
-    }
+//     if (
+//       response.statusCode === 200 &&
+//       response.responseMessage === "로그인 성공"
+//     ) {
+//       let userCookie = success.data.token;
+//       console.log(userCookie);
+//       setCookie("user_id", userCookie, 30);
+//       window.alert("로그인성공");
+//       history.push("/main");
+//     }
 
-    if (
-      response.statusCode === 200 &&
-      response.responseMessage === "게시글 조회 성공"
-    ) {
-      return response.posts;
-    }
+//     if (
+//       response.statusCode === 200 &&
+//       response.responseMessage === "게시글 조회 성공"
+//     ) {
+//       return response.posts;
+//     }
 
-    if (
-      response.statusCode === 200 &&
-      response.responseMessage === "회원가입 성공"
-    ) {
-      window.alert("회원가입성공");
-      history.push("/");
-      return response.posts;
-    }
+//     if (
+//       response.statusCode === 200 &&
+//       response.responseMessage === "회원가입 성공"
+//     ) {
+//       window.alert("회원가입성공");
+//       history.push("/");
+//       return response.posts;
+//     }
 
-    return success;
-  },
-  (error) => {
-    console.log(error.response);
-    //비밀번호가 비워있을 떄
-    if (
-      error.response.data.statusCode === 400 &&
-      error.response.data.responseMessage === "비밀번호를 입력해주세요"
-    ) {
-      return window.alert("비밀번호를 입력해주세요");
-    }
-    if (
-      error.response.data.statusCode === 400 &&
-      error.response.data.responseMessage === "회원 정보를 찾을 수 없습니다."
-    ) {
-      return window.alert("회원 정보를 찾을 수 없습니다");
-    }
+//     return success;
+//   },
+//   (error) => {
+//     console.log(error.response);
+//     //비밀번호가 비워있을 떄
+//     if (
+//       error.response.data.statusCode === 400 &&
+//       error.response.data.responseMessage === "비밀번호를 입력해주세요"
+//     ) {
+//       return window.alert("비밀번호를 입력해주세요");
+//     }
+//     if (
+//       error.response.data.statusCode === 400 &&
+//       error.response.data.responseMessage === "회원 정보를 찾을 수 없습니다."
+//     ) {
+//       return window.alert("회원 정보를 찾을 수 없습니다");
+//     }
 
-    if (
-      error.response.data.statusCode === 400 &&
-      error.response.data.responseMessage === "이름을 입력해주세요"
-    ) {
-      return window.alert("이름을 입력해주세요");
-    }
-    //올바르지 않은 이메일 형식
-    if (
-      error.response.data.statusCode === 400 &&
-      error.response.data.responseMessage === "이메일 형식이 올바르지 않습니다"
-    ) {
-      return window.alert("이메일 형식이 올바르지 않습니다");
-    }
+//     if (
+//       error.response.data.statusCode === 400 &&
+//       error.response.data.responseMessage === "이름을 입력해주세요"
+//     ) {
+//       return window.alert("이름을 입력해주세요");
+//     }
+//     //올바르지 않은 이메일 형식
+//     if (
+//       error.response.data.statusCode === 400 &&
+//       error.response.data.responseMessage === "이메일 형식이 올바르지 않습니다"
+//     ) {
+//       return window.alert("이메일 형식이 올바르지 않습니다");
+//     }
 
-    if (
-      error.response.data.statusCode === 400 &&
-      error.response.data.responseMessage === "비밀번호는 6~20자리로 해주세요"
-    ) {
-      return window.alert("비밀번호는 6~20자리로 해주세요");
-    }
+//     if (
+//       error.response.data.statusCode === 400 &&
+//       error.response.data.responseMessage === "비밀번호는 6~20자리로 해주세요"
+//     ) {
+//       return window.alert("비밀번호는 6~20자리로 해주세요");
+//     }
 
-    if (
-      error.response.status === 401 &&
-      error.response.data.responseMessage === "로그인이 필요합니다."
-    ) {
-      window.alert("로그인이 필요합니다.");
-      // history.replace('/');
-    }
+//     if (
+//       error.response.status === 401 &&
+//       error.response.data.responseMessage === "로그인이 필요합니다."
+//     ) {
+//       window.alert("로그인이 필요합니다.");
+//       // history.replace('/');
+//     }
 
-    if (
-      error.response.status === 403 &&
-      error.response.responseMessage === "권한이 없습니다."
-    ) {
-      window.alert("권한이 없습니다.");
-    }
+//     if (
+//       error.response.status === 403 &&
+//       error.response.responseMessage === "권한이 없습니다."
+//     ) {
+//       window.alert("권한이 없습니다.");
+//     }
 
-    if (
-      error.response.status === 404 &&
-      error.response.responseMessage === "게시글을 찾을 수 없습니다."
-    ) {
-      window.alert("게시글을 찾을 수 없습니다.");
-    }
+//     if (
+//       error.response.status === 404 &&
+//       error.response.responseMessage === "게시글을 찾을 수 없습니다."
+//     ) {
+//       window.alert("게시글을 찾을 수 없습니다.");
+//     }
 
-    if (
-      error.response.data.statusCode === 403 &&
-      error.response.data.responseMessage === "권한이 없습니다."
-    ) {
-      return window.alert("권한이 없습니다.");
-    }
+//     if (
+//       error.response.data.statusCode === 403 &&
+//       error.response.data.responseMessage === "권한이 없습니다."
+//     ) {
+//       return window.alert("권한이 없습니다.");
+//     }
 
-    return error;
-  }
-);
+//     return error;
+//   }
+// );
 
 export const apis = {
   //회원가입 및 로그인 관련 api
-  login: (loginInfo) => instance.post("/user/login", loginInfo),
-  signup: (registerInfo) => instance.post("/user/register", registerInfo),
-
+  login: loginInfo => instance.post("/user/login", loginInfo),
+  signup: registerInfo => instance.post("/user/register", registerInfo),
+  signup: registerInfo =>
+    instance.post(
+      "/api/post?filter=recommend&displayNumber=6&page=2&",
+      registerInfo
+    ),
   // 유저 관련 api
-  updateProfileImg: (imageUrl) => instance.put(`/user/image`, imageUrl),
+  updateProfileImg: imageUrl => instance.put(`/user/image`, imageUrl),
   getUserInfo: () => instance.get("/user/info"),
   getAllUserList: () => instance.get("/user/list"),
 
   //포스트 관련 api
-  getPost: () => instance.get("/post"),
+  getPost: () =>
+    instance.get("/api/post?filter=&displayNumber=15&page=1&sort=createdAt"),
   //data.json용
   // getPost: () => instance.get(`/post`),
-  addPost: (postInfo) => instance.post(`/post`, postInfo),
+  addPost: postInfo => instance.post(`/post`, postInfo),
   updatePost: (postId, postInfo) => instance.put(`/post/${postId}`, postInfo),
-  deletePost: (postId) => instance.delete(`/post/${postId}`),
-  clickLike: (postId) => instance.post(`/post/${postId}/like`),
-  addComment: (commentInfo) => instance.post("/comment", commentInfo),
-  deleteComment: (commentId) => instance.delete(`/comment/${commentId}`),
+  deletePost: postId => instance.delete(`/post/${postId}`),
+  clickLike: postId => instance.post(`/post/${postId}/like`),
+  addComment: commentInfo => instance.post("/comment", commentInfo),
+  deleteComment: commentId => instance.delete(`/comment/${commentId}`),
   editComment: (commentId, content) =>
     instance.put(`/comment/${commentId}`, content),
 };

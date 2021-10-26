@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Grid = props => {
+const Grid = (props) => {
   const {
     children,
     _onClick,
@@ -40,6 +40,7 @@ const Grid = props => {
     left,
     right,
     hover,
+    zIndex,
   } = props;
 
   const styles = {
@@ -78,6 +79,7 @@ const Grid = props => {
     left,
     right,
     hover,
+    zIndex,
   };
   return (
     <GridBox {...styles} onClick={_onClick} id={id}>
@@ -124,49 +126,50 @@ Grid.defaultProps = {
 };
 
 const GridBox = styled.div`
-  margin: ${props => props.margin};
-  padding: ${props => props.padding};
-  width: ${props => props.width};
-  height: ${props => props.height};
-  background: ${props => props.bg};
-  display: ${props => props.display};
-  ${props =>
+  margin: ${(props) => props.margin};
+  padding: ${(props) => props.padding};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  background: ${(props) => props.bg};
+  display: ${(props) => props.display};
+  ${(props) =>
     props.flexDirection ? `flex-direction:${props.flexDirection}` : ""};
-  flex-wrap: ${props => props.flexWrap};
-  ${props => (props.alignItems ? `align-items: ${props.alignItems};` : "")};
-  justify-content: ${props => props.justifyContent};
-  text-align: ${props => props.textAlign};
-  border: ${props => props.border};
-  ${props =>
+  flex-wrap: ${(props) => props.flexWrap};
+  ${(props) => (props.alignItems ? `align-items: ${props.alignItems};` : "")};
+  justify-content: ${(props) => props.justifyContent};
+  text-align: ${(props) => props.textAlign};
+  border: ${(props) => props.border};
+  ${(props) =>
     props.borderRadius ? `border-radius: ${props.borderRadius}` : ""};
-  border-top: ${props => props.borderTop};
-  border-bottom: ${props => props.borderBottom};
-  border-left: ${props => props.borderLeft};
-  border-right: ${props => props.borderRight};
-  overflow-x: ${props => props.overflowX};
-  overflow-y: ${props => props.overflowY};
-  overflow: ${props => props.overflow};
-  min-width: ${props => props.minWidth};
-  max-width: ${props => props.maxWidth};
-  min-height: ${props => props.minHeight};
-  max-height: ${props => props.maxHeight};
-  background-color: ${props => props.backgroundColor};
-  box-sizing: ${props => props.boxSizing};
-  box-shadow: ${props => props.boxShadow};
-  position: ${props => props.position};
-  top: ${props => props.top};
-  bottom: ${props => props.bottom};
-  left: ${props => props.left};
-  right: ${props => props.right};
-  background-color: ${props => props.backgroundColor};
+  border-top: ${(props) => props.borderTop};
+  border-bottom: ${(props) => props.borderBottom};
+  border-left: ${(props) => props.borderLeft};
+  border-right: ${(props) => props.borderRight};
+  overflow-x: ${(props) => props.overflowX};
+  overflow-y: ${(props) => props.overflowY};
+  overflow: ${(props) => props.overflow};
+  min-width: ${(props) => props.minWidth};
+  max-width: ${(props) => props.maxWidth};
+  min-height: ${(props) => props.minHeight};
+  max-height: ${(props) => props.maxHeight};
+  background-color: ${(props) => props.backgroundColor};
+  box-sizing: ${(props) => props.boxSizing};
+  box-shadow: ${(props) => props.boxShadow};
+  position: ${(props) => props.position};
+  top: ${(props) => props.top};
+  bottom: ${(props) => props.bottom};
+  left: ${(props) => props.left};
+  right: ${(props) => props.right};
+  background-color: ${(props) => props.backgroundColor};
+  z-index: ${(props) => props.zIndex};
 
   :hover {
-    ${props =>
+    ${(props) =>
       props.hover
         ? `background-color:${props.hover};
   cursor: pointer;`
         : ""}
-    ${props => (props.hover_font ? `color : ${props.hover_font}` : null)}
+    ${(props) => (props.hover_font ? `color : ${props.hover_font}` : null)}
   }
 
   ::-webkit-scrollbar {

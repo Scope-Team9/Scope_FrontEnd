@@ -22,11 +22,12 @@ const Carousel = () => {
     // 레이지 로딩할 거야?
     lazyLoad: true,
     // 슬라이더를 넘기지 않고 fade in/out 하는 식으로 트랜지션 됨
-    // fade: true,
+    fade: true,
+    pauseOnHover: true,
   };
 
   return (
-    <div>
+    <div style={{ margin: "auto" }}>
       <Slider {...settings}>
         <div>
           <Image src={Cap} shape="main" />
