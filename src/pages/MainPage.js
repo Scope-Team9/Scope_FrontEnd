@@ -8,18 +8,21 @@ import SideBar from "../components/SideBar";
 const MainPage = () => {
   return (
     <>
-      <ResponsiveSidebar></ResponsiveSidebar>
       <Grid height="100%" bg="#ffff" padding="60px 0 10px 0">
         <HeaderWrapper>
           <Header />
         </HeaderWrapper>
       </Grid>
-      <FFlex>
+
+      <ResponsiveSidebar>
         <SideBar />
-      </FFlex>
-      <div style={{ margin: "31px 0 0 100px" }}>
-        <Carousel />
-      </div>
+      </ResponsiveSidebar>
+
+      <Grid margin="31px 0 0 100px ">
+        <Inside>
+          <Carousel />
+        </Inside>
+      </Grid>
     </>
   );
 };
@@ -37,8 +40,14 @@ const ResponsiveSidebar = styled.div`
   } ;
 `;
 
+const Inside = styled.div`
+  @media screen and (max-width: 750px) {
+    margin-left: -100px;
+  } ;
+`;
+
 const FFlex = styled.div`
-  display: flex;
+  margin-right: 60px;
 `;
 
 export default MainPage;

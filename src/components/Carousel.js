@@ -24,6 +24,8 @@ const Carousel = () => {
     // 슬라이더를 넘기지 않고 fade in/out 하는 식으로 트랜지션 됨
     fade: true,
     pauseOnHover: true,
+    // 좌우 화살표 줄 것인가
+    arrows: false,
   };
 
   return (
