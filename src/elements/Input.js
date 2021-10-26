@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Text, Grid } from "./index";
+import { Text, Grid } from "./Index";
 
 const Input = props => {
   const {
