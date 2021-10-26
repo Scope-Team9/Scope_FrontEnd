@@ -14,6 +14,15 @@ const MainPage = () => {
         <HeaderWrapper>
           <Header />
         </HeaderWrapper>
+        <Grid
+          top='500px'
+          left='500px'
+          width='1000px'
+          backgroundColor='#111'
+          height='500px'
+        >
+          강지훈
+        </Grid>
       </Grid>
     </>
   );

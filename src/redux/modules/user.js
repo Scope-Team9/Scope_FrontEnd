@@ -3,7 +3,7 @@ import { produce } from "immer";
 import { apis } from "../../lib/axios";
 
 //user.js 로그인
-const loginMiddleware = loginInfo => {
+const kakaologinMiddleware = loginInfo => {
   return () => {
     apis
       .login(loginInfo)
@@ -19,7 +19,7 @@ const loginMiddleware = loginInfo => {
 };
 
 const userCreators = {
-  loginMiddleware,
+  kakaologinMiddleware,
 };
 
 export { userCreators };

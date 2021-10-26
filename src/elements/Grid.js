@@ -40,6 +40,7 @@ const Grid = props => {
     left,
     right,
     hover,
+    zIndex,
   } = props;
 
   const styles = {
@@ -78,6 +79,7 @@ const Grid = props => {
     left,
     right,
     hover,
+    zIndex,
   };
   return (
     <GridBox {...styles} onClick={_onClick} id={id}>
@@ -159,6 +161,7 @@ const GridBox = styled.div`
   left: ${props => props.left};
   right: ${props => props.right};
   background-color: ${props => props.backgroundColor};
+  z-index: ${props => props.zIndex};
 
   :hover {
     ${props =>
