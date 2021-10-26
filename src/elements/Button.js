@@ -1,65 +1,124 @@
 import React from "react";
 import styled from "styled-components";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 const Button = props => {
-  const { text, _onClick, is_float, children, margin, width, padding } = props;
+  const {
+    color,
+    text,
+    _onClick,
+    isFloat,
+    children,
+    margin,
+    width,
+    padding,
+    backgroundColor,
+    height,
+    fontSize,
+    borderRadius,
+    top,
+    bottom,
+    left,
+    right,
+    hover,
+    display,
+  } = props;
 
-  if (is_float) {
+  if (isFloat) {
     return (
-      <React.Fragment>
-        <FloatButton onClick={_onClick}>
-          <AddCircleIcon />
-        </FloatButton>
-      </React.Fragment>
+      <>
+        <FloatButton onClick={_onClick}></FloatButton>
+      </>
     );
   }
 
   const styles = {
-    margin: margin,
-    width: width,
-    padding: padding,
+    margin,
+    width,
+    padding,
+    backgroundColor,
+    color,
+    height,
+    fontSize,
+    borderRadius,
+    top,
+    bottom,
+    left,
+    right,
+    hover,
+    display,
   };
 
   return (
-    <React.Fragment>
+    <>
       <ElButton {...styles} onClick={_onClick}>
         {text ? text : children}
       </ElButton>
-    </React.Fragment>
+    </>
   );
 };
 
 Button.defaultProps = {
+  position: false,
   text: false,
   children: null,
   _onClick: () => {},
-  is_float: false,
-  margin: false,
+  isFloat: false,
+  margin: "auto",
   width: "100%",
   padding: "12px 0px",
+  color: "white",
+  height: "50px",
+  top: null,
+  bottom: null,
+  left: null,
+  right: null,
+  hover: null,
+  display: null,
 };
 
 const ElButton = styled.button`
   width: ${props => props.width};
-  background-color: #212121;
-  color: #ffffff;
+  color: ${props => props.color};
   padding: ${props => props.padding};
+  height: ${props => props.height};
+  font-size: ${props => props.fontSize};
+  margin: ${props => props.margin};
+  ${props =>
+    props.backgroundColor
+      ? `background-color:${props.backgroundColor}`
+      : "background-color: blue"};
   box-sizing: border-box;
+  border-radius: 5px;
+  font-weight: bold;
   border: none;
+  ${props =>
+    props.borderRadius
+      ? `border-radius:${props.borderRadius}`
+      : "border-radius: 0px"};
   cursor: pointer;
-  ${props => (props.margin ? `margin: ${props.margin};` : "")}
-  font-size: 15px;
+  flex-shrink: 0;
+  &:hover {
+    background-color: ${props => props.hover};
+  }
+  vertical-align: middle;
+  top: ${props => props.top};
+  bottom: ${props => props.bottom};
+  left: ${props => props.left};
+  right: ${props => props.right};
+  position: ${props => props.position};
+  flex-shrink: 0;
+  display: ${props => props.display};
 `;
 
-const FloatButton = styled.button`
+const FloatButton = styled.div`
   width: 50px;
   height: 50px;
-  background-color: #212121;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: ${props => props.color};
   box-sizing: border-box;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.24);
   font-size: 36px;
-  font-weight: 800;
+  font-weight: bold;
   position: fixed;
   bottom: 50px;
   right: 16px;
@@ -67,6 +126,7 @@ const FloatButton = styled.button`
   vertical-align: middle;
   border: none;
   border-radius: 50px;
+  display: ${props => props.display};
 `;
 
 export default Button;
