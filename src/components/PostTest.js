@@ -27,7 +27,7 @@ const PostTest = (props) => {
             borderRadius="20px 20px 20px 0px"
           >
             <Grid>
-              <TitleDate>D-3</TitleDate>
+              <TitleDate>D-2</TitleDate>
             </Grid>
 
             <Grid
