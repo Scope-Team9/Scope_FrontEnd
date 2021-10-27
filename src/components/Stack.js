@@ -1,16 +1,30 @@
+/* eslint-disable */
 import React from "react";
 import styled from "styled-components";
-
+import { useSelector, useDispatch } from "react-redux";
+import { postActions } from "../redux/modules/post";
 const Stack = () => {
+  const dispatch = useDispatch();
+
+  const [stackList, setStackList] = React.useState({
+    JavaScript: null,
+    React: null,
+    Spring: null,
+  });
+
+  console.log(stackList);
+
   const onclick = (stack) => {
     window.alert(stack);
+    setStackList.stack(stack);
+    // dispatch(postActions.getPostAPI());
   };
   return (
     <div>
       <IMGS
         src="img/react.png"
         onClick={() => {
-          onclick("react");
+          onclick("React");
         }}
       ></IMGS>
       <IMGS src="img/react.png"></IMGS>
