@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { userCreators } from "../redux/modules/user";
 import { GoogleLogin } from "react-google-login";
 
-const LoginModal = props => {
+const LoginModal = (props) => {
   const dispatch = useDispatch();
 
   //모달
@@ -19,11 +19,11 @@ const LoginModal = props => {
   const clientId =
     "334506855914-cqhtql5mhh7nkadkov7bspshehiejo5g.apps.googleusercontent.com";
 
-  const onSuccess = res => {
+  const onSuccess = (res) => {
     console.log("Login Success", res);
   };
 
-  const onFailure = res => {
+  const onFailure = (res) => {
     console.log("Login Failed", res);
   };
 
