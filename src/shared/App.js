@@ -5,13 +5,24 @@ import { history } from "../redux/configureStore";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Text from "../pages/Text";
 import MainPage from "../pages/MainPage";
+import KakaoRedirect from "./KakaoRedirect";
 
 function App() {
   return (
     <React.Fragment>
       <ConnectedRouter history={history}>
         <Switch>
-          <Route path='/' exact component={MainPage}></Route>
+          <Route path="/" exact component={MainPage}></Route>
+          <Route
+            path="/user/kakao/callback"
+            exact
+            component={KakaoRedirect}
+          ></Route>
+          <Route
+            path="/user/github/callback"
+            exact
+            component={KakaoRedirect}
+          ></Route>
         </Switch>
       </ConnectedRouter>
     </React.Fragment>
