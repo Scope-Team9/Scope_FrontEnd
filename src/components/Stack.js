@@ -12,11 +12,12 @@ const Stack = () => {
     Spring: null,
   });
 
-  console.log(stackList);
-
   const onclick = (stack) => {
-    window.alert(stack);
-    setStackList.stack(stack);
+    // window.alert(stack);
+    console.log(stackList);
+    let aa = { stack: stack };
+    setStackList(aa);
+    // setStackList.stack(stack);
     // dispatch(postActions.getPostAPI());
   };
   return (
