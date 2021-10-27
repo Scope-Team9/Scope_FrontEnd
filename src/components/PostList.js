@@ -1,63 +1,47 @@
-// PostList.js
-
-// import를 한다.
+/* eslint-disable */
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import Post from "./Post";
+import PostTest from "./PostTest";
+import { postActions } from "../redux/modules/post";
 import styled from "styled-components";
 
-import { Grid, Text, Input } from "../elements/Index";
+const PostList = () => {
+  const dispatch = useDispatch();
 
-// PostList의 함수형 컴포넌트를 만든다.
-const PostList = (props) => {
+  // React.useEffect(() => {
+  //   dispatch(postActions.getPostAPI());
+  // }, []);
+
+  const product_list = useSelector((state) => state.post);
+
   return (
     <React.Fragment>
-      <Title>게시글 작성페이지</Title>
-      <Grid padding="16px">
-        <Grid>
-          <Text>제목</Text>
-          <Input
-            width="500px"
-            height="30px"
-            padding="10px"
-            placeholder="제목을 입력해주세요."
-          ></Input>
-        </Grid>
-        <Grid>
-          <Text>한줄소개</Text>
-          <Input
-            width="500px"
-            height="30px"
-            padding="10px"
-            placeholder="한줄소개를 입력해주세요."
-          ></Input>
-        </Grid>
-        <Grid>
-          <Text>프로젝트 기간</Text>
-          <Input
-            width="500px"
-            height="30px"
-            padding="10px"
-            placeholder="프로젝트 기간을 입력해주세요."
-          ></Input>
-        </Grid>
-        <Grid>
-          <Text>기술스택 선택</Text>
-          <Input
-            width="500px"
-            height="30px"
-            padding="10px"
-            placeholder="기술스택을 선택해주세요."
-          />
-        </Grid>
-      </Grid>
+      {/* <div>
+        {product_list.map((p, idx) => (
+          <Post key={idx} {...p} />
+        ))}
+      </div> */}
+      <PostWrap>
+        <PostTest />
+        <PostTest />
+        <PostTest />
+        <PostTest />
+        <PostTest />
+        <PostTest />
+        <PostTest />
+      </PostWrap>
     </React.Fragment>
   );
 };
 
-// styled-components를 사용한다.
-const Title = styled.h1`
-  display: flex;
-  justify-content: center;
+const PostWrap = styled.div`
+  max-width: 1300px;
+  margin: auto;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-gap: 40px;
 `;
 
-// export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default PostList;

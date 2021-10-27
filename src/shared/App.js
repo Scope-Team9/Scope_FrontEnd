@@ -3,12 +3,9 @@ import React from "react";
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configureStore";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Text from "../pages/Text";
-import Header from "../components/Header";
+
 import MainPage from "../pages/MainPage";
-import Post from "../pages/Post";
-import PostDetail from "../pages/PostDetail";
-import MyPage from "../pages/MyPage";
+import KakaoRedirect from "../shared/kakaoRedirect";
 
 function App() {
   return (
@@ -19,6 +16,16 @@ function App() {
           <Route path="/post" exact component={Post}></Route>
           <Route path="/postdetail" exact component={PostDetail}></Route>
           <Route path="/mypage" exact component={MyPage}></Route>
+          <Route
+            path="/user/kakao/callback"
+            exact
+            component={KakaoRedirect}
+          ></Route>
+          <Route
+            path="/user/github/callback"
+            exact
+            component={KakaoRedirect}
+          ></Route>
         </Switch>
       </ConnectedRouter>
     </React.Fragment>
