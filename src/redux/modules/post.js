@@ -12,7 +12,7 @@ const initialState = {
   posts: [],
   // is_loaded: false,
   // infinityProducts: [],
-  // paging: { start: null, next: null },
+  paging: { start: null, next: null },
   is_loading: false,
 };
 

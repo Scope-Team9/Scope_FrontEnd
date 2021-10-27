@@ -7,6 +7,7 @@ import Carousel from "../components/Carousel";
 import SideBar from "../components/SideBar";
 import Infinity from "../shared/Infinity";
 import Stack from "../components/Stack";
+import PostList from "../components/PostList";
 
 const MainPage = () => {
   return (
@@ -27,6 +28,9 @@ const MainPage = () => {
           <Stacks>
             <Stack />
           </Stacks>
+          <InsideImg>
+            <PostList></PostList>
+          </InsideImg>
         </Inside>
       </Grid>
     </>
@@ -47,6 +51,12 @@ const ResponsiveSidebar = styled.div`
 `;
 
 const Inside = styled.div`
+  @media screen and (max-width: 750px) {
+    margin-left: -100px;
+  } ;
+`;
+
+const InsideImg = styled.div`
   @media screen and (max-width: 750px) {
     margin-left: -100px;
   } ;
