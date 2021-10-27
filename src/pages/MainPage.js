@@ -28,9 +28,9 @@ const MainPage = () => {
           <Stacks>
             <Stack />
           </Stacks>
-          <InsideImg>
+          <InsideCard>
             <PostList></PostList>
-          </InsideImg>
+          </InsideCard>
         </Inside>
       </Grid>
     </>
@@ -56,7 +56,7 @@ const Inside = styled.div`
   } ;
 `;
 
-const InsideImg = styled.div`
+const InsideCard = styled.div`
   @media screen and (max-width: 750px) {
     margin-left: -100px;
   } ;
