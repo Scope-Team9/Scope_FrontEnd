@@ -4,7 +4,6 @@ import { Dialog } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { userCreators } from "../redux/modules/user";
-import { GoogleLogin } from "react-google-login";
 
 const LoginModal = props => {
   const dispatch = useDispatch();
@@ -13,18 +12,6 @@ const LoginModal = props => {
   const { showModal, setShowModal } = props;
   const modalClose = () => {
     setShowModal(false);
-  };
-
-  //구글로그인
-  const clientId =
-    "334506855914-cqhtql5mhh7nkadkov7bspshehiejo5g.apps.googleusercontent.com";
-
-  const onSuccess = res => {
-    console.log("Login Success", res);
-  };
-
-  const onFailure = res => {
-    console.log("Login Failed", res);
   };
 
   const logIn = () => {
@@ -60,30 +47,24 @@ const LoginModal = props => {
                 margin="-10px 0"
                 justifyContent="center"
               >
-                Welcome to Scope!
+                우선,사용하실 닉네임을 설정
               </Text>
-              <Grid display="flex" flexDirection="column">
-                <a
-                  href={
-                    "https://github.com/login/oauth/authorize?client_id=e479ff8fd436197619e4&scope=repo:status read:repo_hook user:email&redirect_uri=http://localhost:3000/user/github/callback"
-                  }
-                >
-                  깃허브로그인
-                </a>
-                <a
-                  href={
-                    "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code"
-                  }
-                >
-                  카카오로그인
-                </a>
-                <GoogleLogin
-                  clientId={clientId}
-                  buttonText="구글 로그인"
-                  onSuccess={onSuccess}
-                  onFailure={onFailure}
-                />
+              <Grid>
+                <Text>닉네임</Text>
+                <Input type="text"></Input>
               </Grid>
+              <Grid>
+                <Text>이메일</Text>
+                <Input type="text"></Input>
+              </Grid>
+              <Grid>
+                <Text>기술스택</Text>
+                <select>
+                  <option>리액트</option>
+                  <option>스프링</option>
+                </select>
+              </Grid>
+              <Button _onclick={logIn} text="다음"></Button>
             </Grid>
           </Grid>
           <hr color="#eee" />
