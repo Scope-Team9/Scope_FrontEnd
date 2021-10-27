@@ -159,8 +159,10 @@ export const apis = {
   getAllUserList: () => instance.get("/user/list"),
 
   //포스트 관련 api
-  getPost: () =>
-    instance.get("/api/post?filter=&displayNumber=15&page=1&sort=createdAt"),
+  getPost: page =>
+    instance.get(
+      `/api/post?filter=&displayNumber=15&page=${page}&sort=createdAt`
+    ),
   //data.json용
   // getPost: () => instance.get(`/post`),
   addPost: postInfo => instance.post(`/post`, postInfo),

@@ -16,7 +16,8 @@ const SideBar = () => {
         flexDirection="column"
         justifyContent="space-between"
         bg="#f0f2f5"
-        zIndex="9"
+        zIndex="0"
+        marginRight="100px"
       >
         <Grid padding="0 10px">
           <Grid
