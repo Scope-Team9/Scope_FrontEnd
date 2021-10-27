@@ -141,29 +141,6 @@ const GridBox = styled.div`
   border: ${(props) => props.border};
   ${(props) =>
     props.borderRadius ? `border-radius: ${props.borderRadius}` : ""};
-<<<<<<< HEAD
-  border-top: ${props => props.borderTop};
-  border-bottom: ${props => props.borderBottom};
-  border-left: ${props => props.borderLeft};
-  border-right: ${props => props.borderRight};
-  overflow-x: ${props => props.overflowX};
-  overflow-y: ${props => props.overflowY};
-  overflow: ${props => props.overflow};
-  min-width: ${props => props.minWidth};
-  max-width: ${props => props.maxWidth};
-  min-height: ${props => props.minHeight};
-  max-height: ${props => props.maxHeight};
-  background-color: ${props => props.backgroundColor};
-  box-sizing: ${props => props.boxSizing};
-  box-shadow: ${props => props.boxShadow};
-  position: ${props => props.position};
-  top: ${props => props.top};
-  bottom: ${props => props.bottom};
-  left: ${props => props.left};
-  right: ${props => props.right};
-  background-color: ${props => props.backgroundColor};
-  z-index: ${props => props.zIndex};
-=======
   border-top: ${(props) => props.borderTop};
   border-bottom: ${(props) => props.borderBottom};
   border-left: ${(props) => props.borderLeft};
@@ -185,7 +162,6 @@ const GridBox = styled.div`
   right: ${(props) => props.right};
   background-color: ${(props) => props.backgroundColor};
   z-index: ${(props) => props.zIndex};
->>>>>>> 382a092a66662bda44382ae025fb1c23b673140a
 
   :hover {
     ${(props) =>
