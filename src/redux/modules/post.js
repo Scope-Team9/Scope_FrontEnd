@@ -16,20 +16,21 @@ const initialState = {
   is_loading: false,
 };
 
-export const getPostAPI = () => {
+export const getPostAPI = (stech) => {
   return function (dispatch, getState, { history }) {
-    let _paging = getState().product.paging;
+    // let _paging = getState().product.paging;
     dispatch(isLoading(true));
 
-    apis.getPost(_paging.next + 1).then((res) => {
+    apis.getPost().then((res) => {
       const posts = res.data;
       console.log(res);
 
-      let paging = {
-        start: _paging.next,
-        next: _paging.next + 1,
-      };
-      dispatch(getPost(posts, paging));
+      //   let paging = {
+      //     start: _paging.next,
+      //     next: _paging.next + 1,
+      //   };
+      //   dispatch(getPost(posts, paging));
+      dispatch(getPost(posts));
     });
   };
 };
