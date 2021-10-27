@@ -5,7 +5,7 @@ import { history } from "../redux/configureStore";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import MainPage from "../pages/MainPage";
-import KakaoRedirect from "./KakaoRedirect";
+import KakaoRedirect from "./kakaoRedirect";
 
 function App() {
   return (
