@@ -5,7 +5,8 @@ import { history } from "../redux/configureStore";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import MainPage from "../pages/MainPage";
-import KakaoRedirect from "../shared/kakaoRedirect";
+import KakaoRedirect from "./kakaoRedirect";
+import MyPage from "../pages/MyPage";
 
 function App() {
   return (
@@ -13,8 +14,6 @@ function App() {
       <ConnectedRouter history={history}>
         <Switch>
           <Route path="/" exact component={MainPage}></Route>
-          <Route path="/post" exact component={Post}></Route>
-          <Route path="/postdetail" exact component={PostDetail}></Route>
           <Route path="/mypage" exact component={MyPage}></Route>
           <Route
             path="/user/kakao/callback"
