@@ -1,9 +1,12 @@
+/* eslint-disable */
 import React from "react";
 import styled from "styled-components";
 import Header from "../components/Header";
 import { Grid } from "../elements/Index";
 import Carousel from "../components/Carousel";
 import SideBar from "../components/SideBar";
+import Infinity from "../shared/Infinity";
+import Stack from "../components/Stack";
 
 const MainPage = () => {
   return (
@@ -21,6 +24,9 @@ const MainPage = () => {
       <Grid margin="31px 0 0 100px ">
         <Inside>
           <Carousel />
+          <Stacks>
+            <Stack />
+          </Stacks>
         </Inside>
       </Grid>
     </>
@@ -46,8 +52,10 @@ const Inside = styled.div`
   } ;
 `;
 
-const FFlex = styled.div`
-  margin-right: 60px;
+const Stacks = styled.div`
+  display: flex;
+  font-size: 50px;
+  margin-top: 20px;
 `;
 
 export default MainPage;
