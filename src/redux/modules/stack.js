@@ -9,20 +9,20 @@ const setStack = createAction(SET_STACK, (data) => ({ data }));
 
 const initialState = {
   stack: {
-    React: null,
-    Java: null,
-    JavaScript: null,
-    Python: null,
-    Node: null,
-    C__: null,
-    Flask: null,
-    Django: null,
-    Vue: null,
-    Spring: null,
-    PHP: null,
-    Swift: null,
-    Kotlin: null,
-    TypeScript: null,
+    React: "",
+    Java: "",
+    JavaScript: "",
+    Python: "",
+    Node: "",
+    cpp: "",
+    Flask: "",
+    Django: "",
+    Vue: "",
+    Spring: "",
+    php: "",
+    Swift: "",
+    Kotlin: "",
+    TypeScript: "",
   },
 };
 // 스택 값들을 배열에 넣어서 보내기 시도 , 그러나 store에 제대로 반영되지 않음. 따라서 원안대로 키 밸류 값으로 진행.
@@ -79,7 +79,7 @@ export default handleActions(
       produce(state, (draft) => {
         // console.log(action.payload.data);
         const st = action.payload.data;
-        draft.stack[st] = null;
+        draft.stack[st] = "";
         // draft.splice(draft.findIndex((item) => item === action.payload.data));
         // const result = draft.filter((item) => {
         //   if (item !== action.payload.data) {
