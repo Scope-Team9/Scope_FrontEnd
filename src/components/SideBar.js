@@ -7,19 +7,21 @@ const SideBar = () => {
     <React.Fragment>
       <Grid
         position="fixed"
-        top="100px"
-        left="0"
-        width="100px"
-        height="auto"
+        top="30%"
+        left="2%"
+        width="70px"
+        height="200px"
         padding="16px 0 20% 0"
+        borderRadius="300px"
+        textAlign="center"
         display="flex"
         flexDirection="column"
         justifyContent="space-between"
-        bg="#f0f2f5"
+        bg="#8B3FF8"
         zIndex="0"
         marginRight="100px"
       >
-        <Grid padding="0 10px">
+        <Grid margin="20px auto" padding="0 10px">
           <Grid
             width="90%"
             height="46px"
@@ -29,13 +31,10 @@ const SideBar = () => {
             hover="rgba(0, 0, 0, 0.05)"
             borderRadius="10px"
           >
-            <Image src={userImage} size="32" />
-            <Text size="0.93rem" margin="0 0 0 7px">
-              홈
-            </Text>
+            <Image src={userImage} size="48" />
           </Grid>
         </Grid>
-        <Grid padding="0 10px">
+        <Grid margin="20px auto" padding="0 10px">
           <Grid
             width="90%"
             height="46px"
@@ -45,15 +44,12 @@ const SideBar = () => {
             hover="rgba(0, 0, 0, 0.05)"
             borderRadius="10px"
           >
-            <Image src={userImage} size="32" />
-            <Text size="0.93rem" margin="0 0 0 7px">
-              추천프로젝트
-            </Text>
+            <Image src={userImage} size="48" />
           </Grid>
         </Grid>
-        <Grid height="calc(80vh - 36px)" padding="0 10px">
+        <Grid margin="20px auto" padding="0 10px">
           <Grid
-            width="90%"
+            width="100%"
             height="46px"
             display="flex"
             alignItems="center"
@@ -61,10 +57,7 @@ const SideBar = () => {
             hover="rgba(0, 0, 0, 0.05)"
             borderRadius="10px"
           >
-            <Image src={userImage} size="32" />
-            <Text size="0.93rem" margin="0 0 0 7px">
-              마이페이지
-            </Text>
+            <Image src={userImage} size="48" />
           </Grid>
         </Grid>
       </Grid>

@@ -5,7 +5,7 @@ import { apis } from "../../lib/axios";
 const GET_POST = "GET_POST";
 const LOADING = "LOADING";
 
-const getPost = createAction(GET_POST, (data) => ({ data }));
+const getPosts = createAction(GET_POST, (data) => ({ data }));
 const isLoading = createAction(LOADING, (loading) => ({ loading }));
 
 const initialState = {
@@ -14,24 +14,29 @@ const initialState = {
   // infinityProducts: [],
   paging: { start: null, next: null },
   is_loading: false,
+  stack: {
+    Java: null,
+    JavaScript: null,
+    Python: null,
+  },
 };
 
-export const getPostAPI = (stech) => {
+export const getPostAPI = () => {
   return function (dispatch, getState, { history }) {
     // let _paging = getState().product.paging;
-    dispatch(isLoading(true));
+    console.log("what");
+    // dispatch(isLoading(true));
+    dispatch(getPosts());
+    // apis.getPost().then((res) => {
+    //   const posts = res.data;
+    //   console.log(res);
 
-    apis.getPost().then((res) => {
-      const posts = res.data;
-      console.log(res);
-
-      //   let paging = {
-      //     start: _paging.next,
-      //     next: _paging.next + 1,
-      //   };
-      //   dispatch(getPost(posts, paging));
-      dispatch(getPost(posts));
-    });
+    //   //   let paging = {
+    //   //     start: _paging.next,
+    //   //     next: _paging.next + 1,
+    //   //   };
+    //   //   dispatch(getPost(posts, paging));
+    // });
   };
 };
 
@@ -39,7 +44,10 @@ export default handleActions(
   {
     [GET_POST]: (state, action) =>
       produce(state, (draft) => {
-        // console.log(action.payload);
+        console.log("wwgdsagasdf");
+        console.log(action);
+        console.log(state);
+
         // draft.products.push(...action.payload.products.data.content);
         // draft.paging = action.payload.paging;
         // draft.is_loading = false;
