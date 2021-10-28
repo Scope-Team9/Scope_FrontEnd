@@ -4,15 +4,13 @@
 import React from "react";
 import styled from "styled-components";
 
-import PostList from "../components/PostList";
-import PostWrite from "../components/PostWrite";
+import AddPost from "../components/AddPost";
 
 // PostAdd의 함수형 컴포넌트를 만든다.
 const PostAdd = (props) => {
   return (
     <React.Fragment>
-      <PostList />
-      <PostWrite />
+      <AddPost />
     </React.Fragment>
   );
 };
