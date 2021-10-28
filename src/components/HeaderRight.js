@@ -10,22 +10,25 @@ const HeaderRight = props => {
   const modalOpen = () => {
     setShowModal(true);
   };
+  const modalClose = () => {
+    setShowModal(false);
+  };
   return (
     <Grid
-      display='flex'
-      justifyContent='space-around'
-      alignItems='center'
-      height='auto'
+      display="flex"
+      justifyContent="space-around"
+      alignItems="center"
+      height="auto"
     >
       <HeaderWrapper>
-        <Grid display='flex' alignItems='center' margin='0 10px'>
+        <Grid display="flex" alignItems="center" margin="0 10px">
           <Image src={userImage} />
           <Text>사용자</Text>
         </Grid>
         <Button
-          backgroundColor='#111'
-          width='100px'
-          text='로그인'
+          backgroundColor="#111"
+          width="100px"
+          text="로그인"
           _onClick={modalOpen}
         ></Button>
         <LoginModal showModal={showModal} setShowModal={setShowModal} />

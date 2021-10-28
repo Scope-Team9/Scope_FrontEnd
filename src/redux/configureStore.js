@@ -6,7 +6,7 @@ import { connectRouter } from "connected-react-router";
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
-  //   user: User,
+  // user: User,
   //   product: Product,
   //   comment : Comment,
 
@@ -36,6 +36,6 @@ const composeEnhancers =
 // composeEnhancers를 사용해서 applyMiddleware로 지금까지 있었던 미들웨어를 사용한다는 말이다.
 const enhancer = composeEnhancers(applyMiddleware(...middlewares));
 
-let store = (initialStore) => createStore(rootReducer, enhancer);
+let store = initialStore => createStore(rootReducer, enhancer);
 
 export default store();

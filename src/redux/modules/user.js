@@ -12,23 +12,26 @@ const setUser = createAction(SETUSER, user => ({ user }));
 //카카오 로그인
 const kakaologinMiddleware = code => {
   return function (dispatch, getState, { history }) {
-    apis
-      .login(code)
-      // .post(`user/kakao/callback?code=${code}`)
+    console.log("카카오에서 받아온 코드", code);
+    instance
+      .get(`/api/login/kakao?code=${code}`)
       .then(res => {
-        if (res.data.kakaoId) {
+        if (res.status === 300 && !res.data.nickname) {
           window.alert("추가정보 작성이 필요합니다.");
           history.replace("/signup");
+          return;
         }
-
-        console.log(res.data);
-        localStorage.setItem("token", res.data.token);
-        dispatch(
-          setUser({
-            email: res.data.email,
-            nickname: res.data.nickname,
-          })
-        );
+        if (res.status === 200) {
+          const ACCESS_TOKEN = res.data.token;
+          localStorage.setItem("token", ACCESS_TOKEN);
+          dispatch(
+            setUser({
+              email: res.data.email,
+              nickname: res.data.nickname,
+            })
+          );
+          history.replace("/");
+        }
         // window.location.href = "/";
       })
       .catch(err => {
@@ -42,22 +45,26 @@ const kakaologinMiddleware = code => {
 //깃허브 로그인
 const githubLoginMiddleware = code => {
   return function (dispatch, getState, { history }) {
+    console.log("깃허브에서 받아온 코드", code);
     instance
-      .get(`user/kakao/callback?code=${code}`)
+      .get(`/api/login/github?code=${code}`)
       .then(res => {
-        if (!res.data.githubId) {
+        if (res.status === 300 && !res.data.nickname) {
           window.alert("추가정보 작성이 필요합니다.");
           history.replace("/signup");
+          return;
         }
-
-        console.log(res.data);
-        localStorage.setItem("token", res.data.token);
-        dispatch(
-          setUser({
-            email: res.data.email,
-            nickname: res.data.nickname,
-          })
-        );
+        if (res.status === 200) {
+          const ACCESS_TOKEN = res.data.token;
+          localStorage.setItem("token", ACCESS_TOKEN);
+          dispatch(
+            setUser({
+              email: res.data.email,
+              nickname: res.data.nickname,
+            })
+          );
+          history.replace("/");
+        }
         // window.location.href = "/";
       })
       .catch(err => {
@@ -68,35 +75,19 @@ const githubLoginMiddleware = code => {
   };
 };
 
-//구글 로그인
-const googleLoginMiddleware = code => {
-  return function (dispatch, getState, { history }) {
-    instance
-      .get(`user/kakao/callback?code=${code}`)
+//회원가입
+const signupMiddleware = signupInfo => {
+  return () => {
+    apis
+      .signup(signupInfo)
       .then(res => {
-        if (!res.data.googleId) {
-          window.alert("추가정보 작성이 필요합니다.");
-          history.replace("/signup");
-        }
-
-        console.log(res.data);
-        localStorage.setItem("token", res.data.token);
-        dispatch(
-          setUser({
-            email: res.data.email,
-            nickname: res.data.nickname,
-          })
-        );
-        // window.location.href = "/";
+        console.log(res);
       })
       .catch(err => {
-        console.log("소셜로그인 에러", err);
-        alert("로그인에 실패하였습니다.");
-        history.replace("/"); // 로그인 실패하면 로그인화면으로 돌려보냄
+        console.log(err);
       });
   };
 };
-
 // //리듀서
 // export default handleActions({
 //   [SETUSER]: (state, action) => produce(state, draft => {}),
@@ -105,7 +96,6 @@ const googleLoginMiddleware = code => {
 const userCreators = {
   kakaologinMiddleware,
   githubLoginMiddleware,
-  googleLoginMiddleware,
 };
 
 export { userCreators };

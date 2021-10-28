@@ -8,13 +8,9 @@ const KakaoRedirect = props => {
 
   // 인가코드
   let code = new URL(window.location.href).searchParams.get("code");
-  //post방식
-  // const codeinfo = {
-  //   code: code,
-  // };
 
   React.useEffect(() => {
-    dispatch(userCreators.kakaologinMiddleware(code));
+    dispatch(userCreators.githubLoginMiddleware(code));
   }, []);
 
   return <CircularProgress />;

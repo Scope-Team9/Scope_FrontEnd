@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import MainPage from "../pages/MainPage";
 import KakaoRedirect from "./KakaoRedirect";
+import GitHubRedirect from "./GitHubRedirect";
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
           <Route
             path="/user/github/callback"
             exact
-            component={KakaoRedirect}
+            component={GitHubRedirect}
           ></Route>
         </Switch>
       </ConnectedRouter>
