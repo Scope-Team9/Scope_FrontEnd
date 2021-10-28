@@ -3,9 +3,9 @@ import { setCookie } from "../shared/Cookie";
 import { history } from "../redux/configureStore";
 
 export const instance = axios.create({
-  baseURL: "http://localhost:3000",
+  // baseURL: "http://localhost:3000",
   // baseURL: "http://localhost:4000",
-  // baseURL: "http://13.125.243.106:8080",
+  baseURL: "http://15.165.159.211",
   headers: {
     "content-type": "application/json; charset=UTF-8",
     accept: "application/json",
@@ -159,9 +159,14 @@ export const apis = {
   getAllUserList: () => instance.get("/user/list"),
 
   //포스트 관련 api
-  getPost: (page, stack) =>
+  // getPost: (page, stack) =>
+  //   instance.get(
+  //     `/api/post?filter=${};${};${};${};${};${};${};${};${};${};${};${};${};${}&displayNumber=15&page=${page}&sort=createdAt`
+  //   ),
+
+  getPost: (stack) =>
     instance.get(
-      `/api/post?filter=&displayNumber=15&page=${page}&sort=createdAt`
+      `/api/post?filter=${stack.React};${stack.Spring};${stack.Swift};${stack.TypeScript};${stack.cpp};${stack.Django};${stack.Flask};${stack.Java};${stack.JavaScript};${stack.Kotlin};${stack.Node};${stack.php};${stack.Python};${stack.Vue};&displayNumber=15&page=1&sort=createdAt`
     ),
   //data.json용
   // getPost: () => instance.get(`/post`),

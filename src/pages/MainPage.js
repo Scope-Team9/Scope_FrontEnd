@@ -8,8 +8,17 @@ import SideBar from "../components/SideBar";
 import Infinity from "../shared/Infinity";
 import Stack from "../components/Stack";
 import PostList from "../components/PostList";
+import { postActions } from "../redux/modules/post";
+import { useSelector, useDispatch } from "react-redux";
 
 const MainPage = () => {
+  const dispatch = useDispatch();
+  const is_clicked = useSelector((state) => state.stack.stack);
+
+  React.useEffect(() => {
+    dispatch(postActions.getPostAPI());
+  }, [is_clicked]);
+
   return (
     <>
       <Grid height="100%" bg="#ffff" padding="60px 0 10px 0">
