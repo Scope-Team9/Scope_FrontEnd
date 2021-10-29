@@ -14,19 +14,26 @@ const initialState = {
   // infinityProducts: [],
   paging: { start: null, next: null },
   is_loading: false,
-  stack: {
-    Java: null,
-    JavaScript: null,
-    Python: null,
-  },
 };
 
 export const getPostAPI = () => {
   return function (dispatch, getState, { history }) {
+    let stack = getState().stack.stack;
+    console.log(stack);
+
+    apis
+      .getPost(stack)
+      .then((res) => {
+        console.log(res);
+        // dispatch(getPosts());
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
     // let _paging = getState().product.paging;
-    console.log("what");
+
     // dispatch(isLoading(true));
-    dispatch(getPosts());
+
     // apis.getPost().then((res) => {
     //   const posts = res.data;
     //   console.log(res);
