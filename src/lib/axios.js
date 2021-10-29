@@ -5,8 +5,10 @@ import { history } from "../redux/configureStore";
 export const instance = axios.create({
   // baseURL: "http://localhost:3000",
   // baseURL: "http://localhost:4000",
-  // baseURL: "http://15.165.159.211",
   baseURL: "http://3.36.94.200",
+
+  // baseURL: "http://15.165.159.211",
+
   headers: {
     "content-type": "application/json; charset=UTF-8",
     accept: "application/json",
@@ -147,8 +149,8 @@ instance.interceptors.request.use(
 
 export const apis = {
   //회원가입 및 로그인 관련 api
-  login: (code) => instance.post("/user/login", code),
-  signup: (registerInfo) => instance.post("/user/register", registerInfo),
+  kakaologin: (code) => instance.get("/api/login/kakao", code),
+  register: (registerInfo) => instance.post("/api/signup", registerInfo),
   signup: (registerInfo) =>
     instance.post(
       "/api/post?filter=recommend&displayNumber=6&page=2&",
