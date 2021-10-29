@@ -19,21 +19,22 @@ import { addPostAPI } from "../redux/modules/postadd";
 import { postActions as postActions } from "../redux/modules/postadd";
 
 // AddPost의 함수형 컴포넌트를 만든다.
-const AddPost = (props) => {
+const AddPost = props => {
   const history = useHistory();
   const dispatch = useDispatch();
 
   const scope_index = () => {
     const card = {
-      title: title.current.value,
-      summary: summary.current.value,
-      tectstack: tectstack.current.value,
-      startdate: startdate.current.value,
-      enddate: enddate.current.value,
-      totalmember: totalmember.current.value,
-      projectstatus: projectstatus.current.value,
-      contents: contents.current.value,
+      title: title,
+      summary: summary,
+      tectstack: tectstack,
+      startdate: startdate,
+      enddate: enddate,
+      totalmember: totalmember,
+      projectstatus: projectstatus,
+      contents: contents,
     };
+    console.log(card);
     dispatch(postActions.addPostAPI(card));
   };
 
@@ -57,7 +58,7 @@ const AddPost = (props) => {
 
   // 기술스택 선택
   const stactopen = Boolean(tectstack);
-  const stactClick = (event) => {
+  const stactClick = event => {
     setTectstack(event.currentTarget);
   };
 
@@ -67,7 +68,7 @@ const AddPost = (props) => {
 
   // 프로젝트 총 인원 선택
   const totalopen = Boolean(totalmember);
-  const totalClick = (event) => {
+  const totalClick = event => {
     setTotalmember(event.currentTarget);
   };
 
@@ -77,7 +78,7 @@ const AddPost = (props) => {
 
   // 프로젝트 상태 선택
   const statusopen = Boolean(projectstatus);
-  const statusClick = (event) => {
+  const statusClick = event => {
     setProjectstatus(event.currentTarget);
   };
 
@@ -104,7 +105,7 @@ const AddPost = (props) => {
               padding="10px"
               placeholder="제목을 입력해주세요."
               border="1px solid #E7E1FF"
-              _onChange={(e) => {
+              _onChange={e => {
                 setTitle(e.target.value);
               }}
             ></Input>
@@ -117,7 +118,7 @@ const AddPost = (props) => {
               padding="10px"
               placeholder="한줄소개를 입력해주세요."
               border="1px solid #E7E1FF"
-              _onChange={(e) => {
+              _onChange={e => {
                 setSummary(e.target.value);
               }}
             ></Input>
@@ -129,7 +130,7 @@ const AddPost = (props) => {
               aria-controls="fade-menu"
               aria-haspopup="true"
               aria-expanded={stactopen ? "true" : undefined}
-              onChange={(e) => {
+              onChange={e => {
                 setTectstack(e.target.value);
               }}
               onClick={stactClick}
@@ -165,7 +166,7 @@ const AddPost = (props) => {
               <SDatePicker
                 dateFormat="yyyy/MM/dd"
                 selected={startdate}
-                onChange={(date) => setStartdate(date)}
+                onChange={date => setStartdate(date)}
                 selectsStart
                 startdate={startdate}
                 enddate={enddate}
@@ -177,7 +178,7 @@ const AddPost = (props) => {
               <SDatePicker
                 dateFormat="yyyy/MM/dd"
                 selected={enddate}
-                onChange={(date) => setEnddate(date)}
+                onChange={date => setEnddate(date)}
                 selectsEnd
                 enddate={enddate}
                 mindate={startdate}
@@ -193,7 +194,7 @@ const AddPost = (props) => {
               aria-controls="fade-menu"
               aria-haspopup="true"
               aria-expanded={totalopen ? "true" : undefined}
-              onChange={(e) => {
+              onChange={e => {
                 setTotalmember(e.target.value);
               }}
               onClick={totalClick}
@@ -229,7 +230,7 @@ const AddPost = (props) => {
               aria-controls="fade-menu"
               aria-haspopup="true"
               aria-expanded={statusopen ? "true" : undefined}
-              onChange={(e) => {
+              onChange={e => {
                 setTotalmember(e.target.value);
               }}
               onClick={statusClick}
@@ -266,7 +267,7 @@ const AddPost = (props) => {
               padding="10px"
               placeholder="프로젝트 내용을 입력해주세요."
               border="1px solid #E7E1FF"
-              _onChange={(e) => {
+              _onChange={e => {
                 setContents(e.target.value);
               }}
             ></Input>

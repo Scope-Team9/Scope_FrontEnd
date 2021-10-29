@@ -28,7 +28,9 @@ const kakaologinMiddleware = code => {
     instance
       .get(`/api/login/kakao?code=${code}`)
       .then(res => {
-        if (res.status === 300 && !res.data.nickname) {
+        console.log(res);
+        console.log(res.data);
+        if (res.data.status == 300) {
           window.alert("추가정보 작성이 필요합니다.");
           dispatch(
             firstUser({
@@ -67,12 +69,12 @@ const githubLoginMiddleware = code => {
     instance
       .get(`/api/login/github?code=${code}`)
       .then(res => {
-        if (res.status === 300 && !res.data.nickname) {
+        if (res.data.status == 300) {
           window.alert("추가정보 작성이 필요합니다.");
           dispatch(
             firstUser({
-              email: res.data.email,
-              snsId: res.data.id,
+              email: res.data.data.email,
+              snsId: res.data.data.id,
             })
           );
           history.replace("/");

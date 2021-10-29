@@ -5,8 +5,6 @@ import Slider from "react-slick";
 import { Image } from "../elements/Index";
 import Cap from "../images/cap.PNG";
 import Cap2 from "../images/django.png";
-import $ from "jquery";
-import jquery from "jquery";
 
 const Carousel = () => {
   const settings = {

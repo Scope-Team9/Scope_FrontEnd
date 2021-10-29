@@ -5,7 +5,8 @@ import { history } from "../redux/configureStore";
 export const instance = axios.create({
   // baseURL: "http://localhost:3000",
   // baseURL: "http://localhost:4000",
-  baseURL: "http://3.36.94.200",
+  // baseURL: "http://3.36.94.200",
+  baseURL: "http://15.165.159.211",
 
   // baseURL: "http://15.165.159.211",
 
@@ -17,7 +18,7 @@ export const instance = axios.create({
 });
 
 instance.interceptors.request.use(
-  (config) => {
+  config => {
     const cookie = document.cookie;
     console.log(cookie);
     if (cookie === "") {
@@ -37,7 +38,7 @@ instance.interceptors.request.use(
     };
     return config;
   },
-  (err) => {
+  err => {
     console.log(err);
   }
 );
@@ -149,15 +150,15 @@ instance.interceptors.request.use(
 
 export const apis = {
   //회원가입 및 로그인 관련 api
-  kakaologin: (code) => instance.get("/api/login/kakao", code),
-  register: (registerInfo) => instance.post("/api/signup", registerInfo),
-  signup: (registerInfo) =>
+  kakaologin: code => instance.get("/api/login/kakao", code),
+  register: registerInfo => instance.post("/api/signup", registerInfo),
+  signup: registerInfo =>
     instance.post(
       "/api/post?filter=recommend&displayNumber=6&page=2&",
       registerInfo
     ),
   // 유저 관련 api
-  updateProfileImg: (imageUrl) => instance.put(`/user/image`, imageUrl),
+  updateProfileImg: imageUrl => instance.put(`/user/image`, imageUrl),
   getUserInfo: () => instance.get("/user/info"),
   getAllUserList: () => instance.get("/user/list"),
 
@@ -167,18 +168,18 @@ export const apis = {
   //     `/api/post?filter=${};${};${};${};${};${};${};${};${};${};${};${};${};${}&displayNumber=15&page=${page}&sort=createdAt`
   //   ),
 
-  getPost: (stack) =>
+  getPost: stack =>
     instance.get(
       `/api/post?filter=${stack.React};${stack.Spring};${stack.Swift};${stack.TypeScript};${stack.cpp};${stack.Django};${stack.Flask};${stack.Java};${stack.JavaScript};${stack.Kotlin};${stack.Node};${stack.php};${stack.Python};${stack.Vue};&displayNumber=15&page=1&sort=createdAt`
     ),
   //data.json용
   // getPost: () => instance.get(`/post`),
-  addPost: (postInfo) => instance.post(`/post`, postInfo),
+  addPost: postInfo => instance.post(`/post`, postInfo),
   updatePost: (postId, postInfo) => instance.put(`/post/${postId}`, postInfo),
-  deletePost: (postId) => instance.delete(`/post/${postId}`),
-  clickLike: (postId) => instance.post(`/post/${postId}/like`),
-  addComment: (commentInfo) => instance.post("/comment", commentInfo),
-  deleteComment: (commentId) => instance.delete(`/comment/${commentId}`),
+  deletePost: postId => instance.delete(`/post/${postId}`),
+  clickLike: postId => instance.post(`/post/${postId}/like`),
+  addComment: commentInfo => instance.post("/comment", commentInfo),
+  deleteComment: commentId => instance.delete(`/comment/${commentId}`),
   editComment: (commentId, content) =>
     instance.put(`/comment/${commentId}`, content),
 };

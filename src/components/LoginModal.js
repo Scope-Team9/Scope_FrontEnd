@@ -7,10 +7,11 @@ import { userCreators } from "../redux/modules/user";
 
 const LoginModal = props => {
   const dispatch = useDispatch();
+  const user_info = useSelector(state => state.user);
   const sigunupModalState = useSelector(state => state.user.sigunupModalState);
-  console.log(sigunupModalState);
-
   const token = window.localStorage.getItem("token");
+
+  console.log(user_info);
 
   //모달
   const { showModal, setShowModal } = props;
@@ -18,13 +19,16 @@ const LoginModal = props => {
     setShowModal(false);
   };
 
+  //입력부분
   const [nickName, setNickName] = useState();
   const [email, setEmail] = useState();
   const [techStack, setTeckstack] = useState([]);
+  const [emailCheck, setEmailCheck] = useState();
 
   //미들웨어전송
   const register = () => {
     const registerInfo = {
+      snsId: user_info.Id,
       email: email,
       nickname: nickName,
       techStack: [techStack],
@@ -48,16 +52,27 @@ const LoginModal = props => {
           >
             닉네임
           </Input>
-          <Input
-            label="이메일"
-            placeholder="이메일을 입력해주세요"
-            type="텍스트"
-            onChange={e => {
-              setEmail(e.target.value);
-            }}
-          >
-            이메일
-          </Input>
+          <Grid display="flex" width="100%">
+            <Input
+              label="이메일"
+              placeholder="이메일을 입력해주세요"
+              type="텍스트"
+              onChange={e => {
+                setEmail(e.target.value);
+              }}
+            >
+              이메일
+            </Input>
+            <Button
+              width="10%"
+              backgroundColor="#222222"
+              text="이메일 중복 체크"
+              _onClick={() => {
+                register();
+              }}
+            ></Button>
+          </Grid>
+
           <Input type="텍스트">기술스택</Input>
           <Button
             backgroundColor="#222222"
@@ -107,7 +122,7 @@ const LoginModal = props => {
                   <GithubBtn
                     onClick={() => {
                       window.location.href =
-                        "https://github.com/login/oauth/authorize?client_id=e479ff8fd436197619e4&scope=repo:status read:repo_hook user:email&redirect_uri=http://localhost:3000/user/github/callback";
+                        "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=http://localhost:3000/user/github/callback";
                     }}
                   >
                     깃허브로그인
