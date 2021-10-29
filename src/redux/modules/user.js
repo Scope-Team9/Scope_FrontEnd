@@ -1,14 +1,26 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis, instance } from "../../lib/axios";
+import { TrendingUpTwoTone } from "@material-ui/icons";
 
 //액션타입
-const LOGIN = "LOGIN";
-const SETUSER = "SET_USER";
+const FIRST_USER = "FIRST_USER";
+const SET_USER = "SET_USER";
 //액션생성
-const logIn = createAction(LOGIN, user => ({ user }));
-const setUser = createAction(SETUSER, user => ({ user }));
+const firstUser = createAction(FIRST_USER, user => ({ user }));
+const setUser = createAction(SET_USER, user => ({ user }));
 
+//초기값
+const initialState = {
+  nickname: "guest",
+  snsId: null,
+  email: null,
+  techstack: [],
+  is_login: false,
+  userList: [],
+  userfirst: false,
+  sigunupModalState: false,
+};
 //카카오 로그인
 const kakaologinMiddleware = code => {
   return function (dispatch, getState, { history }) {
@@ -18,10 +30,16 @@ const kakaologinMiddleware = code => {
       .then(res => {
         if (res.status === 300 && !res.data.nickname) {
           window.alert("추가정보 작성이 필요합니다.");
-          history.replace("/signup");
+          dispatch(
+            firstUser({
+              email: res.data.email,
+              snsId: res.data.id,
+            })
+          );
+          history.replace("/");
           return;
         }
-        if (res.status === 200) {
+        if (res.status === 200 && res.data.token) {
           const ACCESS_TOKEN = res.data.token;
           localStorage.setItem("token", ACCESS_TOKEN);
           dispatch(
@@ -51,10 +69,16 @@ const githubLoginMiddleware = code => {
       .then(res => {
         if (res.status === 300 && !res.data.nickname) {
           window.alert("추가정보 작성이 필요합니다.");
-          history.replace("/signup");
+          dispatch(
+            firstUser({
+              email: res.data.email,
+              snsId: res.data.id,
+            })
+          );
+          history.replace("/");
           return;
         }
-        if (res.status === 200) {
+        if (res.status === 200 && res.data.token) {
           const ACCESS_TOKEN = res.data.token;
           localStorage.setItem("token", ACCESS_TOKEN);
           dispatch(
@@ -79,7 +103,7 @@ const githubLoginMiddleware = code => {
 const signupMiddleware = signupInfo => {
   return () => {
     apis
-      .signup(signupInfo)
+      .register(signupInfo)
       .then(res => {
         console.log(res);
       })
@@ -88,14 +112,32 @@ const signupMiddleware = signupInfo => {
       });
   };
 };
-// //리듀서
-// export default handleActions({
-//   [SETUSER]: (state, action) => produce(state, draft => {}),
-// });
+//리듀서
+export default handleActions(
+  {
+    [FIRST_USER]: (state, action) =>
+      produce(state, draft => {
+        draft.userId = action.payload.user.userId;
+        draft.snsId = action.payload.user.snsId;
+        draft.userfirst = true;
+        draft.sigunupModalState = true;
+      }),
+    [SET_USER]: (state, action) =>
+      produce(state, draft => {
+        draft.userId = action.payload.user.userId;
+        draft.nickname = action.payload.user.nickname;
+        draft.email = action.payload.user.email;
+        draft.is_login = true;
+        draft.sigunupModalState = false;
+      }),
+  },
+  initialState
+);
 
 const userCreators = {
   kakaologinMiddleware,
   githubLoginMiddleware,
+  signupMiddleware,
 };
 
 export { userCreators };

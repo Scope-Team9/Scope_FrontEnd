@@ -147,7 +147,7 @@ instance.interceptors.request.use(
 export const apis = {
   //회원가입 및 로그인 관련 api
   kakaologin: code => instance.get("/api/login/kakao", code),
-  register: registerInfo => instance.post("/user/register", registerInfo),
+  register: registerInfo => instance.post("/api/signup", registerInfo),
   signup: registerInfo =>
     instance.post(
       "/api/post?filter=recommend&displayNumber=6&page=2&",

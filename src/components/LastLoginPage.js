@@ -26,7 +26,7 @@ const LastLoginpage = props => {
   };
 
   return (
-    <Dialog maxWidth={"md"} scroll="paper" open={setShowModal(true)}>
+    <Dialog maxWidth={"md"} scroll="paper" open={setShowModal(false)}>
       <ModalWrap>
         <Text>회원가입</Text>
         <Input
