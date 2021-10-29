@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { userCreators } from "../redux/modules/user";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-const KakaoRedirect = props => {
+const KakaoRedirect = (props) => {
   const dispatch = useDispatch();
 
   // 인가코드
