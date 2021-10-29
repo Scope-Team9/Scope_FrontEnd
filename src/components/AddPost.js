@@ -1,15 +1,13 @@
 // AddPost.js
 
 // import를 한다.
-import React from "react";
+import React, { useCallback, useMemo } from "react";
 import styled, { useTheme } from "styled-components";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
-import Button from "@mui/material/Button";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import Fade from "@mui/material/Fade";
+import Select from "react-select";
+import makeAnimated from "react-select/animated";
 
 import { Grid, Text, Input } from "../elements/Index";
 
@@ -22,20 +20,7 @@ import { postActions as postActions } from "../redux/modules/postadd";
 const AddPost = (props) => {
   const history = useHistory();
   const dispatch = useDispatch();
-
-  const scope_index = () => {
-    const card = {
-      title: title.current.value,
-      summary: summary.current.value,
-      tectstack: tectstack.current.value,
-      startdate: startdate.current.value,
-      enddate: enddate.current.value,
-      totalmember: totalmember.current.value,
-      projectstatus: projectstatus.current.value,
-      contents: contents.current.value,
-    };
-    dispatch(postActions.addPostAPI(card));
-  };
+  const animatedComponents = makeAnimated();
 
   const [title, setTitle] = React.useState();
   const [summary, setSummary] = React.useState();
@@ -46,44 +31,104 @@ const AddPost = (props) => {
   const [enddate, setEnddate] = React.useState(new Date());
   const [contents, setContents] = React.useState();
 
-  console.log(title);
-  console.log(summary);
-  console.log(tectstack);
-  console.log(totalmember);
-  console.log(projectstatus);
-  console.log(startdate);
-  console.log(enddate);
-  console.log(contents);
-
-  // 기술스택 선택
-  const stactopen = Boolean(tectstack);
-  const stactClick = (event) => {
-    setTectstack(event.currentTarget);
+  const scope_index = () => {
+    const card = {
+      title: title,
+      summary: summary,
+      tectstack: tectstack,
+      startdate: startdate,
+      enddate: enddate,
+      totalmember: totalmember,
+      projectstatus: projectstatus,
+      contents: contents,
+    };
+    dispatch(postActions.addPostAPI(card));
   };
 
-  const stackClose = () => {
-    setTectstack(null);
-  };
+  // 기술 스택 선택
+  const stackSelect = useMemo(
+    () => [
+      { value: "리액트", label: "react" },
+      { value: "자바", label: "java" },
+      { value: "자바스크립트", label: "javascript" },
+      { value: "파이썬", label: "python" },
+      { value: "노드JS", label: "nodejs" },
+      { value: "C++", label: "c++" },
+      { value: "장고", label: "django" },
+      { value: "앵귤러", label: "agular" },
+      { value: "뷰", label: "vue" },
+      { value: "스프링", label: "spring" },
+      { value: "스위프트", label: "swift" },
+      { value: "코틀린", label: "kotlin" },
+      { value: "타입스크립트", label: "typescript" },
+    ],
+    []
+  );
 
-  // 프로젝트 총 인원 선택
-  const totalopen = Boolean(totalmember);
-  const totalClick = (event) => {
-    setTotalmember(event.currentTarget);
-  };
+  const styles = useMemo(
+    () => ({
+      multiValueRemove: (base, state) => {
+        return state.data.isFixed ? { ...base, display: "none" } : base;
+      },
+    }),
+    []
+  );
 
-  const totalClose = () => {
-    setTotalmember(null);
-  };
+  const orderByLabel = useCallback(
+    (a, b) => a.label.localeCompare(b.label),
+    []
+  );
 
-  // 프로젝트 상태 선택
-  const statusopen = Boolean(projectstatus);
-  const statusClick = (event) => {
-    setProjectstatus(event.currentTarget);
-  };
+  const orderOptions = useCallback(
+    (values) =>
+      values
+        .filter((v) => v.isFixed)
+        .sort(orderByLabel)
+        .concat(values.filter((v) => !v.isFixed).sort(orderByLabel)),
+    [orderByLabel]
+  );
 
-  const statusClose = () => {
-    setProjectstatus(null);
-  };
+  const [value, setValue] = React.useState(orderOptions(stackSelect));
+
+  const handleChange = useCallback(
+    (inputValue, { action, removedValue }) => {
+      switch (action) {
+        case "remove-value":
+        case "pop-value":
+          if (removedValue.isFixed) {
+            setValue(orderOptions([...inputValue, removedValue]));
+
+            return;
+          }
+          break;
+        case "clear":
+          setValue(stackSelect.filter((v) => v.isFixed));
+          return;
+        default:
+      }
+      setValue(inputValue);
+      setTectstack(inputValue);
+    },
+    [stackSelect, orderOptions]
+  );
+
+  // 프로젝트 상태
+  const projectStatus = useMemo(
+    () => [{ value: "모집중", label: "모집중" }],
+    []
+  );
+
+  // 프로젝트 인원
+  const projectMembers = useMemo(
+    () => [
+      { value: "2인", label: "2인" },
+      { value: "3인", label: "3인" },
+      { value: "4인", label: "4인" },
+      { value: "5인", label: "5인" },
+      { value: "6인", label: "6인" },
+    ],
+    []
+  );
 
   return (
     <React.Fragment>
@@ -124,39 +169,15 @@ const AddPost = (props) => {
           </Grid>
           <Grid margin="10px auto">
             <Text>기술스택 선택</Text>
-            <Button
-              id="fade-button"
-              aria-controls="fade-menu"
-              aria-haspopup="true"
-              aria-expanded={stactopen ? "true" : undefined}
-              onChange={(e) => {
-                setTectstack(e.target.value);
-              }}
-              onClick={stactClick}
-            >
-              기술스택 선택하기
-            </Button>
-            <Menu
-              id="fade-menu"
-              MenuListProps={{
-                "aria-labelledby": "fade-button",
-              }}
-              tectstack={tectstack}
-              open={stactopen}
-              stackClose={stackClose}
-              TransitionComponent={Fade}
-            >
-              <MenuItem onClick={stackClose}>C#</MenuItem>
-              <MenuItem onClick={stackClose}>리액트</MenuItem>
-              <MenuItem onClick={stackClose}>스프링</MenuItem>
-            </Menu>
-            <Input
-              width="500px"
-              height="30px"
-              padding="10px"
-              placeholder="기술스택을 선택해주세요."
-              border="1px solid #E7E1FF"
-            ></Input>
+            <Select
+              isMulti
+              components={animatedComponents}
+              isClearable={value.some((v) => !v.isFixed)}
+              styles={styles}
+              options={stackSelect}
+              value={value}
+              onChange={handleChange}
+            />
           </Grid>
           <Grid margin="10px auto">
             <Text>기간설정</Text>
@@ -188,75 +209,23 @@ const AddPost = (props) => {
           </Grid>
           <Grid margin="10px auto">
             <Text>프로젝트 총 인원</Text>
-            <Button
-              id="fade-button"
-              aria-controls="fade-menu"
-              aria-haspopup="true"
-              aria-expanded={totalopen ? "true" : undefined}
+            <Select
+              options={projectMembers}
+              isLoading
               onChange={(e) => {
-                setTotalmember(e.target.value);
+                setTotalmember(e);
               }}
-              onClick={totalClick}
-            >
-              프로젝트 총인원 수
-            </Button>
-            <Menu
-              id="fade-menu"
-              MenuListProps={{
-                "aria-labelledby": "fade-button",
-              }}
-              totalmember={totalmember}
-              open={totalopen}
-              onClose={totalClose}
-              TransitionComponent={Fade}
-            >
-              <MenuItem onClick={totalClose}>2인</MenuItem>
-              <MenuItem onClick={totalClose}>4인</MenuItem>
-              <MenuItem onClick={totalClose}>6인</MenuItem>
-            </Menu>
-            <Input
-              width="500px"
-              height="30px"
-              padding="10px"
-              placeholder="총 프로젝트 인원을 설정해주세요."
-              border="1px solid #E7E1FF"
-            ></Input>
+            ></Select>
           </Grid>
           <Grid margin="10px auto">
             <Text>프로젝트 상태체크</Text>
-            <Button
-              id="fade-button"
-              aria-controls="fade-menu"
-              aria-haspopup="true"
-              aria-expanded={statusopen ? "true" : undefined}
+            <Select
+              options={projectStatus}
+              isLoading
               onChange={(e) => {
-                setTotalmember(e.target.value);
+                setProjectstatus(e);
               }}
-              onClick={statusClick}
-            >
-              프로젝트 상태
-            </Button>
-            <Menu
-              id="fade-menu"
-              MenuListProps={{
-                "aria-labelledby": "fade-button",
-              }}
-              totalmember={totalmember}
-              open={statusopen}
-              onClose={statusClose}
-              TransitionComponent={Fade}
-            >
-              <MenuItem onClick={statusClose}>모집 중</MenuItem>
-              <MenuItem onClick={statusClose}>진행 중</MenuItem>
-              <MenuItem onClick={statusClose}>마감</MenuItem>
-            </Menu>
-            <Input
-              width="500px"
-              height="30px"
-              padding="10px"
-              placeholder="프로젝트 상태를 설정해주세요."
-              border="1px solid #E7E1FF"
-            ></Input>
+            ></Select>
           </Grid>
           <Grid>
             <Text>프로젝트 내용적기</Text>

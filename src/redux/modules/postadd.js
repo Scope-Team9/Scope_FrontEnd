@@ -15,11 +15,9 @@ const initialState = {
       contents: "내용",
       tectstack: "기술스택",
       totalmember: "제한 인원",
-      recruitmentmember: "신청자 목록",
       projectstatus: "프로젝트 상태",
       startdate: "시작 날짜",
       enddate: "끝나는 날짜",
-      poststatus: "프로젝트 상태?",
     },
   ],
 };
@@ -36,7 +34,7 @@ export default handleActions(
   {
     [ADD_POST]: (state, action) =>
       produce(state, (draft) => {
-        console.log("ㅁㄴㅇㅁㄴㅇ", action.payload);
+        console.log("요~비치", action.payload);
       }),
   },
   initialState
