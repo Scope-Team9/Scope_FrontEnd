@@ -25,14 +25,14 @@ const AddPost = (props) => {
 
   const scope_index = () => {
     const card = {
-      title: title.current.value,
-      summary: summary.current.value,
-      tectstack: tectstack.current.value,
-      startdate: startdate.current.value,
-      enddate: enddate.current.value,
-      totalmember: totalmember.current.value,
-      projectstatus: projectstatus.current.value,
-      contents: contents.current.value,
+      title: title,
+      summary: summary,
+      tectstack: tectstack,
+      startdate: startdate,
+      enddate: enddate,
+      totalmember: totalmember,
+      projectstatus: projectstatus,
+      contents: contents,
     };
     dispatch(postActions.addPostAPI(card));
   };

@@ -10,6 +10,8 @@ import GitHubRedirect from "./GitHubRedirect";
 import MyPage from "../pages/MyPage";
 import PostAdd from "../pages/PostAdd";
 import PostDetail from "../pages/PostDetail";
+import Markdown from "../components/Markdown";
+import MarkdownRead from "../components/MarkdownRead";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           <Route path="/mypage" exact component={MyPage}></Route>
           <Route path="/postwrite" exact component={PostAdd}></Route>
           <Route path="/postdetail" exact component={PostDetail}></Route>
+          <Route path="/markdown" exact component={Markdown}></Route>
+          <Route path="/markdownread" exact component={MarkdownRead}></Route>
           <Route
             path="/user/kakao/callback"
             exact
