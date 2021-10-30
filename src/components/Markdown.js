@@ -60,11 +60,13 @@ import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-sy
 import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
 import React, { useState, useRef, createRef } from "react";
 export default function Writer(props) {
-  const editorRef = createRef();
+  // const editorRef = createRef();
+  const editorRef = useRef();
 
   const onChangeEditorTextHandler = () => {
     console.log(editorRef.current.getInstance().getMarkdown());
   };
+
   return (
     <Editor
       previewStyle="vertical"
