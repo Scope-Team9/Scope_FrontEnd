@@ -5,9 +5,11 @@ import { TrendingUpTwoTone } from "@material-ui/icons";
 
 //액션타입
 const FIRST_USER = "FIRST_USER";
+const TEST_USER = "TEST_USER";
 const SET_USER = "SET_USER";
 //액션생성
 const firstUser = createAction(FIRST_USER, user => ({ user }));
+const testUser = createAction(TEST_USER, user => ({ user }));
 const setUser = createAction(SET_USER, user => ({ user }));
 
 //초기값
@@ -28,14 +30,13 @@ const kakaologinMiddleware = code => {
     instance
       .get(`/api/login/kakao?code=${code}`)
       .then(res => {
-        console.log(res);
         console.log(res.data);
         if (res.data.status == 300) {
           window.alert("추가정보 작성이 필요합니다.");
           dispatch(
             firstUser({
-              email: res.data.email,
-              snsId: res.data.id,
+              email: res.data.data.email,
+              snsId: res.data.data.id,
             })
           );
           history.replace("/");
@@ -101,11 +102,18 @@ const githubLoginMiddleware = code => {
   };
 };
 
-//회원가입
+//테스트유저 미들웨어
+const testUserMiddleWare = signupInfo => {
+  return function (dispatch, getState, { history }) {
+    dispatch(testUser(signupInfo));
+  };
+};
+
+//테스트 마친 회원가입
 const signupMiddleware = signupInfo => {
   return () => {
-    apis
-      .checkEmail(signupInfo)
+    instance
+      .post("/api/signup", signupInfo)
       .then(res => {
         console.log(res);
       })
@@ -141,10 +149,19 @@ export default handleActions(
   {
     [FIRST_USER]: (state, action) =>
       produce(state, draft => {
-        draft.userId = action.payload.user.userId;
+        draft.email = action.payload.user.email;
         draft.snsId = action.payload.user.snsId;
         draft.userfirst = true;
         draft.sigunupModalState = true;
+      }),
+    [TEST_USER]: (state, action) =>
+      produce(state, draft => {
+        draft.email = action.payload.user.email;
+        draft.snsId = action.payload.user.snsId;
+        draft.techStack = action.payload.user.techStack;
+        draft.nickname = action.payload.user.nickname;
+        draft.userfirst = false;
+        draft.sigunupModalState = false;
       }),
     [SET_USER]: (state, action) =>
       produce(state, draft => {
@@ -163,6 +180,7 @@ const userCreators = {
   githubLoginMiddleware,
   signupMiddleware,
   emailCheckMiddleware,
+  testUserMiddleWare,
 };
 
 export { userCreators };

@@ -11,6 +11,7 @@ import { deleteCookie } from "../shared/Cookie";
 
 const HeaderRight = props => {
   const is_login = useSelector(state => state.user.is_login);
+  const user_info = useSelector(state => state.user);
 
   console.log(is_login);
   const [showModal, setShowModal] = React.useState(false);
@@ -39,7 +40,7 @@ const HeaderRight = props => {
         <HeaderWrapper>
           <Grid display="flex" alignItems="center" margin="0 10px">
             <Image src={userImage} />
-            <Text>사용자</Text>
+            <Text>{user_info.nickname}</Text>
           </Grid>
           <Button
             backgroundColor="#111"

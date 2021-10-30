@@ -4,6 +4,10 @@ import { Dialog } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { userCreators } from "../redux/modules/user";
+import { emailCheck } from "../shared/common";
+import Select from "react-select";
+import { history } from "../redux/configureStore";
+import PropensityTest from "./propensityTest/PropensityTest";
 
 const LoginModal = props => {
   const dispatch = useDispatch();
@@ -13,83 +17,135 @@ const LoginModal = props => {
 
   console.log(user_info);
 
+  //테크스택 옵션
+  const techStackOption = [
+    { value: "react", label: "React" },
+    { value: "vue", label: "Vue" },
+    { value: "spring", label: "Spring" },
+    { value: "nodejs", label: "Nodejs" },
+  ];
+
   //모달
   const { showModal, setShowModal } = props;
+
+  const modalOpen = () => {
+    setShowModal(true);
+  };
   const modalClose = () => {
     setShowModal(false);
   };
 
   //입력부분
   const [nickName, setNickName] = useState();
-  const [email, setEmail] = useState();
+  const [email, setEmail] = useState(user_info.email);
   const [techStack, setTeckstack] = useState([]);
-  const [emailCheck, setEmailCheck] = useState();
+  const [emailDup, setEmailDup] = useState();
+
+  //이메일 중복체크
+
+  const checkEmail = email => {
+    if (email === "") {
+      return window.alert("이메일을 입력해주세요!");
+    }
+    dispatch(userCreators.emailCheckMiddleware(email));
+  };
 
   //미들웨어전송
   const register = () => {
     const registerInfo = {
-      snsId: user_info.Id,
+      snsId: user_info.snsId,
       email: email,
       nickname: nickName,
-      techStack: [techStack],
+      techStack: techStack,
     };
     console.log(registerInfo);
-    dispatch(userCreators.signupMiddleware(registerInfo));
-  };
-
-  const checkEmail = () => {
-    console.log(email);
-    if (email === "") {
-      window.alert("이메일을 입력해주세요!");
-    }
-    dispatch(userCreators.checkEmail(email));
+    // dispatch(userCreators.signupMiddleware(registerInfo));
   };
 
   if (sigunupModalState == true) {
     return (
       <Dialog maxWidth={"md"} scroll="paper" open={showModal}>
         <ModalWrap>
-          <Text>회원가입</Text>
-          <Input
-            label="닉네임"
-            type="텍스트"
-            placeholder="닉네임을 입력해주세요"
-            _onChange={e => {
-              setNickName(e.target.value);
-            }}
+          <Grid
+            className="모달컨테이너"
+            backgroundColor="#fff"
+            borderRadius="0 0 5px 5px"
+            position="relative"
+            width="100%"
+            height="100%"
           >
-            닉네임
-          </Input>
-          <Grid display="flex" width="100%">
+            <Grid
+              position="absolute"
+              top="-10px"
+              right="20px"
+              color="black"
+              width="20px"
+              padding="10px"
+            >
+              <Button text="닫기" _onClick={modalClose} />
+            </Grid>
+            <Text>회원가입</Text>
             <Input
-              label="이메일"
-              placeholder="이메일을 입력해주세요"
+              label="닉네임"
               type="텍스트"
-              onChange={e => {
-                setEmail(e.target.value);
+              placeholder="닉네임을 입력해주세요"
+              _onChange={e => {
+                setNickName(e.target.value);
               }}
             >
-              이메일
+              닉네임
             </Input>
+            <Grid display="flex" width="100%">
+              <Input
+                label="이메일"
+                placeholder="이메일을 입력해주세요"
+                type="텍스트"
+                onChange={e => {
+                  setEmail(e.target.value);
+                }}
+              >
+                이메일
+              </Input>
+              <Button
+                width="10%"
+                backgroundColor="#222222"
+                text="이메일 중복 체크"
+                _onClick={() => {
+                  console.log(email);
+                  checkEmail(email);
+                }}
+              ></Button>
+            </Grid>
+            <Select
+              defaultValue={[techStackOption[0], techStackOption[2]]}
+              isMulti
+              name="techStack"
+              options={techStackOption}
+              className="basic-multi-select"
+              classNamePrefix="select"
+              onChange={e => {
+                let techStack = [];
+                let arr = e;
+                let idx = 0;
+                for (idx = 0; idx < e.length; idx++) {
+                  techStack.push(arr[idx]["value"]);
+                }
+                setTeckstack(techStack);
+              }}
+            >
+              기술스택
+            </Select>
             <Button
-              width="10%"
               backgroundColor="#222222"
-              text="이메일 중복 체크"
+              borderRadius="20px"
+              text="테스트시작"
+              margin="0 0 100px 0"
               _onClick={() => {
-                checkEmail();
+                history.push("/test");
               }}
             ></Button>
+            <PropensityTest showModal={showModal} setShowModal={setShowModal} />
           </Grid>
-
-          <Input type="텍스트">기술스택</Input>
-          <Button
-            backgroundColor="#222222"
-            borderRadius="20px"
-            text="테스트시작"
-            _onClick={() => {
-              register();
-            }}
-          ></Button>
         </ModalWrap>
       </Dialog>
     );
