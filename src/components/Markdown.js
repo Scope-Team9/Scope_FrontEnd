@@ -67,6 +67,7 @@ export default function Writer(props) {
     console.log(editorRef.current.getInstance().getMarkdown());
   };
 
+  // editorRef.current.getInstance.removeHook("addImageBlobHook");
   return (
     <Editor
       previewStyle="vertical"
