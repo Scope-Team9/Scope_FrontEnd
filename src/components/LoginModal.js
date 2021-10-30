@@ -37,6 +37,14 @@ const LoginModal = props => {
     dispatch(userCreators.signupMiddleware(registerInfo));
   };
 
+  const checkEmail = () => {
+    console.log(email);
+    if (email === "") {
+      window.alert("이메일을 입력해주세요!");
+    }
+    dispatch(userCreators.checkEmail(email));
+  };
+
   if (sigunupModalState == true) {
     return (
       <Dialog maxWidth={"md"} scroll="paper" open={showModal}>
@@ -68,7 +76,7 @@ const LoginModal = props => {
               backgroundColor="#222222"
               text="이메일 중복 체크"
               _onClick={() => {
-                register();
+                checkEmail();
               }}
             ></Button>
           </Grid>

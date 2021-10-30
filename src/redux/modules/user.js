@@ -105,7 +105,7 @@ const githubLoginMiddleware = code => {
 const signupMiddleware = signupInfo => {
   return () => {
     apis
-      .register(signupInfo)
+      .checkEmail(signupInfo)
       .then(res => {
         console.log(res);
       })
@@ -114,6 +114,28 @@ const signupMiddleware = signupInfo => {
       });
   };
 };
+
+//이메일 중복체크
+const emailCheckMiddleware = email => {
+  return () => {
+    instance
+      .get(`/api/login/email?email=${email}`)
+      .then(res => {
+        console.log(res);
+        if (res.data.status == 200) {
+          window.alert("사용가능한 메일입니다.");
+        } else {
+          if (res.data.status == 400) {
+            window.alert("중복된 이메일이 존재합니다");
+          }
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+};
+
 //리듀서
 export default handleActions(
   {
@@ -140,6 +162,7 @@ const userCreators = {
   kakaologinMiddleware,
   githubLoginMiddleware,
   signupMiddleware,
+  emailCheckMiddleware,
 };
 
 export { userCreators };
