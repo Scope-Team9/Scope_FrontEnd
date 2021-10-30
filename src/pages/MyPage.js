@@ -22,7 +22,7 @@ const MyPage = (props) => {
     <React.Fragment>
       <MyPageInfo />
       <MyPageMiddle />
-      <MyPageWrite />
+
       <Markdown></Markdown>
     </React.Fragment>
   );

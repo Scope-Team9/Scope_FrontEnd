@@ -27,18 +27,18 @@ export const getPostAPI = () => {
       .getPost(stack, _paging.next + 1)
       .then((res) => {
         console.log(_paging);
-        const posts = res.data;
+        const posts = res.data.data;
 
         let paging = {
           start: _paging.next,
           next: _paging.next + 1,
         };
-        console.log("어떻게 오는지", res);
+        console.log("어떻게 오는지", res.data.data);
 
         dispatch(isLoading(true));
 
         // dispatch(getPosts(posts, paging));
-        dispatch(getPosts(paging));
+        dispatch(getPosts(paging, posts));
       })
       .catch((err) => {
         console.log(err.response);
@@ -55,7 +55,7 @@ export default handleActions(
         console.log(state);
 
         // draft.products.push(...action.payload.products.data.content);
-        draft.paging = action.payload.paging;
+        draft.paging = action.payload.data;
         draft.is_loading = false;
         // draft.search = false;
       }),
