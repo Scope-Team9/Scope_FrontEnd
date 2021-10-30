@@ -15,9 +15,18 @@ const MainPage = () => {
   const dispatch = useDispatch();
   const is_clicked = useSelector((state) => state.stack.stack);
 
+  const is_loading = useSelector((state) => state.post.is_loading);
+  const paging = useSelector((state) => state.post.paging);
+  console.log(paging);
+
   React.useEffect(() => {
     dispatch(postActions.getPostAPI());
   }, [is_clicked]);
+
+  const callNext = () => {
+    dispatch(postActions.getPostAPI());
+    console.log("??");
+  };
 
   return (
     <>
@@ -37,9 +46,16 @@ const MainPage = () => {
           <Stacks>
             <Stack />
           </Stacks>
-          <InsideCard>
-            <PostList></PostList>
-          </InsideCard>
+          <Infinity
+            paging={paging}
+            is_loading={is_loading}
+            callNext={callNext}
+            is_next={paging.next < 5 ? true : false}
+          >
+            <InsideCard>
+              <PostList></PostList>
+            </InsideCard>
+          </Infinity>
         </Inside>
       </Grid>
     </>
