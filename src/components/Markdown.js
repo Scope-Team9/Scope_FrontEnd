@@ -14,6 +14,7 @@ import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-sy
 import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
 import React, { useState, useRef, createRef } from "react";
 import AWS from "aws-sdk";
+import { apis } from "../lib/axios";
 export default function Writer(props) {
   // const editorRef = createRef();
   const editorRef = useRef();
@@ -40,14 +41,7 @@ export default function Writer(props) {
             let formData = new FormData();
             formData.append("file", blob);
 
-            axios.defaults.withCredentials = true;
-            const { data: url } = await axios.post(
-              `${backUrl}image.do`,
-              formData,
-              {
-                header: { "content-type": "multipart/formdata" },
-              }
-            );
+            const { data: url } = await apis.addMyImage(formData);
             callback(url, "alt text");
           })();
 

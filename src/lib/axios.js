@@ -76,4 +76,5 @@ export const apis = {
   deleteComment: (commentId) => instance.delete(`/comment/${commentId}`),
   editComment: (commentId, content) =>
     instance.put(`/comment/${commentId}`, content),
+  addMyImage: (base64) => instance.post(`/api/image`, base64),
 };

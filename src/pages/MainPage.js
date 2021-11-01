@@ -30,17 +30,11 @@ const MainPage = () => {
 
   return (
     <>
-      <Grid height="100%" bg="#ffff" padding="60px 0 10px 0">
-        <HeaderWrapper>
-          <Header />
-        </HeaderWrapper>
-      </Grid>
-
-      <ResponsiveSidebar>
+      <Grid height="100%" bg="#ffff" padding="0px 0px 10px 0"></Grid>
+      {/* <ResponsiveSidebar>
         <SideBar />
-      </ResponsiveSidebar>
-
-      <Grid margin="31px 0 0 100px ">
+      </ResponsiveSidebar> */}
+      <Grid margin="-10px 0 0 0 ">
         <Inside>
           <Carousel />
           <Stacks>
@@ -62,13 +56,6 @@ const MainPage = () => {
   );
 };
 
-const HeaderWrapper = styled.div`
-  z-index: 100;
-  position: sticky;
-  top: 0px;
-  background: #1111;
-`;
-
 const ResponsiveSidebar = styled.div`
   @media screen and (max-width: 750px) {
     display: none;
@@ -77,13 +64,13 @@ const ResponsiveSidebar = styled.div`
 
 const Inside = styled.div`
   @media screen and (max-width: 750px) {
-    margin-left: -100px;
+    /* margin-left: -100px; */
   } ;
 `;
 
 const InsideCard = styled.div`
   @media screen and (max-width: 750px) {
-    margin-left: -100px;
+    margin-left: 18px;
   } ;
 `;
 

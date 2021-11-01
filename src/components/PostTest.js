@@ -29,15 +29,47 @@ const PostTest = (props) => {
             <Grid>
               <TitleDate>D-2</TitleDate>
             </Grid>
-
-            <Grid
-              display="flex"
-              width="50px"
-              borderRadius="50%"
-              backgroundColor="white"
-              margin="-26px 25px"
-            >
-              <Image src={Img} />
+            <Grid display="flex">
+              <Grid
+                width="50px"
+                borderRadius="50%"
+                backgroundColor="white"
+                margin="-26px 8px"
+              >
+                <Image src={Img} />
+              </Grid>
+              <Grid
+                width="50px"
+                borderRadius="50%"
+                backgroundColor="white"
+                margin="-26px 8px"
+              >
+                <Image src={Img} />
+              </Grid>
+              <Grid
+                width="50px"
+                borderRadius="50%"
+                backgroundColor="white"
+                margin="-26px 8px"
+              >
+                <Image src={Img} />
+              </Grid>
+              <Grid
+                width="50px"
+                borderRadius="50%"
+                backgroundColor="white"
+                margin="-26px 8px"
+              >
+                <Image src={Img} />
+              </Grid>
+              <Grid
+                width="50px"
+                borderRadius="50%"
+                backgroundColor="white"
+                margin="-26px 8px"
+              >
+                <Image src={Img} />
+              </Grid>
             </Grid>
           </Grid>
           <DescriptionBox>

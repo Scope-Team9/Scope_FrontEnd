@@ -33,100 +33,132 @@ const Stack = () => {
   // };
 
   return (
-    <div>
-      <IMGS
-        src="img/react.png"
-        onClick={() => {
-          onclick("React");
-        }}
-      ></IMGS>
-      <IMGS
-        src="img/java.png"
-        onClick={() => {
-          onclick("Java");
-        }}
-      ></IMGS>
-      <IMGS
-        src="img/javascript.png"
-        onClick={() => {
-          onclick("JavaScript");
-        }}
-      ></IMGS>
-      <IMGS
-        src="img/python.png"
-        onClick={() => {
-          // test();
-          onclick("Python");
-        }}
-      ></IMGS>
-      <IMGS
-        src="img/node.js.png"
-        onClick={() => {
-          onclick("Node");
-        }}
-      ></IMGS>
-      <IMGS
-        src="img/c__.png"
-        onClick={() => {
-          onclick("cpp");
-        }}
-      ></IMGS>
-      <IMGS
-        src="img/react.png"
-        onClick={() => {
-          onclick("Flask");
-        }}
-      ></IMGS>
-      <IMGS
-        src="img/django.png"
-        onClick={() => {
-          onclick("Django");
-        }}
-      ></IMGS>
-      <IMGS
-        src="img/vue.png"
-        onClick={() => {
-          onclick("Vue");
-        }}
-      ></IMGS>
-      <IMGS
-        src="img/spring.png"
-        onClick={() => {
-          onclick("Spring");
-        }}
-      ></IMGS>
-      <IMGS
-        src="img/react.png"
-        onClick={() => {
-          onclick("php");
-        }}
-      ></IMGS>
-      <IMGS
-        src="img/swift.png"
-        onClick={() => {
-          onclick("Swift");
-        }}
-      ></IMGS>
-      <IMGS
-        src="img/kotlin.png"
-        onClick={() => {
-          onclick("Kotlin");
-        }}
-      ></IMGS>
-      <IMGS
-        src="img/typescript.png"
-        onClick={() => {
-          onclick("TypeScript");
-        }}
-      ></IMGS>
+    <div style={{ display: "flex" }}>
+      <BorderRadius>
+        <IMGS
+          src="img/react.png"
+          onClick={() => {
+            onclick("React");
+          }}
+        ></IMGS>
+      </BorderRadius>
+      <BorderRadius>
+        <IMGS
+          src="img/java.png"
+          onClick={() => {
+            onclick("Java");
+          }}
+        ></IMGS>
+      </BorderRadius>
+      <BorderRadius>
+        <IMGS
+          src="img/javascript.png"
+          onClick={() => {
+            onclick("JavaScript");
+          }}
+        ></IMGS>
+      </BorderRadius>
+      <BorderRadius>
+        <IMGS
+          src="img/python.png"
+          onClick={() => {
+            // test();
+            onclick("Python");
+          }}
+        ></IMGS>
+      </BorderRadius>
+      <BorderRadius>
+        <IMGS
+          src="img/node.js.png"
+          onClick={() => {
+            onclick("Node");
+          }}
+        ></IMGS>
+      </BorderRadius>
+      <BorderRadius>
+        <IMGS
+          src="img/c__.png"
+          onClick={() => {
+            onclick("cpp");
+          }}
+        ></IMGS>
+      </BorderRadius>
+      <BorderRadius>
+        <IMGS
+          src="img/react.png"
+          onClick={() => {
+            onclick("Flask");
+          }}
+        ></IMGS>
+      </BorderRadius>
+      <BorderRadius>
+        <IMGS
+          src="img/django.png"
+          onClick={() => {
+            onclick("Django");
+          }}
+        ></IMGS>
+      </BorderRadius>
+      <BorderRadius>
+        <IMGS
+          src="img/vue.png"
+          onClick={() => {
+            onclick("Vue");
+          }}
+        ></IMGS>
+      </BorderRadius>
+      <BorderRadius>
+        <IMGS
+          src="img/spring.png"
+          onClick={() => {
+            onclick("Spring");
+          }}
+        ></IMGS>
+      </BorderRadius>
+      <BorderRadius>
+        <IMGS
+          src="img/react.png"
+          onClick={() => {
+            onclick("php");
+          }}
+        ></IMGS>
+      </BorderRadius>
+      <BorderRadius>
+        <IMGS
+          src="img/swift.png"
+          onClick={() => {
+            onclick("Swift");
+          }}
+        ></IMGS>
+      </BorderRadius>
+      <BorderRadius>
+        <IMGS
+          src="img/kotlin.png"
+          onClick={() => {
+            onclick("Kotlin");
+          }}
+        ></IMGS>
+      </BorderRadius>
+      <BorderRadius>
+        <IMGS
+          src="img/typescript.png"
+          onClick={() => {
+            onclick("TypeScript");
+          }}
+        ></IMGS>
+      </BorderRadius>
     </div>
   );
 };
 
 const IMGS = styled.img`
   cursor: pointer;
-  width: 80px;
+  width: 50px;
   margin: 5px;
+`;
+
+const BorderRadius = styled.div`
+  border-radius: 250px;
 `;
 
 export default Stack;
