@@ -18,8 +18,8 @@ function App() {
         <Switch>
           <Route path="/" exact component={MainPage}></Route>
           <Route path="/mypage" exact component={MyPage}></Route>
-          <Route path="/postwrite" exact component={PostAdd}></Route>
-          <Route path="/postdetail" exact component={PostDetail}></Route>
+          <Route path="/postadd" exact component={PostAdd}></Route>
+          <Route path="/postdetail/:id" exact component={PostDetail}></Route>
           <Route
             path="/user/kakao/callback"
             exact

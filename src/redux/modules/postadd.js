@@ -1,5 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
+import { apis } from "../../lib/axios";
 
 // Actions
 const ADD_POST = "ADD_POST";
@@ -13,8 +14,8 @@ const initialState = {
       title: "제목",
       summary: "한줄설명",
       contents: "내용",
-      tectstack: "기술스택",
-      totalmember: "제한 인원",
+      techStackList: "기술스택",
+      totalMember: "제한 인원",
       projectstatus: "프로젝트 상태",
       startdate: "시작 날짜",
       enddate: "끝나는 날짜",
@@ -25,6 +26,14 @@ const initialState = {
 // 미들웨어
 export const addPostAPI = (card) => {
   return function (dispatch, getState, { history }) {
+    apis
+      .addPost(card)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
     dispatch(addPosts(card));
   };
 };

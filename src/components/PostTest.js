@@ -5,18 +5,19 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 
 import { history } from "../redux/configureStore";
-import { Grid, Image } from "../elements/Index";
+import { Grid, Image, Progress } from "../elements/Index";
 
 import Img from "../images/flutter.png";
 
 const PostTest = (props) => {
   const dispatch = useDispatch();
 
+  console.log("asdsad", props);
   return (
     <React.Fragment>
       <ProductImgWrap
         onClick={() => {
-          history.push(`/product/${props.id}`);
+          history.push(`/postdetail/${props.postId}`);
         }}
       >
         <Grid backgroundColor="#E7E1FF" borderRadius="30px">
@@ -30,22 +31,56 @@ const PostTest = (props) => {
               <TitleDate>D-2</TitleDate>
             </Grid>
 
-            <Grid
-              display="flex"
-              width="50px"
-              borderRadius="50%"
-              backgroundColor="white"
-              margin="-26px 25px"
-            >
-              <Image src={Img} />
+            <Grid display="flex" width="100px">
+              <Grid
+                display="flex"
+                width="50px"
+                borderRadius="50%"
+                backgroundColor="white"
+                margin="-26px 15px"
+              >
+                <Image src={Img} />
+              </Grid>
+              <Grid
+                display="flex"
+                width="50px"
+                borderRadius="50%"
+                backgroundColor="white"
+                margin="-26px 15px"
+              >
+                <Image src={Img} />
+              </Grid>
+              <Grid
+                display="flex"
+                width="50px"
+                borderRadius="50%"
+                backgroundColor="white"
+                margin="-26px 15px"
+              >
+                <Image src={Img} />
+              </Grid>
+              <Grid
+                display="flex"
+                width="50px"
+                borderRadius="50%"
+                backgroundColor="white"
+                margin="-26px 15px"
+              >
+                <Image src={Img} />
+              </Grid>
             </Grid>
           </Grid>
           <DescriptionBox>
-            <Title>타이틀</Title>
-            <Description>한줄설명입니다.</Description>
-            <Date>2021.10.11 ~ 2021.10.12</Date>
+            <Title>{props.title}</Title>
+            <Summary>{props.summary}</Summary>
+            <Date>
+              {props.startDate}~{props.endDate}
+            </Date>
             <Line />
-            <ProjectState>진행중</ProjectState>
+            <Grid>
+              <Progress></Progress>
+              <ProjectState>{props.projectStatus}</ProjectState>
+            </Grid>
           </DescriptionBox>
         </Grid>
       </ProductImgWrap>
@@ -70,7 +105,7 @@ const Title = styled.h1`
   font-size: 20px;
 `;
 
-const Description = styled.div`
+const Summary = styled.div`
   font-size: 14px;
   color: gray;
   margin-bottom: 80px;

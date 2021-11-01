@@ -86,7 +86,7 @@ const ElButton = styled.button`
   ${(props) =>
     props.backgroundColor
       ? `background-color:${props.backgroundColor}`
-      : "background-color: blue"};
+      : "background-color: #8B3FF8"};
   box-sizing: border-box;
   border-radius: 5px;
   font-weight: bold;

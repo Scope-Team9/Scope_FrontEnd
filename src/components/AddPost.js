@@ -1,8 +1,8 @@
 // AddPost.js
 
 // import를 한다.
-import React, { useCallback, useMemo } from "react";
-import styled, { useTheme } from "styled-components";
+import React, { useCallback, useEffect, useMemo } from "react";
+import styled from "styled-components";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
@@ -17,6 +17,7 @@ import { addPostAPI } from "../redux/modules/postadd";
 import { postActions as postActions } from "../redux/modules/postadd";
 
 // AddPost의 함수형 컴포넌트를 만든다.
+// AddPost 안에 다뤄지는  특정 값(state) ex.title 값이 변화하였을 때, AddPost자체가 리랜더링 된다.
 const AddPost = (props) => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -24,22 +25,23 @@ const AddPost = (props) => {
 
   const [title, setTitle] = React.useState();
   const [summary, setSummary] = React.useState();
-  const [tectstack, setTectstack] = React.useState();
-  const [totalmember, setTotalmember] = React.useState();
-  const [projectstatus, setProjectstatus] = React.useState();
-  const [startdate, setStartdate] = React.useState(new Date());
-  const [enddate, setEnddate] = React.useState(new Date());
+  const [techstack, setTectstack] = React.useState([]);
+  const [totalMember, setTotalmember] = React.useState();
+  const [projectStatus, setProjectstatus] = React.useState();
+  const [startDate, setStartdate] = React.useState(new Date());
+  const [endDate, setEnddate] = React.useState(new Date());
   const [contents, setContents] = React.useState();
+  const [techStackList, setTest] = React.useState();
 
   const scope_index = () => {
     const card = {
       title: title,
       summary: summary,
-      tectstack: tectstack,
-      startdate: startdate,
-      enddate: enddate,
-      totalmember: totalmember,
-      projectstatus: projectstatus,
+      techStackList: techStackList,
+      startDate: startDate,
+      endDate: endDate,
+      totalMember: totalMember,
+      projectStatus: projectStatus,
       contents: contents,
     };
     dispatch(postActions.addPostAPI(card));
@@ -48,19 +50,21 @@ const AddPost = (props) => {
   // 기술 스택 선택
   const stackSelect = useMemo(
     () => [
-      { value: "리액트", label: "react" },
-      { value: "자바", label: "java" },
-      { value: "자바스크립트", label: "javascript" },
-      { value: "파이썬", label: "python" },
-      { value: "노드JS", label: "nodejs" },
-      { value: "C++", label: "c++" },
-      { value: "장고", label: "django" },
-      { value: "앵귤러", label: "agular" },
-      { value: "뷰", label: "vue" },
-      { value: "스프링", label: "spring" },
-      { value: "스위프트", label: "swift" },
-      { value: "코틀린", label: "kotlin" },
-      { value: "타입스크립트", label: "typescript" },
+      // object형태(value는 키값, ""는 value 값), object의 값을 가져오기 위해서는 키값을 알아야한다.
+      { value: "react", label: "react" },
+      { value: "java", label: "java" },
+      { value: "javascript", label: "javascript" },
+      { value: "python", label: "python" },
+      { value: "nodejs", label: "nodejs" },
+      { value: "flask", label: "flask" },
+      { value: "c++", label: "c++" },
+      { value: "django", label: "django" },
+      { value: "agular", label: "agular" },
+      { value: "vue", label: "vue" },
+      { value: "spring", label: "spring" },
+      { value: "swift", label: "swift" },
+      { value: "kotlin", label: "kotlin" },
+      { value: "typescript", label: "typescript" },
     ],
     []
   );
@@ -106,14 +110,29 @@ const AddPost = (props) => {
           return;
         default:
       }
+
       setValue(inputValue);
       setTectstack(inputValue);
     },
     [stackSelect, orderOptions]
   );
 
+  const formatTech = () => {
+    let tamarray = [];
+    let index;
+    for (index = 0; index < techstack.length; index++) {
+      tamarray.push(techstack[index]["label"]);
+    }
+    console.log(tamarray);
+    setTest(tamarray);
+  };
+
+  useEffect(() => {
+    formatTech();
+  }, [techstack]);
+
   // 프로젝트 상태
-  const projectStatus = useMemo(
+  const projectstatus = useMemo(
     () => [{ value: "모집중", label: "모집중" }],
     []
   );
@@ -121,11 +140,11 @@ const AddPost = (props) => {
   // 프로젝트 인원
   const projectMembers = useMemo(
     () => [
-      { value: "2인", label: "2인" },
-      { value: "3인", label: "3인" },
-      { value: "4인", label: "4인" },
-      { value: "5인", label: "5인" },
-      { value: "6인", label: "6인" },
+      { value: 2, label: 2 },
+      { value: 3, label: 3 },
+      { value: 4, label: 4 },
+      { value: 5, label: 5 },
+      { value: 6, label: 6 },
     ],
     []
   );
@@ -175,7 +194,6 @@ const AddPost = (props) => {
               isClearable={value.some((v) => !v.isFixed)}
               styles={styles}
               options={stackSelect}
-              value={value}
               onChange={handleChange}
             />
           </Grid>
@@ -185,11 +203,11 @@ const AddPost = (props) => {
               <Text margin="auto 20px">프로젝트 시작 일 :</Text>
               <SDatePicker
                 dateFormat="yyyy/MM/dd"
-                selected={startdate}
+                selected={startDate}
                 onChange={(date) => setStartdate(date)}
                 selectsStart
-                startdate={startdate}
-                enddate={enddate}
+                startdate={startDate}
+                enddate={endDate}
                 locale={ko}
                 minDate={new Date()}
                 placeholderText="프로젝트 시작일 입력"
@@ -197,13 +215,13 @@ const AddPost = (props) => {
               <Text margin="auto 20px">프로젝트 종료 일 :</Text>
               <SDatePicker
                 dateFormat="yyyy/MM/dd"
-                selected={enddate}
+                selected={endDate}
                 onChange={(date) => setEnddate(date)}
                 selectsEnd
-                enddate={enddate}
-                mindate={startdate}
+                enddate={endDate}
+                mindate={startDate}
                 locale={ko}
-                minDate={new Date()}
+                minDate={new Date("")}
               />
             </Grid>
           </Grid>
@@ -213,17 +231,27 @@ const AddPost = (props) => {
               options={projectMembers}
               isLoading
               onChange={(e) => {
-                setTotalmember(e);
+                let b;
+                b = e["label"];
+                setTotalmember(b);
+                console.log(b);
               }}
             ></Select>
           </Grid>
           <Grid margin="10px auto">
             <Text>프로젝트 상태체크</Text>
             <Select
-              options={projectStatus}
+              options={projectstatus}
               isLoading
               onChange={(e) => {
-                setProjectstatus(e);
+                let a;
+                a = e["label"];
+                console.log(a);
+
+                // let a = [];
+                // a = e["label"];
+                // console.log(a);
+                setProjectstatus(a);
               }}
             ></Select>
           </Grid>

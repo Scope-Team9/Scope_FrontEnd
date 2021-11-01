@@ -6,7 +6,6 @@ export const instance = axios.create({
   // baseURL: "http://localhost:3000",
   // baseURL: "http://localhost:4000",
   baseURL: "http://3.36.94.200",
-
   // baseURL: "http://15.165.159.211",
 
   headers: {
@@ -23,6 +22,7 @@ instance.interceptors.request.use(
     if (cookie === "") {
       return config;
     }
+
     // const cookieSplitUndefined = cookie.split('=')[1];
     // console.log(cookieSplitUndefined);
     // const cookieSplit = cookieSplitUndefined.split(';')[0];
@@ -173,7 +173,7 @@ export const apis = {
     ),
   //data.json용
   // getPost: () => instance.get(`/post`),
-  addPost: (postInfo) => instance.post(`/post`, postInfo),
+  addPost: (postInfo) => instance.post(`/api/post`, postInfo),
   updatePost: (postId, postInfo) => instance.put(`/post/${postId}`, postInfo),
   deletePost: (postId) => instance.delete(`/post/${postId}`),
   clickLike: (postId) => instance.post(`/post/${postId}/like`),
