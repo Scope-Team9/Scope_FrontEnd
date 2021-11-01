@@ -8,6 +8,7 @@ import { emailCheck } from "../shared/common";
 import Select from "react-select";
 import { history } from "../redux/configureStore";
 import PropensityTest from "./propensityTest/PropensityTest";
+import { instance } from "../lib/axios";
 
 const LoginModal = props => {
   const dispatch = useDispatch();
@@ -39,18 +40,54 @@ const LoginModal = props => {
   const [nickName, setNickName] = useState();
   const [email, setEmail] = useState(user_info.email);
   const [techStack, setTeckstack] = useState([]);
-  const [emailDup, setEmailDup] = useState();
+  const [emailDup, setEmailDup] = useState(true);
+  const [test, setTest] = useState(false);
+
+  console.log("닉네임", nickName);
+  console.log("이메일", email);
+  console.log("기술스택", techStack);
+  console.log("sns아이디", user_info.snsId);
 
   //이메일 중복체크
-
-  const checkEmail = email => {
-    if (email === "") {
-      return window.alert("이메일을 입력해주세요!");
-    }
-    dispatch(userCreators.emailCheckMiddleware(email));
+  const emailCheck = email => {
+    return () => {
+      instance
+        .get(`/api/login/email?email=${email}`)
+        .then(res => {
+          console.log(res);
+          if (res.data.status == 200) {
+            setEmailDup(true);
+            window.alert("사용가능한 메일입니다.");
+          } else {
+            if (res.data.status == 400) {
+              window.alert("중복된 이메일이 존재합니다");
+            }
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    };
   };
 
-  //미들웨어전송
+  //테스트 회원 유효성 검사
+  const preSignUP = () => {
+    if (nickName === undefined) {
+      alert("닉네임을 입력 해주세요.");
+      return false;
+    }
+    if (techStack.length === 0) {
+      alert("기술스택을 선택 해주세요.");
+      return false;
+    }
+    if (emailDup === false) {
+      alert("이메일 중복확인을 해주세요.");
+      return false;
+    }
+    setTest(true);
+  };
+
+  //테스트 마친 회원가입 미들웨어전송
   const register = () => {
     const registerInfo = {
       snsId: user_info.snsId,
@@ -66,86 +103,88 @@ const LoginModal = props => {
     return (
       <Dialog maxWidth={"md"} scroll="paper" open={showModal}>
         <ModalWrap>
-          <Grid
-            className="모달컨테이너"
-            backgroundColor="#fff"
-            borderRadius="0 0 5px 5px"
-            position="relative"
-            width="100%"
-            height="100%"
-          >
+          {!test ? (
             <Grid
-              position="absolute"
-              top="-10px"
-              right="20px"
-              color="black"
-              width="20px"
-              padding="10px"
+              className="모달컨테이너"
+              backgroundColor="#fff"
+              borderRadius="0 0 5px 5px"
+              position="relative"
+              width="100%"
+              height="100%"
             >
-              <Button text="닫기" _onClick={modalClose} />
-            </Grid>
-            <Text>회원가입</Text>
-            <Input
-              label="닉네임"
-              type="텍스트"
-              placeholder="닉네임을 입력해주세요"
-              _onChange={e => {
-                setNickName(e.target.value);
-              }}
-            >
-              닉네임
-            </Input>
-            <Grid display="flex" width="100%">
+              <Grid
+                position="absolute"
+                top="-10px"
+                right="20px"
+                color="black"
+                width="20px"
+                padding="10px"
+              >
+                <Button text="닫기" _onClick={modalClose} />
+              </Grid>
+              <Text>회원가입</Text>
               <Input
-                label="이메일"
-                placeholder="이메일을 입력해주세요"
+                label="닉네임"
                 type="텍스트"
-                onChange={e => {
-                  setEmail(e.target.value);
+                placeholder="닉네임을 입력해주세요"
+                _onChange={e => {
+                  setNickName(e.target.value);
                 }}
               >
-                이메일
+                닉네임
               </Input>
+              <Grid display="flex" width="100%">
+                <Input
+                  label="이메일"
+                  placeholder="이메일을 입력해주세요"
+                  type="텍스트"
+                  onChange={e => {
+                    setEmail(e.target.value);
+                  }}
+                >
+                  이메일
+                </Input>
+                <Button
+                  width="10%"
+                  backgroundColor="#222222"
+                  text="이메일 중복 체크"
+                  _onClick={() => {
+                    emailCheck();
+                  }}
+                ></Button>
+              </Grid>
+              <Select
+                defaultValue={[techStackOption[0]]}
+                isMulti
+                name="techStack"
+                options={techStackOption}
+                className="basic-multi-select"
+                classNamePrefix="select"
+                onChange={e => {
+                  let techStack = [];
+                  let arr = e;
+                  let idx = 0;
+                  for (idx = 0; idx < e.length; idx++) {
+                    techStack.push(arr[idx]["value"]);
+                  }
+                  setTeckstack(techStack);
+                }}
+              >
+                기술스택
+              </Select>
               <Button
-                width="10%"
                 backgroundColor="#222222"
-                text="이메일 중복 체크"
+                borderRadius="20px"
+                text="테스트시작"
+                margin="0 0 100px 0"
                 _onClick={() => {
-                  console.log(email);
-                  checkEmail(email);
+                  preSignUP();
                 }}
               ></Button>
             </Grid>
-            <Select
-              defaultValue={[techStackOption[0], techStackOption[2]]}
-              isMulti
-              name="techStack"
-              options={techStackOption}
-              className="basic-multi-select"
-              classNamePrefix="select"
-              onChange={e => {
-                let techStack = [];
-                let arr = e;
-                let idx = 0;
-                for (idx = 0; idx < e.length; idx++) {
-                  techStack.push(arr[idx]["value"]);
-                }
-                setTeckstack(techStack);
-              }}
-            >
-              기술스택
-            </Select>
-            <Button
-              backgroundColor="#222222"
-              borderRadius="20px"
-              text="테스트시작"
-              margin="0 0 100px 0"
-              _onClick={() => {
-                history.push("/test");
-              }}
-            ></Button>
-            <PropensityTest showModal={showModal} setShowModal={setShowModal} />
-          </Grid>
+          ) : (
+            <PropensityTest />
+          )}
         </ModalWrap>
       </Dialog>
     );

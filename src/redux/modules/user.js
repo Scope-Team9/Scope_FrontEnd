@@ -1,7 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis, instance } from "../../lib/axios";
-import { TrendingUpTwoTone } from "@material-ui/icons";
 
 //액션타입
 const FIRST_USER = "FIRST_USER";
@@ -22,6 +21,8 @@ const initialState = {
   userList: [],
   userfirst: false,
   sigunupModalState: false,
+  userPropensityType: [],
+  memberPropensityType: [],
 };
 //카카오 로그인
 const kakaologinMiddleware = code => {
@@ -123,27 +124,6 @@ const signupMiddleware = signupInfo => {
   };
 };
 
-//이메일 중복체크
-const emailCheckMiddleware = email => {
-  return () => {
-    instance
-      .get(`/api/login/email?email=${email}`)
-      .then(res => {
-        console.log(res);
-        if (res.data.status == 200) {
-          window.alert("사용가능한 메일입니다.");
-        } else {
-          if (res.data.status == 400) {
-            window.alert("중복된 이메일이 존재합니다");
-          }
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-};
-
 //리듀서
 export default handleActions(
   {
@@ -179,7 +159,6 @@ const userCreators = {
   kakaologinMiddleware,
   githubLoginMiddleware,
   signupMiddleware,
-  emailCheckMiddleware,
   testUserMiddleWare,
 };
 

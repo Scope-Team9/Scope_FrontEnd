@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Dialog } from "@material-ui/core";
 import styled from "styled-components";
+import TestOne from "./TestOne";
 import { useSelector, useDispatch } from "react-redux";
 import { Grid, Button, Image } from "../../elements/Index";
 import { userCreators } from "../../redux/modules/user";
@@ -15,6 +16,10 @@ const PropensityTest = props => {
   const [page, setpage] = useState(1);
   const [userPropensityType, setUserPropensityType] = useState([]);
   const [memberPropensityType, setMemberPropensityType] = useState([]);
+  const [isChecked, setIsChecked] = useState(false);
+
+  console.log(userPropensityType);
+  console.log(memberPropensityType);
 
   //3.스테이트값에 변화를 버튼에 달아줌
   const nextStep = () => {
@@ -26,6 +31,20 @@ const PropensityTest = props => {
     setpage(page => page - 1);
   };
 
+  const handleUserCreate = answer => {
+    setUserPropensityType(userPropensityType.concat(answer));
+  };
+
+  //체크박스 선택
+  // const handleCheck = (type, newData) => {};
+
+  // const checkedAnswerHandler = (answer, isChecked) => {
+  //   if (isChecked) {
+  //     userPropensityType.add(answer);
+  //   }
+  // };
+
+  //회원가입
   const register = () => {
     const registerInfo = {
       snsId: userInfo.snsId,
@@ -38,6 +57,7 @@ const PropensityTest = props => {
     console.log(registerInfo);
     dispatch(userCreators.signupMiddleware(registerInfo));
   };
+
   return (
     <Grid>
       {/* 프로그래스바 */}
@@ -47,15 +67,60 @@ const PropensityTest = props => {
 
       {/* 컨텐츠자리 */}
       <Grid>
-        {page === 1 && <TestOne />}
-        {page === 2 && <TestTwo />}
-        {page === 3 && <TestThree />}
-        {page === 4 && <TestFour />}
-        {page === 5 && <TestFive />}
-        {page === 6 && <TestSix />}
-        {page === 7 && <TestSeven />}
-        {page === 8 && <TestEight />}
-        {page === 9 && <TestNine />}
+        {page === 1 && (
+          <TestOne
+            userPropensityType={userPropensityType}
+            handleUserCreate={handleUserCreate}
+          />
+        )}
+        {page === 2 && (
+          <TestTwo
+            setUserPropensityType={setUserPropensityType}
+            setMemberPropensityType={setMemberPropensityType}
+          />
+        )}
+        {page === 3 && (
+          <TestThree
+            setUserPropensityType={setUserPropensityType}
+            setMemberPropensityType={setMemberPropensityType}
+          />
+        )}
+        {page === 4 && (
+          <TestFour
+            setUserPropensityType={setUserPropensityType}
+            setMemberPropensityType={setMemberPropensityType}
+          />
+        )}
+        {page === 5 && (
+          <TestFive
+            setUserPropensityType={setUserPropensityType}
+            setMemberPropensityType={setMemberPropensityType}
+          />
+        )}
+        {page === 6 && (
+          <TestSix
+            setUserPropensityType={setUserPropensityType}
+            setMemberPropensityType={setMemberPropensityType}
+          />
+        )}
+        {page === 7 && (
+          <TestSeven
+            setUserPropensityType={setUserPropensityType}
+            setMemberPropensityType={setMemberPropensityType}
+          />
+        )}
+        {page === 8 && (
+          <TestEight
+            setUserPropensityType={setUserPropensityType}
+            setMemberPropensityType={setMemberPropensityType}
+          />
+        )}
+        {page === 9 && (
+          <TestNine
+            setUserPropensityType={setUserPropensityType}
+            setMemberPropensityType={setMemberPropensityType}
+          />
+        )}
         {page === 10 && <TestResult />}
       </Grid>
 
@@ -100,30 +165,7 @@ const PropensityTest = props => {
 };
 
 //2.스테이트별로 변화를 넣어줄 컴포넌트들 만들기
-const TestOne = () => {
-  return (
-    <div>
-      <Grid bg="#007BFF">리더형/팔로워형 테스트</Grid>
-      <div>성향테스트 1번</div>
-      <Grid diplay="flex">
-        <Grid>
-          <div>Q1.팀 회의할 때 당신의 모습에 더 가까운 것은?</div>
-          <button>L - 내 주장을 펼치며 회의 분위기를 탄탄하게 이끌기</button>
-          <button>
-            F - 다른 사람들의 의견을 들으며 뭘 맡아서 해야할지 파악하기
-          </button>
-        </Grid>
-        <Grid>
-          <div>Q2.팀 회의할 때 선호하는 팀원의 모습에 더 가까운 것은?</div>
-          <button>L - 내 주장을 펼치며 회의 분위기를 탄탄하게 이끌기</button>
-          <button>
-            F - 다른 사람들의 의견을 들으며 뭘 맡아서 해야할지 파악하기
-          </button>
-        </Grid>
-      </Grid>
-    </div>
-  );
-};
+
 const TestTwo = () => {
   return (
     <div>
