@@ -106,17 +106,27 @@ const githubLoginMiddleware = code => {
 //테스트유저 미들웨어
 const testUserMiddleWare = signupInfo => {
   return function (dispatch, getState, { history }) {
-    dispatch(testUser(signupInfo));
+    console.log(signupInfo);
+    dispatch(firstUser(signupInfo));
   };
 };
 
 //테스트 마친 회원가입
 const signupMiddleware = signupInfo => {
-  return () => {
+  return function (dispatch, getState, { history }) {
     instance
       .post("/api/signup", signupInfo)
       .then(res => {
         console.log(res);
+        const ACCESS_TOKEN = res.data.token;
+        localStorage.setItem("token", ACCESS_TOKEN);
+        dispatch(
+          setUser({
+            email: res.data.email,
+            nickname: res.data.nickname,
+          })
+        );
+        history.replace("/");
       })
       .catch(err => {
         console.log(err);
@@ -131,17 +141,10 @@ export default handleActions(
       produce(state, draft => {
         draft.email = action.payload.user.email;
         draft.snsId = action.payload.user.snsId;
+        draft.techStack = action.payload.user.techStack;
+        draft.nickName = action.payload.user.nickName;
         draft.userfirst = true;
         draft.sigunupModalState = true;
-      }),
-    [TEST_USER]: (state, action) =>
-      produce(state, draft => {
-        draft.email = action.payload.user.email;
-        draft.snsId = action.payload.user.snsId;
-        draft.techStack = action.payload.user.techStack;
-        draft.nickname = action.payload.user.nickname;
-        draft.userfirst = false;
-        draft.sigunupModalState = false;
       }),
     [SET_USER]: (state, action) =>
       produce(state, draft => {

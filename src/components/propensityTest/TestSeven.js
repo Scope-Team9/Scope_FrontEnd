@@ -1,7 +1,8 @@
+import { Button } from "@material-ui/core";
 import React from "react";
-import { Grid, Button } from "../../elements/Index";
+import { Grid } from "../../elements/Index";
 
-const TestOne = props => {
+const TestSeven = props => {
   const {
     setUserPropensityType,
     setMemberPropensityType,
@@ -10,22 +11,22 @@ const TestOne = props => {
   } = props;
   return (
     <Grid>
-      <Grid height="30px" bg="#dddddd">
-        리더형/팔로워형 테스트
+      <Grid height="30px" bg="#007BFF">
+        결과/과정 중심형 테스트
       </Grid>
-      <div>성향테스트 1번</div>
+      <div>성향테스트 7번</div>
       <Grid display="flex" flexDirection="column">
         <Grid>
           <div>
-            Q1.팀 회의할 때 당신의 모습에 더 가까운 것은?
+            Q. 어떤 문장이 당신과 더 어울리나요
             <button
               value="L"
               onClick={e => {
-                console.log(e);
                 handleUserCreate(e.target.value);
               }}
             >
-              내 주장을 펼치며 회의 분위기를 탄탄하게 이끌기
+              P - 문제를 해결하는 과정에서 얻는 성취감이 있다면 보상이
+              상대적으로 적더라도 만족한다.
             </button>
             <button
               value="F"
@@ -38,14 +39,15 @@ const TestOne = props => {
           </div>
         </Grid>
         <Grid>
-          <div>Q2.팀 회의할 때 선호하는 팀원의 모습에 더 가까운 것은?</div>
+          <div>Q. 어떤 문장이 당신이 선호하는 팀원의 모습과 더 어울리나요</div>
           <button
             value="L"
             onClick={e => {
               handleMemberCreate(e.target.value);
             }}
           >
-            내 주장을 펼치며 회의 분위기를 탄탄하게 이끌기
+            G - 결과를 위해서라면 과정에서 얻을 수 있는 심리적 만족감은 조금
+            내려놓을 수도 있어야 한다.
           </button>
           <button
             value="F"
@@ -53,7 +55,8 @@ const TestOne = props => {
               handleMemberCreate(e.target.value);
             }}
           >
-            다른 사람들의 의견을 들으며 뭘 맡아서 해야할지 파악하기
+            P - 문제를 해결하는 과정에서 얻는 성취감이 있다면 보상이 상대적으로
+            적더라도 만족한다.
           </button>
         </Grid>
       </Grid>
@@ -61,4 +64,4 @@ const TestOne = props => {
   );
 };
 
-export default TestOne;
+export default TestSeven;

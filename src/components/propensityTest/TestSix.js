@@ -1,59 +1,53 @@
 import React from "react";
 import { Grid, Button } from "../../elements/Index";
 
-const TestOne = props => {
-  const {
-    setUserPropensityType,
-    setMemberPropensityType,
-    handleUserCreate,
-    handleMemberCreate,
-  } = props;
+const TestSix = props => {
+  const { handleUserCreate, handleMemberCreate } = props;
   return (
     <Grid>
-      <Grid height="30px" bg="#dddddd">
+      <Grid height="30px" bg="#007BFF">
         리더형/팔로워형 테스트
       </Grid>
-      <div>성향테스트 1번</div>
+      <div>성향테스트 6번</div>
       <Grid display="flex" flexDirection="column">
         <Grid>
           <div>
-            Q1.팀 회의할 때 당신의 모습에 더 가까운 것은?
+            당신이 생각할 때 더 좋은 성과를 만들 수 있을 것 같은 팀은?
             <button
-              value="L"
+              value="V"
               onClick={e => {
-                console.log(e);
                 handleUserCreate(e.target.value);
               }}
             >
-              내 주장을 펼치며 회의 분위기를 탄탄하게 이끌기
+              V. 직책에 따라 책임이 분배되는 팀
             </button>
             <button
-              value="F"
+              value="H"
               onClick={e => {
                 handleUserCreate(e.target.value);
               }}
             >
-              다른 사람들의 의견을 들으며 뭘 맡아서 해야할지 파악하기
+              H. 책임이 균등하게 나누어진 팀
             </button>
           </div>
         </Grid>
         <Grid>
-          <div>Q2.팀 회의할 때 선호하는 팀원의 모습에 더 가까운 것은?</div>
+          <div>당신의 팀원이 더 좋은 성과를 만들 수 있을 것 같은 팀은?</div>
           <button
-            value="L"
+            value="V"
             onClick={e => {
               handleMemberCreate(e.target.value);
             }}
           >
-            내 주장을 펼치며 회의 분위기를 탄탄하게 이끌기
+            V. 직책에 따라 책임이 분배되는 팀
           </button>
           <button
-            value="F"
+            value="H"
             onClick={e => {
               handleMemberCreate(e.target.value);
             }}
           >
-            다른 사람들의 의견을 들으며 뭘 맡아서 해야할지 파악하기
+            H. 책임이 균등하게 나누어진 팀
           </button>
         </Grid>
       </Grid>
@@ -61,4 +55,4 @@ const TestOne = props => {
   );
 };
 
-export default TestOne;
+export default TestSix;
