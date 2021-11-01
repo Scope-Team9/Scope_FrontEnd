@@ -9,7 +9,7 @@ import { Grid, Image } from "../elements/Index";
 
 import Img from "../images/flutter.png";
 
-const PostTest = (props) => {
+const MypagePost = (props) => {
   const dispatch = useDispatch();
 
   return (
@@ -29,47 +29,15 @@ const PostTest = (props) => {
             <Grid>
               <TitleDate>D-2</TitleDate>
             </Grid>
-            <Grid display="flex">
-              <Grid
-                width="50px"
-                borderRadius="50%"
-                backgroundColor="white"
-                margin="-26px 8px"
-              >
-                <Image src={Img} />
-              </Grid>
-              <Grid
-                width="50px"
-                borderRadius="50%"
-                backgroundColor="white"
-                margin="-26px 8px"
-              >
-                <Image src={Img} />
-              </Grid>
-              <Grid
-                width="50px"
-                borderRadius="50%"
-                backgroundColor="white"
-                margin="-26px 8px"
-              >
-                <Image src={Img} />
-              </Grid>
-              <Grid
-                width="50px"
-                borderRadius="50%"
-                backgroundColor="white"
-                margin="-26px 8px"
-              >
-                <Image src={Img} />
-              </Grid>
-              <Grid
-                width="50px"
-                borderRadius="50%"
-                backgroundColor="white"
-                margin="-26px 8px"
-              >
-                <Image src={Img} />
-              </Grid>
+
+            <Grid
+              display="flex"
+              width="50px"
+              borderRadius="50%"
+              backgroundColor="white"
+              margin="-26px 25px"
+            >
+              <Image src={Img} />
             </Grid>
           </Grid>
           <DescriptionBox>
@@ -139,4 +107,4 @@ const ProductImgWrap = styled.div`
   }
 `;
 
-export default PostTest;
+export default MypagePost;
