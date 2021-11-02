@@ -41,6 +41,7 @@ const Grid = (props) => {
     right,
     hover,
     zIndex,
+    bgImg,
   } = props;
 
   const styles = {
@@ -80,6 +81,7 @@ const Grid = (props) => {
     right,
     hover,
     zIndex,
+    bgImg,
   };
   return (
     <GridBox {...styles} onClick={_onClick} id={id}>
@@ -122,6 +124,7 @@ Grid.defaultProps = {
   left: null,
   right: null,
   hover: null,
+  bgImg: null,
   _onClick: () => {},
 };
 
@@ -162,6 +165,7 @@ const GridBox = styled.div`
   right: ${(props) => props.right};
   background-color: ${(props) => props.backgroundColor};
   z-index: ${(props) => props.zIndex};
+  background-image: ${(props) => props.bgImg};
 
   :hover {
     ${(props) =>
