@@ -1,21 +1,25 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Grid, Button, Image } from "../../elements/Index";
 
 const TestTwo = props => {
-  const {
-    setUserPropensityType,
-    setMemberPropensityType,
-    handleUserCreate,
-    handleMemberCreate,
-  } = props;
+  const userInfo = useSelector(state => state.user);
 
   return (
-    <div>
+    <Grid>
       <div>테스트결과입니다.</div>
       <Image />
-      <div> FVP - 팔로잉 / 수직 / 과정 - 허숙희</div>
+      <div>
+        {" "}
+        나의성향 - {userInfo.userTestResult} - 팔로잉 / 수직 / 과정 - 허숙희
+      </div>
+      <div>
+        {" "}
+        내가선호하는 성향- {userInfo.memberTestResult} - 팔로잉 / 수직 / 과정 -
+        허숙희
+      </div>
       <div> </div>
-    </div>
+    </Grid>
   );
 };
 

@@ -17,7 +17,7 @@ export const instance = axios.create({
 });
 
 instance.interceptors.request.use(
-  (config) => {
+  config => {
     const cookie = document.cookie;
     console.log(cookie);
     if (cookie === "") {
@@ -38,24 +38,26 @@ instance.interceptors.request.use(
     };
     return config;
   },
-  (err) => {
+  err => {
     console.log(err);
   }
 );
 
 export const apis = {
   //회원가입 및 로그인 관련 api
-  kakaologin: (code) => instance.get("/api/login/kakao", code),
-  register: (registerInfo) => instance.post("/api/signup", registerInfo),
-  checkEmail: (email) => instance.get("/api/login/email?email=email", email),
-  signup: (registerInfo) =>
+  kakaoLogin: code => instance.get("/api/login/kakao", code),
+  register: registerInfo => instance.post("/api/signup", registerInfo),
+  checkEmail: email => instance.get(`/api/login/email?email=${email}`, email),
+  checkNick: nickName =>
+    instance.get(`/api/login/nickname?nickname=${nickName}`, nickName),
+  signup: registerInfo =>
     instance.post(
       "/api/post?filter=recommend&displayNumber=6&page=2&",
       registerInfo
     ),
 
   // 유저 관련 api
-  updateProfileImg: (imageUrl) => instance.put(`/user/image`, imageUrl),
+  updateProfileImg: imageUrl => instance.put(`/user/image`, imageUrl),
   getUserInfo: () => instance.get("/user/info"),
   getAllUserList: () => instance.get("/user/list"),
 
@@ -71,13 +73,13 @@ export const apis = {
     ),
   //data.json용
   // getPost: () => instance.get(`/post`),
-  addPost: (postInfo) => instance.post(`/api/post`, postInfo),
+  addPost: postInfo => instance.post(`/api/post`, postInfo),
   updatePost: (postId, postInfo) => instance.put(`/post/${postId}`, postInfo),
-  deletePost: (postId) => instance.delete(`/post/${postId}`),
-  clickLike: (postId) => instance.post(`/post/${postId}/like`),
-  addComment: (commentInfo) => instance.post("/comment", commentInfo),
-  deleteComment: (commentId) => instance.delete(`/comment/${commentId}`),
+  deletePost: postId => instance.delete(`/post/${postId}`),
+  clickLike: postId => instance.post(`/post/${postId}/like`),
+  addComment: commentInfo => instance.post("/comment", commentInfo),
+  deleteComment: commentId => instance.delete(`/comment/${commentId}`),
   editComment: (commentId, content) =>
     instance.put(`/comment/${commentId}`, content),
-  addMyImage: (base64) => instance.post(`/api/image`, base64),
+  addMyImage: base64 => instance.post(`/api/image`, base64),
 };
