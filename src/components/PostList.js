@@ -44,7 +44,7 @@ const PostList = () => {
       postId: 2,
       title: "이승민 구합니다",
       techStack: ["javscript", "react"],
-      summary: "홀리입니다.",
+      summary: "호호입니다",
       totalMember: 3,
       recruitmentMember: "신청자 a",
       projectStatus: "진행중",

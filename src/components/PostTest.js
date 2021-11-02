@@ -12,7 +12,7 @@ import Img from "../images/flutter.png";
 const PostTest = (props) => {
   const dispatch = useDispatch();
 
-  console.log("asdsad", props);
+  console.log("asdsad", props.postId);
   return (
     <React.Fragment>
       <ProductImgWrap

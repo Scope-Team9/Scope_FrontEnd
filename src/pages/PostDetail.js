@@ -8,6 +8,7 @@ import { Grid, Text, Image, Input, Button } from "../elements/Index";
 
 // DetailList의 함수형 컴포넌트를 만든다.
 const DetailList = (props) => {
+  console.log("제목");
   return (
     <React.Fragment>
       <Grid
