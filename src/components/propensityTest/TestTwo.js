@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Button } from "../../elements/Index";
 
-const TestTwo = props => {
+const TestTwo = (props) => {
   const { handleUserCreate, handleMemberCreate } = props;
 
   return (
@@ -16,8 +16,8 @@ const TestTwo = props => {
           <button
             id="Q2"
             value="L"
-            onClick={e => {
-              handleUserCreate(e.target.id, e.target.value);
+            onClick={(e) => {
+              handleUserCreate(e.target.value);
             }}
           >
             L - 스터디를 어떻게 운영할지 잠깐 생각해보고 스터디장을 맡아서
@@ -26,8 +26,8 @@ const TestTwo = props => {
           <button
             id="Q2"
             value="F"
-            onClick={e => {
-              handleUserCreate(e.target.id, e.target.value);
+            onClick={(e) => {
+              handleUserCreate(e.target.value);
             }}
           >
             F - 누가 스터디를 잘 이끌 사람인지 살핀다.
@@ -40,7 +40,7 @@ const TestTwo = props => {
           </div>
           <button
             value="F"
-            onClick={e => {
+            onClick={(e) => {
               handleMemberCreate(e.target.value);
             }}
           >
@@ -49,7 +49,7 @@ const TestTwo = props => {
           </button>
           <button
             value="L"
-            onClick={e => {
+            onClick={(e) => {
               handleMemberCreate(e.target.value);
             }}
           >
