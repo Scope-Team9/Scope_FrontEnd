@@ -102,6 +102,48 @@ const githubLoginMiddleware = code => {
       });
   };
 };
+// 이메일 중복체크 미들웨어
+const emailCheckMiddleWare = email => {
+  return () => {
+    apis
+      .checkEmail(email)
+      .then(res => {
+        console.log(res);
+        if (res.data.status == 200) {
+          window.alert("사용가능한 메일입니다.");
+        } else {
+          if (res.data.status == 400) {
+            window.alert("중복된 이메일이 존재합니다");
+          }
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+};
+
+// 닉네임 중복체크 미들웨어
+const nickCheckMiddleWare = nickName => {
+  console.log(nickName);
+  return () => {
+    apis
+      .checkNick(nickName)
+      .then(res => {
+        console.log(res);
+        if (res.data.status == 200) {
+          window.alert("사용가능한 닉네임입니다.");
+        } else {
+          if (res.data.status == 400) {
+            window.alert("중복된 닉네임이 존재합니다");
+          }
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+};
 
 //테스트유저 미들웨어
 const testUserMiddleWare = signupInfo => {
@@ -114,16 +156,16 @@ const testUserMiddleWare = signupInfo => {
 //테스트 마친 회원가입
 const signupMiddleware = signupInfo => {
   return function (dispatch, getState, { history }) {
-    instance
-      .post("/api/signup", signupInfo)
+    apis
+      .signup(signupInfo)
       .then(res => {
         console.log(res);
         const ACCESS_TOKEN = res.data.token;
         localStorage.setItem("token", ACCESS_TOKEN);
         dispatch(
           setUser({
-            email: res.data.email,
-            nickname: res.data.nickname,
+            userTestResult: res.data.userTestResult,
+            memberTestResult: res.data.memberTestResult,
           })
         );
         history.replace("/");
@@ -153,6 +195,8 @@ export default handleActions(
         draft.email = action.payload.user.email;
         draft.is_login = true;
         draft.sigunupModalState = false;
+        draft.userTestResult = action.payload.user.userTestResult;
+        draft.memberTestResult = action.payload.user.memberTestResult;
       }),
   },
   initialState
@@ -163,6 +207,8 @@ const userCreators = {
   githubLoginMiddleware,
   signupMiddleware,
   testUserMiddleWare,
+  emailCheckMiddleWare,
+  nickCheckMiddleWare,
 };
 
 export { userCreators };

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Grid, Button } from "../../elements/Index";
 
-const TestOne = (props) => {
+const TestOne = props => {
   const {
     setUserPropensityType,
     setMemberPropensityType,
@@ -22,21 +22,16 @@ const TestOne = (props) => {
           <div>
             Q1.팀 회의할 때 당신의 모습에 더 가까운 것은?
             <SsButton
-              id="Q1"
               value="L"
-              // cheked={bChecked}
-              onClick={(e) => {
-                console.log(e);
-
+              onClick={e => {
                 handleUserCreate(e.target.value);
               }}
             >
               내 주장을 펼치며 회의 분위기를 탄탄하게 이끌기
             </SsButton>
             <button
-              id="Q1"
               value="F"
-              onClick={(e) => {
+              onClick={e => {
                 handleUserCreate(e.target.value);
               }}
             >
@@ -47,18 +42,16 @@ const TestOne = (props) => {
         <Grid>
           <div>Q2.팀 회의할 때 선호하는 팀원의 모습에 더 가까운 것은?</div>
           <button
-            id="Q2"
             value="L"
-            onClick={(e) => {
+            onClick={e => {
               handleMemberCreate(e.target.value);
             }}
           >
             내 주장을 펼치며 회의 분위기를 탄탄하게 이끌기
           </button>
           <button
-            id="Q2"
             value="F"
-            onClick={(e) => {
+            onClick={e => {
               handleMemberCreate(e.target.value);
             }}
           >
