@@ -5,9 +5,9 @@ import { history } from "../redux/configureStore";
 export const instance = axios.create({
   // baseURL: "http://localhost:3000",
   // baseURL: "http://localhost:4000",
-  baseURL: "http://3.36.94.200",
+  // baseURL: "http://3.36.94.200",
 
-  // baseURL: "http://15.165.159.211",
+  baseURL: "http://15.165.159.211",
 
   headers: {
     "content-type": "application/json; charset=UTF-8",
