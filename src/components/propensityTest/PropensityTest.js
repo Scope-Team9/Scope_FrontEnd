@@ -42,6 +42,10 @@ const PropensityTest = (props) => {
   const nextStep = () => {
     if (page === 10) return;
     setpage((page) => page + 1);
+
+    setPreUserPropensityType("");
+    setPreMemberPropensityType("");
+
     //나에대한 항목
     let preMy = userPropensityType;
     preMy.push(preUserPropensityType);
