@@ -117,7 +117,7 @@ export default function Writer(props) {
   // };
 
   const onChangeEditorTextHandler = () => {
-    console.log(editorRef.current.getInstance().getMarkdown());
+    // console.log(editorRef.current.getInstance().getMarkdown());
   };
 
   return (
