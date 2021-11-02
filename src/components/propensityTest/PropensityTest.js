@@ -23,6 +23,7 @@ const PropensityTest = props => {
 
   //스텝별로 스테이트 변화값에 따라 텍스트가 바뀌는지 먼저 확인
   const [page, setpage] = useState(1);
+  console.log(page);
 
   // 최종 장소
   const [userPropensityType, setUserPropensityType] = useState([]);
@@ -81,6 +82,22 @@ const PropensityTest = props => {
 
   //회원가입
   const register = () => {
+    setpage(page => page + 1);
+
+    setPreUserPropensityType("");
+    setPreMemberPropensityType("");
+    //나에대한 항목
+    let preMy = userPropensityType;
+    preMy.push(preUserPropensityType);
+    setUserPropensityType(preMy);
+    console.log("내꺼 잘 들어감?", userPropensityType);
+
+    //상대에 다한 항목
+    let preYou = memberPropensityType;
+    preYou.push(preMemberPropensityType);
+    setMemberPropensityType(preYou);
+    console.log("너꺼 잘 들어감?", memberPropensityType);
+
     let _snsId = String(userInfo.snsId);
     console.log(_snsId);
     console.log(typeof _snsId);

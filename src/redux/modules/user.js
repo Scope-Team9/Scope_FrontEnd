@@ -52,7 +52,7 @@ const kakaologinMiddleware = code => {
               nickname: res.data.nickname,
             })
           );
-          history.replace("/");
+          history.push("/");
         }
         // window.location.href = "/";
       })
@@ -193,6 +193,7 @@ export default handleActions(
         draft.userId = action.payload.user.userId;
         draft.nickname = action.payload.user.nickname;
         draft.email = action.payload.user.email;
+        draft.techStack = action.payload.user.techStack;
         draft.is_login = true;
         draft.sigunupModalState = false;
         draft.userTestResult = action.payload.user.userTestResult;

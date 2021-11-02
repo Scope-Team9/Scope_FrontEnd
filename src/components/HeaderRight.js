@@ -24,9 +24,9 @@ const HeaderRight = props => {
   };
 
   const logOut = () => {
-    deleteCookie("user_id");
-    history.replace("/");
+    localStorage.removeItem("token");
     window.alert("로그아웃 됐습니다");
+    history.replace("/");
   };
 
   if (is_login) {
@@ -45,7 +45,7 @@ const HeaderRight = props => {
           <Button
             backgroundColor="#111"
             width="100px"
-            text="로그인"
+            text="로그아웃"
             _onClick={logOut}
           ></Button>
         </HeaderWrapper>
