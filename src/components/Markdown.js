@@ -42,6 +42,7 @@ export default function Writer(props) {
                 // 2. 읽기가 완료되면 아래코드가 실행됩니다.
                 const base64 = reader.result;
 
+                //await이 중괄호 안에 쓰일 수 없기 때문에 async사용
                 const upload = async () => {
                   // console.log("2차 관문", base64);
                   // 서버로부터 이미지 주소 받아옴
@@ -53,6 +54,7 @@ export default function Writer(props) {
                   return resulturl;
                 };
                 upload();
+                // callback(resulturl, "alt text");
               };
             } catch (err) {
               console.log(err.response);
