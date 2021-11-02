@@ -328,6 +328,7 @@ const LoginModal = props => {
                 <Grid display="flex" flexDirection="column">
                   <GithubBtn
                     onClick={() => {
+                      setShowModal(true);
                       window.location.href =
                         "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=http://localhost:3000/user/github/callback";
                     }}
@@ -336,6 +337,7 @@ const LoginModal = props => {
                   </GithubBtn>
                   <KakaoBtn
                     onClick={() => {
+                      setShowModal(true);
                       window.location.href =
                         "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code";
                     }}
@@ -344,6 +346,7 @@ const LoginModal = props => {
                   </KakaoBtn>
                   <NaverBtn
                     onClick={() => {
+                      setShowModal(true);
                       window.location.href =
                         "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code";
                     }}
