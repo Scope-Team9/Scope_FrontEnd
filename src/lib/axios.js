@@ -50,11 +50,7 @@ export const apis = {
   checkEmail: email => instance.get(`/api/login/email?email=${email}`, email),
   checkNick: nickName =>
     instance.get(`/api/login/nickname?nickname=${nickName}`, nickName),
-  signup: registerInfo =>
-    instance.post(
-      "/api/post?filter=recommend&displayNumber=6&page=2&",
-      registerInfo
-    ),
+  signup: registerInfo => instance.post("/api/signup", registerInfo),
 
   // 유저 관련 api
   updateProfileImg: imageUrl => instance.put(`/user/image`, imageUrl),

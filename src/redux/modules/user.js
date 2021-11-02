@@ -156,8 +156,8 @@ const testUserMiddleWare = signupInfo => {
 //테스트 마친 회원가입
 const signupMiddleware = signupInfo => {
   return function (dispatch, getState, { history }) {
-    instance
-      .post("/api/signup", signupInfo)
+    apis
+      .signup(signupInfo)
       .then(res => {
         console.log(res);
         const ACCESS_TOKEN = res.data.token;
@@ -168,6 +168,7 @@ const signupMiddleware = signupInfo => {
             memberTestResult: res.data.memberTestResult,
           })
         );
+        history.replace("/");
       })
       .catch(err => {
         console.log(err);

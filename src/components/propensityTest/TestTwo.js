@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Button } from "../../elements/Index";
 
-const TestTwo = (props) => {
+const TestTwo = props => {
   const { handleUserCreate, handleMemberCreate } = props;
 
   return (
@@ -10,50 +10,46 @@ const TestTwo = (props) => {
       <Grid display="flex" flexDirection="column">
         <Grid>
           <div>
-            Q1. 새로운 스터디 사람들과의 첫만남! 스터디의 운영을 맡길 스터디
+            Q2. 새로운 스터디 사람들과의 첫만남! 스터디의 운영을 맡길 스터디
             장을 뽑아야 하는데 이때 당신의 행동은?
           </div>
           <button
-            id="Q2"
             value="L"
-            onClick={(e) => {
+            onClick={e => {
               handleUserCreate(e.target.value);
             }}
           >
-            L - 스터디를 어떻게 운영할지 잠깐 생각해보고 스터디장을 맡아서
-            진행한다.
+            스터디를 어떻게 운영할지 잠깐 생각해보고 스터디장을 맡아서 진행한다.
           </button>
           <button
-            id="Q2"
             value="F"
-            onClick={(e) => {
+            onClick={e => {
               handleUserCreate(e.target.value);
             }}
           >
-            F - 누가 스터디를 잘 이끌 사람인지 살핀다.
+            누가 스터디를 잘 이끌 사람인지 살핀다.
           </button>
         </Grid>
         <Grid>
           <div>
-            Q1. 새로운 스터디 사람들과의 첫만남! 스터디의 운영을 맡길 스터디
+            Q2. 새로운 스터디 사람들과의 첫만남! 스터디의 운영을 맡길 스터디
             장을 뽑아야 하는데 이때 당신의 행동은?
           </div>
           <button
-            value="F"
-            onClick={(e) => {
+            value="L"
+            onClick={e => {
               handleMemberCreate(e.target.value);
             }}
           >
-            L - 스터디를 어떻게 운영할지 잠깐 생각해보고 스터디장을 맡아서
-            진행한다.
+            스터디를 어떻게 운영할지 잠깐 생각해보고 스터디장을 맡아서 진행한다.
           </button>
           <button
-            value="L"
-            onClick={(e) => {
+            value="F"
+            onClick={e => {
               handleMemberCreate(e.target.value);
             }}
           >
-            F - 누가 스터디를 잘 이끌 사람인지 살핀다.
+            누가 스터디를 잘 이끌 사람인지 살핀다.
           </button>
         </Grid>
       </Grid>
