@@ -5,7 +5,7 @@ import { history } from "../redux/configureStore";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import MainPage from "../pages/MainPage";
-import KakaoRedirect from "./KakaoRedirect";
+import KakaoRedirect from "./kakaoRedirect";
 import GitHubRedirect from "./GitHubRedirect";
 import MyPage from "../pages/MyPage";
 import PostAdd from "../pages/PostAdd";
@@ -14,6 +14,9 @@ import Markdown from "../components/Markdown";
 import MarkdownRead from "../components/MarkdownRead";
 import styled from "styled-components";
 import Header from "../components/Header";
+
+//테스트용입니다.
+import PropensityTest from "../components/propensityTest/PropensityTest";
 
 function App() {
   return (
@@ -38,6 +41,9 @@ function App() {
             exact
             component={GitHubRedirect}
           ></Route>
+
+          {/* 테스트용입니다. */}
+          <Route path="/test" exact component={PropensityTest}></Route>
         </Switch>
       </ConnectedRouter>
     </React.Fragment>
