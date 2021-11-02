@@ -1,13 +1,14 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis, instance } from "../../lib/axios";
-import { TrendingUpTwoTone } from "@material-ui/icons";
 
 //액션타입
 const FIRST_USER = "FIRST_USER";
+const TEST_USER = "TEST_USER";
 const SET_USER = "SET_USER";
 //액션생성
 const firstUser = createAction(FIRST_USER, user => ({ user }));
+const testUser = createAction(TEST_USER, user => ({ user }));
 const setUser = createAction(SET_USER, user => ({ user }));
 
 //초기값
@@ -20,6 +21,8 @@ const initialState = {
   userList: [],
   userfirst: false,
   sigunupModalState: false,
+  userPropensityType: [],
+  memberPropensityType: [],
 };
 //카카오 로그인
 const kakaologinMiddleware = code => {
@@ -28,12 +31,13 @@ const kakaologinMiddleware = code => {
     instance
       .get(`/api/login/kakao?code=${code}`)
       .then(res => {
-        if (res.status === 300 && !res.data.nickname) {
+        console.log(res.data);
+        if (res.data.status == 300) {
           window.alert("추가정보 작성이 필요합니다.");
           dispatch(
             firstUser({
-              email: res.data.email,
-              snsId: res.data.id,
+              email: res.data.data.email,
+              snsId: res.data.data.id,
             })
           );
           history.replace("/");
@@ -67,12 +71,12 @@ const githubLoginMiddleware = code => {
     instance
       .get(`/api/login/github?code=${code}`)
       .then(res => {
-        if (res.status === 300 && !res.data.nickname) {
+        if (res.data.status == 300) {
           window.alert("추가정보 작성이 필요합니다.");
           dispatch(
             firstUser({
-              email: res.data.email,
-              snsId: res.data.id,
+              email: res.data.data.email,
+              snsId: res.data.data.id,
             })
           );
           history.replace("/");
@@ -99,26 +103,46 @@ const githubLoginMiddleware = code => {
   };
 };
 
-//회원가입
+//테스트유저 미들웨어
+const testUserMiddleWare = signupInfo => {
+  return function (dispatch, getState, { history }) {
+    console.log(signupInfo);
+    dispatch(firstUser(signupInfo));
+  };
+};
+
+//테스트 마친 회원가입
 const signupMiddleware = signupInfo => {
-  return () => {
-    apis
-      .register(signupInfo)
+  return function (dispatch, getState, { history }) {
+    instance
+      .post("/api/signup", signupInfo)
       .then(res => {
         console.log(res);
+        const ACCESS_TOKEN = res.data.token;
+        localStorage.setItem("token", ACCESS_TOKEN);
+        dispatch(
+          setUser({
+            email: res.data.email,
+            nickname: res.data.nickname,
+          })
+        );
+        history.replace("/");
       })
       .catch(err => {
         console.log(err);
       });
   };
 };
+
 //리듀서
 export default handleActions(
   {
     [FIRST_USER]: (state, action) =>
       produce(state, draft => {
-        draft.userId = action.payload.user.userId;
+        draft.email = action.payload.user.email;
         draft.snsId = action.payload.user.snsId;
+        draft.techStack = action.payload.user.techStack;
+        draft.nickName = action.payload.user.nickName;
         draft.userfirst = true;
         draft.sigunupModalState = true;
       }),
@@ -138,6 +162,7 @@ const userCreators = {
   kakaologinMiddleware,
   githubLoginMiddleware,
   signupMiddleware,
+  testUserMiddleWare,
 };
 
 export { userCreators };

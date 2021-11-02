@@ -1,20 +1,32 @@
 import React from "react";
 import styled from "styled-components";
+import { history } from "../redux/configureStore";
 
 import { useDispatch, useSelector } from "react-redux";
 import { Grid, Text, Image, Button } from "../elements/Index";
 import userImage from "../images/임시로고.jpg";
 import LoginModal from "./LoginModal";
 
+import { deleteCookie } from "../shared/Cookie";
+
 const HeaderRight = props => {
   const is_login = useSelector(state => state.user.is_login);
+  const user_info = useSelector(state => state.user);
+
   console.log(is_login);
   const [showModal, setShowModal] = React.useState(false);
+  const sigunupModalState = useSelector(state => state.user.sigunupModalState);
   const modalOpen = () => {
     setShowModal(true);
   };
   const modalClose = () => {
     setShowModal(false);
+  };
+
+  const logOut = () => {
+    deleteCookie("user_id");
+    history.replace("/");
+    window.alert("로그아웃 됐습니다");
   };
 
   if (is_login) {
@@ -28,8 +40,14 @@ const HeaderRight = props => {
         <HeaderWrapper>
           <Grid display="flex" alignItems="center" margin="0 10px">
             <Image src={userImage} />
-            <Text>사용자</Text>
+            <Text>{user_info.nickname}</Text>
           </Grid>
+          <Button
+            backgroundColor="#111"
+            width="100px"
+            text="로그인"
+            _onClick={logOut}
+          ></Button>
         </HeaderWrapper>
       </Grid>
     );
