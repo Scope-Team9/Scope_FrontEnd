@@ -1,15 +1,13 @@
 // AddPost.js
 
 // import를 한다.
-import React from "react";
-import styled, { useTheme } from "styled-components";
+import React, { useCallback, useEffect, useMemo } from "react";
+import styled from "styled-components";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
-import Button from "@mui/material/Button";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import Fade from "@mui/material/Fade";
+import Select from "react-select";
+import makeAnimated from "react-select/animated";
 
 import { Grid, Text, Input } from "../elements/Index";
 
@@ -19,72 +17,138 @@ import { addPostAPI } from "../redux/modules/postadd";
 import { postActions as postActions } from "../redux/modules/postadd";
 
 // AddPost의 함수형 컴포넌트를 만든다.
-const AddPost = props => {
+// AddPost 안에 다뤄지는  특정 값(state) ex.title 값이 변화하였을 때, AddPost자체가 리랜더링 된다.
+const AddPost = (props) => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const animatedComponents = makeAnimated();
+
+  const [title, setTitle] = React.useState();
+  const [summary, setSummary] = React.useState();
+  const [techstack, setTectstack] = React.useState([]);
+  const [totalMember, setTotalmember] = React.useState();
+  const [projectStatus, setProjectstatus] = React.useState();
+  const [startDate, setStartdate] = React.useState(new Date());
+  const [endDate, setEnddate] = React.useState(new Date());
+  const [contents, setContents] = React.useState();
+  const [techStackList, setTest] = React.useState();
 
   const scope_index = () => {
     const card = {
       title: title,
       summary: summary,
-      tectstack: tectstack,
-      startdate: startdate,
-      enddate: enddate,
-      totalmember: totalmember,
-      projectstatus: projectstatus,
+      techStackList: techStackList,
+      startDate: startDate,
+      endDate: endDate,
+      totalMember: totalMember,
+      projectStatus: projectStatus,
       contents: contents,
     };
     console.log(card);
     dispatch(postActions.addPostAPI(card));
   };
 
-  const [title, setTitle] = React.useState();
-  const [summary, setSummary] = React.useState();
-  const [tectstack, setTectstack] = React.useState();
-  const [totalmember, setTotalmember] = React.useState();
-  const [projectstatus, setProjectstatus] = React.useState();
-  const [startdate, setStartdate] = React.useState(new Date());
-  const [enddate, setEnddate] = React.useState(new Date());
-  const [contents, setContents] = React.useState();
+  // 기술 스택 선택
+  const stackSelect = useMemo(
+    () => [
+      // object형태(value는 키값, ""는 value 값), object의 값을 가져오기 위해서는 키값을 알아야한다.
+      { value: "react", label: "react" },
+      { value: "java", label: "java" },
+      { value: "javascript", label: "javascript" },
+      { value: "python", label: "python" },
+      { value: "nodejs", label: "nodejs" },
+      { value: "flask", label: "flask" },
+      { value: "c++", label: "c++" },
+      { value: "django", label: "django" },
+      { value: "agular", label: "agular" },
+      { value: "vue", label: "vue" },
+      { value: "spring", label: "spring" },
+      { value: "swift", label: "swift" },
+      { value: "kotlin", label: "kotlin" },
+      { value: "typescript", label: "typescript" },
+    ],
+    []
+  );
 
-  console.log(title);
-  console.log(summary);
-  console.log(tectstack);
-  console.log(totalmember);
-  console.log(projectstatus);
-  console.log(startdate);
-  console.log(enddate);
-  console.log(contents);
+  const styles = useMemo(
+    () => ({
+      multiValueRemove: (base, state) => {
+        return state.data.isFixed ? { ...base, display: "none" } : base;
+      },
+    }),
+    []
+  );
 
-  // 기술스택 선택
-  const stactopen = Boolean(tectstack);
-  const stactClick = event => {
-    setTectstack(event.currentTarget);
+  const orderByLabel = useCallback(
+    (a, b) => a.label.localeCompare(b.label),
+    []
+  );
+
+  const orderOptions = useCallback(
+    (values) =>
+      values
+        .filter((v) => v.isFixed)
+        .sort(orderByLabel)
+        .concat(values.filter((v) => !v.isFixed).sort(orderByLabel)),
+    [orderByLabel]
+  );
+
+  const [value, setValue] = React.useState(orderOptions(stackSelect));
+
+  const handleChange = useCallback(
+    (inputValue, { action, removedValue }) => {
+      switch (action) {
+        case "remove-value":
+        case "pop-value":
+          if (removedValue.isFixed) {
+            setValue(orderOptions([...inputValue, removedValue]));
+
+            return;
+          }
+          break;
+        case "clear":
+          setValue(stackSelect.filter((v) => v.isFixed));
+          return;
+        default:
+      }
+
+      setValue(inputValue);
+      setTectstack(inputValue);
+    },
+    [stackSelect, orderOptions]
+  );
+
+  const formatTech = () => {
+    let tamarray = [];
+    let index;
+    for (index = 0; index < techstack.length; index++) {
+      tamarray.push(techstack[index]["label"]);
+    }
+    console.log(tamarray);
+    setTest(tamarray);
   };
 
-  const stackClose = () => {
-    setTectstack(null);
-  };
+  useEffect(() => {
+    formatTech();
+  }, [techstack]);
 
-  // 프로젝트 총 인원 선택
-  const totalopen = Boolean(totalmember);
-  const totalClick = event => {
-    setTotalmember(event.currentTarget);
-  };
+  // 프로젝트 상태
+  const projectstatus = useMemo(
+    () => [{ value: "모집중", label: "모집중" }],
+    []
+  );
 
-  const totalClose = () => {
-    setTotalmember(null);
-  };
-
-  // 프로젝트 상태 선택
-  const statusopen = Boolean(projectstatus);
-  const statusClick = event => {
-    setProjectstatus(event.currentTarget);
-  };
-
-  const statusClose = () => {
-    setProjectstatus(null);
-  };
+  // 프로젝트 인원
+  const projectMembers = useMemo(
+    () => [
+      { value: 2, label: 2 },
+      { value: 3, label: 3 },
+      { value: 4, label: 4 },
+      { value: 5, label: 5 },
+      { value: 6, label: 6 },
+    ],
+    []
+  );
 
   return (
     <React.Fragment>
@@ -105,7 +169,7 @@ const AddPost = props => {
               padding="10px"
               placeholder="제목을 입력해주세요."
               border="1px solid #E7E1FF"
-              _onChange={e => {
+              _onChange={(e) => {
                 setTitle(e.target.value);
               }}
             ></Input>
@@ -118,46 +182,21 @@ const AddPost = props => {
               padding="10px"
               placeholder="한줄소개를 입력해주세요."
               border="1px solid #E7E1FF"
-              _onChange={e => {
+              _onChange={(e) => {
                 setSummary(e.target.value);
               }}
             ></Input>
           </Grid>
           <Grid margin="10px auto">
             <Text>기술스택 선택</Text>
-            <Button
-              id="fade-button"
-              aria-controls="fade-menu"
-              aria-haspopup="true"
-              aria-expanded={stactopen ? "true" : undefined}
-              onChange={e => {
-                setTectstack(e.target.value);
-              }}
-              onClick={stactClick}
-            >
-              기술스택 선택하기
-            </Button>
-            <Menu
-              id="fade-menu"
-              MenuListProps={{
-                "aria-labelledby": "fade-button",
-              }}
-              tectstack={tectstack}
-              open={stactopen}
-              stackClose={stackClose}
-              TransitionComponent={Fade}
-            >
-              <MenuItem onClick={stackClose}>C#</MenuItem>
-              <MenuItem onClick={stackClose}>리액트</MenuItem>
-              <MenuItem onClick={stackClose}>스프링</MenuItem>
-            </Menu>
-            <Input
-              width="500px"
-              height="30px"
-              padding="10px"
-              placeholder="기술스택을 선택해주세요."
-              border="1px solid #E7E1FF"
-            ></Input>
+            <Select
+              isMulti
+              components={animatedComponents}
+              isClearable={value.some((v) => !v.isFixed)}
+              styles={styles}
+              options={stackSelect}
+              onChange={handleChange}
+            />
           </Grid>
           <Grid margin="10px auto">
             <Text>기간설정</Text>
@@ -165,11 +204,11 @@ const AddPost = props => {
               <Text margin="auto 20px">프로젝트 시작 일 :</Text>
               <SDatePicker
                 dateFormat="yyyy/MM/dd"
-                selected={startdate}
-                onChange={date => setStartdate(date)}
+                selected={startDate}
+                onChange={(date) => setStartdate(date)}
                 selectsStart
-                startdate={startdate}
-                enddate={enddate}
+                startdate={startDate}
+                enddate={endDate}
                 locale={ko}
                 minDate={new Date()}
                 placeholderText="프로젝트 시작일 입력"
@@ -177,87 +216,45 @@ const AddPost = props => {
               <Text margin="auto 20px">프로젝트 종료 일 :</Text>
               <SDatePicker
                 dateFormat="yyyy/MM/dd"
-                selected={enddate}
-                onChange={date => setEnddate(date)}
+                selected={endDate}
+                onChange={(date) => setEnddate(date)}
                 selectsEnd
-                enddate={enddate}
-                mindate={startdate}
+                enddate={endDate}
+                mindate={startDate}
                 locale={ko}
-                minDate={new Date()}
+                minDate={new Date("")}
               />
             </Grid>
           </Grid>
           <Grid margin="10px auto">
             <Text>프로젝트 총 인원</Text>
-            <Button
-              id="fade-button"
-              aria-controls="fade-menu"
-              aria-haspopup="true"
-              aria-expanded={totalopen ? "true" : undefined}
-              onChange={e => {
-                setTotalmember(e.target.value);
+            <Select
+              options={projectMembers}
+              isLoading
+              onChange={(e) => {
+                let b;
+                b = e["label"];
+                setTotalmember(b);
+                console.log(b);
               }}
-              onClick={totalClick}
-            >
-              프로젝트 총인원 수
-            </Button>
-            <Menu
-              id="fade-menu"
-              MenuListProps={{
-                "aria-labelledby": "fade-button",
-              }}
-              totalmember={totalmember}
-              open={totalopen}
-              onClose={totalClose}
-              TransitionComponent={Fade}
-            >
-              <MenuItem onClick={totalClose}>2인</MenuItem>
-              <MenuItem onClick={totalClose}>4인</MenuItem>
-              <MenuItem onClick={totalClose}>6인</MenuItem>
-            </Menu>
-            <Input
-              width="500px"
-              height="30px"
-              padding="10px"
-              placeholder="총 프로젝트 인원을 설정해주세요."
-              border="1px solid #E7E1FF"
-            ></Input>
+            ></Select>
           </Grid>
           <Grid margin="10px auto">
             <Text>프로젝트 상태체크</Text>
-            <Button
-              id="fade-button"
-              aria-controls="fade-menu"
-              aria-haspopup="true"
-              aria-expanded={statusopen ? "true" : undefined}
-              onChange={e => {
-                setTotalmember(e.target.value);
+            <Select
+              options={projectstatus}
+              isLoading
+              onChange={(e) => {
+                let a;
+                a = e["label"];
+                console.log(a);
+
+                // let a = [];
+                // a = e["label"];
+                // console.log(a);
+                setProjectstatus(a);
               }}
-              onClick={statusClick}
-            >
-              프로젝트 상태
-            </Button>
-            <Menu
-              id="fade-menu"
-              MenuListProps={{
-                "aria-labelledby": "fade-button",
-              }}
-              totalmember={totalmember}
-              open={statusopen}
-              onClose={statusClose}
-              TransitionComponent={Fade}
-            >
-              <MenuItem onClick={statusClose}>모집 중</MenuItem>
-              <MenuItem onClick={statusClose}>진행 중</MenuItem>
-              <MenuItem onClick={statusClose}>마감</MenuItem>
-            </Menu>
-            <Input
-              width="500px"
-              height="30px"
-              padding="10px"
-              placeholder="프로젝트 상태를 설정해주세요."
-              border="1px solid #E7E1FF"
-            ></Input>
+            ></Select>
           </Grid>
           <Grid>
             <Text>프로젝트 내용적기</Text>
@@ -267,7 +264,7 @@ const AddPost = props => {
               padding="10px"
               placeholder="프로젝트 내용을 입력해주세요."
               border="1px solid #E7E1FF"
-              _onChange={e => {
+              _onChange={(e) => {
                 setContents(e.target.value);
               }}
             ></Input>

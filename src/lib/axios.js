@@ -23,6 +23,7 @@ instance.interceptors.request.use(
     if (cookie === "") {
       return config;
     }
+
     // const cookieSplitUndefined = cookie.split('=')[1];
     // console.log(cookieSplitUndefined);
     // const cookieSplit = cookieSplitUndefined.split(';')[0];
@@ -70,7 +71,7 @@ export const apis = {
     ),
   //data.json용
   // getPost: () => instance.get(`/post`),
-  addPost: (postInfo) => instance.post(`/post`, postInfo),
+  addPost: (postInfo) => instance.post(`/api/post`, postInfo),
   updatePost: (postId, postInfo) => instance.put(`/post/${postId}`, postInfo),
   deletePost: (postId) => instance.delete(`/post/${postId}`),
   clickLike: (postId) => instance.post(`/post/${postId}/like`),
