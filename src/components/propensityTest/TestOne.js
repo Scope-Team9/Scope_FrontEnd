@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import { Grid, Button } from "../../elements/Index";
 
 const TestOne = props => {
@@ -8,6 +9,8 @@ const TestOne = props => {
     handleUserCreate,
     handleMemberCreate,
   } = props;
+  // const [bChecked, setChecked] = React.useState(false);
+
   return (
     <Grid>
       <Grid height="30px" bg="#dddddd">
@@ -18,19 +21,23 @@ const TestOne = props => {
         <Grid>
           <div>
             Q1.팀 회의할 때 당신의 모습에 더 가까운 것은?
-            <button
+            <SsButton
+              id="Q1"
               value="L"
+              // cheked={bChecked}
               onClick={e => {
                 console.log(e);
-                handleUserCreate(e.target.value);
+
+                handleUserCreate(e.target.id, e.target.value);
               }}
             >
               내 주장을 펼치며 회의 분위기를 탄탄하게 이끌기
-            </button>
+            </SsButton>
             <button
+              id="Q1"
               value="F"
               onClick={e => {
-                handleUserCreate(e.target.value);
+                handleUserCreate(e.target.id, e.target.value);
               }}
             >
               다른 사람들의 의견을 들으며 뭘 맡아서 해야할지 파악하기
@@ -40,6 +47,7 @@ const TestOne = props => {
         <Grid>
           <div>Q2.팀 회의할 때 선호하는 팀원의 모습에 더 가까운 것은?</div>
           <button
+            id="Q2"
             value="L"
             onClick={e => {
               handleMemberCreate(e.target.value);
@@ -48,6 +56,7 @@ const TestOne = props => {
             내 주장을 펼치며 회의 분위기를 탄탄하게 이끌기
           </button>
           <button
+            id="Q2"
             value="F"
             onClick={e => {
               handleMemberCreate(e.target.value);
@@ -60,5 +69,9 @@ const TestOne = props => {
     </Grid>
   );
 };
+
+const SsButton = styled.button`
+  background-color: aqua;
+`;
 
 export default TestOne;

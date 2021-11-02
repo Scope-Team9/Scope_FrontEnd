@@ -3,12 +3,7 @@ import React from "react";
 import { Grid } from "../../elements/Index";
 
 const TestSeven = props => {
-  const {
-    setUserPropensityType,
-    setMemberPropensityType,
-    handleUserCreate,
-    handleMemberCreate,
-  } = props;
+  const { handleUserCreate, handleMemberCreate } = props;
   return (
     <Grid>
       <Grid height="30px" bg="#007BFF">
@@ -20,7 +15,7 @@ const TestSeven = props => {
           <div>
             Q. 어떤 문장이 당신과 더 어울리나요
             <button
-              value="L"
+              value="P"
               onClick={e => {
                 handleUserCreate(e.target.value);
               }}
@@ -34,14 +29,15 @@ const TestSeven = props => {
                 handleUserCreate(e.target.value);
               }}
             >
-              다른 사람들의 의견을 들으며 뭘 맡아서 해야할지 파악하기
+              G - 결과를 위해서라면 과정에서 얻을 수 있는 심리적 만족감은 조금
+              내려놓을 수도 있어야 한다.
             </button>
           </div>
         </Grid>
         <Grid>
           <div>Q. 어떤 문장이 당신이 선호하는 팀원의 모습과 더 어울리나요</div>
           <button
-            value="L"
+            value="G"
             onClick={e => {
               handleMemberCreate(e.target.value);
             }}
@@ -50,7 +46,7 @@ const TestSeven = props => {
             내려놓을 수도 있어야 한다.
           </button>
           <button
-            value="F"
+            value="P"
             onClick={e => {
               handleMemberCreate(e.target.value);
             }}

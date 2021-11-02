@@ -43,20 +43,31 @@ const PropensityTest = props => {
     setpage(page => page - 1);
   };
 
-  const handleUserCreate = answer => {
-    setUserPropensityType(userPropensityType.concat(answer));
+  const handleUserCreate = (id, answer) => {
+    let arr = [];
+    let _answer = { id, answer };
+    arr.push(_answer);
+    console.log(arr);
+    // const modifyArr = arr.map(item =>
+    //   item.id === _answer.id ? { ...item, answer: answer } : item
+    // );
+    // console.log(modifyArr);
+    // setUserPropensityType(userPropensityType.concat(answer));
   };
 
   const handleMemberCreate = answer => {
     setMemberPropensityType(memberPropensityType.concat(answer));
   };
 
-  //체크박스 선택
-  // const handleCheck = (type, newData) => {};
+  // 체크박스 선택
 
-  // const checkedAnswerHandler = (answer, isChecked) => {
+  // const checkedAnswerHandler = (id, isChecked) => {
   //   if (isChecked) {
-  //     userPropensityType.add(answer);
+  //     userPropensityType.add(id);
+  //     setUserPropensityType(userPropensityType);
+  //   } else if (!isChecked && checkedItems.has(id)) {
+  //     userPropensityType.delete(id);
+  //     setUserPropensityType(userPropensityType);
   //   }
   // };
 
