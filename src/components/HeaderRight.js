@@ -9,13 +9,15 @@ import LoginModal from "./LoginModal";
 
 import { deleteCookie } from "../shared/Cookie";
 
-const HeaderRight = props => {
-  const is_login = useSelector(state => state.user.is_login);
-  const user_info = useSelector(state => state.user);
+const HeaderRight = (props) => {
+  const is_login = useSelector((state) => state.user.is_login);
+  const user_info = useSelector((state) => state.user);
 
   console.log(is_login);
   const [showModal, setShowModal] = React.useState(false);
-  const sigunupModalState = useSelector(state => state.user.sigunupModalState);
+  const sigunupModalState = useSelector(
+    (state) => state.user.sigunupModalState
+  );
   const modalOpen = () => {
     setShowModal(true);
   };
@@ -61,11 +63,16 @@ const HeaderRight = props => {
       >
         <HeaderWrapper>
           <Grid display="flex" alignItems="center" margin="0 10px">
-            <Image src={userImage} />
+            <Image
+              src={userImage}
+              _onClick={() => {
+                history.push("/mypage");
+              }}
+            />
             <Text>사용자</Text>
           </Grid>
           <Button
-            backgroundColor="#111"
+            backgroundColor="#333"
             width="100px"
             text="로그인"
             _onClick={modalOpen}
