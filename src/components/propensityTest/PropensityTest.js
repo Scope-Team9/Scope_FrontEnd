@@ -17,37 +17,69 @@ import { useSelector, useDispatch } from "react-redux";
 import { Grid, Button, Image } from "../../elements/Index";
 import { userCreators } from "../../redux/modules/user";
 
-const PropensityTest = props => {
+const PropensityTest = (props) => {
   const dispatch = useDispatch();
-  const userInfo = useSelector(state => state.user);
+  const userInfo = useSelector((state) => state.user);
 
   const { showModal, setShowModal } = props;
 
   //1.스텝별로 스테이트 변화값에 따라 텍스트가 바뀌는지 먼저 확인
   const [page, setpage] = useState(1);
 
+  // 최종 장소
   const [userPropensityType, setUserPropensityType] = useState([]);
   const [memberPropensityType, setMemberPropensityType] = useState([]);
+  //임시 장소
+  const [preUserPropensityType, setPreUserPropensityType] = useState("");
+  const [preMemberPropensityType, setPreMemberPropensityType] = useState("");
+
   const [isChecked, setIsChecked] = useState(false);
 
-  console.log(userPropensityType);
-  console.log(memberPropensityType);
+  // console.log(userPropensityType);
+  // console.log(memberPropensityType);
 
   //3.스테이트값에 변화를 버튼에 달아줌
   const nextStep = () => {
     if (page === 10) return;
-    setpage(page => page + 1);
+    setpage((page) => page + 1);
+    //나에대한 항목
+    let preMy = userPropensityType;
+    preMy.push(preUserPropensityType);
+    setUserPropensityType(preMy);
+    console.log("내꺼 잘 들어감?", userPropensityType);
+
+    //상대에 다한 항목
+    let preYou = memberPropensityType;
+    preYou.push(preMemberPropensityType);
+
+    setMemberPropensityType(preYou);
+    console.log("너꺼 잘 들어감?", memberPropensityType);
   };
 
   const preStep = () => {
-    setpage(page => page - 1);
+    setpage((page) => page - 1);
+
+    // 이전으로가면 마지막항목 제거 (나의것)
+    let toPopMy = userPropensityType;
+    toPopMy.pop();
+    setUserPropensityType(toPopMy);
+    console.log("마지막 항목이 사라짐?", userPropensityType);
+    //이전으로 가면 마지막 항목 제거 (상대방의 것)
+    let topopYou = memberPropensityType;
+    topopYou.pop();
+    setMemberPropensityType(topopYou);
+    console.log("마지막 항목이 사라짐?", memberPropensityType);
   };
 
-  const handleUserCreate = (id, answer) => {
-    let arr = [];
-    let _answer = { id, answer };
-    arr.push(_answer);
-    console.log(arr);
+  const handleUserCreate = (answer) => {
+    setPreUserPropensityType(answer);
+    console.log("나의항목 임시저장", answer);
+
+    // let arr = [];
+    // let _answer = { id, answer };
+    // arr.push(_answer);
+    // console.log(arr);
+
     // const modifyArr = arr.map(item =>
     //   item.id === _answer.id ? { ...item, answer: answer } : item
     // );
@@ -55,8 +87,10 @@ const PropensityTest = props => {
     // setUserPropensityType(userPropensityType.concat(answer));
   };
 
-  const handleMemberCreate = answer => {
-    setMemberPropensityType(memberPropensityType.concat(answer));
+  const handleMemberCreate = (answer) => {
+    setPreMemberPropensityType(answer);
+    console.log("상대방의 항목 임시저장", answer);
+    // setMemberPropensityType(memberPropensityType.concat(answer));
   };
 
   // 체크박스 선택
