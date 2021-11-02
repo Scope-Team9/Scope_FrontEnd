@@ -10,14 +10,12 @@ const Header = () => {
       <Grid
         width="100vw"
         height="60px"
-        boxShadow="rgba(0, 0, 0, 0.1) 0px 2px 10px;"
         display="flex"
         justifyContent="space-between"
         alignItems="center"
-        position="fixed"
         top="0"
         left="0"
-        bg="#fff"
+        bg="rgba(255, 255, 255, 0)"
         padding="20px"
         zIndex="10"
       >

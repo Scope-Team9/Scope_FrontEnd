@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const Button = props => {
   const {
+    isTest,
     color,
     text,
     _onClick,
@@ -27,6 +28,14 @@ const Button = props => {
     return (
       <>
         <FloatButton onClick={_onClick}></FloatButton>
+      </>
+    );
+  }
+
+  if (isTest) {
+    return (
+      <>
+        <TestButton onClick={_onClick}> {text ? text : children}</TestButton>
       </>
     );
   }
@@ -86,7 +95,7 @@ const ElButton = styled.button`
   ${props =>
     props.backgroundColor
       ? `background-color:${props.backgroundColor}`
-      : "background-color: blue"};
+      : "background-color: #8B3FF8"};
   box-sizing: border-box;
   border-radius: 5px;
   font-weight: bold;
@@ -127,6 +136,20 @@ const FloatButton = styled.div`
   border: none;
   border-radius: 50px;
   display: ${props => props.display};
+`;
+
+const TestButton = styled.button`
+  border-radius: 20px;
+  background-color: #007bff;
+  color: #ffffff;
+  &:hover {
+    background-color: #025cbd;
+  }
+  &::active {
+    box-shadow: 1px 1px 0 rgb(0, 0, 0, 0.5);
+    position: relative;
+    top: 2px;
+  }
 `;
 
 export default Button;

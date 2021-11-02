@@ -4,6 +4,7 @@ import { Grid, Text } from "./Index";
 
 const Input = props => {
   const {
+    id,
     label,
     placeholder,
     _onChange,
@@ -42,7 +43,7 @@ const Input = props => {
   if (multiLine) {
     return (
       <Grid>
-        {label && <Text margin='0px'>{label}</Text>}
+        {label && <Text margin="0px">{label}</Text>}
         <ElTextarea
           backgroundColor={backgroundColor}
           value={value}
@@ -57,7 +58,7 @@ const Input = props => {
   if (edit) {
     return (
       <Grid>
-        {label && <Text margin='0px'>{label}</Text>}
+        {label && <Text margin="0px">{label}</Text>}
         <ElInput
           {...styles}
           backgroundColor={backgroundColor}
@@ -81,7 +82,7 @@ const Input = props => {
 
   return (
     <Grid>
-      {label && <Text margin='0px'>{label}</Text>}
+      {label && <Text margin="0px">{label}</Text>}
       <ElInput
         {...styles}
         backgroundColor={backgroundColor}

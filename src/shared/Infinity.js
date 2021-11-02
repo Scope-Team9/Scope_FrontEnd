@@ -11,7 +11,7 @@ const Infinity = (props) => {
       (document.documentElement && document.documentElement.scrollTop) ||
       document.body.scrollTop;
     //1. 페이지 5페이지 이상으로 넘어감.
-    if (scrollHeight - innerHeight - scrollTop < 500 && paging.next < 5) {
+    if (scrollHeight - innerHeight - scrollTop < 200 && paging.next < 5) {
       callNext();
     }
   }, 300);

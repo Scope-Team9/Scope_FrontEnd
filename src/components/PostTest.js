@@ -5,80 +5,140 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 
 import { history } from "../redux/configureStore";
-import { Grid, Image } from "../elements/Index";
+import { Grid, Image, Progress } from "../elements/Index";
+
+import Img from "../images/flutter.png";
 
 const PostTest = (props) => {
   const dispatch = useDispatch();
+
+  console.log("asdsad", props.postId);
+  console.log("asdafdsfㄴㄹㅇㄴㅇㄹ", props);
 
   return (
     <React.Fragment>
       <ProductImgWrap
         onClick={() => {
-          history.push(`/product/${props.id}`);
+          history.push({
+            pathname: "/postdetail",
+            state: {
+              postId: props.postId,
+              title: props.title,
+              techStack: props.techStack,
+              summary: props.summary,
+              totalMember: props.totalMember,
+              recruitmentMember: props.recruitmentMember,
+              projectStatus: props.projectStatus,
+              startDate: props.startDate,
+              endDate: props.endDate,
+              isBookmarkCheckde: props.isBookmarkCheckde,
+            },
+          });
         }}
       >
-        <p>제목</p>
-        <p>이 프로젝트는 리액트를 기반으로 하는 모집...</p>
-        <p>진행중</p>
-        <p>제목</p>
-        w제목 이름을
-        <p>가나다</p>
+        <Grid backgroundColor="#E7E1FF" borderRadius="30px">
+          <Grid
+            width="350px"
+            height="50px"
+            backgroundColor="#8B3FF8"
+            borderRadius="20px 20px 20px 0px"
+          >
+            <Grid>
+              <TitleDate>D-2</TitleDate>
+            </Grid>
+
+            <Grid display="flex" width="100px">
+              <Grid
+                display="flex"
+                width="50px"
+                borderRadius="50%"
+                backgroundColor="white"
+                margin="-26px 15px"
+              >
+                <Image src={Img} />
+              </Grid>
+              <Grid
+                display="flex"
+                width="50px"
+                borderRadius="50%"
+                backgroundColor="white"
+                margin="-26px 15px"
+              >
+                <Image src={Img} />
+              </Grid>
+              <Grid
+                display="flex"
+                width="50px"
+                borderRadius="50%"
+                backgroundColor="white"
+                margin="-26px 15px"
+              >
+                <Image src={Img} />
+              </Grid>
+              <Grid
+                display="flex"
+                width="50px"
+                borderRadius="50%"
+                backgroundColor="white"
+                margin="-26px 15px"
+              >
+                <Image src={Img} />
+              </Grid>
+            </Grid>
+          </Grid>
+          <DescriptionBox>
+            <Title>{props.title}</Title>
+            <Summary>{props.summary}</Summary>
+            <Date>
+              {props.startDate}~{props.endDate}
+            </Date>
+            <Line />
+            <Grid>
+              <Progress></Progress>
+              <ProjectState>{props.projectStatus}</ProjectState>
+            </Grid>
+          </DescriptionBox>
+        </Grid>
       </ProductImgWrap>
     </React.Fragment>
   );
 };
 
-const CostBox = styled.span`
-  display: block;
-  padding-top: 7px;
-  font-size: 18px;
-  line-height: 29px;
-  :after,
-  :before {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+const TitleDate = styled.div`
+  width: 50px;
+  text-align: center;
+  border-radius: 10px;
+  color: black;
+  background-color: white;
+  margin-left: 280px;
 `;
 
-const ProductPrice = styled.span`
-  font-weight: 800;
-  color: #333;
-  letter-spacing: 0;
-  font-size: 18px;
-  line-height: 29px;
+const DescriptionBox = styled.div`
+  margin: 30px 20px;
 `;
 
-const ProductSubTitle = styled.p`
-  display: block;
-  padding-top: 8px;
-  font-size: 13px;
-  color: #999;
-  line-height: 19px;
-  font-weight: 400;
-  margin: 0;
-`;
-
-const ProductTitle = styled.p`
-  overflow: hidden;
-  max-height: 58px;
-  font-weight: 500;
+const Title = styled.h1`
   font-size: 20px;
-  color: #333;
-  line-height: 29px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  word-wrap: break-word;
-  letter-spacing: 0;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 `;
 
-const ProductContainer = styled.div`
-  height: 643px;
-  cursor: pointer;
+const Summary = styled.div`
+  font-size: 14px;
+  color: gray;
+  margin-bottom: 80px;
+`;
+
+const Date = styled.div`
+  margin-left: 134px;
+`;
+
+const Line = styled.hr`
+  width: 300px;
+  color: black;
+`;
+
+const ProjectState = styled.div`
+  margin-left: 260px;
+  margin-bottom: 10px;
 `;
 
 const ProductImgWrap = styled.div`
@@ -88,7 +148,7 @@ const ProductImgWrap = styled.div`
   margin: auto;
   margin-top: 30px;
   margin-bottom: 30px;
-  border-radius: 5px;
+  border-radius: 30px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.24);
   @media (max-width: 750px) {
     width: 100%;

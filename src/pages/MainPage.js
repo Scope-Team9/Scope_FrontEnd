@@ -8,41 +8,53 @@ import SideBar from "../components/SideBar";
 import Infinity from "../shared/Infinity";
 import Stack from "../components/Stack";
 import PostList from "../components/PostList";
+import { postActions } from "../redux/modules/post";
+import { useSelector, useDispatch } from "react-redux";
 
 const MainPage = () => {
+  const dispatch = useDispatch();
+  const is_clicked = useSelector((state) => state.stack.stack);
+
+  const is_loading = useSelector((state) => state.post.is_loading);
+  const paging = useSelector((state) => state.post.paging);
+  console.log(paging);
+
+  React.useEffect(() => {
+    dispatch(postActions.getPostAPI());
+  }, [is_clicked]);
+
+  const callNext = () => {
+    dispatch(postActions.getPostAPI());
+    console.log("??");
+  };
+
   return (
     <>
-      <Grid height="100%" bg="#ffff" padding="60px 0 10px 0">
-        <HeaderWrapper>
-          <Header />
-        </HeaderWrapper>
-      </Grid>
-
-      <ResponsiveSidebar>
+      <Grid height="100%" bg="#ffff" padding="0px 0px 10px 0"></Grid>
+      {/* <ResponsiveSidebar>
         <SideBar />
-      </ResponsiveSidebar>
-
-      <Grid margin="31px 0 0 100px ">
+      </ResponsiveSidebar> */}
+      <Grid margin="-10px 0 0 0 ">
         <Inside>
           <Carousel />
           <Stacks>
             <Stack />
           </Stacks>
-          <InsideCard>
-            <PostList></PostList>
-          </InsideCard>
+          <Infinity
+            paging={paging}
+            is_loading={is_loading}
+            callNext={callNext}
+            is_next={paging.next < 5 ? true : false}
+          >
+            <InsideCard>
+              <PostList></PostList>
+            </InsideCard>
+          </Infinity>
         </Inside>
       </Grid>
     </>
   );
 };
-
-const HeaderWrapper = styled.div`
-  z-index: 100;
-  position: sticky;
-  top: 0px;
-  background: #1111;
-`;
 
 const ResponsiveSidebar = styled.div`
   @media screen and (max-width: 750px) {
@@ -52,13 +64,13 @@ const ResponsiveSidebar = styled.div`
 
 const Inside = styled.div`
   @media screen and (max-width: 750px) {
-    margin-left: -100px;
+    /* margin-left: -100px; */
   } ;
 `;
 
 const InsideCard = styled.div`
   @media screen and (max-width: 750px) {
-    margin-left: -100px;
+    margin-left: 18px;
   } ;
 `;
 

@@ -28,7 +28,7 @@ const Carousel = () => {
   };
 
   return (
-    <div style={{ margin: "auto" }}>
+    <div className="center" style={{ margin: "auto" }}>
       <Slider {...settings}>
         <div>
           <Image src={Cap} shape="main" />
