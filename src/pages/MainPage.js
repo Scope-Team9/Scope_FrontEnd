@@ -3,14 +3,14 @@ import React from "react";
 import styled from "styled-components";
 import Header from "../components/Header";
 import { Grid } from "../elements/Index";
-import Carousel from "../components/Carousel";
+import TopBanner from "../components/carousel/TopBanner";
 import SideBar from "../components/SideBar";
 import Infinity from "../shared/Infinity";
 import Stack from "../components/Stack";
 import PostList from "../components/PostList";
 import { postActions } from "../redux/modules/post";
 import { useSelector, useDispatch } from "react-redux";
-import MainSlide from "../components/MainSlide";
+import MainSlide from "../components/carousel/MainSlide";
 
 const MainPage = () => {
   const dispatch = useDispatch();
@@ -37,7 +37,7 @@ const MainPage = () => {
       </ResponsiveSidebar> */}
       <Grid margin="-10px 0 0 0 ">
         <Inside>
-          {/* <Carousel /> */}
+          <TopBanner />
           <MainSlide />
           <Stacks>
             <Stack />

@@ -10,13 +10,10 @@ import { history } from "../redux/configureStore";
 import PropensityTest from "./propensityTest/PropensityTest";
 import CloseIcon from "@mui/icons-material/Close";
 
-const LoginModal = (props) => {
+const LoginModal = props => {
   const dispatch = useDispatch();
-  const userInfo = useSelector((state) => state.user);
-  const sigunupModalState = useSelector(
-    (state) => state.user.sigunupModalState
-  );
-  const token = window.localStorage.getItem("token");
+  const userInfo = useSelector(state => state.user);
+  const sigunupModalState = useSelector(state => state.user.sigunupModalState);
 
   var regExpNick = /^[a-zA-Z0-9]{2,10}$/;
   var regExpEmail =
@@ -63,7 +60,7 @@ const LoginModal = (props) => {
   console.log("sns아이디", userInfo.snsId);
 
   //닉네임 체크 미들웨어
-  const nickCheck = (nickName) => {
+  const nickCheck = nickName => {
     if (nickName === "") {
       alert("닉네임을 입력 해주세요.");
       return false;
@@ -77,7 +74,7 @@ const LoginModal = (props) => {
   };
 
   //이메일 체크 미들웨어
-  const emailCheck = (email) => {
+  const emailCheck = email => {
     if (nickName === "") {
       alert("이메일을 입력 해주세요.");
       return false;
@@ -174,7 +171,7 @@ const LoginModal = (props) => {
                     width="70%"
                     height="50px"
                     placeholder="닉네임을 입력해주세요"
-                    _onChange={(e) => {
+                    _onChange={e => {
                       setNickName(e.target.value);
                     }}
                   >
@@ -217,7 +214,7 @@ const LoginModal = (props) => {
                     width="70%"
                     height="50px"
                     placeholder="이메일을 입력해주세요"
-                    _onChange={(e) => {
+                    _onChange={e => {
                       setEmail(e.target.value);
                     }}
                   >
@@ -251,7 +248,7 @@ const LoginModal = (props) => {
                   options={techStackOption}
                   className="basic-multi-select"
                   classNamePrefix="select"
-                  onChange={(e) => {
+                  onChange={e => {
                     let techStack = [];
                     let arr = e;
                     let idx = 0;
