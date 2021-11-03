@@ -10,13 +10,14 @@ import Stack from "../components/Stack";
 import PostList from "../components/PostList";
 import { postActions } from "../redux/modules/post";
 import { useSelector, useDispatch } from "react-redux";
+import MainSlide from "../components/MainSlide";
 
 const MainPage = () => {
   const dispatch = useDispatch();
-  const is_clicked = useSelector((state) => state.stack.stack);
+  const is_clicked = useSelector(state => state.stack.stack);
 
-  const is_loading = useSelector((state) => state.post.is_loading);
-  const paging = useSelector((state) => state.post.paging);
+  const is_loading = useSelector(state => state.post.is_loading);
+  const paging = useSelector(state => state.post.paging);
   console.log(paging);
 
   React.useEffect(() => {
@@ -36,7 +37,8 @@ const MainPage = () => {
       </ResponsiveSidebar> */}
       <Grid margin="-10px 0 0 0 ">
         <Inside>
-          <Carousel />
+          {/* <Carousel /> */}
+          <MainSlide />
           <Stacks>
             <Stack />
           </Stacks>
