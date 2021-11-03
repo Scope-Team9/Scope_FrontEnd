@@ -23,11 +23,18 @@ const LoginModal = props => {
   //테크스택 옵션
   const techStackOption = [
     { value: "React", label: "React" },
+    { value: "Java", label: "Java" },
+    { value: "JavaScript", label: "JavaScript" },
+    { value: "Python", label: "Python" },
+    { value: "Node", label: "Node" },
+    { value: "cpp", label: "C++" },
+    { value: "Flask", label: "Flask" },
+    { value: "Django", label: "Django" },
     { value: "Vue", label: "Vue" },
-    { value: "Spring", label: "Spring" },
-    { value: "Nodejs", label: "Nodejs" },
-    { value: "Nodejs", label: "Nodejs" },
-    { value: "Nodejs", label: "Nodejs" },
+    { value: "php", label: "php" },
+    { value: "Swift", label: "Swift" },
+    { value: "Kotlin", label: "Kotlin" },
+    { value: "TypeScript", label: "TypeScript" },
   ];
 
   //모달
