@@ -2,114 +2,112 @@
 
 import React from "react";
 import styled from "styled-components";
+import PostStacks from "./PostStacks";
 import { useSelector, useDispatch } from "react-redux";
 
 import { history } from "../redux/configureStore";
+import { Grid, Image, Progress } from "../elements/Index";
 
-const Product = (props) => {
+import Img from "../images/flutter.png";
+
+const Post = (props) => {
   const dispatch = useDispatch();
 
+  console.log("카드들", props);
   return (
     <React.Fragment>
-      <ProductContainer
+      <ProductImgWrap
         onClick={() => {
-          history.push(`/product/${props.id}`);
+          history.push(`/postdetail/${props.postId}`);
         }}
       >
-        <ProductImgWrap>
-          <img src={props.image} />
-        </ProductImgWrap>
-        <ProductTitle>{props.name}</ProductTitle>
-        <CostBox>
-          <ProductPrice>{props.price} 원</ProductPrice>
-        </CostBox>
-        <ProductSubTitle>{props.description}</ProductSubTitle>
-      </ProductContainer>
+        <Grid backgroundColor="#E7E1FF" borderRadius="30px">
+          <Grid
+            width="350px"
+            height="50px"
+            backgroundColor="#8B3FF8"
+            borderRadius="20px 20px 20px 0px"
+          >
+            <Grid>
+              <TitleDate>D-2</TitleDate>
+            </Grid>
+
+            <Grid display="flex" width="100px">
+              {props.techStack.map((p, idx) => {
+                return <PostStacks key={idx} {...p}></PostStacks>;
+              })}
+            </Grid>
+          </Grid>
+          <DescriptionBox>
+            <Title>{props.title}</Title>
+            <Summary>{props.summary}</Summary>
+            <Date>
+              {props.startDate}~{props.endDate}
+            </Date>
+            <Line />
+            <Grid>
+              <Progress></Progress>
+              <ProjectState>{props.projectStatus}</ProjectState>
+            </Grid>
+          </DescriptionBox>
+        </Grid>
+      </ProductImgWrap>
     </React.Fragment>
   );
 };
 
-const CostBox = styled.span`
-  display: block;
-  padding-top: 7px;
-  font-size: 18px;
-  line-height: 29px;
-  :after,
-  :before {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+const TitleDate = styled.div`
+  width: 50px;
+  text-align: center;
+  border-radius: 10px;
+  color: black;
+  background-color: white;
+  margin-left: 280px;
 `;
 
-const ProductPrice = styled.span`
-  font-weight: 800;
-  color: #333;
-  letter-spacing: 0;
-  font-size: 18px;
-  line-height: 29px;
+const DescriptionBox = styled.div`
+  margin: 30px 20px;
 `;
 
-const ProductSubTitle = styled.p`
-  display: block;
-  padding-top: 8px;
-  font-size: 13px;
-  color: #999;
-  line-height: 19px;
-  font-weight: 400;
-  margin: 0;
-`;
-
-const ProductTitle = styled.p`
-  overflow: hidden;
-  max-height: 58px;
-  font-weight: 500;
+const Title = styled.h1`
   font-size: 20px;
-  color: #333;
-  line-height: 29px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  word-wrap: break-word;
-  letter-spacing: 0;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 `;
 
-const ProductContainer = styled.div`
-  height: 643px;
-  cursor: pointer;
+const Summary = styled.div`
+  font-size: 14px;
+  color: gray;
+  margin-bottom: 80px;
+`;
+
+const Date = styled.div`
+  margin-left: 134px;
+`;
+
+const Line = styled.hr`
+  width: 300px;
+  color: black;
+`;
+
+const ProjectState = styled.div`
+  margin-left: 260px;
+  margin-bottom: 10px;
 `;
 
 const ProductImgWrap = styled.div`
-  overflow: hidden;
-  position: relative;
-  width: 338px;
-  height: 435px;
-  & img {
-    width: 338px;
-    height: 435px;
-    margin: 0px;
-    padding: 0px;
-    -webkit-transform: scale(1);
-    -moz-transform: scale(1);
-    -ms-transform: scale(1);
-    -o-transform: scale(1);
-    transform: scale(1);
-    -webkit-transition: 0.4s;
-    -moz-transition: 0.4s;
-    -ms-transition: 0.4s;
-    -o-transition: 0.4s;
-    transition: 0.4s;
-    &:hover {
-      transform: scale(1.05);
-      -webkit-transform: scale(1.05);
-      -moz-transform: scale(1.05);
-      -ms-transform: scale(1.05);
-      -o-transform: scale(1.05);
-    }
+  background-color: white;
+  width: 60vw;
+  max-width: 350px;
+  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border-radius: 30px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.24);
+  @media (max-width: 750px) {
+    width: 100%;
+  }
+  @media (max-width: 450px) {
+    width: 100%;
   }
 `;
 
-export default Product;
+export default Post;

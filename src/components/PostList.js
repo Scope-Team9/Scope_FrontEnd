@@ -13,9 +13,9 @@ import styled from "styled-components";
 const PostList = () => {
   const dispatch = useDispatch();
 
-  // React.useEffect(() => {
-  //   dispatch(postActions.getPostAPI());
-  // }, []);
+  React.useEffect(() => {
+    dispatch(postActions.getPostAPI());
+  }, []);
 
   const product_list = useSelector((state) => state.post);
 
@@ -62,7 +62,7 @@ const PostList = () => {
     <React.Fragment>
       <PostWrap>
         {dummyData.map((item, index) => {
-          return <PostTest key={index} {...item} />;
+          return <Post key={index} {...item} />;
         })}
       </PostWrap>
     </React.Fragment>
