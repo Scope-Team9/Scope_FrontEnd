@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 import styled from "styled-components";
 import { history } from "../redux/configureStore";
@@ -6,16 +7,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { Grid, Text, Image, Button } from "../elements/Index";
 import userImage from "../images/임시로고.jpg";
 import LoginModal from "./LoginModal";
+import { userCreators } from "../redux/modules/user";
 
 import { deleteCookie } from "../shared/Cookie";
 
-const HeaderRight = props => {
-  const is_login = useSelector(state => state.user.is_login);
-  const user_info = useSelector(state => state.user);
+const HeaderRight = (props) => {
+  const dispatch = useDispatch();
+  const is_login = useSelector((state) => state.user.is_login);
+  const is_token = document.cookie.split("=")[1];
+  const user_info = useSelector((state) => state.user);
 
-  console.log(is_login);
+  console.log(document.cookie);
   const [showModal, setShowModal] = React.useState(false);
-  const sigunupModalState = useSelector(state => state.user.sigunupModalState);
+  const sigunupModalState = useSelector(
+    (state) => state.user.sigunupModalState
+  );
   const modalOpen = () => {
     setShowModal(true);
   };
@@ -24,12 +30,13 @@ const HeaderRight = props => {
   };
 
   const logOut = () => {
-    deleteCookie("user_id");
-    history.replace("/");
+    deleteCookie("ScopeUser");
     window.alert("로그아웃 됐습니다");
+    dispatch(userCreators.logOut());
+    history.replace("/");
   };
 
-  if (is_login) {
+  if (is_token) {
     return (
       <Grid
         display="flex"
@@ -45,7 +52,7 @@ const HeaderRight = props => {
           <Button
             backgroundColor="#111"
             width="100px"
-            text="로그인"
+            text="로그아웃"
             _onClick={logOut}
           ></Button>
         </HeaderWrapper>
@@ -61,11 +68,16 @@ const HeaderRight = props => {
       >
         <HeaderWrapper>
           <Grid display="flex" alignItems="center" margin="0 10px">
-            <Image src={userImage} />
+            <Image
+              src={userImage}
+              _onClick={() => {
+                history.push("/mypage");
+              }}
+            />
             <Text>사용자</Text>
           </Grid>
           <Button
-            backgroundColor="#111"
+            backgroundColor="#333"
             width="100px"
             text="로그인"
             _onClick={modalOpen}

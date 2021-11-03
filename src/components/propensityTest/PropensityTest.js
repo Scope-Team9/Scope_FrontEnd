@@ -17,65 +17,93 @@ import { useSelector, useDispatch } from "react-redux";
 import { Grid, Button, Image } from "../../elements/Index";
 import { userCreators } from "../../redux/modules/user";
 
-const PropensityTest = props => {
+const PropensityTest = (props) => {
   const dispatch = useDispatch();
-  const userInfo = useSelector(state => state.user);
+  const userInfo = useSelector((state) => state.user);
 
-  const { showModal, setShowModal } = props;
-
-  //1.스텝별로 스테이트 변화값에 따라 텍스트가 바뀌는지 먼저 확인
+  //스텝별로 스테이트 변화값에 따라 텍스트가 바뀌는지 먼저 확인
   const [page, setpage] = useState(1);
+  console.log(page);
 
+  // 최종 장소
   const [userPropensityType, setUserPropensityType] = useState([]);
   const [memberPropensityType, setMemberPropensityType] = useState([]);
+  //임시 장소
+  const [preUserPropensityType, setPreUserPropensityType] = useState("");
+  const [preMemberPropensityType, setPreMemberPropensityType] = useState("");
+
   const [isChecked, setIsChecked] = useState(false);
 
-  console.log(userPropensityType);
-  console.log(memberPropensityType);
+  //자식요소의 밸류값을 가져와 임시에 저장
+  const handleUserCreate = (answer) => {
+    setPreUserPropensityType(answer);
+    console.log("나의항목 임시저장", answer);
+  };
+  const handleMemberCreate = (answer) => {
+    setPreMemberPropensityType(answer);
+    console.log("상대방의 항목 임시저장", answer);
+  };
 
-  //3.스테이트값에 변화를 버튼에 달아줌
+  //스테이트값에 변화를 버튼에 달아줌
+  //다음버튼 누를시에 변화된 값을 스테이트에 담아줌
   const nextStep = () => {
-    if (page === 10) return;
-    setpage(page => page + 1);
+    setpage((page) => page + 1);
+
+    setPreUserPropensityType("");
+    setPreMemberPropensityType("");
+    //나에대한 항목
+    let preMy = userPropensityType;
+    preMy.push(preUserPropensityType);
+    setUserPropensityType(preMy);
+    console.log("내꺼 잘 들어감?", userPropensityType);
+
+    //상대에 다한 항목
+    let preYou = memberPropensityType;
+    preYou.push(preMemberPropensityType);
+    setMemberPropensityType(preYou);
+    console.log("너꺼 잘 들어감?", memberPropensityType);
   };
 
+  //이전버튼 누를시에 마지막으로 저장된값을 스테이트에 삭제함
   const preStep = () => {
-    setpage(page => page - 1);
+    setpage((page) => page - 1);
+
+    // 이전으로가면 마지막항목 제거 (나의것)
+    let toPopMy = userPropensityType;
+    toPopMy.pop();
+    setUserPropensityType(toPopMy);
+    console.log("마지막 항목이 사라짐?", userPropensityType);
+    //이전으로 가면 마지막 항목 제거 (상대방의 것)
+    let topopYou = memberPropensityType;
+    topopYou.pop();
+    setMemberPropensityType(topopYou);
+    console.log("마지막 항목이 사라짐?", memberPropensityType);
   };
-
-  const handleUserCreate = (id, answer) => {
-    let arr = [];
-    let _answer = { id, answer };
-    arr.push(_answer);
-    console.log(arr);
-    // const modifyArr = arr.map(item =>
-    //   item.id === _answer.id ? { ...item, answer: answer } : item
-    // );
-    // console.log(modifyArr);
-    // setUserPropensityType(userPropensityType.concat(answer));
-  };
-
-  const handleMemberCreate = answer => {
-    setMemberPropensityType(memberPropensityType.concat(answer));
-  };
-
-  // 체크박스 선택
-
-  // const checkedAnswerHandler = (id, isChecked) => {
-  //   if (isChecked) {
-  //     userPropensityType.add(id);
-  //     setUserPropensityType(userPropensityType);
-  //   } else if (!isChecked && checkedItems.has(id)) {
-  //     userPropensityType.delete(id);
-  //     setUserPropensityType(userPropensityType);
-  //   }
-  // };
 
   //회원가입
   const register = () => {
-    console.log(userInfo);
+    setpage((page) => page + 1);
+
+    setPreUserPropensityType("");
+    setPreMemberPropensityType("");
+    //나에대한 항목
+    let preMy = userPropensityType;
+    preMy.push(preUserPropensityType);
+    setUserPropensityType(preMy);
+    console.log("내꺼 잘 들어감?", userPropensityType);
+
+    //상대에 다한 항목
+    let preYou = memberPropensityType;
+    preYou.push(preMemberPropensityType);
+    setMemberPropensityType(preYou);
+    console.log("너꺼 잘 들어감?", memberPropensityType);
+
+    let _snsId = String(userInfo.snsId);
+    console.log(_snsId);
+    console.log(typeof _snsId);
+
     const registerInfo = {
-      snsId: userInfo.snsId,
+      snsId: _snsId,
       email: userInfo.email,
       nickname: userInfo.nickName,
       techStack: userInfo.techStack,
@@ -83,7 +111,7 @@ const PropensityTest = props => {
       memberPropensityType: memberPropensityType,
     };
     console.log(registerInfo);
-    // dispatch(userCreators.signupMiddleware(registerInfo));
+    dispatch(userCreators.signupMiddleware(registerInfo));
   };
 
   return (
@@ -209,8 +237,6 @@ const PropensityTest = props => {
     </Grid>
   );
 };
-
-//2.스테이트별로 변화를 넣어줄 컴포넌트들 만들기
 
 const ModalWrap = styled.div`
   overflow: hidden;

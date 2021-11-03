@@ -1,15 +1,18 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis, instance } from "../../lib/axios";
+import { setCookie } from "../../shared/Cookie";
 
 //액션타입
 const FIRST_USER = "FIRST_USER";
 const TEST_USER = "TEST_USER";
 const SET_USER = "SET_USER";
+const LOG_OUT = "LOG_OUT";
 //액션생성
 const firstUser = createAction(FIRST_USER, user => ({ user }));
 const testUser = createAction(TEST_USER, user => ({ user }));
 const setUser = createAction(SET_USER, user => ({ user }));
+const logOut = createAction(LOG_OUT, user => ({ user }));
 
 //초기값
 const initialState = {
@@ -28,10 +31,9 @@ const initialState = {
 const kakaologinMiddleware = code => {
   return function (dispatch, getState, { history }) {
     console.log("카카오에서 받아온 코드", code);
-    instance
-      .get(`/api/login/kakao?code=${code}`)
+    apis
+      .kakaoLogin(code)
       .then(res => {
-        console.log(res.data);
         if (res.data.status == 300) {
           window.alert("추가정보 작성이 필요합니다.");
           dispatch(
@@ -43,18 +45,22 @@ const kakaologinMiddleware = code => {
           history.replace("/");
           return;
         }
-        if (res.status === 200 && res.data.token) {
-          const ACCESS_TOKEN = res.data.token;
-          localStorage.setItem("token", ACCESS_TOKEN);
+        if (res.status === 200) {
+          console.log(res);
+          let userCookie = res.data.data.token;
+          setCookie("ScopeUser", userCookie, 30);
+          // const ACCESS_TOKEN = res.data.token;
+          // localStorage.setItem("token", ACCESS_TOKEN);
           dispatch(
             setUser({
-              email: res.data.email,
-              nickname: res.data.nickname,
+              email: res.data.data.mail,
+              nickname: res.data.data.nickname,
             })
           );
+          window.alert("로그인성공");
           history.replace("/");
+          return;
         }
-        // window.location.href = "/";
       })
       .catch(err => {
         console.log("소셜로그인 에러", err);
@@ -68,8 +74,8 @@ const kakaologinMiddleware = code => {
 const githubLoginMiddleware = code => {
   return function (dispatch, getState, { history }) {
     console.log("깃허브에서 받아온 코드", code);
-    instance
-      .get(`/api/login/github?code=${code}`)
+    apis
+      .githubLogin(code)
       .then(res => {
         if (res.data.status == 300) {
           window.alert("추가정보 작성이 필요합니다.");
@@ -79,18 +85,20 @@ const githubLoginMiddleware = code => {
               snsId: res.data.data.id,
             })
           );
+
           history.replace("/");
           return;
         }
-        if (res.status === 200 && res.data.token) {
-          const ACCESS_TOKEN = res.data.token;
-          localStorage.setItem("token", ACCESS_TOKEN);
+        if (res.status === 200) {
+          let userCookie = res.data.data.token;
+          setCookie("ScopeUser", userCookie, 30);
           dispatch(
             setUser({
-              email: res.data.email,
-              nickname: res.data.nickname,
+              email: res.data.data.mail,
+              nickname: res.data.data.nickname,
             })
           );
+          window.alert("로그인성공");
           history.replace("/");
         }
         // window.location.href = "/";
@@ -99,6 +107,48 @@ const githubLoginMiddleware = code => {
         console.log("소셜로그인 에러", err);
         alert("로그인에 실패하였습니다.");
         history.replace("/"); // 로그인 실패하면 로그인화면으로 돌려보냄
+      });
+  };
+};
+// 이메일 중복체크 미들웨어
+const emailCheckMiddleWare = email => {
+  return () => {
+    apis
+      .checkEmail(email)
+      .then(res => {
+        console.log(res);
+        if (res.data.status == 200) {
+          window.alert("사용가능한 메일입니다.");
+        } else {
+          if (res.data.status == 400) {
+            window.alert("중복된 이메일이 존재합니다");
+          }
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+};
+
+// 닉네임 중복체크 미들웨어
+const nickCheckMiddleWare = nickName => {
+  console.log(nickName);
+  return () => {
+    apis
+      .checkNick(nickName)
+      .then(res => {
+        console.log(res);
+        if (res.data.status == 200) {
+          window.alert("사용가능한 닉네임입니다.");
+        } else {
+          if (res.data.status == 400) {
+            window.alert("중복된 닉네임이 존재합니다");
+          }
+        }
+      })
+      .catch(err => {
+        console.log(err);
       });
   };
 };
@@ -114,16 +164,16 @@ const testUserMiddleWare = signupInfo => {
 //테스트 마친 회원가입
 const signupMiddleware = signupInfo => {
   return function (dispatch, getState, { history }) {
-    instance
-      .post("/api/signup", signupInfo)
+    apis
+      .signup(signupInfo)
       .then(res => {
         console.log(res);
         const ACCESS_TOKEN = res.data.token;
         localStorage.setItem("token", ACCESS_TOKEN);
         dispatch(
           setUser({
-            email: res.data.email,
-            nickname: res.data.nickname,
+            userTestResult: res.data.userTestResult,
+            memberTestResult: res.data.memberTestResult,
           })
         );
         history.replace("/");
@@ -151,8 +201,15 @@ export default handleActions(
         draft.userId = action.payload.user.userId;
         draft.nickname = action.payload.user.nickname;
         draft.email = action.payload.user.email;
+        draft.techStack = action.payload.user.techStack;
         draft.is_login = true;
         draft.sigunupModalState = false;
+        draft.userTestResult = action.payload.user.userTestResult;
+        draft.memberTestResult = action.payload.user.memberTestResult;
+      }),
+    [LOG_OUT]: (state, action) =>
+      produce(state, draft => {
+        draft.is_login = false;
       }),
   },
   initialState
@@ -163,6 +220,9 @@ const userCreators = {
   githubLoginMiddleware,
   signupMiddleware,
   testUserMiddleWare,
+  emailCheckMiddleWare,
+  nickCheckMiddleWare,
+  logOut,
 };
 
 export { userCreators };

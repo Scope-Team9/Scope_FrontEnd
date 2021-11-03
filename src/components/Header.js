@@ -8,16 +8,15 @@ const Header = () => {
   return (
     <>
       <Grid
-        width="100vw"
+        width="70vw"
         height="60px"
         display="flex"
         justifyContent="space-between"
         alignItems="center"
-        top="0"
-        left="0"
         bg="rgba(255, 255, 255, 0)"
         padding="20px"
         zIndex="10"
+        margin="auto"
       >
         <Grid width="auto" height="auto">
           <HeaderLeft />

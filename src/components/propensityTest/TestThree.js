@@ -9,14 +9,14 @@ const TestThree = props => {
       <Grid display="flex" flexDirection="column">
         <Grid>
           <div>
-            Q. 나는 큰 보상과 무거운 책임보다는 평범한 보상과 책임이 더 좋다.
+            Q3. 나는 큰 보상과 무거운 책임보다는 평범한 보상과 책임이 더 좋다.
             <button
               value="L"
               onClick={e => {
                 handleUserCreate(e.target.value);
               }}
             >
-              L - X
+              X
             </button>
             <button
               value="F"
@@ -24,13 +24,14 @@ const TestThree = props => {
                 handleUserCreate(e.target.value);
               }}
             >
-              F - O
+              O
             </button>
           </div>
         </Grid>
         <Grid>
           <div>
-            Q. 나는 큰 보상과 무거운 책임보다는 평범한 보상과 책임이 더 좋다.
+            Q3. 내 팀원은 큰 보상과 무거운 책임보다는 평범한 보상과 책임을 더
+            좋아했으면 좋겠다.
           </div>
           <button
             value="L"
@@ -38,7 +39,7 @@ const TestThree = props => {
               handleMemberCreate(e.target.value);
             }}
           >
-            L - X
+            X
           </button>
           <button
             value="F"
@@ -46,7 +47,7 @@ const TestThree = props => {
               handleMemberCreate(e.target.value);
             }}
           >
-            F - O
+            O
           </button>
         </Grid>
       </Grid>

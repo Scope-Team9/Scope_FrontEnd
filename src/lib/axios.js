@@ -8,7 +8,6 @@ export const instance = axios.create({
   // baseURL: "http://3.36.94.200",
 
   baseURL: "http://15.165.159.211",
-
   headers: {
     "content-type": "application/json; charset=UTF-8",
     accept: "application/json",
@@ -19,7 +18,6 @@ export const instance = axios.create({
 instance.interceptors.request.use(
   (config) => {
     const cookie = document.cookie;
-    console.log(cookie);
     if (cookie === "") {
       return config;
     }
@@ -45,14 +43,13 @@ instance.interceptors.request.use(
 
 export const apis = {
   //회원가입 및 로그인 관련 api
-  kakaologin: (code) => instance.get("/api/login/kakao", code),
+  kakaoLogin: (code) => instance.get(`/api/login/kakao?code=${code}`, code),
+  githubLogin: (code) => instance.get(`/api/login/github?code=${code}`, code),
   register: (registerInfo) => instance.post("/api/signup", registerInfo),
-  checkEmail: (email) => instance.get("/api/login/email?email=email", email),
-  signup: (registerInfo) =>
-    instance.post(
-      "/api/post?filter=recommend&displayNumber=6&page=2&",
-      registerInfo
-    ),
+  checkEmail: (email) => instance.get(`/api/login/email?email=${email}`, email),
+  checkNick: (nickName) =>
+    instance.get(`/api/login/nickname?nickname=${nickName}`, nickName),
+  signup: (registerInfo) => instance.post("/api/signup", registerInfo),
 
   // 유저 관련 api
   updateProfileImg: (imageUrl) => instance.put(`/user/image`, imageUrl),
@@ -65,9 +62,9 @@ export const apis = {
   //     `/api/post?filter=${};${};${};${};${};${};${};${};${};${};${};${};${};${}&displayNumber=15&page=${page}&sort=createdAt`
   //   ),
 
-  getPost: (stack, paging) =>
+  getPost: (stack, paging, sort, reBook) =>
     instance.get(
-      `/api/post?filter=${stack.React};${stack.Spring};${stack.Swift};${stack.TypeScript};${stack.cpp};${stack.Django};${stack.Flask};${stack.Java};${stack.JavaScript};${stack.Kotlin};${stack.Node};${stack.php};${stack.Python};${stack.Vue};&displayNumber=15&page=${paging}&sort=createdAt&snsId=test`
+      `/api/post?filter=${stack.React};${stack.Spring};${stack.Swift};${stack.TypeScript};${stack.cpp};${stack.Django};${stack.Flask};${stack.Java};${stack.JavaScript};${stack.Kotlin};${stack.Node};${stack.php};${stack.Python};${stack.Vue};&displayNumber=9&page=${paging}&sort=${sort}&bookmarkRecommend=${reBook}`
     ),
   //data.json용
   // getPost: () => instance.get(`/post`),

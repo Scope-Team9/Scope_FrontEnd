@@ -9,14 +9,14 @@ const TestFive = props => {
       <div>성향테스트 5번</div>
       <Grid display="flex" flexDirection="column">
         <Grid>
-          <div>당신이 생각하는 이상적인 회의의 모습은?</div>
+          <div>Q5.당신이 생각하는 이상적인 회의의 모습은?</div>
           <button
             value="V"
             onClick={e => {
               handleUserCreate(e.target.value);
             }}
           >
-            V. 능력에 따른 적절한 권한의 분배 하에 진행되는 회의
+            능력에 따른 적절한 권한의 분배 하에 진행되는 회의
           </button>
           <button
             value="H"
@@ -24,11 +24,11 @@ const TestFive = props => {
               handleUserCreate(e.target.value);
             }}
           >
-            H. 모두 동등한 권한을 가지고 진행되는 회의
+            모두 동등한 권한을 가지고 진행되는 회의
           </button>
         </Grid>
         <Grid>
-          <div>당신이 생각하는 이상적인 회의의 모습은?</div>
+          <div>Q5.당신의 팀원이 원했으면 하는 이상적인 회의의 모습은?</div>
           <button
             value="V"
             onClick={e => {

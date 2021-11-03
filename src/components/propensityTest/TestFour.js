@@ -12,14 +12,16 @@ const TestFour = props => {
       <div>성향테스트 4번</div>
       <Grid display="flex" flexDirection="column">
         <Grid>
-          <div>프로젝트를 진행함에 있어서 당신의 생각에 더 가까운 문장은?</div>
+          <div>
+            Q4.프로젝트를 진행함에 있어서 당신의 생각에 더 가까운 문장은?
+          </div>
           <button
             value="V"
             onClick={e => {
               handleUserCreate(e.target.value);
             }}
           >
-            V. 팀장의 존재는 프로젝트를 진행함에 있어 필수적이다.
+            팀장의 존재는 프로젝트를 진행함에 있어 필수적이다.
           </button>
           <button
             value="H"
@@ -27,19 +29,22 @@ const TestFour = props => {
               handleUserCreate(e.target.value);
             }}
           >
-            H. 소통이 원활하게만 잘 된다면 팀장이 없어도 문제없이 프로젝트를
-            진행할 수 있다.
+            소통이 원활하게만 잘 된다면 팀장이 없어도 문제없이 프로젝트를 진행할
+            수 있다.
           </button>
         </Grid>
         <Grid>
-          <div>프로젝트를 진행함에 있어서 당신의 생각에 더 가까운 문장은?</div>
+          <div>
+            Q4.프로젝트를 진행함에 있어서 당신이 원하는 팀원의 생각에 더
+            가까웠으면 하는 문장은?
+          </div>
           <button
             value="V"
             onClick={e => {
               handleMemberCreate(e.target.value);
             }}
           >
-            V. 팀장의 존재는 프로젝트를 진행함에 있어 필수적이다.
+            팀장의 존재는 프로젝트를 진행함에 있어 필수적이다.
           </button>
           <button
             value="H"
@@ -47,8 +52,8 @@ const TestFour = props => {
               handleMemberCreate(e.target.value);
             }}
           >
-            H. 소통이 원활하게만 잘 된다면 팀장이 없어도 문제없이 프로젝트를
-            진행할 수 있다.
+            소통이 원활하게만 잘 된다면 팀장이 없어도 문제없이 프로젝트를 진행할
+            수 있다.
           </button>
         </Grid>
       </Grid>

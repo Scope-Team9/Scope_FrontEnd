@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, Input, Text, Button, Image } from "../elements/Index";
 import { Dialog } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,27 +8,32 @@ import { emailCheck } from "../shared/common";
 import Select from "react-select";
 import { history } from "../redux/configureStore";
 import PropensityTest from "./propensityTest/PropensityTest";
-import { instance } from "../lib/axios";
 import CloseIcon from "@mui/icons-material/Close";
 
 const LoginModal = props => {
   const dispatch = useDispatch();
   const userInfo = useSelector(state => state.user);
   const sigunupModalState = useSelector(state => state.user.sigunupModalState);
-  const token = window.localStorage.getItem("token");
 
-  var regExpNick = /^[a-zA-Z0-9]{4,10}$/;
+  var regExpNick = /^[a-zA-Z0-9]{2,10}$/;
   var regExpEmail =
     /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 
-  console.log(userInfo);
-
   //테크스택 옵션
   const techStackOption = [
-    { value: "react", label: "React" },
-    { value: "vue", label: "Vue" },
-    { value: "spring", label: "Spring" },
-    { value: "nodejs", label: "Nodejs" },
+    { value: "React", label: "React" },
+    { value: "Java", label: "Java" },
+    { value: "JavaScript", label: "JavaScript" },
+    { value: "Python", label: "Python" },
+    { value: "Node", label: "Node" },
+    { value: "cpp", label: "C++" },
+    { value: "Flask", label: "Flask" },
+    { value: "Django", label: "Django" },
+    { value: "Vue", label: "Vue" },
+    { value: "php", label: "php" },
+    { value: "Swift", label: "Swift" },
+    { value: "Kotlin", label: "Kotlin" },
+    { value: "TypeScript", label: "TypeScript" },
   ];
 
   //모달
@@ -54,74 +59,48 @@ const LoginModal = props => {
   console.log("기술스택", techStack);
   console.log("sns아이디", userInfo.snsId);
 
-  //이메일 중복체크
-  const emailCheck = email => {
-    return () => {
-      instance
-        .get(`/api/login/email?email=${email}`)
-        .then(res => {
-          console.log(res);
-          if (res.data.status == 200) {
-            setEmailDup(true);
-            window.alert("사용가능한 메일입니다.");
-          } else {
-            if (res.data.status == 400) {
-              window.alert("중복된 이메일이 존재합니다");
-            }
-          }
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    };
-  };
-
-  //닉네임 중복체크
+  //닉네임 체크 미들웨어
   const nickCheck = nickName => {
-    console.log(nickName);
-    return () => {
-      instance
-        .get(`/api/login/nickname?nickname=${nickName}`)
-        .then(res => {
-          console.log(res);
-          if (res.data.status == 200) {
-            setNameDup(true);
-            window.alert("사용가능한 닉네임입니다.");
-          } else {
-            if (res.data.status == 400) {
-              window.alert("중복된 닉네임이 존재합니다");
-            }
-          }
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    };
-  };
-
-  //테스트 회원 유효성 검사
-  //테스트 마친 회원가입 미들웨어전송
-  const preSignUP = () => {
-    if (nickName === undefined) {
+    if (nickName === "") {
       alert("닉네임을 입력 해주세요.");
-      return false;
-    } else if (techStack.length === 0) {
-      alert("기술스택을 선택 해주세요.");
-      return false;
-    } else if (emailDup === false) {
-      alert("이메일 중복확인을 해주세요.");
-      return false;
-    } else if (nameDup === false) {
-      alert("닉네임중복확인을 해주세요.");
-      return false;
-    } else if (!regExpEmail.test(email)) {
-      alert("이메일 형식을 확인해주세요.");
-      return false;
-    } else if (!regExpNick.test(nickName)) {
-      alert("닉네임은 4~10자 숫자 조합만 가능합니다.");
       return false;
     }
 
+    if (!regExpNick.test(nickName)) {
+      alert("닉네임은 4~10자 숫자 조합만 가능합니다.");
+      return false;
+    }
+    dispatch(userCreators.nickCheckMiddleWare(nickName));
+  };
+
+  //이메일 체크 미들웨어
+  const emailCheck = email => {
+    if (nickName === "") {
+      alert("이메일을 입력 해주세요.");
+      return false;
+    }
+
+    if (!regExpEmail.test(email)) {
+      alert("이메일 형식을 확인해주세요.");
+      return false;
+    }
+    dispatch(userCreators.emailCheckMiddleWare(email));
+  };
+
+  //테스트 마친 회원가입 미들웨어 전송
+  const preSignUP = () => {
+    if (techStack.length === 0) {
+      alert("기술스택을 선택 해주세요.");
+      return false;
+    }
+    if (emailDup === false) {
+      alert("이메일 중복확인을 해주세요.");
+      return false;
+    }
+    if (nameDup === false) {
+      alert("닉네임 중복확인을 해주세요.");
+      return false;
+    }
     const registerInfo = {
       snsId: userInfo.snsId,
       email: email,
@@ -132,7 +111,14 @@ const LoginModal = props => {
     dispatch(userCreators.testUserMiddleWare(registerInfo));
     setTest(true);
   };
+  //회원가입이 필요한 유저일경우 모달창 활성화
+  React.useEffect(() => {
+    if (sigunupModalState) {
+      setShowModal(true);
+    }
+  }, [sigunupModalState]);
 
+  //회원이 아닐경우 회원가입, 회원일 경우 메인으로 이동
   if (sigunupModalState == true) {
     return (
       <Dialog maxWidth={"md"} scroll="paper" open={showModal}>
@@ -198,7 +184,13 @@ const LoginModal = props => {
                     height="50px"
                     backgroundColor="#222222"
                     text="닉네임 중복 체크"
-                    _onClick={nickCheck(nickName)}
+                    _onClick={() => {
+                      if (!regExpNick.test(nickName)) {
+                        return false;
+                      }
+                      nickCheck(nickName);
+                      setNameDup(true);
+                    }}
                   ></Button>
                 </Grid>
               </Grid>
@@ -235,7 +227,10 @@ const LoginModal = props => {
                     height="50px"
                     backgroundColor="#222222"
                     text="이메일 중복 체크"
-                    _onClick={emailCheck(email)}
+                    _onClick={() => {
+                      emailCheck(email);
+                      setEmailDup(true);
+                    }}
                   ></Button>
                 </Grid>
               </Grid>
@@ -328,6 +323,7 @@ const LoginModal = props => {
                 <Grid display="flex" flexDirection="column">
                   <GithubBtn
                     onClick={() => {
+                      setShowModal(true);
                       window.location.href =
                         "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=http://localhost:3000/user/github/callback";
                     }}
@@ -336,6 +332,7 @@ const LoginModal = props => {
                   </GithubBtn>
                   <KakaoBtn
                     onClick={() => {
+                      setShowModal(true);
                       window.location.href =
                         "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code";
                     }}
@@ -344,6 +341,7 @@ const LoginModal = props => {
                   </KakaoBtn>
                   <NaverBtn
                     onClick={() => {
+                      setShowModal(true);
                       window.location.href =
                         "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code";
                     }}
