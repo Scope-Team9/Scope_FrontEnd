@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 import styled from "styled-components";
 import { history } from "../redux/configureStore";
@@ -6,10 +7,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Grid, Text, Image, Button } from "../elements/Index";
 import userImage from "../images/임시로고.jpg";
 import LoginModal from "./LoginModal";
+import { userCreators } from "../redux/modules/user";
 
 import { deleteCookie } from "../shared/Cookie";
 
 const HeaderRight = (props) => {
+  const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);
   const is_token = document.cookie.split("=")[1];
   const user_info = useSelector((state) => state.user);
@@ -29,6 +32,7 @@ const HeaderRight = (props) => {
   const logOut = () => {
     deleteCookie("ScopeUser");
     window.alert("로그아웃 됐습니다");
+    dispatch(userCreators.logOut());
     history.replace("/");
   };
 

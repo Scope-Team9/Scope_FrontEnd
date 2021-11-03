@@ -9,9 +9,9 @@ import styled from "styled-components";
 const PostList = () => {
   const dispatch = useDispatch();
 
-  // React.useEffect(() => {
-  //   dispatch(postActions.getPostAPI());
-  // }, []);
+  React.useEffect(() => {
+    dispatch(postActions.getPostAPI());
+  }, []);
 
   const product_list = useSelector((state) => state.post);
 
