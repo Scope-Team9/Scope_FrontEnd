@@ -83,6 +83,7 @@ const PostDetail = (props) => {
   );
 };
 
+// styled-components를 사용한다.
 const Title = styled.h1``;
 
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.

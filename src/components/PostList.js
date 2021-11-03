@@ -1,3 +1,6 @@
+// PostList.js
+
+// import를 한다.
 /* eslint-disable */
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -6,6 +9,7 @@ import PostTest from "./PostTest";
 import { postActions } from "../redux/modules/post";
 import styled from "styled-components";
 
+// PostList의 함수형 컴포넌트를 만든다.
 const PostList = () => {
   const dispatch = useDispatch();
 
@@ -56,11 +60,6 @@ const PostList = () => {
 
   return (
     <React.Fragment>
-      {/* <div>
-        {product_list.map((p, idx) => (
-          <Post key={idx} {...p} />
-        ))}
-      </div> */}
       <PostWrap>
         {dummyData.map((item, index) => {
           return <PostTest key={index} {...item} />;
@@ -70,6 +69,7 @@ const PostList = () => {
   );
 };
 
+// styled-components를 사용한다.
 const PostWrap = styled.div`
   max-width: 1300px;
   margin: auto;
@@ -79,4 +79,5 @@ const PostWrap = styled.div`
   grid-gap: 40px;
 `;
 
+// export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default PostList;

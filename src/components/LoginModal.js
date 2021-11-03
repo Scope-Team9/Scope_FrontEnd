@@ -61,10 +61,7 @@ const LoginModal = (props) => {
       alert("닉네임을 입력 해주세요.");
       return false;
     }
-    if (nameDup === false) {
-      alert("닉네임 중복확인을 해주세요.");
-      return false;
-    }
+
     if (!regExpNick.test(nickName)) {
       alert("닉네임은 4~10자 숫자 조합만 가능합니다.");
       return false;
@@ -78,10 +75,7 @@ const LoginModal = (props) => {
       alert("이메일을 입력 해주세요.");
       return false;
     }
-    if (emailDup === false) {
-      alert("이메일 중복확인을 해주세요.");
-      return false;
-    }
+
     if (!regExpEmail.test(email)) {
       alert("이메일 형식을 확인해주세요.");
       return false;
@@ -93,6 +87,14 @@ const LoginModal = (props) => {
   const preSignUP = () => {
     if (techStack.length === 0) {
       alert("기술스택을 선택 해주세요.");
+      return false;
+    }
+    if (emailDup === false) {
+      alert("이메일 중복확인을 해주세요.");
+      return false;
+    }
+    if (nameDup === false) {
+      alert("닉네임 중복확인을 해주세요.");
       return false;
     }
     const registerInfo = {
@@ -179,6 +181,9 @@ const LoginModal = (props) => {
                     backgroundColor="#222222"
                     text="닉네임 중복 체크"
                     _onClick={() => {
+                      if (!regExpNick.test(nickName)) {
+                        return false;
+                      }
                       nickCheck(nickName);
                       setNameDup(true);
                     }}

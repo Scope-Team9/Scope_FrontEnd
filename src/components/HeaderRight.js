@@ -11,9 +11,10 @@ import { deleteCookie } from "../shared/Cookie";
 
 const HeaderRight = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
+  const is_token = document.cookie.split("=")[1];
   const user_info = useSelector((state) => state.user);
 
-  console.log(is_login);
+  console.log(document.cookie);
   const [showModal, setShowModal] = React.useState(false);
   const sigunupModalState = useSelector(
     (state) => state.user.sigunupModalState
@@ -26,12 +27,12 @@ const HeaderRight = (props) => {
   };
 
   const logOut = () => {
-    deleteCookie("user_id");
-    history.replace("/");
+    deleteCookie("ScopeUser");
     window.alert("로그아웃 됐습니다");
+    history.replace("/");
   };
 
-  if (is_login) {
+  if (is_token) {
     return (
       <Grid
         display="flex"
@@ -47,7 +48,7 @@ const HeaderRight = (props) => {
           <Button
             backgroundColor="#111"
             width="100px"
-            text="로그인"
+            text="로그아웃"
             _onClick={logOut}
           ></Button>
         </HeaderWrapper>

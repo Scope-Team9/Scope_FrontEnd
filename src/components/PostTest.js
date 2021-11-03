@@ -1,14 +1,16 @@
-/* eslint-disable */
+// PostTest.js
 
+// import를 한다.
+/* eslint-disable */
 import React from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 
 import { history } from "../redux/configureStore";
-import { Grid, Image, Progress } from "../elements/Index";
-
+import { Grid, Image } from "../elements/Index";
 import Img from "../images/flutter.png";
 
+// PostTest의 함수형 컴포넌트를 만든다.
 const PostTest = (props) => {
   const dispatch = useDispatch();
 
@@ -47,10 +49,10 @@ const PostTest = (props) => {
               <TitleDate>D-2</TitleDate>
             </Grid>
 
-            <Grid display="flex" width="100px">
+            <Grid display="flex" width="120px">
               <Grid
                 display="flex"
-                width="50px"
+                width="60px"
                 borderRadius="50%"
                 backgroundColor="white"
                 margin="-26px 15px"
@@ -94,7 +96,6 @@ const PostTest = (props) => {
             </Date>
             <Line />
             <Grid>
-              <Progress></Progress>
               <ProjectState>{props.projectStatus}</ProjectState>
             </Grid>
           </DescriptionBox>
@@ -104,6 +105,7 @@ const PostTest = (props) => {
   );
 };
 
+// styled-components를 사용한다.
 const TitleDate = styled.div`
   width: 50px;
   text-align: center;
@@ -158,4 +160,5 @@ const ProductImgWrap = styled.div`
   }
 `;
 
+// export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default PostTest;
