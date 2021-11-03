@@ -14,6 +14,7 @@ const HeaderRight = props => {
   const user_info = useSelector(state => state.user);
 
   console.log(is_login);
+  console.log(document.cookie);
   const [showModal, setShowModal] = React.useState(false);
   const sigunupModalState = useSelector(state => state.user.sigunupModalState);
   const modalOpen = () => {

@@ -32,7 +32,6 @@ const kakaologinMiddleware = code => {
     apis
       .kakaoLogin(code)
       .then(res => {
-        console.log(res.data);
         if (res.data.status == 300) {
           window.alert("추가정보 작성이 필요합니다.");
           dispatch(
@@ -45,7 +44,8 @@ const kakaologinMiddleware = code => {
           return;
         }
         if (res.status === 200) {
-          let userCookie = res.data.token;
+          console.log(res);
+          let userCookie = res.data.data.token;
           setCookie("ScopeUser", userCookie, 30);
           // const ACCESS_TOKEN = res.data.token;
           // localStorage.setItem("token", ACCESS_TOKEN);
@@ -87,8 +87,8 @@ const githubLoginMiddleware = code => {
           return;
         }
         if (res.status === 200) {
-          const ACCESS_TOKEN = res.data.token;
-          localStorage.setItem("token", ACCESS_TOKEN);
+          let userCookie = res.data.data.token;
+          setCookie("ScopeUser", userCookie, 30);
           dispatch(
             setUser({
               email: res.data.email,

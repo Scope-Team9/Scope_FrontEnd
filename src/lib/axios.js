@@ -8,7 +8,6 @@ export const instance = axios.create({
   // baseURL: "http://3.36.94.200",
 
   baseURL: "http://15.165.159.211",
-
   headers: {
     "content-type": "application/json; charset=UTF-8",
     accept: "application/json",
@@ -19,7 +18,6 @@ export const instance = axios.create({
 instance.interceptors.request.use(
   config => {
     const cookie = document.cookie;
-    console.log(config);
     if (cookie === "") {
       return config;
     }
