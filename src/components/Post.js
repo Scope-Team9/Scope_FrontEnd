@@ -13,7 +13,6 @@ import Img from "../images/flutter.png";
 const Post = (props) => {
   const dispatch = useDispatch();
 
-  console.log("카드들", props);
   return (
     <React.Fragment>
       <ProductImgWrap
