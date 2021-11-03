@@ -63,7 +63,7 @@ const PostList = () => {
       </div> */}
       <PostWrap>
         {dummyData.map((item, index) => {
-          return <PostTest key={index} {...item} />;
+          return <Post key={index} {...item} />;
         })}
       </PostWrap>
     </React.Fragment>

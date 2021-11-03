@@ -37,34 +37,7 @@ const PostTest = (props) => {
                 width="50px"
                 borderRadius="50%"
                 backgroundColor="white"
-                margin="-26px 15px"
-              >
-                <Image src={Img} />
-              </Grid>
-              <Grid
-                display="flex"
-                width="50px"
-                borderRadius="50%"
-                backgroundColor="white"
-                margin="-26px 15px"
-              >
-                <Image src={Img} />
-              </Grid>
-              <Grid
-                display="flex"
-                width="50px"
-                borderRadius="50%"
-                backgroundColor="white"
-                margin="-26px 15px"
-              >
-                <Image src={Img} />
-              </Grid>
-              <Grid
-                display="flex"
-                width="50px"
-                borderRadius="50%"
-                backgroundColor="white"
-                margin="-26px 15px"
+                margin="-26px 13px"
               >
                 <Image src={Img} />
               </Grid>
