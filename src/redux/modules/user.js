@@ -7,10 +7,12 @@ import { setCookie } from "../../shared/Cookie";
 const FIRST_USER = "FIRST_USER";
 const TEST_USER = "TEST_USER";
 const SET_USER = "SET_USER";
+const LOG_OUT = "LOG_OUT";
 //액션생성
 const firstUser = createAction(FIRST_USER, user => ({ user }));
 const testUser = createAction(TEST_USER, user => ({ user }));
 const setUser = createAction(SET_USER, user => ({ user }));
+const logOut = createAction(LOG_OUT, user => ({ user }));
 
 //초기값
 const initialState = {
@@ -205,6 +207,10 @@ export default handleActions(
         draft.userTestResult = action.payload.user.userTestResult;
         draft.memberTestResult = action.payload.user.memberTestResult;
       }),
+    [LOG_OUT]: (state, action) =>
+      produce(state, draft => {
+        draft.is_login = false;
+      }),
   },
   initialState
 );
@@ -216,6 +222,7 @@ const userCreators = {
   testUserMiddleWare,
   emailCheckMiddleWare,
   nickCheckMiddleWare,
+  logOut,
 };
 
 export { userCreators };
