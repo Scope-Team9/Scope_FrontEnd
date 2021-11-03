@@ -61,9 +61,9 @@ export const apis = {
   //     `/api/post?filter=${};${};${};${};${};${};${};${};${};${};${};${};${};${}&displayNumber=15&page=${page}&sort=createdAt`
   //   ),
 
-  getPost: (stack, paging) =>
+  getPost: (stack, paging, sort) =>
     instance.get(
-      `/api/post?filter=${stack.React};${stack.Spring};${stack.Swift};${stack.TypeScript};${stack.cpp};${stack.Django};${stack.Flask};${stack.Java};${stack.JavaScript};${stack.Kotlin};${stack.Node};${stack.php};${stack.Python};${stack.Vue};&displayNumber=15&page=${paging}&sort=createdAt&snsId=test`
+      `/api/post?filter=${stack.React};${stack.Spring};${stack.Swift};${stack.TypeScript};${stack.cpp};${stack.Django};${stack.Flask};${stack.Java};${stack.JavaScript};${stack.Kotlin};${stack.Node};${stack.php};${stack.Python};${stack.Vue};&displayNumber=15&page=${paging}&sort=${sort}&bookmarkRecommend=""`
     ),
   //data.json용
   // getPost: () => instance.get(`/post`),

@@ -27,9 +27,7 @@ const Post = (props) => {
             backgroundColor="#8B3FF8"
             borderRadius="20px 20px 20px 0px"
           >
-            <Grid>
-              <TitleDate>D-2</TitleDate>
-            </Grid>
+            <Grid>{/* <TitleDate>D-2</TitleDate> */}</Grid>
 
             <Grid display="flex" width="100px">
               {props.techStack.map((p, idx) => {

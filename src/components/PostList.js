@@ -9,20 +9,11 @@ import styled from "styled-components";
 const PostList = () => {
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
-    // dispatch(postActions.getPostAPI());
-  }, []);
-
   const post_list = useSelector((state) => state.post.posts);
   console.log(post_list);
 
   return (
     <React.Fragment>
-      {/* <div>
-        {product_list.map((p, idx) => (
-          <Post key={idx} {...p} />
-        ))}
-      </div> */}
       <PostWrap>
         {post_list.map((item, index) => {
           return <Post key={index} {...item} />;

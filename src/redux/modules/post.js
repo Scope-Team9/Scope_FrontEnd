@@ -14,17 +14,20 @@ const initialState = {
   infinityposts: [],
   paging: { start: null, next: null },
   is_loading: false,
+  sorts: "createdAt",
 };
 
 export const getPostAPI = () => {
   return function (dispatch, getState, { history }) {
     let stack = getState().stack.stack;
-    console.log(stack);
+    let sort = getState().sort.sort;
+    console.log("sort값", sort.sort);
+
     let _paging = getState().post.paging;
     console.log(_paging);
 
     apis
-      .getPost(stack, _paging.next + 1)
+      .getPost(stack, _paging.next + 1, sort)
       .then((res) => {
         console.log(_paging);
         const posts = res.data.data;
@@ -36,7 +39,7 @@ export const getPostAPI = () => {
         console.log("어떻게 오는지", res.data.data);
 
         dispatch(isLoading(true));
-        let data = { paging, posts, stack };
+        let data = { paging, posts, stack, sort };
 
         dispatch(getPosts(data));
       })
@@ -52,13 +55,15 @@ export default handleActions(
       produce(state, (draft) => {
         console.log(action);
         let stacks = action.payload.data.stack;
-        if (!draft.stacks) {
+        let sorts = action.payload.data.sort;
+        if (!draft.stacks || !draft.sorts) {
           draft.stacks = stacks;
-          console.log(stacks);
-          console.log("우선 스택을 넣고");
+          draft.sorts = sorts;
           console.log("우선 스택을 넣고", draft.stacks);
+          console.log("우선 스택을 넣고", draft.sorts);
+          console.log(state);
         }
-        if (state.stacks !== stacks) {
+        if (state.stacks !== stacks || state.sorts !== sorts) {
           console.log(draft.stacks !== stacks);
           console.log("받아온 스택", stacks);
           console.log("draft스택", state.stacks);
@@ -67,7 +72,8 @@ export default handleActions(
           draft.paging = action.payload.data.paging;
           draft.is_loading = false;
           draft.stacks = stacks;
-        } else {
+          draft.sorts = sorts;
+        } else if (state.stacks === stacks || state.sorts === sorts) {
           console.log(draft.stacks === stacks);
           console.log("스택이 그대로일때");
           draft.posts.push(...action.payload.data.posts);
