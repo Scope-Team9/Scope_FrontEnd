@@ -11,6 +11,7 @@ import { deleteCookie } from "../shared/Cookie";
 
 const HeaderRight = props => {
   const is_login = useSelector(state => state.user.is_login);
+  const is_token = document.cookie.split("=")[1];
   const user_info = useSelector(state => state.user);
 
   console.log(document.cookie);
@@ -29,7 +30,7 @@ const HeaderRight = props => {
     history.replace("/");
   };
 
-  if (is_login) {
+  if (is_token) {
     return (
       <Grid
         display="flex"
