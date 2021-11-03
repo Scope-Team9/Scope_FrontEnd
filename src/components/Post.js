@@ -1,24 +1,40 @@
-/* eslint-disable */
+// Post.js
 
+// import를 한다.
+/* eslint-disable */
 import React from "react";
 import styled from "styled-components";
 import PostStacks from "./PostStacks";
 import { useSelector, useDispatch } from "react-redux";
 
 import { history } from "../redux/configureStore";
-import { Grid, Image, Progress } from "../elements/Index";
+import { Grid, Image } from "../elements/Index";
 
-import Img from "../images/flutter.png";
-
+// Post의 함수형 컴포넌트를 만든다.
 const Post = (props) => {
   const dispatch = useDispatch();
 
+  console.log("asdsad", props.postId);
   console.log("카드들", props);
   return (
     <React.Fragment>
       <ProductImgWrap
         onClick={() => {
-          history.push(`/postdetail/${props.postId}`);
+          history.push({
+            pathname: "/postdetail",
+            state: {
+              postId: props.postId,
+              title: props.title,
+              techStack: props.techStack,
+              summary: props.summary,
+              totalMember: props.totalMember,
+              recruitmentMember: props.recruitmentMember,
+              projectStatus: props.projectStatus,
+              startDate: props.startDate,
+              endDate: props.endDate,
+              isBookmarkCheckde: props.isBookmarkCheckde,
+            },
+          });
         }}
       >
         <Grid backgroundColor="#E7E1FF" borderRadius="30px">
@@ -46,7 +62,6 @@ const Post = (props) => {
             </Date>
             <Line />
             <Grid>
-              <Progress></Progress>
               <ProjectState>{props.projectStatus}</ProjectState>
             </Grid>
           </DescriptionBox>
