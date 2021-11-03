@@ -1,6 +1,7 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis, instance } from "../../lib/axios";
+import { setCookie } from "../../shared/Cookie";
 
 //액션타입
 const FIRST_USER = "FIRST_USER";
@@ -28,8 +29,8 @@ const initialState = {
 const kakaologinMiddleware = code => {
   return function (dispatch, getState, { history }) {
     console.log("카카오에서 받아온 코드", code);
-    instance
-      .get(`/api/login/kakao?code=${code}`)
+    apis
+      .kakaoLogin(code)
       .then(res => {
         console.log(res.data);
         if (res.data.status == 300) {
@@ -43,18 +44,21 @@ const kakaologinMiddleware = code => {
           history.replace("/");
           return;
         }
-        if (res.status === 200 && res.data.token) {
-          const ACCESS_TOKEN = res.data.token;
-          localStorage.setItem("token", ACCESS_TOKEN);
+        if (res.status === 200) {
+          let userCookie = res.data.token;
+          setCookie("ScopeUser", userCookie, 30);
+          // const ACCESS_TOKEN = res.data.token;
+          // localStorage.setItem("token", ACCESS_TOKEN);
           dispatch(
             setUser({
               email: res.data.email,
               nickname: res.data.nickname,
             })
           );
-          history.push("/");
+          window.alert("로그인성공");
+          history.replace("/");
+          return;
         }
-        // window.location.href = "/";
       })
       .catch(err => {
         console.log("소셜로그인 에러", err);
@@ -82,7 +86,7 @@ const githubLoginMiddleware = code => {
           history.replace("/");
           return;
         }
-        if (res.status === 200 && res.data.token) {
+        if (res.status === 200) {
           const ACCESS_TOKEN = res.data.token;
           localStorage.setItem("token", ACCESS_TOKEN);
           dispatch(

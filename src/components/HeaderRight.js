@@ -24,7 +24,7 @@ const HeaderRight = props => {
   };
 
   const logOut = () => {
-    localStorage.removeItem("token");
+    deleteCookie("ScopeUser");
     window.alert("로그아웃 됐습니다");
     history.replace("/");
   };
