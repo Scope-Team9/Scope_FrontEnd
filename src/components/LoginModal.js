@@ -141,12 +141,7 @@ const LoginModal = props => {
               >
                 <CloseIcon fontSize="large" onClick={modalClose} />
               </Grid>
-              <Grid
-                display="flex"
-                bg="#F7F7F7"
-                height="50px"
-                alignItems="center"
-              >
+              <Grid bg="#F7F7F7" height="100px" alignItems="center">
                 <Text margin="0 0 0 20px" bold>
                   회원가입
                 </Text>
@@ -281,7 +276,7 @@ const LoginModal = props => {
     );
   } else {
     return (
-      <Dialog maxWidth={"sm"} scroll="paper" open={showModal}>
+      <Dialog maxWidth={"md"} scroll="paper" open={showModal}>
         <ModalWrap>
           <Grid
             className="모달컨테이너"
@@ -361,9 +356,8 @@ const LoginModal = props => {
 };
 
 const ModalWrap = styled.div`
-  overflow: hidden;
-  width: 400px;
-  height: 450px;
+  width: 550px;
+  height: 500px;
 `;
 
 const GithubBtn = styled.div`
