@@ -1,7 +1,7 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 
-const GET_RB = "GET_SORT";
+const GET_RB = "GET_RB";
 
 const getRb = createAction(GET_RB, (data) => ({ data }));
 
@@ -14,7 +14,7 @@ export default handleActions(
     [GET_RB]: (state, action) =>
       produce(state, (draft) => {
         console.log(action);
-        draft.re_book = action.payload.data;
+        draft.reBook = action.payload.data;
       }),
   },
   initialState

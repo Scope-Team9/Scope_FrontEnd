@@ -11,6 +11,7 @@ import PostList from "../components/PostList";
 import { postActions } from "../redux/modules/post";
 import { sortAction } from "../redux/modules/sort";
 import { bookRecommendAction } from "../redux/modules/bookRecommend";
+import { pageAction } from "../redux/modules/infinity";
 import { useSelector, useDispatch } from "react-redux";
 
 const MainPage = () => {
@@ -18,24 +19,32 @@ const MainPage = () => {
   const is_stack_clicked = useSelector((state) => state.stack.stack);
   const is_sort_clicked = useSelector((state) => state.sort.sort);
   const is_loading = useSelector((state) => state.post.is_loading);
-  const paging = useSelector((state) => state.post.paging);
+  const paging = useSelector((state) => state.infinity.paging);
+  const is_reBook_clicked = useSelector((state) => state.rebook.reBook);
 
-  const [sort, setSort] = React.useState("createdAt");
+  console.log(useSelector((state) => state.infinity.paging));
+  let page = 0;
 
-  console.log(paging);
+  // const [page, setPage] = React.useState(0);
+
+  // console.log(paging);
 
   React.useEffect(() => {
     console.log("?? 여기서 되는거임?");
     dispatch(postActions.getPostAPI());
-  }, [is_stack_clicked, is_sort_clicked]);
+  }, [is_stack_clicked, is_sort_clicked, is_reBook_clicked]);
   //무한스크롤 다음
   const callNext = () => {
+    page++;
+
+    dispatch(pageAction.getPage(page));
     dispatch(postActions.getPostAPI());
     console.log("??");
   };
   //sort
   const onclickSort = (data) => {
     dispatch(sortAction.getSort(data));
+    dispatch(bookRecommendAction.getRb(""));
   };
   //bookmark,recommend
   const onclickRb = (data) => {
