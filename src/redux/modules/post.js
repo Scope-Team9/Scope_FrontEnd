@@ -36,9 +36,9 @@ export const getPostAPI = () => {
         console.log("어떻게 오는지", res.data.data);
 
         dispatch(isLoading(true));
+        let data = { paging, posts, stack };
 
-        // dispatch(getPosts(posts, paging));
-        dispatch(getPosts(paging, posts));
+        dispatch(getPosts(data));
       })
       .catch((err) => {
         console.log(err.response);
@@ -48,16 +48,33 @@ export const getPostAPI = () => {
 
 export default handleActions(
   {
+    // 백엔드와 통신
     [GET_POST]: (state, action) =>
       produce(state, (draft) => {
-        console.log("wwgdsagasdf");
         console.log(action);
-        console.log(state);
-
-        // draft.products.push(...action.payload.products.data.content);
-        draft.paging = action.payload.data;
-        draft.is_loading = false;
-        // draft.search = false;
+        let stacks = action.payload.data.stack;
+        if (!draft.stacks) {
+          draft.stacks = stacks;
+          console.log(stacks);
+          console.log("우선 스택을 넣고");
+          console.log("우선 스택을 넣고", draft.stacks);
+        }
+        if (state.stacks !== stacks) {
+          console.log(draft.stacks !== stacks);
+          console.log("받아온 스택", stacks);
+          console.log("draft스택", state.stacks);
+          console.log("스택이 달라졌을때");
+          draft.posts = action.payload.data.posts;
+          draft.paging = action.payload.data.paging;
+          draft.is_loading = false;
+          draft.stacks = stacks;
+        } else {
+          console.log(draft.stacks === stacks);
+          console.log("스택이 그대로일때");
+          draft.posts.push(...action.payload.data.posts);
+          draft.paging = action.payload.data.paging;
+          draft.is_loading = false;
+        }
       }),
 
     [LOADING]: (state, action) =>

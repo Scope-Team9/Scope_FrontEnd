@@ -8,6 +8,7 @@ const FIRST_USER = "FIRST_USER";
 const TEST_USER = "TEST_USER";
 const SET_USER = "SET_USER";
 const LOG_OUT = "LOG_OUT";
+
 //액션생성
 const firstUser = createAction(FIRST_USER, (user) => ({ user }));
 const testUser = createAction(TEST_USER, (user) => ({ user }));
@@ -53,8 +54,8 @@ const kakaologinMiddleware = (code) => {
           // localStorage.setItem("token", ACCESS_TOKEN);
           dispatch(
             setUser({
-              email: res.data.email,
-              nickname: res.data.nickname,
+              email: res.data.data.mail,
+              nickname: res.data.data.nickname,
             })
           );
           window.alert("로그인성공");
@@ -74,8 +75,8 @@ const kakaologinMiddleware = (code) => {
 const githubLoginMiddleware = (code) => {
   return function (dispatch, getState, { history }) {
     console.log("깃허브에서 받아온 코드", code);
-    instance
-      .get(`/api/login/github?code=${code}`)
+    apis
+      .githubLogin(code)
       .then((res) => {
         if (res.data.status == 300) {
           window.alert("추가정보 작성이 필요합니다.");
@@ -85,6 +86,7 @@ const githubLoginMiddleware = (code) => {
               snsId: res.data.data.id,
             })
           );
+
           history.replace("/");
           return;
         }
@@ -93,10 +95,11 @@ const githubLoginMiddleware = (code) => {
           setCookie("ScopeUser", userCookie, 30);
           dispatch(
             setUser({
-              email: res.data.email,
-              nickname: res.data.nickname,
+              email: res.data.data.mail,
+              nickname: res.data.data.nickname,
             })
           );
+          window.alert("로그인성공");
           history.replace("/");
         }
         // window.location.href = "/";

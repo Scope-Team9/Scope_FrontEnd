@@ -63,17 +63,13 @@ export const apis = {
 
   getPost: (stack, paging) =>
     instance.get(
-      `/api/post?filter=${stack.React};${stack.Spring};${stack.Swift};${stack.TypeScript};${stack.cpp};${stack.Django};${stack.Flask};${stack.Java};${stack.JavaScript};${stack.Kotlin};${stack.Node};${stack.php};${stack.Python};${stack.Vue};&displayNumber=15&page=${paging}&sort=createdAt&snsId=test`
+      `/api/post?filter=${stack.React};${stack.Spring};${stack.Swift};${stack.TypeScript};${stack.cpp};${stack.Django};${stack.Flask};${stack.Java};${stack.JavaScript};${stack.Kotlin};${stack.Node};${stack.php};${stack.Python};${stack.Vue};&displayNumber=15&page=${paging}&sort=createdAt&bookmarkRecommend=""`
     ),
+
   //data.json용
   // getPost: () => instance.get(`/post`),
   addPost: (postInfo) => instance.post(`/api/post`, postInfo),
-  updatePost: (postId, postInfo) => instance.put(`/post/${postId}`, postInfo),
-  deletePost: (postId) => instance.delete(`/post/${postId}`),
-  clickLike: (postId) => instance.post(`/post/${postId}/like`),
-  addComment: (commentInfo) => instance.post("/comment", commentInfo),
-  deleteComment: (commentId) => instance.delete(`/comment/${commentId}`),
-  editComment: (commentId, content) =>
-    instance.put(`/comment/${commentId}`, content),
-  addMyImage: (base64) => instance.post(`/api/image`, base64),
+  editPost: (postId, postInfo) =>
+    instance.postdetail(`/post/${postId}`, postInfo),
+  deletePost: (postId) => instance.postdetail(`/api/post/${postId}`),
 };

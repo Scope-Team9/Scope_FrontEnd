@@ -52,4 +52,5 @@ export default handleActions(
 const postActions = {
   addPostAPI,
 };
+
 export { postActions };

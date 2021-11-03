@@ -26,6 +26,7 @@ const Post = (props) => {
               postId: props.postId,
               title: props.title,
               techStack: props.techStack,
+              contents: props.contents,
               summary: props.summary,
               totalMember: props.totalMember,
               recruitmentMember: props.recruitmentMember,
