@@ -6,7 +6,6 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Grid, Text, Image, Input, Button } from "../elements/Index";
-<<<<<<< HEAD
 import ApplyModal from "../components/ApplyModal";
 
 // DetailList의 함수형 컴포넌트를 만든다.
@@ -17,20 +16,6 @@ const DetailList = props => {
   };
 
   console.log("제목");
-=======
-import { postActions } from "../redux/modules/post";
-import { useSelector, useDispatch } from "react-redux";
-// DetailList의 함수형 컴포넌트를 만든다.
-const DetailList = (props) => {
-  const dispatch = useDispatch();
-  const is_mainPage = useSelector((state) => state.post.mainpage);
-
-  React.useEffect(() => {
-    dispatch(postActions.isMainPage(false));
-    dispatch(postActions.whatPage("postDetailPage"));
-  }, []);
-
->>>>>>> 976bb2af5e419641db4a39e278161a8c03c3b825
   return (
     <React.Fragment>
       <Grid
