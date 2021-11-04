@@ -22,6 +22,8 @@ const Button = props => {
     right,
     hover,
     display,
+    isValue,
+    disabled,
   } = props;
 
   if (isFloat) {
@@ -35,7 +37,9 @@ const Button = props => {
   if (isTest) {
     return (
       <>
-        <TestButton onClick={_onClick}> {text ? text : children}</TestButton>
+        <TestButton onClick={_onClick} value={isValue} disabled={disabled}>
+          {text ? text : children}
+        </TestButton>
       </>
     );
   }
@@ -83,6 +87,7 @@ Button.defaultProps = {
   right: null,
   hover: null,
   display: null,
+  isValue: null,
 };
 
 const ElButton = styled.button`
@@ -139,16 +144,29 @@ const FloatButton = styled.div`
 `;
 
 const TestButton = styled.button`
+  font-size: 10px;
+  text-align: center;
+  border: none;
   border-radius: 20px;
-  background-color: #007bff;
-  color: #ffffff;
+  background-color: #f1f9ff;
+  color: #111;
+  padding: 9px;
+  margin: 10px;
+  box-shadow: 0px 2px 2px #ddd;
+
   &:hover {
     background-color: #025cbd;
+    cursor: pointer;
+    color: #fff;
+    box-shadow: 0px 3px 2px #111;
   }
   &::active {
-    box-shadow: 1px 1px 0 rgb(0, 0, 0, 0.5);
-    position: relative;
-    top: 2px;
+    box-shadow: 0px 1px 2px #111;
+    transform: translateY(10px);
+  }
+  &::disabled {
+    cursor: default;
+    opacity: 0.7;
   }
 `;
 

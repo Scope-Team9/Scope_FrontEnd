@@ -3,11 +3,18 @@
 // import를 한다.
 import React from "react";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Grid, Text, Image, Input, Button } from "../elements/Index";
+import ApplyModal from "../components/ApplyModal";
 
 // DetailList의 함수형 컴포넌트를 만든다.
 const DetailList = props => {
+  const [showModal, setShowModal] = React.useState(false);
+  const modalOpen = () => {
+    setShowModal(true);
+  };
+
   console.log("제목");
   return (
     <React.Fragment>
@@ -17,11 +24,13 @@ const DetailList = props => {
         margin="40px auto"
         border="2px solid #8B3FF8"
         borderRadius="30px"
+        position="relative"
       >
         <Title>제목입니다.</Title>
         <Grid margin="10px auto">
           <Text>한줄설명입니다.</Text>
         </Grid>
+
         <Grid>
           <Text>게시자 정보</Text>
           <Grid display="column">
@@ -36,6 +45,25 @@ const DetailList = props => {
                 <Text>이승민</Text>
               </Grid>
             </Grid>
+            <Grid position="relative" width="100%">
+              <Grid
+                position="absolute"
+                right="20px"
+                width="100px"
+                padding="10px"
+              >
+                <Button
+                  postion="absolute"
+                  width="100%"
+                  borderRadius="10px"
+                  _onClick={modalOpen}
+                >
+                  신청현황 확인
+                </Button>
+                <ApplyModal showModal={showModal} setShowModal={setShowModal} />
+              </Grid>
+            </Grid>
+
             <Grid display="flex" margin="10px auto">
               <Text margin="auto 10px auto 0px">프로젝트 기간 :</Text>
               <Text> 2021-10-24 ~ 2021-11-24</Text>

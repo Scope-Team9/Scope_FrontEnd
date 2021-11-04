@@ -4,7 +4,6 @@ import { Dialog } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { userCreators } from "../redux/modules/user";
-import { emailCheck } from "../shared/common";
 import Select from "react-select";
 import { history } from "../redux/configureStore";
 import PropensityTest from "./propensityTest/PropensityTest";

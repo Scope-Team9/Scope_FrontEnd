@@ -18,6 +18,7 @@ import { Grid, Button, Image } from "../../elements/Index";
 import { userCreators } from "../../redux/modules/user";
 
 const PropensityTest = props => {
+  const is_token = document.cookie.split("=")[1];
   const dispatch = useDispatch();
   const userInfo = useSelector(state => state.user);
 
@@ -111,6 +112,16 @@ const PropensityTest = props => {
     dispatch(userCreators.signupMiddleware(registerInfo));
   };
 
+  const editTest = () => {
+    setpage(page => page + 1);
+    const testInfo = {
+      userPropensityType: userPropensityType,
+      memberPropensityType: memberPropensityType,
+    };
+    console.log(testInfo);
+    dispatch(userCreators.editTestMiddleware(testInfo));
+  };
+
   return (
     <Grid width="100%" height="350px">
       {/* 프로그래스바 */}
@@ -200,7 +211,7 @@ const PropensityTest = props => {
         width="90%"
         justifyContent="space-between"
         height="50px"
-        margin="auto"
+        margin="30px auto 0 auto"
       >
         {/* 5.다음결과값이 없을때 페이지처리 */}
         {page !== 1 && (
@@ -231,7 +242,7 @@ const PropensityTest = props => {
             borderRadius="30px"
             width="47%"
             margin="5px"
-            _onClick={register}
+            _onClick={is_token ? register : editTest}
           >
             제출하기
           </Button>

@@ -16,7 +16,7 @@ export const instance = axios.create({
 });
 
 instance.interceptors.request.use(
-  (config) => {
+  config => {
     const cookie = document.cookie;
     if (cookie === "") {
       return config;
@@ -36,23 +36,31 @@ instance.interceptors.request.use(
     };
     return config;
   },
-  (err) => {
+  err => {
     console.log(err);
   }
 );
 
 export const apis = {
   //회원가입 및 로그인 관련 api
-  kakaoLogin: (code) => instance.get(`/api/login/kakao?code=${code}`, code),
-  githubLogin: (code) => instance.get(`/api/login/github?code=${code}`, code),
-  register: (registerInfo) => instance.post("/api/signup", registerInfo),
-  checkEmail: (email) => instance.get(`/api/login/email?email=${email}`, email),
-  checkNick: (nickName) =>
+  kakaoLogin: code => instance.get(`/api/login/kakao?code=${code}`, code),
+  githubLogin: code => instance.get(`/api/login/github?code=${code}`, code),
+  register: registerInfo => instance.post("/api/signup", registerInfo),
+  checkEmail: email => instance.get(`/api/login/email?email=${email}`, email),
+  checkNick: nickName =>
     instance.get(`/api/login/nickname?nickname=${nickName}`, nickName),
-  signup: (registerInfo) => instance.post("/api/signup", registerInfo),
+  signup: registerInfo => instance.post("/api/signup", registerInfo),
 
   // 유저 관련 api
-  updateProfileImg: (imageUrl) => instance.put(`/user/image`, imageUrl),
+  editTest: (userId, testInfo) =>
+    instance.post(`/api/test/${userId}`, testInfo),
+  applyUser: postId => instance.get(`/api/applicant/${postId}`),
+  aceeptOffer: (postId, acceptInfo) =>
+    instance.post(`/api/team/${postId}`, acceptInfo),
+  applyProject: (postId, comment) =>
+    instance.post(`/api/applicant/${postId}`, comment),
+  cancelProject: postId => instance.post(`/api/applicant/${postId}`),
+
   getUserInfo: () => instance.get("/user/info"),
   getAllUserList: () => instance.get("/user/list"),
 
@@ -68,13 +76,13 @@ export const apis = {
     ),
   //data.json용
   // getPost: () => instance.get(`/post`),
-  addPost: (postInfo) => instance.post(`/api/post`, postInfo),
+  addPost: postInfo => instance.post(`/api/post`, postInfo),
   updatePost: (postId, postInfo) => instance.put(`/post/${postId}`, postInfo),
-  deletePost: (postId) => instance.delete(`/post/${postId}`),
-  clickLike: (postId) => instance.post(`/post/${postId}/like`),
-  addComment: (commentInfo) => instance.post("/comment", commentInfo),
-  deleteComment: (commentId) => instance.delete(`/comment/${commentId}`),
+  deletePost: postId => instance.delete(`/post/${postId}`),
+  clickLike: postId => instance.post(`/post/${postId}/like`),
+  addComment: commentInfo => instance.post("/comment", commentInfo),
+  deleteComment: commentId => instance.delete(`/comment/${commentId}`),
   editComment: (commentId, content) =>
     instance.put(`/comment/${commentId}`, content),
-  addMyImage: (base64) => instance.post(`/api/image`, base64),
+  addMyImage: base64 => instance.post(`/api/image`, base64),
 };

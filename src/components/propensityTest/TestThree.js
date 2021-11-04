@@ -10,45 +10,49 @@ const TestThree = props => {
         <Grid>
           <div>
             Q3. 나는 큰 보상과 무거운 책임보다는 평범한 보상과 책임이 더 좋다.
-            <button
-              value="L"
-              onClick={e => {
+            <Button
+              isTest
+              isValue="L"
+              _onClick={e => {
                 handleUserCreate(e.target.value);
               }}
             >
-              X
-            </button>
-            <button
-              value="F"
-              onClick={e => {
+              평범한 보상과 평범한 책임
+            </Button>
+            <Button
+              isTest
+              isValue="F"
+              _onClick={e => {
                 handleUserCreate(e.target.value);
               }}
             >
-              O
-            </button>
+              큰 보상과 무거운책임
+            </Button>
           </div>
         </Grid>
         <Grid>
           <div>
-            Q3. 내 팀원은 큰 보상과 무거운 책임보다는 평범한 보상과 책임을 더
-            좋아했으면 좋겠다.
+            Q3. <b>내 팀원</b>은 큰 보상과 무거운 책임보다는 평범한 보상과
+            책임을 더 좋아했으면 좋겠다.
           </div>
-          <button
-            value="L"
-            onClick={e => {
+          <Button
+            isTest
+            isValue="L"
+            _onClick={e => {
               handleMemberCreate(e.target.value);
             }}
           >
-            X
-          </button>
-          <button
-            value="F"
-            onClick={e => {
+            큰 보상과 무거운책임
+          </Button>
+          <Button
+            isTest
+            isValue="F"
+            _onClick={e => {
               handleMemberCreate(e.target.value);
             }}
           >
-            O
-          </button>
+            평범한 보상과 평범한 책임
+          </Button>
         </Grid>
       </Grid>
     </Grid>
