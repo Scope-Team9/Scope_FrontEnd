@@ -1,3 +1,4 @@
+/* eslint-disable */
 // AddPost.js
 
 // import를 한다.
@@ -32,6 +33,11 @@ const AddPost = (props) => {
   const [endDate, setEnddate] = React.useState(new Date());
   const [contents, setContents] = React.useState();
   const [techStackList, setTest] = React.useState();
+
+  React.useEffect(() => {
+    dispatch(postActions.isMainPage(false));
+    dispatch(postActions.whatPage("addPostPage"));
+  }, []);
 
   const scope_index = () => {
     const card = {
