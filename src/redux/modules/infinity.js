@@ -17,7 +17,7 @@ export const getPage = (data) => {
   return function (dispatch, getState, { history }) {
     let mainPage = getState().post.mainpage;
     let whatPages = getState().post.whatPage;
-    console.log(data);
+    // console.log(data);
 
     if (mainPage === false && whatPages.now !== "mainPage") {
       // console.log("메인페이지 무한스크롤 펄스값", mainPage);
