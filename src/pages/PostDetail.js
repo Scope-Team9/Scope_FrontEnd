@@ -24,7 +24,7 @@ const PostDetail = (props) => {
 
   React.useEffect(() => {
     dispatch(postActions.isMainPage(false));
-    dispatch(postActions.whatPage("myPage"));
+    dispatch(postActions.whatPage("postDetail"));
     const CheckPost = async () => {
       try {
         const result = await apis.detailPost(post_id);
@@ -35,6 +35,7 @@ const PostDetail = (props) => {
     };
     CheckPost();
   }, []);
+  //비동기로 인한 state를 불러오기 위한 동기작업을 위한 옵셔널 체이닝
   const passedData = checkPost?.data["data"].post;
   const passdedMenber = checkPost?.data["data"].members[0];
 

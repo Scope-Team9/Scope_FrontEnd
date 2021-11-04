@@ -49,8 +49,8 @@ export default handleActions(
   initialState
 );
 
-const postActions = {
+const postAddActions = {
   addPostAPI,
 };
 
-export { postActions };
+export { postAddActions };

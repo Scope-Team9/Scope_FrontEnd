@@ -17,7 +17,8 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { addPostAPI } from "../redux/modules/postadd";
 import { editPostAPI } from "../redux/modules/postdetail";
-import { postActions as postActions } from "../redux/modules/postadd";
+import { postAddActions } from "../redux/modules/postadd";
+import { postActions } from "../redux/modules/post";
 
 // AddPost의 함수형 컴포넌트를 만든다.
 // AddPost 안에 다뤄지는  특정 값(state) ex.title 값이 변화하였을 때, AddPost자체가 리랜더링 된다.
@@ -52,7 +53,8 @@ const AddPost = (props) => {
       projectStatus: projectStatus,
       contents: contents,
     };
-    dispatch(postActions.addPostAPI(card));
+    console.log("글 작성");
+    dispatch(postAddActions.addPostAPI(card));
   };
 
   // 기술 스택 선택

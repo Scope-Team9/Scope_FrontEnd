@@ -22,13 +22,14 @@ const MainPage = () => {
   const is_stack_clicked = useSelector((state) => state.stack.stack);
   const is_sort_clicked = useSelector((state) => state.sort.sort);
   const is_loading = useSelector((state) => state.post.is_loading);
-
+  const cards = useSelector((state) => state.post.posts);
+  console.log(cards);
   const is_reBook_clicked = useSelector((state) => state.rebook.reBook);
   const is_mainPage = useSelector((state) => state.post.mainpage);
   // const infinity = useSelector((state) => state.infinity.paging);
   const whatPage = useSelector((state) => state.post.whatPage);
   const [ref, inView] = useInView();
-  const [paging, setPaging] = React.useState(1);
+  const [paging, setPaging] = React.useState(0);
 
   // console.log(infinity);
 
@@ -60,11 +61,13 @@ const MainPage = () => {
     dispatch(postActions.isMainPage(true));
     dispatch(sortAction.getSort(data));
     dispatch(bookRecommendAction.getRb(""));
+    setPaging(0);
   };
   //bookmark,recommend
   const onclickRb = (data) => {
     dispatch(postActions.isMainPage(true));
     dispatch(bookRecommendAction.getRb(data));
+    setPaging(0);
   };
 
   return (
@@ -117,18 +120,21 @@ const MainPage = () => {
               추천
             </Filtering>
           </FilterBox>
+          {cards && (
+            <>
+              <InsideCard>
+                <PostList></PostList>
+              </InsideCard>
 
-          <InsideCard>
-            <PostList></PostList>
-          </InsideCard>
-
-          <div
-            ref={ref}
-            style={{
-              height: "900px",
-              backgroundColor: "white",
-            }}
-          ></div>
+              <div
+                ref={ref}
+                style={{
+                  height: "900px",
+                  backgroundColor: "white",
+                }}
+              ></div>
+            </>
+          )}
         </Inside>
       </Grid>
     </>
