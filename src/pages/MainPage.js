@@ -2,10 +2,8 @@
 import React from "react";
 import styled from "styled-components";
 import Header from "../components/Header";
-import { Grid } from "../elements/Index";
 import TopBanner from "../components/carousel/TopBanner";
-import SideBar from "../components/SideBar";
-// import Infinity from "../shared/Infinity";
+import { Grid, Button } from "../elements/Index";
 import Stack from "../components/Stack";
 import PostList from "../components/PostList";
 import { postActions } from "../redux/modules/post";
@@ -16,9 +14,11 @@ import { useSelector, useDispatch } from "react-redux";
 import MainSlide from "../components/carousel/MainSlide";
 import { useInView } from "react-intersection-observer";
 import { Tune } from "@material-ui/icons";
+import { useHistory } from "react-router";
 
 const MainPage = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const is_stack_clicked = useSelector((state) => state.stack.stack);
   const is_sort_clicked = useSelector((state) => state.sort.sort);
   const is_loading = useSelector((state) => state.post.is_loading);
@@ -176,6 +176,20 @@ const Filtering = styled.p`
     text-decoration: underline;
     color: lightskyblue;
   }
+`;
+
+const Btn = styled.button`
+  position: fixed;
+  bottom: 70px;
+  border: 1px solid black;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  right: 50px;
+  margin: auto;
+  background: black;
+  cursor: pointer;
 `;
 
 export default MainPage;

@@ -66,15 +66,10 @@ export const apis = {
     instance.get(
       `/api/post?filter=${stack.React};${stack.Spring};${stack.Swift};${stack.TypeScript};${stack.cpp};${stack.Django};${stack.Flask};${stack.Java};${stack.JavaScript};${stack.Kotlin};${stack.Node};${stack.php};${stack.Python};${stack.Vue};&displayNumber=9&page=${paging}&sort=${sort}&bookmarkRecommend=${reBook}`
     ),
-  //data.json용
-  // getPost: () => instance.get(`/post`),
+
+  // 승민
   addPost: (postInfo) => instance.post(`/api/post`, postInfo),
-  updatePost: (postId, postInfo) => instance.put(`/post/${postId}`, postInfo),
-  deletePost: (postId) => instance.delete(`/post/${postId}`),
-  clickLike: (postId) => instance.post(`/post/${postId}/like`),
-  addComment: (commentInfo) => instance.post("/comment", commentInfo),
-  deleteComment: (commentId) => instance.delete(`/comment/${commentId}`),
-  editComment: (commentId, content) =>
-    instance.put(`/comment/${commentId}`, content),
-  addMyImage: (base64) => instance.post(`/api/image`, base64),
+  detailPost: (postId) => instance.get(`/api/post/${postId}`),
+  editPost: (postId) => instance.post(`/api/post/${postId}`),
+  deletePost: (postId) => instance.delete(`/api/post/${postId}`),
 };

@@ -1,34 +1,19 @@
-/* eslint-disable */
-
-// PostDetail.js
-
-// import를 한다.
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
-
-import { Grid, Text, Image, Button } from "../elements/Index";
-import { postDetailActions } from "../redux/modules/postdetail";
+import { Grid, Text, Image, Button, Input } from "../elements/Index";
+import { useDispatch } from "react-redux";
 import { apis } from "../lib/axios";
-import { useHistory } from "react-router";
-import { postActions } from "../redux/modules/post";
-import { useSelector, useDispatch } from "react-redux";
 
-// PostDetail의 함수형 컴포넌트를 만든다.
-const PostDetail = (props) => {
+const PostEdit = (props) => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const [checkPost, setCheckPost] = React.useState();
 
-  // const postId = props.location.state.postId;
   let post_id = props.match.params.id;
-  console.log("asdasda", post_id);
 
   React.useEffect(() => {
-    dispatch(postActions.isMainPage(false));
-    dispatch(postActions.whatPage("myPage"));
     const CheckPost = async () => {
       try {
-        const result = await apis.detailPost(post_id);
+        const result = await apis.detailPost(2013);
         setCheckPost(result);
       } catch (err) {
         console.log(err);
@@ -36,13 +21,38 @@ const PostDetail = (props) => {
     };
     CheckPost();
   }, []);
-  console.log("메롱", checkPost);
 
   const passedData = checkPost?.data["data"].post;
   const passdedMenber = checkPost?.data["data"].members[0];
 
+  const [title, setTitle] = React.useState("");
+
+  const onChange = useCallback((e) => {
+    setTitle(e.target.value);
+  }, []);
+
+  React.useEffect(() => {
+    setTitle(passedData?.title);
+  });
+  console.log("냥냥", title);
   return (
     <React.Fragment>
+      <input type="text" value={title} onChange={onChange}></input>
+      <Input
+        type="text"
+        value={title}
+        _onChange={(e) => {
+          setTitle(e.target.value);
+          console.log("냥냥", e.target.value);
+        }}
+      />
+      <button
+        onClick={() => {
+          setTitle();
+        }}
+      >
+        확인
+      </button>
       <Grid
         width="550px"
         padding="16px"
@@ -98,14 +108,7 @@ const PostDetail = (props) => {
               <Button width="100px" height="30px" margin="auto 10px">
                 모집완료
               </Button>
-              <Button
-                width="100px"
-                height="30px"
-                margin="auto 10px"
-                _onClick={() => {
-                  history.push("/postedit");
-                }}
-              >
+              <Button width="100px" height="30px" margin="auto 10px">
                 포스트수정
               </Button>
               <Button width="100px" height="30px" margin="auto 10px">
@@ -119,7 +122,6 @@ const PostDetail = (props) => {
   );
 };
 
-// styled-components를 사용한다.
 const Title = styled.h1``;
 
 const Content = styled.h3`
@@ -130,5 +132,4 @@ const Content = styled.h3`
   border-radius: 5px;
 `;
 
-// export를 통해 밖에서도 사용할 수 있도록 설정한다.
-export default PostDetail;
+export default PostEdit;

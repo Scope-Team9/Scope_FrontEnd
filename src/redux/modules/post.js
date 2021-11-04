@@ -65,6 +65,7 @@ export const getPostAPI = () => {
 
 export default handleActions(
   {
+    // 백엔드와 통신
     [GET_POST]: (state, action) =>
       produce(state, (draft) => {
         console.log(action);
@@ -124,7 +125,7 @@ export default handleActions(
           pre: state.whatPage.now,
           now: action.payload.data,
         };
-        // console.log(page);
+        console.log(page);
         draft.whatPage = page;
       }),
   },
