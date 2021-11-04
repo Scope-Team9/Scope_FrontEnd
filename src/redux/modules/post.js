@@ -32,7 +32,7 @@ export const getPostAPI = () => {
     let reBook = getState().rebook.reBook;
     let mainPage = getState().post.mainpage;
     let whatPages = getState().post.whatPage;
-    console.log("mainPage메인페이지", mainPage);
+    // console.log("mainPage메인페이지", mainPage);
 
     if (mainPage === false) {
       return;
@@ -42,7 +42,6 @@ export const getPostAPI = () => {
       return;
     }
 
-    // let _paging = getState().post.paging;
     // console.log(_paging);
 
     apis
@@ -51,10 +50,6 @@ export const getPostAPI = () => {
         console.log(_paging);
         const posts = res.data.data;
 
-        // let paging = {
-        //   start: _paging.start,
-        //   next: _paging.next,
-        // };
         console.log("어떻게 오는지", res.data.data);
 
         dispatch(isLoading(true));
@@ -70,6 +65,7 @@ export const getPostAPI = () => {
 
 export default handleActions(
   {
+    // 백엔드와 통신
     [GET_POST]: (state, action) =>
       produce(state, (draft) => {
         console.log(action);
@@ -123,13 +119,13 @@ export default handleActions(
       }),
     [WHATPAGE]: (state, action) =>
       produce(state, (draft) => {
-        console.log("현재페이지", action.payload.data);
+        // console.log("현재페이지", action.payload.data);
         // console.log(state);
         let page = {
           pre: state.whatPage.now,
           now: action.payload.data,
         };
-        // console.log(page);
+        console.log(page);
         draft.whatPage = page;
       }),
   },

@@ -42,7 +42,7 @@ const Stack = () => {
       justifyContent="space-evenly"
       margin="0 auto 20px auto"
       boxShadow="0px 0px 10px #ddd"
-      padding="20px 20px"
+      padding="20px 50px"
       borderRadius="20px"
       overflow="auto"
     >

@@ -1,33 +1,19 @@
-/* eslint-disable */
-// PostDetail.js
-// import를 한다.
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-import { postDetailActions } from "../redux/modules/postdetail";
+import { Grid, Text, Image, Button, Input } from "../elements/Index";
+import { useDispatch } from "react-redux";
 import { apis } from "../lib/axios";
-import { useHistory } from "react-router";
-import { postActions } from "../redux/modules/post";
-import { Grid, Text, Image, Input, Button } from "../elements/Index";
-import ApplyModal from "../components/ApplyModal";
 
-// PostDetail의 함수형 컴포넌트를 만든다.
-const PostDetail = (props) => {
+const PostEdit = (props) => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const [checkPost, setCheckPost] = React.useState();
-  const [showModal, setShowModal] = React.useState(false);
 
-  // const postId = props.location.state.postId;
   let post_id = props.match.params.id;
-  console.log("asdasda", post_id);
 
   React.useEffect(() => {
-    dispatch(postActions.isMainPage(false));
-    dispatch(postActions.whatPage("myPage"));
     const CheckPost = async () => {
       try {
-        const result = await apis.detailPost(post_id);
+        const result = await apis.detailPost(2013);
         setCheckPost(result);
       } catch (err) {
         console.log(err);
@@ -35,28 +21,49 @@ const PostDetail = (props) => {
     };
     CheckPost();
   }, []);
+
   const passedData = checkPost?.data["data"].post;
   const passdedMenber = checkPost?.data["data"].members[0];
 
-  const modalOpen = () => {
-    setShowModal(true);
-  };
+  const [title, setTitle] = React.useState("");
 
+  const onChange = useCallback((e) => {
+    setTitle(e.target.value);
+  }, []);
+
+  React.useEffect(() => {
+    setTitle(passedData?.title);
+  });
+  console.log("냥냥", title);
   return (
     <React.Fragment>
+      <input type="text" value={title} onChange={onChange}></input>
+      <Input
+        type="text"
+        value={title}
+        _onChange={(e) => {
+          setTitle(e.target.value);
+          console.log("냥냥", e.target.value);
+        }}
+      />
+      <button
+        onClick={() => {
+          setTitle();
+        }}
+      >
+        확인
+      </button>
       <Grid
         width="550px"
         padding="16px"
         margin="40px auto"
         border="2px solid #8B3FF8"
         borderRadius="30px"
-        position="relative"
       >
         <Title>{passedData?.title}</Title>
         <Grid margin="10px auto">
           <Text>{passedData?.summary}</Text>
         </Grid>
-
         <Grid>
           <Text>게시자 정보</Text>
           <Grid display="column">
@@ -74,25 +81,6 @@ const PostDetail = (props) => {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid position="relative" width="100%">
-              <Grid
-                position="absolute"
-                right="20px"
-                width="100px"
-                padding="10px"
-              >
-                <Button
-                  postion="absolute"
-                  width="100%"
-                  borderRadius="10px"
-                  _onClick={modalOpen}
-                >
-                  신청현황 확인
-                </Button>
-                <ApplyModal showModal={showModal} setShowModal={setShowModal} />
-              </Grid>
-            </Grid>
-
             <Grid display="flex" margin="10px auto">
               <Text margin="auto 10px auto 0px">프로젝트 기간 :</Text>
               <Text>
@@ -120,14 +108,7 @@ const PostDetail = (props) => {
               <Button width="100px" height="30px" margin="auto 10px">
                 모집완료
               </Button>
-              <Button
-                width="100px"
-                height="30px"
-                margin="auto 10px"
-                _onClick={() => {
-                  history.push("/postedit");
-                }}
-              >
+              <Button width="100px" height="30px" margin="auto 10px">
                 포스트수정
               </Button>
               <Button width="100px" height="30px" margin="auto 10px">
@@ -141,7 +122,6 @@ const PostDetail = (props) => {
   );
 };
 
-// styled-components를 사용한다.
 const Title = styled.h1``;
 
 const Content = styled.h3`
@@ -152,5 +132,4 @@ const Content = styled.h3`
   border-radius: 5px;
 `;
 
-// export를 통해 밖에서도 사용할 수 있도록 설정한다.
-export default PostDetail;
+export default PostEdit;

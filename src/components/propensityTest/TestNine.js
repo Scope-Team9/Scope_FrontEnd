@@ -13,44 +13,48 @@ const TestNine = props => {
             Q9. 지금까지 진행했던 프로잭트를 떠올렸을 때 가장 먼저 생각나는
             부분은?
           </div>
-          <button
-            value="G"
-            onClick={e => {
+          <Button
+            isTest
+            isValue="G"
+            _onClick={e => {
               handleUserCreate(e.target.value);
             }}
           >
             프로젝트가 이끌어낸 결과와 그에 따른 성취감
-          </button>
-          <button
-            value="P"
-            onClick={e => {
+          </Button>
+          <Button
+            isTest
+            isValue="P"
+            _onClick={e => {
               handleUserCreate(e.target.value);
             }}
           >
             프로젝트 과정에서 얻은 지식과 그에 따른 성취감
-          </button>
+          </Button>
         </Grid>
         <Grid>
           <div>
             Q9.당신의 팀원이 프로잭트를 떠올렸을 때 가장 먼저 생각났으면 하는
             부분은?
           </div>
-          <button
-            value="G"
-            onClick={e => {
+          <Button
+            isTest
+            isValue="G"
+            _onClick={e => {
               handleMemberCreate(e.target.value);
             }}
           >
             프로젝트가 이끌어낸 결과와 그에 따른 성취감
-          </button>
-          <button
-            value="P"
-            onClick={e => {
+          </Button>
+          <Button
+            isTest
+            isValue="P"
+            _onClick={e => {
               handleMemberCreate(e.target.value);
             }}
           >
             프로젝트 과정에서 얻은 지식과 그에 따른 성취감
-          </button>
+          </Button>
         </Grid>
       </Grid>
     </Grid>

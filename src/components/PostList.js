@@ -5,12 +5,14 @@ import Post from "./Post";
 import PostTest from "./PostTest";
 import { postActions } from "../redux/modules/post";
 import styled from "styled-components";
+// import { useInView } from "react-intersection-observer";
+import { height } from "@mui/system";
 
 const PostList = () => {
   const dispatch = useDispatch();
 
   const post_list = useSelector((state) => state.post.posts);
-  console.log(post_list);
+  // console.log(post_list);
 
   return (
     <React.Fragment>
