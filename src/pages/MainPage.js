@@ -5,7 +5,7 @@ import Header from "../components/Header";
 import { Grid } from "../elements/Index";
 import TopBanner from "../components/carousel/TopBanner";
 import SideBar from "../components/SideBar";
-import Infinity from "../shared/Infinity";
+// import Infinity from "../shared/Infinity";
 import Stack from "../components/Stack";
 import PostList from "../components/PostList";
 import { postActions } from "../redux/modules/post";
@@ -14,21 +14,26 @@ import { bookRecommendAction } from "../redux/modules/bookRecommend";
 import { pageAction } from "../redux/modules/infinity";
 import { useSelector, useDispatch } from "react-redux";
 import MainSlide from "../components/carousel/MainSlide";
+import { useInView } from "react-intersection-observer";
+import { Tune } from "@material-ui/icons";
 
 const MainPage = () => {
   const dispatch = useDispatch();
   const is_stack_clicked = useSelector((state) => state.stack.stack);
   const is_sort_clicked = useSelector((state) => state.sort.sort);
   const is_loading = useSelector((state) => state.post.is_loading);
-  const paging = useSelector((state) => state.infinity.paging);
+
   const is_reBook_clicked = useSelector((state) => state.rebook.reBook);
   const is_mainPage = useSelector((state) => state.post.mainpage);
-  const infinity = useSelector((state) => state.infinity.paging);
+  // const infinity = useSelector((state) => state.infinity.paging);
   const whatPage = useSelector((state) => state.post.whatPage);
+  const [ref, inView] = useInView();
+  const [paging, setPaging] = React.useState(1);
+
   // console.log(infinity);
 
   // console.log(useSelector((state) => state.infinity.paging));
-  let page = 0;
+  // let page = 0;
 
   // const [page, setPage] = React.useState(0);
 
@@ -40,18 +45,16 @@ const MainPage = () => {
     dispatch(postActions.whatPage("mainPage"));
     dispatch(postActions.getPostAPI());
   }, [is_stack_clicked, is_sort_clicked, is_reBook_clicked]);
-  //무한스크롤 다음
-  const callNext = () => {
-    // if (is_mainPage !== true && whatPage.now !== "mainPage") {
-    //   return;
-    // }
-    page++;
-    // dispatch(postActions.isMainPage(true));
-    dispatch(pageAction.getPage(page));
 
-    dispatch(postActions.getPostAPI());
-    console.log("??");
-  };
+  React.useEffect(() => {
+    if (inView === true) {
+      setPaging(paging + 1);
+      console.log(paging);
+      dispatch(pageAction.getPage(paging));
+      dispatch(postActions.getPostAPI());
+    }
+  }, [inView]);
+
   //sort
   const onclickSort = (data) => {
     dispatch(postActions.isMainPage(true));
@@ -114,16 +117,18 @@ const MainPage = () => {
               추천
             </Filtering>
           </FilterBox>
-          <Infinity
-            paging={paging}
-            is_loading={is_loading}
-            callNext={callNext}
-            is_next={is_mainPage}
-          >
-            <InsideCard>
-              <PostList></PostList>
-            </InsideCard>
-          </Infinity>
+
+          <InsideCard>
+            <PostList></PostList>
+          </InsideCard>
+
+          <div
+            ref={ref}
+            style={{
+              height: "900px",
+              backgroundColor: "white",
+            }}
+          ></div>
         </Inside>
       </Grid>
     </>
