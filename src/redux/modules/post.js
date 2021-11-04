@@ -119,7 +119,7 @@ export default handleActions(
       }),
     [WHATPAGE]: (state, action) =>
       produce(state, (draft) => {
-        console.log("현재페이지", action.payload.data);
+        // console.log("현재페이지", action.payload.data);
         // console.log(state);
         let page = {
           pre: state.whatPage.now,

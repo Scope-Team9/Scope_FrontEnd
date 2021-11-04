@@ -40,7 +40,7 @@ const MainPage = () => {
   // console.log(paging);
   // Todo 수정페이지에도 페이지 리덕스 넘겨줘야함
   React.useEffect(() => {
-    console.log("?? 여기서 되는거임?");
+    // console.log("?? 여기서 되는거임?");
     dispatch(postActions.isMainPage(true));
     dispatch(postActions.whatPage("mainPage"));
     dispatch(postActions.getPostAPI());
