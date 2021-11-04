@@ -13,44 +13,48 @@ const TestTwo = props => {
             Q2. 새로운 스터디 사람들과의 첫만남! 스터디의 운영을 맡길 스터디
             장을 뽑아야 하는데 이때 당신의 행동은?
           </div>
-          <button
-            value="L"
-            onClick={e => {
+          <Button
+            isTest
+            isValue="L"
+            _onClick={e => {
               handleUserCreate(e.target.value);
             }}
           >
             스터디를 어떻게 운영할지 잠깐 생각해보고 스터디장을 맡아서 진행한다.
-          </button>
-          <button
-            value="F"
-            onClick={e => {
+          </Button>
+          <Button
+            isTest
+            isValue="F"
+            _onClick={e => {
               handleUserCreate(e.target.value);
             }}
           >
             누가 스터디를 잘 이끌 사람인지 살핀다.
-          </button>
+          </Button>
         </Grid>
         <Grid>
           <div>
             Q2. 새로운 스터디 사람들과의 첫만남! 스터디의 운영을 맡길 스터디
             장을 뽑아야 하는데 이때 당신의 행동은?
           </div>
-          <button
-            value="L"
-            onClick={e => {
+          <Button
+            isTest
+            isValue="L"
+            _onClick={e => {
               handleMemberCreate(e.target.value);
             }}
           >
             스터디를 어떻게 운영할지 잠깐 생각해보고 스터디장을 맡아서 진행한다.
-          </button>
-          <button
-            value="F"
-            onClick={e => {
+          </Button>
+          <Button
+            isTest
+            isValue="F"
+            _onClick={e => {
               handleMemberCreate(e.target.value);
             }}
           >
             누가 스터디를 잘 이끌 사람인지 살핀다.
-          </button>
+          </Button>
         </Grid>
       </Grid>
     </Grid>

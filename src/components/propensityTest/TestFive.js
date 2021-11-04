@@ -10,41 +10,45 @@ const TestFive = props => {
       <Grid display="flex" flexDirection="column">
         <Grid>
           <div>Q5.당신이 생각하는 이상적인 회의의 모습은?</div>
-          <button
-            value="V"
-            onClick={e => {
+          <Button
+            isTest
+            isValue="V"
+            _onClick={e => {
               handleUserCreate(e.target.value);
             }}
           >
             능력에 따른 적절한 권한의 분배 하에 진행되는 회의
-          </button>
-          <button
-            value="H"
-            onClick={e => {
+          </Button>
+          <Button
+            isTest
+            isValue="H"
+            _onClick={e => {
               handleUserCreate(e.target.value);
             }}
           >
             모두 동등한 권한을 가지고 진행되는 회의
-          </button>
+          </Button>
         </Grid>
         <Grid>
           <div>Q5.당신의 팀원이 원했으면 하는 이상적인 회의의 모습은?</div>
-          <button
-            value="V"
-            onClick={e => {
+          <Button
+            isTest
+            isValue="V"
+            _onClick={e => {
               handleMemberCreate(e.target.value);
             }}
           >
             V. 능력에 따른 적절한 권한의 분배 하에 진행되는 회의
-          </button>
-          <button
-            value="H"
-            onClick={e => {
+          </Button>
+          <Button
+            isTest
+            isValue="H"
+            _onClick={e => {
               handleMemberCreate(e.target.value);
             }}
           >
             H. 모두 동등한 권한을 가지고 진행되는 회의
-          </button>
+          </Button>
         </Grid>
       </Grid>
     </Grid>

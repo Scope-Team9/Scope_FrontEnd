@@ -52,7 +52,15 @@ export const apis = {
   signup: (registerInfo) => instance.post("/api/signup", registerInfo),
 
   // 유저 관련 api
-  updateProfileImg: (imageUrl) => instance.put(`/user/image`, imageUrl),
+  editTest: (userId, testInfo) =>
+    instance.post(`/api/test/${userId}`, testInfo),
+  applyUser: (postId) => instance.get(`/api/applicant/${postId}`),
+  aceeptOffer: (postId, acceptInfo) =>
+    instance.post(`/api/team/${postId}`, acceptInfo),
+  applyProject: (postId, comment) =>
+    instance.post(`/api/applicant/${postId}`, comment),
+  cancelProject: (postId) => instance.post(`/api/applicant/${postId}`),
+
   getUserInfo: () => instance.get("/user/info"),
   getAllUserList: () => instance.get("/user/list"),
 
@@ -72,4 +80,16 @@ export const apis = {
   detailPost: (postId) => instance.get(`/api/post/${postId}`),
   editPost: (postId) => instance.post(`/api/post/${postId}`),
   deletePost: (postId) => instance.delete(`/api/post/${postId}`),
+
+  //data.json용
+  // getPost: () => instance.get(`/post`),
+
+  updatePost: (postId, postInfo) => instance.put(`/post/${postId}`, postInfo),
+
+  clickLike: (postId) => instance.post(`/post/${postId}/like`),
+  addComment: (commentInfo) => instance.post("/comment", commentInfo),
+  deleteComment: (commentId) => instance.delete(`/comment/${commentId}`),
+  editComment: (commentId, content) =>
+    instance.put(`/comment/${commentId}`, content),
+  addMyImage: (base64) => instance.post(`/api/image`, base64),
 };

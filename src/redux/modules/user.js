@@ -184,6 +184,10 @@ const signupMiddleware = (signupInfo) => {
       });
   };
 };
+//협업테스트 수정 미들웨어
+const editTestMiddleware = () => {
+  return function (dispatch, getState, { history }) {};
+};
 
 //리듀서
 export default handleActions(
@@ -223,6 +227,7 @@ const userCreators = {
   testUserMiddleWare,
   emailCheckMiddleWare,
   nickCheckMiddleWare,
+  editTestMiddleware,
   logOut,
 };
 
