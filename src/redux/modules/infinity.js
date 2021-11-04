@@ -20,10 +20,10 @@ export const getPage = (data) => {
     console.log(data);
 
     if (mainPage === false && whatPages.now !== "mainPage") {
-      console.log("메인페이지 무한스크롤 펄스값", mainPage);
+      // console.log("메인페이지 무한스크롤 펄스값", mainPage);
       return;
     } else {
-      console.log("메인페이지 무한스크롤 트루값", mainPage);
+      // console.log("메인페이지 무한스크롤 트루값", mainPage);
       dispatch(getPages(data));
     }
   };
