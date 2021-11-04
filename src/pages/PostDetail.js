@@ -9,22 +9,31 @@ import { apis } from "../lib/axios";
 import { useHistory } from "react-router";
 import { postActions } from "../redux/modules/post";
 import { Grid, Text, Image, Input, Button } from "../elements/Index";
-import ApplyModal from "../components/ApplyModal";
-
+import ApplyStatusModal from "../components/ApplyStatusModal";
+import ApplyUserModal from "../components/ApplyUserModal";
 // PostDetail의 함수형 컴포넌트를 만든다.
 const PostDetail = props => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [checkPost, setCheckPost] = React.useState();
-  const [showModal, setShowModal] = React.useState(false);
+  const [applyStatusModal, setApplyStatusModal] = React.useState(false); //신청현황
+  const [applyUserModal, setApplyUserModal] = React.useState(false); //지원취소
 
-  // const postId = props.location.state.postId;
+  const applyStatusModalOpen = () => {
+    setApplyStatusModal(true);
+  };
+
+  const applyUserModalOpen = () => {
+    setApplyUserModal(true);
+  };
   let post_id = props.match.params.id;
-  console.log("asdasda", post_id);
+  const userId = useSelector(state => state.user.userId); //로그인 유저아이디
+  const postUserId = checkPost?.data.data.post.userId;
+  console.log(userId, postUserId);
 
   React.useEffect(() => {
     dispatch(postActions.isMainPage(false));
-    dispatch(postActions.whatPage("myPage"));
+    dispatch(postActions.whatPage("postDetail"));
     const CheckPost = async () => {
       try {
         const result = await apis.detailPost(post_id);
@@ -37,10 +46,6 @@ const PostDetail = props => {
   }, []);
   const passedData = checkPost?.data["data"].post;
   const passdedMenber = checkPost?.data["data"].members[0];
-
-  const modalOpen = () => {
-    setShowModal(true);
-  };
 
   return (
     <React.Fragment>
@@ -85,11 +90,14 @@ const PostDetail = props => {
                   postion="absolute"
                   width="100%"
                   borderRadius="10px"
-                  _onClick={modalOpen}
+                  _onClick={applyStatusModalOpen}
                 >
                   신청현황 확인
                 </Button>
-                <ApplyModal showModal={showModal} setShowModal={setShowModal} />
+                <ApplyStatusModal
+                  applyStatusModal={applyStatusModal}
+                  setApplyStatusModal={setApplyStatusModal}
+                />
               </Grid>
             </Grid>
 
@@ -117,22 +125,50 @@ const PostDetail = props => {
               <Content>{passedData?.contents}</Content>
             </Grid>
             <Grid padding="16px">
-              <Button width="100px" height="30px" margin="auto 10px">
-                모집완료
-              </Button>
-              <Button
-                width="100px"
-                height="30px"
-                margin="auto 10px"
-                _onClick={() => {
-                  history.push("/postedit");
-                }}
-              >
-                포스트수정
-              </Button>
-              <Button width="100px" height="30px" margin="auto 10px">
-                포스트삭제
-              </Button>
+              {userId === postUserId ? (
+                <Grid>
+                  <Button width="100px" height="30px" margin="auto 10px">
+                    {" "}
+                    모집완료{" "}
+                  </Button>
+                  <Button
+                    width="100px"
+                    height="30px"
+                    margin="auto 10px"
+                    _onClick={() => {
+                      history.push("/postedit");
+                    }}
+                  >
+                    포스트수정
+                  </Button>
+                  <Button width="100px" height="30px" margin="auto 10px">
+                    포스트삭제
+                  </Button>
+                </Grid>
+              ) : (
+                <Grid>
+                  <Button
+                    _onClick={applyUserModalOpen}
+                    width="100px"
+                    height="30px"
+                    margin="auto 10px"
+                  >
+                    지원신청
+                  </Button>
+                  <Button
+                    _onClick={applyUserModalOpen}
+                    width="100px"
+                    height="30px"
+                    margin="auto 10px"
+                  >
+                    지원취소
+                  </Button>
+                  <ApplyUserModal
+                    applyUserModal={applyUserModal}
+                    setApplyUserModal={setApplyUserModal}
+                  />
+                </Grid>
+              )}
             </Grid>
           </Grid>
         </Grid>

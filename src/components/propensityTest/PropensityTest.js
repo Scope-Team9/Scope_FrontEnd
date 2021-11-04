@@ -242,7 +242,7 @@ const PropensityTest = props => {
             borderRadius="30px"
             width="47%"
             margin="5px"
-            _onClick={is_token ? register : editTest}
+            _onClick={register}
           >
             제출하기
           </Button>
