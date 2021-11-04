@@ -9,14 +9,17 @@ import Header from "../components/Header";
 import MyPageInfo from "../components/MyPageInfo";
 
 import Markdown from "../components/Markdown";
+import { postActions } from "../redux/modules/post";
+import { useSelector, useDispatch } from "react-redux";
 
 // MyPage의 함수형 컴포넌트를 만든다.
 const MyPage = (props) => {
-  const editorRef = createRef();
+  const dispatch = useDispatch();
 
-  const onChangeEditorTextHandler = () => {
-    console.log(editorRef.current.getInstance().getMarkdown());
-  };
+  React.useEffect(() => {
+    dispatch(postActions.isMainPage(false));
+    dispatch(postActions.whatPage("myPage"));
+  }, []);
 
   return (
     <React.Fragment>
