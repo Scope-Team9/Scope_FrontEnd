@@ -2,6 +2,7 @@
 // AddPost.js
 
 // import를 한다.
+/* eslint-disable */
 import React, { useCallback, useEffect, useMemo } from "react";
 import styled from "styled-components";
 import DatePicker from "react-datepicker";
@@ -15,6 +16,7 @@ import { Grid, Text, Input } from "../elements/Index";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { addPostAPI } from "../redux/modules/postadd";
+import { editPostAPI } from "../redux/modules/postdetail";
 import { postActions as postActions } from "../redux/modules/postadd";
 
 // AddPost의 함수형 컴포넌트를 만든다.
@@ -50,7 +52,6 @@ const AddPost = (props) => {
       projectStatus: projectStatus,
       contents: contents,
     };
-    console.log(card);
     dispatch(postActions.addPostAPI(card));
   };
 
@@ -58,24 +59,25 @@ const AddPost = (props) => {
   const stackSelect = useMemo(
     () => [
       // object형태(value는 키값, ""는 value 값), object의 값을 가져오기 위해서는 키값을 알아야한다.
-      { value: "react", label: "react" },
-      { value: "java", label: "java" },
-      { value: "javascript", label: "javascript" },
-      { value: "python", label: "python" },
-      { value: "nodejs", label: "nodejs" },
-      { value: "flask", label: "flask" },
-      { value: "c++", label: "c++" },
-      { value: "django", label: "django" },
-      { value: "agular", label: "agular" },
-      { value: "vue", label: "vue" },
-      { value: "spring", label: "spring" },
-      { value: "swift", label: "swift" },
-      { value: "kotlin", label: "kotlin" },
-      { value: "typescript", label: "typescript" },
+      { value: "React", label: "React" },
+      { value: "Java", label: "Java" },
+      { value: "Javascript", label: "Javascript" },
+      { value: "Python", label: "Python" },
+      { value: "Nodejs", label: "Nodejs" },
+      { value: "Flask", label: "Flask" },
+      { value: "cpp", label: "cpp" },
+      { value: "Django", label: "Django" },
+      { value: "php", label: "php" },
+      { value: "Vue", label: "Vue" },
+      { value: "Spring", label: "Spring" },
+      { value: "Swift", label: "Swift" },
+      { value: "Kotlin", label: "Kotlin" },
+      { value: "Typescript", label: "Typescript" },
     ],
     []
   );
 
+  // 게시글 작성(스택선택)
   const styles = useMemo(
     () => ({
       multiValueRemove: (base, state) => {
@@ -138,13 +140,13 @@ const AddPost = (props) => {
     formatTech();
   }, [techstack]);
 
-  // 프로젝트 상태
+  // 게시글 작성(프로젝트 상태)
   const projectstatus = useMemo(
     () => [{ value: "모집중", label: "모집중" }],
     []
   );
 
-  // 프로젝트 인원
+  // 게시글 작성(프로젝트 인원)
   const projectMembers = useMemo(
     () => [
       { value: 2, label: 2 },
