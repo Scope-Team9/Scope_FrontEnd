@@ -8,57 +8,86 @@ import CloseIcon from "@mui/icons-material/Close";
 
 const ApplyUserModal = props => {
   const dispatch = useDispatch();
-  const { applyUserModal, setApplyUserModal, postId } = props;
+  const { applyUserModal, setApplyUserModal, applyValue, postId } = props;
   const [comment, setComment] = React.useState();
-  // let postId = props.match.params.id;
 
   const modalClose = () => {
     setApplyUserModal(false);
   };
 
   const apply = () => {
+    console.log(postId);
     const applyComment = {
       comment: comment,
     };
-    console.log("여기?");
-    dispatch(applyCreators.applyProjectMW(applyComment));
+    console.log(applyComment);
+    dispatch(applyCreators.applyProjectMW(postId, applyComment));
+  };
+
+  const cancel = () => {
+    dispatch(applyCreators.cancelProjectMW(postId));
   };
 
   return (
     <>
       <Dialog maxWidth={"sm"} scroll="paper" open={applyUserModal}>
-        <ModalWrap>
-          <Grid height="10%" bg="#eee" position="relative">
-            <Grid
-              position="absolute"
-              top="0px"
-              right="10px"
-              width="20px"
-              padding="10px"
-            >
-              <CloseIcon fontSize="large" onClick={modalClose} />
+        {applyValue === "apply" ? (
+          <ModalWrap>
+            <Grid height="10%" bg="#eee" position="relative">
+              <Grid
+                position="absolute"
+                top="0px"
+                right="10px"
+                width="20px"
+                padding="10px"
+              >
+                <CloseIcon fontSize="large" onClick={modalClose} />
+              </Grid>
+              <Grid alignItems="center">
+                <Text margin="0 0 0 20px" bold>
+                  지원신청
+                </Text>
+              </Grid>
             </Grid>
-            <Grid alignItems="center">
-              <Text margin="0 0 0 20px" bold>
-                지원신청
-              </Text>
+            <Grid display="flex" height="200px" justifyContent="center">
+              <Grid>
+                <Input
+                  backgroundColor="#fff"
+                  placeholder="신청자분을 간단히 소개해주세요!"
+                  _onChange={e => {
+                    console.log(e.target.value);
+                    setComment(e.target.value);
+                  }}
+                ></Input>
+                <Button _onClick={apply}>지원신청</Button>
+              </Grid>
             </Grid>
-          </Grid>
-          <Grid display="flex" height="85%" justifyContent="center">
-            <Grid>
-              <Input
-                multiLine
-                backgroundColor="#fff"
-                row="2"
-                placeholder="신청자분을 간단히 소개해주세요!"
-                _onChange={e => {
-                  setComment(e.target.value);
-                }}
-              ></Input>
-              <Button _onClick={apply()}>지원신청</Button>
+          </ModalWrap>
+        ) : (
+          <ModalWrap>
+            <Grid height="10%" bg="#eee" position="relative">
+              <Grid
+                position="absolute"
+                top="0px"
+                right="10px"
+                width="20px"
+                padding="10px"
+              >
+                <CloseIcon fontSize="large" onClick={modalClose} />
+              </Grid>
+              <Grid alignItems="center">
+                <Text margin="0 0 0 20px" bold>
+                  지원취소
+                </Text>
+              </Grid>
             </Grid>
-          </Grid>
-        </ModalWrap>
+            <Grid display="flex" height="85%" justifyContent="center">
+              <Grid>
+                <Button _onClick={cancel}>지원취소</Button>
+              </Grid>
+            </Grid>
+          </ModalWrap>
+        )}
       </Dialog>
     </>
   );
@@ -66,7 +95,7 @@ const ApplyUserModal = props => {
 
 const ModalWrap = styled.div`
   width: 550px;
-  height: 500px;
+  height: 300px;
 `;
 
 export default ApplyUserModal;

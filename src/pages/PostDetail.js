@@ -18,12 +18,14 @@ const PostDetail = props => {
   const [checkPost, setCheckPost] = React.useState();
   const [applyStatusModal, setApplyStatusModal] = React.useState(false); //신청현황
   const [applyUserModal, setApplyUserModal] = React.useState(false); //지원취소
+  const [applyValue, setApplyValue] = React.useState();
 
   const applyStatusModalOpen = () => {
     setApplyStatusModal(true);
   };
 
-  const applyUserModalOpen = () => {
+  const applyUserModalOpen = value => {
+    setApplyValue(value);
     setApplyUserModal(true);
   };
   let post_id = props.match.params.id;
@@ -79,27 +81,29 @@ const PostDetail = props => {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid position="relative" width="100%">
-              <Grid
-                position="absolute"
-                right="20px"
-                width="100px"
-                padding="10px"
-              >
-                <Button
-                  postion="absolute"
-                  width="100%"
-                  borderRadius="10px"
-                  _onClick={applyStatusModalOpen}
+            {userId === postUserId && (
+              <Grid position="relative" width="100%">
+                <Grid
+                  position="absolute"
+                  right="20px"
+                  width="100px"
+                  padding="10px"
                 >
-                  신청현황 확인
-                </Button>
-                <ApplyStatusModal
-                  applyStatusModal={applyStatusModal}
-                  setApplyStatusModal={setApplyStatusModal}
-                />
+                  <Button
+                    postion="absolute"
+                    width="100%"
+                    borderRadius="10px"
+                    _onClick={applyStatusModalOpen}
+                  >
+                    신청현황 확인
+                  </Button>
+                  <ApplyStatusModal
+                    applyStatusModal={applyStatusModal}
+                    setApplyStatusModal={setApplyStatusModal}
+                  />
+                </Grid>
               </Grid>
-            </Grid>
+            )}
 
             <Grid display="flex" margin="10px auto">
               <Text margin="auto 10px auto 0px">프로젝트 기간 :</Text>
@@ -148,25 +152,34 @@ const PostDetail = props => {
               ) : (
                 <Grid>
                   <Button
-                    _onClick={applyUserModalOpen}
+                    isValue="apply"
+                    _onClick={e => {
+                      console.log(e);
+                      applyUserModalOpen(e.target.value);
+                    }}
                     width="100px"
                     height="30px"
                     margin="auto 10px"
                   >
                     지원신청
                   </Button>
+                  <ApplyUserModal
+                    applyUserModal={applyUserModal}
+                    setApplyUserModal={setApplyUserModal}
+                    applyValue={applyValue}
+                    postId={post_id}
+                  />
                   <Button
-                    _onClick={applyUserModalOpen}
+                    isValue="cancel"
+                    _onClick={e => {
+                      applyUserModalOpen(e.target.value);
+                    }}
                     width="100px"
                     height="30px"
                     margin="auto 10px"
                   >
                     지원취소
                   </Button>
-                  <ApplyUserModal
-                    applyUserModal={applyUserModal}
-                    setApplyUserModal={setApplyUserModal}
-                  />
                 </Grid>
               )}
             </Grid>

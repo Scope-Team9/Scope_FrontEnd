@@ -56,7 +56,7 @@ const acceptOfferMW = (postId, acceptInfo) => {
 const applyProjectMW = (postId, comment) => {
   return function (dispatch, getState, { history }) {
     apis
-      .aceeptOffer(comment)
+      .applyProject(postId, comment)
       .then(res => {
         console.log(res);
         window.alert("프로젝트에 지원되었습니다.");
@@ -68,10 +68,10 @@ const applyProjectMW = (postId, comment) => {
   };
 };
 //프로젝트취소
-const cancelProjectMW = (postId, acceptInfo) => {
+const cancelProjectMW = postId => {
   return function (dispatch, getState, { history }) {
     apis
-      .cancelProject()
+      .cancelProject(postId)
       .then(res => {
         console.log(res);
         window.alert("프로젝트 지원이 취소되었습니다.!");
