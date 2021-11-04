@@ -49,25 +49,6 @@ const AddPost = (props) => {
     dispatch(postActions.addPostAPI(card));
   };
 
-  // 게시글 수정
-  const editPost = () => {
-    if (postId) {
-      const edited_post = {
-        title: title,
-        summary: summary,
-        techStackList: techStackList,
-        startDate: startDate,
-        endDate: endDate,
-        totalMember: totalMember,
-        projectStatus: projectStatus,
-        contents: contents,
-      };
-      dispatch(postActions.editPostAPI(edited_post));
-    }
-  };
-
-  console.log("제목이얌", title);
-
   // 기술 스택 선택
   const stackSelect = useMemo(
     () => [

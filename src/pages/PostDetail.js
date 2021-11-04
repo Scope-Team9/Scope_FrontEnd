@@ -9,10 +9,12 @@ import { Grid, Text, Image, Button } from "../elements/Index";
 import { useDispatch } from "react-redux";
 import { postActions as postActions } from "../redux/modules/postdetail";
 import { apis } from "../lib/axios";
+import { useHistory } from "react-router";
 
 // PostDetail의 함수형 컴포넌트를 만든다.
 const PostDetail = (props) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [checkPost, setCheckPost] = React.useState();
 
   // const postId = props.location.state.postId;
@@ -92,7 +94,14 @@ const PostDetail = (props) => {
               <Button width="100px" height="30px" margin="auto 10px">
                 모집완료
               </Button>
-              <Button width="100px" height="30px" margin="auto 10px">
+              <Button
+                width="100px"
+                height="30px"
+                margin="auto 10px"
+                _onClick={() => {
+                  history.push("/postedit");
+                }}
+              >
                 포스트수정
               </Button>
               <Button width="100px" height="30px" margin="auto 10px">

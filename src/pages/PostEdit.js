@@ -1,39 +1,14 @@
-// PostDetail.js
-
-// import를 한다.
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import { Grid, Text, Image, Button, Input } from "../elements/Index";
-
 import { useDispatch } from "react-redux";
-
-import { postActions as postActions } from "../redux/modules/postdetail";
 import { apis } from "../lib/axios";
 
-// PostDetail의 함수형 컴포넌트를 만든다.
-const PostDetail = (props) => {
+const PostEdit = (props) => {
   const dispatch = useDispatch();
   const [checkPost, setCheckPost] = React.useState();
 
-  //게시글 수정
-  // const editPost = () => {
-  //   if (postId) {
-  //     const edited_post = {
-  //       title: title,
-  //       summary: summary,
-  //       techStackList: techStackList,
-  //       startDate: startDate,
-  //       endDate: endDate,
-  //       totalMember: totalMember,
-  //       projectStatus: projectStatus,
-  //       contents: contents,
-  //     };
-  //     dispatch(postActions.editPostAPI(edited_post));
-  //   }
-  // };
-
-  //   const postId = props.location.state.postId;
-  //   let post_id = props.match.params.id;
+  let post_id = props.match.params.id;
 
   React.useEffect(() => {
     const CheckPost = async () => {
@@ -52,19 +27,32 @@ const PostDetail = (props) => {
 
   const [title, setTitle] = React.useState("");
 
+  const onChange = useCallback((e) => {
+    setTitle(e.target.value);
+  }, []);
+
   React.useEffect(() => {
     setTitle(passedData?.title);
   });
-
+  console.log("냥냥", title);
   return (
     <React.Fragment>
-      <input
-        defultValue={title}
-        onChange={(e) => {
+      <input type="text" value={title} onChange={onChange}></input>
+      <Input
+        type="text"
+        value={title}
+        _onChange={(e) => {
           setTitle(e.target.value);
-          console.log("a", e.target.value);
+          console.log("냥냥", e.target.value);
         }}
-      ></input>
+      />
+      <button
+        onClick={() => {
+          setTitle();
+        }}
+      >
+        확인
+      </button>
       <Grid
         width="550px"
         padding="16px"
@@ -134,7 +122,6 @@ const PostDetail = (props) => {
   );
 };
 
-// styled-components를 사용한다.
 const Title = styled.h1``;
 
 const Content = styled.h3`
@@ -145,5 +132,4 @@ const Content = styled.h3`
   border-radius: 5px;
 `;
 
-// export를 통해 밖에서도 사용할 수 있도록 설정한다.
-export default PostDetail;
+export default PostEdit;

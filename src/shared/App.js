@@ -9,11 +9,10 @@ import KakaoRedirect from "./KakaoRedirect";
 import GitHubRedirect from "./GitHubRedirect";
 import MyPage from "../pages/MyPage";
 import PostAdd from "../pages/PostAdd";
-import PostDetail from "../pages/PostDetail";
 import PostEdit from "../pages/PostEdit";
+import PostDetail from "../pages/PostDetail";
 import Markdown from "../components/Markdown";
 import MarkdownRead from "../components/MarkdownRead";
-import styled from "styled-components";
 import Header from "../components/Header";
 
 //테스트용입니다.
@@ -28,12 +27,11 @@ function App() {
         <Switch>
           <Route path="/" exact component={MainPage}></Route>
           <Route path="/mypage" exact component={MyPage}></Route>
-
           <Route path="/postwrite" exact component={PostAdd}></Route>
+          <Route path="/postedit" exact component={PostEdit}></Route>
           <Route path="/markdown" exact component={Markdown}></Route>
           <Route path="/markdownread" exact component={MarkdownRead}></Route>
           <Route path="/postadd" exact component={PostAdd}></Route>
-          <Route path="/postedit" exact component={PostEdit}></Route>
           <Route path="/postdetail/:id" exact component={PostDetail}></Route>
 
           <Route
