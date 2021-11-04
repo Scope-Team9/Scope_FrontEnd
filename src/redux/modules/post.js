@@ -32,8 +32,8 @@ export const getPostAPI = () => {
     let reBook = getState().rebook.reBook;
     let mainPage = getState().post.mainpage;
     let whatPages = getState().post.whatPage;
-    console.log("mainPage메인페이지", mainPage);
-    let nulls = null;
+    // console.log("mainPage메인페이지", mainPage);
+
     if (mainPage === false) {
       return;
     }
@@ -42,8 +42,7 @@ export const getPostAPI = () => {
       return;
     }
 
-    // let _paging = getState().post.paging;
-    console.log(_paging);
+    // console.log(_paging);
 
     apis
       .getPost(stack, _paging.next + 1, sort, reBook)
@@ -61,22 +60,6 @@ export const getPostAPI = () => {
       .catch((err) => {
         console.log(err.response);
       });
-
-    // apis
-    //   .getPost(stack, 1, sort, reBook)
-    //   .then((res) => {
-    //     const posts = res.data.data;
-
-    //     console.log("어떻게 오는지", res.data.data);
-
-    //     dispatch(isLoading(true));
-    //     let data = { nulls, posts, stack, sort, reBook };
-
-    //     dispatch(getPosts(data));
-    //   })
-    //   .catch((err) => {
-    //     console.log(err.response);
-    //   });
   };
 };
 
