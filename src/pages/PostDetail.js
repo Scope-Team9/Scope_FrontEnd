@@ -1,14 +1,20 @@
 // DetailList.js
-
+/* eslint-disable */
 // import를 한다.
 import React from "react";
 import styled from "styled-components";
 
 import { Grid, Text, Image, Input, Button } from "../elements/Index";
-
+import { postActions } from "../redux/modules/post";
+import { useSelector, useDispatch } from "react-redux";
 // DetailList의 함수형 컴포넌트를 만든다.
-const DetailList = props => {
-  console.log("제목");
+const DetailList = (props) => {
+  const dispatch = useDispatch();
+  const is_mainPage = useSelector((state) => state.post.mainpage);
+  React.useEffect(() => {
+    dispatch(postActions.isMainPage(false));
+  }, []);
+
   return (
     <React.Fragment>
       <Grid
@@ -18,6 +24,13 @@ const DetailList = props => {
         border="2px solid #8B3FF8"
         borderRadius="30px"
       >
+        <button
+          onClick={() => {
+            console.log(is_mainPage);
+          }}
+        >
+          확인하기
+        </button>
         <Title>제목입니다.</Title>
         <Grid margin="10px auto">
           <Text>한줄설명입니다.</Text>

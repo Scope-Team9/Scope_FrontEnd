@@ -22,6 +22,9 @@ const MainPage = () => {
   const is_loading = useSelector((state) => state.post.is_loading);
   const paging = useSelector((state) => state.infinity.paging);
   const is_reBook_clicked = useSelector((state) => state.rebook.reBook);
+  const is_mainPage = useSelector((state) => state.post.mainpage);
+  const infinity = useSelector((state) => state.infinity.paging);
+  console.log(infinity);
 
   console.log(useSelector((state) => state.infinity.paging));
   let page = 0;
@@ -33,22 +36,25 @@ const MainPage = () => {
   React.useEffect(() => {
     console.log("?? 여기서 되는거임?");
     dispatch(postActions.getPostAPI());
-  }, [is_stack_clicked, is_sort_clicked, is_reBook_clicked]);
+  }, [is_stack_clicked, is_sort_clicked, is_reBook_clicked, is_mainPage]);
   //무한스크롤 다음
   const callNext = () => {
     page++;
-
+    dispatch(postActions.isMainPage(true));
     dispatch(pageAction.getPage(page));
+
     dispatch(postActions.getPostAPI());
     console.log("??");
   };
   //sort
   const onclickSort = (data) => {
+    dispatch(postActions.isMainPage(true));
     dispatch(sortAction.getSort(data));
     dispatch(bookRecommendAction.getRb(""));
   };
   //bookmark,recommend
   const onclickRb = (data) => {
+    dispatch(postActions.isMainPage(true));
     dispatch(bookRecommendAction.getRb(data));
   };
 
@@ -65,6 +71,13 @@ const MainPage = () => {
           <Stacks>
             <Stack />
           </Stacks>
+          <button
+            onClick={() => {
+              console.log(is_mainPage);
+            }}
+          >
+            확인하기
+          </button>
           <FilterBox>
             <Filtering
               onClick={() => {
@@ -99,7 +112,7 @@ const MainPage = () => {
             paging={paging}
             is_loading={is_loading}
             callNext={callNext}
-            is_next={paging.next < 5 ? true : false}
+            is_next={is_mainPage}
           >
             <InsideCard>
               <PostList></PostList>
