@@ -11,8 +11,10 @@ import { useSelector, useDispatch } from "react-redux";
 const DetailList = (props) => {
   const dispatch = useDispatch();
   const is_mainPage = useSelector((state) => state.post.mainpage);
+
   React.useEffect(() => {
     dispatch(postActions.isMainPage(false));
+    dispatch(postActions.whatPage("postDetailPage"));
   }, []);
 
   return (

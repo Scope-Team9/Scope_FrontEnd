@@ -18,6 +18,7 @@ const MyPage = (props) => {
 
   React.useEffect(() => {
     dispatch(postActions.isMainPage(false));
+    dispatch(postActions.whatPage("myPage"));
   }, []);
 
   return (

@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 const Infinity = (props) => {
   const { children, callNext, paging, is_loading, is_next } = props;
   const is_mainPage = useSelector((state) => state.post.mainpage);
-  console.log("이거 확인좀 해봐야겠네", is_mainPage);
+  // console.log("이거 확인좀 해봐야겠네", props);
 
   const _handleScroll = _.throttle(() => {
     const { innerHeight } = window;
@@ -16,10 +16,10 @@ const Infinity = (props) => {
       (document.documentElement && document.documentElement.scrollTop) ||
       document.body.scrollTop;
     //1. 페이지 5페이지 이상으로 넘어감.
-    if (scrollHeight - innerHeight - scrollTop < 200 && is_mainPage === true) {
+    if (scrollHeight - innerHeight - scrollTop < 300) {
       callNext();
     }
-  }, 300);
+  }, 600);
 
   const handleScroll = useCallback(_handleScroll, []);
 
@@ -27,25 +27,17 @@ const Infinity = (props) => {
     if (is_loading) {
       return;
     }
-    // if (is_mainPage === false) {
-    //   return;
-    // } else {
-    //   console.log("????????????");
-    // }
 
     if (is_mainPage === true) {
-      console.log("지나갑니다");
       window.addEventListener("scroll", () => {
         handleScroll();
       });
     } else {
-      console.log("끊겠습니다");
-      // window.removeEventListener("scroll", () => {
-      //   handleScroll();
-      // });
+      console.log("여기서 막힘?");
+      window.removeEventListener("scroll", handleScroll);
     }
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [paging]);
+  }, [paging, is_mainPage]);
   return <div>{children}</div>;
 };
 

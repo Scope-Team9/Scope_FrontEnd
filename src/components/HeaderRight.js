@@ -46,7 +46,12 @@ const HeaderRight = (props) => {
       >
         <HeaderWrapper>
           <Grid display="flex" alignItems="center" margin="0 10px">
-            <Image src={userImage} />
+            <Image
+              _onClick={() => {
+                history.push("/mypage");
+              }}
+              src={userImage}
+            />
             <Text>{user_info.nickname}</Text>
           </Grid>
           <Button

@@ -24,23 +24,29 @@ const MainPage = () => {
   const is_reBook_clicked = useSelector((state) => state.rebook.reBook);
   const is_mainPage = useSelector((state) => state.post.mainpage);
   const infinity = useSelector((state) => state.infinity.paging);
-  console.log(infinity);
+  const whatPage = useSelector((state) => state.post.whatPage);
+  // console.log(infinity);
 
-  console.log(useSelector((state) => state.infinity.paging));
+  // console.log(useSelector((state) => state.infinity.paging));
   let page = 0;
 
   // const [page, setPage] = React.useState(0);
 
   // console.log(paging);
-
+  // Todo 수정페이지에도 페이지 리덕스 넘겨줘야함
   React.useEffect(() => {
     console.log("?? 여기서 되는거임?");
+    dispatch(postActions.isMainPage(true));
+    dispatch(postActions.whatPage("mainPage"));
     dispatch(postActions.getPostAPI());
-  }, [is_stack_clicked, is_sort_clicked, is_reBook_clicked, is_mainPage]);
+  }, [is_stack_clicked, is_sort_clicked, is_reBook_clicked]);
   //무한스크롤 다음
   const callNext = () => {
+    // if (is_mainPage !== true && whatPage.now !== "mainPage") {
+    //   return;
+    // }
     page++;
-    dispatch(postActions.isMainPage(true));
+    // dispatch(postActions.isMainPage(true));
     dispatch(pageAction.getPage(page));
 
     dispatch(postActions.getPostAPI());

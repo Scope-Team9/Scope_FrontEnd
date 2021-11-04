@@ -5,10 +5,12 @@ import { apis } from "../../lib/axios";
 const GET_POST = "GET_POST";
 const LOADING = "LOADING";
 const MAINPAGE = "MAINPAGE";
+const WHATPAGE = "WHATPAGE";
 
 const getPosts = createAction(GET_POST, (data) => ({ data }));
 const isLoading = createAction(LOADING, (loading) => ({ loading }));
 const isMainPage = createAction(MAINPAGE, (data) => ({ data }));
+const whatPage = createAction(WHATPAGE, (data) => ({ data }));
 
 const initialState = {
   posts: [],
@@ -19,6 +21,7 @@ const initialState = {
   sorts: "createdAt",
   reBook: "",
   mainpage: true,
+  whatPage: { pre: null, now: null },
 };
 
 export const getPostAPI = () => {
@@ -28,9 +31,14 @@ export const getPostAPI = () => {
     let _paging = getState().infinity.paging;
     let reBook = getState().rebook.reBook;
     let mainPage = getState().post.mainpage;
+    let whatPages = getState().post.whatPage;
     console.log("mainPage메인페이지", mainPage);
 
     if (mainPage === false) {
+      return;
+    }
+    if (whatPages.now !== whatPages.pre) {
+      dispatch(whatPage("mainPage"));
       return;
     }
 
@@ -110,8 +118,19 @@ export default handleActions(
       }),
     [MAINPAGE]: (state, action) =>
       produce(state, (draft) => {
-        console.log("여기가 메인페이지인가", action.payload.data);
+        // console.log("여기가 메인페이지인가", action.payload.data);
         draft.mainpage = action.payload.data;
+      }),
+    [WHATPAGE]: (state, action) =>
+      produce(state, (draft) => {
+        console.log("현재페이지", action.payload.data);
+        // console.log(state);
+        let page = {
+          pre: state.whatPage.now,
+          now: action.payload.data,
+        };
+        // console.log(page);
+        draft.whatPage = page;
       }),
   },
   initialState
@@ -120,5 +139,6 @@ export default handleActions(
 const postActions = {
   getPostAPI,
   isMainPage,
+  whatPage,
 };
 export { postActions };
