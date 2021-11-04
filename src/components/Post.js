@@ -14,26 +14,16 @@ import { Grid, Image } from "../elements/Index";
 const Post = (props) => {
   const dispatch = useDispatch();
 
+  console.log("게시자", props.recruitmentMember);
   console.log("asdsad", props.postId);
-  console.log("카드들", props);
   return (
     <React.Fragment>
       <ProductImgWrap
         onClick={() => {
           history.push({
-            pathname: "/postdetail",
+            pathname: `/postdetail/${props.postId}`,
             state: {
               postId: props.postId,
-              title: props.title,
-              techStack: props.techStack,
-              contents: props.contents,
-              summary: props.summary,
-              totalMember: props.totalMember,
-              recruitmentMember: props.recruitmentMember,
-              projectStatus: props.projectStatus,
-              startDate: props.startDate,
-              endDate: props.endDate,
-              isBookmarkCheckde: props.isBookmarkCheckde,
             },
           });
         }}
@@ -45,9 +35,7 @@ const Post = (props) => {
             backgroundColor="#8B3FF8"
             borderRadius="20px 20px 20px 0px"
           >
-            <Grid>
-              <TitleDate>D-2</TitleDate>
-            </Grid>
+            <Grid>{/* <TitleDate>D-2</TitleDate> */}</Grid>
 
             <Grid display="flex" width="100px">
               {props.techStack.map((p, idx) => {

@@ -2,11 +2,15 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../../lib/axios";
 
+// CHECK
+const CHECK_POST = "CHECK_POST";
 // 수정
 const EDIT_POST = "EDIT_POST";
 // 삭제
 const DELETE_POST = "DELETE_POST";
 
+// 포스트 CHECK 액션생성함수 생성
+const checkPost = createAction(CHECK_POST, (card) => ({ card }));
 // 포스트 수정 액션생성함수 생성
 const editPost = createAction(EDIT_POST, (card) => ({ card }));
 // 포스트 삭제 액션생성함수 생성
@@ -14,56 +18,58 @@ const deletePost = createAction(DELETE_POST, (card) => ({ card }));
 
 // 초기값
 const initialState = {
-  list: [
-    {
-      postId: 0,
-      title: "제목",
-      summary: "한줄설명",
-      contents: "내용",
-      techStackList: "기술스택",
-      totalMember: "제한 인원",
-      recruitmentMember: "신청자",
-      projectStatus: "프로젝트 상태",
-      startDate: "시작 날짜",
-      endDate: "끝나는 날짜",
-      bookmarkChecked: "북마크",
-    },
-  ],
+  list: [],
 };
 
+// 포스트 CHECK
+export const checkPostAPI = (postId) => {
+  return function (dispatch, getState, { history }) {
+    apis
+      .detailPost(postId)
+      .then((res) => {
+        // 버스기사가 checkpost라는 주소로 postid를 들고 간다.
+        dispatch(checkPost(postId));
+      })
+      .catch((err) => {
+        console.logg(err.response);
+      });
+  };
+};
 // 포스트 수정
 export const editPostAPI = (card) => {
   return function (dispatch, getState, { history }) {
     apis
       .editPost(card)
       .then((res) => {
-        console.log(res);
+        dispatch(editPost(card));
       })
       .catch((err) => {
         console.log(err.response);
       });
-    dispatch(editPost(card));
   };
 };
-
 // 포스트 삭제
-export const deletePostAPI = (card) => {
+export const deletePostAPI = (postId) => {
   return function (dispatch, getState, { history }) {
     apis
-      .deletePost(card)
+      .deletePost(postId)
       .then((res) => {
-        console.log(res);
+        dispatch(deletePost(postId));
+        console.log(postId);
       })
       .catch((err) => {
         console.log(err.response);
       });
-    dispatch(deletePost(card));
   };
 };
 
 // 리듀서
 export default handleActions(
   {
+    [CHECK_POST]: (state, action) =>
+      produce(state, (draft) => {
+        console.log("포스트 CHECK", action.payload);
+      }),
     [EDIT_POST]: (state, action) =>
       produce(state, (draft) => {
         console.log("포스트 수정", action.payload);
@@ -77,6 +83,7 @@ export default handleActions(
 );
 
 const postActions = {
+  checkPostAPI,
   editPostAPI,
   deletePostAPI,
 };

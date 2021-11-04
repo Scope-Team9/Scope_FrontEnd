@@ -61,15 +61,14 @@ export const apis = {
   //     `/api/post?filter=${};${};${};${};${};${};${};${};${};${};${};${};${};${}&displayNumber=15&page=${page}&sort=createdAt`
   //   ),
 
-  getPost: (stack, paging) =>
+  getPost: (stack, paging, sort, reBook) =>
     instance.get(
-      `/api/post?filter=${stack.React};${stack.Spring};${stack.Swift};${stack.TypeScript};${stack.cpp};${stack.Django};${stack.Flask};${stack.Java};${stack.JavaScript};${stack.Kotlin};${stack.Node};${stack.php};${stack.Python};${stack.Vue};&displayNumber=15&page=${paging}&sort=createdAt&bookmarkRecommend=""`
+      `/api/post?filter=${stack.React};${stack.Spring};${stack.Swift};${stack.TypeScript};${stack.cpp};${stack.Django};${stack.Flask};${stack.Java};${stack.JavaScript};${stack.Kotlin};${stack.Node};${stack.php};${stack.Python};${stack.Vue};&displayNumber=9&page=${paging}&sort=${sort}&bookmarkRecommend=${reBook}`
     ),
 
-  //data.json용
-  // getPost: () => instance.get(`/post`),
+  // 승민
   addPost: (postInfo) => instance.post(`/api/post`, postInfo),
-  editPost: (postId, postInfo) =>
-    instance.postdetail(`/post/${postId}`, postInfo),
-  deletePost: (postId) => instance.postdetail(`/api/post/${postId}`),
+  detailPost: (postId) => instance.get(`/api/post/${postId}`),
+  editPost: (postId) => instance.post(`/api/post/${postId}`),
+  deletePost: (postId) => instance.delete(`/api/post/${postId}`),
 };

@@ -10,7 +10,6 @@ const PostList = () => {
   const dispatch = useDispatch();
 
   const post_list = useSelector((state) => state.post.posts);
-  console.log("이게뭐냐고", post_list);
 
   return (
     <React.Fragment>

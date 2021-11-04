@@ -15,6 +15,7 @@ import { Grid, Text, Input } from "../elements/Index";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { addPostAPI } from "../redux/modules/postadd";
+import { editPostAPI } from "../redux/modules/postdetail";
 import { postActions as postActions } from "../redux/modules/postadd";
 
 // AddPost의 함수형 컴포넌트를 만든다.
@@ -45,9 +46,27 @@ const AddPost = (props) => {
       projectStatus: projectStatus,
       contents: contents,
     };
-    console.log(card);
     dispatch(postActions.addPostAPI(card));
   };
+
+  // 게시글 수정
+  const editPost = () => {
+    if (postId) {
+      const edited_post = {
+        title: title,
+        summary: summary,
+        techStackList: techStackList,
+        startDate: startDate,
+        endDate: endDate,
+        totalMember: totalMember,
+        projectStatus: projectStatus,
+        contents: contents,
+      };
+      dispatch(postActions.editPostAPI(edited_post));
+    }
+  };
+
+  console.log("제목이얌", title);
 
   // 기술 스택 선택
   const stackSelect = useMemo(

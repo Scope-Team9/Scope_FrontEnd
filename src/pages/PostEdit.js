@@ -3,10 +3,10 @@
 // import를 한다.
 import React from "react";
 import styled from "styled-components";
-
-import { Grid, Text, Image, Button } from "../elements/Index";
+import { Grid, Text, Image, Button, Input } from "../elements/Index";
 
 import { useDispatch } from "react-redux";
+
 import { postActions as postActions } from "../redux/modules/postdetail";
 import { apis } from "../lib/axios";
 
@@ -15,14 +15,30 @@ const PostDetail = (props) => {
   const dispatch = useDispatch();
   const [checkPost, setCheckPost] = React.useState();
 
-  // const postId = props.location.state.postId;
-  let post_id = props.match.params.id;
-  console.log("asdasda", post_id);
+  //게시글 수정
+  // const editPost = () => {
+  //   if (postId) {
+  //     const edited_post = {
+  //       title: title,
+  //       summary: summary,
+  //       techStackList: techStackList,
+  //       startDate: startDate,
+  //       endDate: endDate,
+  //       totalMember: totalMember,
+  //       projectStatus: projectStatus,
+  //       contents: contents,
+  //     };
+  //     dispatch(postActions.editPostAPI(edited_post));
+  //   }
+  // };
+
+  //   const postId = props.location.state.postId;
+  //   let post_id = props.match.params.id;
 
   React.useEffect(() => {
     const CheckPost = async () => {
       try {
-        const result = await apis.detailPost(post_id);
+        const result = await apis.detailPost(2013);
         setCheckPost(result);
       } catch (err) {
         console.log(err);
@@ -30,13 +46,25 @@ const PostDetail = (props) => {
     };
     CheckPost();
   }, []);
-  console.log("메롱", checkPost);
 
   const passedData = checkPost?.data["data"].post;
   const passdedMenber = checkPost?.data["data"].members[0];
 
+  const [title, setTitle] = React.useState("");
+
+  React.useEffect(() => {
+    setTitle(passedData?.title);
+  });
+
   return (
     <React.Fragment>
+      <input
+        defultValue={title}
+        onChange={(e) => {
+          setTitle(e.target.value);
+          console.log("a", e.target.value);
+        }}
+      ></input>
       <Grid
         width="550px"
         padding="16px"
