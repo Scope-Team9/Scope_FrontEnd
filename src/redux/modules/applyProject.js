@@ -6,10 +6,10 @@ import { apis } from "../../lib/axios";
 const APPLY_PROJEFCT = "APPLY_POST";
 
 // 액션생성
-const applyUsers = createAction(APPLY_PROJEFCT, applyUser => ({ applyUser }));
+const applyUsers = createAction(APPLY_PROJEFCT, applyUsers => ({ applyUsers }));
 
 const initialState = {
-  users: [
+  testUsers: [
     {
       userId: "1813325",
       nickname: "guest",
@@ -26,10 +26,9 @@ const applyUserAPI = postId => {
     apis
       .applyUser(postId)
       .then(res => {
-        console.log(res);
-        console.log(res.data.users);
-        window.alert("신청자 정보가 잘 불러와졌네용!");
-        dispatch(applyUsers(res.data.users));
+        console.log(res.data.data);
+        window.alert("1111신청자 정보가 잘 불러와졌네용!");
+        dispatch(applyUsers(res.data.data));
       })
       .catch(err => {
         console.log(err.response);
@@ -41,11 +40,11 @@ const applyUserAPI = postId => {
 const acceptOfferAPI = (postId, acceptInfo) => {
   return function (dispatch, getState, { history }) {
     apis
-      .aceeptOffer(acceptInfo)
+      .aceeptOffer(postId, acceptInfo)
       .then(res => {
+        console.log(res.data.data);
         console.log(res);
-        console.log(res.data.users);
-        window.alert("신청자 정보가 잘 불러와졌네용!");
+        window.alert("신청을 수락하였습니다!");
         dispatch(applyUsers(res.data.users));
       })
       .catch(err => {
@@ -95,8 +94,8 @@ export default handleActions(
   {
     [APPLY_PROJEFCT]: (state, action) =>
       produce(state, draft => {
-        console.log("신청자정보", action.payload);
-        draft.users = action.payload.users;
+        console.log("신청자정보", action);
+        draft.applyUsers = action.payload.applyUsers;
       }),
   },
   initialState

@@ -8,20 +8,36 @@ import CloseIcon from "@mui/icons-material/Close";
 
 const ApplyStatusModal = props => {
   const dispatch = useDispatch();
+  const applyUsers = useSelector(state => state.apply.applyUsers);
   const { applyStatusModal, setApplyStatusModal, postId } = props;
   const modalClose = () => {
     setApplyStatusModal(false);
   };
-
-  // const applyUser = useSelector(state => state.applyUser.users);
+  console.log(applyUsers);
 
   React.useEffect(() => {
     console.log(postId);
-    dispatch(applyCreators.applyUserAPI(postId));
-  }, [postId]);
+    if (applyStatusModal) {
+      dispatch(applyCreators.applyUserAPI(postId));
+    }
+  }, [applyStatusModal]);
 
-  const acceptOffer = () => {
-    dispatch(applyCreators.acceptOfferAPI());
+  const acceptOffer = acceptUser => {
+    const acceptInfo = {
+      userId: acceptUser,
+      accept: true,
+    };
+    console.log(acceptInfo);
+    // dispatch(applyCreators.acceptOfferAPI(postId, acceptInfo));
+  };
+
+  const cancelOffer = cancelUser => {
+    const acceptInfo = {
+      userId: cancelUser,
+      accept: false,
+    };
+    console.log(acceptInfo);
+    // dispatch(applyCreators.acceptOfferAPI(postId, acceptInfo));
   };
 
   return (
@@ -45,38 +61,61 @@ const ApplyStatusModal = props => {
             </Grid>
           </Grid>
           <Grid display="flex" height="85%" justifyContent="center">
-            <Grid width="80%" margin="10px">
-              {/* {applyUser.map((img, idx) => (
-            <Grid>
-              <img src={img} alt={img} />
-            </Grid>
-          ))} */}
-              <Grid
-                border="1px solid #ddd"
-                margin="auto"
-                height="100px"
-                display="flex"
-                alignItems="center"
-                justifyContent="space-around"
-                padding="10px"
-                width="90%"
-              >
-                <Grid margin="auto">
-                  <Image size="80"></Image>
-                </Grid>
-                <Grid margin="auto" height="50px">
-                  닉네임(유저성향)
-                </Grid>
-                <Grid margin="auto" height="50px">
-                  <Button _onClick={acceptOffer}>수락</Button>
-                </Grid>
-                <Grid margin="auto" height="50px">
-                  <Button backgroundColor="#fff" color="#111">
-                    취소
-                  </Button>
-                </Grid>
+            {applyUsers && (
+              <Grid width="80%" margin="10px">
+                {applyUsers.map((user, idx) => (
+                  <Grid
+                    border="1px solid #ddd"
+                    margin="auto"
+                    height="100px"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="space-around"
+                    padding="10px"
+                    width="90%"
+                    key={idx}
+                    {...user}
+                  >
+                    <Grid margin="auto">
+                      <Image size="80"></Image>
+                    </Grid>
+                    <Grid margin="auto" height="50px">
+                      <Grid margin="auto" height="20px">
+                        {applyUsers[idx].nickname}
+                      </Grid>
+                      <Grid margin="auto" height="20px">
+                        {applyUsers[idx].userPropensityType}
+                      </Grid>
+                    </Grid>
+                    <Grid margin="auto" height="50px">
+                      <Button
+                        isValue={applyUsers[idx].userId}
+                        _onClick={e => {
+                          console.log(e);
+                          acceptOffer(e.target.value);
+                        }}
+                      >
+                        수락
+                      </Button>
+                    </Grid>
+                    <Grid margin="auto" height="50px">
+                      <Button
+                        _id="cancel"
+                        backgroundColor="#fff"
+                        color="#111"
+                        isValue={applyUsers[idx].userId}
+                        _onClick={e => {
+                          console.log(e);
+                          cancelOffer(e.target.value);
+                        }}
+                      >
+                        취소
+                      </Button>
+                    </Grid>
+                  </Grid>
+                ))}
               </Grid>
-            </Grid>
+            )}
           </Grid>
         </ModalWrap>
       </Dialog>

@@ -36,6 +36,7 @@ const kakaologinMiddleware = code => {
     apis
       .kakaoLogin(code)
       .then(res => {
+        console.log(res);
         if (res.data.status == 300) {
           window.alert("추가정보 작성이 필요합니다.");
           dispatch(
