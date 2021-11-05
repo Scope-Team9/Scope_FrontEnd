@@ -19,14 +19,14 @@ import { useHistory } from "react-router";
 const MainPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const is_stack_clicked = useSelector((state) => state.stack.stack);
-  const is_sort_clicked = useSelector((state) => state.sort.sort);
-  const is_loading = useSelector((state) => state.post.is_loading);
+  const is_stack_clicked = useSelector(state => state.stack.stack);
+  const is_sort_clicked = useSelector(state => state.sort.sort);
+  const is_loading = useSelector(state => state.post.is_loading);
 
-  const is_reBook_clicked = useSelector((state) => state.rebook.reBook);
-  const is_mainPage = useSelector((state) => state.post.mainpage);
+  const is_reBook_clicked = useSelector(state => state.rebook.reBook);
+  const is_mainPage = useSelector(state => state.post.mainpage);
   // const infinity = useSelector((state) => state.infinity.paging);
-  const whatPage = useSelector((state) => state.post.whatPage);
+  const whatPage = useSelector(state => state.post.whatPage);
   const [ref, inView] = useInView();
   const [paging, setPaging] = React.useState(0);
 
@@ -56,13 +56,13 @@ const MainPage = () => {
   }, [inView]);
 
   //sort
-  const onclickSort = (data) => {
+  const onclickSort = data => {
     dispatch(postActions.isMainPage(true));
     dispatch(sortAction.getSort(data));
     dispatch(bookRecommendAction.getRb(""));
   };
   //bookmark,recommend
-  const onclickRb = (data) => {
+  const onclickRb = data => {
     dispatch(postActions.isMainPage(true));
     dispatch(bookRecommendAction.getRb(data));
   };

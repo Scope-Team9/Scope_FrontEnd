@@ -6,27 +6,27 @@ import styled from "styled-components";
 import { applyCreators } from "../redux/modules/applyProject";
 import CloseIcon from "@mui/icons-material/Close";
 
-const ApplyModal = props => {
+const ApplyStatusModal = props => {
   const dispatch = useDispatch();
-  const { showModal, setShowModal, postId } = props;
+  const { applyStatusModal, setApplyStatusModal, postId } = props;
   const modalClose = () => {
-    setShowModal(false);
+    setApplyStatusModal(false);
   };
 
   // const applyUser = useSelector(state => state.applyUser.users);
 
-  // React.useEffect(() => {
-  //   const postId = props.postId;
-  //   dispatch(applyCreators.applyUserMiddleware(postId));
-  // }, []);
+  React.useEffect(() => {
+    console.log(postId);
+    dispatch(applyCreators.applyUserAPI(postId));
+  }, []);
 
   const acceptOffer = () => {
-    dispatch(applyCreators.acceptOfferMiddleware());
+    dispatch(applyCreators.acceptOfferAPI());
   };
 
   return (
     <>
-      <Dialog maxWidth={"sm"} scroll="paper" open={showModal}>
+      <Dialog maxWidth={"sm"} scroll="paper" open={applyStatusModal}>
         <ModalWrap>
           <Grid height="10%" bg="#eee" position="relative">
             <Grid
@@ -89,4 +89,4 @@ const ModalWrap = styled.div`
   height: 500px;
 `;
 
-export default ApplyModal;
+export default ApplyStatusModal;

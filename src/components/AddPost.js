@@ -16,13 +16,19 @@ import { Grid, Text, Input } from "../elements/Index";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { addPostAPI } from "../redux/modules/postadd";
+<<<<<<< HEAD
 
 import { postActions } from "../redux/modules/post";
 import { postAddActions } from "../redux/modules/postadd";
+=======
+import { editPostAPI } from "../redux/modules/postdetail";
+import { postAddActions } from "../redux/modules/postadd";
+import { postActions } from "../redux/modules/post";
+>>>>>>> 7a7904253e2bfbdf7794c4de8398a8a2ffbc25a0
 
 // AddPost의 함수형 컴포넌트를 만든다.
 // AddPost 안에 다뤄지는  특정 값(state) ex.title 값이 변화하였을 때, AddPost자체가 리랜더링 된다.
-const AddPost = (props) => {
+const AddPost = props => {
   const history = useHistory();
   const dispatch = useDispatch();
   const animatedComponents = makeAnimated();
@@ -94,11 +100,11 @@ const AddPost = (props) => {
   );
 
   const orderOptions = useCallback(
-    (values) =>
+    values =>
       values
-        .filter((v) => v.isFixed)
+        .filter(v => v.isFixed)
         .sort(orderByLabel)
-        .concat(values.filter((v) => !v.isFixed).sort(orderByLabel)),
+        .concat(values.filter(v => !v.isFixed).sort(orderByLabel)),
     [orderByLabel]
   );
 
@@ -116,7 +122,7 @@ const AddPost = (props) => {
           }
           break;
         case "clear":
-          setValue(stackSelect.filter((v) => v.isFixed));
+          setValue(stackSelect.filter(v => v.isFixed));
           return;
         default:
       }
@@ -178,7 +184,7 @@ const AddPost = (props) => {
               padding="10px"
               placeholder="제목을 입력해주세요."
               border="1px solid #E7E1FF"
-              _onChange={(e) => {
+              _onChange={e => {
                 setTitle(e.target.value);
               }}
             ></Input>
@@ -191,7 +197,7 @@ const AddPost = (props) => {
               padding="10px"
               placeholder="한줄소개를 입력해주세요."
               border="1px solid #E7E1FF"
-              _onChange={(e) => {
+              _onChange={e => {
                 setSummary(e.target.value);
               }}
             ></Input>
@@ -201,7 +207,7 @@ const AddPost = (props) => {
             <Select
               isMulti
               components={animatedComponents}
-              isClearable={value.some((v) => !v.isFixed)}
+              isClearable={value.some(v => !v.isFixed)}
               styles={styles}
               options={stackSelect}
               onChange={handleChange}
@@ -214,7 +220,7 @@ const AddPost = (props) => {
               <SDatePicker
                 dateFormat="yyyy/MM/dd"
                 selected={startDate}
-                onChange={(date) => setStartdate(date)}
+                onChange={date => setStartdate(date)}
                 selectsStart
                 startdate={startDate}
                 enddate={endDate}
@@ -226,7 +232,7 @@ const AddPost = (props) => {
               <SDatePicker
                 dateFormat="yyyy/MM/dd"
                 selected={endDate}
-                onChange={(date) => setEnddate(date)}
+                onChange={date => setEnddate(date)}
                 selectsEnd
                 enddate={endDate}
                 mindate={startDate}
@@ -240,7 +246,7 @@ const AddPost = (props) => {
             <Select
               options={projectMembers}
               isLoading
-              onChange={(e) => {
+              onChange={e => {
                 let b;
                 b = e["label"];
                 setTotalmember(b);
@@ -252,7 +258,7 @@ const AddPost = (props) => {
             <Select
               options={projectstatus}
               isLoading
-              onChange={(e) => {
+              onChange={e => {
                 let a;
                 a = e["label"];
                 setProjectstatus(a);
@@ -267,7 +273,7 @@ const AddPost = (props) => {
               padding="10px"
               placeholder="프로젝트 내용을 입력해주세요."
               border="1px solid #E7E1FF"
-              _onChange={(e) => {
+              _onChange={e => {
                 setContents(e.target.value);
               }}
             ></Input>

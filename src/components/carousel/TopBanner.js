@@ -3,6 +3,7 @@ import { Image, Grid, Button, Text } from "../../elements/Index";
 import styled from "styled-components";
 import Symbol from "../../images/tiger.jpg";
 import PropensityTest from "../propensityTest/PropensityTest";
+import { history } from "../../redux/configureStore";
 
 const TopBanner = () => {
   const is_token = document.cookie.split("=")[1];
@@ -23,7 +24,7 @@ const TopBanner = () => {
               borderRadius="5px"
               _onClick={() => {
                 is_token
-                  ? window.alert("유저")
+                  ? history.push("/postwrite")
                   : window.alert("로그인이 필요합니다");
               }}
             >
