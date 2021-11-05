@@ -132,7 +132,6 @@ const AddPost = (props) => {
     for (index = 0; index < techstack.length; index++) {
       tamarray.push(techstack[index]["label"]);
     }
-    console.log(tamarray);
     setTest(tamarray);
   };
 

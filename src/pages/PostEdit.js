@@ -62,6 +62,7 @@ const PostEdit = (props) => {
         setTitle(setValue.title);
         setSummary(setValue.summary);
         setContents(setValue.contents);
+        setTectstack(setValue.techStack);
       } catch (err) {
         console.log(err);
       }
@@ -147,7 +148,6 @@ const PostEdit = (props) => {
     for (index = 0; index < techstack.length; index++) {
       tamarray.push(techstack[index]["label"]);
     }
-    console.log(tamarray);
     setTest(tamarray);
   };
 
@@ -215,13 +215,39 @@ const PostEdit = (props) => {
               isMulti
               components={animatedComponents}
               isClearable={value.some((v) => !v.isFixed)}
+              defaulValue={techstack}
+              styles={styles}
+              options={stackSelect}
+              onChange={(e) => {
+                setTectstack(e);
+              }}
+            />
+            {/* 2차방안 */}
+            <Select
+              isMulti
+              components={animatedComponents}
+              isClearable={value.some((v) => !v.isFixed)}
+              value={techstack}
+              styles={styles}
+              options={stackSelect}
+              onChange={(e) => {
+                setTectstack(e);
+              }}
+            />
+            {/* 3차방안 */}
+            <Select
+              isMulti
+              components={animatedComponents}
+              isClearable={value.some((v) => !v.isFixed)}
               value={techstack}
               styles={styles}
               options={stackSelect}
               onChange={handleChange}
+              onChange={(e) => {
+                setTectstack(e);
+                handleChange();
+              }}
             />
-            {/* 2차방안 */}
-            {/* 3차방안 */}
             {/* 4차방안 */}
             {/* 5차방안 */}
           </Grid>
