@@ -244,7 +244,6 @@ const AddPost = (props) => {
                 let b;
                 b = e["label"];
                 setTotalmember(b);
-                console.log(b);
               }}
             ></Select>
           </Grid>
@@ -256,11 +255,6 @@ const AddPost = (props) => {
               onChange={(e) => {
                 let a;
                 a = e["label"];
-                console.log(a);
-
-                // let a = [];
-                // a = e["label"];
-                // console.log(a);
                 setProjectstatus(a);
               }}
             ></Select>

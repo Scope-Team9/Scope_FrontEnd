@@ -6,7 +6,7 @@ import User from "./modules/user";
 
 import Post from "./modules/post";
 import Stack from "./modules/stack";
-import PostAdd from "./modules/postadd";
+import Card from "./modules/postadd";
 import Sort from "./modules/sort";
 import ReBook from "./modules/bookRecommend";
 import Infinitys from "./modules/infinity";
@@ -22,7 +22,7 @@ const rootReducer = combineReducers({
   apply: ApplyUser,
   post: Post,
   stack: Stack,
-  card: PostAdd,
+  card: Card,
   sort: Sort,
   rebook: ReBook,
   infinity: Infinitys,
