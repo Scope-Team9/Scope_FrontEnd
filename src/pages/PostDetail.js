@@ -1,5 +1,3 @@
-/* eslint-disable */
-/* eslint-disable */ /* eslint-disable */ /* eslint-disable */ /* eslint-disable */
 // PostDetail.js
 // import를 한다.
 import React from "react";
@@ -12,6 +10,8 @@ import { postActions } from "../redux/modules/post";
 import { Grid, Text, Image, Input, Button } from "../elements/Index";
 import ApplyStatusModal from "../components/ApplyStatusModal";
 import ApplyUserModal from "../components/ApplyUserModal";
+import { history } from "../redux/configureStore";
+
 // PostDetail의 함수형 컴포넌트를 만든다.
 const PostDetail = props => {
   const dispatch = useDispatch();
@@ -30,6 +30,8 @@ const PostDetail = props => {
     setApplyUserModal(true);
   };
   let post_id = props.match.params.id;
+  console.log("프로젝트제발", post_id);
+
   const userId = useSelector(state => state.user.userId); //로그인 유저아이디
   const postUserId = checkPost?.data.data.post.userId;
   console.log(userId, postUserId);
@@ -69,7 +71,7 @@ const PostDetail = props => {
           <Text>게시자 정보</Text>
           <Grid display="column">
             <Image />
-            <Text>{passdedMenber?.userId}</Text>
+            <Text>{passdedMenber?.nickname}</Text>
           </Grid>
           <Grid margin="10px auto">
             <Text>프로젝트 인원</Text>
@@ -134,15 +136,14 @@ const PostDetail = props => {
               {userId === postUserId ? (
                 <Grid>
                   <Button width="100px" height="30px" margin="auto 10px">
-                    {" "}
-                    모집완료{" "}
+                    모집완료
                   </Button>
                   <Button
                     width="100px"
                     height="30px"
                     margin="auto 10px"
                     _onClick={() => {
-                      history.push("/postedit");
+                      history.push({ pathname: `/postedit/${post_id}` });
                     }}
                   >
                     포스트수정

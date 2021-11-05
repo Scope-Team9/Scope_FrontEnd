@@ -7,10 +7,10 @@ const LOADING = "LOADING";
 const MAINPAGE = "MAINPAGE";
 const WHATPAGE = "WHATPAGE";
 
-const getPosts = createAction(GET_POST, (data) => ({ data }));
-const isLoading = createAction(LOADING, (loading) => ({ loading }));
-const isMainPage = createAction(MAINPAGE, (data) => ({ data }));
-const whatPage = createAction(WHATPAGE, (data) => ({ data }));
+const getPosts = createAction(GET_POST, data => ({ data }));
+const isLoading = createAction(LOADING, loading => ({ loading }));
+const isMainPage = createAction(MAINPAGE, data => ({ data }));
+const whatPage = createAction(WHATPAGE, data => ({ data }));
 
 const initialState = {
   posts: [],
@@ -46,9 +46,9 @@ export const getPostAPI = () => {
 
     apis
       .getPost(stack, _paging.next + 1, sort, reBook)
-      .then((res) => {
+      .then(res => {
         console.log(_paging);
-        const posts = res.data.data;
+        const posts = res.data.data.postResponseDtos;
 
         console.log("어떻게 오는지", res.data.data);
 
@@ -57,7 +57,7 @@ export const getPostAPI = () => {
 
         dispatch(getPosts(data));
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err.response);
       });
   };
@@ -67,7 +67,7 @@ export default handleActions(
   {
     // 백엔드와 통신
     [GET_POST]: (state, action) =>
-      produce(state, (draft) => {
+      produce(state, draft => {
         console.log(action);
         let stacks = action.payload.data.stack;
         let sorts = action.payload.data.sort;
@@ -109,16 +109,16 @@ export default handleActions(
       }),
 
     [LOADING]: (state, action) =>
-      produce(state, (draft) => {
+      produce(state, draft => {
         draft.is_loading = action.payload.loading;
       }),
     [MAINPAGE]: (state, action) =>
-      produce(state, (draft) => {
+      produce(state, draft => {
         // console.log("여기가 메인페이지인가", action.payload.data);
         draft.mainpage = action.payload.data;
       }),
     [WHATPAGE]: (state, action) =>
-      produce(state, (draft) => {
+      produce(state, draft => {
         // console.log("현재페이지", action.payload.data);
         // console.log(state);
         let page = {
