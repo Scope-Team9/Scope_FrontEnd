@@ -20,7 +20,7 @@ const PostDetail = (props) => {
 
   // const postId = props.location.state.postId;
   let post_id = props.match.params.id;
-  console.log("프로젝트", post_id);
+  console.log("프로젝트제발", post_id);
 
   React.useEffect(() => {
     dispatch(postActions.isMainPage(false));
