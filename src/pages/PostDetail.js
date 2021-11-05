@@ -38,6 +38,7 @@ const PostDetail = (props) => {
   }, []);
   const passedData = checkPost?.data["data"].post;
   const passdedMenber = checkPost?.data["data"].members[0];
+  console.log("소리쳐봐", checkPost?.data["data"].post);
 
   const modalOpen = () => {
     setShowModal(true);
