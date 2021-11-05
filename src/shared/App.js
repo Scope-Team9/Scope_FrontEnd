@@ -25,11 +25,11 @@ function App() {
   const dispatch = useDispatch();
   console.log(isCookie);
 
-  // React.useEffect(() => {
-  //   if (isCookie) {
-  //     dispatch(userCreators.myUserAPI());
-  //   }
-  // }, []);
+  React.useEffect(() => {
+    if (isCookie) {
+      dispatch(userCreators.myUserAPI());
+    }
+  }, []);
 
   return (
     <React.Fragment>
