@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useEffect } from "react";
 import styled from "styled-components";
-import { Grid, Text, Image, Button } from "../elements/Index";
+import { Grid, Text, Image, Button, Input } from "../elements/Index";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { apis } from "../lib/axios";
@@ -43,6 +43,7 @@ const PostEdit = (props) => {
       endDate: endDate,
       contents: contents,
     };
+    console.log("카드들", editcard);
     dispatch(postDetailActions.editPostAPI(editcard));
   };
 
@@ -51,22 +52,18 @@ const PostEdit = (props) => {
     const CheckPost = async () => {
       try {
         const result = await apis.detailPost(post_id);
+        let setValue = result.data.data.post;
         setCheckPost(result);
+        setTitle(setValue.title);
+        setSummary(setValue.summary);
+        setContents(setValue.contents);
       } catch (err) {
         console.log(err);
       }
     };
+
     CheckPost();
   }, []);
-
-  React.useEffect(() => {
-    setTitle(passedData?.title);
-    setSummary(passedData?.summary);
-    setContents(passedData?.contents);
-  });
-
-  const passedData = checkPost?.data["data"].post;
-  const passdedMenber = checkPost?.data["data"].members[0];
 
   // 기술 스택 선택
   const stackSelect = useMemo(
@@ -184,14 +181,14 @@ const PostEdit = (props) => {
         border="2px solid #8B3FF8"
         borderRadius="30px"
       >
-        <Title>게시글 작성페이지</Title>
+        <Title>게시글 수정페이지</Title>
         <Grid padding="16px">
           <Grid margin="10px auto">
-            <Text>Title</Text>
+            <Text>제목</Text>
             <Input
               type="text"
-              defaultValue={title}
-              onChange={(e) => {
+              editValue={title}
+              _onChange={(e) => {
                 setTitle(e.target.value);
               }}
             />
@@ -200,24 +197,37 @@ const PostEdit = (props) => {
             <Text>한줄소개</Text>
             <Input
               type="text"
-              defaultValue={summary}
-              onChange={(e) => {
+              editValue={summary}
+              _onChange={(e) => {
                 setSummary(e.target.value);
               }}
             />
           </Grid>
           <Grid margin="10px auto">
             <Text>기술스택 선택</Text>
+            {/* 1차방안 */}
             <Select
               isMulti
               components={animatedComponents}
               isClearable={value.some((v) => !v.isFixed)}
               value={techstack}
-              defaultValue={techstack}
               styles={styles}
               options={stackSelect}
               onChange={handleChange}
             />
+            {/* 2차방안 */}
+            <Select
+              isMulti
+              components={animatedComponents}
+              isClearable={value.some((v) => !v.isFixed)}
+              value={techStack}
+              styles={styles}
+              options={stackSelect}
+              onChange={handleChange}
+            />
+            {/* 3차방안 */}
+            {/* 4차방안 */}
+            {/* 5차방안 */}
           </Grid>
           <Grid margin="10px auto">
             <Text>기간설정</Text>
@@ -279,9 +289,9 @@ const PostEdit = (props) => {
             <Text>프로젝트 내용적기</Text>
             <Input
               type="text"
-              defaultValue={contents}
-              onChange={(e) => {
-                console.log("야옹", e.target.value);
+              editValue={contents}
+              _onChange={(e) => {
+                setContents();
               }}
             />
             <Grid padding="16px">
@@ -293,11 +303,11 @@ const PostEdit = (props) => {
                 height="30px"
                 margin="auto 10px"
                 _onClick={() => {
-                  history.push("/");
+                  // history.push("/");
                   scope_edit();
                 }}
               >
-                포스트수정
+                포스트수정 완료
               </Button>
               <Button width="100px" height="30px" margin="auto 10px">
                 포스트삭제
@@ -311,14 +321,6 @@ const PostEdit = (props) => {
 };
 
 const Title = styled.h1``;
-
-const Input = styled.input`
-  width: 500px;
-  height: 18px;
-  padding: 10px;
-  border: 1px solid #e7e1ff;
-  border-radius: 5px;
-`;
 
 const SDatePicker = styled(DatePicker)`
   box-sizing: border-box;

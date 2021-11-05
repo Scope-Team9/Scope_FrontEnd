@@ -1,4 +1,3 @@
-/* eslint-disable */
 // PostDetail.js
 // import를 한다.
 import React from "react";
@@ -9,23 +8,37 @@ import { apis } from "../lib/axios";
 import { useHistory } from "react-router";
 import { postActions } from "../redux/modules/post";
 import { Grid, Text, Image, Input, Button } from "../elements/Index";
-import ApplyModal from "../components/ApplyModal";
+import ApplyStatusModal from "../components/ApplyStatusModal";
+import ApplyUserModal from "../components/ApplyUserModal";
 import { history } from "../redux/configureStore";
 
 // PostDetail의 함수형 컴포넌트를 만든다.
 const PostDetail = (props) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [checkPost, setCheckPost] = React.useState();
-  const [showModal, setShowModal] = React.useState(false);
+  const [applyStatusModal, setApplyStatusModal] = React.useState(false); //신청현황
+  const [applyUserModal, setApplyUserModal] = React.useState(false); //지원취소
+  const [applyValue, setApplyValue] = React.useState();
 
-  // const postId = props.location.state.postId;
+  const applyStatusModalOpen = () => {
+    setApplyStatusModal(true);
+  };
+
+  const applyUserModalOpen = (value) => {
+    setApplyValue(value);
+    setApplyUserModal(true);
+  };
   let post_id = props.match.params.id;
   console.log("프로젝트제발", post_id);
+
+  const userId = useSelector((state) => state.user.userId); //로그인 유저아이디
+  const postUserId = checkPost?.data.data.post.userId;
+  console.log(userId, postUserId);
 
   React.useEffect(() => {
     dispatch(postActions.isMainPage(false));
     dispatch(postActions.whatPage("postDetail"));
-
     const CheckPost = async () => {
       try {
         const result = await apis.detailPost(post_id);
@@ -38,12 +51,6 @@ const PostDetail = (props) => {
   }, []);
   const passedData = checkPost?.data["data"].post;
   const passdedMenber = checkPost?.data["data"].members[0];
-
-  const modalOpen = () => {
-    setShowModal(true);
-  };
-
-  console.log("디테일포스트아이디", props);
 
   return (
     <React.Fragment>
@@ -77,24 +84,30 @@ const PostDetail = (props) => {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid position="relative" width="100%">
-              <Grid
-                position="absolute"
-                right="20px"
-                width="100px"
-                padding="10px"
-              >
-                <Button
-                  postion="absolute"
-                  width="100%"
-                  borderRadius="10px"
-                  _onClick={modalOpen}
+            {userId === postUserId && (
+              <Grid position="relative" width="100%">
+                <Grid
+                  position="absolute"
+                  right="20px"
+                  width="100px"
+                  padding="10px"
                 >
-                  신청현황 확인
-                </Button>
-                <ApplyModal showModal={showModal} setShowModal={setShowModal} />
+                  <Button
+                    postion="absolute"
+                    width="100%"
+                    borderRadius="10px"
+                    _onClick={applyStatusModalOpen}
+                  >
+                    신청현황 확인
+                  </Button>
+                  <ApplyStatusModal
+                    applyStatusModal={applyStatusModal}
+                    setApplyStatusModal={setApplyStatusModal}
+                    postId={post_id}
+                  />
+                </Grid>
               </Grid>
-            </Grid>
+            )}
 
             <Grid display="flex" margin="10px auto">
               <Text margin="auto 10px auto 0px">프로젝트 기간 :</Text>
@@ -120,24 +133,58 @@ const PostDetail = (props) => {
               <Content>{passedData?.contents}</Content>
             </Grid>
             <Grid padding="16px">
-              <Button width="100px" height="30px" margin="auto 10px">
-                모집완료
-              </Button>
-              <Button
-                width="100px"
-                height="30px"
-                margin="auto 10px"
-                _onClick={() => {
-                  history.push({
-                    pathname: `/postedit/${post_id}`,
-                  });
-                }}
-              >
-                포스트수정
-              </Button>
-              <Button width="100px" height="30px" margin="auto 10px">
-                포스트삭제
-              </Button>
+              {userId === postUserId ? (
+                <Grid>
+                  <Button width="100px" height="30px" margin="auto 10px">
+                    모집완료
+                  </Button>
+                  <Button
+                    width="100px"
+                    height="30px"
+                    margin="auto 10px"
+                    _onClick={() => {
+                      history.push({ pathname: `/postedit/${post_id}` });
+                    }}
+                  >
+                    포스트수정
+                  </Button>
+                  <Button width="100px" height="30px" margin="auto 10px">
+                    포스트삭제
+                  </Button>
+                </Grid>
+              ) : (
+                <Grid>
+                  <Button
+                    isValue="apply"
+                    _onClick={(e) => {
+                      console.log(e);
+                      applyUserModalOpen(e.target.value);
+                    }}
+                    width="100px"
+                    height="30px"
+                    margin="auto 10px"
+                  >
+                    지원신청
+                  </Button>
+                  <ApplyUserModal
+                    applyUserModal={applyUserModal}
+                    setApplyUserModal={setApplyUserModal}
+                    applyValue={applyValue}
+                    postId={post_id}
+                  />
+                  <Button
+                    isValue="cancel"
+                    _onClick={(e) => {
+                      applyUserModalOpen(e.target.value);
+                    }}
+                    width="100px"
+                    height="30px"
+                    margin="auto 10px"
+                  >
+                    지원취소
+                  </Button>
+                </Grid>
+              )}
             </Grid>
           </Grid>
         </Grid>

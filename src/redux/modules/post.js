@@ -48,7 +48,7 @@ export const getPostAPI = () => {
       .getPost(stack, _paging.next + 1, sort, reBook)
       .then((res) => {
         console.log(_paging);
-        const posts = res.data.data;
+        const posts = res.data.data.postResponseDtos;
 
         console.log("어떻게 오는지", res.data.data);
 
