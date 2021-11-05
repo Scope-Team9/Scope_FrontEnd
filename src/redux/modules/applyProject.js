@@ -32,7 +32,7 @@ const applyUserMW = postId => {
       })
       .catch(err => {
         console.log(err.response);
-        window.alert("신청자를 못찾겠네용!");
+        window.alert("4444신청자를 못찾겠네용!");
       });
   };
 };
@@ -48,7 +48,7 @@ const acceptOfferMW = (postId, acceptInfo) => {
       })
       .catch(err => {
         console.log(err.response);
-        window.alert("신청자를 못찾겠네용!");
+        window.alert("111신청자를 못찾겠네용!");
       });
   };
 };
@@ -63,7 +63,7 @@ const applyProjectMW = (postId, comment) => {
       })
       .catch(err => {
         console.log(err.response);
-        window.alert("신청자를 못찾겠네용!");
+        window.alert("2222신청자를 못찾겠네용!");
       });
   };
 };
@@ -78,7 +78,7 @@ const cancelProjectMW = (postId, acceptInfo) => {
       })
       .catch(err => {
         console.log(err.response);
-        window.alert("신청자를 못찾겠네용!");
+        window.alert("33333신청자를 못찾겠네용!");
       });
   };
 };

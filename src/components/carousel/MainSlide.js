@@ -67,7 +67,10 @@ const MainSlide = () => {
         <h3>What's up?</h3>
         <Slider {...settings}>
           {images.map((img, idx) => (
-            <div className={idx === imageIndex ? "slide activeSlide" : "slide"}>
+            <div
+              key={idx}
+              className={idx === imageIndex ? "slide activeSlide" : "slide"}
+            >
               <img src={img} alt={img} />
               {imageIndex == 0 && (
                 <div

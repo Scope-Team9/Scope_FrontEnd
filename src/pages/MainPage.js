@@ -61,13 +61,17 @@ const MainPage = () => {
     dispatch(postActions.isMainPage(true));
     dispatch(sortAction.getSort(data));
     dispatch(bookRecommendAction.getRb(""));
-    setPaging(0);
+    // if (paging > 0) {
+    //   setPaging(paging - 1);
+    // }
   };
   //bookmark,recommend
   const onclickRb = (data) => {
     dispatch(postActions.isMainPage(true));
     dispatch(bookRecommendAction.getRb(data));
-    setPaging(0);
+    // if (paging > 0) {
+    //   setPaging(paging - 1);
+    // }
   };
 
   return (
@@ -120,21 +124,17 @@ const MainPage = () => {
               추천
             </Filtering>
           </FilterBox>
-          {cards && (
-            <>
-              <InsideCard>
-                <PostList></PostList>
-              </InsideCard>
 
-              <div
-                ref={ref}
-                style={{
-                  height: "900px",
-                  backgroundColor: "white",
-                }}
-              ></div>
-            </>
-          )}
+          <InsideCard>
+            <PostList></PostList>
+          </InsideCard>
+          <div
+            ref={ref}
+            style={{
+              height: "900px",
+              backgroundColor: "white",
+            }}
+          ></div>
         </Inside>
       </Grid>
     </>

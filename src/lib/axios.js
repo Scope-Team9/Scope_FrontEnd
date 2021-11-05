@@ -65,15 +65,12 @@ export const apis = {
   getAllUserList: () => instance.get("/user/list"),
 
   //포스트 관련 api
-  // getPost: (page, stack) =>
-  //   instance.get(
-  //     `/api/post?filter=${};${};${};${};${};${};${};${};${};${};${};${};${};${}&displayNumber=15&page=${page}&sort=createdAt`
-  //   ),
-
   getPost: (stack, paging, sort, reBook) =>
     instance.get(
       `/api/post?filter=${stack.React};${stack.Spring};${stack.Swift};${stack.TypeScript};${stack.cpp};${stack.Django};${stack.Flask};${stack.Java};${stack.JavaScript};${stack.Kotlin};${stack.Node};${stack.php};${stack.Python};${stack.Vue};&displayNumber=9&page=${paging}&sort=${sort}&bookmarkRecommend=${reBook}`
     ),
+  //마이페이지
+  getMypage: (userId) => instance.post(`/api/post${userId}`),
 
   // 승민
   addPost: (postInfo) => instance.post(`/api/post`, postInfo),

@@ -53,7 +53,6 @@ const AddPost = (props) => {
       projectStatus: projectStatus,
       contents: contents,
     };
-    console.log("글 작성");
     dispatch(postAddActions.addPostAPI(card));
   };
 
