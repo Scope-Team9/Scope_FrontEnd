@@ -10,21 +10,22 @@ import { useHistory } from "react-router";
 import { postActions } from "../redux/modules/post";
 import { Grid, Text, Image, Input, Button } from "../elements/Index";
 import ApplyModal from "../components/ApplyModal";
+import { history } from "../redux/configureStore";
 
 // PostDetail의 함수형 컴포넌트를 만든다.
 const PostDetail = (props) => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const [checkPost, setCheckPost] = React.useState();
   const [showModal, setShowModal] = React.useState(false);
 
   // const postId = props.location.state.postId;
   let post_id = props.match.params.id;
-  console.log("asdasda", post_id);
+  console.log("프로젝트", post_id);
 
   React.useEffect(() => {
     dispatch(postActions.isMainPage(false));
-    dispatch(postActions.whatPage("myPage"));
+    dispatch(postActions.whatPage("postDetail"));
+
     const CheckPost = async () => {
       try {
         const result = await apis.detailPost(post_id);
@@ -41,6 +42,8 @@ const PostDetail = (props) => {
   const modalOpen = () => {
     setShowModal(true);
   };
+
+  console.log("디테일포스트아이디", props);
 
   return (
     <React.Fragment>
@@ -61,7 +64,7 @@ const PostDetail = (props) => {
           <Text>게시자 정보</Text>
           <Grid display="column">
             <Image />
-            <Text>{passdedMenber?.userId}</Text>
+            <Text>{passdedMenber?.nickname}</Text>
           </Grid>
           <Grid margin="10px auto">
             <Text>프로젝트 인원</Text>
@@ -125,7 +128,9 @@ const PostDetail = (props) => {
                 height="30px"
                 margin="auto 10px"
                 _onClick={() => {
-                  history.push("/postedit");
+                  history.push({
+                    pathname: `/postedit/${post_id}`,
+                  });
                 }}
               >
                 포스트수정

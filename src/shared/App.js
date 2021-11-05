@@ -5,7 +5,7 @@ import { history } from "../redux/configureStore";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import MainPage from "../pages/MainPage";
-import KakaoRedirect from "./kakaoRedirect";
+import KakaoRedirect from "./KakaoRedirect";
 import GitHubRedirect from "./GitHubRedirect";
 import MyPage from "../pages/MyPage";
 import PostAdd from "../pages/PostAdd";
@@ -27,8 +27,8 @@ function App() {
         <Switch>
           <Route path="/" exact component={MainPage}></Route>
           <Route path="/mypage" exact component={MyPage}></Route>
-          <Route path="/postwrite" exact component={PostAdd}></Route>
-          <Route path="/postedit" exact component={PostEdit}></Route>
+          <Route path="/postadd" exact component={PostAdd}></Route>
+          <Route path="/postedit/:id" exact component={PostEdit}></Route>
           <Route path="/markdown" exact component={Markdown}></Route>
           <Route path="/markdownread" exact component={MarkdownRead}></Route>
           <Route path="/postadd" exact component={PostAdd}></Route>

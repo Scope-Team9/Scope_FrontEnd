@@ -28,7 +28,7 @@ const MainPage = () => {
   // const infinity = useSelector((state) => state.infinity.paging);
   const whatPage = useSelector((state) => state.post.whatPage);
   const [ref, inView] = useInView();
-  const [paging, setPaging] = React.useState(1);
+  const [paging, setPaging] = React.useState(0);
 
   // console.log(infinity);
 
