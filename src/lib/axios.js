@@ -59,7 +59,7 @@ export const apis = {
     instance.post(`/api/team/${postId}`, acceptInfo),
   applyProject: (postId, comment) =>
     instance.post(`/api/applicant/${postId}`, comment),
-  cancelProject: (postId) => instance.post(`/api/applicant/${postId}`),
+  cancelProject: (postId) => instance.delete(`/api/applicant/${postId}`),
 
   getUserInfo: () => instance.get("/user/info"),
   getAllUserList: () => instance.get("/user/list"),
@@ -70,7 +70,7 @@ export const apis = {
       `/api/post?filter=${stack.React};${stack.Spring};${stack.Swift};${stack.TypeScript};${stack.cpp};${stack.Django};${stack.Flask};${stack.Java};${stack.JavaScript};${stack.Kotlin};${stack.Node};${stack.php};${stack.Python};${stack.Vue};&displayNumber=9&page=${paging}&sort=${sort}&bookmarkRecommend=${reBook}`
     ),
   //마이페이지
-  getMypage: (userId) => instance.post(`/api/post${userId}`),
+  getMypage: (userId) => instance.get(`/api/user/${userId}`),
 
   // 승민
   addPost: (postInfo) => instance.post(`/api/post`, postInfo),

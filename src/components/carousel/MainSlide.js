@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from "react";
 import "./MainSlide.css";
 import { history } from "../../redux/configureStore";

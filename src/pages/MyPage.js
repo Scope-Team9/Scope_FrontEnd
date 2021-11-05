@@ -21,7 +21,7 @@ const MyPage = (props) => {
   React.useEffect(() => {
     dispatch(postActions.isMainPage(false));
     dispatch(postActions.whatPage("myPage"));
-    dispatch(myPageActions.getMypages(userId));
+    dispatch(myPageActions.getMypageAPI(userId));
   }, []);
 
   return (

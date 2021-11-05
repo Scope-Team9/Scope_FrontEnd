@@ -21,11 +21,12 @@ const initialState = {
 };
 
 // 신청자 현황 불러오기 미들웨어
-const applyUserMW = postId => {
+const applyUserAPI = postId => {
   return function (dispatch, getState, { history }) {
     apis
       .applyUser(postId)
       .then(res => {
+        console.log(res);
         console.log(res.data.users);
         window.alert("신청자 정보가 잘 불러와졌네용!");
         dispatch(applyUsers(res.data.users));
@@ -37,11 +38,12 @@ const applyUserMW = postId => {
   };
 };
 //신청자 수락
-const acceptOfferMW = (postId, acceptInfo) => {
+const acceptOfferAPI = (postId, acceptInfo) => {
   return function (dispatch, getState, { history }) {
     apis
       .aceeptOffer(acceptInfo)
       .then(res => {
+        console.log(res);
         console.log(res.data.users);
         window.alert("신청자 정보가 잘 불러와졌네용!");
         dispatch(applyUsers(res.data.users));
@@ -53,25 +55,31 @@ const acceptOfferMW = (postId, acceptInfo) => {
   };
 };
 //프로젝트 지원
-const applyProjectMW = (postId, comment) => {
+const applyProjectAPI = (postId, comment) => {
   return function (dispatch, getState, { history }) {
     apis
-      .aceeptOffer(comment)
+      .applyProject(postId, comment)
       .then(res => {
         console.log(res);
         window.alert("프로젝트에 지원되었습니다.");
       })
       .catch(err => {
-        console.log(err.response);
-        window.alert("2222신청자를 못찾겠네용!");
+        if (
+          err.response.status === 400 &&
+          err.response.data.msg === "이미 지원한 프로젝트 입니다."
+        ) {
+          window.alert("이미 지원한 프로젝트 입니다.");
+          return;
+        }
+        window.alert("신청자 정보를 찾을 수 없습니다.");
       });
   };
 };
 //프로젝트취소
-const cancelProjectMW = (postId, acceptInfo) => {
+const cancelProjectAPI = postId => {
   return function (dispatch, getState, { history }) {
     apis
-      .cancelProject()
+      .cancelProject(postId)
       .then(res => {
         console.log(res);
         window.alert("프로젝트 지원이 취소되었습니다.!");
@@ -95,10 +103,10 @@ export default handleActions(
 );
 
 const applyCreators = {
-  applyUserMW,
-  acceptOfferMW,
-  applyProjectMW,
-  cancelProjectMW,
+  applyUserAPI,
+  acceptOfferAPI,
+  applyProjectAPI,
+  cancelProjectAPI,
 };
 
 export { applyCreators };

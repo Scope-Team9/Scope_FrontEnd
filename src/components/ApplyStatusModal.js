@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 import { Grid, Input, Text, Button, Image } from "../elements/Index";
 import { Dialog } from "@material-ui/core";
@@ -6,7 +7,7 @@ import styled from "styled-components";
 import { applyCreators } from "../redux/modules/applyProject";
 import CloseIcon from "@mui/icons-material/Close";
 
-const ApplyStatusModal = props => {
+const ApplyStatusModal = (props) => {
   const dispatch = useDispatch();
   const { applyStatusModal, setApplyStatusModal, postId } = props;
   const modalClose = () => {
@@ -15,13 +16,13 @@ const ApplyStatusModal = props => {
 
   // const applyUser = useSelector(state => state.applyUser.users);
 
-  // React.useEffect(() => {
-  //   const postId = props.postId;
-  //   dispatch(applyCreators.applyUserMiddleware(postId));
-  // }, []);
+  React.useEffect(() => {
+    console.log(postId);
+    dispatch(applyCreators.applyUserAPI(postId));
+  }, []);
 
   const acceptOffer = () => {
-    dispatch(applyCreators.acceptOfferMiddleware());
+    dispatch(applyCreators.acceptOfferAPI());
   };
 
   return (

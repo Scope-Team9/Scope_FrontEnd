@@ -1,18 +1,22 @@
 // MyPageInfo.js
-
+/* eslint-disable */
 // import를 한다.
 import React from "react";
 
 import Img from "../images/임시로고.jpg";
 import { Grid, Image, Text } from "../elements/Index";
-
+import { postActions } from "../redux/modules/post";
+import { myPageActions } from "../redux/modules/myPage";
+import { useSelector, useDispatch } from "react-redux";
 import Header from "./Header";
 import styled from "styled-components";
 import Markdown from "./Markdown";
 
 // MyPageInfo의 함수형 컴포넌트를 만든다.
 const MyPageInfo = (props) => {
-  const [filter, setFilter] = React.useState("관심");
+  const dispatch = useDispatch();
+  const userId = useSelector((state) => state.user.userId);
+  const [filter, setFilter] = React.useState("소개");
 
   return (
     <React.Fragment>

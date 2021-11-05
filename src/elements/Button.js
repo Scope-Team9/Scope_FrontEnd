@@ -63,7 +63,7 @@ const Button = props => {
 
   return (
     <>
-      <ElButton {...styles} onClick={_onClick}>
+      <ElButton {...styles} value={isValue} onClick={_onClick}>
         {text ? text : children}
       </ElButton>
     </>
