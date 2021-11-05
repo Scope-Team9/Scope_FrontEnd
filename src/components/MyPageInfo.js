@@ -1,4 +1,3 @@
-// MyPageInfo.js
 /* eslint-disable */
 // import를 한다.
 import React from "react";
@@ -11,12 +10,32 @@ import { useSelector, useDispatch } from "react-redux";
 import Header from "./Header";
 import styled from "styled-components";
 import Markdown from "./Markdown";
+import { apis } from "../lib/axios";
+import MypagePostList from "./mypagePost/MypagePostList";
 
 // MyPageInfo의 함수형 컴포넌트를 만든다.
 const MyPageInfo = (props) => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.user.userId);
+  console.log(userId);
   const [filter, setFilter] = React.useState("소개");
+  const [mydata, setMydata] = React.useState();
+  React.useEffect(() => {
+    // dispatch(myPageActions.getMypageAPI(userId));
+
+    const fetchData = async () => {
+      try {
+        const result = await apis.getMypage(userId);
+        console.log(result);
+        setMydata(result.data.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, []);
+
+  console.log(mydata);
 
   return (
     <React.Fragment>
@@ -70,6 +89,12 @@ const MyPageInfo = (props) => {
           소개
         </Filter>
       </Grid>
+      {filter === "모집" && (
+        <MypagePostList {...mydata.recruitment}></MypagePostList>
+      )}
+      {filter === "진행중" && <MypagePostList></MypagePostList>}
+      {filter === "관심" && <MypagePostList></MypagePostList>}
+      {filter === "완료" && <MypagePostList></MypagePostList>}
       {filter === "소개" && <Markdown></Markdown>}
     </React.Fragment>
   );

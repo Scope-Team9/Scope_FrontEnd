@@ -17,11 +17,10 @@ import { useSelector, useDispatch } from "react-redux";
 const MyPage = (props) => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.user.userId);
-  console.log(userId);
+
   React.useEffect(() => {
     dispatch(postActions.isMainPage(false));
     dispatch(postActions.whatPage("myPage"));
-    dispatch(myPageActions.getMypageAPI(userId));
   }, []);
 
   return (

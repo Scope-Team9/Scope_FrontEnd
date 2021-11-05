@@ -61,9 +61,7 @@ const MainPage = () => {
     dispatch(postActions.isMainPage(true));
     dispatch(sortAction.getSort(data));
     dispatch(bookRecommendAction.getRb(""));
-    // if (paging > 0) {
-    //   setPaging(paging - 1);
-    // }
+    setPaging(0);
   };
   //bookmark,recommend
   const onclickRb = (data) => {
@@ -72,6 +70,7 @@ const MainPage = () => {
     // if (paging > 0) {
     //   setPaging(paging - 1);
     // }
+    setPaging(0);
   };
 
   return (

@@ -15,7 +15,7 @@ const Post = (props) => {
   const dispatch = useDispatch();
 
   // console.log("게시자", props.recruitmentMember);
-  console.log("메인포스트아이디", props);
+  // console.log("메인포스트아이디", props);
   return (
     <React.Fragment>
       <ProductImgWrap

@@ -1,7 +1,5 @@
 /* eslint-disable */
-
 import React, { useCallback, useMemo, useEffect } from "react";
-
 import styled from "styled-components";
 import { Grid, Text, Image, Button } from "../elements/Index";
 import { useHistory } from "react-router";
