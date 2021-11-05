@@ -1,4 +1,5 @@
 /* eslint-disable */
+/* eslint-disable */ /* eslint-disable */ /* eslint-disable */ /* eslint-disable */
 // PostDetail.js
 // import를 한다.
 import React from "react";
