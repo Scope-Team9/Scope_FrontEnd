@@ -1,3 +1,7 @@
+/* eslint-disable */
+// PostEdit.js
+
+// import를 한다.
 import React, { useCallback, useMemo, useEffect } from "react";
 import styled from "styled-components";
 import { Grid, Text, Image, Button, Input } from "../elements/Index";
@@ -13,6 +17,7 @@ import { ko } from "date-fns/esm/locale";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 
+// PostEdit의 함수형 컴포넌트를 만든다.
 const PostEdit = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -216,15 +221,6 @@ const PostEdit = (props) => {
               onChange={handleChange}
             />
             {/* 2차방안 */}
-            <Select
-              isMulti
-              components={animatedComponents}
-              isClearable={value.some((v) => !v.isFixed)}
-              value={techStack}
-              styles={styles}
-              options={stackSelect}
-              onChange={handleChange}
-            />
             {/* 3차방안 */}
             {/* 4차방안 */}
             {/* 5차방안 */}
@@ -320,6 +316,7 @@ const PostEdit = (props) => {
   );
 };
 
+// styled-components를 사용한다.
 const Title = styled.h1``;
 
 const SDatePicker = styled(DatePicker)`
@@ -340,4 +337,5 @@ const Content = styled.h3`
   border-radius: 5px;
 `;
 
+// export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default PostEdit;

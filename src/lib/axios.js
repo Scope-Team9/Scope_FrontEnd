@@ -53,6 +53,7 @@ export const apis = {
   signup: registerInfo => instance.post("/api/signup", registerInfo),
 
   // 유저 관련 api
+  myUser: () => instance.get("/api/myuser"),
   editTest: (userId, testInfo) =>
     instance.post(`/api/test/${userId}`, testInfo),
   applyUser: postId => instance.get(`/api/applicant/${postId}`),

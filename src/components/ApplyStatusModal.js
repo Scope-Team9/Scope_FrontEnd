@@ -18,7 +18,7 @@ const ApplyStatusModal = props => {
   React.useEffect(() => {
     console.log(postId);
     dispatch(applyCreators.applyUserAPI(postId));
-  }, []);
+  }, [postId]);
 
   const acceptOffer = () => {
     dispatch(applyCreators.acceptOfferAPI());

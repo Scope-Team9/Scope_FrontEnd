@@ -99,6 +99,7 @@ const githubLoginMiddleware = code => {
               email: res.data.data.mail,
               nickname: res.data.data.nickname,
               userId: res.data.data.userId,
+              userPropensityType: res.data.data.userPropensityType,
             })
           );
           window.alert("로그인성공");
@@ -164,6 +165,28 @@ const testUserMiddleWare = signupInfo => {
   };
 };
 
+//로그인 정보 유지
+const myUserAPI = () => {
+  return function (dispatch, getState, { history }) {
+    apis
+      .myUser()
+      .then(res => {
+        console.log(res);
+        dispatch(
+          setUser({
+            email: res.data.data.mail,
+            nickname: res.data.data.nickname,
+            userId: res.data.data.userId,
+            userPropensityType: res.data.data.userPropensityType,
+          })
+        );
+        history.replace("/");
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+};
 //테스트 마친 회원가입
 const signupMiddleware = signupInfo => {
   return function (dispatch, getState, { history }) {
@@ -212,6 +235,7 @@ export default handleActions(
         draft.sigunupModalState = false;
         draft.userTestResult = action.payload.user.userTestResult;
         draft.memberTestResult = action.payload.user.memberTestResult;
+        draft.userPropensityType = action.payload.user.userPropensityType;
       }),
     [LOG_OUT]: (state, action) =>
       produce(state, draft => {
@@ -229,6 +253,7 @@ const userCreators = {
   emailCheckMiddleWare,
   nickCheckMiddleWare,
   editTestMiddleware,
+  myUserAPI,
   logOut,
 };
 
