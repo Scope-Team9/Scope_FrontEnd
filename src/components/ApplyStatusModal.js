@@ -15,13 +15,13 @@ const ApplyStatusModal = props => {
 
   // const applyUser = useSelector(state => state.applyUser.users);
 
-  // React.useEffect(() => {
-  //   const postId = props.postId;
-  //   dispatch(applyCreators.applyUserMiddleware(postId));
-  // }, []);
+  React.useEffect(() => {
+    console.log(postId);
+    dispatch(applyCreators.applyUserAPI(postId));
+  }, []);
 
   const acceptOffer = () => {
-    dispatch(applyCreators.acceptOfferMiddleware());
+    dispatch(applyCreators.acceptOfferAPI());
   };
 
   return (

@@ -21,11 +21,11 @@ const ApplyUserModal = props => {
       comment: comment,
     };
     console.log(applyComment);
-    dispatch(applyCreators.applyProjectMW(postId, applyComment));
+    dispatch(applyCreators.applyProjectAPI(postId, applyComment));
   };
 
   const cancel = () => {
-    dispatch(applyCreators.cancelProjectMW(postId));
+    dispatch(applyCreators.cancelProjectAPI(postId));
   };
 
   return (

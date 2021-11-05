@@ -21,11 +21,12 @@ const initialState = {
 };
 
 // 신청자 현황 불러오기 미들웨어
-const applyUserMW = postId => {
+const applyUserAPI = postId => {
   return function (dispatch, getState, { history }) {
     apis
       .applyUser(postId)
       .then(res => {
+        console.log(res);
         console.log(res.data.users);
         window.alert("신청자 정보가 잘 불러와졌네용!");
         dispatch(applyUsers(res.data.users));
@@ -37,11 +38,12 @@ const applyUserMW = postId => {
   };
 };
 //신청자 수락
-const acceptOfferMW = (postId, acceptInfo) => {
+const acceptOfferAPI = (postId, acceptInfo) => {
   return function (dispatch, getState, { history }) {
     apis
       .aceeptOffer(acceptInfo)
       .then(res => {
+        console.log(res);
         console.log(res.data.users);
         window.alert("신청자 정보가 잘 불러와졌네용!");
         dispatch(applyUsers(res.data.users));
@@ -53,7 +55,7 @@ const acceptOfferMW = (postId, acceptInfo) => {
   };
 };
 //프로젝트 지원
-const applyProjectMW = (postId, comment) => {
+const applyProjectAPI = (postId, comment) => {
   return function (dispatch, getState, { history }) {
     apis
       .applyProject(postId, comment)
@@ -74,7 +76,7 @@ const applyProjectMW = (postId, comment) => {
   };
 };
 //프로젝트취소
-const cancelProjectMW = postId => {
+const cancelProjectAPI = postId => {
   return function (dispatch, getState, { history }) {
     apis
       .cancelProject(postId)
@@ -101,10 +103,10 @@ export default handleActions(
 );
 
 const applyCreators = {
-  applyUserMW,
-  acceptOfferMW,
-  applyProjectMW,
-  cancelProjectMW,
+  applyUserAPI,
+  acceptOfferAPI,
+  applyProjectAPI,
+  cancelProjectAPI,
 };
 
 export { applyCreators };

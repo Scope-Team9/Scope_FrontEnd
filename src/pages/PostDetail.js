@@ -100,6 +100,7 @@ const PostDetail = props => {
                   <ApplyStatusModal
                     applyStatusModal={applyStatusModal}
                     setApplyStatusModal={setApplyStatusModal}
+                    postId={post_id}
                   />
                 </Grid>
               </Grid>
