@@ -3,6 +3,8 @@ import React from "react";
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configureStore";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { userCreators } from "../redux/modules/user";
 
 import MainPage from "../pages/MainPage";
 import KakaoRedirect from "./kakaoRedirect";
@@ -19,6 +21,16 @@ import Header from "../components/Header";
 import PropensityTest from "../components/propensityTest/PropensityTest";
 
 function App() {
+  const isCookie = document.cookie.split("=")[1];
+  const dispatch = useDispatch();
+  console.log(isCookie);
+
+  // React.useEffect(() => {
+  //   if (isCookie) {
+  //     dispatch(userCreators.myUserAPI());
+  //   }
+  // }, []);
+
   return (
     <React.Fragment>
       <Header />
