@@ -62,8 +62,14 @@ const applyProjectMW = (postId, comment) => {
         window.alert("프로젝트에 지원되었습니다.");
       })
       .catch(err => {
-        console.log(err.response);
-        window.alert("2222신청자를 못찾겠네용!");
+        if (
+          err.response.status === 400 &&
+          err.response.data.msg === "이미 지원한 프로젝트 입니다."
+        ) {
+          window.alert("이미 지원한 프로젝트 입니다.");
+          return;
+        }
+        window.alert("신청자 정보를 찾을 수 없습니다.");
       });
   };
 };
