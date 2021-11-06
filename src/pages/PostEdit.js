@@ -62,7 +62,15 @@ const PostEdit = (props) => {
         setTitle(setValue.title);
         setSummary(setValue.summary);
         setContents(setValue.contents);
-        setTectstack(setValue.techStack);
+        setTectstack(
+          setValue.techStack.map((value) => ({ label: value, value }))
+        );
+        setTotalmember(
+          setValue.totalMember.map((value) => ({ label: value, value }))
+        );
+        console.log("시간", setValue.startDate);
+        // setStartdate(setValue.startDate);
+        // setEnddate(setValue.endDate);
       } catch (err) {
         console.log(err);
       }
@@ -70,28 +78,26 @@ const PostEdit = (props) => {
 
     CheckPost();
   }, []);
+  console.log("갓준일멘토님", techstack);
 
   // 기술 스택 선택
-  const stackSelect = useMemo(
-    () => [
-      // object형태(value는 키값, ""는 value 값), object의 값을 가져오기 위해서는 키값을 알아야한다.
-      { value: "React", label: "React" },
-      { value: "Java", label: "Java" },
-      { value: "Javascript", label: "Javascript" },
-      { value: "Python", label: "Python" },
-      { value: "Nodejs", label: "Nodejs" },
-      { value: "Flask", label: "Flask" },
-      { value: "cpp", label: "cpp" },
-      { value: "Django", label: "Django" },
-      { value: "php", label: "php" },
-      { value: "Vue", label: "Vue" },
-      { value: "Spring", label: "Spring" },
-      { value: "Swift", label: "Swift" },
-      { value: "Kotlin", label: "Kotlin" },
-      { value: "Typescript", label: "Typescript" },
-    ],
-    []
-  );
+  const stackSelect = [
+    // object형태(value는 키값, ""는 value 값), object의 값을 가져오기 위해서는 키값을 알아야한다.
+    { value: "React", label: "React" },
+    { value: "Java", label: "Java" },
+    { value: "Javascript", label: "Javascript" },
+    { value: "Python", label: "Python" },
+    { value: "Nodejs", label: "Nodejs" },
+    { value: "Flask", label: "Flask" },
+    { value: "cpp", label: "cpp" },
+    { value: "Django", label: "Django" },
+    { value: "php", label: "php" },
+    { value: "Vue", label: "Vue" },
+    { value: "Spring", label: "Spring" },
+    { value: "Swift", label: "Swift" },
+    { value: "Kotlin", label: "Kotlin" },
+    { value: "Typescript", label: "Typescript" },
+  ];
 
   // 게시글 작성(스택선택)
   const styles = useMemo(
@@ -214,26 +220,11 @@ const PostEdit = (props) => {
               isMulti
               components={animatedComponents}
               isClearable={value.some((v) => !v.isFixed)}
-              value={techstack}
               styles={styles}
-              options={stackSelect}
-              onChange={(e) => {
-                setTectstack(e);
-              }}
-            />
-            {/* 2차방안 */}
-            <Select
-              isMulti
-              components={animatedComponents}
-              isClearable={value.some((v) => !v.isFixed)}
               value={techstack}
-              styles={styles}
               options={stackSelect}
               onChange={handleChange}
             />
-            {/* 3차방안 */}
-            {/* 4차방안 */}
-            {/* 5차방안 */}
           </Grid>
           <Grid margin="10px auto">
             <Text>기간설정</Text>
@@ -271,6 +262,7 @@ const PostEdit = (props) => {
             <Select
               options={projectMembers}
               isLoading
+              value={totalMember}
               onChange={(e) => {
                 let b;
                 b = e["label"];
