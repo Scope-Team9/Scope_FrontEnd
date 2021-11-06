@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useCallback, useMemo, useEffect } from "react";
 import styled from "styled-components";
-import { Grid, Text, Image, Button } from "../elements/Index";
+import { Grid, Text, Image, Button, Input } from "../elements/Index";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { apis } from "../lib/axios";
@@ -14,6 +14,7 @@ import { ko } from "date-fns/esm/locale";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 
+// PostEdit의 함수형 컴포넌트를 만든다.
 const PostEdit = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -44,6 +45,7 @@ const PostEdit = (props) => {
       endDate: endDate,
       contents: contents,
     };
+    console.log("카드들", editcard);
     dispatch(postDetailActions.editPostAPI(editcard));
   };
 
@@ -52,44 +54,47 @@ const PostEdit = (props) => {
     const CheckPost = async () => {
       try {
         const result = await apis.detailPost(post_id);
+        let setValue = result.data.data.post;
         setCheckPost(result);
+        setTitle(setValue.title);
+        setSummary(setValue.summary);
+        setContents(setValue.contents);
+        setTectstack(
+          setValue.techStack.map((value) => ({ label: value, value }))
+        );
+        setTotalmember(
+          setValue.totalMember.map((value) => ({ label: value, value }))
+        );
+        console.log("시간입니다", setValue.startDate);
+        // setStartdate(setValue.startDate);
+        // setEnddate(setValue.endDate);
       } catch (err) {
         console.log(err);
       }
     };
+
     CheckPost();
   }, []);
-
-  React.useEffect(() => {
-    setTitle(passedData?.title);
-    setSummary(passedData?.summary);
-    setContents(passedData?.contents);
-  });
-
-  const passedData = checkPost?.data["data"].post;
-  const passdedMenber = checkPost?.data["data"].members[0];
+  console.log("갓준일멘토님", techstack);
 
   // 기술 스택 선택
-  const stackSelect = useMemo(
-    () => [
-      // object형태(value는 키값, ""는 value 값), object의 값을 가져오기 위해서는 키값을 알아야한다.
-      { value: "React", label: "React" },
-      { value: "Java", label: "Java" },
-      { value: "Javascript", label: "Javascript" },
-      { value: "Python", label: "Python" },
-      { value: "Nodejs", label: "Nodejs" },
-      { value: "Flask", label: "Flask" },
-      { value: "cpp", label: "cpp" },
-      { value: "Django", label: "Django" },
-      { value: "php", label: "php" },
-      { value: "Vue", label: "Vue" },
-      { value: "Spring", label: "Spring" },
-      { value: "Swift", label: "Swift" },
-      { value: "Kotlin", label: "Kotlin" },
-      { value: "Typescript", label: "Typescript" },
-    ],
-    []
-  );
+  const stackSelect = [
+    // object형태(value는 키값, ""는 value 값), object의 값을 가져오기 위해서는 키값을 알아야한다.
+    { value: "React", label: "React" },
+    { value: "Java", label: "Java" },
+    { value: "Javascript", label: "Javascript" },
+    { value: "Python", label: "Python" },
+    { value: "Nodejs", label: "Nodejs" },
+    { value: "Flask", label: "Flask" },
+    { value: "cpp", label: "cpp" },
+    { value: "Django", label: "Django" },
+    { value: "php", label: "php" },
+    { value: "Vue", label: "Vue" },
+    { value: "Spring", label: "Spring" },
+    { value: "Swift", label: "Swift" },
+    { value: "Kotlin", label: "Kotlin" },
+    { value: "Typescript", label: "Typescript" },
+  ];
 
   // 게시글 작성(스택선택)
   const styles = useMemo(
@@ -116,7 +121,6 @@ const PostEdit = (props) => {
   );
 
   const [value, setValue] = React.useState(orderOptions(stackSelect));
-
   const handleChange = useCallback(
     (inputValue, { action, removedValue }) => {
       switch (action) {
@@ -146,7 +150,6 @@ const PostEdit = (props) => {
     for (index = 0; index < techstack.length; index++) {
       tamarray.push(techstack[index]["label"]);
     }
-    console.log(tamarray);
     setTest(tamarray);
   };
 
@@ -185,14 +188,14 @@ const PostEdit = (props) => {
         border="2px solid #8B3FF8"
         borderRadius="30px"
       >
-        <Title>게시글 작성페이지</Title>
+        <Title>게시글 수정페이지</Title>
         <Grid padding="16px">
           <Grid margin="10px auto">
-            <Text>Title</Text>
+            <Text>제목</Text>
             <Input
               type="text"
-              defaultValue={title}
-              onChange={(e) => {
+              editValue={title}
+              _onChange={(e) => {
                 setTitle(e.target.value);
               }}
             />
@@ -201,21 +204,21 @@ const PostEdit = (props) => {
             <Text>한줄소개</Text>
             <Input
               type="text"
-              defaultValue={summary}
-              onChange={(e) => {
+              editValue={summary}
+              _onChange={(e) => {
                 setSummary(e.target.value);
               }}
             />
           </Grid>
           <Grid margin="10px auto">
             <Text>기술스택 선택</Text>
+            {/* 1차방안 */}
             <Select
               isMulti
               components={animatedComponents}
               isClearable={value.some((v) => !v.isFixed)}
-              value={techstack}
-              defaultValue={techstack}
               styles={styles}
+              value={techstack}
               options={stackSelect}
               onChange={handleChange}
             />
@@ -229,7 +232,7 @@ const PostEdit = (props) => {
                 selected={startDate}
                 onChange={(date) => setStartdate(date)}
                 selectsStart
-                defaultValue={startDate}
+                value={startDate}
                 startdate={startDate}
                 enddate={endDate}
                 locale={ko}
@@ -242,11 +245,12 @@ const PostEdit = (props) => {
                 selected={endDate}
                 onChange={(date) => setEnddate(date)}
                 selectsEnd
-                defaultValue={endDate}
+                value={endDate}
+                startdate={startDate}
                 enddate={endDate}
-                mindate={startDate}
                 locale={ko}
-                minDate={new Date("")}
+                minDate={new Date()}
+                placeholderText="프로젝트 종료일 입력"
               />
             </Grid>
           </Grid>
@@ -255,6 +259,7 @@ const PostEdit = (props) => {
             <Select
               options={projectMembers}
               isLoading
+              value={totalMember}
               onChange={(e) => {
                 let b;
                 b = e["label"];
@@ -280,9 +285,9 @@ const PostEdit = (props) => {
             <Text>프로젝트 내용적기</Text>
             <Input
               type="text"
-              defaultValue={contents}
-              onChange={(e) => {
-                console.log("야옹", e.target.value);
+              editValue={contents}
+              _onChange={(e) => {
+                setContents();
               }}
             />
             <Grid padding="16px">
@@ -294,11 +299,11 @@ const PostEdit = (props) => {
                 height="30px"
                 margin="auto 10px"
                 _onClick={() => {
-                  history.push("/");
+                  // history.push("/");
                   scope_edit();
                 }}
               >
-                포스트수정
+                포스트수정 완료
               </Button>
               <Button width="100px" height="30px" margin="auto 10px">
                 포스트삭제
@@ -311,15 +316,8 @@ const PostEdit = (props) => {
   );
 };
 
+// styled-components를 사용한다.
 const Title = styled.h1``;
-
-const Input = styled.input`
-  width: 500px;
-  height: 18px;
-  padding: 10px;
-  border: 1px solid #e7e1ff;
-  border-radius: 5px;
-`;
 
 const SDatePicker = styled(DatePicker)`
   box-sizing: border-box;
@@ -339,4 +337,5 @@ const Content = styled.h3`
   border-radius: 5px;
 `;
 
+// export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default PostEdit;

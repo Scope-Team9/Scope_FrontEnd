@@ -13,6 +13,7 @@ const Input = (props) => {
     multiLine,
     edit,
     value,
+    editValue,
     defaulValue,
     margin,
     width,
@@ -67,6 +68,8 @@ const Input = (props) => {
           width={width}
           margin={margin}
           type={type}
+          value={value}
+          defaulValue={defaulValue}
           placeholder={placeholder}
           onChange={_onChange}
           ref={innerRef}
@@ -92,6 +95,7 @@ const Input = (props) => {
         margin={margin}
         type={type}
         placeholder={placeholder}
+        value={editValue}
         defaulValue={defaulValue}
         onChange={_onChange}
         ref={innerRef}

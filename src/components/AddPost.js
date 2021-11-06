@@ -2,7 +2,6 @@
 // AddPost.js
 
 // import를 한다.
-/* eslint-disable */
 import React, { useCallback, useEffect, useMemo } from "react";
 import styled from "styled-components";
 import DatePicker from "react-datepicker";
@@ -133,7 +132,6 @@ const AddPost = (props) => {
     for (index = 0; index < techstack.length; index++) {
       tamarray.push(techstack[index]["label"]);
     }
-    console.log(tamarray);
     setTest(tamarray);
   };
 
@@ -229,7 +227,7 @@ const AddPost = (props) => {
                 onChange={(date) => setEnddate(date)}
                 selectsEnd
                 enddate={endDate}
-                mindate={startDate}
+                mindate={new Date()}
                 locale={ko}
                 minDate={new Date("")}
               />

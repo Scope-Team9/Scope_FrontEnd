@@ -28,7 +28,6 @@ const MainPage = () => {
   const is_mainPage = useSelector((state) => state.post.mainpage);
   // const infinity = useSelector((state) => state.infinity.paging);
   const whatPage = useSelector((state) => state.post.whatPage);
-
   const [ref, inView] = useInView();
   const [paging, setPaging] = React.useState(0);
   const [nowFilter, setNowFilter] = React.useState("최신");
@@ -141,6 +140,22 @@ const MainPage = () => {
               }}
             ></div>
           )}
+
+          <Btn
+            onClick={() => {
+              history.push("/postadd");
+            }}
+          >
+            {" "}
+            <i
+              style={{
+                fontSize: "30px",
+                margin: "12px auto",
+                color: "white",
+              }}
+              className="fas fa-plus"
+            ></i>
+          </Btn>
         </Inside>
       </Grid>
     </>
@@ -200,7 +215,7 @@ const Btn = styled.button`
   text-align: center;
   right: 50px;
   margin: auto;
-  background: black;
+  background: blue;
   cursor: pointer;
 `;
 
