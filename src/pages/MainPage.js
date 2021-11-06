@@ -82,7 +82,12 @@ const MainPage = () => {
 
   return (
     <>
-      <Grid height="100%" bg="#ffff" padding="0px 0px 10px 0"></Grid>
+      <Grid
+        maxWidth="1920"
+        height="100%"
+        bg="#ffff"
+        padding="0px 0px 10px 0"
+      ></Grid>
       {/* <ResponsiveSidebar>
         <SideBar />
       </ResponsiveSidebar> */}

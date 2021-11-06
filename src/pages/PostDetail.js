@@ -39,6 +39,7 @@ const PostDetail = props => {
 
   //북마크 토글
   const ToggleBookMark = () => {
+    setBookmark(!bookmark);
     dispatch(postDetailActions.bookMarkAPI(post_id));
   };
 
@@ -55,11 +56,11 @@ const PostDetail = props => {
       }
     };
     CheckPost();
-  }, []);
+  }, [bookmark]);
   const passedData = checkPost?.data["data"].post;
   const passdedMenber = checkPost?.data["data"].members[0];
   console.log(passedData);
-  console.log(passedData?.bookmarkChecked);
+  console.log();
   return (
     <React.Fragment>
       <Grid
