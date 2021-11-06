@@ -48,7 +48,7 @@ const HeaderRight = (props) => {
           <Grid display="flex" alignItems="center" margin="0 10px">
             <Image
               _onClick={() => {
-                history.push(`/mypage/${user_id}`);
+                history.push(`/mypage/${user_info.userId}`);
               }}
               src={userImage}
             />
