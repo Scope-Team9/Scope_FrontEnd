@@ -70,15 +70,6 @@ const HeaderRight = props => {
         height="auto"
       >
         <HeaderWrapper>
-          <Grid display="flex" alignItems="center" margin="0 10px">
-            <Image
-              src={userImage}
-              _onClick={() => {
-                history.push("/mypage");
-              }}
-            />
-            <Text>사용자</Text>
-          </Grid>
           <Button
             backgroundColor="#333"
             width="100px"

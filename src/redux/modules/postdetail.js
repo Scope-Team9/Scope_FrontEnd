@@ -51,7 +51,13 @@ const bookMarkAPI = postId => {
       .bookMarkChecked(postId)
       .then(res => {
         console.log(res);
-        window.alert("관심프로젝트로 추가되었습니다!");
+        console.log(res.data.data.isBookmarkChecked);
+        if (res.data.msg == "북마크 추가 성공") {
+          window.alert("관심프로젝트로 추가되었습니다!");
+        } else {
+          window.alert("관심프로젝트로 삭제되었습니다!");
+          return;
+        }
       })
       .catch(err => {
         console.log(err.response);

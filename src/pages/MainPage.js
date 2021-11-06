@@ -19,19 +19,19 @@ import { useHistory } from "react-router";
 const MainPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const is_stack_clicked = useSelector((state) => state.stack.stack);
-  const is_sort_clicked = useSelector((state) => state.sort.sort);
-  const is_loading = useSelector((state) => state.post.is_loading);
-  const cards = useSelector((state) => state.post.posts);
+  const is_stack_clicked = useSelector(state => state.stack.stack);
+  const is_sort_clicked = useSelector(state => state.sort.sort);
+  const is_loading = useSelector(state => state.post.is_loading);
+  const cards = useSelector(state => state.post.posts);
   console.log(cards);
-  const is_reBook_clicked = useSelector((state) => state.rebook.reBook);
-  const is_mainPage = useSelector((state) => state.post.mainpage);
+  const is_reBook_clicked = useSelector(state => state.rebook.reBook);
+  const is_mainPage = useSelector(state => state.post.mainpage);
   // const infinity = useSelector((state) => state.infinity.paging);
-  const whatPage = useSelector((state) => state.post.whatPage);
+  const whatPage = useSelector(state => state.post.whatPage);
   const [ref, inView] = useInView();
   const [paging, setPaging] = React.useState(0);
   const [nowFilter, setNowFilter] = React.useState("최신");
-  const post_list = useSelector((state) => state.post.posts);
+  const post_list = useSelector(state => state.post.posts);
   console.log("어떻게오느냐 을랴랴랴랴랴랴ㅑ랴랴", post_list);
   // console.log(infinity);
 
@@ -59,14 +59,14 @@ const MainPage = () => {
   }, [inView]);
 
   //sort
-  const onclickSort = (data) => {
+  const onclickSort = data => {
     dispatch(postActions.isMainPage(true));
     dispatch(sortAction.getSort(data));
     // dispatch(bookRecommendAction.getRb(""));
     setPaging(0);
   };
   //bookmark,recommend
-  const onclickRb = (data) => {
+  const onclickRb = data => {
     dispatch(postActions.isMainPage(true));
     dispatch(bookRecommendAction.getRb(data));
     // dispatch(sortAction.getSort(""));
@@ -76,7 +76,7 @@ const MainPage = () => {
     setPaging(0);
   };
 
-  const checkNowFilter = (data) => {
+  const checkNowFilter = data => {
     setNowFilter(data);
   };
 

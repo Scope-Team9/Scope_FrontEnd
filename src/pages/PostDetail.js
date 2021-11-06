@@ -49,7 +49,7 @@ const PostDetail = props => {
       try {
         const result = await apis.detailPost(post_id);
         setCheckPost(result);
-        console.log(result.data.data.bookmarkChecked);
+        console.log(result);
       } catch (err) {
         console.log(err);
       }
@@ -59,6 +59,7 @@ const PostDetail = props => {
   const passedData = checkPost?.data["data"].post;
   const passdedMenber = checkPost?.data["data"].members[0];
   console.log(passedData);
+  console.log(passedData?.bookmarkChecked);
   return (
     <React.Fragment>
       <Grid
