@@ -1,14 +1,16 @@
 import React from "react";
 import MypagePost from "./MypagePost";
 
-const MypagePostList = (props) => {
-  const myCards = [props[0]];
+const MypagePostList = props => {
+  const myCards = props;
+  const newMyCards = Object.values(myCards);
   console.log(myCards);
+  console.log(newMyCards);
   return (
     <>
-      {myCards && (
+      {newMyCards && (
         <React.Fragment>
-          {myCards.map((p, idx) => {
+          {newMyCards.map((p, idx) => {
             return <MypagePost key={idx} {...p}></MypagePost>;
           })}
         </React.Fragment>

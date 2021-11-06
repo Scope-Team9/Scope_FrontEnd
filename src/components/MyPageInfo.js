@@ -16,7 +16,7 @@ import MarkdownRead from "./MarkdownRead";
 import { history } from "../redux/configureStore";
 
 // MyPageInfo의 함수형 컴포넌트를 만든다.
-const MyPageInfo = (props) => {
+const MyPageInfo = props => {
   const dispatch = useDispatch();
   // const userId = useSelector((state) => state.user.userId);
   const userId = props.match.params.id;
@@ -42,6 +42,15 @@ const MyPageInfo = (props) => {
     fetchData();
   }, [filter]);
   const introduction = mydata?.user.introduction ? true : false;
+  const recruitmentProject = mydata?.recruitment;
+  const inProgressProject = mydata?.inProgress;
+  const bookMarkProject = mydata?.bookmark;
+  const endProject = mydata?.end;
+
+  console.log(recruitmentProject);
+  console.log(inProgressProject);
+  console.log(bookMarkProject);
+  console.log(endProject);
 
   return (
     <React.Fragment>
@@ -96,15 +105,15 @@ const MyPageInfo = (props) => {
         </Filter>
       </Grid>
       {filter === "모집" && (
-        <MypagePostList {...mydata.recruitment}></MypagePostList>
+        <MypagePostList {...recruitmentProject}></MypagePostList>
       )}
       {filter === "진행중" && (
-        <MypagePostList {...mydata.inProgress}></MypagePostList>
+        <MypagePostList {...inProgressProject}></MypagePostList>
       )}
       {filter === "관심" && (
-        <MypagePostList {...mydata.bookmark}></MypagePostList>
+        <MypagePostList {...bookMarkProject}></MypagePostList>
       )}
-      {filter === "완료" && <MypagePostList {...mydata.end}></MypagePostList>}
+      {filter === "완료" && <MypagePostList {...endProject}></MypagePostList>}
       <button
         onClick={() => {
           history.push({

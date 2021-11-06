@@ -13,10 +13,11 @@ import ApplyUserModal from "../components/ApplyUserModal";
 import { history } from "../redux/configureStore";
 
 // PostDetail의 함수형 컴포넌트를 만든다.
-const PostDetail = (props) => {
+const PostDetail = props => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [checkPost, setCheckPost] = React.useState();
+  const [bookmark, setBookmark] = React.useState(false);
   const [applyStatusModal, setApplyStatusModal] = React.useState(false); //신청현황
   const [applyUserModal, setApplyUserModal] = React.useState(false); //지원취소
   const [applyValue, setApplyValue] = React.useState();
@@ -25,16 +26,21 @@ const PostDetail = (props) => {
     setApplyStatusModal(true);
   };
 
-  const applyUserModalOpen = (value) => {
+  const applyUserModalOpen = value => {
     setApplyValue(value);
     setApplyUserModal(true);
   };
   let post_id = props.match.params.id;
   console.log("프로젝트제발", post_id);
 
-  const userId = useSelector((state) => state.user.userId); //로그인 유저아이디
+  const userId = useSelector(state => state.user.userId); //로그인 유저아이디
   const postUserId = checkPost?.data.data.post.userId;
   console.log(userId, postUserId);
+
+  //북마크 토글
+  const ToggleBookMark = () => {
+    dispatch(postDetailActions.bookMarkAPI(post_id));
+  };
 
   React.useEffect(() => {
     dispatch(postActions.isMainPage(false));
@@ -43,6 +49,7 @@ const PostDetail = (props) => {
       try {
         const result = await apis.detailPost(post_id);
         setCheckPost(result);
+        console.log(result.data.data.bookmarkChecked);
       } catch (err) {
         console.log(err);
       }
@@ -51,7 +58,7 @@ const PostDetail = (props) => {
   }, []);
   const passedData = checkPost?.data["data"].post;
   const passdedMenber = checkPost?.data["data"].members[0];
-
+  console.log(passedData);
   return (
     <React.Fragment>
       <Grid
@@ -62,6 +69,13 @@ const PostDetail = (props) => {
         borderRadius="30px"
         position="relative"
       >
+        {userId !== postUserId && (
+          <Grid width="50px" position="absolute" top="20px" right="20px">
+            <Button _onClick={ToggleBookMark}>
+              {!passedData?.bookmarkChecked ? "관심없음" : "관심있음"}
+            </Button>
+          </Grid>
+        )}
         <Title>{passedData?.title}</Title>
         <Grid margin="10px auto">
           <Text>{passedData?.summary}</Text>
@@ -157,7 +171,7 @@ const PostDetail = (props) => {
                 <Grid>
                   <Button
                     isValue="apply"
-                    _onClick={(e) => {
+                    _onClick={e => {
                       console.log(e);
                       applyUserModalOpen(e.target.value);
                     }}
@@ -175,7 +189,7 @@ const PostDetail = (props) => {
                   />
                   <Button
                     isValue="cancel"
-                    _onClick={(e) => {
+                    _onClick={e => {
                       applyUserModalOpen(e.target.value);
                     }}
                     width="100px"
@@ -186,7 +200,7 @@ const PostDetail = (props) => {
                   </Button>
                   <Button
                     isValue="teamExit"
-                    _onClick={(e) => {
+                    _onClick={e => {
                       applyUserModalOpen(e.target.value);
                     }}
                     width="100px"
