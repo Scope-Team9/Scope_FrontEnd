@@ -6,11 +6,12 @@ import User from "./modules/user";
 
 import Post from "./modules/post";
 import Stack from "./modules/stack";
-import PostAdd from "./modules/postadd";
+import Card from "./modules/postadd";
 import Sort from "./modules/sort";
 import ReBook from "./modules/bookRecommend";
 import Infinitys from "./modules/infinity";
 import ApplyUser from "./modules/applyProject";
+import Mypage from "./modules/myPage";
 
 export const history = createBrowserHistory();
 
@@ -21,10 +22,11 @@ const rootReducer = combineReducers({
   apply: ApplyUser,
   post: Post,
   stack: Stack,
-  card: PostAdd,
+  card: Card,
   sort: Sort,
   rebook: ReBook,
   infinity: Infinitys,
+  mypage: Mypage,
 
   // 8. 리덕스에 history를 이제 넣어줄 것이다. 우리가 만든 history와 우리의 라우터가 연결이되는 것이다. 그리고 이것의 우리의 스토어에 저장이되는 것이다.
   router: connectRouter(history),
@@ -52,6 +54,6 @@ const composeEnhancers =
 // composeEnhancers를 사용해서 applyMiddleware로 지금까지 있었던 미들웨어를 사용한다는 말이다.
 const enhancer = composeEnhancers(applyMiddleware(...middlewares));
 
-let store = initialStore => createStore(rootReducer, enhancer);
+let store = (initialStore) => createStore(rootReducer, enhancer);
 
 export default store();

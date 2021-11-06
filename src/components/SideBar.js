@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 import { Grid, Image, Text } from "../elements/Index";
 import userImage from "../images/임시로고.jpg";

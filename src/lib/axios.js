@@ -21,6 +21,7 @@ instance.interceptors.request.use(
     if (cookie === "") {
       return config;
     }
+    // console.log(cookie);
 
     // const cookieSplitUndefined = cookie.split('=')[1];
     // console.log(cookieSplitUndefined);
@@ -52,6 +53,7 @@ export const apis = {
   signup: (registerInfo) => instance.post("/api/signup", registerInfo),
 
   // 유저 관련 api
+  myUser: () => instance.get("/api/myuser"),
   editTest: (userId, testInfo) =>
     instance.post(`/api/test/${userId}`, testInfo),
   applyUser: (postId) => instance.get(`/api/applicant/${postId}`),
@@ -59,21 +61,21 @@ export const apis = {
     instance.post(`/api/team/${postId}`, acceptInfo),
   applyProject: (postId, comment) =>
     instance.post(`/api/applicant/${postId}`, comment),
-  cancelProject: (postId) => instance.post(`/api/applicant/${postId}`),
+  cancelProject: (postId) => instance.delete(`/api/applicant/${postId}`),
+  exitTeam: (postId) => instance.delete("/api/team/secession", postId),
 
   getUserInfo: () => instance.get("/user/info"),
   getAllUserList: () => instance.get("/user/list"),
 
   //포스트 관련 api
-  // getPost: (page, stack) =>
-  //   instance.get(
-  //     `/api/post?filter=${};${};${};${};${};${};${};${};${};${};${};${};${};${}&displayNumber=15&page=${page}&sort=createdAt`
-  //   ),
-
   getPost: (stack, paging, sort, reBook) =>
     instance.get(
       `/api/post?filter=${stack.React};${stack.Spring};${stack.Swift};${stack.TypeScript};${stack.cpp};${stack.Django};${stack.Flask};${stack.Java};${stack.JavaScript};${stack.Kotlin};${stack.Node};${stack.php};${stack.Python};${stack.Vue};&displayNumber=9&page=${paging}&sort=${sort}&bookmarkRecommend=${reBook}`
     ),
+  //마이페이지
+  getMypage: (userId) => instance.get(`/api/user/${userId}`),
+  writeMyIntroduction: (userId, introduction) =>
+    instance.post(`/api/user/${userId}/desc`, introduction),
 
   // 승민
   addPost: (postInfo) => instance.post(`/api/post`, postInfo),

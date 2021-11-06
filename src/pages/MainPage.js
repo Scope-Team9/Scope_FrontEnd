@@ -22,14 +22,17 @@ const MainPage = () => {
   const is_stack_clicked = useSelector((state) => state.stack.stack);
   const is_sort_clicked = useSelector((state) => state.sort.sort);
   const is_loading = useSelector((state) => state.post.is_loading);
-
+  const cards = useSelector((state) => state.post.posts);
+  console.log(cards);
   const is_reBook_clicked = useSelector((state) => state.rebook.reBook);
   const is_mainPage = useSelector((state) => state.post.mainpage);
   // const infinity = useSelector((state) => state.infinity.paging);
   const whatPage = useSelector((state) => state.post.whatPage);
   const [ref, inView] = useInView();
-  const [paging, setPaging] = React.useState(1);
-
+  const [paging, setPaging] = React.useState(0);
+  const [nowFilter, setNowFilter] = React.useState("최신");
+  const post_list = useSelector((state) => state.post.posts);
+  console.log("어떻게오느냐 을랴랴랴랴랴랴ㅑ랴랴", post_list);
   // console.log(infinity);
 
   // console.log(useSelector((state) => state.infinity.paging));
@@ -49,7 +52,7 @@ const MainPage = () => {
   React.useEffect(() => {
     if (inView === true) {
       setPaging(paging + 1);
-      console.log(paging);
+      console.log("내가 페이지", paging);
       dispatch(pageAction.getPage(paging));
       dispatch(postActions.getPostAPI());
     }
@@ -59,12 +62,22 @@ const MainPage = () => {
   const onclickSort = (data) => {
     dispatch(postActions.isMainPage(true));
     dispatch(sortAction.getSort(data));
-    dispatch(bookRecommendAction.getRb(""));
+    // dispatch(bookRecommendAction.getRb(""));
+    setPaging(0);
   };
   //bookmark,recommend
   const onclickRb = (data) => {
     dispatch(postActions.isMainPage(true));
     dispatch(bookRecommendAction.getRb(data));
+    // dispatch(sortAction.getSort(""));
+    // if (paging > 0) {
+    //   setPaging(paging - 1);
+    // }
+    setPaging(0);
+  };
+
+  const checkNowFilter = (data) => {
+    setNowFilter(data);
   };
 
   return (
@@ -80,17 +93,11 @@ const MainPage = () => {
           <Stacks>
             <Stack />
           </Stacks>
-          <button
-            onClick={() => {
-              console.log(is_mainPage);
-            }}
-          >
-            확인하기
-          </button>
           <FilterBox>
             <Filtering
               onClick={() => {
                 onclickSort("createdAt");
+                checkNowFilter("createdAt");
               }}
             >
               최신
@@ -98,6 +105,7 @@ const MainPage = () => {
             <Filtering
               onClick={() => {
                 onclickSort("deadline");
+                checkNowFilter("deadline");
               }}
             >
               마감순
@@ -105,6 +113,7 @@ const MainPage = () => {
             <Filtering
               onClick={() => {
                 onclickRb("bookmark");
+                checkNowFilter("bookmark");
               }}
             >
               북마크
@@ -112,6 +121,7 @@ const MainPage = () => {
             <Filtering
               onClick={() => {
                 onclickRb("recommend");
+                checkNowFilter("recommend");
               }}
             >
               추천
@@ -121,14 +131,31 @@ const MainPage = () => {
           <InsideCard>
             <PostList></PostList>
           </InsideCard>
+          {nowFilter !== "bookmark" && (
+            <div
+              ref={ref}
+              style={{
+                height: "900px",
+                backgroundColor: "white",
+              }}
+            ></div>
+          )}
 
-          <div
-            ref={ref}
-            style={{
-              height: "900px",
-              backgroundColor: "white",
+          <Btn
+            onClick={() => {
+              history.push("/postadd");
             }}
-          ></div>
+          >
+            {" "}
+            <i
+              style={{
+                fontSize: "30px",
+                margin: "12px auto",
+                color: "white",
+              }}
+              className="fas fa-plus"
+            ></i>
+          </Btn>
         </Inside>
       </Grid>
     </>
@@ -188,7 +215,7 @@ const Btn = styled.button`
   text-align: center;
   right: 50px;
   margin: auto;
-  background: black;
+  background: blue;
   cursor: pointer;
 `;
 

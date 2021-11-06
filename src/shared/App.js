@@ -3,11 +3,14 @@ import React from "react";
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configureStore";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { userCreators } from "../redux/modules/user";
 
 import MainPage from "../pages/MainPage";
 import KakaoRedirect from "./kakaoRedirect";
 import GitHubRedirect from "./GitHubRedirect";
 import MyPage from "../pages/MyPage";
+import MyPageInfo from "../components/MyPageInfo";
 import PostAdd from "../pages/PostAdd";
 import PostEdit from "../pages/PostEdit";
 import PostDetail from "../pages/PostDetail";
@@ -19,6 +22,16 @@ import Header from "../components/Header";
 import PropensityTest from "../components/propensityTest/PropensityTest";
 
 function App() {
+  const isCookie = document.cookie.split("=")[1];
+  const dispatch = useDispatch();
+  console.log(isCookie);
+
+  React.useEffect(() => {
+    if (isCookie) {
+      dispatch(userCreators.myUserAPI());
+    }
+  }, []);
+
   return (
     <React.Fragment>
       <Header />
@@ -26,11 +39,10 @@ function App() {
       <ConnectedRouter history={history}>
         <Switch>
           <Route path="/" exact component={MainPage}></Route>
-          <Route path="/mypage" exact component={MyPage}></Route>
-          <Route path="/postwrite" exact component={PostAdd}></Route>
-          <Route path="/postedit" exact component={PostEdit}></Route>
-          <Route path="/markdown" exact component={Markdown}></Route>
-          <Route path="/markdownread" exact component={MarkdownRead}></Route>
+          <Route path="/mypage/:id" exact component={MyPageInfo}></Route>
+          <Route path="/postadd" exact component={PostAdd}></Route>
+          <Route path="/postedit/:id" exact component={PostEdit}></Route>
+          <Route path="/addmarkdown" exact component={Markdown}></Route>
           <Route path="/postadd" exact component={PostAdd}></Route>
           <Route path="/postdetail/:id" exact component={PostDetail}></Route>
 
