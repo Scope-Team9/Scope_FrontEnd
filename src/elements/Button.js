@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const Button = props => {
   const {
+    _id,
     isTest,
     color,
     text,
@@ -63,7 +64,7 @@ const Button = props => {
 
   return (
     <>
-      <ElButton {...styles} value={isValue} onClick={_onClick}>
+      <ElButton {...styles} value={isValue} onClick={_onClick} id={_id}>
         {text ? text : children}
       </ElButton>
     </>

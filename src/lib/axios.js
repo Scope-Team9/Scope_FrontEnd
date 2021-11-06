@@ -62,6 +62,7 @@ export const apis = {
   applyProject: (postId, comment) =>
     instance.post(`/api/applicant/${postId}`, comment),
   cancelProject: (postId) => instance.delete(`/api/applicant/${postId}`),
+  exitTeam: (postId) => instance.delete("/api/team/secession", postId),
 
   getUserInfo: () => instance.get("/user/info"),
   getAllUserList: () => instance.get("/user/list"),

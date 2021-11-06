@@ -104,6 +104,7 @@ const PostDetail = (props) => {
                     applyStatusModal={applyStatusModal}
                     setApplyStatusModal={setApplyStatusModal}
                     postId={post_id}
+                    userId={userId}
                   />
                 </Grid>
               </Grid>
@@ -182,6 +183,17 @@ const PostDetail = (props) => {
                     margin="auto 10px"
                   >
                     지원취소
+                  </Button>
+                  <Button
+                    isValue="teamExit"
+                    _onClick={(e) => {
+                      applyUserModalOpen(e.target.value);
+                    }}
+                    width="100px"
+                    height="30px"
+                    margin="auto 10px"
+                  >
+                    팀탈퇴
                   </Button>
                 </Grid>
               )}

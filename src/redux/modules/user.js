@@ -36,6 +36,7 @@ const kakaologinMiddleware = code => {
     apis
       .kakaoLogin(code)
       .then(res => {
+        console.log(res);
         if (res.data.status == 300) {
           window.alert("추가정보 작성이 필요합니다.");
           dispatch(
@@ -168,20 +169,25 @@ const testUserMiddleWare = signupInfo => {
 //로그인 정보 유지
 const myUserAPI = () => {
   return function (dispatch, getState, { history }) {
-    apis.myUser().then(res => {
-      console.log(res);
-      dispatch(
-        setUser({
-          email: res.data.data.mail,
-          nickname: res.data.data.nickname,
-          userId: res.data.data.userId,
-          userPropensityType: res.data.data.userPropensityType,
-        })
-      );
-    });
+    apis
+      .myUser()
+      .then(res => {
+        console.log(res);
+        dispatch(
+          setUser({
+            email: res.data.data.mail,
+            nickname: res.data.data.nickname,
+            userId: res.data.data.userId,
+            userPropensityType: res.data.data.userPropensityType,
+          })
+        );
+        history.replace("/");
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 };
-
 //테스트 마친 회원가입
 const signupMiddleware = signupInfo => {
   return function (dispatch, getState, { history }) {

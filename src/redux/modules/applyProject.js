@@ -6,10 +6,10 @@ import { apis } from "../../lib/axios";
 const APPLY_PROJEFCT = "APPLY_POST";
 
 // 액션생성
-const applyUsers = createAction(APPLY_PROJEFCT, applyUser => ({ applyUser }));
+const applyUsers = createAction(APPLY_PROJEFCT, applyUsers => ({ applyUsers }));
 
 const initialState = {
-  users: [
+  testUsers: [
     {
       userId: "1813325",
       nickname: "guest",
@@ -20,16 +20,15 @@ const initialState = {
   ],
 };
 
-// 신청자 현황 불러오기 미들웨어
+// 내가만든 프로젝트 신청자 현황 불러오기
 const applyUserAPI = postId => {
   return function (dispatch, getState, { history }) {
     apis
       .applyUser(postId)
       .then(res => {
-        console.log(res);
-        console.log(res.data.users);
-        window.alert("신청자 정보가 잘 불러와졌네용!");
-        dispatch(applyUsers(res.data.users));
+        console.log(res.data.data);
+        window.alert("1111신청자 정보가 잘 불러와졌네용!");
+        dispatch(applyUsers(res.data.data));
       })
       .catch(err => {
         console.log(err.response);
@@ -37,24 +36,24 @@ const applyUserAPI = postId => {
       });
   };
 };
-//신청자 수락
+//내가 만든 프로젝트 신청자 수락(팀장)
 const acceptOfferAPI = (postId, acceptInfo) => {
   return function (dispatch, getState, { history }) {
     apis
-      .aceeptOffer(acceptInfo)
+      .aceeptOffer(postId, acceptInfo)
       .then(res => {
+        console.log(res.data.data);
         console.log(res);
-        console.log(res.data.users);
-        window.alert("신청자 정보가 잘 불러와졌네용!");
+        window.alert("신청을 수락하였습니다!");
         dispatch(applyUsers(res.data.users));
       })
       .catch(err => {
         console.log(err.response);
-        window.alert("111신청자를 못찾겠네용!");
+        window.alert("88888신청자를 못찾겠네용!");
       });
   };
 };
-//프로젝트 지원
+//모집중인 프로젝트 지원(팀원)
 const applyProjectAPI = (postId, comment) => {
   return function (dispatch, getState, { history }) {
     apis
@@ -75,7 +74,7 @@ const applyProjectAPI = (postId, comment) => {
       });
   };
 };
-//프로젝트취소
+//모집중인 프로젝트 지원취소(팀원)
 const cancelProjectAPI = postId => {
   return function (dispatch, getState, { history }) {
     apis
@@ -90,13 +89,28 @@ const cancelProjectAPI = postId => {
       });
   };
 };
+//팀장이 수락한 프로젝트 탈퇴(팀원)
+const exitTeamAPI = postId => {
+  return function (dispatch, getState, { history }) {
+    apis
+      .exitTeam(postId)
+      .then(res => {
+        console.log(res);
+        window.alert("팀에서 탈출하였습니다!");
+      })
+      .catch(err => {
+        console.log(err.response);
+        window.alert("5555신청자를 못찾겠네용!");
+      });
+  };
+};
 // 리듀서
 export default handleActions(
   {
     [APPLY_PROJEFCT]: (state, action) =>
       produce(state, draft => {
-        console.log("신청자정보", action.payload);
-        draft.users = action.payload.users;
+        console.log("신청자정보", action);
+        draft.applyUsers = action.payload.applyUsers;
       }),
   },
   initialState
@@ -107,6 +121,7 @@ const applyCreators = {
   acceptOfferAPI,
   applyProjectAPI,
   cancelProjectAPI,
+  exitTeamAPI,
 };
 
 export { applyCreators };
