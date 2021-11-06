@@ -2,8 +2,7 @@ import React from "react";
 import MypagePost from "./MypagePost";
 
 const MypagePostList = (props) => {
-  console.log("프롭스 받았다 모집중", props);
-  const myCards = props;
+  const myCards = [props[0]];
   console.log(myCards);
   return (
     <>

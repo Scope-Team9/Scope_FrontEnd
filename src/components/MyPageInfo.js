@@ -12,16 +12,23 @@ import styled from "styled-components";
 import Markdown from "./Markdown";
 import { apis } from "../lib/axios";
 import MypagePostList from "./mypagePost/MypagePostList";
+import MarkdownRead from "./MarkdownRead";
+import { history } from "../redux/configureStore";
 
 // MyPageInfo의 함수형 컴포넌트를 만든다.
 const MyPageInfo = (props) => {
   const dispatch = useDispatch();
-  const userId = useSelector((state) => state.user.userId);
+  // const userId = useSelector((state) => state.user.userId);
+  const userId = props.match.params.id;
+  // console.log(props);
   console.log(userId);
   const [filter, setFilter] = React.useState("소개");
   const [mydata, setMydata] = React.useState();
+
   React.useEffect(() => {
     // dispatch(myPageActions.getMypageAPI(userId));
+    dispatch(postActions.isMainPage(false));
+    dispatch(postActions.whatPage("myPage"));
 
     const fetchData = async () => {
       try {
@@ -33,9 +40,8 @@ const MyPageInfo = (props) => {
       }
     };
     fetchData();
-  }, []);
-
-  console.log(mydata);
+  }, [filter]);
+  const introduction = mydata?.user.introduction ? true : false;
 
   return (
     <React.Fragment>
@@ -92,10 +98,27 @@ const MyPageInfo = (props) => {
       {filter === "모집" && (
         <MypagePostList {...mydata.recruitment}></MypagePostList>
       )}
-      {filter === "진행중" && <MypagePostList></MypagePostList>}
-      {filter === "관심" && <MypagePostList></MypagePostList>}
-      {filter === "완료" && <MypagePostList></MypagePostList>}
-      {filter === "소개" && <Markdown></Markdown>}
+      {filter === "진행중" && (
+        <MypagePostList {...mydata.inProgress}></MypagePostList>
+      )}
+      {filter === "관심" && (
+        <MypagePostList {...mydata.bookmark}></MypagePostList>
+      )}
+      {filter === "완료" && <MypagePostList {...mydata.end}></MypagePostList>}
+      <button
+        onClick={() => {
+          history.push({
+            pathname: "/addmarkdown",
+            state: { userId: userId },
+          });
+        }}
+      >
+        작성하기
+      </button>
+
+      {filter === "소개" && introduction === true && (
+        <MarkdownRead {...userId}></MarkdownRead>
+      )}
     </React.Fragment>
   );
 };

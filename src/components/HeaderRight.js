@@ -11,15 +11,19 @@ import { userCreators } from "../redux/modules/user";
 
 import { deleteCookie } from "../shared/Cookie";
 
-const HeaderRight = props => {
+const HeaderRight = (props) => {
   const dispatch = useDispatch();
-  const is_login = useSelector(state => state.user.is_login);
+  const is_login = useSelector((state) => state.user.is_login);
   const is_token = document.cookie.split("=")[1];
-  const user_info = useSelector(state => state.user);
+  const user_info = useSelector((state) => state.user);
+  const user_id = user_info.userId;
+  console.log(user_info.userId);
 
   console.log(document.cookie);
   const [showModal, setShowModal] = React.useState(false);
-  const sigunupModalState = useSelector(state => state.user.sigunupModalState);
+  const sigunupModalState = useSelector(
+    (state) => state.user.sigunupModalState
+  );
   const modalOpen = () => {
     setShowModal(true);
   };
@@ -46,7 +50,7 @@ const HeaderRight = props => {
           <Grid display="flex" alignItems="center" margin="0 10px">
             <Image
               _onClick={() => {
-                history.push("/mypage");
+                history.push(`/mypage/${user_id}`);
               }}
               src={userImage}
             />

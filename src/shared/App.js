@@ -10,6 +10,7 @@ import MainPage from "../pages/MainPage";
 import KakaoRedirect from "./kakaoRedirect";
 import GitHubRedirect from "./GitHubRedirect";
 import MyPage from "../pages/MyPage";
+import MyPageInfo from "../components/MyPageInfo";
 import PostAdd from "../pages/PostAdd";
 import PostEdit from "../pages/PostEdit";
 import PostDetail from "../pages/PostDetail";
@@ -38,11 +39,10 @@ function App() {
       <ConnectedRouter history={history}>
         <Switch>
           <Route path="/" exact component={MainPage}></Route>
-          <Route path="/mypage" exact component={MyPage}></Route>
+          <Route path="/mypage/:id" exact component={MyPageInfo}></Route>
           <Route path="/postadd" exact component={PostAdd}></Route>
           <Route path="/postedit/:id" exact component={PostEdit}></Route>
-          <Route path="/markdown" exact component={Markdown}></Route>
-          <Route path="/markdownread" exact component={MarkdownRead}></Route>
+          <Route path="/addmarkdown" exact component={Markdown}></Route>
           <Route path="/postadd" exact component={PostAdd}></Route>
           <Route path="/postdetail/:id" exact component={PostDetail}></Route>
 

@@ -73,6 +73,8 @@ export const apis = {
     ),
   //마이페이지
   getMypage: (userId) => instance.get(`/api/user/${userId}`),
+  writeMyIntroduction: (userId, introduction) =>
+    instance.post(`/api/user/${userId}/desc`, introduction),
 
   // 승민
   addPost: (postInfo) => instance.post(`/api/post`, postInfo),
