@@ -30,7 +30,6 @@ const PostDetail = (props) => {
     setApplyUserModal(true);
   };
   let post_id = props.match.params.id;
-  console.log("프로젝트제발", post_id);
 
   const userId = useSelector((state) => state.user.userId); //로그인 유저아이디
   const postUserId = checkPost?.data.data.post.userId;
@@ -104,7 +103,6 @@ const PostDetail = (props) => {
                     applyStatusModal={applyStatusModal}
                     setApplyStatusModal={setApplyStatusModal}
                     postId={post_id}
-                    userId={userId}
                   />
                 </Grid>
               </Grid>
@@ -183,17 +181,6 @@ const PostDetail = (props) => {
                     margin="auto 10px"
                   >
                     지원취소
-                  </Button>
-                  <Button
-                    isValue="teamExit"
-                    _onClick={(e) => {
-                      applyUserModalOpen(e.target.value);
-                    }}
-                    width="100px"
-                    height="30px"
-                    margin="auto 10px"
-                  >
-                    팀탈퇴
                   </Button>
                 </Grid>
               )}

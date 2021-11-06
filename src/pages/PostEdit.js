@@ -1,4 +1,7 @@
 /* eslint-disable */
+//PostEdit.js
+
+// import를 한다.
 import React, { useCallback, useMemo, useEffect } from "react";
 import styled from "styled-components";
 import { Grid, Text, Image, Button, Input } from "../elements/Index";
@@ -20,6 +23,7 @@ const PostEdit = (props) => {
   const history = useHistory();
   const animatedComponents = makeAnimated();
   const [checkPost, setCheckPost] = React.useState();
+
   const [postId, setPostId] = React.useState();
   const [title, setTitle] = React.useState();
   const [summary, setSummary] = React.useState();
@@ -45,6 +49,7 @@ const PostEdit = (props) => {
       endDate: endDate,
       contents: contents,
     };
+    console.log("포스트아이디", postId);
     console.log("카드들", editcard);
     dispatch(postDetailActions.editPostAPI(editcard));
   };
@@ -62,12 +67,22 @@ const PostEdit = (props) => {
         setTectstack(
           setValue.techStack.map((value) => ({ label: value, value }))
         );
-        setTotalmember(
-          setValue.totalMember.map((value) => ({ label: value, value }))
-        );
-        console.log("시간입니다", setValue.startDate);
         // setStartdate(setValue.startDate);
         // setEnddate(setValue.endDate);
+        // setTotalmember(setValue.totalMember);
+
+        // setTotalmember(
+        //   setValue.totalMember.map((value) => ({ lable: value, number }))
+        // );
+        // // setProjectstatus(setValue.projectStatus);
+        // setProjectstatus(
+        //   setValue.projectStatus.map((value) => ({ label: value, value }))
+        // );
+        console.log("스택입니다", setValue.techStack);
+        console.log("시작시간", setValue.startDate);
+        console.log("마감시간", setValue.endDate);
+        console.log("프로젝트상태", setValue.projectStatus);
+        console.log("총인원입니다", setValue.totalMember);
       } catch (err) {
         console.log(err);
       }
@@ -75,7 +90,6 @@ const PostEdit = (props) => {
 
     CheckPost();
   }, []);
-  console.log("갓준일멘토님", techstack);
 
   // 기술 스택 선택
   const stackSelect = [
@@ -94,6 +108,22 @@ const PostEdit = (props) => {
     { value: "Swift", label: "Swift" },
     { value: "Kotlin", label: "Kotlin" },
     { value: "Typescript", label: "Typescript" },
+  ];
+
+  // 게시글 작성(프로젝트 상태)
+  const projectstatus = [
+    { value: "모집중", label: "모집중" },
+    { value: "진행중", label: "진행중" },
+    { value: "마감중", label: "마감중" },
+  ];
+
+  // 게시글 작성(프로젝트 인원)
+  const projectMembers = [
+    { value: 2, label: 2 },
+    { value: 3, label: 3 },
+    { value: 4, label: 4 },
+    { value: 5, label: 5 },
+    { value: 6, label: 6 },
   ];
 
   // 게시글 작성(스택선택)
@@ -157,28 +187,6 @@ const PostEdit = (props) => {
     formatTech();
   }, [techstack]);
 
-  // 게시글 작성(프로젝트 상태)
-  const projectstatus = useMemo(
-    () => [
-      { value: "모집중", label: "모집중" },
-      { value: "진행중", label: "진행중" },
-      { value: "마감중", label: "마감중" },
-    ],
-    []
-  );
-
-  // 게시글 작성(프로젝트 인원)
-  const projectMembers = useMemo(
-    () => [
-      { value: 2, label: 2 },
-      { value: 3, label: 3 },
-      { value: 4, label: 4 },
-      { value: 5, label: 5 },
-      { value: 6, label: 6 },
-    ],
-    []
-  );
-
   return (
     <React.Fragment>
       <Grid
@@ -234,7 +242,6 @@ const PostEdit = (props) => {
                 selectsStart
                 value={startDate}
                 startdate={startDate}
-                enddate={endDate}
                 locale={ko}
                 minDate={new Date()}
                 placeholderText="프로젝트 시작일 입력"
@@ -246,7 +253,6 @@ const PostEdit = (props) => {
                 onChange={(date) => setEnddate(date)}
                 selectsEnd
                 value={endDate}
-                startdate={startDate}
                 enddate={endDate}
                 locale={ko}
                 minDate={new Date()}
@@ -259,12 +265,12 @@ const PostEdit = (props) => {
             <Select
               options={projectMembers}
               isLoading
-              value={totalMember}
+              value={projectMembers}
               onChange={(e) => {
                 let b;
                 b = e["label"];
+                console.log("프로젝트 총 인원", b);
                 setTotalmember(b);
-                console.log(b);
               }}
             ></Select>
           </Grid>
@@ -273,10 +279,9 @@ const PostEdit = (props) => {
             <Select
               options={projectstatus}
               isLoading
+              value={projectstatus}
               onChange={(e) => {
-                let a;
-                a = e["label"];
-                console.log(a);
+                console.log("프로젝트 상태", a);
                 setProjectstatus(a);
               }}
             ></Select>
