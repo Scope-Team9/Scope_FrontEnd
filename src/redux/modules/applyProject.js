@@ -20,7 +20,7 @@ const initialState = {
   ],
 };
 
-// 신청자 현황 불러오기 미들웨어
+// 내가만든 프로젝트 신청자 현황 불러오기
 const applyUserAPI = postId => {
   return function (dispatch, getState, { history }) {
     apis
@@ -36,7 +36,7 @@ const applyUserAPI = postId => {
       });
   };
 };
-//신청자 수락
+//내가 만든 프로젝트 신청자 수락(팀장)
 const acceptOfferAPI = (postId, acceptInfo) => {
   return function (dispatch, getState, { history }) {
     apis
@@ -49,11 +49,11 @@ const acceptOfferAPI = (postId, acceptInfo) => {
       })
       .catch(err => {
         console.log(err.response);
-        window.alert("111신청자를 못찾겠네용!");
+        window.alert("88888신청자를 못찾겠네용!");
       });
   };
 };
-//프로젝트 지원
+//모집중인 프로젝트 지원(팀원)
 const applyProjectAPI = (postId, comment) => {
   return function (dispatch, getState, { history }) {
     apis
@@ -74,7 +74,7 @@ const applyProjectAPI = (postId, comment) => {
       });
   };
 };
-//프로젝트취소
+//모집중인 프로젝트 지원취소(팀원)
 const cancelProjectAPI = postId => {
   return function (dispatch, getState, { history }) {
     apis
@@ -86,6 +86,21 @@ const cancelProjectAPI = postId => {
       .catch(err => {
         console.log(err.response);
         window.alert("33333신청자를 못찾겠네용!");
+      });
+  };
+};
+//팀장이 수락한 프로젝트 탈퇴(팀원)
+const exitTeamAPI = postId => {
+  return function (dispatch, getState, { history }) {
+    apis
+      .exitTeam(postId)
+      .then(res => {
+        console.log(res);
+        window.alert("팀에서 탈출하였습니다!");
+      })
+      .catch(err => {
+        console.log(err.response);
+        window.alert("5555신청자를 못찾겠네용!");
       });
   };
 };
@@ -106,6 +121,7 @@ const applyCreators = {
   acceptOfferAPI,
   applyProjectAPI,
   cancelProjectAPI,
+  exitTeamAPI,
 };
 
 export { applyCreators };

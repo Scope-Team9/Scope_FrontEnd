@@ -184,6 +184,17 @@ const PostDetail = props => {
                   >
                     지원취소
                   </Button>
+                  <Button
+                    isValue="teamExit"
+                    _onClick={e => {
+                      applyUserModalOpen(e.target.value);
+                    }}
+                    width="100px"
+                    height="30px"
+                    margin="auto 10px"
+                  >
+                    팀탈퇴
+                  </Button>
                 </Grid>
               )}
             </Grid>

@@ -28,10 +28,17 @@ const ApplyUserModal = props => {
     dispatch(applyCreators.cancelProjectAPI(postId));
   };
 
+  const exitTeam = () => {
+    const _postId = {
+      postId: postId,
+    };
+    console.log(_postId);
+    dispatch(applyCreators.exitTeamAPI(_postId));
+  };
   return (
     <>
       <Dialog maxWidth={"sm"} scroll="paper" open={applyUserModal}>
-        {applyValue === "apply" ? (
+        {applyValue === "apply" && (
           <ModalWrap>
             <Grid height="10%" bg="#eee" position="relative">
               <Grid
@@ -63,7 +70,8 @@ const ApplyUserModal = props => {
               </Grid>
             </Grid>
           </ModalWrap>
-        ) : (
+        )}{" "}
+        {applyValue === "cancel" && (
           <ModalWrap>
             <Grid height="10%" bg="#eee" position="relative">
               <Grid
@@ -84,6 +92,31 @@ const ApplyUserModal = props => {
             <Grid display="flex" height="85%" justifyContent="center">
               <Grid>
                 <Button _onClick={cancel}>지원취소</Button>
+              </Grid>
+            </Grid>
+          </ModalWrap>
+        )}
+        {applyValue === "teamExit" && (
+          <ModalWrap>
+            <Grid height="10%" bg="#eee" position="relative">
+              <Grid
+                position="absolute"
+                top="0px"
+                right="10px"
+                width="20px"
+                padding="10px"
+              >
+                <CloseIcon fontSize="large" onClick={modalClose} />
+              </Grid>
+              <Grid alignItems="center">
+                <Text margin="0 0 0 20px" bold>
+                  팀탈퇴
+                </Text>
+              </Grid>
+            </Grid>
+            <Grid display="flex" height="85%" justifyContent="center">
+              <Grid>
+                <Button _onClick={exitTeam}>팀원탈퇴</Button>
               </Grid>
             </Grid>
           </ModalWrap>
