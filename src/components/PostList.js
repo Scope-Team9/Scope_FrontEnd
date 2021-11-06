@@ -17,9 +17,13 @@ const PostList = () => {
   return (
     <React.Fragment>
       <PostWrap>
-        {post_list.map((item, index) => {
-          return <Post key={index} {...item} />;
-        })}
+        {post_list && (
+          <>
+            {post_list.map((item, index) => {
+              return <Post key={index} {...item} />;
+            })}
+          </>
+        )}
       </PostWrap>
     </React.Fragment>
   );

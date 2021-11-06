@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <>
       <Grid
-        width="70vw"
+        width="100vw"
         height="60px"
         display="flex"
         justifyContent="space-between"
@@ -18,10 +18,10 @@ const Header = () => {
         zIndex="10"
         margin="auto"
       >
-        <Grid width="auto" height="auto">
+        <Grid width="auto" height="auto" margin="0 0 0 20px">
           <HeaderLeft />
         </Grid>
-        <Grid width="auto" height="auto">
+        <Grid width="auto" height="auto" margin="0 40px 0 0 ">
           <HeaderRight />
         </Grid>
       </Grid>
