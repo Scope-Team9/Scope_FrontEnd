@@ -227,7 +227,7 @@ const AddPost = (props) => {
                 onChange={(date) => setEnddate(date)}
                 selectsEnd
                 enddate={endDate}
-                mindate={startDate}
+                mindate={new Date()}
                 locale={ko}
                 minDate={new Date("")}
               />

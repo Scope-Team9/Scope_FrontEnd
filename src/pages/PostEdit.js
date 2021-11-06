@@ -118,7 +118,6 @@ const PostEdit = (props) => {
   );
 
   const [value, setValue] = React.useState(orderOptions(stackSelect));
-
   const handleChange = useCallback(
     (inputValue, { action, removedValue }) => {
       switch (action) {
@@ -215,7 +214,7 @@ const PostEdit = (props) => {
               isMulti
               components={animatedComponents}
               isClearable={value.some((v) => !v.isFixed)}
-              defaulValue={techstack}
+              value={techstack}
               styles={styles}
               options={stackSelect}
               onChange={(e) => {
@@ -230,24 +229,9 @@ const PostEdit = (props) => {
               value={techstack}
               styles={styles}
               options={stackSelect}
-              onChange={(e) => {
-                setTectstack(e);
-              }}
+              onChange={handleChange}
             />
             {/* 3차방안 */}
-            <Select
-              isMulti
-              components={animatedComponents}
-              isClearable={value.some((v) => !v.isFixed)}
-              value={techstack}
-              styles={styles}
-              options={stackSelect}
-              onChange={handleChange}
-              onChange={(e) => {
-                setTectstack(e);
-                handleChange();
-              }}
-            />
             {/* 4차방안 */}
             {/* 5차방안 */}
           </Grid>
@@ -260,7 +244,7 @@ const PostEdit = (props) => {
                 selected={startDate}
                 onChange={(date) => setStartdate(date)}
                 selectsStart
-                defaultValue={startDate}
+                value={startDate}
                 startdate={startDate}
                 enddate={endDate}
                 locale={ko}
@@ -273,11 +257,12 @@ const PostEdit = (props) => {
                 selected={endDate}
                 onChange={(date) => setEnddate(date)}
                 selectsEnd
-                defaultValue={endDate}
+                value={endDate}
+                startdate={startDate}
                 enddate={endDate}
-                mindate={startDate}
                 locale={ko}
-                minDate={new Date("")}
+                minDate={new Date()}
+                placeholderText="프로젝트 종료일 입력"
               />
             </Grid>
           </Grid>
