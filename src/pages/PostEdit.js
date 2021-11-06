@@ -68,7 +68,7 @@ const PostEdit = (props) => {
         setTotalmember(
           setValue.totalMember.map((value) => ({ label: value, value }))
         );
-        console.log("시간", setValue.startDate);
+        console.log("시간입니다", setValue.startDate);
         // setStartdate(setValue.startDate);
         // setEnddate(setValue.endDate);
       } catch (err) {
