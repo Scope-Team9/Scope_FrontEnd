@@ -147,9 +147,6 @@ const PostDetail = (props) => {
                   >
                     포스트수정
                   </Button>
-                  <Button width="100px" height="30px" margin="auto 10px">
-                    포스트삭제
-                  </Button>
                 </Grid>
               ) : (
                 <Grid>
