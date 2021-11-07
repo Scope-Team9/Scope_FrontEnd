@@ -23,6 +23,7 @@ export const editPostAPI = (editcard) => {
     apis
       .editPost(editcard)
       .then((res) => {
+        window.alert("수정이 완료되었습니다.");
         history.goBack();
       })
       .catch((err) => {
