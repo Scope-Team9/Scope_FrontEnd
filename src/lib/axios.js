@@ -80,7 +80,7 @@ export const apis = {
   // 승민
   addPost: (postInfo) => instance.post(`/api/post`, postInfo),
   detailPost: (postId) => instance.get(`/api/post/${postId}`),
-  editPost: (postId) => instance.post(`/api/post/${postId}`),
+  editPost: (postId, data) => instance.post(`/api/post/${postId}`, data),
   deletePost: (postId) => instance.delete(`/api/post/${postId}`),
 
   //data.json용
