@@ -35,26 +35,24 @@ const PostEdit = (props) => {
   const [endDate, setEnddate] = React.useState(new Date());
   const [contents, setContents] = React.useState();
   const [techStack, setTest] = React.useState();
+  const [loaded, setLoaded] = React.useState(false);
 
+  let post_id = props.match.params.id;
   const scope_edit = () => {
     const editcard = {
-      postId: postId,
       title: title,
       summary: summary,
       techStack: techStack,
-      totalMember: totalMember,
-      recruitmentMember: recruitmentMember,
-      projectStatus: projectStatus,
+      totalMember: totalMember.value,
+      projectStatus: projectStatus.value,
       startDate: startDate,
       endDate: endDate,
       contents: contents,
     };
-    console.log("포스트아이디", postId);
     console.log("카드들", editcard);
-    dispatch(postDetailActions.editPostAPI(editcard));
+    dispatch(postDetailActions.editPostAPI(post_id, editcard));
   };
 
-  let post_id = props.match.params.id;
   React.useEffect(() => {
     const CheckPost = async () => {
       try {
@@ -67,29 +65,33 @@ const PostEdit = (props) => {
         setTectstack(
           setValue.techStack.map((value) => ({ label: value, value }))
         );
-        // setStartdate(setValue.startDate);
-        // setEnddate(setValue.endDate);
-        // setTotalmember(setValue.totalMember);
-
-        // setTotalmember(
-        //   setValue.totalMember.map((value) => ({ lable: value, number }))
-        // );
-        // // setProjectstatus(setValue.projectStatus);
-        // setProjectstatus(
-        //   setValue.projectStatus.map((value) => ({ label: value, value }))
-        // );
+        setStartdate(setValue.startDate);
+        setEnddate(setValue.endDate);
+        setTotalmember(setValue.totalMember);
+        setProjectstatus(setValue.projectStatus);
         console.log("스택입니다", setValue.techStack);
         console.log("시작시간", setValue.startDate);
         console.log("마감시간", setValue.endDate);
         console.log("프로젝트상태", setValue.projectStatus);
         console.log("총인원입니다", setValue.totalMember);
+        setLoaded(true);
       } catch (err) {
         console.log(err);
+        setLoaded(false);
       }
     };
 
-    CheckPost();
+    if (loaded === false) CheckPost();
   }, []);
+
+  const DeletePost = async () => {
+    try {
+      const deletePost = await apis.deletePost(post_id);
+      console.log("삭제", deletePost);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   // 기술 스택 선택
   const stackSelect = [
@@ -111,7 +113,7 @@ const PostEdit = (props) => {
   ];
 
   // 게시글 작성(프로젝트 상태)
-  const projectstatus = [
+  const projectStatused = [
     { value: "모집중", label: "모집중" },
     { value: "진행중", label: "진행중" },
     { value: "마감중", label: "마감중" },
@@ -237,11 +239,10 @@ const PostEdit = (props) => {
               <Text margin="auto 20px">프로젝트 시작 일 :</Text>
               <SDatePicker
                 dateFormat="yyyy/MM/dd"
-                selected={startDate}
+                selected={new Date(startDate)}
                 onChange={(date) => setStartdate(date)}
-                selectsStart
-                value={startDate}
                 startdate={startDate}
+                selectsStart
                 locale={ko}
                 minDate={new Date()}
                 placeholderText="프로젝트 시작일 입력"
@@ -249,11 +250,11 @@ const PostEdit = (props) => {
               <Text margin="auto 20px">프로젝트 종료 일 :</Text>
               <SDatePicker
                 dateFormat="yyyy/MM/dd"
-                selected={endDate}
+                selected={new Date(endDate)}
                 onChange={(date) => setEnddate(date)}
-                selectsEnd
-                value={endDate}
+                startdate={startDate}
                 enddate={endDate}
+                selectsEnd
                 locale={ko}
                 minDate={new Date()}
                 placeholderText="프로젝트 종료일 입력"
@@ -265,25 +266,17 @@ const PostEdit = (props) => {
             <Select
               options={projectMembers}
               isLoading
-              value={projectMembers}
-              onChange={(e) => {
-                let b;
-                b = e["label"];
-                console.log("프로젝트 총 인원", b);
-                setTotalmember(b);
-              }}
+              value={totalMember}
+              onChange={setTotalmember}
             ></Select>
           </Grid>
           <Grid margin="10px auto">
             <Text>프로젝트 상태체크</Text>
             <Select
-              options={projectstatus}
+              options={projectStatused}
               isLoading
-              value={projectstatus}
-              onChange={(e) => {
-                console.log("프로젝트 상태", a);
-                setProjectstatus(a);
-              }}
+              value={projectStatus}
+              onChange={setProjectstatus}
             ></Select>
           </Grid>
           <Grid>
@@ -292,7 +285,7 @@ const PostEdit = (props) => {
               type="text"
               editValue={contents}
               _onChange={(e) => {
-                setContents();
+                setContents(e.target.value);
               }}
             />
             <Grid padding="16px">
@@ -305,12 +298,21 @@ const PostEdit = (props) => {
                 margin="auto 10px"
                 _onClick={() => {
                   // history.push("/");
+                  window.alert("수정이 완료되었습니다.");
                   scope_edit();
                 }}
               >
                 포스트수정 완료
               </Button>
-              <Button width="100px" height="30px" margin="auto 10px">
+              <Button
+                width="100px"
+                height="30px"
+                margin="auto 10px"
+                _onClick={() => {
+                  window.alert("삭제 되었습니다.");
+                  DeletePost();
+                }}
+              >
                 포스트삭제
               </Button>
             </Grid>
