@@ -8,6 +8,7 @@ import { apis } from "../lib/axios";
 import { useHistory } from "react-router";
 import { postActions } from "../redux/modules/post";
 import { Grid, Text, Image, Input, Button } from "../elements/Index";
+import Img from "../images/PostAdd.png";
 import ApplyStatusModal from "../components/ApplyStatusModal";
 import ApplyUserModal from "../components/ApplyUserModal";
 import { history } from "../redux/configureStore";
@@ -54,133 +55,151 @@ const PostDetail = (props) => {
   return (
     <React.Fragment>
       <Grid
-        width="550px"
-        padding="16px"
-        margin="40px auto"
-        border="2px solid #8B3FF8"
-        borderRadius="30px"
-        position="relative"
+        display="flex"
+        justifyContent="center"
+        width="100%"
+        margin="auto"
+        border="1px solid #C4C4C4"
+        alignItems="center"
       >
-        <Title>{passedData?.title}</Title>
-        <Grid margin="10px auto">
-          <Text>{passedData?.summary}</Text>
-        </Grid>
-
-        <Grid>
-          <Text>게시자 정보</Text>
-          <Grid display="column">
-            <Image />
-            <Text>{passdedMenber?.nickname}</Text>
-          </Grid>
+        <img src={Img} style={{ width: "800px", height: "850px" }} />
+        <Grid margin="auto 20px">
+          <Title>Scoope</Title>
+          <Title>{passedData?.title}</Title>
           <Grid margin="10px auto">
-            <Text>프로젝트 인원</Text>
-            <Grid display="flex">
-              <Grid display="column">
-                <Image />
-                <Grid display="column">
-                  <Text>{passedData?.recruitmentMember}</Text>
-                  <Text>({passdedMenber?.userPropensityType})</Text>
-                </Grid>
-              </Grid>
-            </Grid>
-            {userId === postUserId && (
-              <Grid position="relative" width="100%">
-                <Grid
-                  position="absolute"
-                  right="20px"
-                  width="100px"
-                  padding="10px"
-                >
-                  <Button
-                    postion="absolute"
-                    width="100%"
-                    borderRadius="10px"
-                    _onClick={applyStatusModalOpen}
-                  >
-                    신청현황 확인
-                  </Button>
-                  <ApplyStatusModal
-                    applyStatusModal={applyStatusModal}
-                    setApplyStatusModal={setApplyStatusModal}
-                    postId={post_id}
-                  />
-                </Grid>
-              </Grid>
-            )}
+            <Text>{passedData?.summary}</Text>
+          </Grid>
 
-            <Grid display="flex" margin="10px auto">
-              <Text margin="auto 10px auto 0px">프로젝트 기간 :</Text>
-              <Text>
-                {passedData?.startDate} ~ {passedData?.endDate}
-              </Text>
+          <Grid>
+            <Text>게시자 정보</Text>
+            <Grid display="column">
+              <Image />
+              <Text>{passdedMenber?.nickname}</Text>
             </Grid>
-            <Grid display="flex" margin="10px auto">
-              <Text margin="auto 10px auto 0px">기술스택</Text>
-              {passedData?.techStack.map((item, index) => {
-                return (
-                  <Text margin="auto 5px" key={index}>
-                    {item}
-                  </Text>
-                );
-              })}
-            </Grid>
-            <Grid display="flex">
-              <Text margin="auto 10px auto 0px">프로젝트 상태</Text>
-              <Text>{passedData?.projectStatus}</Text>
-            </Grid>
-            <Grid>
-              <Content>{passedData?.contents}</Content>
-            </Grid>
-            <Grid padding="16px">
-              {userId === postUserId ? (
-                <Grid>
-                  <Button width="100px" height="30px" margin="auto 10px">
-                    모집완료
-                  </Button>
-                  <Button
-                    width="100px"
-                    height="30px"
-                    margin="auto 10px"
-                    _onClick={() => {
-                      history.push({ pathname: `/postedit/${post_id}` });
-                    }}
-                  >
-                    포스트수정
-                  </Button>
+            <Grid margin="10px auto">
+              <Text>프로젝트 인원</Text>
+              <Grid display="flex">
+                <Grid display="column">
+                  <Image />
+                  <Grid display="column">
+                    <Text>{passedData?.recruitmentMember}</Text>
+                    <Text>({passdedMenber?.userPropensityType})</Text>
+                  </Grid>
                 </Grid>
-              ) : (
-                <Grid>
-                  <Button
-                    isValue="apply"
-                    _onClick={(e) => {
-                      console.log(e);
-                      applyUserModalOpen(e.target.value);
-                    }}
-                    width="100px"
-                    height="30px"
-                    margin="auto 10px"
+              </Grid>
+              {userId === postUserId && (
+                <Grid position="relative" width="100%">
+                  <Grid
+                    position="absolute"
+                    right="20px"
+                    width="120px"
+                    padding="10px"
                   >
-                    지원신청
-                  </Button>
-                  <ApplyUserModal
-                    applyUserModal={applyUserModal}
-                    setApplyUserModal={setApplyUserModal}
-                    applyValue={applyValue}
-                    postId={post_id}
-                  />
-                  <Button
-                    isValue="cancel"
-                    _onClick={(e) => {
-                      applyUserModalOpen(e.target.value);
-                    }}
-                    width="100px"
-                    height="30px"
-                    margin="auto 10px"
-                  >
-                    지원취소
-                  </Button>
+                    <Button
+                      postion="absolute"
+                      width="100%"
+                      height="40px"
+                      borderRadius="50px"
+                      backgroundColor="#42309b"
+                      _onClick={applyStatusModalOpen}
+                    >
+                      신청현황 확인
+                    </Button>
+                    <ApplyStatusModal
+                      applyStatusModal={applyStatusModal}
+                      setApplyStatusModal={setApplyStatusModal}
+                      postId={post_id}
+                    />
+                  </Grid>
                 </Grid>
               )}
+
+              <Grid display="flex" margin="10px auto">
+                <Text margin="auto 10px auto 0px">프로젝트 기간 :</Text>
+                <Text>
+                  {passedData?.startDate} ~ {passedData?.endDate}
+                </Text>
+              </Grid>
+              <Grid display="flex" margin="10px auto">
+                <Text margin="auto 10px auto 0px">기술스택</Text>
+                {passedData?.techStack.map((item, index) => {
+                  return (
+                    <Text margin="auto 5px" key={index}>
+                      {item}
+                    </Text>
+                  );
+                })}
+              </Grid>
+              <Grid display="flex">
+                <Text margin="auto 10px auto 0px">프로젝트 상태</Text>
+                <Text>{passedData?.projectStatus}</Text>
+              </Grid>
+              <Grid>
+                <Content>{passedData?.contents}</Content>
+              </Grid>
+              <Grid>
+                {userId === postUserId ? (
+                  <Grid display="flex" justifyContent="center">
+                    <Btn
+                      width="120px"
+                      height="40px"
+                      margin="auto 10px auto auto"
+                      backgroundColor="#42309b"
+                      borderRadius="50px"
+                    >
+                      모집완료
+                    </Btn>
+                    <Btn
+                      width="120px"
+                      height="40px"
+                      margin="auto 10px auto auto"
+                      backgroundColor="#42309b"
+                      borderRadius="50px"
+                      onClick={() => {
+                        history.push({ pathname: `/postedit/${post_id}` });
+                      }}
+                    >
+                      포스트수정
+                    </Btn>
+                  </Grid>
+                ) : (
+                  <Grid>
+                    <Button
+                      isValue="apply"
+                      _onClick={(e) => {
+                        console.log(e);
+                        applyUserModalOpen(e.target.value);
+                      }}
+                      width="120px"
+                      height="40px"
+                      margin="auto 10px"
+                      backgroundColor="#42309b"
+                      borderRadius="50px"
+                    >
+                      지원신청
+                    </Button>
+                    <ApplyUserModal
+                      applyUserModal={applyUserModal}
+                      setApplyUserModal={setApplyUserModal}
+                      applyValue={applyValue}
+                      postId={post_id}
+                    />
+                    <Button
+                      isValue="cancel"
+                      _onClick={(e) => {
+                        applyUserModalOpen(e.target.value);
+                      }}
+                      width="120px"
+                      height="40px"
+                      margin="auto 10px"
+                      backgroundColor="#42309b"
+                      borderRadius="50px"
+                    >
+                      지원취소
+                    </Button>
+                  </Grid>
+                )}
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
@@ -193,11 +212,25 @@ const PostDetail = (props) => {
 const Title = styled.h1``;
 
 const Content = styled.h3`
-  width: 500px;
+  width: 100%;
   height: 300px;
   padding: 10px;
-  border: 1px solid orange;
+  border: 1px solid #c4c4c4;
   border-radius: 5px;
+`;
+
+const Btn = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 140px;
+  height: 35px;
+  border: none;
+  border-radius: 50px;
+  color: #fff;
+  background-color: #42309b;
+  cursor: pointer;
+  margin: 10px auto 10px auto;
 `;
 
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.

@@ -5,6 +5,7 @@
 import React, { useCallback, useMemo, useEffect } from "react";
 import styled from "styled-components";
 import { Grid, Text, Image, Button, Input } from "../elements/Index";
+import Img from "../images/PostAdd.png";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { apis } from "../lib/axios";
@@ -42,9 +43,9 @@ const PostEdit = (props) => {
     const editcard = {
       title: title,
       summary: summary,
-      techStack: techStack,
+      techStack: techStack.value,
       totalMember: totalMember.value,
-      projectStatus: projectStatus.value,
+      projectStatus: projectStatus,
       startDate: startDate,
       endDate: endDate,
       contents: contents,
@@ -192,129 +193,153 @@ const PostEdit = (props) => {
   return (
     <React.Fragment>
       <Grid
-        width="550px"
-        padding="10px"
-        margin="40px auto"
-        border="2px solid #8B3FF8"
-        borderRadius="30px"
+        display="flex"
+        justifyContent="center"
+        width="100%"
+        margin="auto"
+        border="1px solid #C4C4C4"
+        alignItems="center"
       >
-        <Title>게시글 수정페이지</Title>
-        <Grid padding="16px">
-          <Grid margin="10px auto">
-            <Text>제목</Text>
-            <Input
-              type="text"
-              editValue={title}
-              _onChange={(e) => {
-                setTitle(e.target.value);
-              }}
-            />
-          </Grid>
-          <Grid margin="10px auto">
-            <Text>한줄소개</Text>
-            <Input
-              type="text"
-              editValue={summary}
-              _onChange={(e) => {
-                setSummary(e.target.value);
-              }}
-            />
-          </Grid>
-          <Grid margin="10px auto">
-            <Text>기술스택 선택</Text>
-            {/* 1차방안 */}
-            <Select
-              isMulti
-              components={animatedComponents}
-              isClearable={value.some((v) => !v.isFixed)}
-              styles={styles}
-              value={techstack}
-              options={stackSelect}
-              onChange={handleChange}
-            />
-          </Grid>
-          <Grid margin="10px auto">
-            <Text>기간설정</Text>
-            <Grid display="flex">
-              <Text margin="auto 20px">프로젝트 시작 일 :</Text>
-              <SDatePicker
-                dateFormat="yyyy/MM/dd"
-                selected={new Date(startDate)}
-                onChange={(date) => setStartdate(date)}
-                startdate={startDate}
-                selectsStart
-                locale={ko}
-                minDate={new Date()}
-                placeholderText="프로젝트 시작일 입력"
-              />
-              <Text margin="auto 20px">프로젝트 종료 일 :</Text>
-              <SDatePicker
-                dateFormat="yyyy/MM/dd"
-                selected={new Date(endDate)}
-                onChange={(date) => setEnddate(date)}
-                startdate={startDate}
-                enddate={endDate}
-                selectsEnd
-                locale={ko}
-                minDate={new Date()}
-                placeholderText="프로젝트 종료일 입력"
+        <img src={Img} style={{ width: "800px", height: "850px" }} />
+        <Grid>
+          <Title>Scoope</Title>
+          <Text size="20px" bold>
+            게시글 수정하기
+          </Text>
+          <Grid padding="16px">
+            <Grid margin="10px auto">
+              <Text>제목</Text>
+              <Input
+                width="100%"
+                height="30px"
+                padding="10px"
+                border="1px solid #E7E1FF"
+                placeholder="제목을 입력해주세요."
+                type="text"
+                editValue={title}
+                _onChange={(e) => {
+                  setTitle(e.target.value);
+                }}
               />
             </Grid>
-          </Grid>
-          <Grid margin="10px auto">
-            <Text>프로젝트 총 인원</Text>
-            <Select
-              options={projectMembers}
-              isLoading
-              value={totalMember}
-              onChange={setTotalmember}
-            ></Select>
-          </Grid>
-          <Grid margin="10px auto">
-            <Text>프로젝트 상태체크</Text>
-            <Select
-              options={projectStatused}
-              isLoading
-              value={projectStatus}
-              onChange={setProjectstatus}
-            ></Select>
-          </Grid>
-          <Grid>
-            <Text>프로젝트 내용적기</Text>
-            <Input
-              type="text"
-              editValue={contents}
-              _onChange={(e) => {
-                setContents(e.target.value);
-              }}
-            />
-            <Grid padding="16px">
-              <Button width="100px" height="30px" margin="auto 10px">
-                모집완료
-              </Button>
-              <Button
-                width="100px"
+            <Grid margin="10px auto">
+              <Text>한줄소개</Text>
+              <Input
+                width="100%"
                 height="30px"
-                margin="auto 10px"
-                _onClick={() => {
-                  // history.push("/");
-                  window.alert("수정이 완료되었습니다.");
-                  scope_edit();
+                padding="10px"
+                placeholder="프로젝트를 한줄소개를 소개해주세요."
+                border="1px solid #E7E1FF"
+                type="text"
+                editValue={summary}
+                _onChange={(e) => {
+                  setSummary(e.target.value);
                 }}
-              >
-                포스트수정 완료
-              </Button>
-              <Button
-                width="100px"
-                height="30px"
-                margin="auto 10px"
-                _onClick={() => {
-                  window.alert("삭제 되었습니다.");
-                  DeletePost();
+              />
+            </Grid>
+            <Grid margin="10px auto">
+              <Text>기술스택 선택</Text>
+              {/* 1차방안 */}
+              <Select
+                isMulti
+                components={animatedComponents}
+                isClearable={value.some((v) => !v.isFixed)}
+                styles={styles}
+                value={techstack}
+                options={stackSelect}
+                onChange={handleChange}
+                placeholder={<div>기술 스택을 선택해주세요.</div>}
+              />
+            </Grid>
+            <Grid margin="10px auto">
+              <Text>기간설정</Text>
+              <Grid display="flex">
+                <Text margin="auto 20px">프로젝트 시작 일 :</Text>
+                <SDatePicker
+                  dateFormat="yyyy/MM/dd"
+                  selected={new Date(startDate)}
+                  onChange={(date) => setStartdate(date)}
+                  startdate={startDate}
+                  selectsStart
+                  locale={ko}
+                  minDate={new Date()}
+                  placeholderText="프로젝트 시작일 입력"
+                />
+                <Text margin="auto 20px">프로젝트 종료 일 :</Text>
+                <SDatePicker
+                  dateFormat="yyyy/MM/dd"
+                  selected={new Date(endDate)}
+                  onChange={(date) => setEnddate(date)}
+                  startdate={startDate}
+                  enddate={endDate}
+                  selectsEnd
+                  locale={ko}
+                  minDate={new Date()}
+                  placeholderText="프로젝트 종료일 입력"
+                />
+              </Grid>
+            </Grid>
+            <Grid margin="10px auto">
+              <Text>프로젝트 총 인원</Text>
+              <Select
+                options={projectMembers}
+                isLoading
+                value={totalMember}
+                onChange={setTotalmember}
+                placeholder={<div>총인원을 선택해주세요.</div>}
+              ></Select>
+            </Grid>
+            <Grid margin="10px auto">
+              <Text>프로젝트 상태체크</Text>
+              <Select
+                options={projectStatused}
+                isLoading
+                value={projectStatus}
+                onChange={setProjectstatus}
+                placeholder={<div>상태를 설정해주세요.</div>}
+              ></Select>
+            </Grid>
+            <Grid>
+              <Text>프로젝트 내용적기</Text>
+              <Input
+                width="100%"
+                height="200px"
+                padding="10px"
+                border="1px solid #E7E1FF"
+                type="text"
+                editValue={contents}
+                _onChange={(e) => {
+                  setContents(e.target.value);
                 }}
-              >
-                포스트삭제
-              </Button>
+              />
+              <Grid display="flex" padding="16px">
+                <Btn width="100px" height="30px" margin="auto 10px">
+                  모집완료
+                </Btn>
+                <Btn
+                  width="100px"
+                  height="30px"
+                  margin="auto 10px"
+                  onClick={() => {
+                    // history.push("/");
+                    window.alert("수정이 완료되었습니다.");
+                    scope_edit();
+                  }}
+                >
+                  포스트수정 완료
+                </Btn>
+                <Btn
+                  width="100px"
+                  height="30px"
+                  margin="auto 10px"
+                  onClick={() => {
+                    window.alert("삭제 되었습니다.");
+                    DeletePost();
+                  }}
+                >
+                  포스트삭제
+                </Btn>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
@@ -324,7 +349,10 @@ const PostEdit = (props) => {
 };
 
 // styled-components를 사용한다.
-const Title = styled.h1``;
+const Title = styled.h1`
+  margin: "auto 20px";
+  color: #8b3ff8;
+`;
 
 const SDatePicker = styled(DatePicker)`
   box-sizing: border-box;
@@ -336,12 +364,18 @@ const SDatePicker = styled(DatePicker)`
   border: 1px solid #e7e1ff;
 `;
 
-const Content = styled.h3`
-  width: 500px;
-  height: 300px;
-  padding: 10px;
-  border: 1px solid orange;
-  border-radius: 5px;
+const Btn = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 140px;
+  height: 35px;
+  border: none;
+  border-radius: 50px;
+  color: #fff;
+  background-color: #42309b;
+  margin: 10px auto 10px auto;
+  cursor: pointer;
 `;
 
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.

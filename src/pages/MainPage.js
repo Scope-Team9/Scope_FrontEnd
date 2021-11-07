@@ -207,14 +207,14 @@ const Filtering = styled.p`
 const Btn = styled.button`
   position: fixed;
   bottom: 70px;
-  border: 1px solid black;
+  border: 1px solid #42309b;
   border-radius: 50%;
   width: 60px;
   height: 60px;
   text-align: center;
   right: 50px;
   margin: auto;
-  background: blue;
+  background: #42309b;
   cursor: pointer;
 `;
 
