@@ -11,17 +11,15 @@ import { userCreators } from "../redux/modules/user";
 
 import { deleteCookie } from "../shared/Cookie";
 
-const HeaderRight = (props) => {
+const HeaderRight = props => {
   const dispatch = useDispatch();
   const isToken = document.cookie.split("=")[1];
-  const user_info = useSelector((state) => state.user);
+  const user_info = useSelector(state => state.user);
 
   console.log(isToken);
   console.log(user_info);
   const [showModal, setShowModal] = React.useState(false);
-  const sigunupModalState = useSelector(
-    (state) => state.user.sigunupModalState
-  );
+  const sigunupModalState = useSelector(state => state.user.sigunupModalState);
   const modalOpen = () => {
     setShowModal(true);
   };
@@ -45,18 +43,20 @@ const HeaderRight = (props) => {
         height="auto"
       >
         <HeaderWrapper>
-          <Grid display="flex" alignItems="center" margin="0 10px">
+          <Grid display="flex" alignItems="center" margin="0 20px">
             <Image
               _onClick={() => {
-                history.push(`/mypage/${user_id}`);
+                history.push(`/mypage/${user_info.userId}`);
               }}
               src={userImage}
+              size="50"
             />
-            <Text>{user_info.nickname}</Text>
+            <Text bold>{user_info.nickname}님 환영합니다!</Text>
           </Grid>
           <Button
-            backgroundColor="#111"
-            width="100px"
+            height="50px"
+            backgroundColor="#170184"
+            width="132px"
             text="로그아웃"
             _onClick={logOut}
           ></Button>
@@ -72,15 +72,6 @@ const HeaderRight = (props) => {
         height="auto"
       >
         <HeaderWrapper>
-          <Grid display="flex" alignItems="center" margin="0 10px">
-            <Image
-              src={userImage}
-              _onClick={() => {
-                history.push("/mypage");
-              }}
-            />
-            <Text>사용자</Text>
-          </Grid>
           <Button
             backgroundColor="#333"
             width="100px"

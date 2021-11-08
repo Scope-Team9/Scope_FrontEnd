@@ -101,7 +101,7 @@ const ElButton = styled.button`
   ${props =>
     props.backgroundColor
       ? `background-color:${props.backgroundColor}`
-      : "background-color: #8B3FF8"};
+      : "background-color: #170184"};
   box-sizing: border-box;
   border-radius: 5px;
   font-weight: bold;
@@ -109,7 +109,7 @@ const ElButton = styled.button`
   ${props =>
     props.borderRadius
       ? `border-radius:${props.borderRadius}`
-      : "border-radius: 0px"};
+      : "border-radius: 25px"};
   cursor: pointer;
   flex-shrink: 0;
   &:hover {

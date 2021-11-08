@@ -72,6 +72,8 @@ export const apis = {
     instance.get(
       `/api/post?filter=${stack.React};${stack.Spring};${stack.Swift};${stack.TypeScript};${stack.cpp};${stack.Django};${stack.Flask};${stack.Java};${stack.JavaScript};${stack.Kotlin};${stack.Node};${stack.php};${stack.Python};${stack.Vue};&displayNumber=9&page=${paging}&sort=${sort}&bookmarkRecommend=${reBook}`
     ),
+  bookMarkChecked: (postId) => instance.post(`/api/bookmark/${postId}`),
+
   //마이페이지
   getMypage: (userId) => instance.get(`/api/user/${userId}`),
   writeMyIntroduction: (userId, introduction) =>

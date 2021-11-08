@@ -44,6 +44,27 @@ export const deletePostAPI = (postId) => {
   };
 };
 
+//북마크 전송
+const bookMarkAPI = (postId) => {
+  return function (dispatch, getState, { history }) {
+    apis
+      .bookMarkChecked(postId)
+      .then((res) => {
+        console.log(res);
+        console.log(res.data.data.isBookmarkChecked);
+        if (res.data.msg == "북마크 추가 성공") {
+          window.alert("관심프로젝트로 추가되었습니다!");
+        } else {
+          window.alert("관심프로젝트로 삭제되었습니다!");
+          return;
+        }
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  };
+};
+
 // 리듀서
 export default handleActions(
   {
@@ -62,6 +83,7 @@ export default handleActions(
 const postDetailActions = {
   editPostAPI,
   deletePostAPI,
+  bookMarkAPI,
 };
 
 export { postDetailActions };

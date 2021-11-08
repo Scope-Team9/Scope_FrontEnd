@@ -73,20 +73,6 @@ const MainSlide = () => {
               className={idx === imageIndex ? "slide activeSlide" : "slide"}
             >
               <img src={img} alt={img} />
-              {imageIndex == 0 && (
-                <div
-                  onClick={() => {
-                    history.push("/mypage");
-                  }}
-                  className="btn"
-                >
-                  {is_token ? (
-                    <Text>테스트하러가기</Text>
-                  ) : (
-                    <Text>추천받기</Text>
-                  )}
-                </div>
-              )}
             </div>
           ))}
         </Slider>

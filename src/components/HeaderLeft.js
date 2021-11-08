@@ -2,12 +2,19 @@
 import React from "react";
 import styled from "styled-components";
 import { Grid, Image } from "../elements/Index";
-import Logo from "../images/임시로고.jpg";
+import Logo from "../images/임시로고1.jpg";
+import { history } from "../redux/configureStore";
 
 const HeaderLeft = () => {
   return (
     <Grid>
-      <Image src={Logo} size="50" />
+      <img
+        onClick={() => {
+          history.push("/");
+        }}
+        src={Logo}
+        width="150px"
+      />
     </Grid>
   );
 };

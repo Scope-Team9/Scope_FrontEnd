@@ -152,15 +152,44 @@ export default function Writer(props) {
       } catch (err) {
         const userId = props.location.state.userId;
         console.log(err);
-        history.push(`/mypage/${userId}`);
+        window.alert("작성 형식이 올바르지 않습니다.");
       }
     };
     writing();
   };
   const introduction = mydata?.user.introduction;
-  console.log(typeof introduction);
+  console.log(introduction);
   return (
     <>
+      {introduction === null && (
+        <>
+          <button
+            onClick={() => {
+              write();
+            }}
+          >
+            작성하기
+          </button>
+
+          <Editor
+            previewStyle="vertical"
+            plugins={[
+              colorSyntax,
+              [codeSyntaxHighlight, { highlighter: Prism }],
+            ]}
+            onChange={onChangeEditorTextHandler}
+            ref={editorRef}
+            height="79vh"
+            // initialValue={introduction}
+            hooks={{
+              addImageBlobHook: async (blob, callback) => {
+                uploadImage(blob, callback);
+                // callback(img_url, "alt_text");
+              },
+            }}
+          ></Editor>
+        </>
+      )}
       {introduction && (
         <>
           <button

@@ -18,6 +18,7 @@ const PostDetail = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [checkPost, setCheckPost] = React.useState();
+  const [bookmark, setBookmark] = React.useState(false);
   const [applyStatusModal, setApplyStatusModal] = React.useState(false); //신청현황
   const [applyUserModal, setApplyUserModal] = React.useState(false); //지원취소
   const [applyValue, setApplyValue] = React.useState();
@@ -36,6 +37,12 @@ const PostDetail = (props) => {
   const postUserId = checkPost?.data.data.post.userId;
   console.log(userId, postUserId);
 
+  //북마크 토글
+  const ToggleBookMark = () => {
+    setBookmark(!bookmark);
+    dispatch(postDetailActions.bookMarkAPI(post_id));
+  };
+
   React.useEffect(() => {
     dispatch(postActions.isMainPage(false));
     dispatch(postActions.whatPage("postDetail"));
@@ -43,15 +50,17 @@ const PostDetail = (props) => {
       try {
         const result = await apis.detailPost(post_id);
         setCheckPost(result);
+        console.log(result);
       } catch (err) {
         console.log(err);
       }
     };
     CheckPost();
-  }, []);
+  }, [bookmark]);
   const passedData = checkPost?.data["data"].post;
   const passdedMenber = checkPost?.data["data"].members[0];
-
+  console.log("나는 신청자다", passedData?.recruitmentMember);
+  console.log();
   return (
     <React.Fragment>
       <Grid
@@ -85,11 +94,11 @@ const PostDetail = (props) => {
                     {/* {passedData?.recruitmentMember.map((item, index) => {
                       return (
                         <Text margin="auto 5px" key={index}>
-                          {item}
+                          {...item}
                         </Text>
                       );
                     })} */}
-                    {/* <Text>{passedData?.recruitmentMember}</Text> */}
+                    <Text>{passedData?.recruitmentMember}</Text>
                     <Text>({passdedMenber?.userPropensityType})</Text>
                   </Grid>
                 </Grid>

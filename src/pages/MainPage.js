@@ -32,6 +32,7 @@ const MainPage = () => {
   const [paging, setPaging] = React.useState(0);
   const [nowFilter, setNowFilter] = React.useState("최신");
   const post_list = useSelector((state) => state.post.posts);
+  console.log("어떻게오느냐 을랴랴랴랴랴랴ㅑ랴랴", post_list);
   // console.log(infinity);
 
   // console.log(useSelector((state) => state.infinity.paging));
@@ -81,7 +82,12 @@ const MainPage = () => {
 
   return (
     <>
-      <Grid height="100%" bg="#ffff" padding="0px 0px 10px 0"></Grid>
+      <Grid
+        maxWidth="1920"
+        height="100%"
+        bg="#ffff"
+        padding="0px 0px 10px 0"
+      ></Grid>
       {/* <ResponsiveSidebar>
         <SideBar />
       </ResponsiveSidebar> */}

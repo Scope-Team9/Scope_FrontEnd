@@ -3,7 +3,7 @@
 import React from "react";
 
 import Img from "../images/임시로고.jpg";
-import { Grid, Image, Text } from "../elements/Index";
+import { Grid, Image, Text, Button } from "../elements/Index";
 import { postActions } from "../redux/modules/post";
 import { myPageActions } from "../redux/modules/myPage";
 import { useSelector, useDispatch } from "react-redux";
@@ -16,7 +16,7 @@ import MarkdownRead from "./MarkdownRead";
 import { history } from "../redux/configureStore";
 
 // MyPageInfo의 함수형 컴포넌트를 만든다.
-const MyPageInfo = (props) => {
+const MyPageInfo = props => {
   const dispatch = useDispatch();
   // const userId = useSelector((state) => state.user.userId);
   const userId = props.match.params.id;
@@ -42,6 +42,16 @@ const MyPageInfo = (props) => {
     fetchData();
   }, [filter]);
   const introduction = mydata?.user.introduction ? true : false;
+  const recruitmentProject = mydata?.recruitment;
+  const inProgressProject = mydata?.inProgress;
+  const bookMarkProject = mydata?.bookmark;
+  const endProject = mydata?.end;
+
+  console.log(recruitmentProject);
+  console.log(inProgressProject);
+  console.log(bookMarkProject);
+  console.log(endProject);
+  const myInfo = mydata?.user;
 
   return (
     <React.Fragment>
@@ -52,12 +62,29 @@ const MyPageInfo = (props) => {
         bgImg="url(/img/testtest.png)"
       ></Grid>
       <Grid
+        boxShadow="rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px"
         margin="-260px 0 0 55px"
         width="270px"
         height="500px"
         backgroundColor="black"
         borderRadius="20px"
-      ></Grid>
+      >
+        <img
+          src="/img/fire.png"
+          style={{ width: "270px", height: "300px", borderRadius: "20px" }}
+        ></img>
+        <Button
+          backgroundColor="#333"
+          fontSize="10px"
+          height="30px"
+          borderRadius="20px"
+          width="120px"
+          margin="-90px 0 0 137px"
+        >
+          프로필 수정하기
+        </Button>
+        <p></p>
+      </Grid>
       <Grid display="flex" margin="auto" justifyContent="center">
         <Filter
           onClick={() => {
@@ -96,15 +123,15 @@ const MyPageInfo = (props) => {
         </Filter>
       </Grid>
       {filter === "모집" && (
-        <MypagePostList {...mydata.recruitment}></MypagePostList>
+        <MypagePostList {...recruitmentProject}></MypagePostList>
       )}
       {filter === "진행중" && (
-        <MypagePostList {...mydata.inProgress}></MypagePostList>
+        <MypagePostList {...inProgressProject}></MypagePostList>
       )}
       {filter === "관심" && (
-        <MypagePostList {...mydata.bookmark}></MypagePostList>
+        <MypagePostList {...bookMarkProject}></MypagePostList>
       )}
-      {filter === "완료" && <MypagePostList {...mydata.end}></MypagePostList>}
+      {filter === "완료" && <MypagePostList {...endProject}></MypagePostList>}
       <button
         onClick={() => {
           history.push({
