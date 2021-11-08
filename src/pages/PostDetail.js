@@ -82,7 +82,14 @@ const PostDetail = (props) => {
                 <Grid display="column">
                   <Image />
                   <Grid display="column">
-                    <Text>{passedData?.recruitmentMember}</Text>
+                    {/* {passedData?.recruitmentMember.map((item, index) => {
+                      return (
+                        <Text margin="auto 5px" key={index}>
+                          {item}
+                        </Text>
+                      );
+                    })} */}
+                    {/* <Text>{passedData?.recruitmentMember}</Text> */}
                     <Text>({passdedMenber?.userPropensityType})</Text>
                   </Grid>
                 </Grid>
