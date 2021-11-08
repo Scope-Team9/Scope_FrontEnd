@@ -6,11 +6,13 @@ const GET_POST = "GET_POST";
 const LOADING = "LOADING";
 const MAINPAGE = "MAINPAGE";
 const WHATPAGE = "WHATPAGE";
+const PAGECHECK = "PAGECHECK";
 
 const getPosts = createAction(GET_POST, (data) => ({ data }));
 const isLoading = createAction(LOADING, (loading) => ({ loading }));
 const isMainPage = createAction(MAINPAGE, (data) => ({ data }));
 const whatPage = createAction(WHATPAGE, (data) => ({ data }));
+const pageCheck = createAction(PAGECHECK, (data) => ({ data }));
 
 const initialState = {
   posts: [],
@@ -22,6 +24,7 @@ const initialState = {
   reBook: "",
   mainpage: true,
   whatPage: { pre: "mainPage", now: "mainPage" },
+  pageCheck: false,
 };
 
 export const getPostAPI = () => {
@@ -106,7 +109,8 @@ export default handleActions(
         ) {
           // console.log(draft.stacks === stacks);
           // console.log("스택이 그대로일때");
-          draft.posts.push(...action.payload.data.posts);
+          // draft.posts.push(...action.payload.data.posts);
+          draft.posts = action.payload.data.posts;
           draft.paging = action.payload.data.paging;
           draft.is_loading = false;
         }
@@ -132,6 +136,11 @@ export default handleActions(
         console.log(page);
         draft.whatPage = page;
       }),
+    [PAGECHECK]: (state, action) =>
+      produce(state, (draft) => {
+        console.log("페이지 체크", action);
+        draft.pageCheck = action.payload.data;
+      }),
   },
   initialState
 );
@@ -140,5 +149,6 @@ const postActions = {
   getPostAPI,
   isMainPage,
   whatPage,
+  pageCheck,
 };
 export { postActions };

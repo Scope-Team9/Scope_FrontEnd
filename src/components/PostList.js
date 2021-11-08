@@ -25,7 +25,7 @@ const PostList = () => {
   return (
     <React.Fragment>
       <PostWrap>
-        {post_list && (
+        {posts && (
           <>
             {posts.map((item, index) => {
               return <Post key={index} {...item} />;
