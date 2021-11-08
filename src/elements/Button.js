@@ -38,7 +38,12 @@ const Button = props => {
   if (isTest) {
     return (
       <>
-        <TestButton onClick={_onClick} value={isValue} disabled={disabled}>
+        <TestButton
+          onClick={_onClick}
+          value={isValue}
+          disabled={disabled}
+          backgroundColor={color}
+        >
           {text ? text : children}
         </TestButton>
       </>
@@ -145,30 +150,33 @@ const FloatButton = styled.div`
 `;
 
 const TestButton = styled.button`
-  font-size: 10px;
+  font-size: 12px;
   text-align: center;
-  border: none;
-  border-radius: 20px;
-  background-color: #f1f9ff;
-  color: #111;
-  padding: 9px;
-  margin: 10px;
+  border: 1px solid #170184;
+  border-radius: 25px;
+  ${props =>
+    props.backgroundColor
+      ? `background-color:${props.backgroundColor}`
+      : "background-color: #170184"};
+  color: #170184;
+  padding: 20px;
+  margin: 5px;
   box-shadow: 0px 2px 2px #ddd;
 
   &:hover {
-    background-color: #025cbd;
+    background-color: #170184;
     cursor: pointer;
     color: #fff;
     box-shadow: 0px 3px 2px #111;
   }
-  &::active {
+  /* &::active {
     box-shadow: 0px 1px 2px #111;
     transform: translateY(10px);
   }
   &::disabled {
     cursor: default;
     opacity: 0.7;
-  }
+  } */
 `;
 
 export default Button;

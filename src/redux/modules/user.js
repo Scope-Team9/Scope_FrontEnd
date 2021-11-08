@@ -37,7 +37,7 @@ const kakaologinMiddleware = code => {
       .kakaoLogin(code)
       .then(res => {
         console.log(res);
-        if (res.data.status == 300) {
+        if (res.data.msg == "추가 정보 작성이 필요한 사용자입니다.") {
           window.alert("추가정보 작성이 필요합니다.");
           dispatch(
             firstUser({
@@ -48,7 +48,7 @@ const kakaologinMiddleware = code => {
           history.replace("/");
           return;
         }
-        if (res.status === 200) {
+        if (res.data.msg == "로그인이 완료되었습니다") {
           let userCookie = res.data.data.token;
           setCookie("ScopeUser", userCookie, 30);
           // const ACCESS_TOKEN = res.data.token;
@@ -80,7 +80,7 @@ const githubLoginMiddleware = code => {
     apis
       .githubLogin(code)
       .then(res => {
-        if (res.data.status == 300) {
+        if (res.data.msg == "추가 정보 작성이 필요한 사용자입니다.") {
           window.alert("추가정보 작성이 필요합니다.");
           dispatch(
             firstUser({
@@ -89,10 +89,10 @@ const githubLoginMiddleware = code => {
             })
           );
 
-          history.replace("/");
+          // history.replace("/");
           return;
         }
-        if (res.status === 200) {
+        if (res.data.msg == "로그인이 완료되었습니다") {
           let userCookie = res.data.data.token;
           setCookie("ScopeUser", userCookie, 30);
           dispatch(
@@ -122,10 +122,10 @@ const emailCheckMiddleWare = email => {
       .checkEmail(email)
       .then(res => {
         console.log(res);
-        if (res.data.status == 200) {
+        if (res.data.msg == "사용가능한 메일입니다.") {
           window.alert("사용가능한 메일입니다.");
         } else {
-          if (res.data.status == 400) {
+          if (res.data.msg == "중복된 이메일이 존재합니다.") {
             window.alert("중복된 이메일이 존재합니다");
           }
         }
@@ -143,17 +143,15 @@ const nickCheckMiddleWare = nickName => {
     apis
       .checkNick(nickName)
       .then(res => {
-        console.log(res);
-        if (res.data.status == 200) {
+        console.log(res.data);
+        if (res.data.msg == "사용가능한 닉네임입니다.") {
           window.alert("사용가능한 닉네임입니다.");
-        } else {
-          if (res.data.status == 400) {
-            window.alert("중복된 닉네임이 존재합니다");
-          }
+          return;
         }
       })
       .catch(err => {
         console.log(err);
+        window.alert("중복된 닉네임이 존재합니다");
       });
   };
 };

@@ -12,7 +12,7 @@ const TopBanner = () => {
     <>
       <Grid width="70vw" margin="0 auto 7rem auto">
         <Title>SCOPE</Title>
-        <Sub>스스로 코딩하는 프로젝트</Sub>
+        <Sub>스마트 코딩 프로젝트</Sub>
         <Grid
           display="flex"
           width="100%"

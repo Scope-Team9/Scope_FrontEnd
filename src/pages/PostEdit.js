@@ -5,7 +5,7 @@
 import React, { useCallback, useMemo, useEffect } from "react";
 import styled from "styled-components";
 import { Grid, Text, Image, Button, Input } from "../elements/Index";
-import Img from "../images/postadd.png";
+import Img from "../images/PostAdd.png";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { apis } from "../lib/axios";
@@ -66,7 +66,7 @@ const PostEdit = props => {
         setTectstack(
           setValue.techStack.map(value => ({ label: value, value }))
         );
-        setStartdate(setValue.startDate);
+        setStartdate(setValue?.startDate);
         setEnddate(setValue.endDate);
         setTotalmember(setValue.totalMember);
         setProjectstatus(setValue.projectStatus);

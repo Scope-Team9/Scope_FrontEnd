@@ -1,14 +1,16 @@
 import React from "react";
-import { Grid, Button } from "../../elements/Index";
+import { Grid, Button, Text } from "../../elements/Index";
 
 const TestFive = props => {
   const { handleUserCreate, handleMemberCreate } = props;
 
   return (
     <Grid>
-      <div>성향테스트 5번</div>
+      <Grid height="30px" bg="#dddddd" textAlign="center">
+        <Text>수직적/수평적 조직형 테스트 #2</Text>
+      </Grid>
       <Grid display="flex" flexDirection="column">
-        <Grid>
+        <Grid margin="20px 0">
           <div>Q5.당신이 생각하는 이상적인 회의의 모습은?</div>
           <Button
             isTest

@@ -42,6 +42,7 @@ const Grid = props => {
     hover,
     zIndex,
     bgImg,
+    verticalAlign,
   } = props;
 
   const styles = {
@@ -82,6 +83,7 @@ const Grid = props => {
     hover,
     zIndex,
     bgImg,
+    verticalAlign,
   };
   return (
     <GridBox {...styles} onClick={_onClick} id={id}>
@@ -141,6 +143,7 @@ const GridBox = styled.div`
   align-items: ${props => props.alignItems};
   justify-content: ${props => props.justifyContent};
   text-align: ${props => props.textAlign};
+  vertical-align: ${props => props.verticalAlign};
   border: ${props => props.border};
   ${props =>
     props.borderRadius ? `border-radius: ${props.borderRadius}` : ""};
