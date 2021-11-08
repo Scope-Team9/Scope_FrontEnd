@@ -16,11 +16,11 @@ const PostList = () => {
   let reBook = useSelector((state) => state.rebook.reBook);
   let post_list = useSelector((state) => state.post.posts);
 
-  console.log(post_list);
-  console.log(paging);
+  // console.log(post_list);
+  // console.log(paging);
 
   let posts = post_list.slice(0, paging);
-  console.log(posts);
+  // console.log(posts);
 
   return (
     <React.Fragment>

@@ -37,10 +37,10 @@ export const getPostAPI = () => {
     let whatPages = getState().post.whatPage;
     // console.log("mainPage메인페이지", mainPage);
 
-    if (mainPage === false) {
-      console.log("끊겠음1");
-      return;
-    }
+    // if (mainPage === false) {
+    //   console.log("끊겠음1");
+    //   return;
+    // }
     if (whatPages.now !== whatPages.pre) {
       console.log(whatPages.now, whatPages.pre);
       console.log("끊겠음2");
@@ -108,7 +108,7 @@ export default handleActions(
           state.reBook === reBook
         ) {
           // console.log(draft.stacks === stacks);
-          // console.log("스택이 그대로일때");
+          console.log("스택이 그대로일때");
           // draft.posts.push(...action.payload.data.posts);
           draft.posts = action.payload.data.posts;
           draft.paging = action.payload.data.paging;

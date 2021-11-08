@@ -13,9 +13,15 @@ import { Grid, Image } from "../elements/Index";
 // Post의 함수형 컴포넌트를 만든다.
 const Post = (props) => {
   const dispatch = useDispatch();
-
+  const is_mainPage = useSelector((state) => state.post.mainpage);
+  const [stacks, setStacks] = React.useState();
   // console.log("게시자", props.recruitmentMember);
   // console.log("메인포스트아이디", props);
+  React.useEffect(() => {
+    let stack = props.techStack;
+    setStacks(stack);
+  }, [props, is_mainPage]);
+
   return (
     <React.Fragment>
       <ProductImgWrap
