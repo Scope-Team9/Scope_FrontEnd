@@ -81,7 +81,7 @@ const MainPage = () => {
     dispatch(postActions.isMainPage(true));
     dispatch(sortAction.getSort(data));
     dispatch(bookRecommendAction.getRb(""));
-    setPaging(9);
+    setPaging(6);
   };
   //bookmark,recommend
   const onclickRb = (data) => {
@@ -152,11 +152,6 @@ const MainPage = () => {
           </FilterBox>
 
           <InsideCard>
-            {/* {post_list.length === 0 && pageCheck === false && (
-              <>
-                <div style={{ height: "500px" }}></div>
-              </> */}
-            {/* )} */}
             <PostList></PostList>
           </InsideCard>
           {nowFilter !== "bookmark" && (
@@ -203,7 +198,7 @@ const Inside = styled.div`
 
 const InsideCard = styled.div`
   @media screen and (max-width: 750px) {
-    margin-left: -25px;
+    margin-left: 0px;
   } ;
 `;
 
@@ -215,10 +210,16 @@ const Stacks = styled.div`
 
 const FilterBox = styled.div`
   display: flex;
-  font-size: 12px;
+  font-size: 14px;
   margin-top: 20px;
   justify-content: flex-end;
   max-width: 1690px;
+  @media screen and (max-width: 1850px) {
+    justify-content: center;
+  }
+  @media screen and (max-width: 750px) {
+    justify-content: center;
+  } ;
 `;
 const Filtering = styled.p`
   margin: 20px;
@@ -246,6 +247,10 @@ const Btn = styled.button`
   margin: auto;
   background: #42309b;
   cursor: pointer;
+
+  @media screen and (max-width: 750px) {
+    right: 34%;
+  } ;
 `;
 
 export default MainPage;

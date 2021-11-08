@@ -10,10 +10,10 @@ const SET_USER = "SET_USER";
 const LOG_OUT = "LOG_OUT";
 
 //액션생성
-const firstUser = createAction(FIRST_USER, user => ({ user }));
-const testUser = createAction(TEST_USER, user => ({ user }));
-const setUser = createAction(SET_USER, user => ({ user }));
-const logOut = createAction(LOG_OUT, user => ({ user }));
+const firstUser = createAction(FIRST_USER, (user) => ({ user }));
+const testUser = createAction(TEST_USER, (user) => ({ user }));
+const setUser = createAction(SET_USER, (user) => ({ user }));
+const logOut = createAction(LOG_OUT, (user) => ({ user }));
 
 //초기값
 const initialState = {
@@ -30,12 +30,12 @@ const initialState = {
   memberPropensityType: [],
 };
 //카카오 로그인
-const kakaologinMiddleware = code => {
+const kakaologinMiddleware = (code) => {
   return function (dispatch, getState, { history }) {
     console.log("카카오에서 받아온 코드", code);
     apis
       .kakaoLogin(code)
-      .then(res => {
+      .then((res) => {
         console.log(res);
         if (res.data.status == 300) {
           window.alert("추가정보 작성이 필요합니다.");
@@ -65,7 +65,7 @@ const kakaologinMiddleware = code => {
           return;
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log("소셜로그인 에러", err);
         alert("로그인에 실패하였습니다.");
         history.replace("/"); // 로그인 실패하면 로그인화면으로 돌려보냄
@@ -74,12 +74,12 @@ const kakaologinMiddleware = code => {
 };
 
 //깃허브 로그인
-const githubLoginMiddleware = code => {
+const githubLoginMiddleware = (code) => {
   return function (dispatch, getState, { history }) {
     console.log("깃허브에서 받아온 코드", code);
     apis
       .githubLogin(code)
-      .then(res => {
+      .then((res) => {
         if (res.data.status == 300) {
           window.alert("추가정보 작성이 필요합니다.");
           dispatch(
@@ -108,7 +108,7 @@ const githubLoginMiddleware = code => {
         }
         // window.location.href = "/";
       })
-      .catch(err => {
+      .catch((err) => {
         console.log("소셜로그인 에러", err);
         alert("로그인에 실패하였습니다.");
         history.replace("/"); // 로그인 실패하면 로그인화면으로 돌려보냄
@@ -116,11 +116,11 @@ const githubLoginMiddleware = code => {
   };
 };
 // 이메일 중복체크 미들웨어
-const emailCheckMiddleWare = email => {
+const emailCheckMiddleWare = (email) => {
   return () => {
     apis
       .checkEmail(email)
-      .then(res => {
+      .then((res) => {
         console.log(res);
         if (res.data.status == 200) {
           window.alert("사용가능한 메일입니다.");
@@ -130,19 +130,19 @@ const emailCheckMiddleWare = email => {
           }
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
 };
 
 // 닉네임 중복체크 미들웨어
-const nickCheckMiddleWare = nickName => {
+const nickCheckMiddleWare = (nickName) => {
   console.log(nickName);
   return () => {
     apis
       .checkNick(nickName)
-      .then(res => {
+      .then((res) => {
         console.log(res);
         if (res.data.status == 200) {
           window.alert("사용가능한 닉네임입니다.");
@@ -152,14 +152,14 @@ const nickCheckMiddleWare = nickName => {
           }
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
 };
 
 //테스트유저 미들웨어
-const testUserMiddleWare = signupInfo => {
+const testUserMiddleWare = (signupInfo) => {
   return function (dispatch, getState, { history }) {
     console.log(signupInfo);
     dispatch(firstUser(signupInfo));
@@ -171,7 +171,7 @@ const myUserAPI = () => {
   return function (dispatch, getState, { history }) {
     apis
       .myUser()
-      .then(res => {
+      .then((res) => {
         console.log(res);
         dispatch(
           setUser({
@@ -181,19 +181,19 @@ const myUserAPI = () => {
             userPropensityType: res.data.data.userPropensityType,
           })
         );
-        history.replace("/");
+        // history.replace("/");
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
 };
 //테스트 마친 회원가입
-const signupMiddleware = signupInfo => {
+const signupMiddleware = (signupInfo) => {
   return function (dispatch, getState, { history }) {
     apis
       .signup(signupInfo)
-      .then(res => {
+      .then((res) => {
         const ACCESS_TOKEN = res.data.token;
         localStorage.setItem("token", ACCESS_TOKEN);
         dispatch(
@@ -204,7 +204,7 @@ const signupMiddleware = signupInfo => {
         );
         history.replace("/");
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
@@ -218,7 +218,7 @@ const editTestMiddleware = () => {
 export default handleActions(
   {
     [FIRST_USER]: (state, action) =>
-      produce(state, draft => {
+      produce(state, (draft) => {
         draft.email = action.payload.user.email;
         draft.snsId = action.payload.user.snsId;
         draft.techStack = action.payload.user.techStack;
@@ -227,7 +227,7 @@ export default handleActions(
         draft.sigunupModalState = true;
       }),
     [SET_USER]: (state, action) =>
-      produce(state, draft => {
+      produce(state, (draft) => {
         draft.userId = action.payload.user.userId;
         draft.nickname = action.payload.user.nickname;
         draft.email = action.payload.user.email;
@@ -239,7 +239,7 @@ export default handleActions(
         draft.userPropensityType = action.payload.user.userPropensityType;
       }),
     [LOG_OUT]: (state, action) =>
-      produce(state, draft => {
+      produce(state, (draft) => {
         draft.is_login = false;
       }),
   },

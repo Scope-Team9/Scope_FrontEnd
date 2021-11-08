@@ -57,35 +57,18 @@ const MyPageInfo = (props) => {
   return (
     <React.Fragment>
       <Grid
-        margin="-100px 0px"
+        width="100%"
+        margin="-100px auto"
         display="flex"
         height="400px"
         bgImg="url(/img/testtest.png)"
       ></Grid>
-      <Grid
-        boxShadow="rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px"
-        margin="-260px 0 0 55px"
-        width="270px"
-        height="500px"
-        backgroundColor="black"
-        borderRadius="20px"
-      >
+      <Cards>
         <img
           src="/img/fire.png"
-          style={{ width: "270px", height: "300px", borderRadius: "20px" }}
+          style={{ width: "270px", height: "400px", borderRadius: "20px" }}
         ></img>
-        <Button
-          backgroundColor="#333"
-          fontSize="10px"
-          height="30px"
-          borderRadius="20px"
-          width="120px"
-          margin="-90px 0 0 137px"
-        >
-          프로필 수정하기
-        </Button>
-        <p></p>
-      </Grid>
+      </Cards>
       <Grid display="flex" margin="auto" justifyContent="center">
         <Filter
           onClick={() => {
@@ -134,6 +117,7 @@ const MyPageInfo = (props) => {
       )}
       {filter === "완료" && <MypagePostList {...endProject}></MypagePostList>}
       <button
+        style={{ float: "right", margin: "0 20% 0 0" }}
         onClick={() => {
           history.push({
             pathname: "/addmarkdown",
@@ -163,7 +147,22 @@ const Filter = styled.p`
     text-decoration: underline;
     color: lightskyblue;
   }
+  @media screen and (max-width: 750px) {
+    margin-top: 150px;
+  } ;
 `;
 
+const Cards = styled.div`
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  margin: -260px 0 -400px 55px;
+  width: 270px;
+  height: 800px;
+  background-color: black;
+  border-radius: 20px;
+  @media screen and (max-width: 750px) {
+    display: none;
+  } ;
+`;
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default MyPageInfo;

@@ -8,15 +8,19 @@ import { history } from "../redux/configureStore";
 const HeaderLeft = () => {
   return (
     <Grid>
-      <img
-        onClick={() => {
-          history.push("/");
-        }}
-        src={Logo}
-        width="150px"
-      />
+      <LogoDiv>
+        <img
+          onClick={() => {
+            history.push("/");
+          }}
+          src={Logo}
+          width="150px"
+        />
+      </LogoDiv>
     </Grid>
   );
 };
-
+const LogoDiv = styled.div`
+  width: 20%;
+`;
 export default HeaderLeft;

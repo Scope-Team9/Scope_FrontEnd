@@ -40,10 +40,10 @@ const Post = (props) => {
           >
             <Grid>{/* <TitleDate>D-2</TitleDate> */}</Grid>
 
-            <Grid display="flex" width="100px">
+            <Grid display="flex" width="100%">
               {props.techStack.map((p, idx) => {
                 return (
-                  <div key={idx}>
+                  <div style={{ width: "22%" }} key={idx}>
                     <PostStacks stack={p}></PostStacks>
                   </div>
                 );
@@ -107,6 +107,15 @@ const Date = styled.div`
   margin-top: 25%;
   margin-left: 50%;
   text-overflow: ellipsis;
+
+  @media (max-width: 750px) {
+    font-size: 15px;
+    margin-left: 0%;
+  }
+  @media (max-width: 360px) {
+    font-size: 15px;
+    margin-left: 0%;
+  }
 `;
 
 const Line = styled.hr`
@@ -117,12 +126,19 @@ const Line = styled.hr`
 const ProjectState = styled.div`
   margin-left: 80%;
   margin-bottom: 10px;
+
+  @media (max-width: 750px) {
+    margin-left: 60%;
+  }
+  @media (max-width: 370px) {
+    margin-left: 60%;
+  }
 `;
 
 const ProductImgWrap = styled.div`
   background-color: white;
   width: 60vw;
-  height: 443px;
+  height: 90%;
   max-width: 90%;
   margin: auto;
   margin-top: 30px;
@@ -131,10 +147,17 @@ const ProductImgWrap = styled.div`
   border-radius: 30px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.24);
   @media (max-width: 750px) {
-    width: 100%;
+    width: 60vw;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
   }
-  @media (max-width: 450px) {
-    width: 100%;
+  @media (max-width: 370px) {
+    width: 60vw;
+    margin: auto;
+    margin-left: 5%;
+    margin-top: 30px;
+    margin-bottom: 30px;
   }
 `;
 
