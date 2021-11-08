@@ -59,7 +59,7 @@ const PostDetail = props => {
   }, [bookmark]);
   const passedData = checkPost?.data["data"].post;
   const passdedMenber = checkPost?.data["data"].members[0];
-  console.log(passedData);
+  console.log("나는 신청자다", passedData);
   console.log();
   return (
     <React.Fragment>
@@ -98,6 +98,13 @@ const PostDetail = props => {
                 <Grid display="column">
                   <Image />
                   <Grid display="column">
+                    {/* {passedData?.recruitmentMember.map((item, index) => {
+                      return (
+                        <Text margin="auto 5px" key={index}>
+                          {item}
+                        </Text>
+                      );
+                    })} */}
                     <Text>{passedData?.recruitmentMember}</Text>
                     <Text>({passdedMenber?.userPropensityType})</Text>
                   </Grid>
