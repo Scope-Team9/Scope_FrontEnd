@@ -8,6 +8,7 @@ import { Grid, Image, Progress } from "../elements/Index";
 import Img from "../images/flutter.png";
 
 const PostStacks = (props) => {
+  console.log(post_list);
   let stack = props.stack;
   console.log(stack);
 
