@@ -97,7 +97,7 @@ const Stack = () => {
       </BorderRadius>
       <BorderRadius>
         <IMGS
-          src="img/react.png"
+          src="img/flask.png"
           onClick={() => {
             onclick("Flask");
           }}
@@ -129,7 +129,7 @@ const Stack = () => {
       </BorderRadius>
       <BorderRadius>
         <IMGS
-          src="img/react.png"
+          src="img/php.png"
           onClick={() => {
             onclick("php");
           }}

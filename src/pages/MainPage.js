@@ -67,8 +67,7 @@ const MainPage = () => {
       // pageCheck는 기본값이 false . 즉 메인페이지가 아닌 다른페이지 경로로 먼저 들어왔을 경우 메인페이지로 이동했을때
       // true로 바꾸어 위에있는 useEffect를 렌더링시켜 getPost를 호출하였다. 하지만 이럼에도 문제가 발생했으니..
       // 화면이 그려질때 observer div가 보여져서 처음 메인화면에서 새로고침 했을 때에 getPost가 두번 호출당하는 사태가 발생
-      // 그것을 해결하기 위해 서버로부터 받아온 post_list 가 없고, pageCheck가 false일때 안보이는 height가 500px인 div를 넣었다.
-      // 이렇게 되면 자연스러운 스크롤 줄 수 있다.
+      // 받아올때 push를 없앴다.
       if (post_list.length === 0 && pageCheck === false) {
         dispatch(postActions.pageCheck(true));
       }
