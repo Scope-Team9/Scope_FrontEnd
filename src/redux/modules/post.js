@@ -21,7 +21,7 @@ const initialState = {
   sorts: "createdAt",
   reBook: "",
   mainpage: true,
-  whatPage: { pre: null, now: null },
+  whatPage: { pre: "mainPage", now: "mainPage" },
 };
 
 export const getPostAPI = () => {
@@ -35,9 +35,12 @@ export const getPostAPI = () => {
     // console.log("mainPage메인페이지", mainPage);
 
     if (mainPage === false) {
+      console.log("끊겠음1");
       return;
     }
     if (whatPages.now !== whatPages.pre) {
+      console.log(whatPages.now, whatPages.pre);
+      console.log("끊겠음2");
       dispatch(whatPage("mainPage"));
       return;
     }
@@ -88,7 +91,8 @@ export default handleActions(
           // console.log(draft.stacks !== stacks);
           // console.log("받아온 스택", stacks);
           // console.log("draft스택", state.stacks);
-          // console.log("스택이 달라졌을때");
+          console.log("스택이 달라졌을때");
+          console.log(action);
           draft.posts = action.payload.data.posts;
           draft.paging = action.payload.data.paging;
           draft.is_loading = false;
