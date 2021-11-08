@@ -111,7 +111,6 @@ const PostDetail = props => {
                   <Button
                     postion="absolute"
                     width="100%"
-                    borderRadius="10px"
                     _onClick={applyStatusModalOpen}
                   >
                     신청현황 확인
@@ -152,12 +151,11 @@ const PostDetail = props => {
             <Grid padding="16px">
               {userId === postUserId ? (
                 <Grid>
-                  <Button width="100px" height="30px" margin="auto 10px">
+                  <Button width="100px" margin="auto 10px">
                     모집완료
                   </Button>
                   <Button
                     width="100px"
-                    height="30px"
                     margin="auto 10px"
                     _onClick={() => {
                       history.push({ pathname: `/postedit/${post_id}` });
@@ -165,7 +163,7 @@ const PostDetail = props => {
                   >
                     포스트수정
                   </Button>
-                  <Button width="100px" height="30px" margin="auto 10px">
+                  <Button width="100px" margin="auto 10px">
                     포스트삭제
                   </Button>
                 </Grid>
@@ -178,7 +176,6 @@ const PostDetail = props => {
                       applyUserModalOpen(e.target.value);
                     }}
                     width="100px"
-                    height="30px"
                     margin="auto 10px"
                   >
                     지원신청
@@ -195,7 +192,6 @@ const PostDetail = props => {
                       applyUserModalOpen(e.target.value);
                     }}
                     width="100px"
-                    height="30px"
                     margin="auto 10px"
                   >
                     지원취소
@@ -206,7 +202,6 @@ const PostDetail = props => {
                       applyUserModalOpen(e.target.value);
                     }}
                     width="100px"
-                    height="30px"
                     margin="auto 10px"
                   >
                     팀탈퇴

@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { applyCreators } from "../redux/modules/applyProject";
 import CloseIcon from "@mui/icons-material/Close";
 
-const ApplyStatusModal = (props) => {
+const ApplyStatusModal = props => {
   const dispatch = useDispatch();
   const applyUsers = useSelector(state => state.apply.applyUsers);
   const { applyStatusModal, setApplyStatusModal, postId } = props;
@@ -45,7 +45,13 @@ const ApplyStatusModal = (props) => {
     <>
       <Dialog maxWidth={"sm"} scroll="paper" open={applyStatusModal}>
         <ModalWrap>
-          <Grid height="10%" bg="#eee" position="relative">
+          <Grid
+            height="10%"
+            bg="#170184"
+            position="relative"
+            textAlign="center"
+            padding="10px 0 0 0"
+          >
             <Grid
               position="absolute"
               top="0px"
@@ -55,19 +61,16 @@ const ApplyStatusModal = (props) => {
             >
               <CloseIcon fontSize="large" onClick={modalClose} />
             </Grid>
-            <Grid alignItems="center">
-              <Text margin="0 0 0 20px" bold>
-                신청현황
-              </Text>
-            </Grid>
+            <Text size="30px" bold color="#fff">
+              신청현황
+            </Text>
           </Grid>
           <Grid display="flex" height="85%" justifyContent="center">
             {applyUsers && (
-              <Grid width="80%" margin="10px">
+              <Grid width="80%" margin="10px 0">
                 {applyUsers.map((user, idx) => (
                   <Grid
-                    border="1px solid #ddd"
-                    margin="auto"
+                    margin="10px auto"
                     height="100px"
                     display="flex"
                     alignItems="center"
@@ -99,11 +102,11 @@ const ApplyStatusModal = (props) => {
                         수락
                       </Button>
                     </Grid>
-                    <Grid margin="auto" height="50px">
+                    <Grid margin="auto auto auto 3px" height="50px">
                       <Button
                         _id="cancel"
-                        backgroundColor="#fff"
-                        color="#111"
+                        backgroundColor="#DE2890"
+                        color="#fff"
                         isValue={applyUsers[idx].userId}
                         _onClick={e => {
                           console.log(e);

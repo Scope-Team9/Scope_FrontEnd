@@ -22,7 +22,6 @@ const TopBanner = () => {
           <Grid>
             <Button
               width="10vw"
-              borderRadius="5px"
               _onClick={() => {
                 is_token
                   ? history.push("/postwrite")

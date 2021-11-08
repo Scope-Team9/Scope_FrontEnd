@@ -55,7 +55,6 @@ const HeaderRight = props => {
           </Grid>
           <Button
             height="50px"
-            borderRadius="20px"
             backgroundColor="#170184"
             width="132px"
             text="로그아웃"
@@ -74,7 +73,6 @@ const HeaderRight = props => {
       >
         <HeaderWrapper>
           <Button
-            borderRadius="20px"
             backgroundColor="#333"
             width="100px"
             text="로그인"
