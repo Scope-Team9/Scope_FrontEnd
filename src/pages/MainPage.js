@@ -32,7 +32,6 @@ const MainPage = () => {
   const [paging, setPaging] = React.useState(9);
   const [nowFilter, setNowFilter] = React.useState("최신");
   const post_list = useSelector((state) => state.post.posts);
-  console.log("어떻게오느냐 을랴랴랴랴랴랴ㅑ랴랴", post_list);
   // console.log(infinity);
 
   // console.log(useSelector((state) => state.infinity.paging));
@@ -214,14 +213,14 @@ const Filtering = styled.p`
 const Btn = styled.button`
   position: fixed;
   bottom: 70px;
-  border: 1px solid black;
+  border: 1px solid #42309b;
   border-radius: 50%;
   width: 60px;
   height: 60px;
   text-align: center;
   right: 50px;
   margin: auto;
-  background: blue;
+  background: #42309b;
   cursor: pointer;
 `;
 

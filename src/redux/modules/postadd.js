@@ -6,7 +6,7 @@ import { apis } from "../../lib/axios";
 const ADD_POST = "ADD_POST";
 
 // Action Creators
-const addPosts = createAction(ADD_POST, card => ({ card }));
+const addPosts = createAction(ADD_POST, (card) => ({ card }));
 
 const initialState = {
   list: [
@@ -24,14 +24,14 @@ const initialState = {
 };
 
 // 미들웨어
-export const addPostAPI = card => {
+export const addPostAPI = (card) => {
   return function (dispatch, getState, { history }) {
     apis
       .addPost(card)
-      .then(res => {
+      .then((res) => {
         console.log(res);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err.response);
       });
     dispatch(addPosts(card));
@@ -42,7 +42,7 @@ export const addPostAPI = card => {
 export default handleActions(
   {
     [ADD_POST]: (state, action) =>
-      produce(state, draft => {
+      produce(state, (draft) => {
         console.log("요~비치", action.payload);
       }),
   },
