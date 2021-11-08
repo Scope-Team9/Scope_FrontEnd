@@ -38,7 +38,7 @@ const Post = (props) => {
               {props.techStack.map((p, idx) => {
                 return (
                   <div key={idx}>
-                    <PostStacks stack={p}></PostStacks>;
+                    <PostStacks stack={p}></PostStacks>
                   </div>
                 );
               })}
