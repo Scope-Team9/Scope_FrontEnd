@@ -31,12 +31,12 @@ const Post = (props) => {
           });
         }}
       >
-        <Grid backgroundColor="#E7E1FF" borderRadius="30px">
+        <Grid backgroundColor="#D7D4E6" borderRadius="30px" margin="auto">
           <Grid
-            width="350px"
+            width="100%"
             height="50px"
-            backgroundColor="#8B3FF8"
-            borderRadius="20px 20px 20px 0px"
+            backgroundColor="#170184"
+            borderRadius="30px 30px 30px 0px"
           >
             <Grid>{/* <TitleDate>D-2</TitleDate> */}</Grid>
 
@@ -81,36 +81,53 @@ const DescriptionBox = styled.div`
 `;
 
 const Title = styled.h1`
+  margin-top: 15%;
   font-size: 20px;
+  width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const Summary = styled.div`
   font-size: 14px;
   color: gray;
-  margin-bottom: 80px;
+
+  margin-top: 15%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-height: 14px;
+  max-height: 28px;
+  -webkit-line-clamp: 2; /* 표시하고자 하는 라인 수 */
+  -webkit-box-orient: vertical;
 `;
 
 const Date = styled.div`
-  margin-left: 134px;
+  margin-top: 25%;
+  margin-left: 50%;
+  text-overflow: ellipsis;
 `;
 
 const Line = styled.hr`
-  width: 300px;
+  width: 100%;
   color: black;
 `;
 
 const ProjectState = styled.div`
-  margin-left: 260px;
+  margin-left: 80%;
   margin-bottom: 10px;
 `;
 
 const ProductImgWrap = styled.div`
   background-color: white;
   width: 60vw;
-  max-width: 350px;
+  height: 443px;
+  max-width: 90%;
   margin: auto;
   margin-top: 30px;
   margin-bottom: 30px;
+
   border-radius: 30px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.24);
   @media (max-width: 750px) {

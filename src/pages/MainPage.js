@@ -203,7 +203,7 @@ const Inside = styled.div`
 
 const InsideCard = styled.div`
   @media screen and (max-width: 750px) {
-    margin-left: 18px;
+    margin-left: -25px;
   } ;
 `;
 
@@ -217,6 +217,8 @@ const FilterBox = styled.div`
   display: flex;
   font-size: 12px;
   margin-top: 20px;
+  justify-content: flex-end;
+  max-width: 1690px;
 `;
 const Filtering = styled.p`
   margin: 20px;
