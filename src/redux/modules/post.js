@@ -6,11 +6,13 @@ const GET_POST = "GET_POST";
 const LOADING = "LOADING";
 const MAINPAGE = "MAINPAGE";
 const WHATPAGE = "WHATPAGE";
+const PAGECHECK = "PAGECHECK";
 
 const getPosts = createAction(GET_POST, (data) => ({ data }));
 const isLoading = createAction(LOADING, (loading) => ({ loading }));
 const isMainPage = createAction(MAINPAGE, (data) => ({ data }));
 const whatPage = createAction(WHATPAGE, (data) => ({ data }));
+const pageCheck = createAction(PAGECHECK, (data) => ({ data }));
 
 const initialState = {
   posts: [],
@@ -21,7 +23,8 @@ const initialState = {
   sorts: "createdAt",
   reBook: "",
   mainpage: true,
-  whatPage: { pre: null, now: null },
+  whatPage: { pre: "mainPage", now: "mainPage" },
+  pageCheck: false,
 };
 
 export const getPostAPI = () => {
@@ -35,9 +38,12 @@ export const getPostAPI = () => {
     // console.log("mainPage메인페이지", mainPage);
 
     if (mainPage === false) {
+      console.log("끊겠음1");
       return;
     }
     if (whatPages.now !== whatPages.pre) {
+      console.log(whatPages.now, whatPages.pre);
+      console.log("끊겠음2");
       dispatch(whatPage("mainPage"));
       return;
     }
@@ -88,7 +94,8 @@ export default handleActions(
           // console.log(draft.stacks !== stacks);
           // console.log("받아온 스택", stacks);
           // console.log("draft스택", state.stacks);
-          // console.log("스택이 달라졌을때");
+          console.log("스택이 달라졌을때");
+          console.log(action);
           draft.posts = action.payload.data.posts;
           draft.paging = action.payload.data.paging;
           draft.is_loading = false;
@@ -102,7 +109,8 @@ export default handleActions(
         ) {
           // console.log(draft.stacks === stacks);
           // console.log("스택이 그대로일때");
-          draft.posts.push(...action.payload.data.posts);
+          // draft.posts.push(...action.payload.data.posts);
+          draft.posts = action.payload.data.posts;
           draft.paging = action.payload.data.paging;
           draft.is_loading = false;
         }
@@ -128,6 +136,11 @@ export default handleActions(
         console.log(page);
         draft.whatPage = page;
       }),
+    [PAGECHECK]: (state, action) =>
+      produce(state, (draft) => {
+        console.log("페이지 체크", action);
+        draft.pageCheck = action.payload.data;
+      }),
   },
   initialState
 );
@@ -136,5 +149,6 @@ const postActions = {
   getPostAPI,
   isMainPage,
   whatPage,
+  pageCheck,
 };
 export { postActions };

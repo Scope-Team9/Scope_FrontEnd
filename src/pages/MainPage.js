@@ -26,14 +26,15 @@ const MainPage = () => {
   console.log(cards);
   const is_reBook_clicked = useSelector((state) => state.rebook.reBook);
   const is_mainPage = useSelector((state) => state.post.mainpage);
+  const pageCheck = useSelector((state) => state.post.pageCheck);
   // const infinity = useSelector((state) => state.infinity.paging);
   const whatPage = useSelector((state) => state.post.whatPage);
   const [ref, inView] = useInView();
-  const [paging, setPaging] = React.useState(0);
+  const [paging, setPaging] = React.useState(9);
   const [nowFilter, setNowFilter] = React.useState("최신");
   const post_list = useSelector((state) => state.post.posts);
   console.log("어떻게오느냐 을랴랴랴랴랴랴ㅑ랴랴", post_list);
-  // console.log(infinity);
+  console.log(pageCheck);
 
   // console.log(useSelector((state) => state.infinity.paging));
   // let page = 0;
@@ -42,19 +43,34 @@ const MainPage = () => {
 
   // console.log(paging);
   // Todo 수정페이지에도 페이지 리덕스 넘겨줘야함
+
   React.useEffect(() => {
-    // console.log("?? 여기서 되는거임?");
+    console.log("?? 여기서 되는거임?");
     dispatch(postActions.isMainPage(true));
     dispatch(postActions.whatPage("mainPage"));
+    console.log("무얏호우", whatPage);
+
     dispatch(postActions.getPostAPI());
-  }, [is_stack_clicked, is_sort_clicked, is_reBook_clicked]);
+
+    console.log("?? 여기서 되는거임?");
+  }, [is_stack_clicked, is_sort_clicked, is_reBook_clicked, pageCheck]);
 
   React.useEffect(() => {
     if (inView === true) {
-      setPaging(paging + 1);
+      setPaging(paging + 9);
       console.log("내가 페이지", paging);
       dispatch(pageAction.getPage(paging));
-      dispatch(postActions.getPostAPI());
+      // dispatch(postActions.getPostAPI());
+      // 다른페이지에서 새로고침하면 현재 페이지가 그 페이지로 되고 메인으로 나오면 포스트 호출을 끊고 page.next와 page.pre를 main으로 바꾸지만
+      //스크롤로 다시 getpost를 실행할 수 없어서 안불러와짐.
+      // 그래서 pageCheck 라는 친구를 둬서 그 친구가 바뀔 때 마다 getPost하는 useEffect가 리랜더링 되도록 하였다.
+      // pageCheck는 기본값이 false . 즉 메인페이지가 아닌 다른페이지 경로로 먼저 들어왔을 경우 메인페이지로 이동했을때
+      // true로 바꾸어 위에있는 useEffect를 렌더링시켜 getPost를 호출하였다. 하지만 이럼에도 문제가 발생했으니..
+      // 화면이 그려질때 observer div가 보여져서 처음 메인화면에서 새로고침 했을 때에 getPost가 두번 호출당하는 사태가 발생
+      // 받아올때 push를 없앴다.
+      if (post_list.length === 0 && pageCheck === false) {
+        dispatch(postActions.pageCheck(true));
+      }
     }
   }, [inView]);
 
@@ -62,18 +78,18 @@ const MainPage = () => {
   const onclickSort = (data) => {
     dispatch(postActions.isMainPage(true));
     dispatch(sortAction.getSort(data));
-    // dispatch(bookRecommendAction.getRb(""));
-    setPaging(0);
+    dispatch(bookRecommendAction.getRb(""));
+    setPaging(9);
   };
   //bookmark,recommend
   const onclickRb = (data) => {
     dispatch(postActions.isMainPage(true));
     dispatch(bookRecommendAction.getRb(data));
-    // dispatch(sortAction.getSort(""));
+    dispatch(sortAction.getSort(""));
     // if (paging > 0) {
     //   setPaging(paging - 1);
     // }
-    setPaging(0);
+    setPaging(9);
   };
 
   const checkNowFilter = (data) => {
@@ -134,14 +150,18 @@ const MainPage = () => {
           </FilterBox>
 
           <InsideCard>
+            {/* {post_list.length === 0 && pageCheck === false && (
+              <>
+                <div style={{ height: "500px" }}></div>
+              </> */}
+            {/* )} */}
             <PostList></PostList>
           </InsideCard>
           {nowFilter !== "bookmark" && (
             <div
               ref={ref}
               style={{
-                height: "900px",
-                backgroundColor: "white",
+                height: "500px",
               }}
             ></div>
           )}

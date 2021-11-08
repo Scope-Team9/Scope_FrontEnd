@@ -221,10 +221,11 @@ const AddPost = (props) => {
                 selected={endDate}
                 onChange={(date) => setEnddate(date)}
                 selectsEnd
+                startdate={startDate}
                 enddate={endDate}
-                mindate={new Date()}
                 locale={ko}
-                minDate={new Date("")}
+                minDate={new Date()}
+                placeholderText="프로젝트 종료일"
               />
             </Grid>
           </Grid>

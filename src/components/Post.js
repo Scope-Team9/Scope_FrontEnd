@@ -36,7 +36,11 @@ const Post = (props) => {
 
             <Grid display="flex" width="100px">
               {props.techStack.map((p, idx) => {
-                return <PostStacks key={idx} {...p}></PostStacks>;
+                return (
+                  <div key={idx}>
+                    <PostStacks stack={p}></PostStacks>;
+                  </div>
+                );
               })}
             </Grid>
           </Grid>

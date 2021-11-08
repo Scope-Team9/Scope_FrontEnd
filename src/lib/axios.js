@@ -70,7 +70,7 @@ export const apis = {
   //포스트 관련 api
   getPost: (stack, paging, sort, reBook) =>
     instance.get(
-      `/api/post?filter=${stack.React};${stack.Spring};${stack.Swift};${stack.TypeScript};${stack.cpp};${stack.Django};${stack.Flask};${stack.Java};${stack.JavaScript};${stack.Kotlin};${stack.Node};${stack.php};${stack.Python};${stack.Vue};&displayNumber=9&page=${paging}&sort=${sort}&bookmarkRecommend=${reBook}`
+      `/api/post?filter=${stack.React};${stack.Spring};${stack.Swift};${stack.TypeScript};${stack.cpp};${stack.Django};${stack.Flask};${stack.Java};${stack.JavaScript};${stack.Kotlin};${stack.Node};${stack.php};${stack.Python};${stack.Vue};&sort=${sort}&bookmarkRecommend=${reBook}`
     ),
   bookMarkChecked: (postId) => instance.post(`/api/bookmark/${postId}`),
 
@@ -84,6 +84,7 @@ export const apis = {
   detailPost: (postId) => instance.get(`/api/post/${postId}`),
   editPost: (postId, data) => instance.post(`/api/post/${postId}`, data),
   deletePost: (postId) => instance.delete(`/api/post/${postId}`),
+  projectStatus: (postId) => instance.post(`/api/post/${postId}/status`),
 
   //data.json용
   // getPost: () => instance.get(`/post`),
