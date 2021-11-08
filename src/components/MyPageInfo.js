@@ -16,7 +16,7 @@ import MarkdownRead from "./MarkdownRead";
 import { history } from "../redux/configureStore";
 
 // MyPageInfo의 함수형 컴포넌트를 만든다.
-const MyPageInfo = props => {
+const MyPageInfo = (props) => {
   const dispatch = useDispatch();
   // const userId = useSelector((state) => state.user.userId);
   const userId = props.match.params.id;
@@ -47,6 +47,7 @@ const MyPageInfo = props => {
   const bookMarkProject = mydata?.bookmark;
   const endProject = mydata?.end;
 
+  console.log(mydata);
   console.log(recruitmentProject);
   console.log(inProgressProject);
   console.log(bookMarkProject);
