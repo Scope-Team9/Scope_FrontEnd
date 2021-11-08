@@ -120,7 +120,7 @@ const LoginModal = props => {
   //회원이 아닐경우 회원가입, 회원일 경우 메인으로 이동
   if (sigunupModalState == true) {
     return (
-      <Dialog maxWidth={"md"} scroll="paper" open={showModal}>
+      <Dialog maxWidth={"sm"} scroll="paper" open={showModal}>
         <ModalWrap>
           {!test ? (
             <Grid
@@ -280,7 +280,7 @@ const LoginModal = props => {
           <Grid
             className="모달컨테이너"
             backgroundColor="#fff"
-            borderRadius="0 0 5px 5px"
+            borderRadius="20px"
             position="relative"
             width="100%"
             height="100%"
@@ -333,19 +333,9 @@ const LoginModal = props => {
                   >
                     카카오로그인
                   </KakaoBtn>
-                  <NaverBtn
-                    onClick={() => {
-                      setShowModal(true);
-                      window.location.href =
-                        "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code";
-                    }}
-                  >
-                    네이버로그인
-                  </NaverBtn>
                 </Grid>
               </Grid>
             </Grid>
-
             <hr color="#eee" />
           </Grid>
         </ModalWrap>
@@ -356,7 +346,7 @@ const LoginModal = props => {
 
 const ModalWrap = styled.div`
   width: 550px;
-  height: 500px;
+  height: 100%;
 `;
 
 const GithubBtn = styled.div`
@@ -367,7 +357,7 @@ const GithubBtn = styled.div`
   padding-top: 12px;
   border: 0.5px solid #707070;
   box-sizing: border-box;
-  border-radius: 22.5px;
+  border-radius: 25px;
   font-size: 14px;
   text-align: center;
   color: #555555;
@@ -382,28 +372,12 @@ const KakaoBtn = styled.div`
   padding-top: 12px;
   border: 0.5px solid #707070;
   box-sizing: border-box;
-  border-radius: 22.5px;
+  border-radius: 25px;
   font-size: 14px;
   text-align: center;
   color: #606060;
   cursor: pointer;
   background-color: #f9e000;
-`;
-
-const NaverBtn = styled.div`
-  display: inline-block;
-  width: 250px;
-  height: 50px;
-  margin: 5px auto;
-  padding-top: 12px;
-  border: 0.5px solid #707070;
-  box-sizing: border-box;
-  border-radius: 22.5px;
-  font-size: 14px;
-  text-align: center;
-  color: #ffffff;
-  cursor: pointer;
-  background-color: #00bf18;
 `;
 
 export default LoginModal;

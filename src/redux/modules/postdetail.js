@@ -10,7 +10,7 @@ const DELETE_POST = "DELETE_POST";
 // 포스트 수정 액션생성함수 생성
 const editPost = createAction(EDIT_POST, editcard => ({ editcard }));
 // 포스트 삭제 액션생성함수 생성
-const deletePost = createAction(DELETE_POST, card => ({ card }));
+const deletePost = createAction(DELETE_POST, postId => ({ postId }));
 
 // 초기값
 const initialState = {

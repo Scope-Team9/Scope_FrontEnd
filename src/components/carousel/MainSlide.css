@@ -15,13 +15,13 @@
 }
 
 .slide {
-  transform: scale(0.7);
+  transform: scale(0.8);
   transition: transform 300ms;
   opacity: 0.5;
 }
 
 .activeSlide {
-  transform: scale(1);
+  transform: scale(1.1, 1);
   opacity: 1;
 }
 
