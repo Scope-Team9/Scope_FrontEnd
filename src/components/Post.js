@@ -36,7 +36,7 @@ const Post = (props) => {
             width="100%"
             height="50px"
             backgroundColor="#170184"
-            borderRadius="30px 30px 30px 0px"
+            borderRadius="30px 30px 0px 0px"
           >
             <Grid>{/* <TitleDate>D-2</TitleDate> */}</Grid>
 
