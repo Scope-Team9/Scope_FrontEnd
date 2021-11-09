@@ -9,12 +9,13 @@ import { useHistory } from "react-router";
 import { postActions } from "../redux/modules/post";
 import { Grid, Text, Image, Input, Button } from "../elements/Index";
 import Img from "../images/PostAdd.png";
+import UserList from "../components/UserList";
 import ApplyStatusModal from "../components/ApplyStatusModal";
 import ApplyUserModal from "../components/ApplyUserModal";
 import { history } from "../redux/configureStore";
 
 // PostDetail의 함수형 컴포넌트를 만든다.
-const PostDetail = props => {
+const PostDetail = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [checkPost, setCheckPost] = React.useState();
@@ -27,15 +28,14 @@ const PostDetail = props => {
     setApplyStatusModal(true);
   };
 
-  const applyUserModalOpen = value => {
+  const applyUserModalOpen = (value) => {
     setApplyValue(value);
     setApplyUserModal(true);
   };
   let post_id = props.match.params.id;
 
-  const userId = useSelector(state => state.user.userId); //로그인 유저아이디
+  const userId = useSelector((state) => state.user.userId); //로그인 유저아이디
   const postUserId = checkPost?.data.data.post.userId;
-  console.log(userId, postUserId);
 
   //북마크 토글
   const ToggleBookMark = () => {
@@ -58,9 +58,7 @@ const PostDetail = props => {
     CheckPost();
   }, [bookmark]);
   const passedData = checkPost?.data["data"].post;
-  const passdedMenber = checkPost?.data["data"].members[0];
-  console.log("나는 신청자다", passedData);
-  console.log();
+  const passdedMenber = checkPost?.data["data"].members;
   return (
     <React.Fragment>
       <Grid
@@ -90,23 +88,23 @@ const PostDetail = props => {
             <Text>게시자 정보</Text>
             <Grid display="column">
               <Image />
-              <Text>{passdedMenber?.nickname}</Text>
+              <Text>{passedData?.nickname}</Text>
             </Grid>
             <Grid margin="10px auto">
               <Text>프로젝트 인원</Text>
               <Grid display="flex">
                 <Grid display="column">
-                  <Image />
-                  <Grid display="column">
-                    {/* {passedData?.recruitmentMember.map((item, index) => {
-                      return (
-                        <Text margin="auto 5px" key={index}>
-                          {item}
-                        </Text>
-                      );
-                    })} */}
-                    <Text>{passedData?.recruitmentMember}</Text>
-                    <Text>({passdedMenber?.userPropensityType})</Text>
+                  <Grid display="flex">
+                    {passdedMenber?.map((item, index) => (
+                      <Grid key={index} {...item}>
+                        <Grid>
+                          <Image />
+                          {/* <UserList></UserList> */}
+                        </Grid>
+                        <Grid>{item.nickname}</Grid>
+                        <Grid>({item.userPropensityType})</Grid>
+                      </Grid>
+                    ))}
                   </Grid>
                 </Grid>
               </Grid>
@@ -189,7 +187,7 @@ const PostDetail = props => {
                   <Grid>
                     <Button
                       isValue="apply"
-                      _onClick={e => {
+                      _onClick={(e) => {
                         console.log(e);
                         applyUserModalOpen(e.target.value);
                       }}
@@ -209,7 +207,7 @@ const PostDetail = props => {
                     />
                     <Button
                       isValue="cancel"
-                      _onClick={e => {
+                      _onClick={(e) => {
                         applyUserModalOpen(e.target.value);
                       }}
                       width="120px"
@@ -222,7 +220,7 @@ const PostDetail = props => {
                     </Button>
                     <Button
                       isValue="teamExit"
-                      _onClick={e => {
+                      _onClick={(e) => {
                         applyUserModalOpen(e.target.value);
                       }}
                       width="120px"

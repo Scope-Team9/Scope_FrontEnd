@@ -24,7 +24,7 @@ const TopBanner = () => {
         >
           <Grid>
             <Button
-              width="10vw"
+              width="150px"
               _onClick={() => {
                 is_token
                   ? setShowModal(true)
@@ -40,7 +40,7 @@ const TopBanner = () => {
             </Dialog>
           </Grid>
 
-          <img src={Symbol} />
+          <img style={{ width: "50%" }} src={Symbol} />
         </Grid>
       </Grid>
     </>

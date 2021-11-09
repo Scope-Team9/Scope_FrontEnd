@@ -16,11 +16,11 @@ const PostList = () => {
   let reBook = useSelector((state) => state.rebook.reBook);
   let post_list = useSelector((state) => state.post.posts);
 
-  console.log(post_list);
-  console.log(paging);
+  // console.log(post_list);
+  // console.log(paging);
 
   let posts = post_list.slice(0, paging);
-  console.log(posts);
+  // console.log(posts);
 
   return (
     <React.Fragment>
@@ -38,12 +38,11 @@ const PostList = () => {
 };
 
 const PostWrap = styled.div`
-  max-width: 1300px;
+  max-width: 80%;
   margin: auto;
-
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  grid-gap: 40px;
+  grid-template-columns: repeat(auto-fill, minmax(443px, 1fr));
+  /* grid-gap: 10px; */
 `;
 
 export default PostList;

@@ -10,7 +10,6 @@ import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { apis } from "../lib/axios";
 import { postDetailActions } from "../redux/modules/postdetail";
-import { editPostAPI } from "../redux/modules/postdetail";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -38,20 +37,33 @@ const PostEdit = props => {
   const [techStack, setTest] = React.useState();
   const [loaded, setLoaded] = React.useState(false);
 
+  const json = JSON.stringify(startDate);
+  console.log("변환", json);
+
   let post_id = props.match.params.id;
   const scope_edit = () => {
     const editcard = {
       title: title,
       summary: summary,
-      techStack: techStack.value,
+      techStack: techStack,
       totalMember: totalMember.value,
-      projectStatus: projectStatus,
+      projectStatus: projectStatus.label,
       startDate: startDate,
       endDate: endDate,
       contents: contents,
     };
     console.log("카드들", editcard);
+    console.log("시작날짜", startDate);
+    console.log("시작날짜", typeof startDate);
     dispatch(postDetailActions.editPostAPI(post_id, editcard));
+  };
+
+  const edit_status = () => {
+    const editstatus = {
+      projectStatus: projectStatus.value,
+    };
+    console.log("프로젝트 상태", editstatus);
+    dispatch(postDetailActions.statusPostAPI(post_id, editstatus));
   };
 
   React.useEffect(() => {
@@ -70,12 +82,9 @@ const PostEdit = props => {
         setEnddate(setValue.endDate);
         setTotalmember(setValue.totalMember);
         setProjectstatus(setValue.projectStatus);
-        console.log("스택입니다", setValue.techStack);
-        console.log("시작시간", setValue.startDate);
-        console.log("마감시간", setValue.endDate);
-        console.log("프로젝트상태", setValue.projectStatus);
-        console.log("총인원입니다", setValue.totalMember);
         setLoaded(true);
+        console.log("시작하기", setValue.startDate);
+        console.log("데이터", typeof startDate);
       } catch (err) {
         console.log(err);
         setLoaded(false);
@@ -115,9 +124,9 @@ const PostEdit = props => {
 
   // 게시글 작성(프로젝트 상태)
   const projectStatused = [
-    { value: "모집중", label: "모집중" },
-    { value: "진행중", label: "진행중" },
-    { value: "마감중", label: "마감중" },
+    { value: "done", label: "모집중" },
+    { value: "doing", label: "진행중" },
+    { value: "ready", label: "마감중" },
   ];
 
   // 게시글 작성(프로젝트 인원)
@@ -256,7 +265,7 @@ const PostEdit = props => {
               <Grid display="flex">
                 <Text margin="auto 20px">프로젝트 시작 일 :</Text>
                 <SDatePicker
-                  dateFormat="yyyy/MM/dd"
+                  dateFormat="yyyy-MM-dd"
                   selected={new Date(startDate)}
                   onChange={date => setStartdate(date)}
                   startdate={startDate}
@@ -267,7 +276,7 @@ const PostEdit = props => {
                 />
                 <Text margin="auto 20px">프로젝트 종료 일 :</Text>
                 <SDatePicker
-                  dateFormat="yyyy/MM/dd"
+                  dateFormat="yyyy-MM-dd"
                   selected={new Date(endDate)}
                   onChange={date => setEnddate(date)}
                   startdate={startDate}
@@ -313,9 +322,44 @@ const PostEdit = props => {
                 }}
               />
               <Grid display="flex" padding="16px">
-                <Btn width="100px" height="30px" margin="auto 10px">
-                  모집완료
-                </Btn>
+                {projectStatus === "done" && (
+                  <Btn
+                    width="100px"
+                    height="30px"
+                    margin="auto 10px"
+                    onClick={() => {
+                      edit_status();
+                    }}
+                  >
+                    프로젝트 모집완료
+                  </Btn>
+                )}
+
+                {projectStatus === "doing" && (
+                  <Btn
+                    width="100px"
+                    height="30px"
+                    margin="auto 10px"
+                    onClick={() => {
+                      edit_status();
+                    }}
+                  >
+                    프로젝트 진행중
+                  </Btn>
+                )}
+
+                {projectStatus === "ready" && (
+                  <Btn
+                    width="100px"
+                    height="30px"
+                    margin="auto 10px"
+                    onClick={() => {
+                      edit_status();
+                    }}
+                  >
+                    프로젝트 준비중
+                  </Btn>
+                )}
                 <Btn
                   width="100px"
                   height="30px"

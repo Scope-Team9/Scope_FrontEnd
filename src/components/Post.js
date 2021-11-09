@@ -13,9 +13,15 @@ import { Grid, Image } from "../elements/Index";
 // Post의 함수형 컴포넌트를 만든다.
 const Post = (props) => {
   const dispatch = useDispatch();
-
+  const is_mainPage = useSelector((state) => state.post.mainpage);
+  const [stacks, setStacks] = React.useState();
   // console.log("게시자", props.recruitmentMember);
   // console.log("메인포스트아이디", props);
+  React.useEffect(() => {
+    let stack = props.techStack;
+    setStacks(stack);
+  }, [props, is_mainPage]);
+
   return (
     <React.Fragment>
       <ProductImgWrap
@@ -25,20 +31,20 @@ const Post = (props) => {
           });
         }}
       >
-        <Grid backgroundColor="#E7E1FF" borderRadius="30px">
+        <Grid backgroundColor="#D7D4E6" borderRadius="30px" margin="auto">
           <Grid
-            width="350px"
+            width="100%"
             height="50px"
-            backgroundColor="#8B3FF8"
-            borderRadius="20px 20px 20px 0px"
+            backgroundColor="#170184"
+            borderRadius="30px 30px 30px 0px"
           >
             <Grid>{/* <TitleDate>D-2</TitleDate> */}</Grid>
 
-            <Grid display="flex" width="100px">
+            <Grid display="flex" width="100%">
               {props.techStack.map((p, idx) => {
                 return (
-                  <div key={idx}>
-                    <PostStacks stack={p}></PostStacks>;
+                  <div style={{ width: "22%" }} key={idx}>
+                    <PostStacks stack={p}></PostStacks>
                   </div>
                 );
               })}
@@ -75,43 +81,83 @@ const DescriptionBox = styled.div`
 `;
 
 const Title = styled.h1`
+  margin-top: 15%;
   font-size: 20px;
+  width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const Summary = styled.div`
   font-size: 14px;
   color: gray;
-  margin-bottom: 80px;
+
+  margin-top: 15%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-height: 14px;
+  max-height: 28px;
+  -webkit-line-clamp: 2; /* 표시하고자 하는 라인 수 */
+  -webkit-box-orient: vertical;
 `;
 
 const Date = styled.div`
-  margin-left: 134px;
+  margin-top: 25%;
+  margin-left: 50%;
+  text-overflow: ellipsis;
+
+  @media (max-width: 750px) {
+    font-size: 15px;
+    margin-left: 0%;
+  }
+  @media (max-width: 360px) {
+    font-size: 15px;
+    margin-left: 0%;
+  }
 `;
 
 const Line = styled.hr`
-  width: 300px;
+  width: 100%;
   color: black;
 `;
 
 const ProjectState = styled.div`
-  margin-left: 260px;
+  margin-left: 80%;
   margin-bottom: 10px;
+
+  @media (max-width: 750px) {
+    margin-left: 60%;
+  }
+  @media (max-width: 370px) {
+    margin-left: 60%;
+  }
 `;
 
 const ProductImgWrap = styled.div`
   background-color: white;
   width: 60vw;
-  max-width: 350px;
+  height: 90%;
+  max-width: 90%;
   margin: auto;
   margin-top: 30px;
   margin-bottom: 30px;
+
   border-radius: 30px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.24);
   @media (max-width: 750px) {
-    width: 100%;
+    width: 60vw;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
   }
-  @media (max-width: 450px) {
-    width: 100%;
+  @media (max-width: 370px) {
+    width: 60vw;
+    margin: auto;
+    margin-left: 5%;
+    margin-top: 30px;
+    margin-bottom: 30px;
   }
 `;
 

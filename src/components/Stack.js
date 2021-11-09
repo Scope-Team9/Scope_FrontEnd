@@ -40,7 +40,7 @@ const Stack = () => {
       display="flex"
       width="70%"
       justifyContent="space-evenly"
-      margin="0 auto 20px auto"
+      margin="auto auto 20px auto"
       boxShadow="0px 0px 10px #ddd"
       padding="20px 50px"
       borderRadius="20px"
