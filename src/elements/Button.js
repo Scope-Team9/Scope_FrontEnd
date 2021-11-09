@@ -25,6 +25,7 @@ const Button = props => {
     display,
     isValue,
     disabled,
+    isChecked,
   } = props;
 
   if (isFloat) {
@@ -42,7 +43,7 @@ const Button = props => {
           onClick={_onClick}
           value={isValue}
           disabled={disabled}
-          backgroundColor={color}
+          isChecked={isChecked}
         >
           {text ? text : children}
         </TestButton>
@@ -154,11 +155,8 @@ const TestButton = styled.button`
   text-align: center;
   border: 1px solid #170184;
   border-radius: 25px;
-  ${props =>
-    props.backgroundColor
-      ? `background-color:${props.backgroundColor}`
-      : "background-color: #170184"};
-  color: #170184;
+  background-color: ${props => props.isChecked};
+  ${props => (props.isChecked === "#170184" ? "color:#fff" : "color:#170184")};
   padding: 20px;
   margin: 5px;
   box-shadow: 0px 2px 2px #ddd;

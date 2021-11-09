@@ -32,7 +32,7 @@ const TestFive = props => {
           </Button>
         </Grid>
         <Grid>
-          <div>Q5.당신의 팀원이 원했으면 하는 이상적인 회의의 모습은?</div>
+          <Grid>Q5.당신의 팀원이 원했으면 하는 이상적인 회의의 모습은?</Grid>
           <Button
             isTest
             isValue="V"

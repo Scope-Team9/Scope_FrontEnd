@@ -14,7 +14,7 @@ const TestThree = props => {
             Q3. 나는 큰 보상과 무거운 책임보다는 평범한 보상과 책임이 더 좋다.
             <Button
               isTest
-              isValue="L"
+              isValue="F"
               _onClick={e => {
                 handleUserCreate(e.target.value);
               }}
@@ -23,7 +23,7 @@ const TestThree = props => {
             </Button>
             <Button
               isTest
-              isValue="F"
+              isValue="L"
               _onClick={e => {
                 handleUserCreate(e.target.value);
               }}

@@ -24,7 +24,7 @@ const TestSeven = props => {
             </Button>
             <Button
               isTest
-              isValue="F"
+              isValue="G"
               _onClick={e => {
                 handleUserCreate(e.target.value);
               }}

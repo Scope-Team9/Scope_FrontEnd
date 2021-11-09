@@ -16,7 +16,7 @@ const TestFour = props => {
           </Grid>
           <Button
             isTest
-            isValue="L"
+            isValue="V"
             _onClick={e => {
               handleUserCreate(e.target.value);
             }}
@@ -35,10 +35,10 @@ const TestFour = props => {
           </Button>
         </Grid>
         <Grid>
-          <div>
+          <Grid>
             Q4.프로젝트를 진행함에 있어서 당신이 원하는 팀원의 생각에 더
             가까웠으면 하는 문장은?
-          </div>
+          </Grid>
           <Button
             isTest
             isValue="V"
