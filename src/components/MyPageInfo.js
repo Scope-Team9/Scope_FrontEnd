@@ -14,8 +14,7 @@ import { apis } from "../lib/axios";
 import MypagePostList from "./mypagePost/MypagePostList";
 import MarkdownRead from "./MarkdownRead";
 import { history } from "../redux/configureStore";
-import { height } from "@mui/system";
-import { Input } from "reactstrap";
+import Select from "react-select";
 
 // MyPageInfo의 함수형 컴포넌트를 만든다.
 const MyPageInfo = (props) => {
@@ -27,6 +26,7 @@ const MyPageInfo = (props) => {
   const [filter, setFilter] = React.useState("소개");
   const [mydata, setMydata] = React.useState();
   const [editMyProfile, setEditMyProfile] = React.useState(false);
+  const [techStack, setTeckstack] = React.useState([]);
   console.log(mydata);
   React.useEffect(() => {
     // dispatch(myPageActions.getMypageAPI(userId));
@@ -69,6 +69,23 @@ const MyPageInfo = (props) => {
   };
   const nickEmailCheck = () => {};
 
+  //테크스택 옵션
+  const techStackOption = [
+    { value: "React", label: "React" },
+    { value: "Java", label: "Java" },
+    { value: "JavaScript", label: "JavaScript" },
+    { value: "Python", label: "Python" },
+    { value: "Node", label: "Node" },
+    { value: "cpp", label: "C++" },
+    { value: "Flask", label: "Flask" },
+    { value: "Django", label: "Django" },
+    { value: "Vue", label: "Vue" },
+    { value: "php", label: "php" },
+    { value: "Swift", label: "Swift" },
+    { value: "Kotlin", label: "Kotlin" },
+    { value: "TypeScript", label: "TypeScript" },
+  ];
+
   return (
     <React.Fragment>
       {mydata && (
@@ -102,7 +119,6 @@ const MyPageInfo = (props) => {
                     style={{
                       width: "100px",
                       marginLeft: "30px",
-                      height: "150px",
                     }}
                   >
                     <p>E-mail </p>
@@ -113,7 +129,13 @@ const MyPageInfo = (props) => {
                 </MyInfoText1>
                 {/* 기술 스텍 */}
                 <MyInfoText1>
-                  <div style={{ width: "100px", marginLeft: "30px" }}>
+                  <div
+                    style={{
+                      width: "100px",
+                      marginLeft: "30px",
+                      height: "150px",
+                    }}
+                  >
                     <p>TechStack </p>
                   </div>
                   <div style={{ width: "150px" }}>
@@ -191,7 +213,7 @@ const MyPageInfo = (props) => {
                     style={{
                       width: "90px",
                       marginLeft: "30px",
-                      height: "150px",
+                      height: "80px",
                     }}
                   >
                     <p style={{ marginTop: "20px" }}>E-mail </p>
@@ -215,34 +237,52 @@ const MyPageInfo = (props) => {
                     ></input>
                   </div>
                 </MyInfoText1>
-
+                <MyInfoText1>
+                  <Grid height="100px" display="flex" width="100%">
+                    <div
+                      style={{
+                        width: "90px",
+                        marginLeft: "30px",
+                        height: "50px",
+                      }}
+                    >
+                      <p style={{}}>TechStack </p>
+                    </div>
+                    <Select
+                      isMulti
+                      name="techStack"
+                      options={techStackOption}
+                      className="basic-multi-select"
+                      classNamePrefix="select"
+                      onChange={(e) => {
+                        let techStack = [];
+                        let arr = e;
+                        let idx = 0;
+                        for (idx = 0; idx < e.length; idx++) {
+                          techStack.push(arr[idx]["value"]);
+                        }
+                        setTeckstack(techStack);
+                      }}
+                    >
+                      기술스택
+                    </Select>
+                  </Grid>
+                </MyInfoText1>
                 <Line></Line>
                 {/* 진행 프로젝트 */}
                 <MyInfoText2>
-                  <div style={{ width: "150px", marginLeft: "30px" }}>
-                    <p>진행 프로젝트 </p>
-                  </div>
-                  <div style={{ width: "50px", marginLeft: "100px" }}>
-                    <p>5</p>
-                  </div>
+                  <div style={{ width: "150px", marginLeft: "30px" }}></div>
+                  <div style={{ width: "50px", marginLeft: "100px" }}></div>
                 </MyInfoText2>
                 {/* 참여 프로젝트 */}
                 <MyInfoText2>
-                  <div style={{ width: "150px", marginLeft: "30px" }}>
-                    <p>참여 프로젝트 </p>
-                  </div>
-                  <div style={{ width: "50px", marginLeft: "100px" }}>
-                    <p>5</p>
-                  </div>
+                  <div style={{ width: "150px", marginLeft: "30px" }}></div>
+                  <div style={{ width: "50px", marginLeft: "100px" }}></div>
                 </MyInfoText2>
                 {/* 마감 프로젝트 */}
                 <MyInfoText2>
-                  <div style={{ width: "150px", marginLeft: "30px" }}>
-                    <p>마감 프로젝트 </p>
-                  </div>
-                  <div style={{ width: "50px", marginLeft: "100px" }}>
-                    <p>5</p>
-                  </div>
+                  <div style={{ width: "150px", marginLeft: "30px" }}></div>
+                  <div style={{ width: "50px", marginLeft: "100px" }}></div>
                 </MyInfoText2>
                 <div style={{ display: "flex" }}>
                   <Button
@@ -329,7 +369,9 @@ const MyPageInfo = (props) => {
           )}
 
           {filter === "소개" && introduction === true && (
-            <MarkdownRead {...userId}></MarkdownRead>
+            <MarkdownRead
+              introduction={mydata?.user.introduction}
+            ></MarkdownRead>
           )}
         </>
       )}
