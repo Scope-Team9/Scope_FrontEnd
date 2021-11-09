@@ -12,9 +12,6 @@ const TestOne = props => {
 
   return (
     <Grid>
-      <Grid height="30px" bg="#dddddd" textAlign="center">
-        <Text>리더형/팔로워형 테스트 #1</Text>
-      </Grid>
       <Grid display="flex" flexDirection="column">
         <Grid margin="20px 0">
           <Grid>

@@ -6,9 +6,6 @@ const TestFive = props => {
 
   return (
     <Grid>
-      <Grid height="30px" bg="#dddddd" textAlign="center">
-        <Text>수직적/수평적 조직형 테스트 #2</Text>
-      </Grid>
       <Grid display="flex" flexDirection="column">
         <Grid margin="20px 0">
           <div>Q5.당신이 생각하는 이상적인 회의의 모습은?</div>

@@ -5,9 +5,6 @@ const TestSix = props => {
   const { handleUserCreate, handleMemberCreate } = props;
   return (
     <Grid>
-      <Grid height="30px" bg="#dddddd" textAlign="center">
-        <Text>수직적/수평적 조직형 테스트 #3</Text>
-      </Grid>
       <Grid display="flex" flexDirection="column">
         <Grid margin="20px 0">
           <Grid>
