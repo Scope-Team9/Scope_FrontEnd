@@ -15,7 +15,7 @@ import ApplyUserModal from "../components/ApplyUserModal";
 import { history } from "../redux/configureStore";
 
 // PostDetail의 함수형 컴포넌트를 만든다.
-const PostDetail = (props) => {
+const PostDetail = props => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [checkPost, setCheckPost] = React.useState();
@@ -28,13 +28,13 @@ const PostDetail = (props) => {
     setApplyStatusModal(true);
   };
 
-  const applyUserModalOpen = (value) => {
+  const applyUserModalOpen = value => {
     setApplyValue(value);
     setApplyUserModal(true);
   };
   let post_id = props.match.params.id;
 
-  const userId = useSelector((state) => state.user.userId); //로그인 유저아이디
+  const userId = useSelector(state => state.user.userId); //로그인 유저아이디
   const postUserId = checkPost?.data.data.post.userId;
 
   //북마크 토글
@@ -121,7 +121,6 @@ const PostDetail = (props) => {
                       width="100%"
                       height="40px"
                       borderRadius="50px"
-                      backgroundColor="#42309b"
                       _onClick={applyStatusModalOpen}
                     >
                       신청현황 확인
@@ -187,14 +186,13 @@ const PostDetail = (props) => {
                   <Grid>
                     <Button
                       isValue="apply"
-                      _onClick={(e) => {
+                      _onClick={e => {
                         console.log(e);
                         applyUserModalOpen(e.target.value);
                       }}
                       width="120px"
                       height="40px"
                       margin="auto 10px"
-                      backgroundColor="#42309b"
                       borderRadius="50px"
                     >
                       지원신청
@@ -207,25 +205,23 @@ const PostDetail = (props) => {
                     />
                     <Button
                       isValue="cancel"
-                      _onClick={(e) => {
+                      _onClick={e => {
                         applyUserModalOpen(e.target.value);
                       }}
                       width="120px"
                       height="40px"
                       margin="auto 10px"
-                      backgroundColor="#42309b"
                       borderRadius="50px"
                     >
                       지원취소
                     </Button>
                     <Button
                       isValue="teamExit"
-                      _onClick={(e) => {
+                      _onClick={e => {
                         applyUserModalOpen(e.target.value);
                       }}
                       width="120px"
                       height="40px"
-                      backgroundColor="#42309b"
                       margin="auto 10px"
                     >
                       팀탈퇴

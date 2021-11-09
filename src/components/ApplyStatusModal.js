@@ -47,7 +47,7 @@ const ApplyStatusModal = props => {
         <ModalWrap>
           <Grid
             height="10%"
-            bg="#170184"
+            bg="#B29CF4"
             position="relative"
             textAlign="center"
             padding="10px 0 0 0"
@@ -105,7 +105,6 @@ const ApplyStatusModal = props => {
                     <Grid margin="auto auto auto 3px" height="50px">
                       <Button
                         _id="cancel"
-                        backgroundColor="#DE2890"
                         color="#fff"
                         isValue={applyUsers[idx].userId}
                         _onClick={e => {

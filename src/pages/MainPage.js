@@ -111,8 +111,9 @@ const MainPage = () => {
       </ResponsiveSidebar> */}
       <Grid margin="-10px 0 0 0 ">
         <Inside>
-          <TopBanner />
+          {/* <TopBanner /> */}
           <MainSlide />
+
           <Stacks>
             <Stack />
           </Stacks>

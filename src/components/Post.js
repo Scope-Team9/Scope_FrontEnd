@@ -11,9 +11,9 @@ import { history } from "../redux/configureStore";
 import { Grid, Image } from "../elements/Index";
 
 // Post의 함수형 컴포넌트를 만든다.
-const Post = (props) => {
+const Post = props => {
   const dispatch = useDispatch();
-  const is_mainPage = useSelector((state) => state.post.mainpage);
+  const is_mainPage = useSelector(state => state.post.mainpage);
   const [stacks, setStacks] = React.useState();
   // console.log("게시자", props.recruitmentMember);
   // console.log("메인포스트아이디", props);
@@ -32,12 +32,7 @@ const Post = (props) => {
         }}
       >
         <Grid backgroundColor="#D7D4E6" borderRadius="30px" margin="auto">
-          <Grid
-            width="100%"
-            height="70px"
-            backgroundColor="#170184"
-            borderRadius="30px 30px 0px 0px"
-          >
+          <Ssss>
             <Grid>{/* <TitleDate>D-2</TitleDate> */}</Grid>
 
             <Grid display="flex" width="100%">
@@ -49,7 +44,7 @@ const Post = (props) => {
                 );
               })}
             </Grid>
-          </Grid>
+          </Ssss>
           <DescriptionBox>
             <Title>{props.title}</Title>
             <Summary>{props.summary}</Summary>
@@ -169,6 +164,12 @@ const ProductImgWrap = styled.div`
     margin-top: 30px;
     margin-bottom: 30px;
   }
+`;
+const Ssss = styled.div`
+  height: 200px;
+  width: 200px;
+  background: linear-gradient(rgba(250, 0, 0, 0.5), transparent);
+  background-color: orange; /*this your primary color*/
 `;
 
 export default Post;

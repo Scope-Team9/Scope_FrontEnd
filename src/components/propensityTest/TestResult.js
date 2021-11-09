@@ -6,9 +6,12 @@ const TestTwo = props => {
   const userInfo = useSelector(state => state.user);
 
   return (
-    <Grid>
+    <Grid textAlign="center">
       <div>테스트결과입니다.</div>
-      <Image />
+      <Grid display="flex" justifyContent="center">
+        <Image />
+      </Grid>
+
       <div>
         {" "}
         나의성향 - {userInfo.userTestResult} - 팔로잉 / 수직 / 과정 - 허숙희

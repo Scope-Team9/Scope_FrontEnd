@@ -64,7 +64,7 @@ const ApplyUserModal = props => {
                   지원신청
                 </Text>
               </Grid>
-              <Grid height="25%" margin="10px 0">
+              <Grid height="25%" margin="10px 0" textAlign="center">
                 <Input
                   border="1px solid #eee"
                   height="100%"

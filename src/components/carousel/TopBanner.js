@@ -3,7 +3,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Image, Grid, Button, Text } from "../../elements/Index";
 import styled from "styled-components";
-import Symbol from "../../images/tiger.jpg";
+import Symbol from "../../images/111111.png";
 import PropensityTest from "../propensityTest/PropensityTest";
 import { Dialog } from "@material-ui/core";
 
@@ -14,15 +14,13 @@ const TopBanner = () => {
   return (
     <>
       <Grid width="70vw" margin="0 auto 7rem auto">
-        <Title>SCOPE</Title>
-        <Sub>스마트 코딩 프로젝트</Sub>
         <Grid
           display="flex"
           width="100%"
           justifyContents="space-between"
           alignItems="end"
         >
-          <Grid>
+          {/* <Grid>
             <Button
               width="150px"
               _onClick={() => {
@@ -38,9 +36,9 @@ const TopBanner = () => {
                 <PropensityTest />
               </Grid>
             </Dialog>
-          </Grid>
+          </Grid> */}
 
-          <img style={{ width: "50%" }} src={Symbol} />
+          <img style={{ width: "100%", height: "50%" }} src={Symbol} />
         </Grid>
       </Grid>
     </>
