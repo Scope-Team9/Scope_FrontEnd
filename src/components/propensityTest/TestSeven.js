@@ -1,16 +1,15 @@
 import React from "react";
-import { Grid, Button } from "../../elements/Index";
+import { Grid, Button, Text } from "../../elements/Index";
 
 const TestSeven = props => {
   const { handleUserCreate, handleMemberCreate } = props;
   return (
     <Grid>
-      <Grid height="30px" bg="#007BFF">
-        결과/과정 중심형 테스트
+      <Grid height="30px" bg="#dddddd" textAlign="center">
+        <Text>결과/과정 중심형 테스트 #1</Text>
       </Grid>
-      <div>성향테스트 7번</div>
       <Grid display="flex" flexDirection="column">
-        <Grid>
+        <Grid margin="20px 0">
           <div>
             Q. 어떤 문장이 당신과 더 어울리나요
             <Button
@@ -20,8 +19,8 @@ const TestSeven = props => {
                 handleUserCreate(e.target.value);
               }}
             >
-              P - 문제를 해결하는 과정에서 얻는 성취감이 있다면 보상이
-              상대적으로 적더라도 만족한다.
+              문제를 해결하는 과정에서 얻는 성취감이 있다면 보상이 상대적으로
+              적더라도 만족한다.
             </Button>
             <Button
               isTest
@@ -30,7 +29,7 @@ const TestSeven = props => {
                 handleUserCreate(e.target.value);
               }}
             >
-              G - 결과를 위해서라면 과정에서 얻을 수 있는 심리적 만족감은 조금
+              결과를 위해서라면 과정에서 얻을 수 있는 심리적 만족감은 조금
               내려놓을 수도 있어야 한다.
             </Button>
           </div>
@@ -44,7 +43,7 @@ const TestSeven = props => {
               handleMemberCreate(e.target.value);
             }}
           >
-            G - 결과를 위해서라면 과정에서 얻을 수 있는 심리적 만족감은 조금
+            결과를 위해서라면 과정에서 얻을 수 있는 심리적 만족감은 조금
             내려놓을 수도 있어야 한다.
           </Button>
           <Button
@@ -54,7 +53,7 @@ const TestSeven = props => {
               handleMemberCreate(e.target.value);
             }}
           >
-            P - 문제를 해결하는 과정에서 얻는 성취감이 있다면 보상이 상대적으로
+            문제를 해결하는 과정에서 얻는 성취감이 있다면 보상이 상대적으로
             적더라도 만족한다.
           </Button>
         </Grid>

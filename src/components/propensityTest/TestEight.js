@@ -1,14 +1,16 @@
 import React from "react";
-import { Grid, Button } from "../../elements/Index";
+import { Grid, Button, Text } from "../../elements/Index";
 
 const TestEight = props => {
   const { handleUserCreate, handleMemberCreate } = props;
 
   return (
     <Grid>
-      <div>성향테스트 8번</div>
+      <Grid height="30px" bg="#dddddd" textAlign="center">
+        <Text>결과/과정 중심형 테스트 #1</Text>
+      </Grid>
       <Grid display="flex" flexDirection="column">
-        <Grid>
+        <Grid margin="20px 0">
           <div>
             Q8.프로젝트에서 문제가 생겼을 때 당신이 생각하는 더 나은 방법은?
           </div>

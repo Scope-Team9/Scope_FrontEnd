@@ -1,20 +1,19 @@
 import React from "react";
-import { Grid, Button } from "../../elements/Index";
+import { Grid, Button, Text } from "../../elements/Index";
 
 const TestFour = props => {
   const { handleUserCreate, handleMemberCreate } = props;
 
   return (
     <Grid>
-      <Grid height="30px" bg="#007BFF">
-        수직적/수평적 조직형 테스트
+      <Grid height="30px" bg="#dddddd" textAlign="center">
+        <Text>수직적/수평적 조직형 테스트 #1</Text>
       </Grid>
-      <div>성향테스트 4번</div>
       <Grid display="flex" flexDirection="column">
-        <Grid>
-          <div>
+        <Grid margin="20px 0">
+          <Grid>
             Q4.프로젝트를 진행함에 있어서 당신의 생각에 더 가까운 문장은?
-          </div>
+          </Grid>
           <Button
             isTest
             isValue="L"

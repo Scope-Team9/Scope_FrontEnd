@@ -17,7 +17,7 @@ import { history } from "../redux/configureStore";
 import Select from "react-select";
 
 // MyPageInfo의 함수형 컴포넌트를 만든다.
-const MyPageInfo = (props) => {
+const MyPageInfo = props => {
   const dispatch = useDispatch();
   // const userId = useSelector((state) => state.user.userId);
   const userId = props.match.params.id;

@@ -1,14 +1,16 @@
 import React from "react";
-import { Grid, Button } from "../../elements/Index";
+import { Grid, Button, Text } from "../../elements/Index";
 
 const TestThree = props => {
   const { handleUserCreate, handleMemberCreate } = props;
   return (
     <Grid>
-      <div>성향테스트 3번</div>
+      <Grid height="30px" bg="#dddddd" textAlign="center">
+        <Text>리더형/팔로워형 테스트 #3</Text>
+      </Grid>
       <Grid display="flex" flexDirection="column">
-        <Grid>
-          <div>
+        <Grid margin="20px 0">
+          <Grid>
             Q3. 나는 큰 보상과 무거운 책임보다는 평범한 보상과 책임이 더 좋다.
             <Button
               isTest
@@ -28,7 +30,7 @@ const TestThree = props => {
             >
               큰 보상과 무거운책임
             </Button>
-          </div>
+          </Grid>
         </Grid>
         <Grid>
           <div>

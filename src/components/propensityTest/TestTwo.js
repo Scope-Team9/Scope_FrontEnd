@@ -1,18 +1,20 @@
 import React from "react";
-import { Grid, Button } from "../../elements/Index";
+import { Grid, Button, Text } from "../../elements/Index";
 
 const TestTwo = props => {
   const { handleUserCreate, handleMemberCreate } = props;
 
   return (
     <Grid>
-      <div>성향테스트 2번</div>
+      <Grid height="30px" bg="#dddddd" textAlign="center">
+        <Text>리더형/팔로워형 테스트 #2</Text>
+      </Grid>
       <Grid display="flex" flexDirection="column">
-        <Grid>
-          <div>
+        <Grid margin="20px 0">
+          <Grid>
             Q2. 새로운 스터디 사람들과의 첫만남! 스터디의 운영을 맡길 스터디
             장을 뽑아야 하는데 이때 당신의 행동은?
-          </div>
+          </Grid>
           <Button
             isTest
             isValue="L"
