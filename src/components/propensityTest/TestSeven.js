@@ -5,9 +5,6 @@ const TestSeven = props => {
   const { handleUserCreate, handleMemberCreate } = props;
   return (
     <Grid>
-      <Grid height="30px" bg="#dddddd" textAlign="center">
-        <Text>결과/과정 중심형 테스트 #1</Text>
-      </Grid>
       <Grid display="flex" flexDirection="column">
         <Grid margin="20px 0">
           <div>
@@ -24,7 +21,7 @@ const TestSeven = props => {
             </Button>
             <Button
               isTest
-              isValue="F"
+              isValue="G"
               _onClick={e => {
                 handleUserCreate(e.target.value);
               }}

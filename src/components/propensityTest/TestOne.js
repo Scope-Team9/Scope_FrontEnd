@@ -4,17 +4,14 @@ import { Grid, Button, Text } from "../../elements/Index";
 
 const TestOne = props => {
   const { handleUserCreate, handleMemberCreate } = props;
-  const [color, setColor] = React.useState("yellow");
+  const [isChecked, setIsChecked] = React.useState("#fff");
   const ToggleButton = () => {
-    color === "yellow" ? setColor("red") : setColor("yellow");
+    isChecked === "#fff" ? setIsChecked("#170184") : setIsChecked("#fff");
   };
   // const [bChecked, setChecked] = React.useState(false);
 
   return (
     <Grid>
-      <Grid height="30px" bg="#dddddd" textAlign="center">
-        <Text>리더형/팔로워형 테스트 #1</Text>
-      </Grid>
       <Grid display="flex" flexDirection="column">
         <Grid margin="20px 0">
           <Grid>
@@ -22,21 +19,23 @@ const TestOne = props => {
               Q1.<b>팀 회의할 때 당신의 모습</b>에 더 가까운 것은?
             </Grid>
             <Button
-              backgroundColor={color}
+              isChecked={isChecked}
               isTest
               isValue="L"
               _onClick={e => {
                 ToggleButton();
-                console.log(color);
+                console.log(isChecked);
                 handleUserCreate(e.target.value);
               }}
             >
               내 주장을 펼치며 회의 분위기를 탄탄하게 이끌기
             </Button>
             <Button
+              isChecked={isChecked}
               isTest
               isValue="F"
               _onClick={e => {
+                ToggleButton();
                 handleUserCreate(e.target.value);
               }}
             >
@@ -46,7 +45,7 @@ const TestOne = props => {
         </Grid>
         <Grid>
           <Grid margin="5px 0">
-            Q2.<b>팀 회의할 때 선호하는 팀원의 모습</b>에 더 가까운 것은?
+            Q1.<b>팀 회의할 때 선호하는 팀원의 모습</b>에 더 가까운 것은?
           </Grid>
           <Button
             isTest

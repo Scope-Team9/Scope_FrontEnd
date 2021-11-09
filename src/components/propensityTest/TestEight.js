@@ -6,9 +6,6 @@ const TestEight = props => {
 
   return (
     <Grid>
-      <Grid height="30px" bg="#dddddd" textAlign="center">
-        <Text>결과/과정 중심형 테스트 #1</Text>
-      </Grid>
       <Grid display="flex" flexDirection="column">
         <Grid margin="20px 0">
           <div>

@@ -117,7 +117,7 @@ const ApplyUserModal = props => {
                 </Text>
               </Grid>
               <Grid height="10%">
-                <Button borderRadius="25px" _onClick={apply}>
+                <Button borderRadius="25px" _onClick={cancel}>
                   지원취소
                 </Button>
               </Grid>

@@ -2,13 +2,10 @@ import React from "react";
 import { Grid, Button, Text } from "../../elements/Index";
 
 const TestTwo = props => {
-  const { handleUserCreate, handleMemberCreate } = props;
+  const { handleUserCreate, handleMemberCreate, ToggleButton } = props;
 
   return (
     <Grid>
-      <Grid height="30px" bg="#dddddd" textAlign="center">
-        <Text>리더형/팔로워형 테스트 #2</Text>
-      </Grid>
       <Grid display="flex" flexDirection="column">
         <Grid margin="20px 0">
           <Grid>
@@ -19,6 +16,7 @@ const TestTwo = props => {
             isTest
             isValue="L"
             _onClick={e => {
+              ToggleButton();
               handleUserCreate(e.target.value);
             }}
           >
@@ -37,7 +35,7 @@ const TestTwo = props => {
         <Grid>
           <div>
             Q2. 새로운 스터디 사람들과의 첫만남! 스터디의 운영을 맡길 스터디
-            장을 뽑아야 하는데 이때 당신의 행동은?
+            장을 뽑아야 하는데 이때 당신이 선호하는 팀원의 행동은?
           </div>
           <Button
             isTest

@@ -129,14 +129,9 @@ const PropensityTest = props => {
     }
   };
 
-  const editTest = () => {
-    setpage(page => page + 1);
-    const testInfo = {
-      userPropensityType: userPropensityType,
-      memberPropensityType: memberPropensityType,
-    };
-    console.log(testInfo);
-    dispatch(userCreators.editTestMiddleware(testInfo));
+  const [isChecked, setIsChecked] = React.useState("#fff");
+  const ToggleButton = () => {
+    isChecked === "#fff" ? setIsChecked("#170184") : setIsChecked("#fff");
   };
 
   return (
@@ -167,73 +162,56 @@ const PropensityTest = props => {
       <Grid height="15%" width="90%" margin="auto">
         {page === 1 && (
           <TestOne
-            userPropensityType={userPropensityType}
             handleUserCreate={handleUserCreate}
-            memberPropensityType={memberPropensityType}
             handleMemberCreate={handleMemberCreate}
           />
         )}
         {page === 2 && (
           <TestTwo
-            userPropensityType={userPropensityType}
             handleUserCreate={handleUserCreate}
-            memberPropensityType={memberPropensityType}
             handleMemberCreate={handleMemberCreate}
+            ToggleButton={ToggleButton}
           />
         )}
         {page === 3 && (
           <TestThree
-            userPropensityType={userPropensityType}
             handleUserCreate={handleUserCreate}
-            memberPropensityType={memberPropensityType}
             handleMemberCreate={handleMemberCreate}
           />
         )}
         {page === 4 && (
           <TestFour
-            userPropensityType={userPropensityType}
             handleUserCreate={handleUserCreate}
-            memberPropensityType={memberPropensityType}
             handleMemberCreate={handleMemberCreate}
           />
         )}
         {page === 5 && (
           <TestFive
-            userPropensityType={userPropensityType}
             handleUserCreate={handleUserCreate}
-            memberPropensityType={memberPropensityType}
             handleMemberCreate={handleMemberCreate}
           />
         )}
         {page === 6 && (
           <TestSix
-            userPropensityType={userPropensityType}
             handleUserCreate={handleUserCreate}
-            memberPropensityType={memberPropensityType}
             handleMemberCreate={handleMemberCreate}
           />
         )}
         {page === 7 && (
           <TestSeven
-            userPropensityType={userPropensityType}
             handleUserCreate={handleUserCreate}
-            memberPropensityType={memberPropensityType}
             handleMemberCreate={handleMemberCreate}
           />
         )}
         {page === 8 && (
           <TestEight
-            userPropensityType={userPropensityType}
             handleUserCreate={handleUserCreate}
-            memberPropensityType={memberPropensityType}
             handleMemberCreate={handleMemberCreate}
           />
         )}
         {page === 9 && (
           <TestNine
-            userPropensityType={userPropensityType}
             handleUserCreate={handleUserCreate}
-            memberPropensityType={memberPropensityType}
             handleMemberCreate={handleMemberCreate}
           />
         )}

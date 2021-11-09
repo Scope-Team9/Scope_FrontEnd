@@ -60,17 +60,19 @@ const applyProjectAPI = (postId, comment) => {
       .applyProject(postId, comment)
       .then(res => {
         console.log(res);
-        window.alert("프로젝트에 지원되었습니다.");
+        return window.alert("프로젝트에 지원되었습니다.");
       })
       .catch(err => {
-        if (
-          err.response.status === 400 &&
-          err.response.data.msg === "이미 지원한 프로젝트 입니다."
-        ) {
-          window.alert("이미 지원한 프로젝트 입니다.");
+        console.log(err.response);
+        if (err.response.data.msg === "모집중인 프로젝트가 아닙니다.") {
+          return window.alert("모집중인 프로젝트가 아닙니다.");
+        }
+        if (err.response.data.msg === "이미 지원한 프로젝트 입니다.") {
+          return window.alert("이미 지원한 프로젝트 입니다.");
+        } else {
+          window.alert("해당 지원 정보를 찾을 수 없습니다.");
           return;
         }
-        window.alert("신청자 정보를 찾을 수 없습니다.");
       });
   };
 };
@@ -85,7 +87,7 @@ const cancelProjectAPI = postId => {
       })
       .catch(err => {
         console.log(err.response);
-        window.alert("33333신청자를 못찾겠네용!");
+        window.alert("신청자 정보를 찾을 수 없습니다!");
       });
   };
 };
