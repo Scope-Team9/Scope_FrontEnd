@@ -37,6 +37,9 @@ const PostEdit = (props) => {
   const [techStack, setTest] = React.useState();
   const [loaded, setLoaded] = React.useState(false);
 
+  const json = JSON.stringify(startDate);
+  console.log("변환", json);
+
   let post_id = props.match.params.id;
   const scope_edit = () => {
     const editcard = {
