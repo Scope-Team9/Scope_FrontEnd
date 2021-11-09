@@ -21,7 +21,7 @@ import { userCreators } from "../../redux/modules/user";
 import { history } from "../../redux/configureStore";
 
 const PropensityTest = props => {
-  const is_token = document.cookie.split("=")[1];
+  const isToken = document.cookie.split("=")[1];
   const dispatch = useDispatch();
   const userInfo = useSelector(state => state.user);
 
@@ -57,7 +57,6 @@ const PropensityTest = props => {
     preMy.push(preUserPropensityType);
     setUserPropensityType(preMy);
     console.log("내꺼 잘 들어감?", userPropensityType);
-
     //상대에 다한 항목
     let preYou = memberPropensityType;
     preYou.push(preMemberPropensityType);
@@ -99,19 +98,31 @@ const PropensityTest = props => {
     setMemberPropensityType(preYou);
     console.log("너꺼 잘 들어감?", memberPropensityType);
 
-    let _snsId = String(userInfo.snsId);
+    let realSnsId = String(userInfo.snsId);
+    let realUserId = userInfo.userId;
+    console.log(realUserId);
 
     const registerInfo = {
-      snsId: _snsId,
+      snsId: realSnsId,
       email: userInfo.email,
       nickname: userInfo.nickName,
       techStack: userInfo.techStack,
       userPropensityType: userPropensityType,
       memberPropensityType: memberPropensityType,
     };
-    console.log(registerInfo);
+    const testUpdateInfo = {
+      userPropensityType: userPropensityType,
+      memberPropensityType: memberPropensityType,
+    };
+    console.log(realSnsId, registerInfo);
+    console.log(realUserId, testUpdateInfo);
+    if (isToken) {
+      dispatch(userCreators.editTestMiddleware(realUserId, testUpdateInfo));
+      return;
+    }
+
     if (userPropensityType.length === 9 && memberPropensityType === 9) {
-      dispatch(userCreators.signupMiddleware(registerInfo));
+      return dispatch(userCreators.signupMiddleware(registerInfo));
     } else {
       window.alert("설문지가 정확히 작성되지 않았습니다!");
       return false;
@@ -237,7 +248,7 @@ const PropensityTest = props => {
         margin="30px auto"
       >
         {/* 5.다음결과값이 없을때 페이지처리 */}
-        {page !== 1 && (
+        {page !== 1 && page !== 10 && (
           <Button
             width="40%"
             margin="5px"
@@ -247,7 +258,7 @@ const PropensityTest = props => {
             이전버튼
           </Button>
         )}
-        {page !== 9 && (
+        {page < 9 && (
           <Button width="40%" margin="5px" _onClick={nextStep}>
             다음버튼
           </Button>

@@ -196,8 +196,11 @@ const signupMiddleware = signupInfo => {
         localStorage.setItem("token", ACCESS_TOKEN);
         dispatch(
           setUser({
-            userTestResult: res.data.userTestResult,
-            memberTestResult: res.data.memberTestResult,
+            userPropensityType: res.data.data.userPropensityType,
+            memberPropensityType: res.data.data.memberPropensityType,
+            applicantDate: res.data.data.applicantDate,
+            comment: res.data.data.comment,
+            isAssessment: res.data.data.isAssessment,
           })
         );
         history.replace("/");
@@ -208,8 +211,24 @@ const signupMiddleware = signupInfo => {
   };
 };
 //협업테스트 수정 미들웨어
-const editTestMiddleware = () => {
-  return function (dispatch, getState, { history }) {};
+const editTestMiddleware = (userId, testInfo) => {
+  return function (dispatch, getState, { history }) {
+    apis
+      .editTest(userId, testInfo)
+      .then(res => {
+        console.log(res);
+        dispatch(
+          setUser({
+            userPropensityType: res.data.data.userPropensityType,
+            memberPropensityType: res.data.data.memberPropensityType,
+          })
+        );
+        window.alert("성향 테스트가 업데이트 되었습니다!");
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 };
 
 //리듀서
@@ -232,9 +251,11 @@ export default handleActions(
         draft.techStack = action.payload.user.techStack;
         draft.is_login = true;
         draft.sigunupModalState = false;
-        draft.userTestResult = action.payload.user.userTestResult;
-        draft.memberTestResult = action.payload.user.memberTestResult;
+        draft.memberPropensityType = action.payload.user.memberPropensityType;
         draft.userPropensityType = action.payload.user.userPropensityType;
+        draft.applicantDate = action.payload.user.applicantDate;
+        draft.comment = action.payload.user.comment;
+        draft.isAssessment = action.payload.user.isAssessment;
       }),
     [LOG_OUT]: (state, action) =>
       produce(state, draft => {
