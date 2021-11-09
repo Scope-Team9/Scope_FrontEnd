@@ -238,8 +238,8 @@ const AddPost = (props) => {
                   selected={startDate}
                   onChange={(date) => setStartdate(date)}
                   selectsStart
-                  startdate={startDate}
-                  enddate={endDate}
+                  startDate={startDate}
+                  endDate={endDate}
                   locale={ko}
                   minDate={new Date()}
                   placeholderText="프로젝트 시작일 입력"
@@ -251,9 +251,9 @@ const AddPost = (props) => {
                   dateFormat="yyyy/MM/dd"
                   selected={endDate}
                   onChange={(date) => setEnddate(date)}
-                  selectsEnd
-                  startdate={startDate}
-                  enddate={endDate}
+                  selectsEnd4
+                  startDate={startDate}
+                  endDate={endDate}
                   locale={ko}
                   minDate={new Date()}
                   placeholderText="프로젝트 종료일"

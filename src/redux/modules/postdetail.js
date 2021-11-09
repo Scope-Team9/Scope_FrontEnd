@@ -22,10 +22,10 @@ const initialState = {
 };
 
 // 포스트 수정
-export const editPostAPI = (editcard) => {
+export const editPostAPI = (post_id, editcard) => {
   return function (dispatch, getState, { history }) {
     apis
-      .editPost(editcard)
+      .editPost(post_id, editcard)
       .then((res) => {
         history.goBack();
       })
