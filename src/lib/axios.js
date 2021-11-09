@@ -84,7 +84,7 @@ export const apis = {
   detailPost: (postId) => instance.get(`/api/post/${postId}`),
   editPost: (postId, data) => instance.post(`/api/post/${postId}`, data),
   deletePost: (postId) => instance.delete(`/api/post/${postId}`),
-  projectStatus: (postId) => instance.post(`/api/post/${postId}/status`),
+  statusPost: (postId) => instance.post(`/api/post/${postId}/status`),
 
   //data.json용
   // getPost: () => instance.get(`/post`),

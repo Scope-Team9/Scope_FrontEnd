@@ -34,29 +34,28 @@ const PostEdit = (props) => {
   const [startDate, setStartdate] = React.useState(new Date());
   const [endDate, setEnddate] = React.useState(new Date());
   const [contents, setContents] = React.useState();
-  const [techStack, setTest] = React.useState();
+  const [techStackList, setTest] = React.useState();
   const [loaded, setLoaded] = React.useState(false);
-
-  const json = JSON.stringify(startDate);
-  console.log("변환", json);
 
   let post_id = props.match.params.id;
   const scope_edit = () => {
     const editcard = {
       title: title,
       summary: summary,
-      techStack: techStack,
+      contents: contents,
+      techStackList: techStackList,
       totalMember: totalMember.value,
       projectStatus: projectStatus.label,
       startDate: startDate,
       endDate: endDate,
-      contents: contents,
     };
     console.log("카드들", editcard);
-    console.log("시작날짜", startDate);
-    console.log("시작날짜", typeof startDate);
+
     dispatch(postDetailActions.editPostAPI(post_id, editcard));
   };
+
+  console.log("시작날짜", startDate);
+  console.log("마감날짜", endDate);
 
   const edit_status = () => {
     const editstatus = {
@@ -126,7 +125,7 @@ const PostEdit = (props) => {
   const projectStatused = [
     { value: "done", label: "모집중" },
     { value: "doing", label: "진행중" },
-    { value: "ready", label: "마감중" },
+    { value: "ready", label: "종료" },
   ];
 
   // 게시글 작성(프로젝트 인원)
@@ -265,7 +264,6 @@ const PostEdit = (props) => {
               <Grid display="flex">
                 <Text margin="auto 20px">프로젝트 시작 일 :</Text>
                 <SDatePicker
-                  dateFormat="yyyy-MM-dd"
                   selected={new Date(startDate)}
                   onChange={(date) => setStartdate(date)}
                   startdate={startDate}
@@ -276,7 +274,6 @@ const PostEdit = (props) => {
                 />
                 <Text margin="auto 20px">프로젝트 종료 일 :</Text>
                 <SDatePicker
-                  dateFormat="yyyy-MM-dd"
                   selected={new Date(endDate)}
                   onChange={(date) => setEnddate(date)}
                   startdate={startDate}
