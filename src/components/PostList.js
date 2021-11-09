@@ -43,6 +43,9 @@ const PostWrap = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(443px, 1fr));
   /* grid-gap: 10px; */
+  @media (max-width: 1700px) {
+    width: 100%;
+  }
 `;
 
 export default PostList;

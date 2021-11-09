@@ -34,7 +34,7 @@ const Post = (props) => {
         <Grid backgroundColor="#D7D4E6" borderRadius="30px" margin="auto">
           <Grid
             width="100%"
-            height="50px"
+            height="70px"
             backgroundColor="#170184"
             borderRadius="30px 30px 0px 0px"
           >
@@ -87,24 +87,25 @@ const Title = styled.h1`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: #606060;
 `;
 
 const Summary = styled.div`
-  font-size: 14px;
+  font-size: 17px;
   color: gray;
 
-  margin-top: 15%;
+  margin-top: 8%;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  line-height: 14px;
-  max-height: 28px;
+  line-height: 17px;
+  max-height: 34px;
   -webkit-line-clamp: 2; /* 표시하고자 하는 라인 수 */
   -webkit-box-orient: vertical;
 `;
 
 const Date = styled.div`
-  margin-top: 25%;
+  margin-top: 15%;
   margin-left: 50%;
   text-overflow: ellipsis;
 
@@ -125,7 +126,7 @@ const Line = styled.hr`
 
 const ProjectState = styled.div`
   margin-left: 80%;
-  margin-bottom: 10px;
+  margin-bottom: 55px;
 
   @media (max-width: 750px) {
     margin-left: 60%;
@@ -137,25 +138,34 @@ const ProjectState = styled.div`
 
 const ProductImgWrap = styled.div`
   background-color: white;
-  width: 60vw;
-  height: 90%;
-  max-width: 90%;
+  width: 80vw;
+  height: 80%;
+  max-width: 400px;
   margin: auto;
   margin-top: 30px;
   margin-bottom: 30px;
-
   border-radius: 30px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.24);
-  @media (max-width: 750px) {
-    width: 60vw;
+  @media (max-width: 1700px) {
+    width: 400px;
+    height: 80%;
     margin: auto;
     margin-top: 30px;
     margin-bottom: 30px;
   }
-  @media (max-width: 370px) {
-    width: 60vw;
+  @media (max-width: 1200px) {
+    width: 300px;
+    height: 80%;
     margin: auto;
-    margin-left: 5%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  @media (max-width: 450px) {
+    width: 300px;
+    height: 280px;
+    margin: auto;
+    margin-left: 1%;
     margin-top: 30px;
     margin-bottom: 30px;
   }

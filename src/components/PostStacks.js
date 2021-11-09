@@ -23,29 +23,36 @@ const PostStacks = (props) => {
       {stacks && (
         <Grid
           display="flex"
-          width="45px"
-          borderRadius="50%"
-          backgroundColor="white"
+          width="70%"
+          height="85%"
+          borderRadius="70%"
+          backgroundColor="rgba( 255, 255, 255, 0.9 )"
           margin="-26px 13px"
+          font
         >
-          {stacks === "React" && <Image src="img/react.png" />}
-          {stacks === "Java" && <Image src="img/java.png" />}
-          {stacks === "JavaScript" && <Image src="img/javascript.png" />}
-          {stacks === "Python" && <Image src="img/python.png" />}
-          {stacks === "Node" && <Image src="img/node.js.png" />}
-          {stacks === "cpp" && <Image src="img/c__.png" />}
-          {stacks === "Flask" && <Image src="img/flask.png" />}
-          {stacks === "Django" && <Image src="img/django.png" />}
-          {stacks === "Vue" && <Image src="img/vue.png" />}
-          {stacks === "Spring" && <Image src="img/spring.png" />}
-          {stacks === "php" && <Image src="img/php.png" />}
-          {stacks === "Swift" && <Image src="img/swift.png" />}
-          {stacks === "Kotlin" && <Image src="img/kotlin.png" />}
-          {stacks === "TypeScript" && <Image src="img/typescript.png" />}
+          {stacks === "React" && <IMGS src="img/react.png" />}
+          {stacks === "Java" && <IMGS src="img/java.png" />}
+          {stacks === "JavaScript" && <IMGS src="img/javascript.png" />}
+          {stacks === "Python" && <IMGS src="img/python.png" />}
+          {stacks === "Node" && <IMGS src="img/node.js.png" />}
+          {stacks === "cpp" && <IMGS src="img/c__.png" />}
+          {stacks === "Flask" && <IMGS src="img/flask.png" />}
+          {stacks === "Django" && <IMGS src="img/django.png" />}
+          {stacks === "Vue" && <IMGS src="img/vue.png" />}
+          {stacks === "Spring" && <IMGS src="img/spring.png" />}
+          {stacks === "php" && <IMGS src="img/php.png" />}
+          {stacks === "Swift" && <IMGS src="img/swift.png" />}
+          {stacks === "Kotlin" && <IMGS src="img/kotlin.png" />}
+          {stacks === "TypeScript" && <IMGS src="img/typescript.png" />}
         </Grid>
       )}
     </div>
   );
 };
+
+const IMGS = styled.img`
+  width: 90%;
+  margin: auto;
+`;
 
 export default PostStacks;
