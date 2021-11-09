@@ -211,10 +211,10 @@ const Stacks = styled.div`
 
 const FilterBox = styled.div`
   display: flex;
-  font-size: 14px;
+  font-size: 20px;
   margin-top: 20px;
   justify-content: flex-end;
-  max-width: 1690px;
+  max-width: 1790px;
   @media screen and (max-width: 1850px) {
     justify-content: center;
   }
@@ -232,7 +232,7 @@ const Filtering = styled.p`
     -ms-transform: scale(1.05);
     -o-transform: scale(1.05);
     text-decoration: underline;
-    color: lightskyblue;
+    color: #dacceb;
   }
 `;
 

@@ -27,12 +27,7 @@ const MypagePost = (props) => {
         }}
       >
         <Grid backgroundColor="#E7E1FF" borderRadius="30px">
-          <Grid
-            width="350px"
-            height="50px"
-            backgroundColor="#8B3FF8"
-            borderRadius="20px 20px 20px 0px"
-          >
+          <CardHeader>
             <Grid>{/* <TitleDate>D-2</TitleDate> */}</Grid>
             <>
               {props.techStack && (
@@ -43,7 +38,7 @@ const MypagePost = (props) => {
                 </Grid>
               )}
             </>
-          </Grid>
+          </CardHeader>
           <DescriptionBox>
             <Title>{props.title}</Title>
             <Summary>{props.summary}</Summary>
@@ -73,15 +68,36 @@ const TitleDate = styled.div`
 const DescriptionBox = styled.div`
   margin: 30px 20px;
 `;
+const CardHeader = styled.div`
+  width: 100%;
+  height: 70px;
+  background-color: #f1bad1;
+  border-radius: 30px 30px 0px 0px;
+  background: rgb(83, 201, 253);
+  background: linear-gradient(
+    140deg,
+    rgba(83, 201, 253, 1) 0%,
+    rgba(231, 170, 250, 1) 74%,
+    rgba(231, 170, 250, 1) 100%
+  );
+`;
 
 const Title = styled.h1`
   font-size: 20px;
 `;
 
 const Summary = styled.div`
-  font-size: 14px;
+  font-size: 17px;
   color: gray;
-  margin-bottom: 80px;
+
+  margin-top: 8%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-height: 17px;
+  max-height: 34px;
+  -webkit-line-clamp: 2; /* 표시하고자 하는 라인 수 */
+  -webkit-box-orient: vertical;
 `;
 
 const Date = styled.div`
@@ -94,13 +110,21 @@ const Line = styled.hr`
 `;
 
 const ProjectState = styled.div`
-  margin-left: 260px;
-  margin-bottom: 10px;
+  margin-left: 80%;
+  margin-bottom: 55px;
+
+  @media (max-width: 750px) {
+    margin-left: 60%;
+  }
+  @media (max-width: 370px) {
+    margin-left: 60%;
+  }
 `;
 
 const ProductImgWrap = styled.div`
   background-color: white;
-  width: 60vw;
+  width: 80vw;
+  height: 80%;
   max-width: 350px;
   margin: auto;
   margin-top: 30px;

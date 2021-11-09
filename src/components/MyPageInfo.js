@@ -17,7 +17,7 @@ import { history } from "../redux/configureStore";
 import Select from "react-select";
 
 // MyPageInfo의 함수형 컴포넌트를 만든다.
-const MyPageInfo = props => {
+const MyPageInfo = (props) => {
   const dispatch = useDispatch();
   // const userId = useSelector((state) => state.user.userId);
   const userId = props.match.params.id;
@@ -27,7 +27,11 @@ const MyPageInfo = props => {
   const [mydata, setMydata] = React.useState();
   const [editMyProfile, setEditMyProfile] = React.useState(false);
   const [techStack, setTeckstack] = React.useState([]);
-  console.log(mydata);
+
+  const [nickName, setNickName] = React.useState();
+  const [email, setEmail] = React.useState();
+  console.log(nickName);
+
   React.useEffect(() => {
     // dispatch(myPageActions.getMypageAPI(userId));
     dispatch(postActions.isMainPage(false));
@@ -38,12 +42,16 @@ const MyPageInfo = props => {
         const result = await apis.getMypage(userId);
         console.log(result);
         setMydata(result.data.data);
+        setNickName(result.data.data.user.nickname);
+        setEmail(result.data.data.user.email);
+        // setTeckstack(result.data.data.user.techStackList);
       } catch (err) {
         console.log(err);
       }
     };
     fetchData();
   }, [filter]);
+
   const introduction = mydata?.user.introduction ? true : false;
   const recruitmentProject = mydata?.recruitment;
   const inProgressProject = mydata?.inProgress;
@@ -63,6 +71,12 @@ const MyPageInfo = props => {
 
   const setEditProfile = () => {
     setEditMyProfile(false);
+    let userData = {
+      nickname: nickName,
+      email: email,
+      userTechStack: techStack,
+    };
+    console.log(userData);
   };
   const editProfileCancle = () => {
     setEditMyProfile(false);
@@ -203,6 +217,9 @@ const MyPageInfo = props => {
                         padding: "7px",
                       }}
                       defaultValue={mydata.user.nickname}
+                      onChange={(e) => {
+                        setNickName(e.target.value);
+                      }}
                     ></input>
                   </div>
                 </MyInfoText1>
@@ -234,6 +251,9 @@ const MyPageInfo = props => {
                         padding: "7px",
                       }}
                       defaultValue={mydata.user.email}
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                      }}
                     ></input>
                   </div>
                 </MyInfoText1>
@@ -262,6 +282,7 @@ const MyPageInfo = props => {
                           techStack.push(arr[idx]["value"]);
                         }
                         setTeckstack(techStack);
+                        console.log(techStack);
                       }}
                     >
                       기술스택

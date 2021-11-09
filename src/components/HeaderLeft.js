@@ -2,7 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Grid, Image } from "../elements/Index";
-import Logo from "../images/임시로고1.jpg";
+import Logo from "../images/Logo.png";
 import { history } from "../redux/configureStore";
 
 const HeaderLeft = () => {
@@ -10,6 +10,7 @@ const HeaderLeft = () => {
     <Grid>
       <LogoDiv>
         <img
+          style={{ cursor: "pointer" }}
           onClick={() => {
             history.push("/");
           }}

@@ -31,8 +31,8 @@ const Post = props => {
           });
         }}
       >
-        <Grid backgroundColor="#D7D4E6" borderRadius="30px" margin="auto">
-          <Ssss>
+        <DDescriptionBox>
+          <CardHeader>
             <Grid>{/* <TitleDate>D-2</TitleDate> */}</Grid>
 
             <Grid display="flex" width="100%">
@@ -44,7 +44,7 @@ const Post = props => {
                 );
               })}
             </Grid>
-          </Ssss>
+          </CardHeader>
           <DescriptionBox>
             <Title>{props.title}</Title>
             <Summary>{props.summary}</Summary>
@@ -56,7 +56,7 @@ const Post = props => {
               <ProjectState>{props.projectStatus}</ProjectState>
             </Grid>
           </DescriptionBox>
-        </Grid>
+        </DDescriptionBox>
       </ProductImgWrap>
     </React.Fragment>
   );
@@ -73,6 +73,25 @@ const TitleDate = styled.div`
 
 const DescriptionBox = styled.div`
   margin: 30px 20px;
+`;
+const DDescriptionBox = styled.div`
+  /* background-color: #fff5f9; */
+  border-radius: 30px;
+  margin: auto;
+`;
+
+const CardHeader = styled.div`
+  width: 100%;
+  height: 70px;
+  background-color: #f1bad1;
+  border-radius: 30px 30px 0px 0px;
+  background: rgb(83, 201, 253);
+  background: linear-gradient(
+    140deg,
+    rgba(83, 201, 253, 1) 0%,
+    rgba(231, 170, 250, 1) 74%,
+    rgba(231, 170, 250, 1) 100%
+  );
 `;
 
 const Title = styled.h1`
@@ -135,7 +154,7 @@ const ProductImgWrap = styled.div`
   background-color: white;
   width: 80vw;
   height: 80%;
-  max-width: 400px;
+  max-width: 350px;
   margin: auto;
   margin-top: 30px;
   margin-bottom: 30px;

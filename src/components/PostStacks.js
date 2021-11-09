@@ -25,10 +25,9 @@ const PostStacks = (props) => {
           display="flex"
           width="70%"
           height="85%"
-          borderRadius="70%"
-          backgroundColor="rgba( 255, 255, 255, 0.9 )"
-          margin="-26px 13px"
-          font
+          borderRadius="100%"
+          backgroundColor="rgba( 255, 255, 255, 1 )"
+          margin="-60px 13px"
         >
           {stacks === "React" && <IMGS src="img/react.png" />}
           {stacks === "Java" && <IMGS src="img/java.png" />}
@@ -51,8 +50,10 @@ const PostStacks = (props) => {
 };
 
 const IMGS = styled.img`
-  width: 90%;
+  width: 80%;
   margin: auto;
+  padding: 5px;
+  align-items: center;
 `;
 
 export default PostStacks;

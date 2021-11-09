@@ -38,11 +38,11 @@ const PostList = () => {
 };
 
 const PostWrap = styled.div`
-  max-width: 80%;
+  max-width: 90%;
   margin: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(443px, 1fr));
-  /* grid-gap: 10px; */
+  grid-template-columns: repeat(auto-fill, minmax(390px, 1fr));
+  /* grid-gap: 1px; */
   @media (max-width: 1700px) {
     width: 100%;
   }
