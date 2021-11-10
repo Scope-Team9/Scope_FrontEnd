@@ -110,12 +110,9 @@ const Summary = styled.div`
 
   margin-top: 8%;
   overflow: hidden;
+  white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
-  display: -webkit-box;
-  line-height: 17px;
-  max-height: 34px;
-  -webkit-line-clamp: 2; /* 표시하고자 하는 라인 수 */
-  -webkit-box-orient: vertical;
 `;
 
 const Date = styled.div`

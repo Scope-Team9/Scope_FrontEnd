@@ -22,7 +22,7 @@ const MyPageInfo = (props) => {
   // const userId = useSelector((state) => state.user.userId);
   const userId = props.match.params.id;
   // console.log(props);
-  console.log(userId);
+  // console.log(userId);
   const [filter, setFilter] = React.useState("소개");
   const [mydata, setMydata] = React.useState();
   const [editMyProfile, setEditMyProfile] = React.useState(false);
@@ -30,7 +30,9 @@ const MyPageInfo = (props) => {
 
   const [nickName, setNickName] = React.useState();
   const [email, setEmail] = React.useState();
-  console.log(nickName);
+  // console.log(nickName);
+  const myType = mydata?.user.userPropensityType;
+  // console.log(myType);
 
   React.useEffect(() => {
     // dispatch(myPageActions.getMypageAPI(userId));
@@ -44,13 +46,14 @@ const MyPageInfo = (props) => {
         setMydata(result.data.data);
         setNickName(result.data.data.user.nickname);
         setEmail(result.data.data.user.email);
-        // setTeckstack(result.data.data.user.techStackList);
+        setTeckstack(result.data.data.user.techStackList);
       } catch (err) {
         console.log(err);
       }
     };
     fetchData();
   }, [filter]);
+  console.log(techStack);
 
   const introduction = mydata?.user.introduction ? true : false;
   const recruitmentProject = mydata?.recruitment;
@@ -70,6 +73,10 @@ const MyPageInfo = (props) => {
   };
 
   const setEditProfile = () => {
+    if (techStack.length > 4) {
+      window.alert("기술은 4개 까지 선택 가능합니다.");
+      return;
+    }
     setEditMyProfile(false);
     let userData = {
       nickname: nickName,
@@ -77,11 +84,19 @@ const MyPageInfo = (props) => {
       userTechStack: techStack,
     };
     console.log(userData);
+    const fetchData = async () => {
+      try {
+        const result = await apis.editUserInfo(userId, userData);
+        console.log(result);
+      } catch (err) {
+        console.log(err.response);
+      }
+    };
+    fetchData();
   };
   const editProfileCancle = () => {
     setEditMyProfile(false);
   };
-  const nickEmailCheck = () => {};
 
   //테크스택 옵션
   const techStackOption = [
@@ -102,20 +117,62 @@ const MyPageInfo = (props) => {
 
   return (
     <React.Fragment>
-      {mydata && (
+      {mydata && myType && (
         <>
-          <Grid
-            width="100%"
-            margin="-100px auto"
-            display="flex"
-            height="400px"
-            bgImg="url(/img/testtest.png)"
-          ></Grid>
+          <Banner>
+            {myType === "LVG" && (
+              <BannerTiger>
+                <BannerImg src="/img/호랑이.png"></BannerImg>
+              </BannerTiger>
+            )}
+            {myType === "LVP" && (
+              <BannerWolf>
+                <BannerImg src="/img/늑대.png"></BannerImg>
+              </BannerWolf>
+            )}
+            {myType === "LHG" && (
+              <BannerFox>
+                <BannerImg src="/img/여우.png"></BannerImg>
+              </BannerFox>
+            )}
+            {myType === "LHP" && (
+              <BannerPanda>
+                <BannerImg src="/img/판다.png"></BannerImg>
+              </BannerPanda>
+            )}
+            {myType === "FVG" && (
+              <BannerRabbit>
+                <BannerImg src="/img/토끼.png"></BannerImg>
+              </BannerRabbit>
+            )}
+            {myType === "FVP" && (
+              <BannerDog>
+                <BannerImg src="/img/개.png"></BannerImg>
+              </BannerDog>
+            )}
+            {myType === "FHG" && (
+              <BannerCat>
+                <BannerImg src="/img/고양이.png"></BannerImg>
+              </BannerCat>
+            )}
+            {myType === "FHP" && (
+              <BannerSeal>
+                <BannerImg src="/img/물개.png"></BannerImg>
+              </BannerSeal>
+            )}
+          </Banner>
           <Cards>
-            <img
-              src="/img/fire.png"
-              style={{ width: "300px", height: "400px", borderRadius: "20px" }}
-            ></img>
+            <div style={{}}>
+              {myType === "LVG" && <CardImg src="/img/호랑이.png"></CardImg>}
+              {myType === "LVP" && <CardImg src="/img/늑대.png"></CardImg>}
+              {myType === "LHG" && <CardImg src="/img/여우.png"></CardImg>}
+              {myType === "LHP" && <CardImg src="/img/판다.png"></CardImg>}
+              {myType === "FVG" && <CardImg src="/img/토끼.png"></CardImg>}
+              {myType === "FVP" && <CardImg src="/img/허스키.png"></CardImg>}
+              {myType === "FHG" && <CardImg src="/img/고양이.png"></CardImg>}
+              {myType === "FHP" && <CardImg src="/img/물개.png"></CardImg>}
+            </div>
+
             {editMyProfile === false && (
               <>
                 {/* 닉네임 */}
@@ -152,9 +209,15 @@ const MyPageInfo = (props) => {
                   >
                     <p>TechStack </p>
                   </div>
-                  <div style={{ width: "150px" }}>
-                    <p>stacks, stacks, stacks, stacks, stacks</p>
-                  </div>
+                  {techStack && (
+                    <>
+                      <div style={{ width: "150px" }}>
+                        {techStack?.map((p, idx) => {
+                          return <p key={idx}>{p}</p>;
+                        })}
+                      </div>
+                    </>
+                  )}
                 </MyInfoText1>
                 <Line></Line>
                 {/* 진행 프로젝트 */}
@@ -425,9 +488,11 @@ const Cards = styled.div`
     rgba(0, 0, 0, 0.22) 0px 15px 12px;
   margin: -260px 0 -600px 55px;
   width: 300px;
-  height: 900px;
-  background-color: #e6e6e6;
+  height: 950px;
+  background-color: rgba(255, 255, 255, 0);
   border-radius: 20px;
+  overflow: hidden;
+
   @media screen and (max-width: 1400px) {
   }
 `;
@@ -446,6 +511,90 @@ const MyInfoText2 = styled.div`
 const Line = styled.hr`
   width: 80%;
   color: black;
+`;
+
+const CardImg = styled.img`
+  width: 420px;
+  height: 450px;
+`;
+const Banner = styled.div`
+  width: 100%;
+  margin: -100px auto;
+  display: flex;
+  height: 400px;
+  overflow: hidden;
+`;
+const BannerImg = styled.img`
+  object-fit: cover;
+  width: 800px;
+  height: auto;
+  margin: auto auto auto 30%;
+  position: relative;
+  z-index: -1909;
+`;
+
+const BannerTiger = styled.div`
+  width: 100%;
+  background-color: #eed691;
+  /* opacity: 0.5; */
+
+  z-index: -1;
+`;
+
+const BannerWolf = styled.div`
+  width: 100%;
+  background-color: #afa9a0;
+  /* opacity: 0.5; */
+  z-index: -1;
+`;
+
+const BannerFox = styled.div`
+  width: 100%;
+  background-color: #e4812a;
+  /* opacity: 0.5; */
+  z-index: -1;
+`;
+
+const BannerPanda = styled.div`
+  width: 100%;
+  background-color: #9c9c9c;
+  /* background-color: black; */
+  opacity: 0.7;
+  /* background-color: rgba(0, 0, 0, 0.5); 까만색(0,0,0) 80% 투명도 */
+  z-index: -1;
+`;
+
+const BannerRabbit = styled.div`
+  width: 100%;
+  background-color: #998fc9;
+  /* opacity: 0.5; */
+  z-index: -1;
+`;
+
+const BannerDog = styled.div`
+  width: 100%;
+  background-color: #e8ddb8;
+  /* opacity: 0.5; */
+  z-index: -1;
+`;
+const BannerCat = styled.div`
+  width: 100%;
+  background-color: #6d6e72;
+  /* opacity: 0.5; */
+  z-index: -1;
+`;
+
+const BannerSeal = styled.div`
+  width: 100%;
+  background-color: #a9adb3;
+  /* opacity: 0.5; */
+  z-index: -1;
+`;
+const Blur = styled.div`
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0.5;
+  z-index: -1;
 `;
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default MyPageInfo;
