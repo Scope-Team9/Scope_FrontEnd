@@ -39,7 +39,6 @@ const Post = props => {
         <DDescriptionBox>
           <CardHeader>
             <Grid>{/* <TitleDate>D-2</TitleDate> */}</Grid>
-
             <Grid display="flex" width="100%">
               {props.techStack.map((p, idx) => {
                 return (
@@ -54,10 +53,16 @@ const Post = props => {
           <Grid
             borderRadius="50px 30px 30px 30px"
             bg="#fff"
-            height="260px"
+            height="245px"
             position="absolute"
           ></Grid>
-          <DescriptionBox>
+          <DescriptionBox
+            onClick={() => {
+              history.push({
+                pathname: `/postdetail/${props.postId}`,
+              });
+            }}
+          >
             <ProjectState>{props.projectStatus}</ProjectState>
             <Title>{props.title}</Title>
             <Summary>{props.summary}</Summary>
@@ -108,7 +113,7 @@ const DDescriptionBox = styled.div`
 `;
 
 const CardHeader = styled.div`
-  z-index: -9;
+  /* z-index: -1; */
   position: relative;
   width: 100%;
   height: 70px;
@@ -124,7 +129,7 @@ const CardHeader = styled.div`
 `;
 
 const CardHeaderTwo = styled.div`
-  z-index: -8;
+  /* z-index: -1; */
   position: absolute;
   top: 0px;
   left: 0px;
@@ -139,13 +144,6 @@ const CardHeaderTwo = styled.div`
     rgba(231, 170, 250, 1) 74%,
     rgba(231, 170, 250, 1) 100%
   );
-`;
-const ContentBox = styled.div`
-  position: absolute;
-  background-color: #fff;
-  border-radius: 30px 0 30px 0px;
-  width: 100%;
-  z-z-index: 999;
 `;
 
 const Title = styled.h1`
@@ -208,7 +206,7 @@ const ProjectState = styled.div`
 `;
 
 const ProductImgWrap = styled.div`
-  z-index: -10;
+  /* z-index: -1; */
   background-color: white;
   width: 80vw;
   height: 80%;

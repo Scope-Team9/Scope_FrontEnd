@@ -159,7 +159,7 @@ const PropensityTest = props => {
       </Grid>
 
       {/* 컨텐츠자리 */}
-      <Grid height="15%" width="90%" margin="auto">
+      <Grid height="15%" width="90%" margin="auto" color={state}>
         {page === 1 && (
           <TestOne
             handleUserCreate={handleUserCreate}

@@ -9,9 +9,9 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 
 import slideOne from "../../images/01.png";
-import slideTwo from "../../images/002.png";
-import slideThree from "../../images/003.png";
-import slideFour from "../../images/004.png";
+import slideTwo from "../../images/02.png";
+import slideThree from "../../images/03.png";
+import slideFour from "../../images/04.png";
 
 const images = [slideTwo, slideOne, slideThree, slideFour];
 const is_token = document.cookie.split("=")[1];
