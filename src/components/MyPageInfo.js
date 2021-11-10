@@ -40,6 +40,7 @@ const MyPageInfo = props => {
   const myType = mydata?.user.userPropensityType;
   // console.log(myType);
   const [modal, setModal] = React.useState(false);
+  const [testmodal, setTestModal] = React.useState(false);
 
   React.useEffect(() => {
     // dispatch(myPageActions.getMypageAPI(userId));
@@ -124,6 +125,10 @@ const MyPageInfo = props => {
 
   const EmailConfirm = () => {
     setModal(true);
+  };
+
+  const EditTest = () => {
+    setTestModal(true);
   };
 
   return (
@@ -487,16 +492,10 @@ const MyPageInfo = props => {
             </MyResultDiv>
             {userId == myUserId && (
               <Grid>
-                <GotoTest
-                  onClick={() => {
-                    setModal(true);
-                  }}
-                >
-                  성향 테스트하기⇀
-                </GotoTest>
+                <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
               </Grid>
             )}
-            <Dialog maxWidth={"sm"} scroll="paper" open={modal}>
+            <Dialog maxWidth={"sm"} scroll="paper" open={testmodal}>
               <Grid width="550px" height="100%">
                 <PropensityTest />
               </Grid>
