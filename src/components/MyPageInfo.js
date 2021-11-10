@@ -115,6 +115,8 @@ const MyPageInfo = (props) => {
     { value: "TypeScript", label: "TypeScript" },
   ];
 
+  const EmailConfirm = () => {};
+
   return (
     <React.Fragment>
       {mydata && myType && (
@@ -123,44 +125,148 @@ const MyPageInfo = (props) => {
             {myType === "LVG" && (
               <BannerTiger>
                 <BannerImg src="/img/호랑이.png"></BannerImg>
+
+                <Grid margin="-500px 0 0 500px">
+                  <WhiteP>LVG / 호랑이</WhiteP>
+                </Grid>
+                <Grid margin="-500px 0 0 90%" zIndex="2">
+                  <ConfirmEmail
+                    onClick={() => {
+                      EmailConfirm();
+                    }}
+                  >
+                    이메일 인증하기
+                  </ConfirmEmail>
+                </Grid>
               </BannerTiger>
             )}
             {myType === "LVP" && (
               <BannerWolf>
                 <BannerImg src="/img/늑대.png"></BannerImg>
+
+                <Grid margin="-500px 0 0 500px">
+                  <WhiteP>LVP / 늑대</WhiteP>
+                </Grid>
+                <Grid margin="-500px 0 0 90%" zIndex="2">
+                  <ConfirmEmail
+                    onClick={() => {
+                      EmailConfirm();
+                    }}
+                  >
+                    이메일 인증하기
+                  </ConfirmEmail>
+                </Grid>
               </BannerWolf>
             )}
             {myType === "LHG" && (
               <BannerFox>
                 <BannerImg src="/img/여우.png"></BannerImg>
+
+                <Grid margin="-500px 0 0 500px">
+                  <WhiteP>LHG / 여우</WhiteP>
+                </Grid>
+                <Grid margin="-500px 0 0 90%" zIndex="2">
+                  <ConfirmEmail
+                    onClick={() => {
+                      EmailConfirm();
+                    }}
+                  >
+                    이메일 인증하기
+                  </ConfirmEmail>
+                </Grid>
               </BannerFox>
             )}
             {myType === "LHP" && (
               <BannerPanda>
                 <BannerImg src="/img/판다.png"></BannerImg>
+                <Grid margin="-500px 0 0 500px">
+                  <WhiteP>LHP / 팬더</WhiteP>
+                </Grid>
+                <Grid margin="-500px 0 0 90%" zIndex="2">
+                  <ConfirmEmail
+                    onClick={() => {
+                      EmailConfirm();
+                    }}
+                  >
+                    이메일 인증하기
+                  </ConfirmEmail>
+                </Grid>
               </BannerPanda>
             )}
             {myType === "FVG" && (
               <BannerRabbit>
                 <BannerImg src="/img/토끼.png"></BannerImg>
+
+                <Grid margin="-500px 0 0 500px">
+                  <WhiteP>FVG / 토끼</WhiteP>
+                </Grid>
+                <Grid margin="-500px 0 0 90%" zIndex="2">
+                  <ConfirmEmail
+                    onClick={() => {
+                      EmailConfirm();
+                    }}
+                  >
+                    이메일 인증하기
+                  </ConfirmEmail>
+                </Grid>
               </BannerRabbit>
             )}
             {myType === "FVP" && (
               <BannerDog>
                 <BannerImg src="/img/개.png"></BannerImg>
+
+                <Grid margin="-500px 0 0 500px">
+                  <WhiteP>FVP / 강아지</WhiteP>
+                </Grid>
+                <Grid margin="-500px 0 0 90%" zIndex="2">
+                  <ConfirmEmail
+                    onClick={() => {
+                      EmailConfirm();
+                    }}
+                  >
+                    이메일 인증하기
+                  </ConfirmEmail>
+                </Grid>
               </BannerDog>
             )}
             {myType === "FHG" && (
               <BannerCat>
                 <BannerImg src="/img/고양이.png"></BannerImg>
+
+                <Grid margin="-500px 0 0 500px">
+                  <WhiteP>LHP / 팬더</WhiteP>
+                </Grid>
+                <Grid margin="-500px 0 0 90%" zIndex="2">
+                  <ConfirmEmail
+                    onClick={() => {
+                      EmailConfirm();
+                    }}
+                  >
+                    이메일 인증하기
+                  </ConfirmEmail>
+                </Grid>
               </BannerCat>
             )}
             {myType === "FHP" && (
               <BannerSeal>
                 <BannerImg src="/img/물개.png"></BannerImg>
+
+                <Grid margin="-500px 0 0 500px">
+                  <WhiteP>LHP / 팬더</WhiteP>
+                </Grid>
+                <Grid margin="-500px 0 0 90%" zIndex="2">
+                  <ConfirmEmail
+                    onClick={() => {
+                      EmailConfirm();
+                    }}
+                  >
+                    이메일 인증하기
+                  </ConfirmEmail>
+                </Grid>
               </BannerSeal>
             )}
           </Banner>
+
           <Cards>
             <div style={{}}>
               {myType === "LVG" && <CardImg src="/img/호랑이.png"></CardImg>}
@@ -389,6 +495,7 @@ const MyPageInfo = (props) => {
               </>
             )}
           </Cards>
+
           <Grid display="flex" margin="auto" justifyContent="center">
             <Filter
               onClick={() => {
@@ -492,7 +599,8 @@ const Cards = styled.div`
   background-color: rgba(255, 255, 255, 0);
   border-radius: 20px;
   overflow: hidden;
-
+  z-index: 1;
+  position: relative;
   @media screen and (max-width: 1400px) {
   }
 `;
@@ -514,23 +622,22 @@ const Line = styled.hr`
 `;
 
 const CardImg = styled.img`
-  width: 420px;
+  width: 400px;
   height: 450px;
+  object-fit: cover;
 `;
 const Banner = styled.div`
   width: 100%;
   margin: -100px auto;
   display: flex;
-  height: 400px;
+  height: 500px;
   overflow: hidden;
 `;
 const BannerImg = styled.img`
   object-fit: cover;
-  width: 800px;
-  height: auto;
-  margin: auto auto auto 30%;
-  position: relative;
-  z-index: -1909;
+  width: 1200px;
+  height: 180%;
+  margin: auto auto auto 20%;
 `;
 
 const BannerTiger = styled.div`
@@ -559,9 +666,9 @@ const BannerPanda = styled.div`
   width: 100%;
   background-color: #9c9c9c;
   /* background-color: black; */
-  opacity: 0.7;
+  /* opacity: 0.7; */
   /* background-color: rgba(0, 0, 0, 0.5); 까만색(0,0,0) 80% 투명도 */
-  z-index: -1;
+  z-index: 0;
 `;
 
 const BannerRabbit = styled.div`
@@ -596,5 +703,24 @@ const Blur = styled.div`
   opacity: 0.5;
   z-index: -1;
 `;
-// export를 통해 밖에서도 사용할 수 있도록 설정한다.
+
+const WhiteP = styled.p`
+  font-size: 30px;
+  color: white;
+  font-weight: bold;
+`;
+const ConfirmEmail = styled.button`
+  width: 140px;
+  padding: 5px 15px;
+  border: 1px solid white;
+  background-color: transparent;
+  color: white;
+  border-radius: 10px;
+  z-index: 99999;
+  cursor: pointer;
+  @media screen and (max-width: 750px) {
+    color: black;
+  } ;
+`;
+
 export default MyPageInfo;

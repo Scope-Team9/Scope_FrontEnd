@@ -56,6 +56,8 @@ const MainPage = () => {
     console.log("?? 여기서 되는거임?");
   }, [is_stack_clicked, is_sort_clicked, is_reBook_clicked, pageCheck]);
 
+  // 요청에 대한 속도가 다를때. 다른것이 띄워질 수 있는 버그성.
+
   React.useEffect(() => {
     if (inView === true) {
       setPaging(paging + 9);
@@ -73,7 +75,7 @@ const MainPage = () => {
       if (post_list.length === 0 && pageCheck === false) {
         dispatch(postActions.pageCheck(true));
       }
-    }
+    } // 옵저버를 좀 더 위로
   }, [inView]);
 
   //sort

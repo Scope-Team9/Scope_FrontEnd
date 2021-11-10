@@ -22,7 +22,7 @@ const Infinity = (props) => {
   }, 600);
 
   const handleScroll = useCallback(_handleScroll, []);
-
+  // 메인페이지에서 Hook으로 커스텀 HOOK
   useEffect(() => {
     if (is_loading) {
       return;
