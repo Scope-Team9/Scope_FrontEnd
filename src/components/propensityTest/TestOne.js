@@ -5,11 +5,15 @@ import { Grid, Button, Text } from "../../elements/Index";
 const TestOne = props => {
   const { handleUserCreate, handleMemberCreate } = props;
   const [isChecked, setIsChecked] = React.useState("#fff");
-  const [blue, setBlue] = React.useState(true);
+  // const [blue, setBlue] = React.useState("L");
 
-  const ToggleButton = () => {
-    setBlue(!blue);
-    isChecked === "#fff" ? setIsChecked("#B29CF4") : setIsChecked("#fff");
+  const ToggleButton = answer => {
+    console.log(answer);
+    if (answer === "L") {
+      setIsChecked("#B29CF4");
+    } else if (answer === "F") {
+      setIsChecked("#fff");
+    }
   };
   // const [bChecked, setChecked] = React.useState(false);
 
@@ -26,7 +30,7 @@ const TestOne = props => {
               isTest
               isValue="L"
               _onClick={e => {
-                ToggleButton();
+                ToggleButton(e.target.value);
                 console.log(isChecked);
                 handleUserCreate(e.target.value);
               }}
@@ -38,7 +42,7 @@ const TestOne = props => {
               isTest
               isValue="F"
               _onClick={e => {
-                ToggleButton();
+                ToggleButton(e.target.value);
                 handleUserCreate(e.target.value);
               }}
             >

@@ -56,13 +56,7 @@ const Post = props => {
             height="245px"
             position="absolute"
           ></Grid>
-          <DescriptionBox
-            onClick={() => {
-              history.push({
-                pathname: `/postdetail/${props.postId}`,
-              });
-            }}
-          >
+          <DescriptionBox>
             <ProjectState>{props.projectStatus}</ProjectState>
             <Title>{props.title}</Title>
             <Summary>{props.summary}</Summary>

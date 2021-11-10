@@ -25,6 +25,12 @@ const PropensityTest = props => {
   const dispatch = useDispatch();
   const userInfo = useSelector(state => state.user);
 
+  // const [active, setActive] = React.useState(preUserPropensityType);
+  const [isChecked, setIsChecked] = React.useState("#fff");
+  const ToggleButton = answer => {
+    isChecked === "#fff" ? setIsChecked("#170184") : setIsChecked("#fff");
+  };
+
   //스텝별로 스테이트 변화값에 따라 텍스트가 바뀌는지 먼저 확인
   const [page, setpage] = useState(1);
 
@@ -127,11 +133,6 @@ const PropensityTest = props => {
       window.alert("설문지가 정확히 작성되지 않았습니다!");
       return false;
     }
-  };
-
-  const [isChecked, setIsChecked] = React.useState("#fff");
-  const ToggleButton = () => {
-    isChecked === "#fff" ? setIsChecked("#170184") : setIsChecked("#fff");
   };
 
   return (
