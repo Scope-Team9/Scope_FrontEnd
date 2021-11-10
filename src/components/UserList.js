@@ -3,17 +3,10 @@ import { Grid, Image } from "../elements/Index";
 
 const UserList = (props) => {
   let list = props.list;
-  console.log("리스트야", list);
 
   return (
     <React.Fragment>
-      <Grid
-        display="flex"
-        width="45px"
-        borderRadius="50%"
-        backgroundColor="white"
-        margin="-26px 13px"
-      >
+      <Grid display="flex" width="45px" borderRadius="50%">
         {list === "LVG" && <Image src="img/react.png" />}
         {list === "LVP" && <Image src="img/java.png" />}
         {list === "LHG" && <Image src="img/javascript.png" />}

@@ -11,6 +11,7 @@ const Input = (props) => {
     onSubmit,
     type,
     multiLine,
+    textAlign,
     edit,
     value,
     editValue,
@@ -20,6 +21,8 @@ const Input = (props) => {
     padding,
     height,
     border,
+    borderbottom,
+    maxLength,
     borderRadius,
     bg,
     backgroundImage,
@@ -34,8 +37,11 @@ const Input = (props) => {
     padding,
     height,
     border,
+    borderbottom,
     borderRadius,
     bg,
+    textAlign,
+    maxLength,
     backgroundImage,
     inputFocusOutline,
     inputFocusBorder,
@@ -51,6 +57,8 @@ const Input = (props) => {
           value={value}
           defaulValue={defaulValue}
           rows={10}
+          textAlign={textAlign}
+          maxLength={maxLength}
           placeholder={placeholder}
           onChange={_onChange}
         ></ElTextarea>
@@ -68,10 +76,12 @@ const Input = (props) => {
           width={width}
           margin={margin}
           type={type}
+          textAlign={textAlign}
           value={value}
           defaulValue={defaulValue}
           placeholder={placeholder}
           onChange={_onChange}
+          maxLength={maxLength}
           ref={innerRef}
           onKeyPress={(e) => {
             console.log(e.key);
@@ -93,9 +103,11 @@ const Input = (props) => {
         backgroundColor={backgroundColor}
         width={width}
         margin={margin}
+        textAlign={textAlign}
         type={type}
         placeholder={placeholder}
         value={editValue}
+        maxLength={maxLength}
         defaulValue={defaulValue}
         onChange={_onChange}
         ref={innerRef}
@@ -116,6 +128,7 @@ Input.defaultProps = {
   label: false,
   placeholder: "텍스트를 입력해주세요.",
   type: "text",
+  align: "",
   value: "",
   defaulValue: "",
   margin: 0,
@@ -123,6 +136,7 @@ Input.defaultProps = {
   width: "100%",
   height: false,
   border: false,
+  borderbottom: false,
   borderRadius: false,
   bg: false,
   backgroundImage: false,
@@ -149,7 +163,9 @@ const ElInput = styled.input`
   border: ${(props) => props.border};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
+  textalign: ${(props) => props.textAlign};
   border-radius: ${(props) => props.borderRadius};
+  borderbottom: ${(props) => props.borderBottom};
   background: ${(props) => props.bg};
   padding: ${(props) => props.padding};
   backgroundimage: ${(props) => props.backgroundImage};

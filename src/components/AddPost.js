@@ -12,19 +12,13 @@ import makeAnimated from "react-select/animated";
 
 import { Grid, Text, Input } from "../elements/Index";
 import Img from "../images/PostAdd.png";
-
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router";
-import { addPostAPI } from "../redux/modules/postadd";
-import { editPostAPI } from "../redux/modules/postdetail";
 import { postAddActions } from "../redux/modules/postadd";
 import { postActions } from "../redux/modules/post";
-import { height, width } from "@mui/system";
 
 // AddPost의 함수형 컴포넌트를 만든다.
 // AddPost 안에 다뤄지는  특정 값(state) ex.title 값이 변화하였을 때, AddPost자체가 리랜더링 된다.
 const AddPost = (props) => {
-  const history = useHistory();
   const dispatch = useDispatch();
   const animatedComponents = makeAnimated();
 
@@ -43,14 +37,6 @@ const AddPost = (props) => {
     dispatch(postActions.whatPage("addPostPage"));
   }, []);
 
-  // 값바꿔주기
-  var today = new Date();
-  var year = today.getFullYear();
-  var month = ("0" + (today.getMonth() + 1)).slice(-2);
-  var day = ("0" + today.getDate()).slice(-2);
-  var dateString = year + "-" + month + "-" + day;
-  console.log("제발", dateString);
-
   const scope_index = () => {
     const card = {
       title: title,
@@ -65,15 +51,6 @@ const AddPost = (props) => {
     console.log("카드들", card);
     dispatch(postAddActions.addPostAPI(card));
   };
-
-  console.log("제목", title);
-  console.log("한줄소개", summary);
-  console.log("기술스택", techStackList);
-  console.log("시작일", startDate);
-  console.log("마감일", endDate);
-  console.log("총인원", totalMember);
-  console.log("프로젝트 상태", projectStatus);
-  console.log("내용", contents);
 
   // 기술 스택 선택
   const stackSelect = useMemo(
@@ -97,11 +74,36 @@ const AddPost = (props) => {
     []
   );
 
+  // 게시글 작성(프로젝트 상태)
+  const projectstatus = useMemo(
+    () => [{ value: "모집중", label: "모집중" }],
+    []
+  );
+
+  // 게시글 작성(프로젝트 인원)
+  const projectMembers = useMemo(
+    () => [
+      { value: 2, label: 2 },
+      { value: 3, label: 3 },
+      { value: 4, label: 4 },
+      { value: 5, label: 5 },
+      { value: 6, label: 6 },
+    ],
+    []
+  );
+
   // 게시글 작성(스택선택)
   const styles = {
-    multiValueRemove: (base, state) => {
-      return state.data.isFixed ? { ...base } : base;
-    },
+    control: (base, state) => ({
+      ...base,
+      boxShadow: state.isFocused ? 0 : 0,
+      borderWidth: 2,
+      minHeight: 40,
+      borderColor: state.isFocused ? "#C4C4C4" : base.borderColor,
+      "&:hover": {
+        borderColor: state.isFocused ? "#C4C4C4" : base.borderColor,
+      },
+    }),
   };
 
   const orderByLabel = useCallback(
@@ -141,24 +143,6 @@ const AddPost = (props) => {
     formatTech();
   }, [techstack]);
 
-  // 게시글 작성(프로젝트 상태)
-  const projectstatus = useMemo(
-    () => [{ value: "모집중", label: "모집중" }],
-    []
-  );
-
-  // 게시글 작성(프로젝트 인원)
-  const projectMembers = useMemo(
-    () => [
-      { value: 2, label: 2 },
-      { value: 3, label: 3 },
-      { value: 4, label: 4 },
-      { value: 5, label: 5 },
-      { value: 6, label: 6 },
-    ],
-    []
-  );
-
   return (
     <React.Fragment>
       <Grid
@@ -171,17 +155,15 @@ const AddPost = (props) => {
         alignItems="center"
       >
         {/* 이미지 하나 */}
-        <img src={Img} style={{ width: "790px", height: "100%" }} />
+        <SideBarImg src={Img} style={{ maxWidth: "100%", height: "100%" }} />
         {/* 텍스트 하나 */}
-        <Grid>
+        <Grid padding="0px 16px">
           {/* Scoope */}
-          <Grid>
-            <Title>Scoope</Title>
-          </Grid>
+          <Title>Scoope</Title>
           <Grid>
             {/* 게시글 작성하기 */}
             <Grid>
-              <Text size="20px" bold>
+              <Text color="#C4C4C4" size="20px" bold>
                 게시글 작성하기
               </Text>
             </Grid>
@@ -190,10 +172,13 @@ const AddPost = (props) => {
               <Text margin="auto 100px auto auto">제목</Text>
               <Input
                 width="100%"
-                height="30px"
+                maxLength="35"
+                height="40px"
                 padding="10px"
-                border="1px solid #E7E1FF"
+                border="1px solid #C4C4C4"
                 placeholder="제목을 입력해주세요."
+                inputFocusOutline="none"
+                fontSize="16px"
                 _onChange={(e) => {
                   setTitle(e.target.value);
                 }}
@@ -204,10 +189,13 @@ const AddPost = (props) => {
               <Text margin="auto 100px auto auto">한줄소개</Text>
               <Input
                 width="100%"
-                height="30px"
+                maxLength="60"
+                height="40px"
                 padding="10px"
                 placeholder="프로젝트를 한줄소개를 소개해주세요."
-                border="1px solid #E7E1FF"
+                border="1px solid #C4C4C4"
+                inputFocusOutline="none"
+                fontSize="16px"
                 _onChange={(e) => {
                   setSummary(e.target.value);
                 }}
@@ -231,32 +219,24 @@ const AddPost = (props) => {
               <Grid>
                 <Text>기간설정</Text>
               </Grid>
-              <Grid>
-                <Text margin="auto 20px">프로젝트 시작 일 :</Text>
+              <Grid display="colum">
+                <Text>프로젝트 시작 일 :</Text>
                 <SDatePicker
                   dateFormat="yyyy/MM/dd"
                   selected={startDate}
                   onChange={(date) => setStartdate(date)}
-                  selectsStart
-                  startDate={startDate}
-                  endDate={endDate}
                   locale={ko}
                   minDate={new Date()}
-                  placeholderText="프로젝트 시작일 입력"
                 />
               </Grid>
               <Grid>
-                <Text margin="auto 20px">프로젝트 종료 일 :</Text>
+                <Text>프로젝트 종료 일 :</Text>
                 <SDatePicker
                   dateFormat="yyyy/MM/dd"
                   selected={endDate}
                   onChange={(date) => setEnddate(date)}
-                  selectsEnd4
-                  startDate={startDate}
-                  endDate={endDate}
                   locale={ko}
                   minDate={new Date()}
-                  placeholderText="프로젝트 종료일"
                 />
               </Grid>
             </Grid>
@@ -266,6 +246,7 @@ const AddPost = (props) => {
               <Select
                 options={projectMembers}
                 isLoading
+                styles={styles}
                 onChange={(e) => {
                   let b;
                   b = e["label"];
@@ -280,6 +261,7 @@ const AddPost = (props) => {
               <Select
                 options={projectstatus}
                 isLoading
+                styles={styles}
                 onChange={(e) => {
                   let a;
                   a = e["label"];
@@ -295,7 +277,9 @@ const AddPost = (props) => {
                 width="100%"
                 height="200px"
                 padding="10px"
-                border="1px solid #E7E1FF"
+                border="1px solid #C4C4C4"
+                inputFocusOutline="none"
+                fontSize="16px"
                 _onChange={(e) => {
                   setContents(e.target.value);
                 }}
@@ -306,7 +290,6 @@ const AddPost = (props) => {
             <Grid>
               <Btn
                 onClick={() => {
-                  history.push("/");
                   scope_index();
                 }}
               >
@@ -323,24 +306,19 @@ const AddPost = (props) => {
 // styled-components를 사용한다.
 const Title = styled.h1`
   margin: "auto 20px";
-  color: black;
+  color: #c4c4c4;
   font-size: 40px;
-`;
-
-const CustomSelect = styled(Select)`
-  & .Select {
-    width: 100px;
-  }
 `;
 
 const SDatePicker = styled(DatePicker)`
   box-sizing: border-box;
   width: 100%;
-  height: 35px;
+  height: 40px;
   padding: 8px 20px;
   margin-top: 1.5rem;
-  border-radius: 10px;
-  border: 1px solid #e7e1ff;
+  outline: none;
+  border-radius: 4px;
+  border: 1px solid #c4c4c4;
 `;
 
 const Btn = styled.button`
@@ -352,9 +330,21 @@ const Btn = styled.button`
   border: none;
   border-radius: 50px;
   color: #fff;
-  background-color: #42309b;
+  background: linear-gradient(
+    0deg,
+    rgba(83, 201, 253, 1) 0%,
+    rgba(182, 161, 240, 1) 69%,
+    rgba(231, 170, 250, 1) 100%,
+    rgba(240, 247, 254, 1) 100%
+  );
   margin: 10px auto 10px auto;
   cursor: pointer;
+`;
+
+const SideBarImg = styled.img`
+  @media screen and (max-width: 800px) {
+    display: none;
+  }
 `;
 
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.

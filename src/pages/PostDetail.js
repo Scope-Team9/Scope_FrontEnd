@@ -8,7 +8,7 @@ import { apis } from "../lib/axios";
 import { useHistory } from "react-router";
 import { postActions } from "../redux/modules/post";
 import { Grid, Text, Image, Input, Button } from "../elements/Index";
-import Img from "../images/PostAdd.png";
+import Img from "../images/DetailImg.png";
 import UserList from "../components/UserList";
 import ApplyStatusModal from "../components/ApplyStatusModal";
 import ApplyUserModal from "../components/ApplyUserModal";
@@ -59,29 +59,47 @@ const PostDetail = (props) => {
   }, [bookmark]);
   const passedData = checkPost?.data["data"].post;
   const passdedMenber = checkPost?.data["data"].members;
+
+  const DeletePost = async () => {
+    try {
+      const deletePost = await apis.deletePost(post_id);
+      console.log("삭제", deletePost);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <React.Fragment>
       <Grid
         display="flex"
         justifyContent="center"
-        width="100%"
+        maxWidth="1920px"
+        height="100%"
         margin="auto"
         border="1px solid #C4C4C4"
         alignItems="center"
       >
-        <img src={Img} style={{ width: "800px", height: "850px" }} />
-        <Grid margin="auto 20px">
+        <SideBarImg src={Img} style={{ maxWidth: "100%", height: "100%" }} />
+        <Grid padding="0px 16px">
           <Title>Scoope</Title>
-          <Title>{passedData?.title}</Title>
+          <Text color="#C4C4C4" size="20px" bold>
+            <span style={{ color: "black" }}>제목</span> : {passedData?.title}
+            <hr width="92%" />
+          </Text>
           <Grid margin="10px auto">
-            <Text>{passedData?.summary}</Text>
+            <Text color="#C4C4C4" size="20px" bold>
+              <span style={{ color: "black" }}>소개 : </span>{" "}
+              {passedData?.summary}
+              <hr width="92%" />
+            </Text>
           </Grid>
-
           <Grid>
             <Text>게시자 정보</Text>
             <Grid display="column">
-              <Image />
+              <UserList list={passedData?.propensityType}></UserList>
               <Text>{passedData?.nickname}</Text>
+              <Grid>({passedData?.propensityType})</Grid>
             </Grid>
             <Grid margin="10px auto">
               <Text>프로젝트 인원</Text>
@@ -91,8 +109,7 @@ const PostDetail = (props) => {
                     {passdedMenber?.map((item, index) => (
                       <Grid key={index} {...item}>
                         <Grid>
-                          <Image />
-                          {/* <UserList></UserList> */}
+                          <UserList list={item.userPropensityType}></UserList>
                         </Grid>
                         <Grid>{item.nickname}</Grid>
                         <Grid>({item.userPropensityType})</Grid>
@@ -135,7 +152,7 @@ const PostDetail = (props) => {
                 </Text>
               </Grid>
               <Grid display="flex" margin="10px auto">
-                <Text margin="auto 10px auto 0px">기술스택</Text>
+                <Text margin="auto 10px auto 0px">기술스택 :</Text>
                 {passedData?.techStack.map((item, index) => {
                   return (
                     <Text margin="auto 5px" key={index}>
@@ -145,7 +162,7 @@ const PostDetail = (props) => {
                 })}
               </Grid>
               <Grid display="flex">
-                <Text margin="auto 10px auto 0px">프로젝트 상태</Text>
+                <Text margin="auto 10px auto 0px">프로젝트 상태 :</Text>
                 <Text>{passedData?.projectStatus}</Text>
               </Grid>
               <Grid>
@@ -154,26 +171,20 @@ const PostDetail = (props) => {
               <Grid>
                 {userId === postUserId ? (
                   <Grid display="flex" justifyContent="center">
+                    <Btn>모집완료</Btn>
                     <Btn
-                      width="120px"
-                      height="40px"
-                      margin="auto 10px auto auto"
-                      backgroundColor="#42309b"
-                      borderRadius="50px"
-                    >
-                      모집완료
-                    </Btn>
-                    <Btn
-                      width="120px"
-                      height="40px"
-                      margin="auto 10px auto auto"
-                      backgroundColor="#42309b"
-                      borderRadius="50px"
                       onClick={() => {
                         history.push({ pathname: `/postedit/${post_id}` });
                       }}
                     >
                       포스트수정
+                    </Btn>
+                    <Btn
+                      onClick={() => {
+                        DeletePost();
+                      }}
+                    >
+                      포스트삭제
                     </Btn>
                   </Grid>
                 ) : (
@@ -223,11 +234,15 @@ const PostDetail = (props) => {
 };
 
 // styled-components를 사용한다.
-const Title = styled.h1``;
+const Title = styled.h1`
+  margin: "auto 20px";
+  color: #c4c4c4;
+  font-size: 40px;
+`;
 
 const Content = styled.h3`
-  width: 100%;
-  height: 300px;
+  width: 96%;
+  height: 200px;
   padding: 10px;
   border: 1px solid #c4c4c4;
   border-radius: 5px;
@@ -237,14 +252,26 @@ const Btn = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 140px;
+  width: 120px;
   height: 35px;
   border: none;
   border-radius: 50px;
   color: #fff;
-  background-color: #42309b;
+  background: linear-gradient(
+    0deg,
+    rgba(83, 201, 253, 1) 0%,
+    rgba(182, 161, 240, 1) 69%,
+    rgba(231, 170, 250, 1) 100%,
+    rgba(240, 247, 254, 1) 100%
+  );
   cursor: pointer;
-  margin: 10px auto 10px auto;
+  margin: auto 10px;
+`;
+
+const SideBarImg = styled.img`
+  @media screen and (max-width: 800px) {
+    display: none;
+  }
 `;
 
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.
