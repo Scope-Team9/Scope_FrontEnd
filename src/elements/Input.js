@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Grid, Text } from "./Index";
 
-const Input = props => {
+const Input = (props) => {
   const {
     id,
     label,
@@ -83,7 +83,7 @@ const Input = props => {
           onChange={_onChange}
           maxLength={maxLength}
           ref={innerRef}
-          onKeyPress={e => {
+          onKeyPress={(e) => {
             console.log(e.key);
             if (e.key === "Enter") {
               console.log("pass");
@@ -111,7 +111,7 @@ const Input = props => {
         defaulValue={defaulValue}
         onChange={_onChange}
         ref={innerRef}
-        onKeyPress={e => {
+        onKeyPress={(e) => {
           console.log(e.key);
           if (e.key === "Enter") {
             console.log("pass");
@@ -146,37 +146,38 @@ Input.defaultProps = {
 };
 
 const ElTextarea = styled.textarea`
-  margin: ${props => props.margin};
-  border: ${props => props.border};
-  width: ${props => props.width};
-  height: ${props => props.height};
-  border-radius: ${props => props.borderRadius};
-  background: ${props => props.bg};
-  padding: ${props => props.padding};
-  background-image: ${props => props.backgroundImage};
+  margin: ${(props) => props.margin};
+  border: ${(props) => props.border};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  border-radius: 25px;
+  border-radius: ${(props) => props.borderRadius};
+  background: ${(props) => props.bg};
+  padding: ${(props) => props.padding};
+  background-image: ${(props) => props.backgroundImage};
   box-sizing: border-box;
-  background-color: ${props => props.backgroundColor};
+  background-color: ${(props) => props.backgroundColor};
 `;
 
 const ElInput = styled.input`
-  margin: ${props => props.margin};
-  border: ${props => props.border};
-  width: ${props => props.width};
-  height: ${props => props.height};
-  text-align: ${props => props.textAlign};
-  border-radius: ${props => props.borderRadius};
-  border-bottom: ${props => props.borderBottom};
-  background: ${props => props.bg};
-  padding: ${props => props.padding};
-  background-image: ${props => props.backgroundImage};
+  margin: ${(props) => props.margin};
+  border: ${(props) => props.border};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  text-align: ${(props) => props.textAlign};
+  border-radius: ${(props) => props.borderRadius};
+  border-bottom: ${(props) => props.borderBottom};
+  background: ${(props) => props.bg};
+  padding: ${(props) => props.padding};
+  background-image: ${(props) => props.backgroundImage};
   box-sizing: border-box;
-  border-radius: 25px;
-  background-color: ${props => props.backgroundColor};
-  font-size: ${props => props.fontSize};
+
+  background-color: ${(props) => props.backgroundColor};
+  font-size: ${(props) => props.fontSize};
   &:focus {
-    outline: ${props => props.inputFocusOutline};
-    border: ${props => props.inputFocusBorder};
-    box-shadow: ${props => props.inputFocusBoxShadow};
+    outline: ${(props) => props.inputFocusOutline};
+    border: ${(props) => props.inputFocusBorder};
+    box-shadow: ${(props) => props.inputFocusBoxShadow};
   }
 `;
 

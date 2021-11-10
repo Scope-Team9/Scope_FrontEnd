@@ -35,7 +35,7 @@ const EmailAuth = (props) => {
           <Grid
             width="100%"
             height="13%"
-            bg="#B29CF4"
+            // bg="#B29CF4"
             position="relative"
             textAlign="center"
             padding="10px 0 10px 0"
@@ -49,8 +49,8 @@ const EmailAuth = (props) => {
             >
               <CloseIcon fontSize="large" onClick={modalClose} />
             </Grid>
-            <Grid>
-              <Text size="20px" bold color="#fff">
+            <Grid margin="20px 0 0 0">
+              <Text size="30px" bold color="#08061D">
                 이메일 인증
               </Text>
             </Grid>
@@ -58,17 +58,24 @@ const EmailAuth = (props) => {
           {/* 내용작성 */}
           <Grid height="45%">
             <Dec>이메일 인증을 하고 이메일 알림을 받아 보세요!</Dec>
+
             <Input
               padding="10px"
               placeholder="이메일을 입력해 주세요."
-              margin="40px 0 0 0"
+              margin="10px 0 0 18%"
               fontSize="15px"
-              border="1px solid #707070"
+              border="1px solid #C9C9C9"
+              borderRadius="8px"
+              width="320px"
               _onChange={(e) => {
                 EmailInput(e.target.value);
               }}
             ></Input>
+
             <Button
+              width="320px"
+              height="50px"
+              margin="-90px 0 0 18%"
               _onClick={() => {
                 EmailSend();
               }}
@@ -84,16 +91,16 @@ const EmailAuth = (props) => {
 
 const ModalWrap = styled.div`
   width: 500px;
-  height: 400px;
+  height: 300px;
   border-radius: 20px;
 `;
 const Dec = styled.p`
   color: #08061d;
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 14px;
   align-items: center;
   display: flex;
   justify-content: center;
+  margin-top: 25px;
 `;
 
 export default EmailAuth;

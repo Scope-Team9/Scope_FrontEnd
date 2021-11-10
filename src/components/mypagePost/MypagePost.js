@@ -83,7 +83,13 @@ const CardHeader = styled.div`
 `;
 
 const Title = styled.h1`
+  margin-top: 15%;
   font-size: 20px;
+  width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #606060;
 `;
 
 const Summary = styled.div`
@@ -92,12 +98,9 @@ const Summary = styled.div`
 
   margin-top: 8%;
   overflow: hidden;
+  white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
-  display: -webkit-box;
-  line-height: 17px;
-  max-height: 34px;
-  -webkit-line-clamp: 2; /* 표시하고자 하는 라인 수 */
-  -webkit-box-orient: vertical;
 `;
 
 const Date = styled.div`
@@ -131,11 +134,28 @@ const ProductImgWrap = styled.div`
   margin-bottom: 30px;
   border-radius: 30px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.24);
-  @media (max-width: 750px) {
-    width: 100%;
+  @media (max-width: 1700px) {
+    width: 400px;
+    height: 80%;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
   }
+  @media (max-width: 1200px) {
+    width: 300px;
+    height: 80%;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
   @media (max-width: 450px) {
-    width: 100%;
+    width: 300px;
+    height: 280px;
+    margin: auto;
+    margin-left: 1%;
+    margin-top: 30px;
+    margin-bottom: 30px;
   }
 `;
 
