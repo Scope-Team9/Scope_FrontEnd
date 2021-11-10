@@ -1,6 +1,5 @@
 /* eslint-disable */
 import React, { useState } from "react";
-import { Dialog } from "@material-ui/core";
 import Symbol from "../../images/tiger.jpg";
 import {
   TestOne,
@@ -165,6 +164,7 @@ const PropensityTest = props => {
           <TestOne
             handleUserCreate={handleUserCreate}
             handleMemberCreate={handleMemberCreate}
+            // ToggleButton={ToggleButton}
           />
         )}
         {page === 2 && (

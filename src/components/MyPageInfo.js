@@ -15,9 +15,10 @@ import MypagePostList from "./mypagePost/MypagePostList";
 import MarkdownRead from "./MarkdownRead";
 import { history } from "../redux/configureStore";
 import Select from "react-select";
+import EmailAuth from "./EmailAuth";
 
 // MyPageInfo의 함수형 컴포넌트를 만든다.
-const MyPageInfo = (props) => {
+const MyPageInfo = props => {
   const dispatch = useDispatch();
   // const userId = useSelector((state) => state.user.userId);
   const userId = props.match.params.id;
@@ -33,6 +34,7 @@ const MyPageInfo = (props) => {
   // console.log(nickName);
   const myType = mydata?.user.userPropensityType;
   // console.log(myType);
+  const [modal, setModal] = React.useState(false);
 
   React.useEffect(() => {
     // dispatch(myPageActions.getMypageAPI(userId));
@@ -115,7 +117,9 @@ const MyPageInfo = (props) => {
     { value: "TypeScript", label: "TypeScript" },
   ];
 
-  const EmailConfirm = () => {};
+  const EmailConfirm = () => {
+    setModal(true);
+  };
 
   return (
     <React.Fragment>
@@ -130,13 +134,10 @@ const MyPageInfo = (props) => {
                   <WhiteP>LVG / 호랑이</WhiteP>
                 </Grid>
                 <Grid margin="-500px 0 0 90%" zIndex="2">
-                  <ConfirmEmail
-                    onClick={() => {
-                      EmailConfirm();
-                    }}
-                  >
+                  <ConfirmEmail onClick={EmailConfirm}>
                     이메일 인증하기
                   </ConfirmEmail>
+                  <EmailAuth modal={modal} setModal={setModal} />
                 </Grid>
               </BannerTiger>
             )}
@@ -148,13 +149,10 @@ const MyPageInfo = (props) => {
                   <WhiteP>LVP / 늑대</WhiteP>
                 </Grid>
                 <Grid margin="-500px 0 0 90%" zIndex="2">
-                  <ConfirmEmail
-                    onClick={() => {
-                      EmailConfirm();
-                    }}
-                  >
+                  <ConfirmEmail onClick={EmailConfirm}>
                     이메일 인증하기
                   </ConfirmEmail>
+                  <EmailAuth modal={modal} setModal={setModal} />
                 </Grid>
               </BannerWolf>
             )}
@@ -166,13 +164,10 @@ const MyPageInfo = (props) => {
                   <WhiteP>LHG / 여우</WhiteP>
                 </Grid>
                 <Grid margin="-500px 0 0 90%" zIndex="2">
-                  <ConfirmEmail
-                    onClick={() => {
-                      EmailConfirm();
-                    }}
-                  >
+                  <ConfirmEmail onClick={EmailConfirm}>
                     이메일 인증하기
                   </ConfirmEmail>
+                  <EmailAuth modal={modal} setModal={setModal} />
                 </Grid>
               </BannerFox>
             )}
@@ -183,13 +178,10 @@ const MyPageInfo = (props) => {
                   <WhiteP>LHP / 팬더</WhiteP>
                 </Grid>
                 <Grid margin="-500px 0 0 90%" zIndex="2">
-                  <ConfirmEmail
-                    onClick={() => {
-                      EmailConfirm();
-                    }}
-                  >
+                  <ConfirmEmail onClick={EmailConfirm}>
                     이메일 인증하기
                   </ConfirmEmail>
+                  <EmailAuth modal={modal} setModal={setModal} />
                 </Grid>
               </BannerPanda>
             )}
@@ -201,13 +193,10 @@ const MyPageInfo = (props) => {
                   <WhiteP>FVG / 토끼</WhiteP>
                 </Grid>
                 <Grid margin="-500px 0 0 90%" zIndex="2">
-                  <ConfirmEmail
-                    onClick={() => {
-                      EmailConfirm();
-                    }}
-                  >
+                  <ConfirmEmail onClick={EmailConfirm}>
                     이메일 인증하기
                   </ConfirmEmail>
+                  <EmailAuth modal={modal} setModal={setModal} />
                 </Grid>
               </BannerRabbit>
             )}
@@ -219,13 +208,10 @@ const MyPageInfo = (props) => {
                   <WhiteP>FVP / 강아지</WhiteP>
                 </Grid>
                 <Grid margin="-500px 0 0 90%" zIndex="2">
-                  <ConfirmEmail
-                    onClick={() => {
-                      EmailConfirm();
-                    }}
-                  >
+                  <ConfirmEmail onClick={EmailConfirm}>
                     이메일 인증하기
                   </ConfirmEmail>
+                  <EmailAuth modal={modal} setModal={setModal} />
                 </Grid>
               </BannerDog>
             )}
@@ -237,13 +223,10 @@ const MyPageInfo = (props) => {
                   <WhiteP>LHP / 팬더</WhiteP>
                 </Grid>
                 <Grid margin="-500px 0 0 90%" zIndex="2">
-                  <ConfirmEmail
-                    onClick={() => {
-                      EmailConfirm();
-                    }}
-                  >
+                  <ConfirmEmail onClick={EmailConfirm}>
                     이메일 인증하기
                   </ConfirmEmail>
+                  <EmailAuth modal={modal} setModal={setModal} />
                 </Grid>
               </BannerCat>
             )}
@@ -255,13 +238,10 @@ const MyPageInfo = (props) => {
                   <WhiteP>LHP / 팬더</WhiteP>
                 </Grid>
                 <Grid margin="-500px 0 0 90%" zIndex="2">
-                  <ConfirmEmail
-                    onClick={() => {
-                      EmailConfirm();
-                    }}
-                  >
+                  <ConfirmEmail onClick={EmailConfirm}>
                     이메일 인증하기
                   </ConfirmEmail>
+                  <EmailAuth modal={modal} setModal={setModal} />
                 </Grid>
               </BannerSeal>
             )}
@@ -386,7 +366,7 @@ const MyPageInfo = (props) => {
                         padding: "7px",
                       }}
                       defaultValue={mydata.user.nickname}
-                      onChange={(e) => {
+                      onChange={e => {
                         setNickName(e.target.value);
                       }}
                     ></input>
@@ -420,7 +400,7 @@ const MyPageInfo = (props) => {
                         padding: "7px",
                       }}
                       defaultValue={mydata.user.email}
-                      onChange={(e) => {
+                      onChange={e => {
                         setEmail(e.target.value);
                       }}
                     ></input>
@@ -443,7 +423,7 @@ const MyPageInfo = (props) => {
                       options={techStackOption}
                       className="basic-multi-select"
                       classNamePrefix="select"
-                      onChange={(e) => {
+                      onChange={e => {
                         let techStack = [];
                         let arr = e;
                         let idx = 0;
@@ -645,21 +625,21 @@ const BannerTiger = styled.div`
   background-color: #eed691;
   /* opacity: 0.5; */
 
-  z-index: -1;
+  z-index: 0;
 `;
 
 const BannerWolf = styled.div`
   width: 100%;
   background-color: #afa9a0;
   /* opacity: 0.5; */
-  z-index: -1;
+  z-index: 0;
 `;
 
 const BannerFox = styled.div`
   width: 100%;
   background-color: #e4812a;
   /* opacity: 0.5; */
-  z-index: -1;
+  z-index: 0;
 `;
 
 const BannerPanda = styled.div`
@@ -675,33 +655,33 @@ const BannerRabbit = styled.div`
   width: 100%;
   background-color: #998fc9;
   /* opacity: 0.5; */
-  z-index: -1;
+  z-index: 0;
 `;
 
 const BannerDog = styled.div`
   width: 100%;
   background-color: #e8ddb8;
   /* opacity: 0.5; */
-  z-index: -1;
+  z-index: 0;
 `;
 const BannerCat = styled.div`
   width: 100%;
   background-color: #6d6e72;
   /* opacity: 0.5; */
-  z-index: -1;
+  z-index: 0;
 `;
 
 const BannerSeal = styled.div`
   width: 100%;
   background-color: #a9adb3;
   /* opacity: 0.5; */
-  z-index: -1;
+  z-index: 0;
 `;
 const Blur = styled.div`
   width: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   opacity: 0.5;
-  z-index: -1;
+  z-index: 0;
 `;
 
 const WhiteP = styled.p`
@@ -722,5 +702,15 @@ const ConfirmEmail = styled.button`
     color: black;
   } ;
 `;
-
+const MyResultText = styled.div`
+  width: 70px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #b29cf4;
+  color: white;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-left: 10px;
+`;
 export default MyPageInfo;
