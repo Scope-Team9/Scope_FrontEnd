@@ -30,6 +30,7 @@ export const addPostAPI = (card) => {
       .addPost(card)
       .then((res) => {
         console.log(res);
+        history.goBack();
       })
       .catch((err) => {
         console.log(err.response);

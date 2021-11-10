@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Grid, Text } from "./Index";
 
-const Input = (props) => {
+const Input = props => {
   const {
     id,
     label,
@@ -11,6 +11,7 @@ const Input = (props) => {
     onSubmit,
     type,
     multiLine,
+    textAlign,
     edit,
     value,
     editValue,
@@ -20,6 +21,8 @@ const Input = (props) => {
     padding,
     height,
     border,
+    borderbottom,
+    maxLength,
     borderRadius,
     bg,
     backgroundImage,
@@ -34,8 +37,11 @@ const Input = (props) => {
     padding,
     height,
     border,
+    borderbottom,
     borderRadius,
     bg,
+    textAlign,
+    maxLength,
     backgroundImage,
     inputFocusOutline,
     inputFocusBorder,
@@ -51,6 +57,8 @@ const Input = (props) => {
           value={value}
           defaulValue={defaulValue}
           rows={10}
+          textAlign={textAlign}
+          maxLength={maxLength}
           placeholder={placeholder}
           onChange={_onChange}
         ></ElTextarea>
@@ -68,12 +76,14 @@ const Input = (props) => {
           width={width}
           margin={margin}
           type={type}
+          textAlign={textAlign}
           value={value}
           defaulValue={defaulValue}
           placeholder={placeholder}
           onChange={_onChange}
+          maxLength={maxLength}
           ref={innerRef}
-          onKeyPress={(e) => {
+          onKeyPress={e => {
             console.log(e.key);
             if (e.key === "Enter") {
               console.log("pass");
@@ -93,13 +103,15 @@ const Input = (props) => {
         backgroundColor={backgroundColor}
         width={width}
         margin={margin}
+        textAlign={textAlign}
         type={type}
         placeholder={placeholder}
         value={editValue}
+        maxLength={maxLength}
         defaulValue={defaulValue}
         onChange={_onChange}
         ref={innerRef}
-        onKeyPress={(e) => {
+        onKeyPress={e => {
           console.log(e.key);
           if (e.key === "Enter") {
             console.log("pass");
@@ -116,6 +128,7 @@ Input.defaultProps = {
   label: false,
   placeholder: "텍스트를 입력해주세요.",
   type: "text",
+  align: "",
   value: "",
   defaulValue: "",
   margin: 0,
@@ -123,6 +136,7 @@ Input.defaultProps = {
   width: "100%",
   height: false,
   border: false,
+  borderbottom: false,
   borderRadius: false,
   bg: false,
   backgroundImage: false,
@@ -132,35 +146,37 @@ Input.defaultProps = {
 };
 
 const ElTextarea = styled.textarea`
-  margin: ${(props) => props.margin};
-  border: ${(props) => props.border};
-  width: ${(props) => props.width};
-  height: ${(props) => props.height};
-  border-radius: ${(props) => props.borderRadius};
-  background: ${(props) => props.bg};
-  padding: ${(props) => props.padding};
-  backgroundimage: ${(props) => props.backgroundImage};
+  margin: ${props => props.margin};
+  border: ${props => props.border};
+  width: ${props => props.width};
+  height: ${props => props.height};
+  border-radius: ${props => props.borderRadius};
+  background: ${props => props.bg};
+  padding: ${props => props.padding};
+  background-image: ${props => props.backgroundImage};
   box-sizing: border-box;
-  background-color: ${(props) => props.backgroundColor};
+  background-color: ${props => props.backgroundColor};
 `;
 
 const ElInput = styled.input`
-  margin: ${(props) => props.margin};
-  border: ${(props) => props.border};
-  width: ${(props) => props.width};
-  height: ${(props) => props.height};
-  border-radius: ${(props) => props.borderRadius};
-  background: ${(props) => props.bg};
-  padding: ${(props) => props.padding};
-  backgroundimage: ${(props) => props.backgroundImage};
+  margin: ${props => props.margin};
+  border: ${props => props.border};
+  width: ${props => props.width};
+  height: ${props => props.height};
+  text-align: ${props => props.textAlign};
+  border-radius: ${props => props.borderRadius};
+  border-bottom: ${props => props.borderBottom};
+  background: ${props => props.bg};
+  padding: ${props => props.padding};
+  background-image: ${props => props.backgroundImage};
   box-sizing: border-box;
-  border-radius: 5px;
-  background-color: ${(props) => props.backgroundColor};
-  font-size: ${(props) => props.fontSize};
+  border-radius: 25px;
+  background-color: ${props => props.backgroundColor};
+  font-size: ${props => props.fontSize};
   &:focus {
-    outline: ${(props) => props.inputFocusOutline};
-    border: ${(props) => props.inputFocusBorder};
-    box-shadow: ${(props) => props.inputFocusBoxShadow};
+    outline: ${props => props.inputFocusOutline};
+    border: ${props => props.inputFocusBorder};
+    box-shadow: ${props => props.inputFocusBoxShadow};
   }
 `;
 

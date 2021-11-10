@@ -128,7 +128,7 @@ const LoginModal = props => {
               {/* 헤더 */}
               <Grid
                 height="15%"
-                bg="#170184"
+                bg="#B29CF4"
                 position="relative"
                 textAlign="center"
                 padding="10px 0 10px 0"
@@ -140,7 +140,11 @@ const LoginModal = props => {
                   width="20px"
                   padding="10px"
                 >
-                  <CloseIcon fontSize="large" onClick={modalClose} />
+                  <CloseIcon
+                    fontSize="large"
+                    backgroundColor="white"
+                    onClick={modalClose}
+                  />
                 </Grid>
                 <Grid>
                   <Text size="20px" bold color="#fff">
@@ -171,27 +175,27 @@ const LoginModal = props => {
                     flexDirection="column"
                     justifyContent="center"
                     margin="10px auto"
-                    height="200px"
+                    height="230px"
                   >
                     <Grid
-                      height="20%"
+                      height="25%"
                       display="flex"
                       alignItems="center"
                       justifyContent="center"
                     >
-                      <Text color="#170184">이메일</Text>
+                      <Text color="#111">이메일</Text>
                     </Grid>
                     <Grid
-                      height="20%"
+                      height="25%"
                       display="flex"
                       alignItems="center"
                       justifyContent="center"
-                      margin="10px 0"
+                      margin="16px 0"
                     >
-                      <Text color="#170184">닉네임</Text>
+                      <Text color="#111">닉네임</Text>
                     </Grid>
-                    <Grid height="50%" padding="10px 0 0 0">
-                      <Text color="#170184">기술스택</Text>
+                    <Grid height="40%" padding="10px 0 0 0">
+                      <Text color="#111">기술스택</Text>
                     </Grid>
                   </Grid>
                   {/* 입력부분 */}
@@ -201,10 +205,11 @@ const LoginModal = props => {
                     flexDirection="column"
                     justifyContent="center"
                     margin="10px auto"
-                    height="200px"
+                    height="230px"
                   >
-                    <Grid height="20%">
+                    <Grid height="25%">
                       <Input
+                        borderRadius="25px"
                         border="1px solid #ddd"
                         fontSize="16px"
                         padding="0 0 0 17px"
@@ -217,7 +222,7 @@ const LoginModal = props => {
                         이메일
                       </Input>
                     </Grid>
-                    <Grid height="20%" margin="10px 0">
+                    <Grid height="25%" margin="16px 0">
                       <Input
                         border="1px solid #ddd"
                         fontSize="16px"
@@ -231,8 +236,9 @@ const LoginModal = props => {
                         닉네임
                       </Input>
                     </Grid>
-                    <Grid height="50%" padding="0 0 10px 0">
+                    <Grid height="40%" padding="0 0 10px 0">
                       <Select
+                        style={{ borderRadius: "10px" }}
                         placeholder="보유중인 기술을 선택해주세요!"
                         isMulti
                         name="techStack"
@@ -260,24 +266,24 @@ const LoginModal = props => {
                     flexDirection="column"
                     justifyContent="center"
                     margin="10px auto"
-                    height="200px"
+                    height="230px"
                   >
-                    <Grid height="19%" margin="0 0 10px 0">
+                    <Grid height="20%" margin="0 0 22px 0">
                       <Button
-                        height="38px"
+                        height="52px"
                         fontSize="12px"
-                        text="이메일 중복 체크"
+                        text="이메일 중복"
                         _onClick={() => {
                           emailCheck(email);
                           setEmailDup(true);
                         }}
                       ></Button>
                     </Grid>
-                    <Grid height="76%">
+                    <Grid height="70%">
                       <Button
-                        height="38px"
+                        height="52px"
                         fontSize="12px"
-                        text="닉네임 중복 체크"
+                        text="닉네임 중복"
                         _onClick={() => {
                           if (!regExpNick.test(nickName)) {
                             return false;
@@ -293,7 +299,7 @@ const LoginModal = props => {
               {/* 버튼 */}
               <Grid width="50%" margin="auto">
                 <Button
-                  text="성향테스트시작"
+                  text="성향테스트"
                   margin="30px 0"
                   _onClick={() => {
                     preSignUP();
@@ -305,7 +311,7 @@ const LoginModal = props => {
             <PropensityTest />
           )}
           <Grid display="flex" justifyContent="center" margin="10px 0 30px 0">
-            <Grid width="20%" backgroundColor="#170184" height="3px"></Grid>
+            <Grid width="20%" backgroundColor="#B29CF4" height="3px"></Grid>
           </Grid>
         </ModalWrap>
       </Dialog>
@@ -316,7 +322,7 @@ const LoginModal = props => {
         <ModalWrap>
           <Grid
             height="15%"
-            bg="#170184"
+            bg="#B29CF4"
             position="relative"
             textAlign="center"
             padding="10px 0 10px 0"
@@ -375,7 +381,7 @@ const LoginModal = props => {
             </Grid>
           </Grid>
           <Grid display="flex" justifyContent="center" margin="10px 0 30px 0">
-            <Grid width="20%" backgroundColor="#170184" height="3px"></Grid>
+            <Grid width="20%" backgroundColor="#B29CF4" height="3px"></Grid>
           </Grid>
         </ModalWrap>
       </Dialog>

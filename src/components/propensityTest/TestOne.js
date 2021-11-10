@@ -5,8 +5,11 @@ import { Grid, Button, Text } from "../../elements/Index";
 const TestOne = props => {
   const { handleUserCreate, handleMemberCreate } = props;
   const [isChecked, setIsChecked] = React.useState("#fff");
+  const [blue, setBlue] = React.useState(true);
+
   const ToggleButton = () => {
-    isChecked === "#fff" ? setIsChecked("#170184") : setIsChecked("#fff");
+    setBlue(!blue);
+    isChecked === "#fff" ? setIsChecked("#B29CF4") : setIsChecked("#fff");
   };
   // const [bChecked, setChecked] = React.useState(false);
 

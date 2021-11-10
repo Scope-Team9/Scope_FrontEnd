@@ -107,7 +107,7 @@ const ElButton = styled.button`
   ${props =>
     props.backgroundColor
       ? `background-color:${props.backgroundColor}`
-      : "background-color: #170184"};
+      : "background-color: #B29CF4"};
   box-sizing: border-box;
   border-radius: 5px;
   font-weight: bold;
@@ -153,19 +153,19 @@ const FloatButton = styled.div`
 const TestButton = styled.button`
   font-size: 12px;
   text-align: center;
-  border: 1px solid #170184;
+  border: 1px solid #b29cf4;
   border-radius: 25px;
   background-color: ${props => props.isChecked};
-  ${props => (props.isChecked === "#170184" ? "color:#fff" : "color:#170184")};
+  ${props => (props.isChecked === "#B29CF4" ? "color:#fff" : "color:#B29CF4")};
   padding: 20px;
   margin: 5px;
   box-shadow: 0px 2px 2px #ddd;
 
   &:hover {
-    background-color: #170184;
+    background-color: #b29cf4;
     cursor: pointer;
     color: #fff;
-    box-shadow: 0px 3px 2px #111;
+    box-shadow: 0px 3px 2px #ddd;
   }
   /* &::active {
     box-shadow: 0px 1px 2px #111;

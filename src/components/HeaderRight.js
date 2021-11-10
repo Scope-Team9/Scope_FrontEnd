@@ -11,17 +11,15 @@ import { userCreators } from "../redux/modules/user";
 
 import { deleteCookie } from "../shared/Cookie";
 
-const HeaderRight = (props) => {
+const HeaderRight = props => {
   const dispatch = useDispatch();
   const isToken = document.cookie.split("=")[1];
-  const user_info = useSelector((state) => state.user);
+  const user_info = useSelector(state => state.user);
 
   console.log(isToken);
   console.log(user_info);
   const [showModal, setShowModal] = React.useState(false);
-  const sigunupModalState = useSelector(
-    (state) => state.user.sigunupModalState
-  );
+  const sigunupModalState = useSelector(state => state.user.sigunupModalState);
   const modalOpen = () => {
     setShowModal(true);
   };
@@ -57,7 +55,6 @@ const HeaderRight = (props) => {
           </Grid>
           <Button
             height="50px"
-            backgroundColor="#170184"
             width="132px"
             text="로그아웃"
             _onClick={logOut}
@@ -74,12 +71,7 @@ const HeaderRight = (props) => {
         height="auto"
       >
         <HeaderWrapper>
-          <Button
-            backgroundColor="#333"
-            width="100px"
-            text="로그인"
-            _onClick={modalOpen}
-          ></Button>
+          <Button width="100px" text="로그인" _onClick={modalOpen}></Button>
           <LoginModal showModal={showModal} setShowModal={setShowModal} />
         </HeaderWrapper>
       </Grid>
