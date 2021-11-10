@@ -1,6 +1,7 @@
 /* eslint-disable */
 // import를 한다.
 import React from "react";
+import { Dialog } from "@material-ui/core";
 
 import Img from "../images/임시로고.jpg";
 import { Grid, Image, Text, Button } from "../elements/Index";
@@ -16,14 +17,18 @@ import MarkdownRead from "./MarkdownRead";
 import { history } from "../redux/configureStore";
 import Select from "react-select";
 import EmailAuth from "./EmailAuth";
+import PropensityTest from "./propensityTest/PropensityTest";
 
 // MyPageInfo의 함수형 컴포넌트를 만든다.
-const MyPageInfo = (props) => {
+const MyPageInfo = props => {
   const dispatch = useDispatch();
   // const userId = useSelector((state) => state.user.userId);
   const userId = props.match.params.id;
+  const myUserId = useSelector(state => state.user.userId);
   // console.log(props);
-  // console.log(userId);
+  console.log(userId);
+  console.log(myUserId);
+
   const [filter, setFilter] = React.useState("소개");
   const [mydata, setMydata] = React.useState();
   const [editMyProfile, setEditMyProfile] = React.useState(false);
@@ -360,7 +365,7 @@ const MyPageInfo = (props) => {
                         padding: "7px",
                       }}
                       defaultValue={mydata.user.nickname}
-                      onChange={(e) => {
+                      onChange={e => {
                         setNickName(e.target.value);
                       }}
                     ></input>
@@ -394,7 +399,7 @@ const MyPageInfo = (props) => {
                         padding: "7px",
                       }}
                       defaultValue={mydata.user.email}
-                      onChange={(e) => {
+                      onChange={e => {
                         setEmail(e.target.value);
                       }}
                     ></input>
@@ -417,7 +422,7 @@ const MyPageInfo = (props) => {
                       options={techStackOption}
                       className="basic-multi-select"
                       classNamePrefix="select"
-                      onChange={(e) => {
+                      onChange={e => {
                         let techStack = [];
                         let arr = e;
                         let idx = 0;
@@ -480,7 +485,22 @@ const MyPageInfo = (props) => {
               <MyResultText>수평</MyResultText>
               <MyResultText>과정</MyResultText>
             </MyResultDiv>
-            <GotoTest>성향 테스트하기⇀</GotoTest>
+            {userId == myUserId && (
+              <Grid>
+                <GotoTest
+                  onClick={() => {
+                    setModal(true);
+                  }}
+                >
+                  성향 테스트하기⇀
+                </GotoTest>
+              </Grid>
+            )}
+            <Dialog maxWidth={"sm"} scroll="paper" open={modal}>
+              <Grid width="550px" height="100%">
+                <PropensityTest />
+              </Grid>
+            </Dialog>
           </Grid>
 
           {myType === "LVG" && ( //호랑이

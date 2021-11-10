@@ -125,12 +125,12 @@ const CardHeaderTwo = styled.div`
   /* z-index: -1; */
   position: absolute;
   top: 0px;
-  left: -1px;
+  left: 0px;
   width: 70%;
   height: 160px;
   background-color: #f1bad1;
 
-  border-radius: 32px 54px 54px 54px;
+  border-radius: 43 px 54px 54px 54px;
   background: rgb(83, 201, 253);
   background: linear-gradient(
     140deg,
@@ -143,7 +143,7 @@ const CardHeaderTwo = styled.div`
 const Title = styled.h1`
   margin-top: 8%;
   margin-bottom: 10px;
-  font-size: 30px;
+  font-size: 25px;
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
@@ -152,7 +152,7 @@ const Title = styled.h1`
 `;
 
 const Summary = styled.div`
-  font-size: 16px;
+  font-size: 14px;
   color: gray;
 
   /* margin-top: 8%; */
