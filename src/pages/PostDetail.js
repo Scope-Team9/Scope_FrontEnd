@@ -13,6 +13,7 @@ import UserList from "../components/UserList";
 import ApplyStatusModal from "../components/ApplyStatusModal";
 import ApplyUserModal from "../components/ApplyUserModal";
 import { history } from "../redux/configureStore";
+import { borderRadius } from "@mui/system";
 
 // PostDetail의 함수형 컴포넌트를 만든다.
 const PostDetail = (props) => {
@@ -97,25 +98,29 @@ const PostDetail = (props) => {
           <Grid>
             <Text>게시자 정보</Text>
             <Grid display="column">
-              <UserList list={passedData?.propensityType}></UserList>
+              <Grid width="45px" borderRadius="50%" backgroundColor="#C4C4C4">
+                <UserList list={passedData?.propensityType}></UserList>
+              </Grid>
               <Text>{passedData?.nickname}</Text>
               <Grid>({passedData?.propensityType})</Grid>
             </Grid>
             <Grid margin="10px auto">
               <Text>프로젝트 인원</Text>
               <Grid display="flex">
-                <Grid display="column">
-                  <Grid display="flex">
-                    {passdedMenber?.map((item, index) => (
-                      <Grid key={index} {...item}>
-                        <Grid>
-                          <UserList list={item.userPropensityType}></UserList>
-                        </Grid>
-                        <Grid>{item.nickname}</Grid>
-                        <Grid>({item.userPropensityType})</Grid>
+                <Grid display="flex">
+                  {passdedMenber?.map((item, index) => (
+                    <Grid key={index} {...item}>
+                      <Grid
+                        width="45px"
+                        borderRadius="50%"
+                        backgroundColor="#C4C4C4"
+                      >
+                        <UserList list={item.userPropensityType}></UserList>
                       </Grid>
-                    ))}
-                  </Grid>
+                      <Text>{item.nickname}</Text>
+                      <Grid>({item.userPropensityType})</Grid>
+                    </Grid>
+                  ))}
                 </Grid>
               </Grid>
               {userId === postUserId && (
@@ -156,7 +161,17 @@ const PostDetail = (props) => {
                 {passedData?.techStack.map((item, index) => {
                   return (
                     <Text margin="auto 5px" key={index}>
-                      {item}
+                      <span
+                        style={{
+                          color: "black",
+                          textAlign: "center",
+                          padding: "4px",
+                          backgroundColor: "#B29CF4",
+                          borderRadius: "20px",
+                        }}
+                      >
+                        {item}
+                      </span>
                     </Text>
                   );
                 })}
@@ -221,6 +236,18 @@ const PostDetail = (props) => {
                       borderRadius="50px"
                     >
                       지원취소
+                    </Button>
+                    <Button
+                      isValue="teamExit"
+                      _onClick={(e) => {
+                        applyUserModalOpen(e.target.value);
+                      }}
+                      width="120px"
+                      height="40px"
+                      backgroundColor="#42309b"
+                      margin="auto 10px"
+                    >
+                      팀탈퇴
                     </Button>
                   </Grid>
                 )}

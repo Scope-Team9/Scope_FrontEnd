@@ -71,7 +71,7 @@ const PostEdit = (props) => {
         setTectstack(
           setValue.techStack.map((value) => ({ label: value, value }))
         );
-        setStartdate(setValue.startDate);
+        setStartdate(setValue?.startDate);
         setEnddate(setValue.endDate);
         setTotalmember(setValue.totalMember);
         setProjectstatus(setValue.projectStatus);
@@ -184,8 +184,6 @@ const PostEdit = (props) => {
   useEffect(() => {
     formatTech();
   }, [techstack]);
-
-  console.log("멍", projectStatused);
 
   return (
     <React.Fragment>
@@ -324,7 +322,7 @@ const PostEdit = (props) => {
                 }}
               />
               <Grid display="flex" padding="16px">
-                {projectStatus === "done" && (
+                {projectStatused[0]?.value === "done" && (
                   <Btn
                     onClick={() => {
                       edit_status();
@@ -334,7 +332,7 @@ const PostEdit = (props) => {
                   </Btn>
                 )}
 
-                {projectStatus === "doing" && (
+                {projectStatused[1]?.value === "doing" && (
                   <Btn
                     onClick={() => {
                       edit_status();
@@ -344,7 +342,7 @@ const PostEdit = (props) => {
                   </Btn>
                 )}
 
-                {projectStatus === "ready" && (
+                {projectStatused[2]?.value === "ready" && (
                   <Btn
                     onClick={() => {
                       edit_status();

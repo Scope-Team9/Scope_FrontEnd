@@ -29,7 +29,7 @@ const ApplyStatusModal = props => {
       accept: true,
     };
     console.log(acceptInfo);
-    // dispatch(applyCreators.acceptOfferAPI(postId, acceptInfo));
+    dispatch(applyCreators.acceptOfferAPI(postId, acceptInfo));
   };
 
   const cancelOffer = cancelUser => {
@@ -38,7 +38,7 @@ const ApplyStatusModal = props => {
       accept: false,
     };
     console.log(acceptInfo);
-    // dispatch(applyCreators.acceptOfferAPI(postId, acceptInfo));
+    dispatch(applyCreators.acceptOfferAPI(postId, acceptInfo));
   };
 
   return (

@@ -21,20 +21,21 @@ const MainPage = () => {
   const history = useHistory();
   const is_stack_clicked = useSelector((state) => state.stack.stack);
   const is_sort_clicked = useSelector((state) => state.sort.sort);
+
   const is_loading = useSelector((state) => state.post.is_loading);
   const cards = useSelector((state) => state.post.posts);
-  console.log(cards);
+  // console.log(cards);
   const is_reBook_clicked = useSelector((state) => state.rebook.reBook);
   const is_mainPage = useSelector((state) => state.post.mainpage);
   const pageCheck = useSelector((state) => state.post.pageCheck);
-  // const infinity = useSelector((state) => state.infinity.paging);
+  const infinity = useSelector((state) => state.infinity.paging);
   const whatPage = useSelector((state) => state.post.whatPage);
   const [ref, inView] = useInView();
-  const [paging, setPaging] = React.useState(9);
+  const [paging, setPaging] = React.useState(infinity.next);
   const [nowFilter, setNowFilter] = React.useState("최신");
   const post_list = useSelector((state) => state.post.posts);
-  console.log("어떻게오느냐 을랴랴랴랴랴랴ㅑ랴랴", post_list);
-  console.log(pageCheck);
+
+  // console.log(pageCheck);
 
   // console.log(useSelector((state) => state.infinity.paging));
   // let page = 0;
@@ -46,10 +47,10 @@ const MainPage = () => {
 
   React.useEffect(() => {
     console.log("?? 여기서 되는거임?");
-    dispatch(postActions.isMainPage(true));
+    // dispatch(postActions.isMainPage(true));
     dispatch(postActions.whatPage("mainPage"));
-    console.log("무얏호우", whatPage);
-
+    // console.log("무얏호우", whatPage);
+    console.log("어떻게오느냐 을랴랴랴랴랴랴ㅑ랴랴", post_list);
     dispatch(postActions.getPostAPI());
 
     console.log("?? 여기서 되는거임?");
@@ -58,7 +59,8 @@ const MainPage = () => {
   React.useEffect(() => {
     if (inView === true) {
       setPaging(paging + 9);
-      console.log("내가 페이지", paging);
+
+      console.log("내가 페이지", infinity);
       dispatch(pageAction.getPage(paging));
       // dispatch(postActions.getPostAPI());
       // 다른페이지에서 새로고침하면 현재 페이지가 그 페이지로 되고 메인으로 나오면 포스트 호출을 끊고 page.next와 page.pre를 main으로 바꾸지만
@@ -79,7 +81,7 @@ const MainPage = () => {
     dispatch(postActions.isMainPage(true));
     dispatch(sortAction.getSort(data));
     dispatch(bookRecommendAction.getRb(""));
-    setPaging(9);
+    setPaging(6);
   };
   //bookmark,recommend
   const onclickRb = (data) => {
@@ -150,11 +152,6 @@ const MainPage = () => {
           </FilterBox>
 
           <InsideCard>
-            {/* {post_list.length === 0 && pageCheck === false && (
-              <>
-                <div style={{ height: "500px" }}></div>
-              </> */}
-            {/* )} */}
             <PostList></PostList>
           </InsideCard>
           {nowFilter !== "bookmark" && (
@@ -201,7 +198,7 @@ const Inside = styled.div`
 
 const InsideCard = styled.div`
   @media screen and (max-width: 750px) {
-    margin-left: 18px;
+    margin-left: 0px;
   } ;
 `;
 
@@ -213,8 +210,16 @@ const Stacks = styled.div`
 
 const FilterBox = styled.div`
   display: flex;
-  font-size: 12px;
+  font-size: 20px;
   margin-top: 20px;
+  justify-content: flex-end;
+  max-width: 1790px;
+  @media screen and (max-width: 1850px) {
+    justify-content: center;
+  }
+  @media screen and (max-width: 750px) {
+    justify-content: center;
+  } ;
 `;
 const Filtering = styled.p`
   margin: 20px;
@@ -226,7 +231,7 @@ const Filtering = styled.p`
     -ms-transform: scale(1.05);
     -o-transform: scale(1.05);
     text-decoration: underline;
-    color: lightskyblue;
+    color: #dacceb;
   }
 `;
 
@@ -242,6 +247,10 @@ const Btn = styled.button`
   margin: auto;
   background: #42309b;
   cursor: pointer;
+
+  @media screen and (max-width: 750px) {
+    right: 34%;
+  } ;
 `;
 
 export default MainPage;

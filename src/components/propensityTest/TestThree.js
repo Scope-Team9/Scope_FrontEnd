@@ -1,18 +1,17 @@
 import React from "react";
-import { Grid, Button } from "../../elements/Index";
+import { Grid, Button, Text } from "../../elements/Index";
 
 const TestThree = props => {
   const { handleUserCreate, handleMemberCreate } = props;
   return (
     <Grid>
-      <div>성향테스트 3번</div>
       <Grid display="flex" flexDirection="column">
-        <Grid>
-          <div>
+        <Grid margin="20px 0">
+          <Grid>
             Q3. 나는 큰 보상과 무거운 책임보다는 평범한 보상과 책임이 더 좋다.
             <Button
               isTest
-              isValue="L"
+              isValue="F"
               _onClick={e => {
                 handleUserCreate(e.target.value);
               }}
@@ -21,14 +20,14 @@ const TestThree = props => {
             </Button>
             <Button
               isTest
-              isValue="F"
+              isValue="L"
               _onClick={e => {
                 handleUserCreate(e.target.value);
               }}
             >
               큰 보상과 무거운책임
             </Button>
-          </div>
+          </Grid>
         </Grid>
         <Grid>
           <div>

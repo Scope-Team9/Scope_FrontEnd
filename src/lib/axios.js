@@ -79,6 +79,7 @@ export const apis = {
   writeMyIntroduction: (userId, introduction) =>
     instance.post(`/api/user/${userId}/desc`, introduction),
   projectAssessmentPost: (postId) => instance.get(`/api/assessment/${postId}`),
+  editUserInfo: (userId, data) => instance.post(`/api/user/${userId}`, data),
 
   // 상세페이지
   addPost: (postInfo) => instance.post(`/api/post`, postInfo),

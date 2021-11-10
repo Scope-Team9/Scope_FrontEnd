@@ -38,11 +38,11 @@ const Stack = () => {
   return (
     <Grid
       display="flex"
-      width="70%"
+      width="80%"
       justifyContent="space-evenly"
-      margin="0 auto 20px auto"
+      margin="auto auto 20px auto"
       boxShadow="0px 0px 10px #ddd"
-      padding="20px 50px"
+      padding="5px 50px"
       borderRadius="20px"
       overflow="auto"
     >
@@ -165,8 +165,8 @@ const Stack = () => {
 
 const IMGS = styled.img`
   cursor: pointer;
-  width: 50px;
-  margin: 5px;
+  width: 80px;
+  margin: 10px;
 `;
 
 const BorderRadius = styled.div`

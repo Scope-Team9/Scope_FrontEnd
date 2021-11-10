@@ -1,14 +1,13 @@
 import React from "react";
-import { Grid, Button } from "../../elements/Index";
+import { Grid, Button, Text } from "../../elements/Index";
 
 const TestNine = props => {
   const { handleUserCreate, handleMemberCreate } = props;
 
   return (
     <Grid>
-      <div>성향테스트 9번</div>
       <Grid display="flex" flexDirection="column">
-        <Grid>
+        <Grid margin="20px 0">
           <div>
             Q9. 지금까지 진행했던 프로잭트를 떠올렸을 때 가장 먼저 생각나는
             부분은?
