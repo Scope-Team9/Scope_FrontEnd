@@ -127,6 +127,7 @@ const PropensityTest = props => {
     console.log(realSnsId, registerInfo);
     console.log(realUserId, testUpdateInfo);
     if (isToken) {
+      setpage(page => page + 1);
       dispatch(userCreators.editTestMiddleware(realUserId, testUpdateInfo));
       return;
     }
