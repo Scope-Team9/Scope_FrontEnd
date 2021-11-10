@@ -10,23 +10,22 @@ const TestOne = props => {
   const [prevClickMB, setPrevClickMB] = React.useState(null);
 
   const clickUser = answer => {
-    console.log(answer);
     setNowClickU(answer);
   };
   const clickMember = answer => {
-    console.log(answer);
     setNowClickMB(answer);
   };
 
+  //유저 설문 버튼 클릭유지
   React.useEffect(
     e => {
+      //값이 들어오면 해당 버튼 css 변경
       if (nowClickU !== null) {
         let current = document.getElementById(nowClickU);
-        console.log(current);
         current.style.backgroundColor = "#B29CF4";
         current.style.color = "#fff";
       }
-
+      //다른 버튼이 클릭될경우 기존 스테이트값이 이전버튼스테이트로 이동
       if (prevClickU !== null) {
         let prev = document.getElementById(prevClickU);
         prev.style.color = "#B29CF4";
@@ -37,11 +36,11 @@ const TestOne = props => {
     [nowClickU]
   );
 
+  //멤버 설문 버튼 클릭유지
   React.useEffect(
     e => {
       if (nowClickMB !== null) {
         let current = document.getElementById(nowClickMB);
-        console.log(current);
         current.style.backgroundColor = "#B29CF4";
         current.style.color = "#fff";
       }
