@@ -11,15 +11,17 @@ import { userCreators } from "../redux/modules/user";
 
 import { deleteCookie } from "../shared/Cookie";
 
-const HeaderRight = props => {
+const HeaderRight = (props) => {
   const dispatch = useDispatch();
   const isToken = document.cookie.split("=")[1];
-  const user_info = useSelector(state => state.user);
+  const user_info = useSelector((state) => state.user);
 
   console.log(isToken);
   console.log(user_info);
   const [showModal, setShowModal] = React.useState(false);
-  const sigunupModalState = useSelector(state => state.user.sigunupModalState);
+  const sigunupModalState = useSelector(
+    (state) => state.user.sigunupModalState
+  );
   const modalOpen = () => {
     setShowModal(true);
   };
@@ -41,6 +43,7 @@ const HeaderRight = props => {
         justifyContent="space-around"
         alignItems="center"
         height="auto"
+        width="auto"
       >
         <HeaderWrapper>
           <Grid display="flex" alignItems="center" margin="0 20px">
@@ -82,7 +85,7 @@ const HeaderRight = props => {
 const HeaderWrapper = styled.div`
   display: flex;
   width: 100%;
-  padding-right: 36px;
+  padding-right: 0px;
   justify-content: space-evenly;
   /* @media screen and (max-width: 595px) {
     display: none; */

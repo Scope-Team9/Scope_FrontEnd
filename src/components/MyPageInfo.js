@@ -283,7 +283,7 @@ const MyPageInfo = (props) => {
               <>
                 {/* 닉네임 */}
                 <MyInfoText1>
-                  <div style={{ width: "100px", marginLeft: "30px" }}>
+                  <div style={{ width: "150px", marginLeft: "30px" }}>
                     <p>NickName </p>
                   </div>
                   <div style={{ width: "150px" }}>
@@ -294,7 +294,7 @@ const MyPageInfo = (props) => {
                 <MyInfoText1>
                   <div
                     style={{
-                      width: "100px",
+                      width: "150px",
                       marginLeft: "30px",
                     }}
                   >
@@ -308,7 +308,7 @@ const MyPageInfo = (props) => {
                 <MyInfoText1>
                   <div
                     style={{
-                      width: "100px",
+                      width: "150px",
                       marginLeft: "30px",
                       height: "150px",
                     }}
@@ -328,7 +328,7 @@ const MyPageInfo = (props) => {
                 <Line></Line>
                 {/* 진행 프로젝트 */}
                 <MyInfoText2>
-                  <div style={{ width: "150px", marginLeft: "30px" }}>
+                  <div style={{ width: "300px", marginLeft: "30px" }}>
                     <p>모집 프로젝트 </p>
                   </div>
                   <div style={{ width: "50px", marginLeft: "100px" }}>
@@ -337,7 +337,7 @@ const MyPageInfo = (props) => {
                 </MyInfoText2>
                 {/* 참여 프로젝트 */}
                 <MyInfoText2>
-                  <div style={{ width: "150px", marginLeft: "30px" }}>
+                  <div style={{ width: "300px", marginLeft: "30px" }}>
                     <p>진행 프로젝트 </p>
                   </div>
                   <div style={{ width: "50px", marginLeft: "100px" }}>
@@ -346,7 +346,7 @@ const MyPageInfo = (props) => {
                 </MyInfoText2>
                 {/* 마감 프로젝트 */}
                 <MyInfoText2>
-                  <div style={{ width: "150px", marginLeft: "30px" }}>
+                  <div style={{ width: "300px", marginLeft: "30px" }}>
                     <p>완료 프로젝트 </p>
                   </div>
                   <div style={{ width: "50px", marginLeft: "100px" }}>
@@ -354,7 +354,7 @@ const MyPageInfo = (props) => {
                   </div>
                 </MyInfoText2>
                 <Button
-                  margin="15px auto 15px 28%"
+                  margin="15px auto 15px 36%"
                   height="40px"
                   backgroundColor="#170184"
                   width="132px"
@@ -495,8 +495,21 @@ const MyPageInfo = (props) => {
               </>
             )}
           </Cards>
+          <Grid margin="-1000px 0 0 660px" display="flex">
+            <MyResultDiv>
+              <MyResultText>리더</MyResultText>
+              <MyResultText>수평</MyResultText>
+              <MyResultText>과정</MyResultText>
+              <GotoTest>성향 테스트하기⇀</GotoTest>
+            </MyResultDiv>
+          </Grid>
 
-          <Grid display="flex" margin="auto" justifyContent="center">
+          <Grid
+            display="flex"
+            margin="auto"
+            justifyContent="center"
+            margin="0px 0 0 150px"
+          >
             <Filter
               onClick={() => {
                 setFilter("모집");
@@ -547,7 +560,7 @@ const MyPageInfo = (props) => {
           )}
           {filter === "소개" && (
             <button
-              style={{ float: "right", margin: "0 20% 0 0" }}
+              style={{ float: "right", margin: "0 10% 0 0" }}
               onClick={() => {
                 history.push({
                   pathname: "/addmarkdown",
@@ -558,12 +571,13 @@ const MyPageInfo = (props) => {
               작성하기
             </button>
           )}
-
-          {filter === "소개" && introduction === true && (
-            <MarkdownRead
-              introduction={mydata?.user.introduction}
-            ></MarkdownRead>
-          )}
+          <Grid margin="0 0 0 200px">
+            {filter === "소개" && introduction === true && (
+              <MarkdownRead
+                introduction={mydata?.user.introduction}
+              ></MarkdownRead>
+            )}
+          </Grid>
         </>
       )}
     </React.Fragment>
@@ -571,7 +585,9 @@ const MyPageInfo = (props) => {
 };
 
 const Filter = styled.p`
-  margin: 20px;
+  margin-left: 12%;
+  margin-top: 100px;
+  margin-bottom: 50px;
   cursor: pointer;
   &:hover {
     transform: scale(1.05);
@@ -580,28 +596,33 @@ const Filter = styled.p`
     -ms-transform: scale(1.05);
     -o-transform: scale(1.05);
     text-decoration: underline;
-    color: lightskyblue;
+    color: #737373;
   }
   @media screen and (max-width: 1400px) {
-    margin-top: 650px;
+    /* margin-top: 1050px; */
   }
   @media screen and (max-width: 750px) {
-    margin-top: 650px;
+    /* margin-top: 1050px; */
   } ;
 `;
 
 const Cards = styled.div`
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
     rgba(0, 0, 0, 0.22) 0px 15px 12px;
-  margin: -260px 0 -600px 55px;
-  width: 300px;
-  height: 950px;
+  margin: -220px 0 -600px 55px;
+  width: 505px;
+  height: 1300px;
   background-color: rgba(255, 255, 255, 0);
   border-radius: 20px;
   overflow: hidden;
   z-index: 1;
   position: relative;
-  @media screen and (max-width: 1400px) {
+  @media screen and (max-width: 1600px) {
+    width: 450px;
+  }
+  @media screen and (max-width: 370px) {
+    width: 250px;
+    margin-right: 250px;
   }
 `;
 
@@ -622,9 +643,11 @@ const Line = styled.hr`
 `;
 
 const CardImg = styled.img`
-  width: 400px;
-  height: 450px;
+  width: 160%;
+  height: 100%;
   object-fit: cover;
+  position: relative;
+  right: 60px;
 `;
 const Banner = styled.div`
   width: 100%;
@@ -645,21 +668,21 @@ const BannerTiger = styled.div`
   background-color: #eed691;
   /* opacity: 0.5; */
 
-  z-index: -1;
+  z-index: 0;
 `;
 
 const BannerWolf = styled.div`
   width: 100%;
   background-color: #afa9a0;
   /* opacity: 0.5; */
-  z-index: -1;
+  z-index: 0;
 `;
 
 const BannerFox = styled.div`
   width: 100%;
   background-color: #e4812a;
   /* opacity: 0.5; */
-  z-index: -1;
+  z-index: 0;
 `;
 
 const BannerPanda = styled.div`
@@ -675,33 +698,33 @@ const BannerRabbit = styled.div`
   width: 100%;
   background-color: #998fc9;
   /* opacity: 0.5; */
-  z-index: -1;
+  z-index: 0;
 `;
 
 const BannerDog = styled.div`
   width: 100%;
   background-color: #e8ddb8;
   /* opacity: 0.5; */
-  z-index: -1;
+  z-index: 0;
 `;
 const BannerCat = styled.div`
   width: 100%;
   background-color: #6d6e72;
   /* opacity: 0.5; */
-  z-index: -1;
+  z-index: 0;
 `;
 
 const BannerSeal = styled.div`
   width: 100%;
   background-color: #a9adb3;
   /* opacity: 0.5; */
-  z-index: -1;
+  z-index: 0;
 `;
 const Blur = styled.div`
   width: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   opacity: 0.5;
-  z-index: -1;
+  z-index: 0;
 `;
 
 const WhiteP = styled.p`
@@ -723,4 +746,33 @@ const ConfirmEmail = styled.button`
   } ;
 `;
 
+const MyResultDiv = styled.div`
+  display: flex;
+  width: auto;
+  @media screen and (max-width: 1400px) {
+    margin-top: 1100px;
+  }
+  @media screen and (max-width: 750px) {
+    margin-top: 1100px;
+  } ;
+`;
+
+const MyResultText = styled.div`
+  width: 70px;
+  height: 40px;
+  border-radius: 12px;
+  background-color: #b29cf4;
+  color: white;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-left: 10px;
+  font-size: 20px;
+  font-weight: bold;
+`;
+
+const GotoTest = styled.p`
+  font-size: 15px;
+  font-weight: bold;
+`;
 export default MyPageInfo;

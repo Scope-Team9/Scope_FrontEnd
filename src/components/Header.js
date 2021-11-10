@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <>
       <Grid
-        width="100%"
+        width="auto%"
         height="60px"
         display="flex"
         justifyContent="space-between"
