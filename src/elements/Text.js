@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Text = props => {
+const Text = (props) => {
   const {
     children,
     color,
@@ -49,15 +49,15 @@ Text.defaultProps = {
 };
 
 const ElText = styled.span`
-  color: ${props => props.color};
-  font-size: ${props => props.size};
-  font-weight: ${props => (props.bold ? "bold" : "400")};
-  text-align: ${props => props.align};
-  margin: ${props => props.margin};
-  padding: ${props => props.padding};
-  family: ${props => props.family};
-  border: ${props => props.border};
-  cursor: ${props => props.cursor};
+  color: ${(props) => props.color};
+  font-size: ${(props) => props.size};
+  font-weight: ${(props) => (props.bold ? "bold" : "400")};
+  text-align: ${(props) => props.align};
+  margin: ${(props) => props.margin};
+  padding: ${(props) => props.padding};
+  family: ${(props) => props.family};
+  border: ${(props) => props.border};
+  cursor: ${(props) => props.cursor};
 `;
 
 export default Text;

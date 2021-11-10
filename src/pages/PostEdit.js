@@ -5,7 +5,7 @@
 import React, { useCallback, useMemo, useEffect } from "react";
 import styled from "styled-components";
 import { Grid, Text, Image, Button, Input } from "../elements/Index";
-import Img from "../images/PostAdd.png";
+import Img from "../images/detailimg.jpg";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { apis } from "../lib/axios";
@@ -49,19 +49,13 @@ const PostEdit = props => {
       startDate: startDate,
       endDate: endDate,
     };
-    console.log("카드들", editcard);
-
     dispatch(postDetailActions.editPostAPI(post_id, editcard));
   };
-
-  console.log("시작날짜", startDate);
-  console.log("마감날짜", endDate);
 
   const edit_status = () => {
     const editstatus = {
       projectStatus: projectStatus.value,
     };
-    console.log("프로젝트 상태", editstatus);
     dispatch(postDetailActions.statusPostAPI(post_id, editstatus));
   };
 
@@ -82,8 +76,6 @@ const PostEdit = props => {
         setTotalmember(setValue.totalMember);
         setProjectstatus(setValue.projectStatus);
         setLoaded(true);
-        console.log("시작하기", setValue.startDate);
-        console.log("데이터", typeof startDate);
       } catch (err) {
         console.log(err);
         setLoaded(false);
@@ -92,15 +84,6 @@ const PostEdit = props => {
 
     if (loaded === false) CheckPost();
   }, []);
-
-  const DeletePost = async () => {
-    try {
-      const deletePost = await apis.deletePost(post_id);
-      console.log("삭제", deletePost);
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   // 기술 스택 선택
   const stackSelect = [
@@ -138,14 +121,18 @@ const PostEdit = props => {
   ];
 
   // 게시글 작성(스택선택)
-  const styles = useMemo(
-    () => ({
-      multiValueRemove: (base, state) => {
-        return state.data.isFixed ? { ...base, display: "none" } : base;
+  const styles = {
+    control: (base, state) => ({
+      ...base,
+      boxShadow: state.isFocused ? 0 : 0,
+      borderWidth: 2,
+      minHeight: 40,
+      borderColor: state.isFocused ? "#C4C4C4" : base.borderColor,
+      "&:hover": {
+        borderColor: state.isFocused ? "#C4C4C4" : base.borderColor,
       },
     }),
-    []
-  );
+  };
 
   const orderByLabel = useCallback(
     (a, b) => a.label.localeCompare(b.label),
@@ -198,31 +185,39 @@ const PostEdit = props => {
     formatTech();
   }, [techstack]);
 
+  console.log("멍", projectStatused);
+
   return (
     <React.Fragment>
       <Grid
         display="flex"
         justifyContent="center"
-        width="100%"
+        maxWidth="1920px"
+        height="100%"
         margin="auto"
         border="1px solid #C4C4C4"
         alignItems="center"
       >
-        <img src={Img} style={{ width: "800px", height: "850px" }} />
-        <Grid>
+        <SideBarImg src={Img} style={{ maxWidth: "100%", height: "100%" }} />
+        <Grid padding="0px 16px">
           <Title>Scoope</Title>
-          <Text size="20px" bold>
-            게시글 수정하기
-          </Text>
-          <Grid padding="16px">
-            <Grid margin="10px auto">
+          <Grid>
+            <Text color="#C4C4C4" size="20px" bold>
+              게시글 수정하기
+            </Text>
+          </Grid>
+          <Grid>
+            <Grid>
               <Text>제목</Text>
               <Input
                 width="100%"
-                height="30px"
+                maxLength="35"
+                height="40px"
                 padding="10px"
-                border="1px solid #E7E1FF"
+                border="1px solid #C4C4C4"
                 placeholder="제목을 입력해주세요."
+                inputFocusOutline="none"
+                fontSize="16px"
                 type="text"
                 editValue={title}
                 _onChange={e => {
@@ -234,10 +229,13 @@ const PostEdit = props => {
               <Text>한줄소개</Text>
               <Input
                 width="100%"
-                height="30px"
+                maxLength="60"
+                height="40px"
                 padding="10px"
                 placeholder="프로젝트를 한줄소개를 소개해주세요."
-                border="1px solid #E7E1FF"
+                border="1px solid #C4C4C4"
+                inputFocusOutline="none"
+                fontSize="16px"
                 type="text"
                 editValue={summary}
                 _onChange={e => {
@@ -260,9 +258,11 @@ const PostEdit = props => {
               />
             </Grid>
             <Grid margin="10px auto">
-              <Text>기간설정</Text>
-              <Grid display="flex">
-                <Text margin="auto 20px">프로젝트 시작 일 :</Text>
+              <Grid>
+                <Text>기간설정</Text>
+              </Grid>
+              <Grid display="colum">
+                <Text>프로젝트 시작 일 :</Text>
                 <SDatePicker
                   selected={new Date(startDate)}
                   onChange={date => setStartdate(date)}
@@ -272,7 +272,7 @@ const PostEdit = props => {
                   minDate={new Date()}
                   placeholderText="프로젝트 시작일 입력"
                 />
-                <Text margin="auto 20px">프로젝트 종료 일 :</Text>
+                <Text>프로젝트 종료 일 :</Text>
                 <SDatePicker
                   selected={new Date(endDate)}
                   onChange={date => setEnddate(date)}
@@ -285,11 +285,12 @@ const PostEdit = props => {
                 />
               </Grid>
             </Grid>
-            <Grid margin="10px auto">
+            <Grid>
               <Text>프로젝트 총 인원</Text>
               <Select
                 options={projectMembers}
                 isLoading
+                styles={styles}
                 value={totalMember}
                 onChange={setTotalmember}
                 placeholder={<div>총인원을 선택해주세요.</div>}
@@ -300,6 +301,7 @@ const PostEdit = props => {
               <Select
                 options={projectStatused}
                 isLoading
+                styles={styles}
                 value={projectStatus}
                 onChange={setProjectstatus}
                 placeholder={<div>상태를 설정해주세요.</div>}
@@ -311,7 +313,10 @@ const PostEdit = props => {
                 width="100%"
                 height="200px"
                 padding="10px"
+                value="3000"
                 border="1px solid #E7E1FF"
+                inputFocusOutline="none"
+                fontSize="16px"
                 type="text"
                 editValue={contents}
                 _onChange={e => {
@@ -321,9 +326,6 @@ const PostEdit = props => {
               <Grid display="flex" padding="16px">
                 {projectStatus === "done" && (
                   <Btn
-                    width="100px"
-                    height="30px"
-                    margin="auto 10px"
                     onClick={() => {
                       edit_status();
                     }}
@@ -334,9 +336,6 @@ const PostEdit = props => {
 
                 {projectStatus === "doing" && (
                   <Btn
-                    width="100px"
-                    height="30px"
-                    margin="auto 10px"
                     onClick={() => {
                       edit_status();
                     }}
@@ -347,9 +346,6 @@ const PostEdit = props => {
 
                 {projectStatus === "ready" && (
                   <Btn
-                    width="100px"
-                    height="30px"
-                    margin="auto 10px"
                     onClick={() => {
                       edit_status();
                     }}
@@ -358,27 +354,11 @@ const PostEdit = props => {
                   </Btn>
                 )}
                 <Btn
-                  width="100px"
-                  height="30px"
-                  margin="auto 10px"
                   onClick={() => {
-                    // history.push("/");
-                    window.alert("수정이 완료되었습니다.");
                     scope_edit();
                   }}
                 >
                   포스트수정 완료
-                </Btn>
-                <Btn
-                  width="100px"
-                  height="30px"
-                  margin="auto 10px"
-                  onClick={() => {
-                    window.alert("삭제 되었습니다.");
-                    DeletePost();
-                  }}
-                >
-                  포스트삭제
                 </Btn>
               </Grid>
             </Grid>
@@ -392,17 +372,19 @@ const PostEdit = props => {
 // styled-components를 사용한다.
 const Title = styled.h1`
   margin: "auto 20px";
-  color: #8b3ff8;
+  color: #c4c4c4;
+  font-size: 40px;
 `;
 
 const SDatePicker = styled(DatePicker)`
   box-sizing: border-box;
-  width: 120px;
-  height: 35px;
+  width: 100%;
+  height: 40px;
   padding: 8px 20px;
   margin-top: 1.5rem;
-  border-radius: 10px;
-  border: 1px solid #e7e1ff;
+  outline: none;
+  border-radius: 4px;
+  border: 1px solid #c4c4c4;
 `;
 
 const Btn = styled.button`
@@ -414,9 +396,21 @@ const Btn = styled.button`
   border: none;
   border-radius: 50px;
   color: #fff;
-  background-color: #42309b;
+  background: linear-gradient(
+    0deg,
+    rgba(83, 201, 253, 1) 0%,
+    rgba(182, 161, 240, 1) 69%,
+    rgba(231, 170, 250, 1) 100%,
+    rgba(240, 247, 254, 1) 100%
+  );
   margin: 10px auto 10px auto;
   cursor: pointer;
+`;
+
+const SideBarImg = styled.img`
+  @media screen and (max-width: 800px) {
+    display: none;
+  }
 `;
 
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.
