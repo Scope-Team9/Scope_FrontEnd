@@ -15,6 +15,7 @@ import MypagePostList from "./mypagePost/MypagePostList";
 import MarkdownRead from "./MarkdownRead";
 import { history } from "../redux/configureStore";
 import Select from "react-select";
+import EmailAuth from "./EmailAuth";
 
 // MyPageInfo의 함수형 컴포넌트를 만든다.
 const MyPageInfo = (props) => {
@@ -33,6 +34,7 @@ const MyPageInfo = (props) => {
   // console.log(nickName);
   const myType = mydata?.user.userPropensityType;
   // console.log(myType);
+  const [modal, setModal] = React.useState(false);
 
   React.useEffect(() => {
     // dispatch(myPageActions.getMypageAPI(userId));
@@ -115,7 +117,9 @@ const MyPageInfo = (props) => {
     { value: "TypeScript", label: "TypeScript" },
   ];
 
-  const EmailConfirm = () => {};
+  const EmailConfirm = () => {
+    setModal(true);
+  };
 
   return (
     <React.Fragment>
@@ -124,144 +128,114 @@ const MyPageInfo = (props) => {
           <Banner>
             {myType === "LVG" && (
               <BannerTiger>
-                <BannerImg src="/img/호랑이.png"></BannerImg>
+                <BannerImg src="/img/호랑이배너.png"></BannerImg>
 
-                <Grid margin="-500px 0 0 500px">
+                <Grid margin="-300px 0 0 35%">
                   <WhiteP>LVG / 호랑이</WhiteP>
                 </Grid>
                 <Grid margin="-500px 0 0 90%" zIndex="2">
-                  <ConfirmEmail
-                    onClick={() => {
-                      EmailConfirm();
-                    }}
-                  >
+                  <ConfirmEmail onClick={EmailConfirm}>
                     이메일 인증하기
                   </ConfirmEmail>
+                  <EmailAuth modal={modal} setModal={setModal} />
                 </Grid>
               </BannerTiger>
             )}
             {myType === "LVP" && (
               <BannerWolf>
-                <BannerImg src="/img/늑대.png"></BannerImg>
-
-                <Grid margin="-500px 0 0 500px">
+                <BannerImg src="/img/늑대배너.jpg"></BannerImg>
+                <Grid margin="-300px 0 0 35%">
                   <WhiteP>LVP / 늑대</WhiteP>
                 </Grid>
                 <Grid margin="-500px 0 0 90%" zIndex="2">
-                  <ConfirmEmail
-                    onClick={() => {
-                      EmailConfirm();
-                    }}
-                  >
+                  <ConfirmEmail onClick={EmailConfirm}>
                     이메일 인증하기
                   </ConfirmEmail>
+                  <EmailAuth modal={modal} setModal={setModal} />
                 </Grid>
               </BannerWolf>
             )}
             {myType === "LHG" && (
               <BannerFox>
-                <BannerImg src="/img/여우.png"></BannerImg>
-
-                <Grid margin="-500px 0 0 500px">
+                <BannerImg src="/img/여우배너.jpg"></BannerImg>
+                <Grid margin="-300px 0 0 35%">
                   <WhiteP>LHG / 여우</WhiteP>
                 </Grid>
                 <Grid margin="-500px 0 0 90%" zIndex="2">
-                  <ConfirmEmail
-                    onClick={() => {
-                      EmailConfirm();
-                    }}
-                  >
+                  <ConfirmEmail onClick={EmailConfirm}>
                     이메일 인증하기
                   </ConfirmEmail>
+                  <EmailAuth modal={modal} setModal={setModal} />
                 </Grid>
               </BannerFox>
             )}
             {myType === "LHP" && (
               <BannerPanda>
-                <BannerImg src="/img/판다.png"></BannerImg>
-                <Grid margin="-500px 0 0 500px">
+                <BannerImg src="/img/팬더배너.jpg"></BannerImg>
+                <Grid margin="-300px 0 0 35%">
                   <WhiteP>LHP / 팬더</WhiteP>
                 </Grid>
-                <Grid margin="-500px 0 0 90%" zIndex="2">
-                  <ConfirmEmail
-                    onClick={() => {
-                      EmailConfirm();
-                    }}
-                  >
+                <Grid margin="-500px 0 0 88%" zIndex="2">
+                  <ConfirmEmail onClick={EmailConfirm}>
                     이메일 인증하기
                   </ConfirmEmail>
+                  <EmailAuth modal={modal} setModal={setModal} />
                 </Grid>
               </BannerPanda>
             )}
             {myType === "FVG" && (
               <BannerRabbit>
-                <BannerImg src="/img/토끼.png"></BannerImg>
-
-                <Grid margin="-500px 0 0 500px">
+                <BannerImg src="/img/토끼배너.jpg"></BannerImg>
+                <Grid margin="-300px 0 0 35%">
                   <WhiteP>FVG / 토끼</WhiteP>
                 </Grid>
                 <Grid margin="-500px 0 0 90%" zIndex="2">
-                  <ConfirmEmail
-                    onClick={() => {
-                      EmailConfirm();
-                    }}
-                  >
+                  <ConfirmEmail onClick={EmailConfirm}>
                     이메일 인증하기
                   </ConfirmEmail>
+                  <EmailAuth modal={modal} setModal={setModal} />
                 </Grid>
               </BannerRabbit>
             )}
             {myType === "FVP" && (
               <BannerDog>
-                <BannerImg src="/img/개.png"></BannerImg>
-
-                <Grid margin="-500px 0 0 500px">
+                <BannerImg src="/img/강아지배너.jpg"></BannerImg>
+                <Grid margin="-300px 0 0 35%">
                   <WhiteP>FVP / 강아지</WhiteP>
                 </Grid>
                 <Grid margin="-500px 0 0 90%" zIndex="2">
-                  <ConfirmEmail
-                    onClick={() => {
-                      EmailConfirm();
-                    }}
-                  >
+                  <ConfirmEmail onClick={EmailConfirm}>
                     이메일 인증하기
                   </ConfirmEmail>
+                  <EmailAuth modal={modal} setModal={setModal} />
                 </Grid>
               </BannerDog>
             )}
             {myType === "FHG" && (
               <BannerCat>
-                <BannerImg src="/img/고양이.png"></BannerImg>
-
-                <Grid margin="-500px 0 0 500px">
-                  <WhiteP>LHP / 팬더</WhiteP>
+                <BannerImg src="/img/고양이배너.jpg"></BannerImg>
+                <Grid margin="-300px 0 0 35%">
+                  <WhiteP>FHG / 고양이</WhiteP>
                 </Grid>
                 <Grid margin="-500px 0 0 90%" zIndex="2">
-                  <ConfirmEmail
-                    onClick={() => {
-                      EmailConfirm();
-                    }}
-                  >
+                  <ConfirmEmail onClick={EmailConfirm}>
                     이메일 인증하기
                   </ConfirmEmail>
+                  <EmailAuth modal={modal} setModal={setModal} />
                 </Grid>
               </BannerCat>
             )}
             {myType === "FHP" && (
               <BannerSeal>
-                <BannerImg src="/img/물개.png"></BannerImg>
-
-                <Grid margin="-500px 0 0 500px">
-                  <WhiteP>LHP / 팬더</WhiteP>
+                <BannerImg src="/img/물개배너.jpg"></BannerImg>
+                <Grid margin="-300px 0 0 35%">
+                  <WhiteP>FHP / 물개</WhiteP>
                 </Grid>
                 <Grid margin="-500px 0 0 90%" zIndex="2">
-                  <ConfirmEmail
-                    onClick={() => {
-                      EmailConfirm();
-                    }}
-                  >
+                  <ConfirmEmail onClick={EmailConfirm}>
                     이메일 인증하기
                   </ConfirmEmail>
+                  <EmailAuth modal={modal} setModal={setModal} />
                 </Grid>
               </BannerSeal>
             )}
@@ -495,20 +469,157 @@ const MyPageInfo = (props) => {
               </>
             )}
           </Cards>
-          <Grid margin="-1000px 0 0 660px" display="flex">
+          <Grid
+            margin="-1000px 0 0 33%"
+            display="flex"
+            width="50.3%"
+            justifyContent="space-between"
+          >
             <MyResultDiv>
               <MyResultText>리더</MyResultText>
               <MyResultText>수평</MyResultText>
               <MyResultText>과정</MyResultText>
-              <GotoTest>성향 테스트하기⇀</GotoTest>
             </MyResultDiv>
+            <GotoTest>성향 테스트하기⇀</GotoTest>
           </Grid>
+
+          {myType === "LVG" && ( //호랑이
+            <Grid margin="0 0 0 33.5%">
+              <Grid display="flex">
+                <MyResultText2>리더형인 당신은 &nbsp; </MyResultText2>
+                <MyResultTextBold>리더 이지만 수직적 리더십</MyResultTextBold>
+                <MyResultText2>을 원해요!</MyResultText2>
+              </Grid>
+              <Grid display="flex">
+                <MyResultText2>
+                  과정보다는 결과를 중요시하는 당신은 우리 스코프 사이드
+                  프로젝트에 적합한 사람!
+                </MyResultText2>
+              </Grid>
+            </Grid>
+          )}
+
+          {myType === "LVP" && ( //늑대
+            <Grid margin="0 0 0 33.5%">
+              <Grid display="flex">
+                <MyResultText2>리더형인 당신은 &nbsp; </MyResultText2>
+                <MyResultTextBold>리더 이지만 수직적 리더십</MyResultTextBold>
+                <MyResultText2>을 원해요!</MyResultText2>
+              </Grid>
+              <Grid display="flex">
+                <MyResultText2>
+                  결과보다는 과정을 중요시하는 당신은 우리 스코프 사이드
+                  프로젝트에 적합한 사람!
+                </MyResultText2>
+              </Grid>
+            </Grid>
+          )}
+          {myType === "LHG" && ( //여우
+            <Grid margin="0 0 0 33.5%">
+              <Grid display="flex">
+                <MyResultText2>리더형인 당신은 &nbsp; </MyResultText2>
+                <MyResultTextBold>리더 이지만 수평적 리더십</MyResultTextBold>
+                <MyResultText2>을 원해요!</MyResultText2>
+              </Grid>
+              <Grid display="flex">
+                <MyResultText2>
+                  과정보다는 결과를 중요시하는 당신은 우리 스코프 사이드
+                  프로젝트에 적합한 사람!
+                </MyResultText2>
+              </Grid>
+            </Grid>
+          )}
+
+          {myType === "LHP" && ( // 팬더
+            <Grid margin="0 0 0 33.5%">
+              <Grid display="flex">
+                <MyResultText2>리더형인 당신은 &nbsp; </MyResultText2>
+                <MyResultTextBold>리더 이지만 수평적 리더십</MyResultTextBold>
+                <MyResultText2>을 원해요!</MyResultText2>
+              </Grid>
+              <Grid display="flex">
+                <MyResultText2>
+                  결과보다는 과정을 중요시하는 당신은 우리 스코프 사이드
+                  프로젝트에 적합한 사람!
+                </MyResultText2>
+              </Grid>
+            </Grid>
+          )}
+          {myType === "FVG" && ( // 토끼
+            <Grid margin="0 0 0 33.5%">
+              <Grid display="flex">
+                <MyResultText2>팔로우형 당신은 &nbsp; </MyResultText2>
+                <MyResultTextBold>
+                  팔로워 이지만 수직적 팔로워십
+                </MyResultTextBold>
+                <MyResultText2>을 원해요!</MyResultText2>
+              </Grid>
+              <Grid display="flex">
+                <MyResultText2>
+                  과정보다는 결과를 중요시하는 당신은 우리 스코프 사이드
+                  프로젝트에 적합한 사람!
+                </MyResultText2>
+              </Grid>
+            </Grid>
+          )}
+          {myType === "FVP" && ( // 강아지
+            <Grid margin="0 0 0 33.5%">
+              <Grid display="flex">
+                <MyResultText2>팔로우형 당신은 &nbsp; </MyResultText2>
+                <MyResultTextBold>
+                  팔로워 이지만 수직적 팔로워십
+                </MyResultTextBold>
+                <MyResultText2>을 원해요!</MyResultText2>
+              </Grid>
+              <Grid display="flex">
+                <MyResultText2>
+                  결과보다는 과정을 중요시하는 당신은 우리 스코프 사이드
+                  프로젝트에 적합한 사람!
+                </MyResultText2>
+              </Grid>
+            </Grid>
+          )}
+          {myType === "FHG" && ( // 고양이
+            <Grid margin="0 0 0 33.5%">
+              <Grid display="flex">
+                <MyResultText2>팔로우형 당신은 &nbsp; </MyResultText2>
+                <MyResultTextBold>
+                  팔로워 이지만 수평적 팔로워십
+                </MyResultTextBold>
+                <MyResultText2>을 원해요!</MyResultText2>
+              </Grid>
+              <Grid display="flex">
+                <MyResultText2>
+                  과정보다는 결과를 중요시하는 당신은 우리 스코프 사이드
+                  프로젝트에 적합한 사람!
+                </MyResultText2>
+              </Grid>
+            </Grid>
+          )}
+          {myType === "FHP" && ( // 물개
+            <Grid margin="0 0 0 33.5%">
+              <Grid display="flex">
+                <MyResultText2>팔로우형 당신은 &nbsp; </MyResultText2>
+                <MyResultTextBold>
+                  팔로워 이지만 수평적 팔로워십
+                </MyResultTextBold>
+                <MyResultText2>을 원해요!</MyResultText2>
+              </Grid>
+              <Grid display="flex">
+                <MyResultText2>
+                  결과보다는 과정을 중요시하는 당신은 우리 스코프 사이드
+                  프로젝트에 적합한 사람!
+                </MyResultText2>
+              </Grid>
+            </Grid>
+          )}
 
           <Grid
             display="flex"
             margin="auto"
             justifyContent="center"
             margin="0px 0 0 150px"
+            width="auto"
           >
             <Filter
               onClick={() => {
@@ -546,6 +657,7 @@ const MyPageInfo = (props) => {
               소개
             </Filter>
           </Grid>
+
           {filter === "모집" && (
             <MypagePostList {...recruitmentProject}></MypagePostList>
           )}
@@ -560,7 +672,13 @@ const MyPageInfo = (props) => {
           )}
           {filter === "소개" && (
             <button
-              style={{ float: "right", margin: "0 10% 0 0" }}
+              style={{
+                float: "right",
+                margin: "10px 18% 0 0",
+                border: "none",
+                cursor: "pointer",
+                backgroundColor: " transparent ",
+              }}
               onClick={() => {
                 history.push({
                   pathname: "/addmarkdown",
@@ -568,10 +686,13 @@ const MyPageInfo = (props) => {
                 });
               }}
             >
-              작성하기
+              <img
+                src="/img/소개글.png"
+                style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
+              />
             </button>
           )}
-          <Grid margin="0 0 0 200px">
+          <Grid margin="0 0 0 34%" width="49%" border="1px solid #707070 ">
             {filter === "소개" && introduction === true && (
               <MarkdownRead
                 introduction={mydata?.user.introduction}
@@ -585,7 +706,7 @@ const MyPageInfo = (props) => {
 };
 
 const Filter = styled.p`
-  margin-left: 12%;
+  margin-left: 10%;
   margin-top: 100px;
   margin-bottom: 50px;
   cursor: pointer;
@@ -658,9 +779,9 @@ const Banner = styled.div`
 `;
 const BannerImg = styled.img`
   object-fit: cover;
-  width: 1200px;
+  /* width: 1200px;
   height: 180%;
-  margin: auto auto auto 20%;
+  margin: auto auto auto 20%; */
 `;
 
 const BannerTiger = styled.div`
@@ -733,14 +854,20 @@ const WhiteP = styled.p`
   font-weight: bold;
 `;
 const ConfirmEmail = styled.button`
-  width: 140px;
-  padding: 5px 15px;
+  width: 160px;
+  padding: 8px 20px;
   border: 1px solid white;
   background-color: transparent;
   color: white;
   border-radius: 10px;
   z-index: 99999;
   cursor: pointer;
+  &:hover {
+    color: black;
+    background-color: white;
+    opacity: 0.7;
+  }
+
   @media screen and (max-width: 750px) {
     color: black;
   } ;
@@ -749,6 +876,7 @@ const ConfirmEmail = styled.button`
 const MyResultDiv = styled.div`
   display: flex;
   width: auto;
+
   @media screen and (max-width: 1400px) {
     margin-top: 1100px;
   }
@@ -772,6 +900,16 @@ const MyResultText = styled.div`
 `;
 
 const GotoTest = styled.p`
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+`;
+const MyResultText2 = styled.p`
+  color: #707070;
+  font-size: 15px;
+`;
+const MyResultTextBold = styled.p`
+  color: black;
   font-size: 15px;
   font-weight: bold;
 `;

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Button = props => {
   const {
-    _id,
+    isId,
     isTest,
     color,
     text,
@@ -44,6 +44,7 @@ const Button = props => {
           value={isValue}
           disabled={disabled}
           isChecked={isChecked}
+          id={isId}
         >
           {text ? text : children}
         </TestButton>
@@ -70,7 +71,7 @@ const Button = props => {
 
   return (
     <>
-      <ElButton {...styles} value={isValue} onClick={_onClick} id={_id}>
+      <ElButton {...styles} value={isValue} onClick={_onClick} id={isId}>
         {text ? text : children}
       </ElButton>
     </>
@@ -155,7 +156,10 @@ const TestButton = styled.button`
   text-align: center;
   border: 1px solid #b29cf4;
   border-radius: 25px;
-  background-color: ${props => props.isChecked};
+  ${props =>
+    props.isChecked === "#B29CF4"
+      ? "background-color:#B29CF4"
+      : "background-color:#fff"};
   ${props => (props.isChecked === "#B29CF4" ? "color:#fff" : "color:#B29CF4")};
   padding: 20px;
   margin: 5px;
