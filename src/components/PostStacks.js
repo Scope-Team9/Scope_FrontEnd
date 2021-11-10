@@ -7,8 +7,8 @@ import { history } from "../redux/configureStore";
 import { Grid, Image, Progress } from "../elements/Index";
 import Img from "../images/flutter.png";
 
-const PostStacks = (props) => {
-  const whatPage = useSelector((state) => state.post.whatPage);
+const PostStacks = props => {
+  const whatPage = useSelector(state => state.post.whatPage);
   const [stacks, setStacks] = React.useState(9);
   // let stack = props.stack;
   // console.log(stack);
@@ -23,11 +23,12 @@ const PostStacks = (props) => {
       {stacks && (
         <Grid
           display="flex"
-          width="70%"
+          width="90%"
           height="85%"
           borderRadius="100%"
-          backgroundColor="rgba( 255, 255, 255, 1 )"
-          margin="-60px 13px"
+          bg="#fff"
+          margin="-40px 0px"
+          boxShadow="0 0 5px #ccc"
         >
           {stacks === "React" && <IMGS src="img/react.png" />}
           {stacks === "Java" && <IMGS src="img/java.png" />}
