@@ -39,7 +39,7 @@ const Post = props => {
         <DDescriptionBox>
           <CardHeader>
             <Grid>{/* <TitleDate>D-2</TitleDate> */}</Grid>
-            <Grid display="flex" width="100%">
+            <Grid position="relative" zIndex="10" display="flex" width="100%">
               {props.techStack.map((p, idx) => {
                 return (
                   <div style={{ width: "22%" }} key={idx}>
@@ -90,15 +90,6 @@ const Post = props => {
     </React.Fragment>
   );
 };
-
-const TitleDate = styled.div`
-  width: 50px;
-  text-align: center;
-  border-radius: 10px;
-  color: black;
-  background-color: white;
-  margin-left: 280px;
-`;
 
 const DescriptionBox = styled.div`
   position: relative;
@@ -206,7 +197,8 @@ const ProjectState = styled.div`
 `;
 
 const ProductImgWrap = styled.div`
-  /* z-index: -1; */
+  z-index: 1;
+  position: relative;
   background-color: white;
   width: 80vw;
   height: 80%;
