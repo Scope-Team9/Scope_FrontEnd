@@ -82,20 +82,12 @@ const HeaderRight = props => {
             </Grid>
           </IconWrap>
           <ButtonWrap>
-            {/* <Button
-              backgroundColor="#fff"
+            <Button
               height="50px"
               width="132px"
               text="로그아웃"
-              color=" #B29CF4"
-              border="10px solid #ddd"
-              hover="#B29CF4"
-              hoverColor="#ffff"
               _onClick={logOut}
-            ></Button> */}
-            <Logout bg="#fff" height="50px" width="132px">
-              로그아웃
-            </Logout>
+            ></Button>
           </ButtonWrap>
         </HeaderWrapper>
       </Grid>

@@ -113,7 +113,7 @@ const ElButton = styled.button`
   box-sizing: border-box;
   border-radius: 5px;
   font-weight: bold;
-  border: ${props => props.border};
+  border: none;
   ${props =>
     props.borderRadius
       ? `border-radius:${props.borderRadius}`
@@ -122,6 +122,7 @@ const ElButton = styled.button`
   flex-shrink: 0;
   &:hover {
     background-color: ${props => props.hover};
+    color: ${props => props.hoverColor};
   }
   vertical-align: middle;
   top: ${props => props.top};

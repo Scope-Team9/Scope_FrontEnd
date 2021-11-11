@@ -30,6 +30,7 @@ const ApplyStatusModal = props => {
     };
     console.log(acceptInfo);
     dispatch(applyCreators.acceptOfferAPI(postId, acceptInfo));
+    window.alert("신청을 수락하였습니다.");
   };
 
   const cancelOffer = cancelUser => {
@@ -39,6 +40,7 @@ const ApplyStatusModal = props => {
     };
     console.log(acceptInfo);
     dispatch(applyCreators.acceptOfferAPI(postId, acceptInfo));
+    window.alert("신청을 수락하였습니다.");
   };
 
   return (
@@ -163,7 +165,6 @@ const ApplyStatusModal = props => {
                             color="#fff"
                             isValue={applyUsers[idx].userId}
                             _onClick={e => {
-                              console.log(e);
                               cancelOffer(e.target.value);
                             }}
                           >

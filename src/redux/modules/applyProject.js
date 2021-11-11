@@ -44,7 +44,6 @@ const acceptOfferAPI = (postId, acceptInfo) => {
       .then(res => {
         console.log(res.data.data);
         console.log(res);
-        window.alert("신청을 수락하였습니다!");
         dispatch(applyUsers(res.data.users));
       })
       .catch(err => {
