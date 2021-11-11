@@ -44,6 +44,10 @@ const MyPageInfo = (props) => {
   const [testmodal, setTestModal] = React.useState(false);
   const [checkEmail, setCheckEmail] = React.useState();
 
+  //click
+  const [currentClick, setCurrentClick] = React.useState(null);
+  const [prevClick, setPrevClick] = React.useState(null);
+
   React.useEffect(() => {
     // dispatch(myPageActions.getMypageAPI(userId));
     dispatch(postActions.isMainPage(false));
@@ -63,7 +67,29 @@ const MyPageInfo = (props) => {
     };
     fetchData();
   }, [filter, editMyProfile]);
-  console.log(techStack);
+  // console.log(techStack);
+
+  React.useEffect(
+    (e) => {
+      if (currentClick !== null) {
+        let current = document.getElementById(currentClick);
+        current.style.color = "#333";
+        current.style.borderBottom = "2px solid";
+        current.style.borderBottomColor = "#707070";
+      }
+      if (prevClick !== null) {
+        let prev = document.getElementById(prevClick);
+        prev.style.color = "#333";
+        prev.style.borderBottom = "none";
+      }
+      setPrevClick(currentClick);
+    },
+    [currentClick]
+  );
+  const GetClick = (e) => {
+    setCurrentClick(e);
+    // console.log(e);
+  };
 
   const introduction = mydata?.user.introduction ? true : false;
   const recruitmentProject = mydata?.recruitment;
@@ -72,11 +98,11 @@ const MyPageInfo = (props) => {
   const endProject = mydata?.end;
 
   console.log(mydata);
-  console.log(recruitmentProject);
-  console.log(inProgressProject);
-  console.log(bookMarkProject);
-  console.log(endProject);
-  const myInfo = mydata?.user;
+  // console.log(recruitmentProject);
+  // console.log(inProgressProject);
+  // console.log(bookMarkProject);
+  // console.log(endProject);
+  // const myInfo = mydata?.user;
 
   const editProfile = () => {
     setEditMyProfile(true);
@@ -181,10 +207,14 @@ const MyPageInfo = (props) => {
                   <WhiteP>LVG / 호랑이</WhiteP>
                 </Grid>
                 <Grid margin="-650px 0 0 90%" zIndex="2">
-                  <ConfirmEmail onClick={EmailConfirm}>
-                    이메일 인증하기
-                  </ConfirmEmail>
-                  <EmailAuth modal={modal} setModal={setModal} />
+                  {mydata?.isMyMypage === true && (
+                    <>
+                      <ConfirmEmail onClick={EmailConfirm}>
+                        이메일 인증하기
+                      </ConfirmEmail>
+                      <EmailAuth modal={modal} setModal={setModal} />
+                    </>
+                  )}
                 </Grid>
               </BannerTiger>
             )}
@@ -195,10 +225,14 @@ const MyPageInfo = (props) => {
                   <WhiteP>LVP / 늑대</WhiteP>
                 </Grid>
                 <Grid margin="-650px 0 0 90%" zIndex="2">
-                  <ConfirmEmail onClick={EmailConfirm}>
-                    이메일 인증하기
-                  </ConfirmEmail>
-                  <EmailAuth modal={modal} setModal={setModal} />
+                  {mydata?.isMyMypage === true && (
+                    <>
+                      <ConfirmEmail onClick={EmailConfirm}>
+                        이메일 인증하기
+                      </ConfirmEmail>
+                      <EmailAuth modal={modal} setModal={setModal} />
+                    </>
+                  )}
                 </Grid>
               </BannerWolf>
             )}
@@ -209,10 +243,14 @@ const MyPageInfo = (props) => {
                   <WhiteP>LHG / 여우</WhiteP>
                 </Grid>
                 <Grid margin="-650px 0 0 90%" zIndex="2">
-                  <ConfirmEmail onClick={EmailConfirm}>
-                    이메일 인증하기
-                  </ConfirmEmail>
-                  <EmailAuth modal={modal} setModal={setModal} />
+                  {mydata?.isMyMypage === true && (
+                    <>
+                      <ConfirmEmail onClick={EmailConfirm}>
+                        이메일 인증하기
+                      </ConfirmEmail>
+                      <EmailAuth modal={modal} setModal={setModal} />
+                    </>
+                  )}
                 </Grid>
               </BannerFox>
             )}
@@ -223,10 +261,14 @@ const MyPageInfo = (props) => {
                   <WhiteP>LHP / 팬더</WhiteP>
                 </Grid>
                 <Grid margin="-650px 0 0 90%" zIndex="2">
-                  <ConfirmEmail onClick={EmailConfirm}>
-                    이메일 인증하기
-                  </ConfirmEmail>
-                  <EmailAuth modal={modal} setModal={setModal} />
+                  {mydata?.isMyMypage === true && (
+                    <>
+                      <ConfirmEmail onClick={EmailConfirm}>
+                        이메일 인증하기
+                      </ConfirmEmail>
+                      <EmailAuth modal={modal} setModal={setModal} />
+                    </>
+                  )}
                 </Grid>
               </BannerPanda>
             )}
@@ -237,10 +279,14 @@ const MyPageInfo = (props) => {
                   <WhiteP>FVG / 토끼</WhiteP>
                 </Grid>
                 <Grid margin="-650px 0 0 90%" zIndex="2">
-                  <ConfirmEmail onClick={EmailConfirm}>
-                    이메일 인증하기
-                  </ConfirmEmail>
-                  <EmailAuth modal={modal} setModal={setModal} />
+                  {mydata?.isMyMypage === true && (
+                    <>
+                      <ConfirmEmail onClick={EmailConfirm}>
+                        이메일 인증하기
+                      </ConfirmEmail>
+                      <EmailAuth modal={modal} setModal={setModal} />
+                    </>
+                  )}
                 </Grid>
               </BannerRabbit>
             )}
@@ -251,10 +297,14 @@ const MyPageInfo = (props) => {
                   <WhiteP>FVP / 강아지</WhiteP>
                 </Grid>
                 <Grid margin="-650px 0 0 90%" zIndex="2">
-                  <ConfirmEmail onClick={EmailConfirm}>
-                    이메일 인증하기
-                  </ConfirmEmail>
-                  <EmailAuth modal={modal} setModal={setModal} />
+                  {mydata?.isMyMypage === true && (
+                    <>
+                      <ConfirmEmail onClick={EmailConfirm}>
+                        이메일 인증하기
+                      </ConfirmEmail>
+                      <EmailAuth modal={modal} setModal={setModal} />
+                    </>
+                  )}
                 </Grid>
               </BannerDog>
             )}
@@ -265,10 +315,14 @@ const MyPageInfo = (props) => {
                   <WhiteP>FHG / 고양이</WhiteP>
                 </Grid>
                 <Grid margin="-650px 0 0 90%" zIndex="2">
-                  <ConfirmEmail onClick={EmailConfirm}>
-                    이메일 인증하기
-                  </ConfirmEmail>
-                  <EmailAuth modal={modal} setModal={setModal} />
+                  {mydata?.isMyMypage === true && (
+                    <>
+                      <ConfirmEmail onClick={EmailConfirm}>
+                        이메일 인증하기
+                      </ConfirmEmail>
+                      <EmailAuth modal={modal} setModal={setModal} />
+                    </>
+                  )}
                 </Grid>
               </BannerCat>
             )}
@@ -279,10 +333,14 @@ const MyPageInfo = (props) => {
                   <WhiteP>FHP / 물개</WhiteP>
                 </Grid>
                 <Grid margin="-650px 0 0 90%" zIndex="2">
-                  <ConfirmEmail onClick={EmailConfirm}>
-                    이메일 인증하기
-                  </ConfirmEmail>
-                  <EmailAuth modal={modal} setModal={setModal} />
+                  {mydata?.isMyMypage === true && (
+                    <>
+                      <ConfirmEmail onClick={EmailConfirm}>
+                        이메일 인증하기
+                      </ConfirmEmail>
+                      <EmailAuth modal={modal} setModal={setModal} />
+                    </>
+                  )}
                 </Grid>
               </BannerSeal>
             )}
@@ -376,13 +434,17 @@ const MyPageInfo = (props) => {
                     <p>{mydata.end.length}</p>
                   </div>
                 </MyInfoText2>
-                <Button
-                  margin="15px auto 15px 36%"
-                  height="40px"
-                  width="132px"
-                  text="프로필 수정하기"
-                  _onClick={editProfile}
-                ></Button>
+                {mydata?.isMyMypage === true && (
+                  <>
+                    <Button
+                      margin="15px auto 15px 36%"
+                      height="40px"
+                      width="132px"
+                      text="프로필 수정하기"
+                      _onClick={editProfile}
+                    ></Button>
+                  </>
+                )}
               </>
             )}
             {editMyProfile === true && (
@@ -530,7 +592,7 @@ const MyPageInfo = (props) => {
                   <MyResultText>수직</MyResultText>
                   <MyResultText>결과</MyResultText>
                 </MyResultDiv>
-                {userId == myUserId && (
+                {userId == myUserId && mydata?.isMyMypage === true && (
                   <Grid>
                     <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
                   </Grid>
@@ -570,7 +632,7 @@ const MyPageInfo = (props) => {
                   <MyResultText>수직</MyResultText>
                   <MyResultText>과정</MyResultText>
                 </MyResultDiv>
-                {userId == myUserId && (
+                {userId == myUserId && mydata?.isMyMypage === true && (
                   <Grid>
                     <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
                   </Grid>
@@ -609,7 +671,7 @@ const MyPageInfo = (props) => {
                   <MyResultText>수평</MyResultText>
                   <MyResultText>결과</MyResultText>
                 </MyResultDiv>
-                {userId == myUserId && (
+                {userId == myUserId && mydata?.isMyMypage === true && (
                   <Grid>
                     <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
                   </Grid>
@@ -649,7 +711,7 @@ const MyPageInfo = (props) => {
                   <MyResultText>수평</MyResultText>
                   <MyResultText>과정</MyResultText>
                 </MyResultDiv>
-                {userId == myUserId && (
+                {userId == myUserId && mydata?.isMyMypage === true && (
                   <Grid>
                     <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
                   </Grid>
@@ -688,7 +750,7 @@ const MyPageInfo = (props) => {
                   <MyResultText>수직</MyResultText>
                   <MyResultText>결과</MyResultText>
                 </MyResultDiv>
-                {userId == myUserId && (
+                {userId == myUserId && mydata?.isMyMypage === true && (
                   <Grid>
                     <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
                   </Grid>
@@ -729,7 +791,7 @@ const MyPageInfo = (props) => {
                   <MyResultText>수직</MyResultText>
                   <MyResultText>과정</MyResultText>
                 </MyResultDiv>
-                {userId == myUserId && (
+                {userId == myUserId && mydata?.isMyMypage === true && (
                   <Grid>
                     <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
                   </Grid>
@@ -770,7 +832,7 @@ const MyPageInfo = (props) => {
                   <MyResultText>수평</MyResultText>
                   <MyResultText>결과</MyResultText>
                 </MyResultDiv>
-                {userId == myUserId && (
+                {userId == myUserId && mydata?.isMyMypage === true && (
                   <Grid>
                     <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
                   </Grid>
@@ -811,7 +873,7 @@ const MyPageInfo = (props) => {
                   <MyResultText>수평</MyResultText>
                   <MyResultText>과정</MyResultText>
                 </MyResultDiv>
-                {userId == myUserId && (
+                {userId == myUserId && mydata?.isMyMypage === true && (
                   <Grid>
                     <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
                   </Grid>
@@ -848,36 +910,46 @@ const MyPageInfo = (props) => {
             width="auto"
           >
             <Filter
-              onClick={() => {
+              id="recruitment"
+              onClick={(e) => {
                 setFilter("모집");
+                GetClick(e.target.id);
               }}
             >
               모집
             </Filter>
             <Filter
-              onClick={() => {
+              id="progress"
+              onClick={(e) => {
                 setFilter("진행중");
+                GetClick(e.target.id);
               }}
             >
               진행중
             </Filter>
             <Filter
-              onClick={() => {
+              id="bookmark"
+              onClick={(e) => {
                 setFilter("관심");
+                GetClick(e.target.id);
               }}
             >
               관심
             </Filter>
             <Filter
-              onClick={() => {
+              id="finish"
+              onClick={(e) => {
                 setFilter("완료");
+                GetClick(e.target.id);
               }}
             >
               완료
             </Filter>
             <Filter
-              onClick={() => {
+              id="introduction"
+              onClick={(e) => {
                 setFilter("소개");
+                GetClick(e.target.id);
               }}
             >
               소개
@@ -896,7 +968,8 @@ const MyPageInfo = (props) => {
           {filter === "완료" && (
             <MypagePostList {...endProject}></MypagePostList>
           )}
-          {filter === "소개" && (
+
+          {filter === "소개" && mydata?.isMyMypage === true && (
             <button
               style={{
                 float: "right",
@@ -942,7 +1015,7 @@ const Filter = styled.p`
     -moz-transform: scale(1.05);
     -ms-transform: scale(1.05);
     -o-transform: scale(1.05);
-    text-decoration: underline;
+    /* text-decoration: underline; */
     color: #737373;
   }
   @media screen and (max-width: 1400px) {

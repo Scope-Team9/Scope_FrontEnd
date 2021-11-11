@@ -34,6 +34,10 @@ const MainPage = () => {
   const [ref, inView] = useInView();
   const [paging, setPaging] = React.useState(infinity.next);
   const [nowFilter, setNowFilter] = React.useState("최신");
+  //click
+  const [currentClick, setCurrentClick] = React.useState(null);
+  const [prevClick, setPrevClick] = React.useState(null);
+
   const post_list = useSelector((state) => state.post.posts);
 
   // console.log(pageCheck);
@@ -78,6 +82,24 @@ const MainPage = () => {
     } // 옵저버를 좀 더 위로
   }, [inView]);
 
+  React.useEffect(
+    (e) => {
+      if (currentClick !== null) {
+        let current = document.getElementById(currentClick);
+        current.style.color = "#333";
+        current.style.borderBottom = "2px solid";
+        current.style.borderBottomColor = "#707070";
+      }
+      if (prevClick !== null) {
+        let prev = document.getElementById(prevClick);
+        prev.style.color = "#333";
+        prev.style.borderBottom = "none";
+      }
+      setPrevClick(currentClick);
+    },
+    [currentClick]
+  );
+
   //sort
   const onclickSort = (data) => {
     dispatch(postActions.isMainPage(true));
@@ -98,6 +120,11 @@ const MainPage = () => {
 
   const checkNowFilter = (data) => {
     setNowFilter(data);
+  };
+
+  const GetClick = (e) => {
+    setCurrentClick(e);
+    console.log(e);
   };
 
   return (
@@ -121,33 +148,41 @@ const MainPage = () => {
           </Stacks>
           <FilterBox>
             <Filtering
-              onClick={() => {
+              id="new"
+              onClick={(e) => {
                 onclickSort("createdAt");
                 checkNowFilter("createdAt");
+                GetClick(e.target.id);
               }}
             >
               최신
             </Filtering>
             <Filtering
-              onClick={() => {
+              id="end"
+              onClick={(e) => {
                 onclickSort("deadline");
                 checkNowFilter("deadline");
+                GetClick(e.target.id);
               }}
             >
               마감순
             </Filtering>
             <Filtering
-              onClick={() => {
+              id="bookmark"
+              onClick={(e) => {
                 onclickRb("bookmark");
                 checkNowFilter("bookmark");
+                GetClick(e.target.id);
               }}
             >
               북마크
             </Filtering>
             <Filtering
-              onClick={() => {
+              id="recommend"
+              onClick={(e) => {
                 onclickRb("recommend");
                 checkNowFilter("recommend");
+                GetClick(e.target.id);
               }}
             >
               추천
@@ -243,7 +278,7 @@ const Filtering = styled.p`
     -moz-transform: scale(1.05);
     -ms-transform: scale(1.05);
     -o-transform: scale(1.05);
-    text-decoration: underline;
+    /* text-decoration: underline; */
     color: #dacceb;
   }
 `;
