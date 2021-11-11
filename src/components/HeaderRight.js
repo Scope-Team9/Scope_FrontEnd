@@ -5,7 +5,6 @@ import { history } from "../redux/configureStore";
 
 import { useDispatch, useSelector } from "react-redux";
 import { Grid, Text, Image, Button } from "../elements/Index";
-import UserList from "./UserList";
 import LoginModal from "./LoginModal";
 import { userCreators } from "../redux/modules/user";
 
@@ -13,13 +12,13 @@ import { deleteCookie } from "../shared/Cookie";
 
 const HeaderRight = (props) => {
   const dispatch = useDispatch();
-  const isToken = document.cookie.split("=")[1];
+  const isToken = document.cookie;
   const userInfo = useSelector((state) => state.user);
-  // console.log(userInfo);
-
+  console.log(userInfo);
+  // console.log(isToken);
   // console.log(isToken);
   // console.log(userInfo);
-  console.log("나의 타입은?", props);
+  // console.log("나의 타입은?", props);
   const [showModal, setShowModal] = React.useState(false);
   const sigunupModalState = useSelector(
     (state) => state.user.sigunupModalState
@@ -38,78 +37,62 @@ const HeaderRight = (props) => {
     history.replace("/");
   };
 
-  // React.useEffect = () => {};
-
   if (isToken) {
     return (
-      <>
-        {userInfo.userPropensityType && (
-          <Grid
-            display="flex"
-            justifyContent="space-around"
-            alignItems="center"
-            height="auto"
-            width="auto"
-          >
-            <HeaderWrapper>
-              <IconWrap>
-                <Grid
-                  display="flex"
-                  alignItems="center"
-                  margin="0 20px"
-                  _onClick={() => {
-                    console.log;
-                    history.push(`/mypage/${userInfo.userId}`);
-                  }}
-                >
-                  {userInfo.userPropensityType === "LVG" && (
-                    <Image src="img/호랑이.png" />
-                  )}
-                  {userInfo.userPropensityType === "LVP" && (
-                    <Image src="img/늑대.png" />
-                  )}
-                  {userInfo.userPropensityType === "LHG" && (
-                    <Image src="img/여우.png" />
-                  )}
-                  {userInfo.userPropensityType === "LHP" && (
-                    <Image src="img/곰.png" />
-                  )}
-                  {userInfo.userPropensityType === "FVG" && (
-                    <Image src="img/토끼.png" />
-                  )}
-                  {userInfo.userPropensityType === "FVP" && (
-                    <Image src="img/허스키.png" />
-                  )}
-                  {userInfo.userPropensityType === "FHG" && (
-                    <Image src="img/고양이.png" />
-                  )}
-                  {userInfo.userPropensityType === "FHP" && (
-                    <Image src="img/물개.png" />
-                  )}
-                  {userInfo.userPropensityType === "RHP" && (
-                    <Image src="img/너구리.png" />
-                  )}
-                  {/* <Image
-                _onClick={() => {
-                  history.push(`/mypage/${userInfo.userId}`);
-                }}
-                src="/img/호랑이.png"
-                size="50"
-              /> */}
-                </Grid>
-              </IconWrap>
-              <ButtonWrap>
-                <Button
-                  height="50px"
-                  width="132px"
-                  text="로그아웃"
-                  _onClick={logOut}
-                ></Button>
-              </ButtonWrap>
-            </HeaderWrapper>
-          </Grid>
-        )}
-      </>
+      <Grid
+        display="flex"
+        justifyContent="space-around"
+        alignItems="center"
+        height="auto"
+        width="auto"
+      >
+        <HeaderWrapper>
+          <IconWrap>
+            <Grid
+              display="flex"
+              alignItems="center"
+              margin="0 20px"
+              _onClick={() => {
+                console.log;
+                history.push(`/mypage/${userInfo.userId}`);
+              }}
+            >
+              {userInfo.userPropensityType === "LVG" && (
+                <Image src="/img/호랑이.png"></Image>
+              )}
+              {userInfo.userPropensityType === "LVP" && (
+                <Image src="/img/늑대.png"></Image>
+              )}
+              {userInfo.userPropensityType === "LHG" && (
+                <Image src="/img/여우.png"></Image>
+              )}
+              {userInfo.userPropensityType === "LHP" && (
+                <Image src="/img/판다.png"></Image>
+              )}
+              {userInfo.userPropensityType === "FVG" && (
+                <Image src="/img/토끼.png"></Image>
+              )}
+              {userInfo.userPropensityType === "FVP" && (
+                <Image src="/img/허스키.png"></Image>
+              )}
+              {userInfo.userPropensityType === "FHG" && (
+                <Image src="/img/고양이.png"></Image>
+              )}
+              {userInfo.userPropensityType === "FHP" && (
+                <Image src="/img/물개.png"></Image>
+              )}
+            </Grid>
+          </IconWrap>
+          <ButtonWrap>
+            <Button
+              height="50px"
+              width="132px"
+              text="로그아웃"
+              _onClick={logOut}
+            ></Button>
+          </ButtonWrap>
+        </HeaderWrapper>
+      </Grid>
     );
   } else {
     return (
@@ -147,6 +130,10 @@ const IconWrap = styled.div`
   @media screen and (max-width: 595px) {
     width: 90%;
   } ;
+`;
+
+const CardImg = styled.img`
+  object-fit: cover;
 `;
 
 export default HeaderRight;

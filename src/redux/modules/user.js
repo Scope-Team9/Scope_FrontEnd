@@ -58,6 +58,7 @@ const kakaologinMiddleware = (code) => {
               email: res.data.data.mail,
               nickname: res.data.data.nickname,
               userId: res.data.data.userId,
+              userPropensityType: res.data.data.userPropensityType,
             })
           );
           window.alert("로그인성공");
