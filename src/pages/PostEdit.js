@@ -50,7 +50,7 @@ const PostEdit = (props) => {
       startDate: startDate,
       endDate: endDate,
     };
-
+    console.log("시간", editcard);
     dispatch(postDetailActions.editPostAPI(post_id, editcard));
   };
 
