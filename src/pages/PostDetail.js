@@ -16,7 +16,7 @@ import { history } from "../redux/configureStore";
 import { borderRadius } from "@mui/system";
 
 // PostDetail의 함수형 컴포넌트를 만든다.
-const PostDetail = (props) => {
+const PostDetail = props => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [checkPost, setCheckPost] = React.useState();
@@ -30,7 +30,7 @@ const PostDetail = (props) => {
     setApplyStatusModal(true);
   };
 
-  const applyUserModalOpen = (value) => {
+  const applyUserModalOpen = value => {
     setApplyValue(value);
     setApplyUserModal(true);
   };
@@ -52,7 +52,7 @@ const PostDetail = (props) => {
   ];
 
   let post_id = props.match.params.id;
-  const userId = useSelector((state) => state.user.userId); //로그인 유저아이디
+  const userId = useSelector(state => state.user.userId); //로그인 유저아이디
   const postUserId = checkPost?.data.data.post.userId;
 
   //북마크 토글
@@ -95,14 +95,14 @@ const PostDetail = (props) => {
         justifyContent="center"
         maxWidth="1920px"
         height="100%"
-        margin="-100px 0 0 0"
+        margin="-100px auto 0 auto"
         border="1px solid #C4C4C4"
         alignItems="center"
       >
         <SideBarImg src={Img} style={{ maxWidth: "100%", height: "100%" }} />
-        <Grid margin="auto 20px" position="relative">
+        <Grid padding="0 40px" margin="auto 20px" position="relative">
           {userId !== postUserId && (
-            <Grid width="50px" position="absolute" top="20px" right="20px">
+            <Grid width="50px" position="absolute" top="40px" right="80px">
               <Button _onClick={ToggleBookMark}>
                 {!passedData?.bookmarkChecked ? "관심없음" : "관심있음"}
               </Button>
@@ -259,7 +259,7 @@ const PostDetail = (props) => {
                   <Grid>
                     <Button
                       isValue="apply"
-                      _onClick={(e) => {
+                      _onClick={e => {
                         console.log(e);
                         applyUserModalOpen(e.target.value);
                       }}
@@ -278,7 +278,7 @@ const PostDetail = (props) => {
                     />
                     <Button
                       isValue="cancel"
-                      _onClick={(e) => {
+                      _onClick={e => {
                         applyUserModalOpen(e.target.value);
                       }}
                       width="120px"
@@ -290,7 +290,7 @@ const PostDetail = (props) => {
                     </Button>
                     <Button
                       isValue="teamExit"
-                      _onClick={(e) => {
+                      _onClick={e => {
                         applyUserModalOpen(e.target.value);
                       }}
                       width="120px"

@@ -26,6 +26,7 @@ const Button = props => {
     isValue,
     disabled,
     isChecked,
+    border,
   } = props;
 
   if (isFloat) {
@@ -112,7 +113,7 @@ const ElButton = styled.button`
   box-sizing: border-box;
   border-radius: 5px;
   font-weight: bold;
-  border: none;
+  border: ${props => props.border};
   ${props =>
     props.borderRadius
       ? `border-radius:${props.borderRadius}`

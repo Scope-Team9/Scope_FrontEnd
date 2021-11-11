@@ -3,7 +3,7 @@
 
 .Container {
   max-width: 1920px;
-  width: 73.5vw;
+  width: 100vw;
   margin: auto;
   display: block;
 }
@@ -26,8 +26,8 @@
 
 .arrow {
   background-color: #eee;
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
   border-radius: 10px;
   position: absolute;
   cursor: pointer;
@@ -41,10 +41,10 @@
   color: #eee;
 }
 .next {
-  right: -30px;
+  right: 30px;
   top: 50%;
 }
 .prev {
-  left: -30px;
+  left: 30px;
   top: 50%;
 }

@@ -8,8 +8,8 @@ import { Grid, Button, Text } from "../../elements/Index";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 
-import slideOne from "../../images/01.png";
-import slideTwo from "../../images/02.png";
+import slideOne from "../../images/04.png";
+import slideTwo from "../../images/03.png";
 import slideThree from "../../images/03.png";
 import slideFour from "../../images/04.png";
 
