@@ -37,28 +37,6 @@ const PostEdit = (props) => {
   const [techStackList, setTest] = React.useState();
   const [loaded, setLoaded] = React.useState(false);
 
-  // console.log("타이틀", title);
-  // console.log("한줄소개", summary);
-  // console.log("기술스택", techstack);
-  // console.log("총인원", totalMember);
-  // console.log("프로젝트 상태", typeof projectStatus);
-  // console.log("내용", contents);
-  // 예외처리
-  // const editHandler = () => {
-  //   if (
-  //     title.length > 0 &&
-  //     summary.length > 0 &&
-  //     techstack.length > 0 &&
-  //     totalMember > 0 &&
-  //     projectStatus.length > 0 &&
-  //     contents.length > 0
-  //   ) {
-  //     window.alert("값이 수정이 되었습니다.");
-  //   } else {
-  //     window.alert("모든 값을 입력해주세요.");
-  //   }
-  // };
-
   // 수정
   let post_id = props.match.params.id;
   const scope_edit = () => {
