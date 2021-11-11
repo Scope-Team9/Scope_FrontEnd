@@ -255,7 +255,7 @@ const PropensityTest = props => {
             width="90%"
             margin="5px"
             _onClick={() => {
-              history.goBack("/");
+              history.push("/");
             }}
           >
             내 성향에 맞는 팀원을 찾으러 가볼까요?

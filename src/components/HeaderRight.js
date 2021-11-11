@@ -35,6 +35,8 @@ const HeaderRight = props => {
     history.replace("/");
   };
 
+  React.useEffect = () => {};
+
   if (isToken) {
     return (
       <Grid
@@ -46,21 +48,23 @@ const HeaderRight = props => {
       >
         <HeaderWrapper>
           <IconWrap>
-            <Grid display="flex" alignItems="center" margin="0 20px">
-              {/* <UserList
-                list={userInfo.userPropensityType}
-                onClick={() => {
-                  console.log;
-                  history.push(`/mypage/${userInfo.userId}`);
-                }}
-              /> */}
-              <Image
+            <Grid
+              display="flex"
+              alignItems="center"
+              margin="0 20px"
+              _onClick={() => {
+                console.log;
+                history.push(`/mypage/${userInfo.userId}`);
+              }}
+            >
+              <UserList list={userInfo.userPropensityType} />
+              {/* <Image
                 _onClick={() => {
                   history.push(`/mypage/${userInfo.userId}`);
                 }}
                 src="/img/호랑이.png"
                 size="50"
-              />
+              /> */}
             </Grid>
           </IconWrap>
           <ButtonWrap>
