@@ -11,26 +11,43 @@ import Select from "react-select";
 import makeAnimated from "react-select/animated";
 
 import { Grid, Text, Input } from "../elements/Index";
-import Img from "../images/postadd.png";
+import Img from "../images/PostAdd 4.png";
 import { useDispatch } from "react-redux";
 import { postAddActions } from "../redux/modules/postadd";
 import { postActions } from "../redux/modules/post";
 
 // AddPost의 함수형 컴포넌트를 만든다.
 // AddPost 안에 다뤄지는  특정 값(state) ex.title 값이 변화하였을 때, AddPost자체가 리랜더링 된다.
-const AddPost = props => {
+const AddPost = (props) => {
   const dispatch = useDispatch();
   const animatedComponents = makeAnimated();
 
-  const [title, setTitle] = React.useState();
-  const [summary, setSummary] = React.useState();
+  const [title, setTitle] = React.useState("");
+  const [summary, setSummary] = React.useState("");
   const [techstack, setTectstack] = React.useState([]);
   const [totalMember, setTotalmember] = React.useState();
-  const [projectStatus, setProjectstatus] = React.useState();
+  const [projectStatus, setProjectstatus] = React.useState("");
   const [startDate, setStartdate] = React.useState(new Date());
   const [endDate, setEnddate] = React.useState(new Date());
-  const [contents, setContents] = React.useState();
+  const [contents, setContents] = React.useState("");
   const [techStackList, setTest] = React.useState();
+
+  // 예외처리
+  const submitHandler = () => {
+    if (
+      title.length > 0 &&
+      summary.length > 0 &&
+      techstack.length > 0 &&
+      totalMember > 0 &&
+      projectStatus.length > 0 &&
+      contents.length > 0
+    ) {
+      window.alert("프로젝트가 생성되었습니다.");
+      scope_index();
+    } else {
+      window.alert("값을 다 입력해주세요.");
+    }
+  };
 
   React.useEffect(() => {
     dispatch(postActions.isMainPage(false));
@@ -112,11 +129,11 @@ const AddPost = props => {
   );
 
   const orderOptions = useCallback(
-    values =>
+    (values) =>
       values
-        .filter(v => v.isFixed)
+        .filter((v) => v.isFixed)
         .sort(orderByLabel)
-        .concat(values.filter(v => !v.isFixed).sort(orderByLabel)),
+        .concat(values.filter((v) => !v.isFixed).sort(orderByLabel)),
     [orderByLabel]
   );
 
@@ -150,7 +167,7 @@ const AddPost = props => {
         justifyContent="center"
         maxWidth="1920px"
         height="100%"
-        margin="auto"
+        margin="-100px auto"
         border="1px solid #C4C4C4"
         alignItems="center"
       >
@@ -162,14 +179,12 @@ const AddPost = props => {
           <Title>Scoope</Title>
           <Grid>
             {/* 게시글 작성하기 */}
-            <Grid>
-              <Text color="#C4C4C4" size="20px" bold>
-                게시글 작성하기
-              </Text>
-            </Grid>
+            <Text color="#C4C4C4" size="20px" bold>
+              게시글 작성하기
+            </Text>
             {/* 제목 */}
-            <Grid margin="10px auto">
-              <Text margin="auto 100px auto auto">제목</Text>
+            <Grid>
+              <Grid>제목</Grid>
               <Input
                 width="100%"
                 maxLength="35"
@@ -179,13 +194,13 @@ const AddPost = props => {
                 placeholder="제목을 입력해주세요."
                 inputFocusOutline="none"
                 fontSize="16px"
-                _onChange={e => {
+                _onChange={(e) => {
                   setTitle(e.target.value);
                 }}
               ></Input>
             </Grid>
             {/* 한줄소개 */}
-            <Grid margin="10px auto">
+            <Grid margin="10px auto auto">
               <Text margin="auto 100px auto auto">한줄소개</Text>
               <Input
                 width="100%"
@@ -193,10 +208,11 @@ const AddPost = props => {
                 height="40px"
                 padding="10px"
                 placeholder="프로젝트를 한줄소개를 소개해주세요."
+                borderRadius="6px"
                 border="1px solid #C4C4C4"
                 inputFocusOutline="none"
                 fontSize="16px"
-                _onChange={e => {
+                _onChange={(e) => {
                   setSummary(e.target.value);
                 }}
               ></Input>
@@ -207,7 +223,7 @@ const AddPost = props => {
               <Select
                 isMulti
                 components={animatedComponents}
-                isClearable={value.some(v => !v.isFixed)}
+                isClearable={value.some((v) => !v.isFixed)}
                 styles={styles}
                 options={stackSelect}
                 onChange={handleChange}
@@ -215,26 +231,24 @@ const AddPost = props => {
               />
             </Grid>
             {/* 기간설정 */}
-            <Grid margin="10px auto">
+            <Grid display="flex">
+              <Grid>기간설정</Grid>
               <Grid>
-                <Text>기간설정</Text>
-              </Grid>
-              <Grid display="colum">
-                <Text>프로젝트 시작 일 :</Text>
+                <Grid>프로젝트 시작 일 </Grid>
                 <SDatePicker
                   dateFormat="yyyy/MM/dd"
                   selected={startDate}
-                  onChange={date => setStartdate(date)}
+                  onChange={(date) => setStartdate(date)}
                   locale={ko}
                   minDate={new Date()}
                 />
               </Grid>
               <Grid>
-                <Text>프로젝트 종료 일 :</Text>
+                <Text>프로젝트 종료 일 </Text>
                 <SDatePicker
                   dateFormat="yyyy/MM/dd"
                   selected={endDate}
-                  onChange={date => setEnddate(date)}
+                  onChange={(date) => setEnddate(date)}
                   locale={ko}
                   minDate={new Date()}
                 />
@@ -247,7 +261,7 @@ const AddPost = props => {
                 options={projectMembers}
                 isLoading
                 styles={styles}
-                onChange={e => {
+                onChange={(e) => {
                   let b;
                   b = e["label"];
                   setTotalmember(b);
@@ -262,7 +276,7 @@ const AddPost = props => {
                 options={projectstatus}
                 isLoading
                 styles={styles}
-                onChange={e => {
+                onChange={(e) => {
                   let a;
                   a = e["label"];
                   setProjectstatus(a);
@@ -273,24 +287,27 @@ const AddPost = props => {
             {/* 프로젝트 내용적기 */}
             <Grid>
               <Text>프로젝트 내용적기</Text>
-              <Input
-                width="100%"
-                height="200px"
-                padding="10px"
-                border="1px solid #C4C4C4"
-                inputFocusOutline="none"
-                fontSize="16px"
-                _onChange={e => {
-                  setContents(e.target.value);
+              <textarea
+                style={{
+                  width: "96%",
+                  height: "200px",
+                  padding: "10px",
+                  border: "1px solid #C4C4C4",
+                  borderRadius: "6px",
+                  fontSize: "16px",
+                  outline: "none",
                 }}
                 placeholder="프로젝트 내용을 입력해주세요."
-              ></Input>
+                onChange={(e) => {
+                  setContents(e.target.value);
+                }}
+              ></textarea>
             </Grid>
             {/* 버튼 */}
             <Grid>
               <Btn
                 onClick={() => {
-                  scope_index();
+                  submitHandler();
                 }}
               >
                 프로젝트 생성하기
@@ -305,14 +322,13 @@ const AddPost = props => {
 
 // styled-components를 사용한다.
 const Title = styled.h1`
-  margin: "auto 20px";
   color: #c4c4c4;
   font-size: 40px;
 `;
 
 const SDatePicker = styled(DatePicker)`
   box-sizing: border-box;
-  width: 100%;
+  width: 120px;
   height: 40px;
   padding: 8px 20px;
   margin-top: 1.5rem;

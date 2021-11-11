@@ -22,7 +22,7 @@ const HeaderLeft = () => {
   );
 };
 const LogoDiv = styled.div`
-  width: 20%;
+  width: 15%;
   @media screen and (max-width: 750px) {
     width: 35%;
   } ;

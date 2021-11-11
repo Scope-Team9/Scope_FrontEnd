@@ -19,14 +19,14 @@ import { Grid, Button, Image, Text } from "../../elements/Index";
 import { userCreators } from "../../redux/modules/user";
 import { history } from "../../redux/configureStore";
 
-const PropensityTest = props => {
+const PropensityTest = (props) => {
   const isToken = document.cookie.split("=")[1];
   const dispatch = useDispatch();
-  const userInfo = useSelector(state => state.user);
+  const userInfo = useSelector((state) => state.user);
 
   // const [active, setActive] = React.useState(preUserPropensityType);
   const [isChecked, setIsChecked] = React.useState("#fff");
-  const ToggleButton = answer => {
+  const ToggleButton = (answer) => {
     isChecked === "#fff" ? setIsChecked("#170184") : setIsChecked("#fff");
   };
 
@@ -41,11 +41,11 @@ const PropensityTest = props => {
   const [preMemberPropensityType, setPreMemberPropensityType] = useState("");
 
   //자식요소의 밸류값을 가져와 임시에 저장
-  const handleUserCreate = answer => {
+  const handleUserCreate = (answer) => {
     setPreUserPropensityType(answer);
     console.log("나의항목 임시저장", answer);
   };
-  const handleMemberCreate = answer => {
+  const handleMemberCreate = (answer) => {
     setPreMemberPropensityType(answer);
     console.log("상대방의 항목 임시저장", answer);
   };
@@ -72,13 +72,13 @@ const PropensityTest = props => {
       setMemberPropensityType(preYou);
       console.log("너꺼 잘 들어감?", memberPropensityType);
 
-      setpage(page => page + 1);
+      setpage((page) => page + 1);
     }
   };
 
   //이전버튼 누를시에 마지막으로 저장된값을 스테이트에 삭제함
   const preStep = () => {
-    setpage(page => page - 1);
+    setpage((page) => page - 1);
 
     // 이전으로가면 마지막항목 제거 (나의것)
     let toPopMy = userPropensityType;
@@ -127,11 +127,11 @@ const PropensityTest = props => {
     console.log(realUserId, testUpdateInfo);
     console.log(isToken);
     if (isToken) {
-      setpage(page => page + 1);
+      setpage((page) => page + 1);
       dispatch(userCreators.editTestMiddleware(realUserId, testUpdateInfo));
       return;
     } else {
-      setpage(page => page + 1);
+      setpage((page) => page + 1);
       return dispatch(userCreators.signupMiddleware(registerInfo));
     }
 
