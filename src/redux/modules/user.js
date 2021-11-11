@@ -2,7 +2,7 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis, instance } from "../../lib/axios";
 import { setCookie } from "../../shared/Cookie";
-
+import Swal from "sweetalert2";
 //액션타입
 const FIRST_USER = "FIRST_USER";
 const TEST_USER = "TEST_USER";
@@ -38,7 +38,8 @@ const kakaologinMiddleware = (code) => {
       .then((res) => {
         console.log(res);
         if (res.data.msg == "추가 정보 작성이 필요한 사용자입니다.") {
-          window.alert("추가정보 작성이 필요합니다.");
+          // window.alert("추가정보 작성이 필요합니다.");
+          Swal.fire("추가정보 작성이 필요합니다.", "info");
           dispatch(
             firstUser({
               email: res.data.data.email,
@@ -61,15 +62,22 @@ const kakaologinMiddleware = (code) => {
               userPropensityType: res.data.data.userPropensityType,
             })
           );
-          window.alert("로그인성공");
+          // window.alert("로그인성공");
+
           history.replace("/");
+          // Swal.fire(
+          //   "로그인 완료!",
+          //   "최고의 프로젝트를 만들어 보세요!",
+          //   "success"
+          // );
           return;
         }
       })
       .catch((err) => {
         console.log("소셜로그인 에러", err);
-        alert("로그인에 실패하였습니다.");
+        // alert("로그인에 실패하였습니다.");
         history.replace("/"); // 로그인 실패하면 로그인화면으로 돌려보냄
+        Swal.fire("로그인에 실패하였습니다!", "", "warning");
       });
   };
 };
@@ -83,7 +91,8 @@ const githubLoginMiddleware = (code) => {
       .then((res) => {
         console.log(res);
         if (res.data.msg == "추가 정보 작성이 필요한 사용자입니다.") {
-          window.alert("추가정보 작성이 필요합니다.");
+          // window.alert("추가정보 작성이 필요합니다.");
+          Swal.fire("추가정보 작성이 필요합니다.", "", "info");
           dispatch(
             firstUser({
               email: res.data.data.email,
@@ -105,15 +114,16 @@ const githubLoginMiddleware = (code) => {
               userPropensityType: res.data.data.userPropensityType,
             })
           );
-          window.alert("로그인성공");
+          // window.alert("로그인성공");
           history.replace("/");
         }
         // window.location.href = "/";
       })
       .catch((err) => {
         console.log("소셜로그인 에러", err);
-        alert("로그인에 실패하였습니다.");
+        // alert("로그인에 실패하였습니다.");
         history.replace("/"); // 로그인 실패하면 로그인화면으로 돌려보냄
+        Swal.fire("로그인에 실패하였습니다.", "", "warning");
       });
   };
 };
@@ -125,13 +135,13 @@ const emailCheckMiddleWare = (email) => {
       .then((res) => {
         console.log(res);
         if (res.data.msg == "사용 가능한 메일입니다.") {
-          return window.alert("사용 가능한 메일입니다.");
+          return Swal.fire("사용 가능한 메일입니다.", "", "success");
         }
       })
       .catch((err) => {
         console.log(err.response);
         if (err.response.data.msg == "중복된 이메일이 존재합니다.") {
-          return window.alert("중복된 이메일이 존재합니다");
+          return Swal.fire("중복된 이메일이 존재합니다", "", "warning");
         }
       });
   };
@@ -145,14 +155,14 @@ const nickCheckMiddleWare = (nickName) => {
       .then((res) => {
         console.log(res.data);
         if (res.data.msg == "사용가능한 닉네임입니다.") {
-          window.alert("사용가능한 닉네임입니다.");
+          Swal.fire("사용가능한 닉네임입니다.", "", "success");
           return;
         }
       })
       .catch((err) => {
         console.log(err.response);
         if (err.response.data.msg == "중복된 닉네임이 존재합니다.") {
-          return window.alert("중복된 닉네임이 존재합니다.");
+          return Swal.fire("중복된 닉네임이 존재합니다.", "warning");
         }
       });
   };
@@ -226,7 +236,8 @@ const editTestMiddleware = (userId, testInfo) => {
             memberPropensityType: res.data.data.memberPropensityType,
           })
         );
-        window.alert("성향 테스트가 업데이트 되었습니다!");
+
+        // Swal.fire("성향 캐릭터가 정해졌습니다!", "", "success");
       })
       .catch((err) => {
         console.log(err);

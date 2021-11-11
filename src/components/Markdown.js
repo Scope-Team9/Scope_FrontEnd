@@ -2,7 +2,7 @@
 import Prism from "prismjs";
 // 여기 css를 수정해서 코드 하이라이팅 커스텀 가능
 import "prismjs/themes/prism.css";
-
+import Swal from "sweetalert2";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor } from "@toast-ui/react-editor";
 
@@ -152,7 +152,8 @@ export default function Writer(props) {
       } catch (err) {
         const userId = props.location.state.userId;
         console.log(err);
-        window.alert("작성 형식이 올바르지 않습니다.");
+        // window.alert("작성 형식이 올바르지 않습니다.");
+        Swal.fire("내용이 같거나 없습니다!", "", "question");
       }
     };
     writing();

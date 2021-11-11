@@ -32,7 +32,12 @@ const HeaderRight = (props) => {
 
   const logOut = () => {
     deleteCookie("ScopeUser");
-    window.alert("로그아웃 됐습니다");
+    // window.alert("로그아웃 됐습니다");
+    // Swal.fire(
+    //   '로그아웃 됐습니다',
+    //   'You clicked the button!',
+    //   'success'
+    // )
     dispatch(userCreators.logOut());
     history.replace("/");
   };
