@@ -5,7 +5,6 @@ import { history } from "../redux/configureStore";
 
 import { useDispatch, useSelector } from "react-redux";
 import { Grid, Text, Image, Button } from "../elements/Index";
-import UserList from "./UserList";
 import LoginModal from "./LoginModal";
 import { userCreators } from "../redux/modules/user";
 
@@ -35,8 +34,6 @@ const HeaderRight = props => {
     history.replace("/");
   };
 
-  React.useEffect = () => {};
-
   if (isToken) {
     return (
       <Grid
@@ -57,14 +54,30 @@ const HeaderRight = props => {
                 history.push(`/mypage/${userInfo.userId}`);
               }}
             >
-              <UserList list={userInfo.userPropensityType} />
-              {/* <Image
-                _onClick={() => {
-                  history.push(`/mypage/${userInfo.userId}`);
-                }}
-                src="/img/호랑이.png"
-                size="50"
-              /> */}
+              {userInfo.userPropensityType === "LVG" && (
+                <Image src="/img/호랑이.png"></Image>
+              )}
+              {userInfo.userPropensityType === "LVP" && (
+                <Image src="/img/늑대.png"></Image>
+              )}
+              {userInfo.userPropensityType === "LHG" && (
+                <Image src="/img/여우.png"></Image>
+              )}
+              {userInfo.userPropensityType === "LHP" && (
+                <Image src="/img/판다.png"></Image>
+              )}
+              {userInfo.userPropensityType === "FVG" && (
+                <Image src="/img/토끼.png"></Image>
+              )}
+              {userInfo.userPropensityType === "FVP" && (
+                <Image src="/img/허스키.png"></Image>
+              )}
+              {userInfo.userPropensityType === "FHG" && (
+                <Image src="/img/고양이.png"></Image>
+              )}
+              {userInfo.userPropensityType === "FHP" && (
+                <Image src="/img/물개.png"></Image>
+              )}
             </Grid>
           </IconWrap>
           <ButtonWrap>
@@ -114,6 +127,10 @@ const IconWrap = styled.div`
   @media screen and (max-width: 595px) {
     width: 90%;
   } ;
+`;
+
+const CardImg = styled.img`
+  object-fit: cover;
 `;
 
 export default HeaderRight;
