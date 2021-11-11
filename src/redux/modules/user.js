@@ -9,12 +9,15 @@ const TEST_USER = "TEST_USER";
 const SET_USER = "SET_USER";
 const LOG_OUT = "LOG_OUT";
 
+const MODAL = "MODAL";
+
 //액션생성
 const firstUser = createAction(FIRST_USER, (user) => ({ user }));
 const testUser = createAction(TEST_USER, (user) => ({ user }));
 const setUser = createAction(SET_USER, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
 
+export const modal = createAction(MODAL, (user) => ({ user }));
 //초기값
 const initialState = {
   nickname: "guest",
@@ -216,7 +219,6 @@ const signupMiddleware = (signupInfo) => {
             isAssessment: res.data.data.isAssessment,
           })
         );
-        history.replace("/");
       })
       .catch((err) => {
         console.log(err.response);
@@ -264,7 +266,6 @@ export default handleActions(
         draft.email = action.payload.user.email;
         draft.techStack = action.payload.user.techStack;
         draft.is_login = true;
-        draft.sigunupModalState = false;
         draft.memberPropensityType = action.payload.user.memberPropensityType;
         draft.userPropensityType = action.payload.user.userPropensityType;
         draft.applicantDate = action.payload.user.applicantDate;
@@ -274,6 +275,10 @@ export default handleActions(
     [LOG_OUT]: (state, action) =>
       produce(state, (draft) => {
         draft.is_login = false;
+      }),
+    [MODAL]: (state, action) =>
+      produce(state, (draft) => {
+        draft.sigunupModalState = false;
       }),
   },
   initialState
@@ -289,6 +294,7 @@ const userCreators = {
   editTestMiddleware,
   myUserAPI,
   logOut,
+  modal,
 };
 
 export { userCreators };

@@ -150,6 +150,11 @@ const PropensityTest = (props) => {
     // }
   };
 
+  const exitResult = () => {
+    dispatch(userCreators.modal());
+    history.push("/");
+  };
+
   return (
     <Grid>
       {/* 상단헤더 */}
@@ -171,7 +176,16 @@ const PropensityTest = (props) => {
         <Progress page={page} />
       </Grid>
       <Grid display="flex" justifyContent="center" margin="10px 0">
-        <img width="40%" src={Symbol} />
+        {page === 1 && <img width="40%" src={Symbol} />}
+        {page === 2 && <img width="40%" src={Symbol} />}
+        {page === 3 && <img width="40%" src={Symbol} />}
+        {page === 4 && <img width="40%" src={Symbol} />}
+        {page === 5 && <img width="40%" src={Symbol} />}
+        {page === 6 && <img width="40%" src={Symbol} />}
+        {page === 7 && <img width="40%" src={Symbol} />}
+        {page === 8 && <img width="40%" src={Symbol} />}
+        {page === 9 && <img width="40%" src={Symbol} />}
+        {page === 10 && <img width="40%" src={Symbol} />}
       </Grid>
 
       {/* 컨텐츠자리 */}
@@ -259,13 +273,7 @@ const PropensityTest = (props) => {
           </Button>
         )}
         {page == 10 && (
-          <Button
-            width="90%"
-            margin="5px"
-            _onClick={() => {
-              history.push("/");
-            }}
-          >
+          <Button width="90%" margin="5px" _onClick={exitResult}>
             내 성향에 맞는 팀원을 찾으러 가볼까요?
           </Button>
         )}

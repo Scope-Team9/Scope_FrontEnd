@@ -2,7 +2,8 @@
 import React from "react";
 import MypagePost from "./MypagePost";
 import { Grid, Image } from "../../elements/Index";
-const MypagePostList = (props) => {
+import styled from "styled-components";
+const MypagePostList = props => {
   const myCards = props;
   const newMyCards = Object.values(myCards);
   console.log(myCards);
@@ -11,15 +12,25 @@ const MypagePostList = (props) => {
     <>
       {newMyCards && (
         <React.Fragment>
-          <Grid>
+          <PostWrap>
             {newMyCards.map((p, idx) => {
               return <MypagePost key={idx} {...p}></MypagePost>;
             })}
-          </Grid>
+          </PostWrap>
         </React.Fragment>
       )}
     </>
   );
 };
+
+const PostWrap = styled.div`
+  width: 50%;
+  margin: 0 0 0 33%;
+  display: grid;
+  background-color: #ddd;
+
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  /* grid-gap: 1px; */
+`;
 
 export default MypagePostList;

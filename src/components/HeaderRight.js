@@ -10,19 +10,17 @@ import { userCreators } from "../redux/modules/user";
 
 import { deleteCookie } from "../shared/Cookie";
 
-const HeaderRight = (props) => {
+const HeaderRight = props => {
   const dispatch = useDispatch();
   const isToken = document.cookie;
-  const userInfo = useSelector((state) => state.user);
+  const userInfo = useSelector(state => state.user);
   console.log(userInfo);
   // console.log(isToken);
   // console.log(isToken);
   // console.log(userInfo);
   // console.log("나의 타입은?", props);
   const [showModal, setShowModal] = React.useState(false);
-  const sigunupModalState = useSelector(
-    (state) => state.user.sigunupModalState
-  );
+  const sigunupModalState = useSelector(state => state.user.sigunupModalState);
   const modalOpen = () => {
     setShowModal(true);
   };
@@ -89,12 +87,20 @@ const HeaderRight = (props) => {
             </Grid>
           </IconWrap>
           <ButtonWrap>
-            <Button
+            {/* <Button
+              backgroundColor="#fff"
               height="50px"
               width="132px"
               text="로그아웃"
+              color=" #B29CF4"
+              border="10px solid #ddd"
+              hover="#B29CF4"
+              hoverColor="#ffff"
               _onClick={logOut}
-            ></Button>
+            ></Button> */}
+            <Logout bg="#fff" height="50px" width="132px">
+              로그아웃
+            </Logout>
           </ButtonWrap>
         </HeaderWrapper>
       </Grid>
@@ -149,4 +155,15 @@ const UserImg = styled.img`
   cursor: pointer;
 `;
 
+const Logout = styled.div`
+  background-color: #fff;
+  height: 30px;
+  width: 100px;
+  color: #b29cf4;
+  border: 1px solid #ddd;
+  &:hover {
+    background-color: #b29cf4;
+    color: #fff;
+  }
+`;
 export default HeaderRight;
