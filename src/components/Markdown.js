@@ -13,7 +13,7 @@ import "tui-color-picker/dist/tui-color-picker.css";
 import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
 import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
 import React, { useState, useRef, createRef } from "react";
-
+import { Grid, Image, Text, Button } from "../elements/Index";
 import { apis } from "../lib/axios";
 import { result } from "lodash";
 
@@ -192,14 +192,6 @@ export default function Writer(props) {
       )}
       {introduction && (
         <>
-          <button
-            onClick={() => {
-              write();
-            }}
-          >
-            작성하기
-          </button>
-
           <Editor
             previewStyle="vertical"
             plugins={[
@@ -217,18 +209,44 @@ export default function Writer(props) {
               },
             }}
           ></Editor>
+          <Grid display="flex" margin="0 0 0 72% ">
+            <Button
+              width="10%"
+              height="50px"
+              margin="20px"
+              _onClick={() => {
+                history.goBack();
+              }}
+            >
+              뒤로가기
+            </Button>
+            <Button
+              width="10%"
+              height="50px"
+              margin="20px"
+              _onClick={() => {
+                write();
+              }}
+            >
+              수정하기
+            </Button>
+          </Grid>
         </>
       )}
       {!introduction && (
         <>
-          <button
-            onClick={() => {
-              write();
-            }}
-          >
-            작성하기
-          </button>
-
+          <Grid display="flex" margin="0 0 0 72% ">
+            <Button
+              width="10%"
+              height="50px"
+              margin="20px"
+              _onClick={() => {
+                write();
+              }}
+            >
+              작성하기
+            </Button>
+          </Grid>
           <Editor
             previewStyle="vertical"
             plugins={[

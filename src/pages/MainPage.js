@@ -19,21 +19,21 @@ import { useHistory } from "react-router";
 const MainPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const is_stack_clicked = useSelector(state => state.stack.stack);
-  const is_sort_clicked = useSelector(state => state.sort.sort);
+  const is_stack_clicked = useSelector((state) => state.stack.stack);
+  const is_sort_clicked = useSelector((state) => state.sort.sort);
 
-  const is_loading = useSelector(state => state.post.is_loading);
-  const cards = useSelector(state => state.post.posts);
+  const is_loading = useSelector((state) => state.post.is_loading);
+  const cards = useSelector((state) => state.post.posts);
   // console.log(cards);
-  const is_reBook_clicked = useSelector(state => state.rebook.reBook);
-  const is_mainPage = useSelector(state => state.post.mainpage);
-  const pageCheck = useSelector(state => state.post.pageCheck);
-  const infinity = useSelector(state => state.infinity.paging);
-  const whatPage = useSelector(state => state.post.whatPage);
+  const is_reBook_clicked = useSelector((state) => state.rebook.reBook);
+  const is_mainPage = useSelector((state) => state.post.mainpage);
+  const pageCheck = useSelector((state) => state.post.pageCheck);
+  const infinity = useSelector((state) => state.infinity.paging);
+  const whatPage = useSelector((state) => state.post.whatPage);
   const [ref, inView] = useInView();
   const [paging, setPaging] = React.useState(infinity.next);
   const [nowFilter, setNowFilter] = React.useState("최신");
-  const post_list = useSelector(state => state.post.posts);
+  const post_list = useSelector((state) => state.post.posts);
 
   // console.log(pageCheck);
 
@@ -60,7 +60,7 @@ const MainPage = () => {
 
   React.useEffect(() => {
     if (inView === true) {
-      setPaging(paging + 9);
+      setPaging(paging + 12);
 
       console.log("내가 페이지", infinity);
       dispatch(pageAction.getPage(paging));
@@ -79,24 +79,24 @@ const MainPage = () => {
   }, [inView]);
 
   //sort
-  const onclickSort = data => {
+  const onclickSort = (data) => {
     dispatch(postActions.isMainPage(true));
     dispatch(sortAction.getSort(data));
     dispatch(bookRecommendAction.getRb(""));
-    setPaging(6);
+    setPaging(12);
   };
   //bookmark,recommend
-  const onclickRb = data => {
+  const onclickRb = (data) => {
     dispatch(postActions.isMainPage(true));
     dispatch(bookRecommendAction.getRb(data));
     dispatch(sortAction.getSort(""));
     // if (paging > 0) {
     //   setPaging(paging - 1);
     // }
-    setPaging(9);
+    setPaging(12);
   };
 
-  const checkNowFilter = data => {
+  const checkNowFilter = (data) => {
     setNowFilter(data);
   };
 
@@ -158,12 +158,15 @@ const MainPage = () => {
             <PostList></PostList>
           </InsideCard>
           {nowFilter !== "bookmark" && (
-            <div
-              ref={ref}
-              style={{
-                height: "500px",
-              }}
-            ></div>
+            <Grid margin="-550px 0 0 0">
+              <div
+                ref={ref}
+                style={{
+                  height: "500px",
+                  backgroundColor: "white",
+                }}
+              ></div>
+            </Grid>
           )}
 
           <Btn
