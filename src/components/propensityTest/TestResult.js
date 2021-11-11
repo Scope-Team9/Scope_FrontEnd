@@ -4,9 +4,8 @@ import { Grid, Button, Image } from "../../elements/Index";
 import UserType from "./UserType";
 
 const TestResult = props => {
-  const userInfo = useSelector(state => state.user);
-  console.log(userInfo);
-  const userType = userInfo.userPropensityType;
+  const userType = useSelector(state => state.user.userPropensityType);
+  console.log(userType);
 
   return (
     <Grid textAlign="center">
@@ -14,7 +13,8 @@ const TestResult = props => {
       <Grid display="flex" justifyContent="center">
         <Image />
       </Grid>
-      <Grid>
+      <Grid textAlign="center">
+        당신의 타입은 {userType} 입니다.
         <UserType userType={userType} />
       </Grid>
     </Grid>

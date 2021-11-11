@@ -15,7 +15,7 @@ const HeaderLeft = () => {
             history.push("/");
           }}
           src={Logo}
-          width="80%"
+          width="60%"
         />
       </LogoDiv>
     </Grid>
