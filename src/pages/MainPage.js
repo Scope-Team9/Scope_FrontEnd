@@ -103,7 +103,7 @@ const MainPage = () => {
   return (
     <>
       <Grid
-        maxWidth="1920"
+        maxWidth="1920px"
         height="100%"
         bg="#ffff"
         padding="0px 0px 10px 0"
