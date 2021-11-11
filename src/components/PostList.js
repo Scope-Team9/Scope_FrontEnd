@@ -10,17 +10,12 @@ import { height } from "@mui/system";
 
 const PostList = () => {
   const dispatch = useDispatch();
-  let stack = useSelector(state => state.stack.stack);
-  let sort = useSelector(state => state.sort.sort);
-  let paging = useSelector(state => state.infinity.paging.next);
-  let reBook = useSelector(state => state.rebook.reBook);
-  let post_list = useSelector(state => state.post.posts);
-
-  // console.log(post_list);
-  // console.log(paging);
-
+  let stack = useSelector((state) => state.stack.stack);
+  let sort = useSelector((state) => state.sort.sort);
+  let paging = useSelector((state) => state.infinity.paging.next);
+  let reBook = useSelector((state) => state.rebook.reBook);
+  let post_list = useSelector((state) => state.post.posts);
   let posts = post_list.slice(0, paging);
-  // console.log(posts);
 
   return (
     <React.Fragment>

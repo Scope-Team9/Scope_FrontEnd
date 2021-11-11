@@ -18,6 +18,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Grid, Button, Image, Text } from "../../elements/Index";
 import { userCreators } from "../../redux/modules/user";
 import { history } from "../../redux/configureStore";
+import Swal from "sweetalert2";
 
 const PropensityTest = (props) => {
   const isToken = document.cookie.split("=")[1];
@@ -62,6 +63,11 @@ const PropensityTest = (props) => {
 
     if (preUserPropensityType === "" || preMemberPropensityType === "") {
       return window.alert("문항을 선택해주세요!");
+      // Swal.fire(
+      //   '문항을 선택해주세요!',
+      //   '',
+      //   'info'
+      // )
     } else {
       preMy.push(preUserPropensityType);
       setUserPropensityType(preMy);

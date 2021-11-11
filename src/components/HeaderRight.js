@@ -30,7 +30,12 @@ const HeaderRight = props => {
 
   const logOut = () => {
     deleteCookie("ScopeUser");
-    window.alert("로그아웃 됐습니다");
+    // window.alert("로그아웃 됐습니다");
+    // Swal.fire(
+    //   '로그아웃 됐습니다',
+    //   'You clicked the button!',
+    //   'success'
+    // )
     dispatch(userCreators.logOut());
     history.replace("/");
   };
@@ -88,6 +93,9 @@ const HeaderRight = props => {
               text="로그아웃"
               _onClick={logOut}
             ></Button>
+            {/* <Logout bg="#fff" height="50px" width="132px">
+              로그아웃
+            </Logout> */}
           </ButtonWrap>
         </HeaderWrapper>
       </Grid>

@@ -1,7 +1,7 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../../lib/axios";
-
+import Swal from "sweetalert2";
 // 수정
 const EDIT_POST = "EDIT_POST";
 // 삭제
@@ -73,28 +73,40 @@ const bookMarkAPI = (postId) => {
         console.log(res);
         console.log(res.data.data.isBookmarkChecked);
         if (res.data.msg == "북마크 추가 성공") {
-          return window.alert("관심프로젝트로 추가되었습니다!");
+          return Swal.fire("관심 프로젝트에 추가되었습니다!", "", "success");
         }
         if (res.data.msg == "북마크 삭제 성공") {
-          return window.alert("관심프로젝트로 삭제되었습니다!");
+          return Swal.fire("관심 프로젝트 에서 삭제되었습니다!", "", "success");
         }
       })
       .catch((err) => {
         console.log(err.response.data.msg);
         if (err.response.data.msg == "해당 유저를 찾을 수 없습니다.") {
-          return window.alert("해당 유저를 찾을 수 없습니다.");
+          return Swal.fire("해당 유저를 찾을 수 없습니다!", "", "question");
         }
         if (err.response.data.msg == "해당 프로젝트를 찾을 수 없습니다.") {
-          return window.alert("해당 프로젝트를 찾을 수 없습니다.");
+          return Swal.fire("해당 프로젝트를 찾을 수 없습니다!", "", "question");
         }
         if (err.response.data.msg == "자신의 게시물은 북마크할 수 없습니다.") {
-          return window.alert("자신의 게시물은 북마크할 수 없습니다!");
+          return Swal.fire(
+            "자신의 게시물은 북마크 할 수 없습니다!",
+            "",
+            "warning"
+          );
         }
         if (err.response.data.msg == "로그인 사용자만 사용할 수 있습니다.") {
-          return window.alert("로그인 사용자만 사용할 수 있습니다.");
+          return Swal.fire(
+            "로그인 사용자만 이용할 수 있습니다!",
+            "",
+            "warning"
+          );
         }
         if (err.response.data.msg == "입력 값이 잘못되었습니다.") {
-          return window.alert("로그인 사용자만 사용할 수 있습니다.");
+          return Swal.fire(
+            "로그인 사용자만 이용할 수 있습니다!",
+            "",
+            "warning"
+          );
         }
       });
   };

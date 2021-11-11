@@ -122,7 +122,6 @@ const ElButton = styled.button`
   flex-shrink: 0;
   &:hover {
     background-color: ${props => props.hover};
-    color: ${props => props.hoverColor};
   }
   vertical-align: middle;
   top: ${props => props.top};
