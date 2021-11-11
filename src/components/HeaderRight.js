@@ -15,6 +15,7 @@ const HeaderRight = props => {
   const dispatch = useDispatch();
   const isToken = document.cookie.split("=")[1];
   const userInfo = useSelector(state => state.user);
+  console.log(userInfo);
 
   console.log(isToken);
   console.log(userInfo);
@@ -44,23 +45,32 @@ const HeaderRight = props => {
         width="auto"
       >
         <HeaderWrapper>
-          <Grid display="flex" alignItems="center" margin="0 20px">
-            <UserList list={userInfo.userPropensityType} />
-            {/* <Image
-              _onClick={() => {
-                history.push(`/mypage/${user_info.userId}`);
-              }}
-              src={userImage}
-              size="50"
-            /> */}
-            {/* <Text bold>{user_info.nickname}님 환영합니다!</Text> */}
-          </Grid>
-          <Button
-            height="50px"
-            width="132px"
-            text="로그아웃"
-            _onClick={logOut}
-          ></Button>
+          <IconWrap>
+            <Grid display="flex" alignItems="center" margin="0 20px">
+              {/* <UserList
+                list={userInfo.userPropensityType}
+                onClick={() => {
+                  console.log;
+                  history.push(`/mypage/${userInfo.userId}`);
+                }}
+              /> */}
+              <Image
+                _onClick={() => {
+                  history.push(`/mypage/${userInfo.userId}`);
+                }}
+                src="/img/호랑이.png"
+                size="50"
+              />
+            </Grid>
+          </IconWrap>
+          <ButtonWrap>
+            <Button
+              height="50px"
+              width="132px"
+              text="로그아웃"
+              _onClick={logOut}
+            ></Button>
+          </ButtonWrap>
         </HeaderWrapper>
       </Grid>
     );
@@ -86,9 +96,20 @@ const HeaderWrapper = styled.div`
   width: 100%;
   padding-right: 0px;
   justify-content: space-evenly;
-  /* @media screen and (max-width: 595px) {
-    display: none; */
-  /* } ; */
+  @media screen and (max-width: 595px) {
+    width: 20%;
+  } ;
+`;
+const ButtonWrap = styled.div`
+  @media screen and (max-width: 595px) {
+    display: none;
+  } ;
+`;
+
+const IconWrap = styled.div`
+  @media screen and (max-width: 595px) {
+    width: 90%;
+  } ;
 `;
 
 export default HeaderRight;

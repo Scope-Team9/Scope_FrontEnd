@@ -80,6 +80,7 @@ const githubLoginMiddleware = code => {
     apis
       .githubLogin(code)
       .then(res => {
+        console.log(res);
         if (res.data.msg == "추가 정보 작성이 필요한 사용자입니다.") {
           window.alert("추가정보 작성이 필요합니다.");
           dispatch(

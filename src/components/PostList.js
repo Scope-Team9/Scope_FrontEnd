@@ -10,11 +10,11 @@ import { height } from "@mui/system";
 
 const PostList = () => {
   const dispatch = useDispatch();
-  let stack = useSelector((state) => state.stack.stack);
-  let sort = useSelector((state) => state.sort.sort);
-  let paging = useSelector((state) => state.infinity.paging.next);
-  let reBook = useSelector((state) => state.rebook.reBook);
-  let post_list = useSelector((state) => state.post.posts);
+  let stack = useSelector(state => state.stack.stack);
+  let sort = useSelector(state => state.sort.sort);
+  let paging = useSelector(state => state.infinity.paging.next);
+  let reBook = useSelector(state => state.rebook.reBook);
+  let post_list = useSelector(state => state.post.posts);
 
   // console.log(post_list);
   // console.log(paging);
@@ -38,10 +38,11 @@ const PostList = () => {
 };
 
 const PostWrap = styled.div`
-  max-width: 90%;
+  max-width: 100%;
   margin: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(390px, 1fr));
+
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   /* grid-gap: 1px; */
   @media (max-width: 1700px) {
     width: 100%;

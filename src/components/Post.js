@@ -57,7 +57,7 @@ const Post = props => {
           <Grid
             borderRadius="54px 54px 54px 54px"
             bg="#fff"
-            height="245px"
+            height="100px"
             position="absolute"
           ></Grid>
           <DescriptionBox>
@@ -108,7 +108,7 @@ const CardHeader = styled.div`
   /* z-index: -1; */
   position: relative;
   width: 100%;
-  height: 70px;
+  height: 63px;
   background-color: #f1bad1;
 
   border-radius: 54px 54px 54px 54px;
@@ -141,9 +141,9 @@ const CardHeaderTwo = styled.div`
 `;
 
 const Title = styled.h1`
-  margin-top: 8%;
+  margin-top: 10%;
   margin-bottom: 10px;
-  font-size: 25px;
+  font-size: 20px;
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
@@ -152,7 +152,7 @@ const Title = styled.h1`
 `;
 
 const Summary = styled.div`
-  font-size: 14px;
+  font-size: 12px;
   color: gray;
 
   /* margin-top: 8%; */
@@ -165,7 +165,7 @@ const Summary = styled.div`
 const Date = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin: 10% auto 10px auto;
+  margin: 20% auto 10px auto;
   width: 100%;
   text-overflow: ellipsis;
 
@@ -191,49 +191,33 @@ const ProjectState = styled.div`
 
   background-color: #eee;
   margin: auto 0;
-  /* margin-left: 80%;
-  margin-bottom: 55px; */
-
-  @media (max-width: 750px) {
-    margin-left: 60%;
-  }
-  @media (max-width: 370px) {
-    margin-left: 60%;
-  }
 `;
 
 const ProductImgWrap = styled.div`
   z-index: 1;
   position: relative;
   background-color: white;
-  width: 77%;
-  height: 77%;
+  width: 330px;
+  height: 330px;
   max-width: 350px;
-  margin: auto;
+  margin: 70px 20px;
   margin-top: 70px;
   margin-bottom: 30px;
-  border-radius: 54px;
+  border-radius: 54px 32px 54px 54px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.24);
   @media (max-width: 1700px) {
-    width: 77%;
-    height: 90%;
     margin: auto;
     margin-top: 30px;
     margin-bottom: 30px;
   }
-  @media (max-width: 1200px) {
-    width: 300px;
-    height: 80%;
+  @media (max-width: 1300px) {
     margin: auto;
     margin-top: 30px;
     margin-bottom: 30px;
   }
 
   @media (max-width: 450px) {
-    width: 300px;
-    height: 280px;
     margin: auto;
-    margin-left: 1%;
     margin-top: 30px;
     margin-bottom: 30px;
   }

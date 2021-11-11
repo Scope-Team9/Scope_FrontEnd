@@ -174,8 +174,8 @@ const MainPage = () => {
             {" "}
             <i
               style={{
-                fontSize: "30px",
-                margin: "12px auto",
+                fontSize: "25px",
+                margin: "auto",
                 color: "white",
               }}
               className="fas fa-plus"
@@ -194,14 +194,18 @@ const ResponsiveSidebar = styled.div`
 `;
 
 const Inside = styled.div`
+  margin: auto;
   @media screen and (max-width: 750px) {
     /* margin-left: -100px; */
   } ;
 `;
 
 const InsideCard = styled.div`
+  margin: 10px auto;
+  width: 75%;
+  max-width: 1920px;
   @media screen and (max-width: 750px) {
-    margin-left: 0px;
+    margin: auto;
   } ;
 `;
 
@@ -214,16 +218,19 @@ const Stacks = styled.div`
 const FilterBox = styled.div`
   display: flex;
   font-size: 20px;
-  margin-top: 20px;
+  margin: 10px auto;
   justify-content: flex-end;
-  max-width: 1790px;
+  width: 75%;
+  max-width: 1920px;
   @media screen and (max-width: 1850px) {
     justify-content: center;
   }
   @media screen and (max-width: 750px) {
     justify-content: center;
-  } ;
+    font-size: 12px;
+  }
 `;
+
 const Filtering = styled.p`
   margin: 20px;
   cursor: pointer;
@@ -250,9 +257,22 @@ const Btn = styled.button`
   margin: auto;
   background: #42309b;
   cursor: pointer;
+  z-index: 999;
 
   @media screen and (max-width: 750px) {
-    right: 34%;
+    position: fixed;
+
+    border: 1px solid #42309b;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    right: 5px;
+    bottom: 5px;
+    margin: auto;
+    background: #42309b;
+    cursor: pointer;
+    z-index: 999;
   } ;
 `;
 
