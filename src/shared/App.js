@@ -3,9 +3,9 @@ import React from "react";
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configureStore";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
 import { userCreators } from "../redux/modules/user";
-import { useSelector, useDispatch } from "react-redux";
+
 import MainPage from "../pages/MainPage";
 import KakaoRedirect from "./kakaoRedirect";
 import GitHubRedirect from "./GitHubRedirect";
@@ -22,7 +22,10 @@ import Header from "../components/Header";
 import PropensityTest from "../components/propensityTest/PropensityTest";
 
 function App() {
-  const myUserId = useSelector((state) => state.user.userId);
+  const isLogin = useSelector((state) => state.user.is_login);
+  const userPropensityType = useSelector(
+    (state) => state.user.userPropensityType
+  );
   const isCookie = document.cookie.split("=")[1];
   const dispatch = useDispatch();
   console.log(isCookie);
@@ -31,11 +34,12 @@ function App() {
     if (isCookie) {
       dispatch(userCreators.myUserAPI());
     }
-  }, []);
+  }, [isLogin, userPropensityType]);
 
   return (
     <React.Fragment>
       <Header />
+
       <ConnectedRouter history={history}>
         <Switch>
           <Route path="/" exact component={MainPage}></Route>
