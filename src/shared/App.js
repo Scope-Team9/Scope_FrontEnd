@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { userCreators } from "../redux/modules/user";
 
 import MainPage from "../pages/MainPage";
-import KakaoRedirect from "./KakaoRedirect";
+import KakaoRedirect from "./kakaoRedirect";
 import GitHubRedirect from "./GitHubRedirect";
 import MyPage from "../pages/MyPage";
 import MyPageInfo from "../components/MyPageInfo";
