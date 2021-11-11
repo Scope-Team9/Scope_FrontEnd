@@ -8,14 +8,15 @@ import { apis } from "../lib/axios";
 import { useHistory } from "react-router";
 import { postActions } from "../redux/modules/post";
 import { Grid, Text, Image, Input, Button } from "../elements/Index";
-import Img from "../images/detailimg.jpg";
+import Img from "../images/DetailImg.png";
 import UserList from "../components/UserList";
 import ApplyStatusModal from "../components/ApplyStatusModal";
 import ApplyUserModal from "../components/ApplyUserModal";
 import { history } from "../redux/configureStore";
+import { borderRadius } from "@mui/system";
 
 // PostDetail의 함수형 컴포넌트를 만든다.
-const PostDetail = props => {
+const PostDetail = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [checkPost, setCheckPost] = React.useState();
@@ -23,18 +24,35 @@ const PostDetail = props => {
   const [applyStatusModal, setApplyStatusModal] = React.useState(false); //신청현황
   const [applyUserModal, setApplyUserModal] = React.useState(false); //지원취소
   const [applyValue, setApplyValue] = React.useState();
+  const [projectStatus, setProjectstatus] = React.useState(""); // 프로젝트 상태
 
   const applyStatusModalOpen = () => {
     setApplyStatusModal(true);
   };
 
-  const applyUserModalOpen = value => {
+  const applyUserModalOpen = (value) => {
     setApplyValue(value);
     setApplyUserModal(true);
   };
-  let post_id = props.match.params.id;
 
-  const userId = useSelector(state => state.user.userId); //로그인 유저아이디
+  // 상태변경
+  const edit_status = () => {
+    const editstatus = {
+      projectStatus: projectStatused,
+    };
+    console.log("상태야", projectStatused[0].value);
+    dispatch(postDetailActions.statusPostAPI(post_id, editstatus));
+  };
+
+  // 게시글 작성(프로젝트 상태)
+  const projectStatused = [
+    { value: "done", label: "모집중" },
+    { value: "doing", label: "진행중" },
+    { value: "ready", label: "종료" },
+  ];
+
+  let post_id = props.match.params.id;
+  const userId = useSelector((state) => state.user.userId); //로그인 유저아이디
   const postUserId = checkPost?.data.data.post.userId;
 
   //북마크 토글
@@ -104,25 +122,29 @@ const PostDetail = props => {
           <Grid>
             <Text>게시자 정보</Text>
             <Grid display="column">
-              <UserList list={passedData?.propensityType}></UserList>
+              <Grid width="45px" borderRadius="50%" backgroundColor="#C4C4C4">
+                <UserList list={passedData?.propensityType}></UserList>
+              </Grid>
               <Text>{passedData?.nickname}</Text>
               <Grid>({passedData?.propensityType})</Grid>
             </Grid>
             <Grid margin="10px auto">
               <Text>프로젝트 인원</Text>
               <Grid display="flex">
-                <Grid display="column">
-                  <Grid display="flex">
-                    {passdedMenber?.map((item, index) => (
-                      <Grid key={index} {...item}>
-                        <Grid>
-                          <UserList list={item.userPropensityType}></UserList>
-                        </Grid>
-                        <Grid>{item.nickname}</Grid>
-                        <Grid>({item.userPropensityType})</Grid>
+                <Grid display="flex">
+                  {passdedMenber?.map((item, index) => (
+                    <Grid key={index} {...item}>
+                      <Grid
+                        width="45px"
+                        borderRadius="50%"
+                        backgroundColor="#C4C4C4"
+                      >
+                        <UserList list={item.userPropensityType}></UserList>
                       </Grid>
-                    ))}
-                  </Grid>
+                      <Text>{item.nickname}</Text>
+                      <Grid>({item.userPropensityType})</Grid>
+                    </Grid>
+                  ))}
                 </Grid>
               </Grid>
               {userId === postUserId && (
@@ -162,7 +184,17 @@ const PostDetail = props => {
                 {passedData?.techStack.map((item, index) => {
                   return (
                     <Text margin="auto 5px" key={index}>
-                      {item}
+                      <span
+                        style={{
+                          color: "black",
+                          textAlign: "center",
+                          padding: "4px",
+                          backgroundColor: "#B29CF4",
+                          borderRadius: "20px",
+                        }}
+                      >
+                        {item}
+                      </span>
                     </Text>
                   );
                 })}
@@ -177,7 +209,35 @@ const PostDetail = props => {
               <Grid>
                 {userId === postUserId ? (
                   <Grid display="flex" justifyContent="center">
-                    <Btn>모집완료</Btn>
+                    {projectStatused[0]?.value === "done" && (
+                      <Btn
+                        onClick={() => {
+                          edit_status();
+                        }}
+                      >
+                        프로젝트 마감입력완료
+                      </Btn>
+                    )}
+
+                    {projectStatused[1]?.value === "doing" && (
+                      <Btn
+                        onClick={() => {
+                          edit_status();
+                        }}
+                      >
+                        프로젝트 마감하기
+                      </Btn>
+                    )}
+
+                    {projectStatused[2]?.value === "ready" && (
+                      <Btn
+                        onClick={() => {
+                          edit_status();
+                        }}
+                      >
+                        모집완료
+                      </Btn>
+                    )}
                     <Btn
                       onClick={() => {
                         history.push({ pathname: `/postedit/${post_id}` });
@@ -188,6 +248,7 @@ const PostDetail = props => {
                     <Btn
                       onClick={() => {
                         DeletePost();
+                        window.alert("삭제되었습니다.");
                       }}
                     >
                       포스트삭제
@@ -197,7 +258,7 @@ const PostDetail = props => {
                   <Grid>
                     <Button
                       isValue="apply"
-                      _onClick={e => {
+                      _onClick={(e) => {
                         console.log(e);
                         applyUserModalOpen(e.target.value);
                       }}
@@ -216,7 +277,7 @@ const PostDetail = props => {
                     />
                     <Button
                       isValue="cancel"
-                      _onClick={e => {
+                      _onClick={(e) => {
                         applyUserModalOpen(e.target.value);
                       }}
                       width="120px"
@@ -228,7 +289,7 @@ const PostDetail = props => {
                     </Button>
                     <Button
                       isValue="teamExit"
-                      _onClick={e => {
+                      _onClick={(e) => {
                         applyUserModalOpen(e.target.value);
                       }}
                       width="120px"

@@ -5,7 +5,7 @@
 import React, { useCallback, useMemo, useEffect } from "react";
 import styled from "styled-components";
 import { Grid, Text, Image, Button, Input } from "../elements/Index";
-import Img from "../images/detailimg.jpg";
+import Img from "../images/DetailImg.png";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { apis } from "../lib/axios";
@@ -18,25 +18,48 @@ import Select from "react-select";
 import makeAnimated from "react-select/animated";
 
 // PostEdit의 함수형 컴포넌트를 만든다.
-const PostEdit = props => {
+const PostEdit = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const animatedComponents = makeAnimated();
   const [checkPost, setCheckPost] = React.useState();
 
   const [postId, setPostId] = React.useState();
-  const [title, setTitle] = React.useState();
-  const [summary, setSummary] = React.useState();
+  const [title, setTitle] = React.useState("");
+  const [summary, setSummary] = React.useState("");
   const [techstack, setTectstack] = React.useState([]);
   const [totalMember, setTotalmember] = React.useState();
   const [recruitmentMember, setRecruitmentMember] = React.useState();
-  const [projectStatus, setProjectstatus] = React.useState();
+  const [projectStatus, setProjectstatus] = React.useState("");
   const [startDate, setStartdate] = React.useState(new Date());
   const [endDate, setEnddate] = React.useState(new Date());
-  const [contents, setContents] = React.useState();
+  const [contents, setContents] = React.useState("");
   const [techStackList, setTest] = React.useState();
   const [loaded, setLoaded] = React.useState(false);
 
+  // console.log("타이틀", title);
+  // console.log("한줄소개", summary);
+  // console.log("기술스택", techstack);
+  // console.log("총인원", totalMember);
+  // console.log("프로젝트 상태", typeof projectStatus);
+  // console.log("내용", contents);
+  // 예외처리
+  // const editHandler = () => {
+  //   if (
+  //     title.length > 0 &&
+  //     summary.length > 0 &&
+  //     techstack.length > 0 &&
+  //     totalMember > 0 &&
+  //     projectStatus.length > 0 &&
+  //     contents.length > 0
+  //   ) {
+  //     window.alert("값이 수정이 되었습니다.");
+  //   } else {
+  //     window.alert("모든 값을 입력해주세요.");
+  //   }
+  // };
+
+  // 수정
   let post_id = props.match.params.id;
   const scope_edit = () => {
     const editcard = {
@@ -49,14 +72,8 @@ const PostEdit = props => {
       startDate: startDate,
       endDate: endDate,
     };
-    dispatch(postDetailActions.editPostAPI(post_id, editcard));
-  };
 
-  const edit_status = () => {
-    const editstatus = {
-      projectStatus: projectStatus.value,
-    };
-    dispatch(postDetailActions.statusPostAPI(post_id, editstatus));
+    dispatch(postDetailActions.editPostAPI(post_id, editcard));
   };
 
   React.useEffect(() => {
@@ -69,7 +86,7 @@ const PostEdit = props => {
         setSummary(setValue.summary);
         setContents(setValue.contents);
         setTectstack(
-          setValue.techStack.map(value => ({ label: value, value }))
+          setValue.techStack.map((value) => ({ label: value, value }))
         );
         setStartdate(setValue?.startDate);
         setEnddate(setValue.endDate);
@@ -77,7 +94,8 @@ const PostEdit = props => {
         setProjectstatus(setValue.projectStatus);
         setLoaded(true);
       } catch (err) {
-        console.log(err);
+        console.log(err.response);
+
         setLoaded(false);
       }
     };
@@ -140,11 +158,11 @@ const PostEdit = props => {
   );
 
   const orderOptions = useCallback(
-    values =>
+    (values) =>
       values
-        .filter(v => v.isFixed)
+        .filter((v) => v.isFixed)
         .sort(orderByLabel)
-        .concat(values.filter(v => !v.isFixed).sort(orderByLabel)),
+        .concat(values.filter((v) => !v.isFixed).sort(orderByLabel)),
     [orderByLabel]
   );
 
@@ -161,7 +179,7 @@ const PostEdit = props => {
           }
           break;
         case "clear":
-          setValue(stackSelect.filter(v => v.isFixed));
+          setValue(stackSelect.filter((v) => v.isFixed));
           return;
         default:
       }
@@ -184,8 +202,6 @@ const PostEdit = props => {
   useEffect(() => {
     formatTech();
   }, [techstack]);
-
-  console.log("멍", projectStatused);
 
   return (
     <React.Fragment>
@@ -220,7 +236,7 @@ const PostEdit = props => {
                 fontSize="16px"
                 type="text"
                 editValue={title}
-                _onChange={e => {
+                _onChange={(e) => {
                   setTitle(e.target.value);
                 }}
               />
@@ -238,7 +254,7 @@ const PostEdit = props => {
                 fontSize="16px"
                 type="text"
                 editValue={summary}
-                _onChange={e => {
+                _onChange={(e) => {
                   setSummary(e.target.value);
                 }}
               />
@@ -249,7 +265,7 @@ const PostEdit = props => {
               <Select
                 isMulti
                 components={animatedComponents}
-                isClearable={value.some(v => !v.isFixed)}
+                isClearable={value.some((v) => !v.isFixed)}
                 styles={styles}
                 value={techstack}
                 options={stackSelect}
@@ -265,7 +281,7 @@ const PostEdit = props => {
                 <Text>프로젝트 시작 일 :</Text>
                 <SDatePicker
                   selected={new Date(startDate)}
-                  onChange={date => setStartdate(date)}
+                  onChange={(date) => setStartdate(date)}
                   startdate={startDate}
                   selectsStart
                   locale={ko}
@@ -275,7 +291,7 @@ const PostEdit = props => {
                 <Text>프로젝트 종료 일 :</Text>
                 <SDatePicker
                   selected={new Date(endDate)}
-                  onChange={date => setEnddate(date)}
+                  onChange={(date) => setEnddate(date)}
                   startdate={startDate}
                   enddate={endDate}
                   selectsEnd
@@ -319,42 +335,14 @@ const PostEdit = props => {
                 fontSize="16px"
                 type="text"
                 editValue={contents}
-                _onChange={e => {
+                _onChange={(e) => {
                   setContents(e.target.value);
                 }}
               />
               <Grid display="flex" padding="16px">
-                {projectStatus === "done" && (
-                  <Btn
-                    onClick={() => {
-                      edit_status();
-                    }}
-                  >
-                    프로젝트 모집완료
-                  </Btn>
-                )}
-
-                {projectStatus === "doing" && (
-                  <Btn
-                    onClick={() => {
-                      edit_status();
-                    }}
-                  >
-                    프로젝트 진행중
-                  </Btn>
-                )}
-
-                {projectStatus === "ready" && (
-                  <Btn
-                    onClick={() => {
-                      edit_status();
-                    }}
-                  >
-                    프로젝트 준비중
-                  </Btn>
-                )}
                 <Btn
                   onClick={() => {
+                    // editHandler();
                     scope_edit();
                   }}
                 >
