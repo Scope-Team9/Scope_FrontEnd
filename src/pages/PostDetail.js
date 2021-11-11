@@ -75,6 +75,7 @@ const PostDetail = (props) => {
     };
     CheckPost();
   }, [bookmark]);
+
   const passedData = checkPost?.data["data"].post;
   const passdedMenber = checkPost?.data["data"].members;
 

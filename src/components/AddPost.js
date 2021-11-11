@@ -167,7 +167,7 @@ const AddPost = (props) => {
         justifyContent="center"
         maxWidth="1920px"
         height="100%"
-        margin="auto"
+        margin="-100px auto"
         border="1px solid #C4C4C4"
         alignItems="center"
       >

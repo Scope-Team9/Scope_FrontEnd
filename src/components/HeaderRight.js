@@ -58,7 +58,7 @@ const HeaderRight = (props) => {
               }}
             >
               {userInfo.userPropensityType === "LVG" && (
-                <UserImg size="50" src="/img/호랑이.png"></UserImg>
+                <Image size="50" src="/img/호랑이.png"></Image>
               )}
               {userInfo.userPropensityType === "LVP" && (
                 <Image src="/img/늑대.png"></Image>
