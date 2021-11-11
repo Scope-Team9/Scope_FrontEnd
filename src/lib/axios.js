@@ -21,8 +21,8 @@ instance.interceptors.request.use(
     if (cookie === "") {
       return config;
     }
-    // console.log(cookie);
 
+    // console.log(cookie);
     // const cookieSplitUndefined = cookie.split('=')[1];
     // console.log(cookieSplitUndefined);
     // const cookieSplit = cookieSplitUndefined.split(';')[0];
