@@ -188,6 +188,7 @@ const myUserAPI = () => {
       });
   };
 };
+
 //테스트 마친 회원가입
 const signupMiddleware = (signupInfo) => {
   return function (dispatch, getState, { history }) {

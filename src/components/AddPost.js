@@ -160,6 +160,8 @@ const AddPost = (props) => {
     formatTech();
   }, [techstack]);
 
+  console.log("이승민");
+
   return (
     <React.Fragment>
       <Grid
@@ -348,10 +350,9 @@ const Btn = styled.button`
   color: #fff;
   background: linear-gradient(
     0deg,
-    rgba(83, 201, 253, 1) 0%,
-    rgba(182, 161, 240, 1) 69%,
-    rgba(231, 170, 250, 1) 100%,
-    rgba(240, 247, 254, 1) 100%
+    rgba(83, 253, 100, 1) 0%,
+    rgba(161, 240, 182, 1) 0%,
+    rgba(255, 255, 255, 1) 100%
   );
   margin: 10px auto 10px auto;
   cursor: pointer;

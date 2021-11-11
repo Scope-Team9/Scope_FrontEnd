@@ -14,6 +14,7 @@ import ApplyStatusModal from "../components/ApplyStatusModal";
 import ApplyUserModal from "../components/ApplyUserModal";
 import { history } from "../redux/configureStore";
 import { borderRadius } from "@mui/system";
+import ProjectJoinUser from "../components/ProjectJoinUser";
 
 // PostDetail의 함수형 컴포넌트를 만든다.
 const PostDetail = (props) => {
@@ -36,11 +37,12 @@ const PostDetail = (props) => {
   };
 
   // 상태변경
-  const edit_status = () => {
+  const edit_status = (data) => {
     const editstatus = {
-      projectStatus: projectStatused,
+      projectStatus: data,
     };
     console.log("상태야", projectStatused[0].value);
+    console.log("상태입니다.");
     dispatch(postDetailActions.statusPostAPI(post_id, editstatus));
   };
 
@@ -95,12 +97,12 @@ const PostDetail = (props) => {
         justifyContent="center"
         maxWidth="1920px"
         height="100%"
-        margin="-100px 0 0 0"
+        margin="-100px auto 0 auto"
         border="1px solid #C4C4C4"
         alignItems="center"
       >
         <SideBarImg src={Img} style={{ maxWidth: "100%", height: "100%" }} />
-        <Grid margin="auto 20px" position="relative">
+        <Grid margin="100px 20px auto 20px" position="relative">
           {userId !== postUserId && (
             <Grid width="50px" position="absolute" top="20px" right="20px">
               <Button _onClick={ToggleBookMark}>
@@ -108,7 +110,7 @@ const PostDetail = (props) => {
               </Button>
             </Grid>
           )}
-          <Title>Scoope</Title>
+          {/* <Title>Scoope</Title> */}
           <Text color="#C4C4C4" size="20px" bold>
             <span style={{ color: "black" }}>제목</span> : {passedData?.title}
             <hr width="92%" />
@@ -120,7 +122,7 @@ const PostDetail = (props) => {
               <hr width="92%" />
             </Text>
           </Grid>
-          <Grid>
+          <Grid margin="10px auto">
             <Text>게시자 정보</Text>
             <Grid display="column">
               <Grid width="45px" borderRadius="50%" backgroundColor="#C4C4C4">
@@ -134,17 +136,7 @@ const PostDetail = (props) => {
               <Grid display="flex">
                 <Grid display="flex">
                   {passdedMenber?.map((item, index) => (
-                    <Grid key={index} {...item}>
-                      <Grid
-                        width="45px"
-                        borderRadius="50%"
-                        backgroundColor="#C4C4C4"
-                      >
-                        <UserList list={item.userPropensityType}></UserList>
-                      </Grid>
-                      <Text>{item.nickname}</Text>
-                      <Grid>({item.userPropensityType})</Grid>
-                    </Grid>
+                    <ProjectJoinUser key={index} {...item} />
                   ))}
                 </Grid>
               </Grid>
@@ -210,30 +202,20 @@ const PostDetail = (props) => {
               <Grid>
                 {userId === postUserId ? (
                   <Grid display="flex" justifyContent="center">
-                    {projectStatused[0]?.value === "done" && (
+                    {checkPost.data.data.post.projectStatus === "진행중" && (
                       <Btn
                         onClick={() => {
-                          edit_status();
-                        }}
-                      >
-                        프로젝트 마감입력완료
-                      </Btn>
-                    )}
-
-                    {projectStatused[1]?.value === "doing" && (
-                      <Btn
-                        onClick={() => {
-                          edit_status();
+                          edit_status("done");
                         }}
                       >
                         프로젝트 마감하기
                       </Btn>
                     )}
 
-                    {projectStatused[2]?.value === "ready" && (
+                    {checkPost.data.data.post.projectStatus === "모집중" && (
                       <Btn
                         onClick={() => {
-                          edit_status();
+                          edit_status("doing");
                         }}
                       >
                         모집완료
@@ -319,7 +301,7 @@ const Title = styled.h1`
 
 const Content = styled.h3`
   width: 96%;
-  height: 200px;
+  height: 300px;
   padding: 10px;
   border: 1px solid #c4c4c4;
   border-radius: 5px;
