@@ -70,7 +70,7 @@ const HeaderRight = props => {
                 <Image src="/img/토끼.png"></Image>
               )}
               {userInfo.userPropensityType === "FVP" && (
-                <Image src="/img/허스키.png"></Image>
+                <Image src="/img/개.png"></Image>
               )}
               {userInfo.userPropensityType === "FHG" && (
                 <Image src="/img/고양이.png"></Image>

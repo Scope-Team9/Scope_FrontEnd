@@ -2,6 +2,7 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis, instance } from "../../lib/axios";
 import { setCookie } from "../../shared/Cookie";
+import Swal from "sweetalert2";
 
 //액션타입
 const FIRST_USER = "FIRST_USER";
@@ -9,12 +10,15 @@ const TEST_USER = "TEST_USER";
 const SET_USER = "SET_USER";
 const LOG_OUT = "LOG_OUT";
 
+const MODAL = "MODAL";
+
 //액션생성
 const firstUser = createAction(FIRST_USER, user => ({ user }));
 const testUser = createAction(TEST_USER, user => ({ user }));
 const setUser = createAction(SET_USER, user => ({ user }));
 const logOut = createAction(LOG_OUT, user => ({ user }));
 
+export const modal = createAction(MODAL, user => ({ user }));
 //초기값
 const initialState = {
   nickname: "guest",
@@ -105,7 +109,8 @@ const githubLoginMiddleware = code => {
               userPropensityType: res.data.data.userPropensityType,
             })
           );
-          window.alert("로그인성공");
+          Swal.fire({ icon: "sucess", title: "로그인 성공" });
+
           history.replace("/");
         }
         // window.location.href = "/";
@@ -206,7 +211,6 @@ const signupMiddleware = signupInfo => {
             isAssessment: res.data.data.isAssessment,
           })
         );
-        history.replace("/");
       })
       .catch(err => {
         console.log(err.response);
@@ -253,7 +257,6 @@ export default handleActions(
         draft.email = action.payload.user.email;
         draft.techStack = action.payload.user.techStack;
         draft.is_login = true;
-        draft.sigunupModalState = false;
         draft.memberPropensityType = action.payload.user.memberPropensityType;
         draft.userPropensityType = action.payload.user.userPropensityType;
         draft.applicantDate = action.payload.user.applicantDate;
@@ -263,6 +266,10 @@ export default handleActions(
     [LOG_OUT]: (state, action) =>
       produce(state, draft => {
         draft.is_login = false;
+      }),
+    [MODAL]: (state, action) =>
+      produce(state, draft => {
+        draft.sigunupModalState = false;
       }),
   },
   initialState
@@ -278,6 +285,7 @@ const userCreators = {
   editTestMiddleware,
   myUserAPI,
   logOut,
+  modal,
 };
 
 export { userCreators };
