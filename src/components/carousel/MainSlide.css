@@ -2,8 +2,9 @@
 @import "slick-carousel/slick/slick-theme.css";
 
 .Container {
-  width: 73vw;
-  margin: 0px auto 100px auto;
+  max-width: 1920px;
+  width: 73.5vw;
+  margin: auto;
   display: block;
 }
 
@@ -24,20 +25,26 @@
 }
 
 .arrow {
-  background-color: transparent;
+  background-color: #eee;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
   position: absolute;
   cursor: pointer;
   z-index: 10;
   transition: color 300ms;
+  text-align: center;
 }
 .arrow svg:hover {
-  background-color: #fff;
+  background-color: #b29cf4;
+  border-radius: 10px;
+  color: #eee;
 }
 .next {
-  right: 0%;
+  right: -30px;
   top: 50%;
 }
 .prev {
-  left: 0%;
+  left: -30px;
   top: 50%;
 }

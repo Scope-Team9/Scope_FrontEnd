@@ -25,6 +25,7 @@ const initialState = {
   mainpage: true,
   whatPage: { pre: "mainPage", now: "mainPage" },
   pageCheck: false,
+  render: false,
 };
 
 export const getPostAPI = () => {
@@ -96,12 +97,13 @@ export default handleActions(
           // console.log("draft스택", state.stacks);
           console.log("스택이 달라졌을때");
           console.log(action);
-          draft.posts = action.payload.data.posts;
           draft.paging = action.payload.data.paging;
+          draft.posts = action.payload.data.posts;
           draft.is_loading = false;
           draft.stacks = stacks;
           draft.sorts = sorts;
           draft.reBook = reBook;
+          draft.render = true;
         } else if (
           state.stacks === stacks ||
           state.sorts === sorts ||
@@ -113,6 +115,7 @@ export default handleActions(
           draft.posts = action.payload.data.posts;
           draft.paging = action.payload.data.paging;
           draft.is_loading = false;
+          draft.render = false;
         }
       }),
 

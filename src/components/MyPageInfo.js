@@ -1,4 +1,5 @@
 /* eslint-disable */
+// 나의 마이페이지에서 뜨는 버튼들과 다른사람 마이페이지에서 뜨는 버튼들
 // import를 한다.
 import React from "react";
 import { Dialog } from "@material-ui/core";

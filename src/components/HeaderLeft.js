@@ -15,13 +15,16 @@ const HeaderLeft = () => {
             history.push("/");
           }}
           src={Logo}
-          width="150px"
+          width="60%"
         />
       </LogoDiv>
     </Grid>
   );
 };
 const LogoDiv = styled.div`
-  width: 20%;
+  width: 15%;
+  @media screen and (max-width: 750px) {
+    width: 35%;
+  } ;
 `;
 export default HeaderLeft;

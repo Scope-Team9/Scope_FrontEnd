@@ -110,7 +110,6 @@ const PropensityTest = (props) => {
 
     let realSnsId = String(userInfo.snsId);
     let realUserId = userInfo.userId;
-    console.log(realUserId);
 
     const registerInfo = {
       snsId: realSnsId,
@@ -126,20 +125,23 @@ const PropensityTest = (props) => {
     };
     console.log(realSnsId, registerInfo);
     console.log(realUserId, testUpdateInfo);
+    console.log(isToken);
     if (isToken) {
       setpage((page) => page + 1);
       dispatch(userCreators.editTestMiddleware(realUserId, testUpdateInfo));
       return;
-    }
-
-    console.log(userPropensityType.length, memberPropensityType.length);
-    if (userPropensityType.length === 9 && memberPropensityType.length === 9) {
+    } else {
       setpage((page) => page + 1);
       return dispatch(userCreators.signupMiddleware(registerInfo));
-    } else {
-      window.alert("설문지가 정확히 작성되지 않았습니다!");
-      return false;
     }
+
+    // console.log(userPropensityType.length, memberPropensityType.length);
+    // if (userPropensityType.length === 9 && memberPropensityType.length === 9) {
+
+    // } else {
+    //   window.alert("설문지가 정확히 작성되지 않았습니다!");
+    //   return false;
+    // }
   };
 
   return (
@@ -255,7 +257,7 @@ const PropensityTest = (props) => {
             width="90%"
             margin="5px"
             _onClick={() => {
-              history.goBack("/");
+              history.push("/");
             }}
           >
             내 성향에 맞는 팀원을 찾으러 가볼까요?

@@ -66,6 +66,22 @@ const ApplyStatusModal = props => {
             </Text>
           </Grid>
           <Grid display="flex" height="85%" justifyContent="center">
+            {applyUsers == "" && (
+              <Grid
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                margin="auto"
+              >
+                <Grid>
+                  <Image
+                    shape="rectangle"
+                    size="41"
+                    src="/img/호랑이배너.jpg"
+                  ></Image>
+                </Grid>
+              </Grid>
+            )}
             {applyUsers && (
               <Grid width="80%" margin="10px 0">
                 {applyUsers.map((user, idx) => (

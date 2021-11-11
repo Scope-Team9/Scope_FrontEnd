@@ -5,7 +5,6 @@ import { history } from "../redux/configureStore";
 
 import { useDispatch, useSelector } from "react-redux";
 import { Grid, Text, Image, Button } from "../elements/Index";
-import userImage from "../images/임시로고.jpg";
 import LoginModal from "./LoginModal";
 import { userCreators } from "../redux/modules/user";
 
@@ -13,11 +12,13 @@ import { deleteCookie } from "../shared/Cookie";
 
 const HeaderRight = (props) => {
   const dispatch = useDispatch();
-  const isToken = document.cookie.split("=")[1];
-  const user_info = useSelector((state) => state.user);
-
-  console.log(isToken);
-  console.log(user_info);
+  const isToken = document.cookie;
+  const userInfo = useSelector((state) => state.user);
+  console.log(userInfo);
+  // console.log(isToken);
+  // console.log(isToken);
+  // console.log(userInfo);
+  // console.log("나의 타입은?", props);
   const [showModal, setShowModal] = React.useState(false);
   const sigunupModalState = useSelector(
     (state) => state.user.sigunupModalState
@@ -46,22 +47,50 @@ const HeaderRight = (props) => {
         width="auto"
       >
         <HeaderWrapper>
-          <Grid display="flex" alignItems="center" margin="0 20px">
-            <Image
+          <IconWrap>
+            <Grid
+              display="flex"
+              alignItems="center"
+              margin="0 20px"
               _onClick={() => {
-                history.push(`/mypage/${user_info.userId}`);
+                console.log;
+                history.push(`/mypage/${userInfo.userId}`);
               }}
-              src={userImage}
-              size="50"
-            />
-            {/* <Text bold>{user_info.nickname}님 환영합니다!</Text> */}
-          </Grid>
-          <Button
-            height="50px"
-            width="132px"
-            text="로그아웃"
-            _onClick={logOut}
-          ></Button>
+            >
+              {userInfo.userPropensityType === "LVG" && (
+                <Image size="50" src="/img/호랑이.png"></Image>
+              )}
+              {userInfo.userPropensityType === "LVP" && (
+                <Image src="/img/늑대.png"></Image>
+              )}
+              {userInfo.userPropensityType === "LHG" && (
+                <Image src="/img/여우.png"></Image>
+              )}
+              {userInfo.userPropensityType === "LHP" && (
+                <Image src="/img/판다.png"></Image>
+              )}
+              {userInfo.userPropensityType === "FVG" && (
+                <Image src="/img/토끼.png"></Image>
+              )}
+              {userInfo.userPropensityType === "FVP" && (
+                <Image src="/img/개.png"></Image>
+              )}
+              {userInfo.userPropensityType === "FHG" && (
+                <Image src="/img/고양이.png"></Image>
+              )}
+              {userInfo.userPropensityType === "FHP" && (
+                <Image src="/img/물개.png"></Image>
+              )}
+            </Grid>
+          </IconWrap>
+          <ButtonWrap>
+            <Button
+              height="50px"
+              width="132px"
+              text="로그아웃"
+              _onClick={logOut}
+            ></Button>
+          </ButtonWrap>
         </HeaderWrapper>
       </Grid>
     );
@@ -87,9 +116,28 @@ const HeaderWrapper = styled.div`
   width: 100%;
   padding-right: 0px;
   justify-content: space-evenly;
-  /* @media screen and (max-width: 595px) {
-    display: none; */
-  /* } ; */
+  @media screen and (max-width: 595px) {
+    width: 20%;
+  } ;
+`;
+const ButtonWrap = styled.div`
+  @media screen and (max-width: 595px) {
+    display: none;
+  } ;
+`;
+
+const IconWrap = styled.div`
+  @media screen and (max-width: 595px) {
+    width: 90%;
+  } ;
+`;
+
+const CardImg = styled.img`
+  object-fit: cover;
+`;
+
+const UserImg = styled.img`
+  object-fit: cover;
 `;
 
 export default HeaderRight;
