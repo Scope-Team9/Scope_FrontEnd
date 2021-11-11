@@ -20,11 +20,11 @@ import EmailAuth from "./EmailAuth";
 import PropensityTest from "./propensityTest/PropensityTest";
 
 // MyPageInfo의 함수형 컴포넌트를 만든다.
-const MyPageInfo = props => {
+const MyPageInfo = (props) => {
   const dispatch = useDispatch();
   // const userId = useSelector((state) => state.user.userId);
   const userId = props.match.params.id;
-  const myUserId = useSelector(state => state.user.userId);
+  const myUserId = useSelector((state) => state.user.userId);
   // console.log(props);
   console.log(userId);
   console.log(myUserId);
@@ -138,7 +138,7 @@ const MyPageInfo = props => {
           <Banner>
             {myType === "LVG" && (
               <BannerTiger>
-                <BannerImg src="/img/호랑이배너.png"></BannerImg>
+                <BannerImg src="/img/호랑이배너.jpg"></BannerImg>
 
                 <Grid margin="-300px 0 0 35%">
                   <WhiteP>LVG / 호랑이</WhiteP>
@@ -370,7 +370,7 @@ const MyPageInfo = props => {
                         padding: "7px",
                       }}
                       defaultValue={mydata.user.nickname}
-                      onChange={e => {
+                      onChange={(e) => {
                         setNickName(e.target.value);
                       }}
                     ></input>
@@ -404,7 +404,7 @@ const MyPageInfo = props => {
                         padding: "7px",
                       }}
                       defaultValue={mydata.user.email}
-                      onChange={e => {
+                      onChange={(e) => {
                         setEmail(e.target.value);
                       }}
                     ></input>
@@ -427,7 +427,7 @@ const MyPageInfo = props => {
                       options={techStackOption}
                       className="basic-multi-select"
                       classNamePrefix="select"
-                      onChange={e => {
+                      onChange={(e) => {
                         let techStack = [];
                         let arr = e;
                         let idx = 0;
@@ -758,7 +758,7 @@ const Cards = styled.div`
   z-index: 1;
   position: relative;
   @media screen and (max-width: 1600px) {
-    width: 450px;
+    width: 400px;
   }
   @media screen and (max-width: 370px) {
     width: 250px;
@@ -922,6 +922,7 @@ const GotoTest = styled.p`
   font-size: 15px;
   font-weight: bold;
   cursor: pointer;
+  float: right;
 `;
 const MyResultText2 = styled.p`
   color: #707070;
