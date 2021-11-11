@@ -58,7 +58,7 @@ const HeaderRight = (props) => {
               }}
             >
               {userInfo.userPropensityType === "LVG" && (
-                <Image src="/img/호랑이.png"></Image>
+                <UserImg size="50" src="/img/호랑이.png"></UserImg>
               )}
               {userInfo.userPropensityType === "LVP" && (
                 <Image src="/img/늑대.png"></Image>
@@ -73,7 +73,7 @@ const HeaderRight = (props) => {
                 <Image src="/img/토끼.png"></Image>
               )}
               {userInfo.userPropensityType === "FVP" && (
-                <Image src="/img/허스키.png"></Image>
+                <Image src="/img/개.png"></Image>
               )}
               {userInfo.userPropensityType === "FHG" && (
                 <Image src="/img/고양이.png"></Image>
@@ -133,6 +133,10 @@ const IconWrap = styled.div`
 `;
 
 const CardImg = styled.img`
+  object-fit: cover;
+`;
+
+const UserImg = styled.img`
   object-fit: cover;
 `;
 

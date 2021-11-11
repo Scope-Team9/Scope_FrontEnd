@@ -124,8 +124,8 @@ const emailCheckMiddleWare = (email) => {
       .checkEmail(email)
       .then((res) => {
         console.log(res);
-        if (res.data.msg == "사용가능한 메일입니다.") {
-          return window.alert("사용가능한 메일입니다.");
+        if (res.data.msg == "사용 가능한 메일입니다.") {
+          return window.alert("사용 가능한 메일입니다.");
         }
       })
       .catch((err) => {
@@ -194,8 +194,9 @@ const signupMiddleware = (signupInfo) => {
     apis
       .signup(signupInfo)
       .then((res) => {
-        const ACCESS_TOKEN = res.data.token;
-        localStorage.setItem("token", ACCESS_TOKEN);
+        console.log(res.response);
+        // const ACCESS_TOKEN = res.data.token;
+        // localStorage.setItem("token", ACCESS_TOKEN);
         dispatch(
           setUser({
             userPropensityType: res.data.data.userPropensityType,
@@ -208,7 +209,7 @@ const signupMiddleware = (signupInfo) => {
         history.replace("/");
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response);
       });
   };
 };
