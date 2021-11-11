@@ -8,17 +8,17 @@ import { stackAction } from "../redux/modules/stack";
 
 const Stack = () => {
   const dispatch = useDispatch();
-  const is_clicked = useSelector((state) => state.stack.stack);
+  const is_clicked = useSelector(state => state.stack.stack);
 
   // console.log(Object.keys(stackList));
 
   // 리덕스에서 filter가 잘 되지만, 다시 불러오면 그대로임 ㅡㅡ
-  const onclick = (stack) => {
+  const onclick = stack => {
     // const testResult = Object.keys(stackList).find((item) => item === stack);
     // console.log("희망", testResult);
 
     //Object.key 또는 Object.values 로 배열의 키와 밸류 값들을 찾을 수 있다.
-    const result = Object.values(is_clicked).find((item) => item === stack);
+    const result = Object.values(is_clicked).find(item => item === stack);
     // console.log("이 값이 있으면 지워줘야함", result);
     if (result) {
       dispatch(postActions.isMainPage(true));
@@ -38,11 +38,11 @@ const Stack = () => {
   return (
     <Grid
       display="flex"
-      width="80%"
-      justifyContent="space-evenly"
-      margin="auto auto 20px auto"
+      width="73%"
+      // justifyContent="space-evenly"
+      margin="25px auto 20px auto"
       boxShadow="0px 0px 10px #ddd"
-      padding="5px 50px"
+      padding="5px 10px"
       borderRadius="20px"
       overflow="auto"
     >
@@ -165,12 +165,25 @@ const Stack = () => {
 
 const IMGS = styled.img`
   cursor: pointer;
-  width: 80px;
-  margin: 10px;
+  width: 68px;
+  margin: 10px 15px;
+  @media screen and (max-width: 750px) {
+    width: 30px;
+  }
 `;
 
 const BorderRadius = styled.div`
   border-radius: 250px;
+`;
+const StackWrap = styled.div`
+  display: flex;
+  width: 80%;
+  justify-content: space-evenly;
+  margin: auto auto 20px auto;
+  box-shadow: 0px 0px 10px #ddd;
+  padding: 5px 50px;
+  border-radius: 20px;
+  overflow: auto;
 `;
 
 export default Stack;

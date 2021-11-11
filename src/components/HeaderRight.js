@@ -5,23 +5,22 @@ import { history } from "../redux/configureStore";
 
 import { useDispatch, useSelector } from "react-redux";
 import { Grid, Text, Image, Button } from "../elements/Index";
-import userImage from "../images/임시로고.jpg";
+import UserList from "./UserList";
 import LoginModal from "./LoginModal";
 import { userCreators } from "../redux/modules/user";
 
 import { deleteCookie } from "../shared/Cookie";
 
-const HeaderRight = (props) => {
+const HeaderRight = props => {
   const dispatch = useDispatch();
   const isToken = document.cookie.split("=")[1];
-  const user_info = useSelector((state) => state.user);
+  const userInfo = useSelector(state => state.user);
+  console.log(userInfo);
 
   console.log(isToken);
-  console.log(user_info);
+  console.log(userInfo);
   const [showModal, setShowModal] = React.useState(false);
-  const sigunupModalState = useSelector(
-    (state) => state.user.sigunupModalState
-  );
+  const sigunupModalState = useSelector(state => state.user.sigunupModalState);
   const modalOpen = () => {
     setShowModal(true);
   };
@@ -46,22 +45,32 @@ const HeaderRight = (props) => {
         width="auto"
       >
         <HeaderWrapper>
-          <Grid display="flex" alignItems="center" margin="0 20px">
-            <Image
-              _onClick={() => {
-                history.push(`/mypage/${user_info.userId}`);
-              }}
-              src={userImage}
-              size="50"
-            />
-            {/* <Text bold>{user_info.nickname}님 환영합니다!</Text> */}
-          </Grid>
-          <Button
-            height="50px"
-            width="132px"
-            text="로그아웃"
-            _onClick={logOut}
-          ></Button>
+          <IconWrap>
+            <Grid display="flex" alignItems="center" margin="0 20px">
+              {/* <UserList
+                list={userInfo.userPropensityType}
+                onClick={() => {
+                  console.log;
+                  history.push(`/mypage/${userInfo.userId}`);
+                }}
+              /> */}
+              <Image
+                _onClick={() => {
+                  history.push(`/mypage/${userInfo.userId}`);
+                }}
+                src="/img/호랑이.png"
+                size="50"
+              />
+            </Grid>
+          </IconWrap>
+          <ButtonWrap>
+            <Button
+              height="50px"
+              width="132px"
+              text="로그아웃"
+              _onClick={logOut}
+            ></Button>
+          </ButtonWrap>
         </HeaderWrapper>
       </Grid>
     );
@@ -87,9 +96,20 @@ const HeaderWrapper = styled.div`
   width: 100%;
   padding-right: 0px;
   justify-content: space-evenly;
-  /* @media screen and (max-width: 595px) {
-    display: none; */
-  /* } ; */
+  @media screen and (max-width: 595px) {
+    width: 20%;
+  } ;
+`;
+const ButtonWrap = styled.div`
+  @media screen and (max-width: 595px) {
+    display: none;
+  } ;
+`;
+
+const IconWrap = styled.div`
+  @media screen and (max-width: 595px) {
+    width: 90%;
+  } ;
 `;
 
 export default HeaderRight;
