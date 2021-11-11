@@ -378,7 +378,6 @@ const MyPageInfo = (props) => {
                 <Button
                   margin="15px auto 15px 36%"
                   height="40px"
-                  backgroundColor="#170184"
                   width="132px"
                   text="프로필 수정하기"
                   _onClick={editProfile}
@@ -499,9 +498,8 @@ const MyPageInfo = (props) => {
                 </MyInfoText2>
                 <div style={{ display: "flex" }}>
                   <Button
-                    margin="15px auto 15px 3%"
+                    margin="15px auto 15px 14%"
                     height="40px"
-                    backgroundColor="#170184"
                     width="132px"
                     text="프로필 저장하기"
                     _onClick={setEditProfile}
@@ -509,7 +507,6 @@ const MyPageInfo = (props) => {
                   <Button
                     margin="15px auto 15px 3%"
                     height="40px"
-                    backgroundColor="#170184"
                     width="132px"
                     text="취소하기"
                     _onClick={editProfileCancle}
