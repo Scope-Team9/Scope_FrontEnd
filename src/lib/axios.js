@@ -80,13 +80,16 @@ export const apis = {
     instance.post(`/api/user/${userId}/desc`, introduction),
   projectAssessmentPost: (postId) => instance.get(`/api/assessment/${postId}`),
   editUserInfo: (userId, data) => instance.post(`/api/user/${userId}`, data),
+  editUserInfo: (userId, data) => instance.post(`/api/user/${userId}`, data),
+  projectAssessmentPost: (postId) => instance.get(`/api/assessment/${postId}`),
 
   // 상세페이지
   addPost: (postInfo) => instance.post(`/api/post`, postInfo),
   detailPost: (postId) => instance.get(`/api/post/${postId}`),
   editPost: (postId, data) => instance.post(`/api/post/${postId}`, data),
   deletePost: (postId) => instance.delete(`/api/post/${postId}`),
-  statusPost: (postId) => instance.post(`/api/post/${postId}/status`),
+  statusPost: (postId, data) =>
+    instance.post(`/api/post/${postId}/status`, data),
 
   //data.json용
   // getPost: () => instance.get(`/post`),

@@ -25,18 +25,41 @@ const PostEdit = (props) => {
   const [checkPost, setCheckPost] = React.useState();
 
   const [postId, setPostId] = React.useState();
-  const [title, setTitle] = React.useState();
-  const [summary, setSummary] = React.useState();
+  const [title, setTitle] = React.useState("");
+  const [summary, setSummary] = React.useState("");
   const [techstack, setTectstack] = React.useState([]);
   const [totalMember, setTotalmember] = React.useState();
   const [recruitmentMember, setRecruitmentMember] = React.useState();
-  const [projectStatus, setProjectstatus] = React.useState();
+  const [projectStatus, setProjectstatus] = React.useState("");
   const [startDate, setStartdate] = React.useState(new Date());
   const [endDate, setEnddate] = React.useState(new Date());
-  const [contents, setContents] = React.useState();
+  const [contents, setContents] = React.useState("");
   const [techStackList, setTest] = React.useState();
   const [loaded, setLoaded] = React.useState(false);
 
+  // console.log("타이틀", title);
+  // console.log("한줄소개", summary);
+  // console.log("기술스택", techstack);
+  // console.log("총인원", totalMember);
+  // console.log("프로젝트 상태", typeof projectStatus);
+  // console.log("내용", contents);
+  // 예외처리
+  // const editHandler = () => {
+  //   if (
+  //     title.length > 0 &&
+  //     summary.length > 0 &&
+  //     techstack.length > 0 &&
+  //     totalMember > 0 &&
+  //     projectStatus.length > 0 &&
+  //     contents.length > 0
+  //   ) {
+  //     window.alert("값이 수정이 되었습니다.");
+  //   } else {
+  //     window.alert("모든 값을 입력해주세요.");
+  //   }
+  // };
+
+  // 수정
   let post_id = props.match.params.id;
   const scope_edit = () => {
     const editcard = {
@@ -49,14 +72,8 @@ const PostEdit = (props) => {
       startDate: startDate,
       endDate: endDate,
     };
-    dispatch(postDetailActions.editPostAPI(post_id, editcard));
-  };
 
-  const edit_status = () => {
-    const editstatus = {
-      projectStatus: projectStatus.value,
-    };
-    dispatch(postDetailActions.statusPostAPI(post_id, editstatus));
+    dispatch(postDetailActions.editPostAPI(post_id, editcard));
   };
 
   React.useEffect(() => {
@@ -322,37 +339,9 @@ const PostEdit = (props) => {
                 }}
               />
               <Grid display="flex" padding="16px">
-                {projectStatused[0]?.value === "done" && (
-                  <Btn
-                    onClick={() => {
-                      edit_status();
-                    }}
-                  >
-                    프로젝트 모집완료
-                  </Btn>
-                )}
-
-                {projectStatused[1]?.value === "doing" && (
-                  <Btn
-                    onClick={() => {
-                      edit_status();
-                    }}
-                  >
-                    프로젝트 진행중
-                  </Btn>
-                )}
-
-                {projectStatused[2]?.value === "ready" && (
-                  <Btn
-                    onClick={() => {
-                      edit_status();
-                    }}
-                  >
-                    프로젝트 준비중
-                  </Btn>
-                )}
                 <Btn
                   onClick={() => {
+                    // editHandler();
                     scope_edit();
                   }}
                 >

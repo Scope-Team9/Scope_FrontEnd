@@ -122,7 +122,7 @@ const PropensityTest = props => {
     }
 
     if (userPropensityType.length === 9 && memberPropensityType === 9) {
-      return dispatch(userCreators.signupMiddleware(registerInfo));
+      // return dispatch(userCreators.signupMiddleware(registerInfo));
     } else {
       window.alert("설문지가 정확히 작성되지 않았습니다!");
       return false;
@@ -139,7 +139,7 @@ const PropensityTest = props => {
       {/* 상단헤더 */}
       <Grid
         height="10%"
-        bg="#170184"
+        bg="#B29CF4"
         position="relative"
         textAlign="center"
         padding="10px 0 10px 0"
@@ -221,18 +221,13 @@ const PropensityTest = props => {
       <Grid
         display="flex"
         width="90%"
-        justifyContent="space-between"
+        justifyContent="center"
         height="100%"
         margin="30px auto"
       >
         {/* 5.다음결과값이 없을때 페이지처리 */}
         {page !== 1 && page !== 10 && (
-          <Button
-            width="40%"
-            margin="5px"
-            _onClick={preStep}
-            backgroundColor="#555"
-          >
+          <Button width="40%" margin="5px" _onClick={preStep}>
             이전버튼
           </Button>
         )}

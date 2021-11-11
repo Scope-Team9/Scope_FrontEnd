@@ -34,6 +34,7 @@ export const editPostAPI = (post_id, editcard) => {
       });
   };
 };
+
 // 포스트 삭제
 export const deletePostAPI = (postId) => {
   return function (dispatch, getState, { history }) {
@@ -47,11 +48,12 @@ export const deletePostAPI = (postId) => {
       });
   };
 };
+
 // 포스트 상태체크
-export const statusPostAPI = (editstatus) => {
+export const statusPostAPI = (post_id, editstatus) => {
   return function (dispatch, getState, { history }) {
     apis
-      .statusPost(editstatus)
+      .statusPost(post_id, editstatus)
       .then((res) => {
         history.goBack();
       })
@@ -70,14 +72,29 @@ const bookMarkAPI = (postId) => {
         console.log(res);
         console.log(res.data.data.isBookmarkChecked);
         if (res.data.msg == "북마크 추가 성공") {
-          window.alert("관심프로젝트로 추가되었습니다!");
-        } else {
-          window.alert("관심프로젝트로 삭제되었습니다!");
-          return;
+          return window.alert("관심프로젝트로 추가되었습니다!");
+        }
+        if (res.data.msg == "북마크 삭제 성공") {
+          return window.alert("관심프로젝트로 삭제되었습니다!");
         }
       })
       .catch((err) => {
-        console.log(err.response);
+        console.log(err.response.data.msg);
+        if (err.response.data.msg == "해당 유저를 찾을 수 없습니다.") {
+          return window.alert("해당 유저를 찾을 수 없습니다.");
+        }
+        if (err.response.data.msg == "해당 프로젝트를 찾을 수 없습니다.") {
+          return window.alert("해당 프로젝트를 찾을 수 없습니다.");
+        }
+        if (err.response.data.msg == "자신의 게시물은 북마크할 수 없습니다.") {
+          return window.alert("자신의 게시물은 북마크할 수 없습니다!");
+        }
+        if (err.response.data.msg == "로그인 사용자만 사용할 수 있습니다.") {
+          return window.alert("로그인 사용자만 사용할 수 있습니다.");
+        }
+        if (err.response.data.msg == "입력 값이 잘못되었습니다.") {
+          return window.alert("로그인 사용자만 사용할 수 있습니다.");
+        }
       });
   };
 };

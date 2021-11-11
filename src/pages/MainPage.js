@@ -111,8 +111,9 @@ const MainPage = () => {
       </ResponsiveSidebar> */}
       <Grid margin="-10px 0 0 0 ">
         <Inside>
-          <TopBanner />
+          {/* <TopBanner /> */}
           <MainSlide />
+
           <Stacks>
             <Stack />
           </Stacks>
@@ -238,14 +239,14 @@ const Filtering = styled.p`
 const Btn = styled.button`
   position: fixed;
   bottom: 70px;
-  border: 1px solid #42309b;
+  border: 1px solid #c4c4c4;
   border-radius: 50%;
   width: 60px;
   height: 60px;
   text-align: center;
   right: 50px;
   margin: auto;
-  background: #42309b;
+  background: #c4c4c4;
   cursor: pointer;
 
   @media screen and (max-width: 750px) {

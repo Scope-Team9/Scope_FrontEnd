@@ -34,7 +34,7 @@ const Progress = props => {
 };
 
 const ProgressBar = styled.div`
-  border: 3px solid #170184;
+  border: 3px solid #b29cf4;
   border-radius: 25px;
   background: #f1f9ff;
   width: 100%;
@@ -43,7 +43,7 @@ const ProgressBar = styled.div`
 
 const HighLight = styled.div`
   border-radius: 25px;
-  background: #170184;
+  background: #b29cf4;
   transition: 1s;
   width: ${props => props.width};
   height: 15px;
@@ -58,7 +58,7 @@ const ArrowBubbleTwo = styled.div`
   /* -webkit-border-radius: 35px;
   -moz-border-radius: 35px; */
   border-radius: 10px;
-  border: #170184 solid 3px;
+  border: #b29cf4 solid 3px;
 
   ::after {
     content: "";
@@ -78,7 +78,7 @@ const ArrowBubbleTwo = styled.div`
     position: absolute;
     border-style: solid;
     border-width: 8px 12px 0;
-    border-color: #170184 transparent;
+    border-color: #b29cf4 transparent;
     display: block;
     width: 0;
     z-index: 0;

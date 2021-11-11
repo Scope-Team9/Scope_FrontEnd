@@ -24,6 +24,7 @@ const PostDetail = (props) => {
   const [applyStatusModal, setApplyStatusModal] = React.useState(false); //신청현황
   const [applyUserModal, setApplyUserModal] = React.useState(false); //지원취소
   const [applyValue, setApplyValue] = React.useState();
+  const [projectStatus, setProjectstatus] = React.useState(""); // 프로젝트 상태
 
   const applyStatusModalOpen = () => {
     setApplyStatusModal(true);
@@ -33,8 +34,24 @@ const PostDetail = (props) => {
     setApplyValue(value);
     setApplyUserModal(true);
   };
-  let post_id = props.match.params.id;
 
+  // 상태변경
+  const edit_status = () => {
+    const editstatus = {
+      projectStatus: projectStatused,
+    };
+    console.log("상태야", projectStatused[0].value);
+    dispatch(postDetailActions.statusPostAPI(post_id, editstatus));
+  };
+
+  // 게시글 작성(프로젝트 상태)
+  const projectStatused = [
+    { value: "done", label: "모집중" },
+    { value: "doing", label: "진행중" },
+    { value: "ready", label: "종료" },
+  ];
+
+  let post_id = props.match.params.id;
   const userId = useSelector((state) => state.user.userId); //로그인 유저아이디
   const postUserId = checkPost?.data.data.post.userId;
 
@@ -82,7 +99,14 @@ const PostDetail = (props) => {
         alignItems="center"
       >
         <SideBarImg src={Img} style={{ maxWidth: "100%", height: "100%" }} />
-        <Grid padding="0px 16px">
+        <Grid margin="auto 20px" position="relative">
+          {userId !== postUserId && (
+            <Grid width="50px" position="absolute" top="20px" right="20px">
+              <Button _onClick={ToggleBookMark}>
+                {!passedData?.bookmarkChecked ? "관심없음" : "관심있음"}
+              </Button>
+            </Grid>
+          )}
           <Title>Scoope</Title>
           <Text color="#C4C4C4" size="20px" bold>
             <span style={{ color: "black" }}>제목</span> : {passedData?.title}
@@ -136,7 +160,6 @@ const PostDetail = (props) => {
                       width="100%"
                       height="40px"
                       borderRadius="50px"
-                      backgroundColor="#42309b"
                       _onClick={applyStatusModalOpen}
                     >
                       신청현황 확인
@@ -186,7 +209,35 @@ const PostDetail = (props) => {
               <Grid>
                 {userId === postUserId ? (
                   <Grid display="flex" justifyContent="center">
-                    <Btn>모집완료</Btn>
+                    {projectStatused[0]?.value === "done" && (
+                      <Btn
+                        onClick={() => {
+                          edit_status();
+                        }}
+                      >
+                        프로젝트 마감입력완료
+                      </Btn>
+                    )}
+
+                    {projectStatused[1]?.value === "doing" && (
+                      <Btn
+                        onClick={() => {
+                          edit_status();
+                        }}
+                      >
+                        프로젝트 마감하기
+                      </Btn>
+                    )}
+
+                    {projectStatused[2]?.value === "ready" && (
+                      <Btn
+                        onClick={() => {
+                          edit_status();
+                        }}
+                      >
+                        모집완료
+                      </Btn>
+                    )}
                     <Btn
                       onClick={() => {
                         history.push({ pathname: `/postedit/${post_id}` });
@@ -197,6 +248,7 @@ const PostDetail = (props) => {
                     <Btn
                       onClick={() => {
                         DeletePost();
+                        window.alert("삭제되었습니다.");
                       }}
                     >
                       포스트삭제
@@ -213,7 +265,6 @@ const PostDetail = (props) => {
                       width="120px"
                       height="40px"
                       margin="auto 10px"
-                      backgroundColor="#42309b"
                       borderRadius="50px"
                     >
                       지원신청
@@ -232,7 +283,6 @@ const PostDetail = (props) => {
                       width="120px"
                       height="40px"
                       margin="auto 10px"
-                      backgroundColor="#42309b"
                       borderRadius="50px"
                     >
                       지원취소
@@ -244,7 +294,6 @@ const PostDetail = (props) => {
                       }}
                       width="120px"
                       height="40px"
-                      backgroundColor="#42309b"
                       margin="auto 10px"
                     >
                       팀탈퇴
