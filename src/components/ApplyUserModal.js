@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { applyCreators } from "../redux/modules/applyProject";
 import CloseIcon from "@mui/icons-material/Close";
 
-const ApplyUserModal = (props) => {
+const ApplyUserModal = props => {
   const dispatch = useDispatch();
   const { applyUserModal, setApplyUserModal, applyValue, postId } = props;
   const [comment, setComment] = React.useState();
@@ -41,7 +41,7 @@ const ApplyUserModal = (props) => {
       <Dialog maxWidth={"sm"} scroll="paper" open={applyUserModal}>
         {applyValue === "apply" && (
           <ModalWrap>
-            <Grid height="10%" bg="#eee" position="relative">
+            <Grid height="10%" position="relative">
               <Grid
                 position="absolute"
                 top="0px"
@@ -51,30 +51,42 @@ const ApplyUserModal = (props) => {
               >
                 <CloseIcon fontSize="large" onClick={modalClose} />
               </Grid>
-              <Grid alignItems="center">
-                <Text margin="0 0 0 20px" bold>
+            </Grid>
+            <Grid
+              margin="auto"
+              height="90%"
+              // justifyContent="center"
+              width="320px"
+              alignItems="center"
+            >
+              <Grid height="20%" textAlign="center">
+                <Text size="30px" bold>
                   지원신청
                 </Text>
               </Grid>
-            </Grid>
-            <Grid display="flex" height="200px" justifyContent="center">
-              <Grid>
+              <Grid height="25%" margin="10px 0" textAlign="center">
                 <Input
+                  border="1px solid #eee"
+                  height="100%"
                   backgroundColor="#fff"
                   placeholder="신청자분을 간단히 소개해주세요!"
-                  _onChange={(e) => {
+                  _onChange={e => {
                     console.log(e.target.value);
                     setComment(e.target.value);
                   }}
                 ></Input>
-                <Button _onClick={apply}>지원신청</Button>
+              </Grid>
+              <Grid height="10%">
+                <Button borderRadius="25px" _onClick={apply}>
+                  지원신청
+                </Button>
               </Grid>
             </Grid>
           </ModalWrap>
         )}{" "}
         {applyValue === "cancel" && (
           <ModalWrap>
-            <Grid height="10%" bg="#eee" position="relative">
+            <Grid height="10%" position="relative">
               <Grid
                 position="absolute"
                 top="0px"
@@ -84,22 +96,37 @@ const ApplyUserModal = (props) => {
               >
                 <CloseIcon fontSize="large" onClick={modalClose} />
               </Grid>
-              <Grid alignItems="center">
-                <Text margin="0 0 0 20px" bold>
+            </Grid>
+
+            <Grid
+              margin="auto"
+              height="90%"
+              // justifyContent="center"
+              width="320px"
+              alignItems="center"
+              textAlign="center"
+            >
+              <Grid height="20%">
+                <Text size="30px" bold>
                   지원취소
                 </Text>
               </Grid>
-            </Grid>
-            <Grid display="flex" height="85%" justifyContent="center">
-              <Grid>
-                <Button _onClick={cancel}>지원취소</Button>
+              <Grid height="25%" margin="10px 0">
+                <Text size="14px">
+                  지원취소를 원하시면 아래 버튼을 클릭해주세요
+                </Text>
+              </Grid>
+              <Grid height="10%">
+                <Button borderRadius="25px" _onClick={cancel}>
+                  지원취소
+                </Button>
               </Grid>
             </Grid>
           </ModalWrap>
         )}
         {applyValue === "teamExit" && (
           <ModalWrap>
-            <Grid height="10%" bg="#eee" position="relative">
+            <Grid height="10%" position="relative">
               <Grid
                 position="absolute"
                 top="0px"
@@ -109,15 +136,31 @@ const ApplyUserModal = (props) => {
               >
                 <CloseIcon fontSize="large" onClick={modalClose} />
               </Grid>
-              <Grid alignItems="center">
-                <Text margin="0 0 0 20px" bold>
+            </Grid>
+
+            <Grid
+              margin="auto"
+              height="90%"
+              // justifyContent="center"
+              width="320px"
+              alignItems="center"
+              textAlign="center"
+            >
+              <Grid height="20%" textAlign="center">
+                <Text size="30px" bold>
                   팀탈퇴
                 </Text>
               </Grid>
-            </Grid>
-            <Grid display="flex" height="85%" justifyContent="center">
-              <Grid>
-                <Button _onClick={exitTeam}>팀원탈퇴</Button>
+              <Grid height="25%" margin="10px 0">
+                <Text size="14px">
+                  정말로 탈퇴하시겠습니까? <br /> 한번 탈퇴하면 다시 신청이
+                  불가능할 수 있습니다.
+                </Text>
+              </Grid>
+              <Grid height="10%">
+                <Button borderRadius="25px" _onClick={exitTeam}>
+                  팀탈퇴
+                </Button>
               </Grid>
             </Grid>
           </ModalWrap>
@@ -129,7 +172,8 @@ const ApplyUserModal = (props) => {
 
 const ModalWrap = styled.div`
   width: 550px;
-  height: 300px;
+  height: 250px;
+  position: relative;
 `;
 
 export default ApplyUserModal;

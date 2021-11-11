@@ -20,6 +20,8 @@ const Input = (props) => {
     padding,
     height,
     border,
+    borderbottom,
+    maxLength,
     borderRadius,
     bg,
     backgroundImage,
@@ -34,8 +36,10 @@ const Input = (props) => {
     padding,
     height,
     border,
+    borderbottom,
     borderRadius,
     bg,
+    maxLength,
     backgroundImage,
     inputFocusOutline,
     inputFocusBorder,
@@ -51,6 +55,7 @@ const Input = (props) => {
           value={value}
           defaulValue={defaulValue}
           rows={10}
+          maxLength={maxLength}
           placeholder={placeholder}
           onChange={_onChange}
         ></ElTextarea>
@@ -72,6 +77,7 @@ const Input = (props) => {
           defaulValue={defaulValue}
           placeholder={placeholder}
           onChange={_onChange}
+          maxLength={maxLength}
           ref={innerRef}
           onKeyPress={(e) => {
             console.log(e.key);
@@ -96,6 +102,7 @@ const Input = (props) => {
         type={type}
         placeholder={placeholder}
         value={editValue}
+        maxLength={maxLength}
         defaulValue={defaulValue}
         onChange={_onChange}
         ref={innerRef}
@@ -123,6 +130,7 @@ Input.defaultProps = {
   width: "100%",
   height: false,
   border: false,
+  borderbottom: false,
   borderRadius: false,
   bg: false,
   backgroundImage: false,
@@ -136,10 +144,11 @@ const ElTextarea = styled.textarea`
   border: ${(props) => props.border};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
+  border-radius: 25px;
   border-radius: ${(props) => props.borderRadius};
   background: ${(props) => props.bg};
   padding: ${(props) => props.padding};
-  backgroundimage: ${(props) => props.backgroundImage};
+  background-image: ${(props) => props.backgroundImage};
   box-sizing: border-box;
   background-color: ${(props) => props.backgroundColor};
 `;
@@ -149,12 +158,14 @@ const ElInput = styled.input`
   border: ${(props) => props.border};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
+  text-align: ${(props) => props.textAlign};
   border-radius: ${(props) => props.borderRadius};
+  border-bottom: ${(props) => props.borderBottom};
   background: ${(props) => props.bg};
   padding: ${(props) => props.padding};
-  backgroundimage: ${(props) => props.backgroundImage};
+  background-image: ${(props) => props.backgroundImage};
   box-sizing: border-box;
-  border-radius: 5px;
+
   background-color: ${(props) => props.backgroundColor};
   font-size: ${(props) => props.fontSize};
   &:focus {

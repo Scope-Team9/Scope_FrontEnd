@@ -5,10 +5,11 @@ import HeaderLeft from "../components/HeaderLeft";
 import HeaderRight from "./HeaderRight";
 
 const Header = () => {
+  //로고를 망원경 하나로 바꾸고 , 닉네임 없애고, 로그아웃을 삼단선으로
   return (
     <>
       <Grid
-        width="70vw"
+        width="auto%"
         height="60px"
         display="flex"
         justifyContent="space-between"
@@ -16,12 +17,14 @@ const Header = () => {
         bg="rgba(255, 255, 255, 0)"
         padding="20px"
         zIndex="10"
-        margin="auto"
+        position="relative"
+
+        // margin="auto"
       >
-        <Grid width="auto" height="auto">
+        <Grid width="auto" height="auto" margin="0 0 0 20px">
           <HeaderLeft />
         </Grid>
-        <Grid width="auto" height="auto">
+        <Grid width="auto" height="auto" margin="0 40px 0 0 ">
           <HeaderRight />
         </Grid>
       </Grid>

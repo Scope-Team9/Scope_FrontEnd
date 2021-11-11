@@ -1,44 +1,98 @@
 import React from "react";
-import { Grid, Button } from "../../elements/Index";
+import { Grid, Button, Text } from "../../elements/Index";
 
 const TestSix = props => {
   const { handleUserCreate, handleMemberCreate } = props;
+  const [nowClickU, setNowClickU] = React.useState(null);
+  const [prevClickU, setPrevClickU] = React.useState(null);
+  const [nowClickMB, setNowClickMB] = React.useState(null);
+  const [prevClickMB, setPrevClickMB] = React.useState(null);
+
+  const clickUser = answer => {
+    setNowClickU(answer);
+  };
+  const clickMember = answer => {
+    setNowClickMB(answer);
+  };
+
+  //유저 설문 버튼 클릭유지
+  React.useEffect(
+    e => {
+      //값이 들어오면 해당 버튼 css 변경
+      if (nowClickU !== null) {
+        let current = document.getElementById(nowClickU);
+        current.style.backgroundColor = "#B29CF4";
+        current.style.color = "#fff";
+      }
+      //다른 버튼이 클릭될경우 기존 스테이트값이 이전버튼스테이트로 이동
+      if (prevClickU !== null) {
+        let prev = document.getElementById(prevClickU);
+        prev.style.color = "#B29CF4";
+        prev.style.backgroundColor = "#fff";
+      }
+      setPrevClickU(nowClickU);
+    },
+    [nowClickU]
+  );
+
+  //멤버 설문 버튼 클릭유지
+  React.useEffect(
+    e => {
+      if (nowClickMB !== null) {
+        let current = document.getElementById(nowClickMB);
+        current.style.backgroundColor = "#B29CF4";
+        current.style.color = "#fff";
+      }
+
+      if (prevClickMB !== null) {
+        let prev = document.getElementById(prevClickMB);
+        prev.style.color = "#B29CF4";
+        prev.style.backgroundColor = "#fff";
+      }
+      setPrevClickMB(nowClickMB);
+    },
+    [nowClickMB]
+  );
   return (
     <Grid>
-      <Grid height="30px" bg="#007BFF">
-        리더형/팔로워형 테스트
-      </Grid>
-      <div>성향테스트 6번</div>
       <Grid display="flex" flexDirection="column">
-        <Grid>
-          <div>
+        <Grid margin="20px 0">
+          <Grid>
             Q6.당신이 생각할 때 더 좋은 성과를 만들 수 있을 것 같은 팀은?
             <Button
               isTest
+              isId="UV"
               isValue="V"
               _onClick={e => {
+                clickUser(e.target.id);
                 handleUserCreate(e.target.value);
               }}
             >
-              V. 직책에 따라 책임이 분배되는 팀
+              직책에 따라 책임이 분배되는 팀
             </Button>
             <Button
               isTest
+              isId="UH"
               isValue="H"
               _onClick={e => {
+                clickUser(e.target.id);
                 handleUserCreate(e.target.value);
               }}
             >
-              H. 책임이 균등하게 나누어진 팀
+              책임이 균등하게 나누어진 팀
             </Button>
-          </div>
+          </Grid>
         </Grid>
         <Grid>
-          <div>Q6.당신의 팀원이 더 좋은 성과를 만들 수 있을 것 같은 팀은?</div>
+          <Grid>
+            Q6.당신의 팀원이 더 좋은 성과를 만들 수 있을 것 같은 팀은?
+          </Grid>
           <Button
             isTest
+            isId="MV"
             isValue="V"
             _onClick={e => {
+              clickMember(e.target.id);
               handleMemberCreate(e.target.value);
             }}
           >
@@ -46,8 +100,10 @@ const TestSix = props => {
           </Button>
           <Button
             isTest
+            isId="MH"
             isValue="H"
             _onClick={e => {
+              clickMember(e.target.id);
               handleMemberCreate(e.target.value);
             }}
           >

@@ -43,20 +43,22 @@ const HeaderRight = (props) => {
         justifyContent="space-around"
         alignItems="center"
         height="auto"
+        width="auto"
       >
         <HeaderWrapper>
-          <Grid display="flex" alignItems="center" margin="0 10px">
+          <Grid display="flex" alignItems="center" margin="0 20px">
             <Image
               _onClick={() => {
-                history.push(`/mypage/${user_id}`);
+                history.push(`/mypage/${user_info.userId}`);
               }}
               src={userImage}
+              size="50"
             />
-            <Text>{user_info.nickname}</Text>
+            {/* <Text bold>{user_info.nickname}님 환영합니다!</Text> */}
           </Grid>
           <Button
-            backgroundColor="#111"
-            width="100px"
+            height="50px"
+            width="132px"
             text="로그아웃"
             _onClick={logOut}
           ></Button>
@@ -72,21 +74,7 @@ const HeaderRight = (props) => {
         height="auto"
       >
         <HeaderWrapper>
-          <Grid display="flex" alignItems="center" margin="0 10px">
-            <Image
-              src={userImage}
-              _onClick={() => {
-                history.push("/mypage");
-              }}
-            />
-            <Text>사용자</Text>
-          </Grid>
-          <Button
-            backgroundColor="#333"
-            width="100px"
-            text="로그인"
-            _onClick={modalOpen}
-          ></Button>
+          <Button width="100px" text="로그인" _onClick={modalOpen}></Button>
           <LoginModal showModal={showModal} setShowModal={setShowModal} />
         </HeaderWrapper>
       </Grid>
@@ -97,7 +85,7 @@ const HeaderRight = (props) => {
 const HeaderWrapper = styled.div`
   display: flex;
   width: 100%;
-  padding-right: 36px;
+  padding-right: 0px;
   justify-content: space-evenly;
   /* @media screen and (max-width: 595px) {
     display: none; */

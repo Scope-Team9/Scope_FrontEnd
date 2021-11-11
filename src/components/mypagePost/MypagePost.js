@@ -27,12 +27,7 @@ const MypagePost = (props) => {
         }}
       >
         <Grid backgroundColor="#E7E1FF" borderRadius="30px">
-          <Grid
-            width="350px"
-            height="50px"
-            backgroundColor="#8B3FF8"
-            borderRadius="20px 20px 20px 0px"
-          >
+          <CardHeader>
             <Grid>{/* <TitleDate>D-2</TitleDate> */}</Grid>
             <>
               {props.techStack && (
@@ -43,7 +38,7 @@ const MypagePost = (props) => {
                 </Grid>
               )}
             </>
-          </Grid>
+          </CardHeader>
           <DescriptionBox>
             <Title>{props.title}</Title>
             <Summary>{props.summary}</Summary>
@@ -73,15 +68,39 @@ const TitleDate = styled.div`
 const DescriptionBox = styled.div`
   margin: 30px 20px;
 `;
+const CardHeader = styled.div`
+  width: 100%;
+  height: 70px;
+  background-color: #f1bad1;
+  border-radius: 30px 30px 0px 0px;
+  background: rgb(83, 201, 253);
+  background: linear-gradient(
+    140deg,
+    rgba(83, 201, 253, 1) 0%,
+    rgba(231, 170, 250, 1) 74%,
+    rgba(231, 170, 250, 1) 100%
+  );
+`;
 
 const Title = styled.h1`
+  margin-top: 15%;
   font-size: 20px;
+  width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #606060;
 `;
 
 const Summary = styled.div`
-  font-size: 14px;
+  font-size: 17px;
   color: gray;
-  margin-bottom: 80px;
+
+  margin-top: 8%;
+  overflow: hidden;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const Date = styled.div`
@@ -94,24 +113,49 @@ const Line = styled.hr`
 `;
 
 const ProjectState = styled.div`
-  margin-left: 260px;
-  margin-bottom: 10px;
+  margin-left: 80%;
+  margin-bottom: 55px;
+
+  @media (max-width: 750px) {
+    margin-left: 60%;
+  }
+  @media (max-width: 370px) {
+    margin-left: 60%;
+  }
 `;
 
 const ProductImgWrap = styled.div`
   background-color: white;
-  width: 60vw;
+  width: 80vw;
+  height: 80%;
   max-width: 350px;
   margin: auto;
   margin-top: 30px;
   margin-bottom: 30px;
   border-radius: 30px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.24);
-  @media (max-width: 750px) {
-    width: 100%;
+  @media (max-width: 1700px) {
+    width: 400px;
+    height: 80%;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
   }
+  @media (max-width: 1200px) {
+    width: 300px;
+    height: 80%;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
   @media (max-width: 450px) {
-    width: 100%;
+    width: 300px;
+    height: 280px;
+    margin: auto;
+    margin-left: 1%;
+    margin-top: 30px;
+    margin-bottom: 30px;
   }
 `;
 

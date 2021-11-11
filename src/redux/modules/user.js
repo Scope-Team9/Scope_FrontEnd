@@ -37,7 +37,7 @@ const kakaologinMiddleware = code => {
       .kakaoLogin(code)
       .then(res => {
         console.log(res);
-        if (res.data.status == 300) {
+        if (res.data.msg == "추가 정보 작성이 필요한 사용자입니다.") {
           window.alert("추가정보 작성이 필요합니다.");
           dispatch(
             firstUser({
@@ -48,7 +48,7 @@ const kakaologinMiddleware = code => {
           history.replace("/");
           return;
         }
-        if (res.status === 200) {
+        if (res.data.msg == "로그인이 완료되었습니다") {
           let userCookie = res.data.data.token;
           setCookie("ScopeUser", userCookie, 30);
           // const ACCESS_TOKEN = res.data.token;
@@ -80,7 +80,7 @@ const githubLoginMiddleware = code => {
     apis
       .githubLogin(code)
       .then(res => {
-        if (res.data.status == 300) {
+        if (res.data.msg == "추가 정보 작성이 필요한 사용자입니다.") {
           window.alert("추가정보 작성이 필요합니다.");
           dispatch(
             firstUser({
@@ -89,10 +89,10 @@ const githubLoginMiddleware = code => {
             })
           );
 
-          history.replace("/");
+          // history.replace("/");
           return;
         }
-        if (res.status === 200) {
+        if (res.data.msg == "로그인이 완료되었습니다") {
           let userCookie = res.data.data.token;
           setCookie("ScopeUser", userCookie, 30);
           dispatch(
@@ -122,38 +122,36 @@ const emailCheckMiddleWare = email => {
       .checkEmail(email)
       .then(res => {
         console.log(res);
-        if (res.data.status == 200) {
-          window.alert("사용가능한 메일입니다.");
-        } else {
-          if (res.data.status == 400) {
-            window.alert("중복된 이메일이 존재합니다");
-          }
+        if (res.data.msg == "사용가능한 메일입니다.") {
+          return window.alert("사용가능한 메일입니다.");
         }
       })
       .catch(err => {
-        console.log(err);
+        console.log(err.response);
+        if (err.response.data.msg == "중복된 이메일이 존재합니다.") {
+          return window.alert("중복된 이메일이 존재합니다");
+        }
       });
   };
 };
 
 // 닉네임 중복체크 미들웨어
 const nickCheckMiddleWare = nickName => {
-  console.log(nickName);
   return () => {
     apis
       .checkNick(nickName)
       .then(res => {
-        console.log(res);
-        if (res.data.status == 200) {
+        console.log(res.data);
+        if (res.data.msg == "사용가능한 닉네임입니다.") {
           window.alert("사용가능한 닉네임입니다.");
-        } else {
-          if (res.data.status == 400) {
-            window.alert("중복된 닉네임이 존재합니다");
-          }
+          return;
         }
       })
       .catch(err => {
-        console.log(err);
+        console.log(err.response);
+        if (err.response.data.msg == "중복된 닉네임이 존재합니다.") {
+          return window.alert("중복된 닉네임이 존재합니다.");
+        }
       });
   };
 };
@@ -181,7 +179,7 @@ const myUserAPI = () => {
             userPropensityType: res.data.data.userPropensityType,
           })
         );
-        history.replace("/");
+        // history.replace("/");
       })
       .catch(err => {
         console.log(err);
@@ -198,8 +196,11 @@ const signupMiddleware = signupInfo => {
         localStorage.setItem("token", ACCESS_TOKEN);
         dispatch(
           setUser({
-            userTestResult: res.data.userTestResult,
-            memberTestResult: res.data.memberTestResult,
+            userPropensityType: res.data.data.userPropensityType,
+            memberPropensityType: res.data.data.memberPropensityType,
+            applicantDate: res.data.data.applicantDate,
+            comment: res.data.data.comment,
+            isAssessment: res.data.data.isAssessment,
           })
         );
         history.replace("/");
@@ -210,8 +211,24 @@ const signupMiddleware = signupInfo => {
   };
 };
 //협업테스트 수정 미들웨어
-const editTestMiddleware = () => {
-  return function (dispatch, getState, { history }) {};
+const editTestMiddleware = (userId, testInfo) => {
+  return function (dispatch, getState, { history }) {
+    apis
+      .editTest(userId, testInfo)
+      .then(res => {
+        console.log(res);
+        dispatch(
+          setUser({
+            userPropensityType: res.data.data.userPropensityType,
+            memberPropensityType: res.data.data.memberPropensityType,
+          })
+        );
+        window.alert("성향 테스트가 업데이트 되었습니다!");
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 };
 
 //리듀서
@@ -234,9 +251,11 @@ export default handleActions(
         draft.techStack = action.payload.user.techStack;
         draft.is_login = true;
         draft.sigunupModalState = false;
-        draft.userTestResult = action.payload.user.userTestResult;
-        draft.memberTestResult = action.payload.user.memberTestResult;
+        draft.memberPropensityType = action.payload.user.memberPropensityType;
         draft.userPropensityType = action.payload.user.userPropensityType;
+        draft.applicantDate = action.payload.user.applicantDate;
+        draft.comment = action.payload.user.comment;
+        draft.isAssessment = action.payload.user.isAssessment;
       }),
     [LOG_OUT]: (state, action) =>
       produce(state, draft => {

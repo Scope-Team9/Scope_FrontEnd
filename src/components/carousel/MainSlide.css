@@ -2,20 +2,18 @@
 @import "slick-carousel/slick/slick-theme.css";
 
 .Container {
-  width: 70vw;
-  margin: 10px auto 7rem auto;
-  height: 100%;
+  width: 73vw;
+  margin: 0px auto 100px auto;
+  display: block;
 }
 
 .slide img {
   postiion: relative;
-  border-radius: 30px;
   width: 100%;
   margin: 0 auto;
 }
 
 .slide {
-  transform: scale(0.45);
   transition: transform 300ms;
   opacity: 0.5;
 }
@@ -26,7 +24,7 @@
 }
 
 .arrow {
-  background-color: #fff;
+  background-color: transparent;
   position: absolute;
   cursor: pointer;
   z-index: 10;
@@ -42,16 +40,4 @@
 .prev {
   left: 0%;
   top: 50%;
-}
-.btn {
-  background-color: #fff;
-  margin: auto;
-  position: absolute;
-  top: 80%;
-  left: 30%;
-  width: 40%;
-  height: 10%;
-  border: 1px solid #111;
-  border-radius: 10px;
-  text-align: center;
 }

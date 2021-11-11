@@ -8,13 +8,16 @@ import Select from "react-select";
 import { history } from "../redux/configureStore";
 import PropensityTest from "./propensityTest/PropensityTest";
 import CloseIcon from "@mui/icons-material/Close";
+import Symbol from "../images/tiger.jpg";
 
-const LoginModal = props => {
+const LoginModal = (props) => {
   const dispatch = useDispatch();
-  const userInfo = useSelector(state => state.user);
-  const sigunupModalState = useSelector(state => state.user.sigunupModalState);
+  const userInfo = useSelector((state) => state.user);
+  const sigunupModalState = useSelector(
+    (state) => state.user.sigunupModalState
+  );
 
-  var regExpNick = /^[a-zA-Z0-9]{2,10}$/;
+  var regExpNick = /^[a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{2,10}$/;
   var regExpEmail =
     /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 
@@ -59,8 +62,8 @@ const LoginModal = props => {
   console.log("sns아이디", userInfo.snsId);
 
   //닉네임 체크 미들웨어
-  const nickCheck = nickName => {
-    if (nickName === "") {
+  const nickCheck = (nickName) => {
+    if (nickName === undefined) {
       alert("닉네임을 입력 해주세요.");
       return false;
     }
@@ -73,7 +76,7 @@ const LoginModal = props => {
   };
 
   //이메일 체크 미들웨어
-  const emailCheck = email => {
+  const emailCheck = (email) => {
     if (nickName === "") {
       alert("이메일을 입력 해주세요.");
       return false;
@@ -107,7 +110,7 @@ const LoginModal = props => {
       techStack: techStack,
     };
     console.log(registerInfo);
-    dispatch(userCreators.testUserMiddleWare(registerInfo));
+    // dispatch(userCreators.testUserMiddleWare(registerInfo));
     setTest(true);
   };
   //회원가입이 필요한 유저일경우 모달창 활성화
@@ -120,147 +123,186 @@ const LoginModal = props => {
   //회원이 아닐경우 회원가입, 회원일 경우 메인으로 이동
   if (sigunupModalState == true) {
     return (
-      <Dialog maxWidth={"md"} scroll="paper" open={showModal}>
+      <Dialog maxWidth={"sm"} scroll="paper" open={showModal}>
         <ModalWrap>
           {!test ? (
-            <Grid
-              display="flex"
-              flexDirection="column"
-              backgroundColor="#fff"
-              borderRadius="0 0 5px 5px"
-              position="relative"
-              width="100%"
-            >
+            <Grid>
+              {/* 헤더 */}
               <Grid
-                position="absolute"
-                top="0px"
-                right="10px"
-                width="20px"
-                padding="10px"
+                height="15%"
+                bg="#B29CF4"
+                position="relative"
+                textAlign="center"
+                padding="10px 0 10px 0"
               >
-                <CloseIcon fontSize="large" onClick={modalClose} />
+                <Grid
+                  position="absolute"
+                  top="0px"
+                  right="10px"
+                  width="20px"
+                  padding="10px"
+                >
+                  <CloseIcon
+                    fontSize="large"
+                    backgroundColor="white"
+                    onClick={modalClose}
+                  />
+                </Grid>
+                <Grid>
+                  <Text size="20px" bold color="#fff">
+                    회원가입
+                  </Text>
+                </Grid>
               </Grid>
-              <Grid bg="#F7F7F7" height="100px" alignItems="center">
-                <Text margin="0 0 0 20px" bold>
-                  회원가입
+              {/* 타이틀 */}
+              <Grid textAlign="center" margin="30px 0 20px 0">
+                <Text bold size="33px">
+                  Welcome to Scope!
                 </Text>
               </Grid>
+              {/* 입력부분 */}
               <Grid
-                width="100%"
                 display="flex"
-                flexDirection="row"
                 justifyContent="center"
-                margin="30px auto"
-                height="50px"
-              >
-                <Grid
-                  display="inline-block"
-                  textAlign="center"
-                  alignItems="center"
-                  justifyContent="center"
-                  width="70%"
-                >
-                  <Input
-                    label="닉네임"
-                    width="70%"
-                    height="50px"
-                    placeholder="닉네임을 입력해주세요"
-                    _onChange={e => {
-                      setNickName(e.target.value);
-                    }}
-                  >
-                    닉네임
-                  </Input>
-                </Grid>
-                <Grid width="20%">
-                  <Button
-                    width="100%"
-                    height="50px"
-                    backgroundColor="#222222"
-                    text="닉네임 중복 체크"
-                    _onClick={() => {
-                      if (!regExpNick.test(nickName)) {
-                        return false;
-                      }
-                      nickCheck(nickName);
-                      setNameDup(true);
-                    }}
-                  ></Button>
-                </Grid>
-              </Grid>
-              <Grid
-                width="100%"
-                display="flex"
-                flexDirection="row"
-                justifyContent="center"
-                margin="30px auto"
-                height="100px"
-              >
-                <Grid
-                  display="inline-block"
-                  textAlign="center"
-                  alignItems="center"
-                  justifyContent="center"
-                  width="70%"
-                >
-                  <Input
-                    label="이메일"
-                    width="70%"
-                    height="50px"
-                    placeholder="이메일을 입력해주세요"
-                    _onChange={e => {
-                      setEmail(e.target.value);
-                    }}
-                  >
-                    이메일
-                  </Input>
-                </Grid>
-                <Grid width="20%">
-                  <Button
-                    width="100%"
-                    height="50px"
-                    backgroundColor="#222222"
-                    text="이메일 중복 체크"
-                    _onClick={() => {
-                      emailCheck(email);
-                      setEmailDup(true);
-                    }}
-                  ></Button>
-                </Grid>
-              </Grid>
-              <Grid
-                width="80%"
+                height="15%"
+                textAlign="center"
+                padding="10px 0"
                 margin="auto"
-                display="flex"
-                justifyContent="center"
               >
-                <Text>기술스택</Text>
-                <Select
-                  defaultValue={[techStackOption[0]]}
-                  isMulti
-                  name="techStack"
-                  options={techStackOption}
-                  className="basic-multi-select"
-                  classNamePrefix="select"
-                  onChange={e => {
-                    let techStack = [];
-                    let arr = e;
-                    let idx = 0;
-                    for (idx = 0; idx < e.length; idx++) {
-                      techStack.push(arr[idx]["value"]);
-                    }
-                    setTeckstack(techStack);
-                  }}
-                >
-                  기술스택
-                </Select>
+                <Grid width="90%" height="90%" display="flex">
+                  {/* 라벨 */}
+                  <Grid
+                    width="15%"
+                    display="flex"
+                    flexDirection="column"
+                    justifyContent="center"
+                    margin="10px auto"
+                    height="230px"
+                  >
+                    <Grid
+                      height="25%"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                    >
+                      <Text color="#111">이메일</Text>
+                    </Grid>
+                    <Grid
+                      height="25%"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      margin="16px 0"
+                    >
+                      <Text color="#111">닉네임</Text>
+                    </Grid>
+                    <Grid height="40%" padding="10px 0 0 0">
+                      <Text color="#111">기술스택</Text>
+                    </Grid>
+                  </Grid>
+                  {/* 입력부분 */}
+                  <Grid
+                    width="60%"
+                    display="flex"
+                    flexDirection="column"
+                    justifyContent="center"
+                    margin="10px auto"
+                    height="230px"
+                  >
+                    <Grid height="25%">
+                      <Input
+                        borderRadius="25px"
+                        border="1px solid #ddd"
+                        fontSize="16px"
+                        padding="0 0 0 17px"
+                        height="100%"
+                        placeholder="이메일을 입력해주세요"
+                        _onChange={(e) => {
+                          setEmail(e.target.value);
+                        }}
+                      >
+                        이메일
+                      </Input>
+                    </Grid>
+                    <Grid height="25%" margin="16px 0">
+                      <Input
+                        border="1px solid #ddd"
+                        fontSize="16px"
+                        padding="0 0 0 17px"
+                        height="100%"
+                        placeholder="닉네임을 입력해주세요"
+                        _onChange={(e) => {
+                          setNickName(e.target.value);
+                        }}
+                      >
+                        닉네임
+                      </Input>
+                    </Grid>
+                    <Grid height="40%" padding="0 0 10px 0">
+                      <Select
+                        style={{ borderRadius: "10px" }}
+                        placeholder="보유중인 기술을 선택해주세요!"
+                        isMulti
+                        name="techStack"
+                        options={techStackOption}
+                        className="basic-multi-select"
+                        classNamePrefix="select"
+                        onChange={(e) => {
+                          let techStack = [];
+                          let arr = e;
+                          let idx = 0;
+                          for (idx = 0; idx < e.length; idx++) {
+                            techStack.push(arr[idx]["value"]);
+                          }
+                          setTeckstack(techStack);
+                        }}
+                      >
+                        기술스택
+                      </Select>
+                    </Grid>
+                  </Grid>
+                  {/* 중복체크 */}
+                  <Grid
+                    width="20%"
+                    display="flex"
+                    flexDirection="column"
+                    justifyContent="center"
+                    margin="10px auto"
+                    height="230px"
+                  >
+                    <Grid height="20%" margin="0 0 22px 0">
+                      <Button
+                        height="52px"
+                        fontSize="12px"
+                        text="이메일 중복"
+                        _onClick={() => {
+                          emailCheck(email);
+                          setEmailDup(true);
+                        }}
+                      ></Button>
+                    </Grid>
+                    <Grid height="70%">
+                      <Button
+                        height="52px"
+                        fontSize="12px"
+                        text="닉네임 중복"
+                        _onClick={() => {
+                          if (!regExpNick.test(nickName)) {
+                            return false;
+                          }
+                          nickCheck(nickName);
+                          setNameDup(true);
+                        }}
+                      ></Button>
+                    </Grid>
+                  </Grid>
+                </Grid>
               </Grid>
-              <Grid display="flex" width="80%" margin="auto">
+              {/* 버튼 */}
+              <Grid width="50%" margin="auto">
                 <Button
-                  backgroundColor="#222222"
-                  borderRadius="20px"
-                  text="테스트시작"
-                  margin="30px 0 70px 0"
+                  text="성향테스트"
+                  margin="30px 0"
                   _onClick={() => {
                     preSignUP();
                   }}
@@ -270,6 +312,9 @@ const LoginModal = props => {
           ) : (
             <PropensityTest />
           )}
+          <Grid display="flex" justifyContent="center" margin="10px 0 30px 0">
+            <Grid width="20%" backgroundColor="#B29CF4" height="3px"></Grid>
+          </Grid>
         </ModalWrap>
       </Dialog>
     );
@@ -278,12 +323,11 @@ const LoginModal = props => {
       <Dialog maxWidth={"md"} scroll="paper" open={showModal}>
         <ModalWrap>
           <Grid
-            className="모달컨테이너"
-            backgroundColor="#fff"
-            borderRadius="0 0 5px 5px"
+            height="15%"
+            bg="#B29CF4"
             position="relative"
-            width="100%"
-            height="100%"
+            textAlign="center"
+            padding="10px 0 10px 0"
           >
             <Grid
               position="absolute"
@@ -294,59 +338,52 @@ const LoginModal = props => {
             >
               <CloseIcon fontSize="large" onClick={modalClose} />
             </Grid>
-            <Grid display="flex" bg="#F7F7F7" height="50px" alignItems="center">
-              <Text margin="0 0 0 20px" bold>
+            <Grid>
+              <Text size="20px" bold color="#fff">
                 로그인
               </Text>
             </Grid>
-            <Grid padding="20px 0">
-              <Grid
-                display="flex"
-                flexDirection="column"
-                alignItems="center"
-                position="relative"
+          </Grid>
+          <Grid height="80%" padding="20px 0">
+            <Grid
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              position="relative"
+            >
+              <img width="40%" src={Symbol} />
+              <Text
+                size="30px"
+                bold="800"
+                margin="0 0 30px 0"
+                justifyContent="center"
               >
-                <Text
-                  size="30px"
-                  bold="800"
-                  margin="40px 0"
-                  justifyContent="center"
+                Welcome to Scope!
+              </Text>
+              <Grid display="flex" flexDirection="column">
+                <GithubBtn
+                  onClick={() => {
+                    setShowModal(true);
+                    window.location.href =
+                      "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=http://localhost:3000/user/github/callback";
+                  }}
                 >
-                  Welcome to Scope!
-                </Text>
-                <Grid display="flex" flexDirection="column">
-                  <GithubBtn
-                    onClick={() => {
-                      setShowModal(true);
-                      window.location.href =
-                        "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=http://localhost:3000/user/github/callback";
-                    }}
-                  >
-                    깃허브로그인
-                  </GithubBtn>
-                  <KakaoBtn
-                    onClick={() => {
-                      setShowModal(true);
-                      window.location.href =
-                        "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code";
-                    }}
-                  >
-                    카카오로그인
-                  </KakaoBtn>
-                  <NaverBtn
-                    onClick={() => {
-                      setShowModal(true);
-                      window.location.href =
-                        "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code";
-                    }}
-                  >
-                    네이버로그인
-                  </NaverBtn>
-                </Grid>
+                  깃허브로그인
+                </GithubBtn>
+                <KakaoBtn
+                  onClick={() => {
+                    setShowModal(true);
+                    window.location.href =
+                      "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code";
+                  }}
+                >
+                  카카오로그인
+                </KakaoBtn>
               </Grid>
             </Grid>
-
-            <hr color="#eee" />
+          </Grid>
+          <Grid display="flex" justifyContent="center" margin="10px 0 30px 0">
+            <Grid width="20%" backgroundColor="#B29CF4" height="3px"></Grid>
           </Grid>
         </ModalWrap>
       </Dialog>
@@ -356,18 +393,18 @@ const LoginModal = props => {
 
 const ModalWrap = styled.div`
   width: 550px;
-  height: 500px;
+  height: 100%;
 `;
 
 const GithubBtn = styled.div`
   display: inline-block;
-  width: 250px;
+  width: 282px;
   height: 50px;
   margin: 5px auto;
   padding-top: 12px;
   border: 0.5px solid #707070;
   box-sizing: border-box;
-  border-radius: 22.5px;
+  border-radius: 25px;
   font-size: 14px;
   text-align: center;
   color: #555555;
@@ -376,34 +413,18 @@ const GithubBtn = styled.div`
 
 const KakaoBtn = styled.div`
   display: inline-block;
-  width: 250px;
+  width: 282px;
   height: 50px;
   margin: 5px auto;
   padding-top: 12px;
   border: 0.5px solid #707070;
   box-sizing: border-box;
-  border-radius: 22.5px;
+  border-radius: 25px;
   font-size: 14px;
   text-align: center;
   color: #606060;
   cursor: pointer;
   background-color: #f9e000;
-`;
-
-const NaverBtn = styled.div`
-  display: inline-block;
-  width: 250px;
-  height: 50px;
-  margin: 5px auto;
-  padding-top: 12px;
-  border: 0.5px solid #707070;
-  box-sizing: border-box;
-  border-radius: 22.5px;
-  font-size: 14px;
-  text-align: center;
-  color: #ffffff;
-  cursor: pointer;
-  background-color: #00bf18;
 `;
 
 export default LoginModal;

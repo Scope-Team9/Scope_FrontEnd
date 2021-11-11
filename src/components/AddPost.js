@@ -11,30 +11,43 @@ import Select from "react-select";
 import makeAnimated from "react-select/animated";
 
 import { Grid, Text, Input } from "../elements/Index";
-
+import Img from "../images/PostAdd 4.png";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router";
-import { addPostAPI } from "../redux/modules/postadd";
-import { editPostAPI } from "../redux/modules/postdetail";
 import { postAddActions } from "../redux/modules/postadd";
 import { postActions } from "../redux/modules/post";
 
 // AddPost의 함수형 컴포넌트를 만든다.
 // AddPost 안에 다뤄지는  특정 값(state) ex.title 값이 변화하였을 때, AddPost자체가 리랜더링 된다.
 const AddPost = (props) => {
-  const history = useHistory();
   const dispatch = useDispatch();
   const animatedComponents = makeAnimated();
 
-  const [title, setTitle] = React.useState();
-  const [summary, setSummary] = React.useState();
+  const [title, setTitle] = React.useState("");
+  const [summary, setSummary] = React.useState("");
   const [techstack, setTectstack] = React.useState([]);
   const [totalMember, setTotalmember] = React.useState();
-  const [projectStatus, setProjectstatus] = React.useState();
+  const [projectStatus, setProjectstatus] = React.useState("");
   const [startDate, setStartdate] = React.useState(new Date());
   const [endDate, setEnddate] = React.useState(new Date());
-  const [contents, setContents] = React.useState();
+  const [contents, setContents] = React.useState("");
   const [techStackList, setTest] = React.useState();
+
+  // 예외처리
+  const submitHandler = () => {
+    if (
+      title.length > 0 &&
+      summary.length > 0 &&
+      techstack.length > 0 &&
+      totalMember > 0 &&
+      projectStatus.length > 0 &&
+      contents.length > 0
+    ) {
+      window.alert("프로젝트가 생성되었습니다.");
+      scope_index();
+    } else {
+      window.alert("값을 다 입력해주세요.");
+    }
+  };
 
   React.useEffect(() => {
     dispatch(postActions.isMainPage(false));
@@ -52,6 +65,7 @@ const AddPost = (props) => {
       projectStatus: projectStatus,
       contents: contents,
     };
+    console.log("카드들", card);
     dispatch(postAddActions.addPostAPI(card));
   };
 
@@ -77,15 +91,37 @@ const AddPost = (props) => {
     []
   );
 
-  // 게시글 작성(스택선택)
-  const styles = useMemo(
-    () => ({
-      multiValueRemove: (base, state) => {
-        return state.data.isFixed ? { ...base, display: "none" } : base;
-      },
-    }),
+  // 게시글 작성(프로젝트 상태)
+  const projectstatus = useMemo(
+    () => [{ value: "모집중", label: "모집중" }],
     []
   );
+
+  // 게시글 작성(프로젝트 인원)
+  const projectMembers = useMemo(
+    () => [
+      { value: 2, label: 2 },
+      { value: 3, label: 3 },
+      { value: 4, label: 4 },
+      { value: 5, label: 5 },
+      { value: 6, label: 6 },
+    ],
+    []
+  );
+
+  // 게시글 작성(스택선택)
+  const styles = {
+    control: (base, state) => ({
+      ...base,
+      boxShadow: state.isFocused ? 0 : 0,
+      borderWidth: 2,
+      minHeight: 40,
+      borderColor: state.isFocused ? "#C4C4C4" : base.borderColor,
+      "&:hover": {
+        borderColor: state.isFocused ? "#C4C4C4" : base.borderColor,
+      },
+    }),
+  };
 
   const orderByLabel = useCallback(
     (a, b) => a.label.localeCompare(b.label),
@@ -105,21 +141,6 @@ const AddPost = (props) => {
 
   const handleChange = useCallback(
     (inputValue, { action, removedValue }) => {
-      switch (action) {
-        case "remove-value":
-        case "pop-value":
-          if (removedValue.isFixed) {
-            setValue(orderOptions([...inputValue, removedValue]));
-
-            return;
-          }
-          break;
-        case "clear":
-          setValue(stackSelect.filter((v) => v.isFixed));
-          return;
-        default:
-      }
-
       setValue(inputValue);
       setTectstack(inputValue);
     },
@@ -139,144 +160,159 @@ const AddPost = (props) => {
     formatTech();
   }, [techstack]);
 
-  // 게시글 작성(프로젝트 상태)
-  const projectstatus = useMemo(
-    () => [{ value: "모집중", label: "모집중" }],
-    []
-  );
-
-  // 게시글 작성(프로젝트 인원)
-  const projectMembers = useMemo(
-    () => [
-      { value: 2, label: 2 },
-      { value: 3, label: 3 },
-      { value: 4, label: 4 },
-      { value: 5, label: 5 },
-      { value: 6, label: 6 },
-    ],
-    []
-  );
-
   return (
     <React.Fragment>
       <Grid
-        width="550px"
-        padding="10px"
-        margin="40px auto"
-        border="2px solid #8B3FF8"
-        borderRadius="30px"
+        display="flex"
+        justifyContent="center"
+        maxWidth="1920px"
+        height="100%"
+        margin="auto"
+        border="1px solid #C4C4C4"
+        alignItems="center"
       >
-        <Title>게시글 작성페이지</Title>
-        <Grid padding="16px">
-          <Grid margin="10px auto">
-            <Text>제목</Text>
-            <Input
-              width="500px"
-              height="30px"
-              padding="10px"
-              placeholder="제목을 입력해주세요."
-              border="1px solid #E7E1FF"
-              _onChange={(e) => {
-                setTitle(e.target.value);
-              }}
-            ></Input>
-          </Grid>
-          <Grid margin="10px auto">
-            <Text>한줄소개</Text>
-            <Input
-              width="500px"
-              height="30px"
-              padding="10px"
-              placeholder="한줄소개를 입력해주세요."
-              border="1px solid #E7E1FF"
-              _onChange={(e) => {
-                setSummary(e.target.value);
-              }}
-            ></Input>
-          </Grid>
-          <Grid margin="10px auto">
-            <Text>기술스택 선택</Text>
-            <Select
-              isMulti
-              components={animatedComponents}
-              isClearable={value.some((v) => !v.isFixed)}
-              styles={styles}
-              options={stackSelect}
-              onChange={handleChange}
-            />
-          </Grid>
-          <Grid margin="10px auto">
-            <Text>기간설정</Text>
-            <Grid display="flex">
-              <Text margin="auto 20px">프로젝트 시작 일 :</Text>
-              <SDatePicker
-                dateFormat="yyyy/MM/dd"
-                selected={startDate}
-                onChange={(date) => setStartdate(date)}
-                selectsStart
-                startdate={startDate}
-                enddate={endDate}
-                locale={ko}
-                minDate={new Date()}
-                placeholderText="프로젝트 시작일 입력"
-              />
-              <Text margin="auto 20px">프로젝트 종료 일 :</Text>
-              <SDatePicker
-                dateFormat="yyyy/MM/dd"
-                selected={endDate}
-                onChange={(date) => setEnddate(date)}
-                selectsEnd
-                enddate={endDate}
-                mindate={new Date()}
-                locale={ko}
-                minDate={new Date("")}
+        {/* 이미지 하나 */}
+        <SideBarImg src={Img} style={{ maxWidth: "100%", height: "100%" }} />
+        {/* 텍스트 하나 */}
+        <Grid padding="0px 16px">
+          {/* Scoope */}
+          <Title>Scoope</Title>
+          <Grid>
+            {/* 게시글 작성하기 */}
+            <Text color="#C4C4C4" size="20px" bold>
+              게시글 작성하기
+            </Text>
+            {/* 제목 */}
+            <Grid>
+              <Grid>제목</Grid>
+              <Input
+                width="100%"
+                maxLength="35"
+                height="40px"
+                padding="10px"
+                border="1px solid #C4C4C4"
+                placeholder="제목을 입력해주세요."
+                inputFocusOutline="none"
+                fontSize="16px"
+                _onChange={(e) => {
+                  setTitle(e.target.value);
+                }}
+              ></Input>
+            </Grid>
+            {/* 한줄소개 */}
+            <Grid margin="10px auto auto">
+              <Text margin="auto 100px auto auto">한줄소개</Text>
+              <Input
+                width="100%"
+                maxLength="60"
+                height="40px"
+                padding="10px"
+                placeholder="프로젝트를 한줄소개를 소개해주세요."
+                borderRadius="6px"
+                border="1px solid #C4C4C4"
+                inputFocusOutline="none"
+                fontSize="16px"
+                _onChange={(e) => {
+                  setSummary(e.target.value);
+                }}
+              ></Input>
+            </Grid>
+            {/* 기술스택 선택 */}
+            <Grid margin="10px auto">
+              <Text>기술스택 선택</Text>
+              <Select
+                isMulti
+                components={animatedComponents}
+                isClearable={value.some((v) => !v.isFixed)}
+                styles={styles}
+                options={stackSelect}
+                onChange={handleChange}
+                placeholder={<div>기술 스택을 선택해주세요.</div>}
               />
             </Grid>
-          </Grid>
-          <Grid margin="10px auto">
-            <Text>프로젝트 총 인원</Text>
-            <Select
-              options={projectMembers}
-              isLoading
-              onChange={(e) => {
-                let b;
-                b = e["label"];
-                setTotalmember(b);
-              }}
-            ></Select>
-          </Grid>
-          <Grid margin="10px auto">
-            <Text>프로젝트 상태체크</Text>
-            <Select
-              options={projectstatus}
-              isLoading
-              onChange={(e) => {
-                let a;
-                a = e["label"];
-                setProjectstatus(a);
-              }}
-            ></Select>
-          </Grid>
-          <Grid>
-            <Text>프로젝트 내용적기</Text>
-            <Input
-              width="500px"
-              height="300px"
-              padding="10px"
-              placeholder="프로젝트 내용을 입력해주세요."
-              border="1px solid #E7E1FF"
-              _onChange={(e) => {
-                setContents(e.target.value);
-              }}
-            ></Input>
-            <Btn
-              onClick={() => {
-                history.push("/");
-                scope_index();
-              }}
-            >
-              프로젝트 생성하기
-            </Btn>
+            {/* 기간설정 */}
+            <Grid display="flex">
+              <Grid>기간설정</Grid>
+              <Grid>
+                <Grid>프로젝트 시작 일 </Grid>
+                <SDatePicker
+                  dateFormat="yyyy/MM/dd"
+                  selected={startDate}
+                  onChange={(date) => setStartdate(date)}
+                  locale={ko}
+                  minDate={new Date()}
+                />
+              </Grid>
+              <Grid>
+                <Text>프로젝트 종료 일 </Text>
+                <SDatePicker
+                  dateFormat="yyyy/MM/dd"
+                  selected={endDate}
+                  onChange={(date) => setEnddate(date)}
+                  locale={ko}
+                  minDate={new Date()}
+                />
+              </Grid>
+            </Grid>
+            {/* 프로젝트 총 인원 */}
+            <Grid margin="10px auto">
+              <Text>프로젝트 총 인원</Text>
+              <Select
+                options={projectMembers}
+                isLoading
+                styles={styles}
+                onChange={(e) => {
+                  let b;
+                  b = e["label"];
+                  setTotalmember(b);
+                }}
+                placeholder={<div>총인원을 선택해주세요.</div>}
+              ></Select>
+            </Grid>
+            {/* 프로젝트 상태체크 */}
+            <Grid margin="10px auto">
+              <Text>프로젝트 상태체크</Text>
+              <Select
+                options={projectstatus}
+                isLoading
+                styles={styles}
+                onChange={(e) => {
+                  let a;
+                  a = e["label"];
+                  setProjectstatus(a);
+                }}
+                placeholder={<div>상태를 설정해주세요.</div>}
+              ></Select>
+            </Grid>
+            {/* 프로젝트 내용적기 */}
+            <Grid>
+              <Text>프로젝트 내용적기</Text>
+              <textarea
+                style={{
+                  width: "96%",
+                  height: "200px",
+                  padding: "10px",
+                  border: "1px solid #C4C4C4",
+                  borderRadius: "6px",
+                  fontSize: "16px",
+                  outline: "none",
+                }}
+                placeholder="프로젝트 내용을 입력해주세요."
+                onChange={(e) => {
+                  setContents(e.target.value);
+                }}
+              ></textarea>
+            </Grid>
+            {/* 버튼 */}
+            <Grid>
+              <Btn
+                onClick={() => {
+                  submitHandler();
+                }}
+              >
+                프로젝트 생성하기
+              </Btn>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
@@ -286,19 +322,19 @@ const AddPost = (props) => {
 
 // styled-components를 사용한다.
 const Title = styled.h1`
-  display: flex;
-  justify-content: center;
-  color: #8b3ff8;
+  color: #c4c4c4;
+  font-size: 40px;
 `;
 
 const SDatePicker = styled(DatePicker)`
   box-sizing: border-box;
   width: 120px;
-  height: 35px;
+  height: 40px;
   padding: 8px 20px;
   margin-top: 1.5rem;
-  border-radius: 10px;
-  border: 1px solid #e7e1ff;
+  outline: none;
+  border-radius: 4px;
+  border: 1px solid #c4c4c4;
 `;
 
 const Btn = styled.button`
@@ -309,8 +345,22 @@ const Btn = styled.button`
   height: 35px;
   border: none;
   border-radius: 50px;
-  background-color: #e7e1ff;
+  color: #fff;
+  background: linear-gradient(
+    0deg,
+    rgba(83, 201, 253, 1) 0%,
+    rgba(182, 161, 240, 1) 69%,
+    rgba(231, 170, 250, 1) 100%,
+    rgba(240, 247, 254, 1) 100%
+  );
   margin: 10px auto 10px auto;
+  cursor: pointer;
+`;
+
+const SideBarImg = styled.img`
+  @media screen and (max-width: 800px) {
+    display: none;
+  }
 `;
 
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.

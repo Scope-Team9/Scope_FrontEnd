@@ -70,18 +70,27 @@ export const apis = {
   //포스트 관련 api
   getPost: (stack, paging, sort, reBook) =>
     instance.get(
-      `/api/post?filter=${stack.React};${stack.Spring};${stack.Swift};${stack.TypeScript};${stack.cpp};${stack.Django};${stack.Flask};${stack.Java};${stack.JavaScript};${stack.Kotlin};${stack.Node};${stack.php};${stack.Python};${stack.Vue};&displayNumber=9&page=${paging}&sort=${sort}&bookmarkRecommend=${reBook}`
+      `/api/post?filter=${stack.React};${stack.Spring};${stack.Swift};${stack.TypeScript};${stack.cpp};${stack.Django};${stack.Flask};${stack.Java};${stack.JavaScript};${stack.Kotlin};${stack.Node};${stack.php};${stack.Python};${stack.Vue};&sort=${sort}&bookmarkRecommend=${reBook}`
     ),
+  bookMarkChecked: (postId) => instance.post(`/api/bookmark/${postId}`),
+
   //마이페이지
   getMypage: (userId) => instance.get(`/api/user/${userId}`),
   writeMyIntroduction: (userId, introduction) =>
     instance.post(`/api/user/${userId}/desc`, introduction),
+  projectAssessmentPost: (postId) => instance.get(`/api/assessment/${postId}`),
+  editUserInfo: (userId, data) => instance.post(`/api/user/${userId}`, data),
+  projectAssessmentPost: (postId) => instance.get(`/api/assessment/${postId}`),
+  authEmail: (email) => instance.get(`/api/user/email?email=${email}`),
+  deleteUser: (userId) => instance.delete(`/api/user/${userId}`),
 
-  // 승민
+  // 상세페이지
   addPost: (postInfo) => instance.post(`/api/post`, postInfo),
   detailPost: (postId) => instance.get(`/api/post/${postId}`),
-  editPost: (postId) => instance.post(`/api/post/${postId}`),
+  editPost: (postId, data) => instance.post(`/api/post/${postId}`, data),
   deletePost: (postId) => instance.delete(`/api/post/${postId}`),
+  statusPost: (postId, data) =>
+    instance.post(`/api/post/${postId}/status`, data),
 
   //data.json용
   // getPost: () => instance.get(`/post`),

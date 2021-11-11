@@ -1,24 +1,72 @@
 import React from "react";
-import { Grid, Button } from "../../elements/Index";
+import { Grid, Button, Text } from "../../elements/Index";
 
 const TestFour = props => {
   const { handleUserCreate, handleMemberCreate } = props;
+  const [nowClickU, setNowClickU] = React.useState(null);
+  const [prevClickU, setPrevClickU] = React.useState(null);
+  const [nowClickMB, setNowClickMB] = React.useState(null);
+  const [prevClickMB, setPrevClickMB] = React.useState(null);
+
+  const clickUser = answer => {
+    setNowClickU(answer);
+  };
+  const clickMember = answer => {
+    setNowClickMB(answer);
+  };
+
+  //유저 설문 버튼 클릭유지
+  React.useEffect(
+    e => {
+      //값이 들어오면 해당 버튼 css 변경
+      if (nowClickU !== null) {
+        let current = document.getElementById(nowClickU);
+        current.style.backgroundColor = "#B29CF4";
+        current.style.color = "#fff";
+      }
+      //다른 버튼이 클릭될경우 기존 스테이트값이 이전버튼스테이트로 이동
+      if (prevClickU !== null) {
+        let prev = document.getElementById(prevClickU);
+        prev.style.color = "#B29CF4";
+        prev.style.backgroundColor = "#fff";
+      }
+      setPrevClickU(nowClickU);
+    },
+    [nowClickU]
+  );
+
+  //멤버 설문 버튼 클릭유지
+  React.useEffect(
+    e => {
+      if (nowClickMB !== null) {
+        let current = document.getElementById(nowClickMB);
+        current.style.backgroundColor = "#B29CF4";
+        current.style.color = "#fff";
+      }
+
+      if (prevClickMB !== null) {
+        let prev = document.getElementById(prevClickMB);
+        prev.style.color = "#B29CF4";
+        prev.style.backgroundColor = "#fff";
+      }
+      setPrevClickMB(nowClickMB);
+    },
+    [nowClickMB]
+  );
 
   return (
     <Grid>
-      <Grid height="30px" bg="#007BFF">
-        수직적/수평적 조직형 테스트
-      </Grid>
-      <div>성향테스트 4번</div>
       <Grid display="flex" flexDirection="column">
-        <Grid>
-          <div>
+        <Grid margin="20px 0">
+          <Grid>
             Q4.프로젝트를 진행함에 있어서 당신의 생각에 더 가까운 문장은?
-          </div>
+          </Grid>
           <Button
             isTest
-            isValue="L"
+            isId="UV"
+            isValue="V"
             _onClick={e => {
+              clickUser(e.target.id);
               handleUserCreate(e.target.value);
             }}
           >
@@ -26,8 +74,10 @@ const TestFour = props => {
           </Button>
           <Button
             isTest
+            isId="UH"
             isValue="H"
             _onClick={e => {
+              clickUser(e.target.id);
               handleUserCreate(e.target.value);
             }}
           >
@@ -36,14 +86,16 @@ const TestFour = props => {
           </Button>
         </Grid>
         <Grid>
-          <div>
+          <Grid>
             Q4.프로젝트를 진행함에 있어서 당신이 원하는 팀원의 생각에 더
             가까웠으면 하는 문장은?
-          </div>
+          </Grid>
           <Button
             isTest
+            isId="MV"
             isValue="V"
             _onClick={e => {
+              clickMember(e.target.id);
               handleMemberCreate(e.target.value);
             }}
           >
@@ -51,8 +103,10 @@ const TestFour = props => {
           </Button>
           <Button
             isTest
+            isId="MH"
             isValue="H"
             _onClick={e => {
+              clickMember(e.target.id);
               handleMemberCreate(e.target.value);
             }}
           >

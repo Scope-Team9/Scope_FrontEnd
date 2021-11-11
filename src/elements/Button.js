@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Button = props => {
   const {
-    _id,
+    isId,
     isTest,
     color,
     text,
@@ -25,6 +25,7 @@ const Button = props => {
     display,
     isValue,
     disabled,
+    isChecked,
   } = props;
 
   if (isFloat) {
@@ -38,7 +39,13 @@ const Button = props => {
   if (isTest) {
     return (
       <>
-        <TestButton onClick={_onClick} value={isValue} disabled={disabled}>
+        <TestButton
+          onClick={_onClick}
+          value={isValue}
+          disabled={disabled}
+          isChecked={isChecked}
+          id={isId}
+        >
           {text ? text : children}
         </TestButton>
       </>
@@ -64,7 +71,7 @@ const Button = props => {
 
   return (
     <>
-      <ElButton {...styles} value={isValue} onClick={_onClick} id={_id}>
+      <ElButton {...styles} value={isValue} onClick={_onClick} id={isId}>
         {text ? text : children}
       </ElButton>
     </>
@@ -101,7 +108,7 @@ const ElButton = styled.button`
   ${props =>
     props.backgroundColor
       ? `background-color:${props.backgroundColor}`
-      : "background-color: #8B3FF8"};
+      : "background-color: #B29CF4"};
   box-sizing: border-box;
   border-radius: 5px;
   font-weight: bold;
@@ -109,7 +116,7 @@ const ElButton = styled.button`
   ${props =>
     props.borderRadius
       ? `border-radius:${props.borderRadius}`
-      : "border-radius: 0px"};
+      : "border-radius: 25px"};
   cursor: pointer;
   flex-shrink: 0;
   &:hover {
@@ -145,30 +152,33 @@ const FloatButton = styled.div`
 `;
 
 const TestButton = styled.button`
-  font-size: 10px;
+  font-size: 12px;
   text-align: center;
-  border: none;
-  border-radius: 20px;
-  background-color: #f1f9ff;
-  color: #111;
-  padding: 9px;
-  margin: 10px;
+  border: 1px solid #b29cf4;
+  border-radius: 25px;
+  ${props =>
+    props.isChecked === "#B29CF4"
+      ? "background-color:#B29CF4"
+      : "background-color:#fff"};
+  ${props => (props.isChecked === "#B29CF4" ? "color:#fff" : "color:#B29CF4")};
+  padding: 20px;
+  margin: 5px;
   box-shadow: 0px 2px 2px #ddd;
 
   &:hover {
-    background-color: #025cbd;
+    background-color: #b29cf4;
     cursor: pointer;
     color: #fff;
-    box-shadow: 0px 3px 2px #111;
+    box-shadow: 0px 3px 2px #ddd;
   }
-  &::active {
+  /* &::active {
     box-shadow: 0px 1px 2px #111;
     transform: translateY(10px);
   }
   &::disabled {
     cursor: default;
     opacity: 0.7;
-  }
+  } */
 `;
 
 export default Button;
