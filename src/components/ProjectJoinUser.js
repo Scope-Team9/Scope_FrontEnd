@@ -1,7 +1,11 @@
 import React from "react";
 
 const ProjectJoinUser = () => {
-  return <React.Fragment></React.Fragment>;
+  return (
+    <React.Fragment>
+      <div></div>
+    </React.Fragment>
+  );
 };
 
 export default ProjectJoinUser;
