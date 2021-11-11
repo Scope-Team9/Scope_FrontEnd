@@ -72,7 +72,8 @@ const PostEdit = (props) => {
         setProjectstatus(setValue.projectStatus);
         setLoaded(true);
       } catch (err) {
-        console.log(err);
+        console.log(err.response);
+
         setLoaded(false);
       }
     };

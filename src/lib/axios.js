@@ -80,8 +80,9 @@ export const apis = {
     instance.post(`/api/user/${userId}/desc`, introduction),
   projectAssessmentPost: (postId) => instance.get(`/api/assessment/${postId}`),
   editUserInfo: (userId, data) => instance.post(`/api/user/${userId}`, data),
-  editUserInfo: (userId, data) => instance.post(`/api/user/${userId}`, data),
   projectAssessmentPost: (postId) => instance.get(`/api/assessment/${postId}`),
+  authEmail: (email) => instance.get(`/api/user/email?email=${email}`),
+  deleteUser: (userId) => instance.delete(`/api/user/${userId}`),
 
   // 상세페이지
   addPost: (postInfo) => instance.post(`/api/post`, postInfo),

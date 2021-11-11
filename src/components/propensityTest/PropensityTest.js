@@ -1,6 +1,5 @@
 /* eslint-disable */
 import React, { useState } from "react";
-import { Dialog } from "@material-ui/core";
 import Symbol from "../../images/tiger.jpg";
 import {
   TestOne,
@@ -25,6 +24,12 @@ const PropensityTest = props => {
   const dispatch = useDispatch();
   const userInfo = useSelector(state => state.user);
 
+  // const [active, setActive] = React.useState(preUserPropensityType);
+  const [isChecked, setIsChecked] = React.useState("#fff");
+  const ToggleButton = answer => {
+    isChecked === "#fff" ? setIsChecked("#170184") : setIsChecked("#fff");
+  };
+
   //스텝별로 스테이트 변화값에 따라 텍스트가 바뀌는지 먼저 확인
   const [page, setpage] = useState(1);
 
@@ -48,20 +53,27 @@ const PropensityTest = props => {
   //스테이트값에 변화를 버튼에 달아줌
   //다음버튼 누를시에 변화된 값을 스테이트에 담아줌
   const nextStep = () => {
-    setpage(page => page + 1);
-
     setPreUserPropensityType("");
     setPreMemberPropensityType("");
     //나에대한 항목
     let preMy = userPropensityType;
-    preMy.push(preUserPropensityType);
-    setUserPropensityType(preMy);
-    console.log("내꺼 잘 들어감?", userPropensityType);
-    //상대에 다한 항목
     let preYou = memberPropensityType;
-    preYou.push(preMemberPropensityType);
-    setMemberPropensityType(preYou);
-    console.log("너꺼 잘 들어감?", memberPropensityType);
+    console.log(preUserPropensityType, preMemberPropensityType);
+
+    if (preUserPropensityType === "" || preMemberPropensityType === "") {
+      return window.alert("문항을 선택해주세요!");
+    } else {
+      preMy.push(preUserPropensityType);
+      setUserPropensityType(preMy);
+      console.log("내꺼 잘 들어감?", userPropensityType);
+      //상대에 다한 항목
+
+      preYou.push(preMemberPropensityType);
+      setMemberPropensityType(preYou);
+      console.log("너꺼 잘 들어감?", memberPropensityType);
+
+      setpage(page => page + 1);
+    }
   };
 
   //이전버튼 누를시에 마지막으로 저장된값을 스테이트에 삭제함
@@ -82,8 +94,6 @@ const PropensityTest = props => {
 
   //회원가입
   const register = () => {
-    setpage(page => page + 1);
-
     setPreUserPropensityType("");
     setPreMemberPropensityType("");
     //나에대한 항목
@@ -117,21 +127,19 @@ const PropensityTest = props => {
     console.log(realSnsId, registerInfo);
     console.log(realUserId, testUpdateInfo);
     if (isToken) {
+      setpage(page => page + 1);
       dispatch(userCreators.editTestMiddleware(realUserId, testUpdateInfo));
       return;
     }
 
-    if (userPropensityType.length === 9 && memberPropensityType === 9) {
+    console.log(userPropensityType.length, memberPropensityType.length);
+    if (userPropensityType.length === 9 && memberPropensityType.length === 9) {
+      setpage(page => page + 1);
       // return dispatch(userCreators.signupMiddleware(registerInfo));
     } else {
       window.alert("설문지가 정확히 작성되지 않았습니다!");
       return false;
     }
-  };
-
-  const [isChecked, setIsChecked] = React.useState("#fff");
-  const ToggleButton = () => {
-    isChecked === "#fff" ? setIsChecked("#170184") : setIsChecked("#fff");
   };
 
   return (
@@ -164,6 +172,7 @@ const PropensityTest = props => {
           <TestOne
             handleUserCreate={handleUserCreate}
             handleMemberCreate={handleMemberCreate}
+            // ToggleButton={ToggleButton}
           />
         )}
         {page === 2 && (

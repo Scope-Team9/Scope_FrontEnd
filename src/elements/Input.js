@@ -144,10 +144,11 @@ const ElTextarea = styled.textarea`
   border: ${(props) => props.border};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
+  border-radius: 25px;
   border-radius: ${(props) => props.borderRadius};
   background: ${(props) => props.bg};
   padding: ${(props) => props.padding};
-  backgroundimage: ${(props) => props.backgroundImage};
+  background-image: ${(props) => props.backgroundImage};
   box-sizing: border-box;
   background-color: ${(props) => props.backgroundColor};
 `;
@@ -157,13 +158,14 @@ const ElInput = styled.input`
   border: ${(props) => props.border};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
+  text-align: ${(props) => props.textAlign};
   border-radius: ${(props) => props.borderRadius};
-  borderbottom: ${(props) => props.borderBottom};
+  border-bottom: ${(props) => props.borderBottom};
   background: ${(props) => props.bg};
   padding: ${(props) => props.padding};
-  backgroundimage: ${(props) => props.backgroundImage};
+  background-image: ${(props) => props.backgroundImage};
   box-sizing: border-box;
-  border-radius: 5px;
+
   background-color: ${(props) => props.backgroundColor};
   font-size: ${(props) => props.fontSize};
   &:focus {

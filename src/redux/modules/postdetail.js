@@ -31,6 +31,7 @@ export const editPostAPI = (post_id, editcard) => {
       })
       .catch((err) => {
         console.log(err.response);
+        window.alert(err.response.data.msg);
       });
   };
 };

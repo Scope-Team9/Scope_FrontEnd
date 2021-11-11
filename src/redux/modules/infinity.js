@@ -10,7 +10,7 @@ const GET_PAGE = "GET_PAGE";
 const getPages = createAction(GET_PAGE, (data) => ({ data }));
 
 const initialState = {
-  paging: { start: null, next: 9 },
+  paging: { start: null, next: 12 },
 };
 
 export const getPage = (data) => {

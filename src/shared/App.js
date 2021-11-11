@@ -35,7 +35,6 @@ function App() {
   return (
     <React.Fragment>
       <Header />
-
       <ConnectedRouter history={history}>
         <Switch>
           <Route path="/" exact component={MainPage}></Route>

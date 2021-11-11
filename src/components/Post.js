@@ -15,8 +15,6 @@ const Post = props => {
   const dispatch = useDispatch();
   const is_mainPage = useSelector(state => state.post.mainpage);
   const [stacks, setStacks] = React.useState();
-  console.log(props.totalMember);
-  console.log(props.recruitmentMember);
 
   let totalmember = props.totalMember;
   let recruitmentMember = props.recruitmentMember;
@@ -39,40 +37,42 @@ const Post = props => {
         <DDescriptionBox>
           <CardHeader>
             <Grid>{/* <TitleDate>D-2</TitleDate> */}</Grid>
-            <Grid display="flex" width="100%">
+            <Grid
+              position="relative"
+              zIndex="10"
+              display="flex"
+              width="80%"
+              margin="auto"
+            >
               {props.techStack.map((p, idx) => {
                 return (
-                  <div style={{ width: "22%" }} key={idx}>
+                  <Grid width="30%" key={idx}>
                     <PostStacks stack={p}></PostStacks>
-                  </div>
+                  </Grid>
                 );
               })}
             </Grid>
             <CardHeaderTwo />
           </CardHeader>
           <Grid
-            borderRadius="50px 30px 30px 30px"
+            borderRadius="54px 54px 54px 54px"
             bg="#fff"
             height="245px"
             position="absolute"
           ></Grid>
-          <DescriptionBox
-            onClick={() => {
-              history.push({
-                pathname: `/postdetail/${props.postId}`,
-              });
-            }}
-          >
+          <DescriptionBox>
             <ProjectState>{props.projectStatus}</ProjectState>
             <Title>{props.title}</Title>
             <Summary>{props.summary}</Summary>
             <Date>
-              {props.startDate}~{props.endDate}
+              <Grid width="70%">
+                {props.startDate}~{props.endDate}
+              </Grid>
             </Date>
             <Line />
             <Grid display="flex" width="100%" justifyContent="space-between">
               <Grid width="100%">
-                <Grid display="flex">
+                <Grid display="flex" margin="10px 0">
                   <ProgressBar>
                     <HighLight
                       width={(recruitmentMember / totalmember) * 100 + "%"}
@@ -91,22 +91,14 @@ const Post = props => {
   );
 };
 
-const TitleDate = styled.div`
-  width: 50px;
-  text-align: center;
-  border-radius: 10px;
-  color: black;
-  background-color: white;
-  margin-left: 280px;
-`;
-
 const DescriptionBox = styled.div`
   position: relative;
-  margin: 30px 20px;
+  margin: 5px 20px;
+  padding: 20px;
 `;
 const DDescriptionBox = styled.div`
   /* background-color: #fff5f9; */
-  border-radius: 30px;
+  border-radius: 54px;
   margin: auto;
   position: relative;
   height: 100%;
@@ -118,7 +110,8 @@ const CardHeader = styled.div`
   width: 100%;
   height: 70px;
   background-color: #f1bad1;
-  border-radius: 30px 30px 30px 0px;
+
+  border-radius: 54px 54px 54px 54px;
   background: rgb(83, 201, 253);
   background: linear-gradient(
     140deg,
@@ -136,7 +129,8 @@ const CardHeaderTwo = styled.div`
   width: 70%;
   height: 160px;
   background-color: #f1bad1;
-  border-radius: 30px 30px 30px 0px;
+
+  border-radius: 43 px 54px 54px 54px;
   background: rgb(83, 201, 253);
   background: linear-gradient(
     140deg,
@@ -147,9 +141,10 @@ const CardHeaderTwo = styled.div`
 `;
 
 const Title = styled.h1`
-  margin-top: 15%;
-  font-size: 20px;
-  width: 90%;
+  margin-top: 8%;
+  margin-bottom: 10px;
+  font-size: 25px;
+  width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -157,10 +152,10 @@ const Title = styled.h1`
 `;
 
 const Summary = styled.div`
-  font-size: 17px;
+  font-size: 14px;
   color: gray;
 
-  margin-top: 8%;
+  /* margin-top: 8%; */
   overflow: hidden;
   white-space: nowrap;
   overflow: hidden;
@@ -168,8 +163,10 @@ const Summary = styled.div`
 `;
 
 const Date = styled.div`
-  margin-top: 15%;
-  margin-left: 50%;
+  display: flex;
+  justify-content: flex-end;
+  margin: 10% auto 10px auto;
+  width: 100%;
   text-overflow: ellipsis;
 
   @media (max-width: 750px) {
@@ -184,13 +181,13 @@ const Date = styled.div`
 
 const Line = styled.hr`
   width: 100%;
-  color: black;
+  border: 1px solid #9e9e9e;
 `;
 
 const ProjectState = styled.div`
   position: absolute;
-  top: -10px;
-  right: 0px;
+  top: 10px;
+  right: 15px;
 
   background-color: #eee;
   margin: auto 0;
@@ -206,19 +203,20 @@ const ProjectState = styled.div`
 `;
 
 const ProductImgWrap = styled.div`
-  /* z-index: -1; */
+  z-index: 1;
+  position: relative;
   background-color: white;
-  width: 80vw;
-  height: 80%;
+  width: 77%;
+  height: 77%;
   max-width: 350px;
   margin: auto;
-  margin-top: 30px;
+  margin-top: 70px;
   margin-bottom: 30px;
-  border-radius: 30px;
+  border-radius: 54px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.24);
   @media (max-width: 1700px) {
-    width: 400px;
-    height: 80%;
+    width: 77%;
+    height: 90%;
     margin: auto;
     margin-top: 30px;
     margin-bottom: 30px;

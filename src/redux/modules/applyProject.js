@@ -27,7 +27,7 @@ const applyUserAPI = postId => {
       .applyUser(postId)
       .then(res => {
         console.log(res.data.data);
-        window.alert("1111신청자 정보가 잘 불러와졌네용!");
+        window.alert("모집 지원 현황 조회 성공");
         dispatch(applyUsers(res.data.data));
       })
       .catch(err => {
@@ -101,8 +101,15 @@ const exitTeamAPI = postId => {
         window.alert("팀에서 탈출하였습니다!");
       })
       .catch(err => {
-        console.log(err.response);
-        window.alert("5555신청자를 못찾겠네용!");
+        if (err.response.data.msg === "입력 값이 잘못되었습니다.") {
+          return window.alert("신청결과를 기다리는 중입니다!");
+        }
+        if (err.response.data.msg === "해당 프로젝트를 찾을 수 없습니다.") {
+          return window.alert("해당 프로젝트를 찾을 수 없습니다.");
+        }
+        if (err.response.data.msg === "이미 진행중인 프로젝트입니다.") {
+          return window.alert("이미 진행중인 프로젝트입니다.");
+        }
       });
   };
 };

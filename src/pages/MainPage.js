@@ -56,9 +56,11 @@ const MainPage = () => {
     console.log("?? 여기서 되는거임?");
   }, [is_stack_clicked, is_sort_clicked, is_reBook_clicked, pageCheck]);
 
+  // 요청에 대한 속도가 다를때. 다른것이 띄워질 수 있는 버그성.
+
   React.useEffect(() => {
     if (inView === true) {
-      setPaging(paging + 9);
+      setPaging(paging + 12);
 
       console.log("내가 페이지", infinity);
       dispatch(pageAction.getPage(paging));
@@ -73,7 +75,7 @@ const MainPage = () => {
       if (post_list.length === 0 && pageCheck === false) {
         dispatch(postActions.pageCheck(true));
       }
-    }
+    } // 옵저버를 좀 더 위로
   }, [inView]);
 
   //sort
@@ -81,7 +83,7 @@ const MainPage = () => {
     dispatch(postActions.isMainPage(true));
     dispatch(sortAction.getSort(data));
     dispatch(bookRecommendAction.getRb(""));
-    setPaging(6);
+    setPaging(12);
   };
   //bookmark,recommend
   const onclickRb = (data) => {
@@ -91,7 +93,7 @@ const MainPage = () => {
     // if (paging > 0) {
     //   setPaging(paging - 1);
     // }
-    setPaging(9);
+    setPaging(12);
   };
 
   const checkNowFilter = (data) => {
@@ -156,12 +158,15 @@ const MainPage = () => {
             <PostList></PostList>
           </InsideCard>
           {nowFilter !== "bookmark" && (
-            <div
-              ref={ref}
-              style={{
-                height: "500px",
-              }}
-            ></div>
+            <Grid margin="-550px 0 0 0">
+              <div
+                ref={ref}
+                style={{
+                  height: "500px",
+                  backgroundColor: "white",
+                }}
+              ></div>
+            </Grid>
           )}
 
           <Btn

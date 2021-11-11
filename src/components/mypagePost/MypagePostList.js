@@ -1,7 +1,8 @@
+/* eslint-disable */
 import React from "react";
 import MypagePost from "./MypagePost";
-
-const MypagePostList = props => {
+import { Grid, Image } from "../../elements/Index";
+const MypagePostList = (props) => {
   const myCards = props;
   const newMyCards = Object.values(myCards);
   console.log(myCards);
@@ -10,9 +11,11 @@ const MypagePostList = props => {
     <>
       {newMyCards && (
         <React.Fragment>
-          {newMyCards.map((p, idx) => {
-            return <MypagePost key={idx} {...p}></MypagePost>;
-          })}
+          <Grid>
+            {newMyCards.map((p, idx) => {
+              return <MypagePost key={idx} {...p}></MypagePost>;
+            })}
+          </Grid>
         </React.Fragment>
       )}
     </>
