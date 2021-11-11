@@ -130,7 +130,7 @@ const CardHeaderTwo = styled.div`
   height: 160px;
   background-color: #f1bad1;
 
-  border-radius: 43 px 54px 54px 54px;
+  border-radius: 43px 54px 54px 54px;
   background: rgb(83, 201, 253);
   background: linear-gradient(
     140deg,
