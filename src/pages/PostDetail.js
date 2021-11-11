@@ -48,9 +48,9 @@ const PostDetail = (props) => {
 
   // 게시글 작성(프로젝트 상태)
   const projectStatused = [
-    { value: "done", label: "모집중" },
-    { value: "doing", label: "진행중" },
-    { value: "ready", label: "종료" },
+    { value: "모집중", label: "모집중" },
+    { value: "진행중", label: "진행중" },
+    { value: "종료", label: "종료" },
   ];
 
   let post_id = props.match.params.id;
@@ -202,25 +202,26 @@ const PostDetail = (props) => {
               <Grid>
                 {userId === postUserId ? (
                   <Grid display="flex" justifyContent="center">
-                    {checkPost.data.data.post.projectStatus === "진행중" && (
+                    {passedData?.projectStatus === "진행중" && (
                       <Btn
                         onClick={() => {
-                          edit_status("done");
+                          edit_status("종료");
                         }}
                       >
                         프로젝트 마감하기
                       </Btn>
                     )}
 
-                    {checkPost.data.data.post.projectStatus === "모집중" && (
+                    {passedData?.projectStatus === "모집중" && (
                       <Btn
                         onClick={() => {
-                          edit_status("doing");
+                          edit_status("진행중");
                         }}
                       >
                         모집완료
                       </Btn>
                     )}
+
                     <Btn
                       onClick={() => {
                         history.push({ pathname: `/postedit/${post_id}` });
