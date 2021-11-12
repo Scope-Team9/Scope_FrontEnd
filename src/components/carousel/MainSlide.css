@@ -26,7 +26,6 @@
 
 .arrow {
   background-color: #eee;
-  width: 50px;
   height: 50px;
   border-radius: 10px;
   position: absolute;
@@ -35,16 +34,29 @@
   transition: color 300ms;
   text-align: center;
 }
+.arrow svg {
+  background-color: #eee;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  position: absolute;
+  cursor: pointer;
+  z-index: 10;
+  transition: color 300ms;
+  text-align: center;
+}
 .arrow svg:hover {
   background-color: #b29cf4;
-  border-radius: 10px;
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
   color: #eee;
 }
 .next {
-  right: 30px;
-  top: 50%;
+  right: 80px;
+  top: 45%;
 }
 .prev {
   left: 30px;
-  top: 50%;
+  top: 45%;
 }

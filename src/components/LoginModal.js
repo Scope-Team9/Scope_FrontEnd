@@ -225,6 +225,7 @@ const LoginModal = props => {
                     </Grid>
                     <Grid height="25%" margin="16px 0">
                       <Input
+                        borderRadius="25px"
                         border="1px solid #ddd"
                         fontSize="16px"
                         padding="0 0 0 17px"

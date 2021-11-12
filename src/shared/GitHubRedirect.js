@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { userCreators } from "../redux/modules/user";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import Spinner from "./Spinner";
 
 const KakaoRedirect = props => {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ const KakaoRedirect = props => {
     dispatch(userCreators.githubLoginMiddleware(code));
   }, []);
 
-  return <CircularProgress />;
+  return <Spinner />;
 };
 
 export default KakaoRedirect;

@@ -13,11 +13,10 @@ import UserList from "../components/UserList";
 import ApplyStatusModal from "../components/ApplyStatusModal";
 import ApplyUserModal from "../components/ApplyUserModal";
 import { history } from "../redux/configureStore";
-import { borderRadius } from "@mui/system";
 import ProjectJoinUser from "../components/ProjectJoinUser";
 
 // PostDetail의 함수형 컴포넌트를 만든다.
-const PostDetail = (props) => {
+const PostDetail = props => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [checkPost, setCheckPost] = React.useState();
@@ -26,18 +25,19 @@ const PostDetail = (props) => {
   const [applyUserModal, setApplyUserModal] = React.useState(false); //지원취소
   const [applyValue, setApplyValue] = React.useState();
   const [projectStatus, setProjectstatus] = React.useState(""); // 프로젝트 상태
+  const [loading, setLoding] = React.useState(null);
 
   const applyStatusModalOpen = () => {
     setApplyStatusModal(true);
   };
 
-  const applyUserModalOpen = (value) => {
+  const applyUserModalOpen = value => {
     setApplyValue(value);
     setApplyUserModal(true);
   };
 
   // 상태변경
-  const edit_status = (data) => {
+  const edit_status = data => {
     const editstatus = {
       projectStatus: data,
     };
@@ -54,7 +54,7 @@ const PostDetail = (props) => {
   ];
 
   let post_id = props.match.params.id;
-  const userId = useSelector((state) => state.user.userId); //로그인 유저아이디
+  const userId = useSelector(state => state.user.userId); //로그인 유저아이디
   const postUserId = checkPost?.data.data.post.userId;
 
   //북마크 토글
@@ -150,9 +150,7 @@ const PostDetail = (props) => {
                   >
                     <Button
                       postion="absolute"
-                      width="100%"
-                      height="40px"
-                      borderRadius="50px"
+                      common
                       _onClick={applyStatusModalOpen}
                     >
                       신청현황 확인
@@ -241,15 +239,13 @@ const PostDetail = (props) => {
                 ) : (
                   <Grid>
                     <Button
+                      common
+                      width="120px"
                       isValue="apply"
-                      _onClick={(e) => {
+                      _onClick={e => {
                         console.log(e);
                         applyUserModalOpen(e.target.value);
                       }}
-                      width="120px"
-                      height="40px"
-                      margin="auto 10px"
-                      borderRadius="50px"
                     >
                       지원신청
                     </Button>
@@ -260,25 +256,23 @@ const PostDetail = (props) => {
                       postId={post_id}
                     />
                     <Button
+                      common
+                      width="120px"
                       isValue="cancel"
-                      _onClick={(e) => {
+                      _onClick={e => {
                         applyUserModalOpen(e.target.value);
                       }}
                       width="120px"
-                      height="40px"
-                      margin="auto 10px"
-                      borderRadius="50px"
                     >
                       지원취소
                     </Button>
                     <Button
+                      common
+                      width="120px"
                       isValue="teamExit"
-                      _onClick={(e) => {
+                      _onClick={e => {
                         applyUserModalOpen(e.target.value);
                       }}
-                      width="120px"
-                      height="40px"
-                      margin="auto 10px"
                     >
                       팀탈퇴
                     </Button>
