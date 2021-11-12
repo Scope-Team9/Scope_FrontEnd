@@ -28,11 +28,15 @@ const PostList = () => {
             })}
           </>
         )}
-
         {posts.length === 0 && (
-          <Grid margin="auto" width="100%">
-            <NoIntroduction src="/img/소개글호랑이.png"></NoIntroduction>
-            <NoIntroductionText>아직 포스트가 없네요.</NoIntroductionText>
+          <Grid margin="auto" width="100%" height="100%" display="flex">
+            <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
+            <NoIntroductionText>
+              아직 포스트가 없네요
+              <br /> .
+              <br /> .
+              <br /> .
+            </NoIntroductionText>
           </Grid>
         )}
       </PostWrap>
@@ -51,16 +55,16 @@ const PostWrap = styled.div`
     width: 100%;
   }
 `;
-
 const NoIntroduction = styled.img`
-  width: 140%;
+  width: 100%;
   height: 100%;
-  object-fit: cover;
-  position: relative;
+  /* object-fit: cover; */
+
   margin: auto;
   display: flex;
   justify-content: center;
 `;
+
 const NoIntroductionText = styled.p`
   color: #737373;
   font-size: 25px;
@@ -68,7 +72,7 @@ const NoIntroductionText = styled.p`
   align-items: center;
   display: flex;
   justify-content: center;
-  margin-left: 60px;
+  margin-left: auto;
 `;
 
 export default PostList;

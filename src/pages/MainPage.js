@@ -321,4 +321,22 @@ const Btn = styled.button`
   } ;
 `;
 
+const NoIntroduction = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  margin: auto;
+  display: flex;
+  justify-content: center;
+`;
+const NoIntroductionText = styled.p`
+  color: #737373;
+  font-size: 25px;
+  width: auto;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+`;
 export default MainPage;
