@@ -30,20 +30,20 @@ const PostStacks = props => {
           margin="-40px 0px"
           boxShadow="0 0 5px #ccc"
         >
-          {stacks === "React" && <IMGS src="img/react.png" />}
-          {stacks === "Java" && <IMGS src="img/java.png" />}
-          {stacks === "JavaScript" && <IMGS src="img/javascript.png" />}
-          {stacks === "Python" && <IMGS src="img/python.png" />}
-          {stacks === "Node" && <IMGS src="img/node.js.png" />}
-          {stacks === "cpp" && <IMGS src="img/c__.png" />}
-          {stacks === "Flask" && <IMGS src="img/flask.png" />}
-          {stacks === "Django" && <IMGS src="img/django.png" />}
-          {stacks === "Vue" && <IMGS src="img/vue.png" />}
-          {stacks === "Spring" && <IMGS src="img/spring.png" />}
-          {stacks === "php" && <IMGS src="img/php.png" />}
-          {stacks === "Swift" && <IMGS src="img/swift.png" />}
-          {stacks === "Kotlin" && <IMGS src="img/kotlin.png" />}
-          {stacks === "TypeScript" && <IMGS src="img/typescript.png" />}
+          {stacks === "React" && <IMGS src="/img/react.png" />}
+          {stacks === "Java" && <IMGS src="/img/java.png" />}
+          {stacks === "JavaScript" && <IMGS src="/img/javascript.png" />}
+          {stacks === "Python" && <IMGS src="/img/python.png" />}
+          {stacks === "Node" && <IMGS src="/img/node.js.png" />}
+          {stacks === "cpp" && <IMGS src="/img/c__.png" />}
+          {stacks === "Flask" && <IMGS src="/img/flask.png" />}
+          {stacks === "Django" && <IMGS src="/img/django.png" />}
+          {stacks === "Vue" && <IMGS src="/img/vue.png" />}
+          {stacks === "Spring" && <IMGS src="/img/spring.png" />}
+          {stacks === "php" && <IMGS src="/img/php.png" />}
+          {stacks === "Swift" && <IMGS src="/img/swift.png" />}
+          {stacks === "Kotlin" && <IMGS src="/img/kotlin.png" />}
+          {stacks === "TypeScript" && <IMGS src="/img/typescript.png" />}
         </Grid>
       )}
     </div>

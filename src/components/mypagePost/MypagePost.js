@@ -29,7 +29,6 @@ const MypagePost = props => {
           });
         }}
       >
-        <img src="img/react.png" />
         <DDescriptionBox>
           <CardHeader>
             <Grid>{/* <TitleDate>D-2</TitleDate> */}</Grid>

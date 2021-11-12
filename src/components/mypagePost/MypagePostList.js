@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React from "react";
-import MypagePost from "./MypagePost";
+// import MypagePost from "./MypagePost";
+import Post from "../Post";
 import { Grid, Image } from "../../elements/Index";
 import styled from "styled-components";
 const MypagePostList = props => {
@@ -14,7 +15,7 @@ const MypagePostList = props => {
         <React.Fragment>
           <PostWrap>
             {newMyCards.map((p, idx) => {
-              return <MypagePost key={idx} {...p}></MypagePost>;
+              return <Post key={idx} {...p}></Post>;
             })}
           </PostWrap>
         </React.Fragment>

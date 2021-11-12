@@ -200,9 +200,8 @@ const ProductImgWrap = styled.div`
   width: 330px;
   height: 330px;
   max-width: 350px;
-  margin: 70px auto;
-  margin-top: 70px;
-  margin-bottom: 30px;
+  margin: 30px auto;
+
   border-radius: 54px 32px 35px 35px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.24);
   @media (max-width: 1700px) {
