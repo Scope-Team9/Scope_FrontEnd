@@ -15,7 +15,7 @@ const Post = (props) => {
   const dispatch = useDispatch();
   const is_mainPage = useSelector((state) => state.post.mainpage);
   const [stacks, setStacks] = React.useState();
-  console.log("내가", props);
+  // console.log("내가", props);
   let totalmember = props.totalMember;
   let recruitmentMember = props.recruitmentMember;
   // console.log("게시자", props.recruitmentMember);

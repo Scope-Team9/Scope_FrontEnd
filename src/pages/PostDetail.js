@@ -7,16 +7,15 @@ import { postDetailActions } from "../redux/modules/postdetail";
 import { apis } from "../lib/axios";
 import { useHistory } from "react-router";
 import { postActions } from "../redux/modules/post";
-import { Grid, Text, Image, Input, Button } from "../elements/Index";
-import Img from "../images/DetailImg.png";
+import { Grid, Text, Button } from "../elements/Index";
+import Img from "../images/PostDetail.png";
 import UserList from "../components/UserList";
 import ApplyStatusModal from "../components/ApplyStatusModal";
 import ApplyUserModal from "../components/ApplyUserModal";
-import { history } from "../redux/configureStore";
 import ProjectJoinUser from "../components/ProjectJoinUser";
 
 // PostDetail의 함수형 컴포넌트를 만든다.
-const PostDetail = props => {
+const PostDetail = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [checkPost, setCheckPost] = React.useState();
@@ -24,20 +23,18 @@ const PostDetail = props => {
   const [applyStatusModal, setApplyStatusModal] = React.useState(false); //신청현황
   const [applyUserModal, setApplyUserModal] = React.useState(false); //지원취소
   const [applyValue, setApplyValue] = React.useState();
-  const [projectStatus, setProjectstatus] = React.useState(""); // 프로젝트 상태
-  const [loading, setLoding] = React.useState(null);
 
   const applyStatusModalOpen = () => {
     setApplyStatusModal(true);
   };
 
-  const applyUserModalOpen = value => {
+  const applyUserModalOpen = (value) => {
     setApplyValue(value);
     setApplyUserModal(true);
   };
 
   // 상태변경
-  const edit_status = data => {
+  const edit_status = (data) => {
     const editstatus = {
       projectStatus: data,
     };
@@ -54,7 +51,7 @@ const PostDetail = props => {
   ];
 
   let post_id = props.match.params.id;
-  const userId = useSelector(state => state.user.userId); //로그인 유저아이디
+  const userId = useSelector((state) => state.user.userId); //로그인 유저아이디
   const postUserId = checkPost?.data.data.post.userId;
 
   //북마크 토글
@@ -97,12 +94,11 @@ const PostDetail = props => {
         justifyContent="center"
         maxWidth="1920px"
         height="100%"
-        margin="-100px auto 0 auto"
         border="1px solid #C4C4C4"
-        alignItems="center"
+        margin="auto"
       >
-        <SideBarImg src={Img} style={{ maxWidth: "100%", height: "100%" }} />
-        <Grid margin="100px 20px auto 20px" position="relative">
+        <SideBarImg src={Img} style={{ maxWidth: "650px", height: "100%" }} />
+        <Grid margin="20px 20px auto 20px" position="relative">
           {userId !== postUserId && (
             <Grid width="50px" position="absolute" top="20px" right="20px">
               <Button _onClick={ToggleBookMark}>
@@ -110,11 +106,15 @@ const PostDetail = props => {
               </Button>
             </Grid>
           )}
-          {/* <Title>Scoope</Title> */}
-          <Text color="#C4C4C4" size="20px" bold>
-            <span style={{ color: "black" }}>제목</span> : {passedData?.title}
-            <hr width="92%" />
-          </Text>
+          <Title>Scoope</Title>
+          {/* 제목 */}
+          <Grid>
+            <Text color="#C4C4C4" size="20px" bold>
+              <span style={{ color: "black" }}>제목</span> : {passedData?.title}
+              <hr width="92%" />
+            </Text>
+          </Grid>
+          {/* 소개 */}
           <Grid margin="10px auto">
             <Text color="#C4C4C4" size="20px" bold>
               <span style={{ color: "black" }}>소개 : </span>{" "}
@@ -122,23 +122,27 @@ const PostDetail = props => {
               <hr width="92%" />
             </Text>
           </Grid>
-          <Grid margin="10px auto">
-            <Text>게시자 정보</Text>
-            <Grid display="column">
-              <Grid width="45px" borderRadius="50%" backgroundColor="#C4C4C4">
+          <Grid margin="20px auto">
+            <Grid>
+              <Text size="18px">프로젝트 게시자</Text>
+              <Grid
+                width="60px"
+                height="60px"
+                borderRadius="50%"
+                backgroundColor="#C4C4C4"
+                margin="10px 0px 0px"
+              >
                 <UserList list={passedData?.propensityType}></UserList>
               </Grid>
-              <Text>{passedData?.nickname}</Text>
+              <Text size="20px">{passedData?.nickname}</Text>
               <Grid>({passedData?.propensityType})</Grid>
             </Grid>
-            <Grid margin="10px auto">
-              <Text>프로젝트 인원</Text>
-              <Grid display="flex">
-                <Grid display="flex">
-                  {passdedMenber?.map((item, index) => (
-                    <ProjectJoinUser key={index} {...item} />
-                  ))}
-                </Grid>
+            <Grid margin="20px auto ">
+              <Text size="18px">모집인원</Text>
+              <Grid display="flex" margin="10px auto">
+                {passdedMenber?.map((item, index) => (
+                  <ProjectJoinUser key={index} {...item} />
+                ))}
               </Grid>
               {userId === postUserId && (
                 <Grid position="relative" width="100%">
@@ -165,23 +169,18 @@ const PostDetail = props => {
               )}
 
               <Grid display="flex" margin="10px auto">
-                <Text margin="auto 10px auto 0px">프로젝트 기간 :</Text>
-                <Text>
-                  {passedData?.startDate} ~ {passedData?.endDate}
-                </Text>
-              </Grid>
-              <Grid display="flex" margin="10px auto">
                 <Text margin="auto 10px auto 0px">기술스택 :</Text>
                 {passedData?.techStack.map((item, index) => {
                   return (
                     <Text margin="auto 5px" key={index}>
                       <span
                         style={{
-                          color: "black",
+                          color: "white",
                           textAlign: "center",
-                          padding: "4px",
-                          backgroundColor: "#B29CF4",
-                          borderRadius: "20px",
+                          padding: "4px 10px",
+                          border: "1px solid #E6DDF2",
+                          background: "#E6DDF2",
+                          borderRadius: "10px",
                         }}
                       >
                         {item}
@@ -189,6 +188,22 @@ const PostDetail = props => {
                     </Text>
                   );
                 })}
+              </Grid>
+              <Grid display="flex" margin="20px auto">
+                <Text margin="auto 10px auto 0px">프로젝트 기간 :</Text>
+                <Text>
+                  <span
+                    style={{
+                      color: "black",
+                      textAlign: "center",
+                      padding: "4px 10px",
+                      border: "1px solid #E6DDF2",
+                      borderRadius: "10px",
+                    }}
+                  >
+                    {passedData?.startDate} ~ {passedData?.endDate}
+                  </span>
+                </Text>
               </Grid>
               <Grid display="flex">
                 <Text margin="auto 10px auto 0px">프로젝트 상태 :</Text>
@@ -237,15 +252,20 @@ const PostDetail = props => {
                     </Btn>
                   </Grid>
                 ) : (
-                  <Grid>
+                  <Grid textAlign="center">
                     <Button
                       common
                       width="120px"
                       isValue="apply"
-                      _onClick={e => {
+                      _onClick={(e) => {
                         console.log(e);
                         applyUserModalOpen(e.target.value);
                       }}
+                      width="120px"
+                      height="40px"
+                      margin="auto 10px"
+                      border="1px solid #b29cf4"
+                      borderRadius="50px"
                     >
                       지원신청
                     </Button>
@@ -259,7 +279,7 @@ const PostDetail = props => {
                       common
                       width="120px"
                       isValue="cancel"
-                      _onClick={e => {
+                      _onClick={(e) => {
                         applyUserModalOpen(e.target.value);
                       }}
                       width="120px"
@@ -270,7 +290,7 @@ const PostDetail = props => {
                       common
                       width="120px"
                       isValue="teamExit"
-                      _onClick={e => {
+                      _onClick={(e) => {
                         applyUserModalOpen(e.target.value);
                       }}
                     >
@@ -296,30 +316,32 @@ const Title = styled.h1`
 
 const Content = styled.h3`
   width: 96%;
-  height: 300px;
+  height: 180px;
   padding: 10px;
   border: 1px solid #c4c4c4;
   border-radius: 5px;
+  overflow: scroll;
 `;
 
 const Btn = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 120px;
+  width: 140px;
   height: 35px;
-  border: none;
+  border: 1px solid #b29cf4;
   border-radius: 50px;
   color: #fff;
-  background: linear-gradient(
-    0deg,
-    rgba(83, 201, 253, 1) 0%,
-    rgba(182, 161, 240, 1) 69%,
-    rgba(231, 170, 250, 1) 100%,
-    rgba(240, 247, 254, 1) 100%
-  );
+  background: white;
+  color: #b29cf4;
+  margin: 10px 4px 10px 4px;
   cursor: pointer;
-  margin: auto 10px;
+  &:hover {
+    color: white;
+    background-color: #b29cf4;
+    border: 1px solid;
+    transition-duration: 1s;
+  }
 `;
 
 const SideBarImg = styled.img`

@@ -11,7 +11,7 @@ import Select from "react-select";
 import makeAnimated from "react-select/animated";
 
 import { Grid, Text, Input } from "../elements/Index";
-import Img from "../images/PostAdd 4.png";
+import Img from "../images/PostAdd.jpg";
 import { useDispatch } from "react-redux";
 import { postAddActions } from "../redux/modules/postadd";
 import { postActions } from "../redux/modules/post";
@@ -37,7 +37,7 @@ const AddPost = (props) => {
     if (
       title.length > 0 &&
       summary.length > 0 &&
-      techstack.length > 0 &&
+      techstack.length <= 3 &&
       totalMember > 0 &&
       projectStatus.length > 0 &&
       contents.length > 0
@@ -45,7 +45,7 @@ const AddPost = (props) => {
       window.alert("프로젝트가 생성되었습니다.");
       scope_index();
     } else {
-      window.alert("값을 다 입력해주세요.");
+      window.alert("값을 다시 입력해주세요.");
     }
   };
 
@@ -160,8 +160,6 @@ const AddPost = (props) => {
     formatTech();
   }, [techstack]);
 
-  console.log("이승민");
-
   return (
     <React.Fragment>
       <Grid
@@ -169,23 +167,22 @@ const AddPost = (props) => {
         justifyContent="center"
         maxWidth="1920px"
         height="100%"
-        margin="-100px auto"
+        margin="10px auto"
         border="1px solid #C4C4C4"
-        alignItems="center"
       >
         {/* 이미지 하나 */}
-        <SideBarImg src={Img} style={{ maxWidth: "100%", height: "100%" }} />
+        <SideBarImg src={Img} style={{ maxWidth: "620px", height: "100%" }} />
         {/* 텍스트 하나 */}
         <Grid padding="0px 16px">
           {/* Scoope */}
-          <Title>Scoope</Title>
+          <Title>SCOPE</Title>
           <Grid>
             {/* 게시글 작성하기 */}
             <Text color="#C4C4C4" size="20px" bold>
               게시글 작성하기
             </Text>
             {/* 제목 */}
-            <Grid>
+            <Grid margin="10px 0px 0px 0px">
               <Grid>제목</Grid>
               <Input
                 width="100%"
@@ -193,6 +190,7 @@ const AddPost = (props) => {
                 height="40px"
                 padding="10px"
                 border="1px solid #C4C4C4"
+                borderRadius="4px"
                 placeholder="제목을 입력해주세요."
                 inputFocusOutline="none"
                 fontSize="16px"
@@ -229,7 +227,7 @@ const AddPost = (props) => {
                 styles={styles}
                 options={stackSelect}
                 onChange={handleChange}
-                placeholder={<div>기술 스택을 선택해주세요.</div>}
+                placeholder={<div>기술 스택을 선택해주세요(3가지).</div>}
               />
             </Grid>
             {/* 기간설정 */}
@@ -299,7 +297,7 @@ const AddPost = (props) => {
                   fontSize: "16px",
                   outline: "none",
                 }}
-                placeholder="프로젝트 내용을 입력해주세요."
+                placeholder="프로젝트 내용을 입력해주세요(X. 연락수단 필수)."
                 onChange={(e) => {
                   setContents(e.target.value);
                 }}
@@ -345,17 +343,19 @@ const Btn = styled.button`
   align-items: center;
   width: 140px;
   height: 35px;
-  border: none;
+  border: 1px solid #b29cf4;
   border-radius: 50px;
   color: #fff;
-  background: linear-gradient(
-    0deg,
-    rgba(83, 253, 100, 1) 0%,
-    rgba(161, 240, 182, 1) 0%,
-    rgba(255, 255, 255, 1) 100%
-  );
+  background: white;
+  color: #b29cf4;
   margin: 10px auto 10px auto;
   cursor: pointer;
+  &:hover {
+    color: white;
+    background-color: #b29cf4;
+    border: 1px solid;
+    transition-duration: 1s;
+  }
 `;
 
 const SideBarImg = styled.img`

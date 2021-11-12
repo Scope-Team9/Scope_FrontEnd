@@ -1,16 +1,14 @@
 import React from "react";
-import UserList from "./UserList";
-import { Grid, Text, Image, Button, Input } from "../elements/Index";
+import { Grid, Text, Image } from "../elements/Index";
 import styled from "styled-components";
 
 const ProjectJoinUser = (props) => {
-  console.log("랜더링 됬다", props);
   return (
     <React.Fragment>
       <Grid>
         <Grid
-          width="45px"
-          height="45px"
+          width="60px"
+          height="60px"
           borderRadius="50%"
           backgroundColor="#C4C4C4"
         >
@@ -24,11 +22,9 @@ const ProjectJoinUser = (props) => {
 
           {props.userPropensityType === "FHG" && <Img src="/img/고양이.png" />}
           {props.userPropensityType === "FHP" && <Img src="/img/물개.png" />}
-          {props.userPropensityType === "RHP" && (
-            <Image src="/img/너구리.png" />
-          )}
+          {props.userPropensityType === "RHP" && <Img src="/img/너구리.png" />}
         </Grid>
-        <Grid>{props.nickname}</Grid>
+        <Text size="20px">{props.nickname}</Text>
         <Grid>({props.userPropensityType})</Grid>
       </Grid>
     </React.Fragment>
@@ -36,9 +32,9 @@ const ProjectJoinUser = (props) => {
 };
 
 const Img = styled.img`
-  margin: 5px;
-  width: 36px;
-  height: 36px;
+  margin: 6px;
+  width: 48px;
+  height: 48px;
 `;
 
-export default React.memo(ProjectJoinUser);
+export default ProjectJoinUser;

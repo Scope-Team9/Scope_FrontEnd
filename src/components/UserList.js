@@ -7,7 +7,7 @@ const UserList = (props) => {
 
   return (
     <React.Fragment>
-      <Grid display="flex" width="45px" borderRadius="50%">
+      <Grid>
         {list === "LVG" && <Img src="/img/호랑이.png" />}
         {list === "LVP" && <Img src="/img/늑대.png" />}
         {list === "LHG" && <Img src="/img/여우.png" />}
@@ -25,9 +25,9 @@ const UserList = (props) => {
 };
 
 const Img = styled.img`
-  margin: 5px;
-  width: 36px;
-  height: 36px;
+  margin: 6px;
+  width: 48px;
+  height: 48px;
 `;
 
 export default UserList;
