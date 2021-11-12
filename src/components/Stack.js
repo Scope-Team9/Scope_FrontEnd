@@ -8,17 +8,21 @@ import { stackAction } from "../redux/modules/stack";
 
 const Stack = () => {
   const dispatch = useDispatch();
-  const is_clicked = useSelector(state => state.stack.stack);
-
+  const is_clicked = useSelector((state) => state.stack.stack);
+  //필터 클릭
+  const [currentClick, setCurrentClick] = React.useState(null);
+  const [prevClick, setPrevClick] = React.useState(null);
+  const [click, setClick] = React.useState(null);
+  const [flag, setFlag] = React.useState([]);
   // console.log(Object.keys(stackList));
 
   // 리덕스에서 filter가 잘 되지만, 다시 불러오면 그대로임 ㅡㅡ
-  const onclick = stack => {
+  const onclick = (stack) => {
     // const testResult = Object.keys(stackList).find((item) => item === stack);
     // console.log("희망", testResult);
 
     //Object.key 또는 Object.values 로 배열의 키와 밸류 값들을 찾을 수 있다.
-    const result = Object.values(is_clicked).find(item => item === stack);
+    const result = Object.values(is_clicked).find((item) => item === stack);
     // console.log("이 값이 있으면 지워줘야함", result);
     if (result) {
       dispatch(postActions.isMainPage(true));
@@ -34,7 +38,38 @@ const Stack = () => {
   // const test = () => {
   //   console.log(is_clicked);
   // };
+  const GetClick = (e) => {
+    setCurrentClick(e);
+    console.log(e);
+  };
 
+  React.useEffect(
+    (e) => {
+      const clickAgain = flag.find((e) => e === currentClick);
+      const toRemove = flag.filter((e) => e !== currentClick);
+
+      if (currentClick !== null) {
+        let current = document.getElementById(currentClick);
+        current.style.opacity = "1";
+      }
+      if (prevClick !== null && clickAgain === currentClick) {
+        let prev = document.getElementById(currentClick);
+        prev.style.opacity = "0.5";
+      }
+      setPrevClick(currentClick);
+
+      if (!clickAgain && currentClick !== null) {
+        setFlag((preList) => [...preList, currentClick]);
+      } else if (clickAgain) {
+        setFlag(toRemove);
+      }
+    },
+
+    [currentClick, click]
+  );
+
+  // let current = document.getElementById("React");
+  // current.style.opacity = "0.4";
   return (
     <Grid
       display="flex"
@@ -48,114 +83,170 @@ const Stack = () => {
     >
       <BorderRadius>
         <IMGS
+          class="stack"
+          id="React"
           src="img/react.png"
-          onClick={() => {
+          onClick={(e) => {
             onclick("React");
+            GetClick(e.target.id);
+            setClick(click + 1);
           }}
         ></IMGS>
       </BorderRadius>
       <BorderRadius>
         <IMGS
+          class="stack"
+          id="Java"
           src="img/java.png"
-          onClick={() => {
+          onClick={(e) => {
             onclick("Java");
+            GetClick(e.target.id);
+            setClick(click + 1);
           }}
         ></IMGS>
       </BorderRadius>
       <BorderRadius>
         <IMGS
+          class="stack"
+          id="JavaScript"
           src="img/javascript.png"
-          onClick={() => {
+          onClick={(e) => {
             onclick("JavaScript");
+            GetClick(e.target.id);
+            setClick(click + 1);
           }}
         ></IMGS>
       </BorderRadius>
       <BorderRadius>
         <IMGS
+          class="stack"
+          id="Python"
           src="img/python.png"
-          onClick={() => {
+          onClick={(e) => {
             // test();
             onclick("Python");
+            GetClick(e.target.id);
+            setClick(click + 1);
           }}
         ></IMGS>
       </BorderRadius>
       <BorderRadius>
         <IMGS
+          class="stack"
+          id="Node"
           src="img/node.js.png"
-          onClick={() => {
+          onClick={(e) => {
             onclick("Node");
+            GetClick(e.target.id);
+            setClick(click + 1);
           }}
         ></IMGS>
       </BorderRadius>
       <BorderRadius>
         <IMGS
+          class="stack"
+          id="cpp"
           src="img/c__.png"
-          onClick={() => {
+          onClick={(e) => {
             onclick("cpp");
+            GetClick(e.target.id);
+            setClick(click + 1);
           }}
         ></IMGS>
       </BorderRadius>
       <BorderRadius>
         <IMGS
+          class="stack"
+          id="Flask"
           src="img/flask.png"
-          onClick={() => {
+          onClick={(e) => {
             onclick("Flask");
+            GetClick(e.target.id);
+            setClick(click + 1);
           }}
         ></IMGS>
       </BorderRadius>
       <BorderRadius>
         <IMGS
+          class="stack"
+          id="Django"
           src="img/django.png"
-          onClick={() => {
+          onClick={(e) => {
             onclick("Django");
+            GetClick(e.target.id);
+            setClick(click + 1);
           }}
         ></IMGS>
       </BorderRadius>
       <BorderRadius>
         <IMGS
+          class="stack"
+          id="Vue"
           src="img/vue.png"
-          onClick={() => {
+          onClick={(e) => {
             onclick("Vue");
+            GetClick(e.target.id);
+            setClick(click + 1);
           }}
         ></IMGS>
       </BorderRadius>
       <BorderRadius>
         <IMGS
+          class="stack"
+          id="Spring"
           src="img/spring.png"
-          onClick={() => {
+          onClick={(e) => {
             onclick("Spring");
+            GetClick(e.target.id);
+            setClick(click + 1);
           }}
         ></IMGS>
       </BorderRadius>
       <BorderRadius>
         <IMGS
+          class="stack"
+          id="php"
           src="img/php.png"
-          onClick={() => {
+          onClick={(e) => {
             onclick("php");
+            GetClick(e.target.id);
+            setClick(click + 1);
           }}
         ></IMGS>
       </BorderRadius>
       <BorderRadius>
         <IMGS
+          class="stack"
+          id="Swift"
           src="img/swift.png"
-          onClick={() => {
+          onClick={(e) => {
             onclick("Swift");
+            GetClick(e.target.id);
+            setClick(click + 1);
           }}
         ></IMGS>
       </BorderRadius>
       <BorderRadius>
         <IMGS
+          class="stack"
+          id="Kotlin"
           src="img/kotlin.png"
-          onClick={() => {
+          onClick={(e) => {
             onclick("Kotlin");
+            GetClick(e.target.id);
+            setClick(click + 1);
           }}
         ></IMGS>
       </BorderRadius>
       <BorderRadius>
         <IMGS
+          class="stack"
+          id="TypeScript"
           src="img/typescript.png"
-          onClick={() => {
+          onClick={(e) => {
             onclick("TypeScript");
+            GetClick(e.target.id);
+            setClick(click + 1);
           }}
         ></IMGS>
       </BorderRadius>
@@ -167,6 +258,7 @@ const IMGS = styled.img`
   cursor: pointer;
   width: 68px;
   margin: 10px 15px;
+  opacity: 0.4;
   @media screen and (max-width: 750px) {
     width: 30px;
   }

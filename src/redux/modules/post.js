@@ -1,6 +1,7 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../../lib/axios";
+import Swal from "sweetalert2";
 
 const GET_POST = "GET_POST";
 const LOADING = "LOADING";
@@ -65,7 +66,12 @@ export const getPostAPI = () => {
         dispatch(getPosts(data));
       })
       .catch((err) => {
-        console.log(err.response);
+        // console.log(err.response);
+        Swal.fire(
+          "로그인 후 이용하실 수 있습니다!",
+          "간단한 테스트를 진행해 주세요.",
+          "info"
+        );
       });
   };
 };

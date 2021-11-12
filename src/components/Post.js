@@ -11,9 +11,9 @@ import { history } from "../redux/configureStore";
 import { Grid, Image, Text } from "../elements/Index";
 
 // Post의 함수형 컴포넌트를 만든다.
-const Post = props => {
+const Post = (props) => {
   const dispatch = useDispatch();
-  const is_mainPage = useSelector(state => state.post.mainpage);
+  const is_mainPage = useSelector((state) => state.post.mainpage);
   const [stacks, setStacks] = React.useState();
 
   let totalmember = props.totalMember;
@@ -235,7 +235,7 @@ const HighLight = styled.div`
   border-radius: 25px;
   background: #b29cf4;
   transition: 1s;
-  width: ${props => props.width};
+  width: ${(props) => props.width};
   height: 15px;
 `;
 
