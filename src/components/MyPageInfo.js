@@ -1021,6 +1021,11 @@ const MyPageInfo = (props) => {
                     introduction={mydata?.user.introduction}
                   ></MarkdownRead>
                 )}
+                {filter === "소개" && introduction === true && (
+                  <Grid>
+                    <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
+                  </Grid>
+                )}
               </Grid>
             </>
           )}
@@ -1247,5 +1252,11 @@ const MyResultTextBold = styled.p`
   color: black;
   font-size: 15px;
   font-weight: bold;
+`;
+const NoIntroduction = styled.p`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: relative;
 `;
 export default MyPageInfo;
