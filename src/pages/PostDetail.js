@@ -104,10 +104,14 @@ const PostDetail = props => {
         <SideBarImg src={Img} style={{ maxWidth: "650px", height: "100%" }} />
         <Grid margin="20px 20px auto 20px" position="relative">
           {userId !== postUserId && (
-            <Grid width="50px" position="absolute" top="20px" right="30px">
-              <Button _onClick={ToggleBookMark}>
-                {!passedData?.bookmarkChecked ? "관심없음" : "관심있음"}
-              </Button>
+            <Grid width="50px" position="absolute" top="20px" right="50px">
+              <Grid _onClick={ToggleBookMark}>
+                {!passedData?.bookmarkChecked ? (
+                  <BookmarkBorderIcon sx={{ color: "#b29cf4", fontSize: 60 }} />
+                ) : (
+                  <BookmarkIcon sx={{ color: "#b29cf4", fontSize: 60 }} />
+                )}
+              </Grid>
             </Grid>
           )}
           <Title>Scoope</Title>
