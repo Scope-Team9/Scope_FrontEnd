@@ -37,7 +37,7 @@ const AddPost = props => {
     if (
       title.length > 0 &&
       summary.length > 0 &&
-      techstack.length > 0 &&
+      techstack.length <= 3 &&
       totalMember > 0 &&
       projectStatus.length > 0 &&
       contents.length > 0
@@ -45,7 +45,7 @@ const AddPost = props => {
       window.alert("프로젝트가 생성되었습니다.");
       scope_index();
     } else {
-      window.alert("값을 다 입력해주세요.");
+      window.alert("값을 다시 입력해주세요.");
     }
   };
 
@@ -175,7 +175,7 @@ const AddPost = props => {
         {/* 텍스트 하나 */}
         <Grid padding="0px 16px">
           {/* Scoope */}
-          <Title>Scoope</Title>
+          <Title>SCOPE</Title>
           <Grid>
             {/* 게시글 작성하기 */}
             <Text color="#C4C4C4" size="20px" bold>
@@ -227,7 +227,7 @@ const AddPost = props => {
                 styles={styles}
                 options={stackSelect}
                 onChange={handleChange}
-                placeholder={<div>기술 스택을 선택해주세요.</div>}
+                placeholder={<div>기술 스택을 선택해주세요(3가지).</div>}
               />
             </Grid>
             {/* 기간설정 */}
@@ -297,7 +297,7 @@ const AddPost = props => {
                   fontSize: "16px",
                   outline: "none",
                 }}
-                placeholder="프로젝트 내용을 입력해주세요."
+                placeholder="프로젝트 내용을 입력해주세요(X. 연락수단 필수)."
                 onChange={e => {
                   setContents(e.target.value);
                 }}
