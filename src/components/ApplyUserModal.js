@@ -124,8 +124,10 @@ const ApplyUserModal = props => {
                   지원신청
                 </Text>
               </Grid>
-              <Grid height="25%" margin="10px 0" textAlign="center">
+              <Grid height="22%" margin="10px 0" textAlign="center">
                 <Input
+                  padding="0 0 0 60px"
+                  borderRadius="25px"
                   border="1px solid #eee"
                   height="100%"
                   backgroundColor="#fff"
@@ -467,7 +469,7 @@ const ApplyUserModal = props => {
 
 const ModalWrap = styled.div`
   width: 550px;
-  height: 500px;
+  height: 300px;
   position: relative;
 `;
 

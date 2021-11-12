@@ -13,9 +13,11 @@ import UserList from "../components/UserList";
 import ApplyStatusModal from "../components/ApplyStatusModal";
 import ApplyUserModal from "../components/ApplyUserModal";
 import ProjectJoinUser from "../components/ProjectJoinUser";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 
 // PostDetail의 함수형 컴포넌트를 만든다.
-const PostDetail = (props) => {
+const PostDetail = props => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [checkPost, setCheckPost] = React.useState();
@@ -29,13 +31,13 @@ const PostDetail = (props) => {
     setApplyStatusModal(true);
   };
 
-  const applyUserModalOpen = (value) => {
+  const applyUserModalOpen = value => {
     setApplyValue(value);
     setApplyUserModal(true);
   };
 
   // 상태변경
-  const edit_status = (data) => {
+  const edit_status = data => {
     const editstatus = {
       projectStatus: data,
     };
@@ -52,7 +54,7 @@ const PostDetail = (props) => {
   ];
 
   let post_id = props.match.params.id;
-  const userId = useSelector((state) => state.user.userId); //로그인 유저아이디
+  const userId = useSelector(state => state.user.userId); //로그인 유저아이디
   const postUserId = checkPost?.data.data.post.userId;
 
   //북마크 토글
@@ -102,7 +104,7 @@ const PostDetail = (props) => {
         <SideBarImg src={Img} style={{ maxWidth: "650px", height: "100%" }} />
         <Grid margin="20px 20px auto 20px" position="relative">
           {userId !== postUserId && (
-            <Grid width="50px" position="absolute" top="20px" right="20px">
+            <Grid width="50px" position="absolute" top="20px" right="30px">
               <Button _onClick={ToggleBookMark}>
                 {!passedData?.bookmarkChecked ? "관심없음" : "관심있음"}
               </Button>
@@ -268,12 +270,10 @@ const PostDetail = (props) => {
                       common
                       width="120px"
                       isValue="apply"
-                      _onClick={(e) => {
+                      _onClick={e => {
                         console.log(e);
                         applyUserModalOpen(e.target.value);
                       }}
-                      width="120px"
-                      height="40px"
                       margin="auto 10px"
                       border="1px solid #b29cf4"
                       borderRadius="50px"
@@ -291,7 +291,7 @@ const PostDetail = (props) => {
                       common
                       width="120px"
                       isValue="cancel"
-                      _onClick={(e) => {
+                      _onClick={e => {
                         applyUserModalOpen(e.target.value);
                       }}
                       width="120px"
@@ -302,7 +302,7 @@ const PostDetail = (props) => {
                       common
                       width="120px"
                       isValue="teamExit"
-                      _onClick={(e) => {
+                      _onClick={e => {
                         applyUserModalOpen(e.target.value);
                       }}
                     >
