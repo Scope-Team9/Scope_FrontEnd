@@ -100,6 +100,7 @@ const exitTeamAPI = postId => {
         window.alert("팀에서 탈출하였습니다!");
       })
       .catch(err => {
+        console.log(err.response);
         if (err.response.data.msg === "입력 값이 잘못되었습니다.") {
           return window.alert("신청결과를 기다리는 중입니다!");
         }
@@ -123,7 +124,31 @@ const starterLikeAPI = userIds => {
         window.alert("팀원 평가 정보가 성공적으로 저장되었습니다.");
       })
       .catch(err => {
-        console.timeLog(err);
+        console.log(err.response);
+        if (err.response.data.msg === "입력 값이 잘못되었습니다.") {
+          return window.alert("팀원 평가가 이루어지지 않았습니다.");
+        }
+        if (err.response.data.msg === "해당 프로젝트를 찾을 수 없습니다.") {
+          return window.alert("해당 프로젝트를 찾을 수 없습니다.");
+        }
+        if (err.response.data.msg === "이미 진행중인 프로젝트입니다.") {
+          return window.alert("이미 진행중인 프로젝트입니다.");
+        }
+      });
+  };
+};
+
+// 깃허브 제출
+const submitUrlAPI = (postId, urls) => {
+  return function (dispatch, getState, { history }) {
+    apis
+      .strterLike(postId, urls)
+      .then(res => {
+        console.log(res);
+        window.alert("프로젝트 URL이 성공적으로 저장되었습니다.");
+      })
+      .catch(err => {
+        console.log(err.response);
       });
   };
 };
@@ -146,6 +171,7 @@ const applyCreators = {
   cancelProjectAPI,
   exitTeamAPI,
   starterLikeAPI,
+  submitUrlAPI,
 };
 
 export { applyCreators };

@@ -226,7 +226,8 @@ const PostDetail = props => {
                     {passedData?.projectStatus === "진행중" && (
                       <Button
                         common
-                        width="120px"
+                        width="140px"
+                        height="35px"
                         isValue="end"
                         _onClick={e => {
                           applyUserModalOpen(e.target.value);
@@ -243,30 +244,39 @@ const PostDetail = props => {
                       passdedMenber={passdedMenber}
                     />
                     {passedData?.projectStatus === "모집중" && (
-                      <Btn
-                        onClick={() => {
+                      <Button
+                        common
+                        width="140px"
+                        height="35px"
+                        _onClick={() => {
                           edit_status("진행중");
                         }}
                       >
                         모집완료
-                      </Btn>
+                      </Button>
                     )}
 
-                    <Btn
-                      onClick={() => {
+                    <Button
+                      common
+                      width="140px"
+                      height="35px"
+                      _onClick={() => {
                         history.push({ pathname: `/postedit/${post_id}` });
                       }}
                     >
                       포스트수정
-                    </Btn>
-                    <Btn
-                      onClick={() => {
+                    </Button>
+                    <Button
+                      common
+                      width="140px"
+                      height="35px"
+                      _onClick={() => {
                         DeletePost();
                         window.alert("삭제되었습니다.");
                       }}
                     >
                       포스트삭제
-                    </Btn>
+                    </Button>
                   </Grid>
                 ) : (
                   <Grid textAlign="center">

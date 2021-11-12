@@ -65,6 +65,7 @@ export const apis = {
   exitTeam: postId => instance.delete("/api/team/secession", postId),
   strterLike: (postId, likeUsers) =>
     instance.post(`/api/assessment/${postId}`, likeUsers),
+  sumbitUrl: (postId, urls) => instance.post(`/api/post/${postId}/url`, urls),
 
   getUserInfo: () => instance.get("/user/info"),
   getAllUserList: () => instance.get("/user/list"),

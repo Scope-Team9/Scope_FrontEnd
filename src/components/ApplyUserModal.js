@@ -24,6 +24,9 @@ const ApplyUserModal = props => {
   const [likes, setLikes] = React.useState([]);
   const [page, setPage] = React.useState(1);
 
+  const [front, setFront] = React.useState();
+  const [back, setBack] = React.useState();
+
   console.log(passdedMenber, isMe);
 
   const modalClose = () => {
@@ -63,6 +66,16 @@ const ApplyUserModal = props => {
   const toggleLike = id => {
     setCurrentLike(id);
     console.log(id);
+  };
+
+  const submitUrl = () => {
+    const github = {
+      frontUrl: front,
+      backUrl: back,
+    };
+    console.log(github);
+    dispatch(applyCreators.submitUrlAPI(postId, github));
+    modalClose;
   };
 
   React.useEffect(
@@ -416,7 +429,7 @@ const ApplyUserModal = props => {
                   height="80%"
                   width="30%"
                   margin="auto"
-                  bg="#222"
+                  bg="#eee"
                 >
                   <Grid
                     display="flex"
@@ -429,8 +442,9 @@ const ApplyUserModal = props => {
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
+                    bg="#eee"
                   >
-                    <Text>프론트엔드</Text>
+                    <Text>백엔드</Text>
                   </Grid>
                 </Grid>
                 <Grid
@@ -439,22 +453,39 @@ const ApplyUserModal = props => {
                   height="80%"
                   width="70%"
                   margin="auto"
-                  bg="#222"
+                  bg="#eee"
                   alignItems="center"
                 >
-                  <Input height="100%"></Input>
+                  <Input
+                    height="100%"
+                    _onChange={e => {
+                      console.log(e.target.value);
+                      setFront(e.target.value);
+                    }}
+                  ></Input>
 
-                  <Input height="100%"></Input>
+                  <Input
+                    height="100%"
+                    _onChange={e => {
+                      console.log(e.target.value);
+                      setBack(e.target.value);
+                    }}
+                  ></Input>
                 </Grid>
               </Grid>
               <Grid display="flex" height="15%" margin="20px auto" width="90%">
                 <Grid>
-                  <Button borderRadius="25px" _onClick={exitTeam}>
+                  <Button borderRadius="25px" _onClick={submitUrl}>
                     제출하기
                   </Button>
                 </Grid>
                 <Grid>
-                  <Button borderRadius="25px" _onClick={exitTeam}>
+                  <Button
+                    borderRadius="25px"
+                    _onClick={() => {
+                      history.push("/");
+                    }}
+                  >
                     다음에제출
                   </Button>
                 </Grid>
