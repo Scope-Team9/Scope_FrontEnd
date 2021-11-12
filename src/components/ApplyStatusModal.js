@@ -72,24 +72,23 @@ const ApplyStatusModal = props => {
               신청현황
             </Text>
           </Grid>
-          <Grid display="flex" height="85%" justifyContent="center">
-            {applyUsers == "" && (
+          {applyUsers == "" && (
+            <Grid height="0%" justifyContent="center">
               <Grid
-                display="flex"
                 justifyContent="center"
                 alignItems="center"
+                width="70%"
+                textAlign="center"
                 margin="auto"
               >
-                <Grid>
-                  <Image
-                    shape="rectangle"
-                    size="41"
-                    src="/img/호랑이배너.jpg"
-                  ></Image>
-                  지원자가 없네용
+                <Grid height="50%">
+                  <img width="100%" src="/img/step9.png" />
                 </Grid>
+                <Grid margin="250px 0">지원자가 아직 없습니다!</Grid>
               </Grid>
-            )}
+            </Grid>
+          )}
+          <Grid display="flex" height="85%" justifyContent="center">
             {applyUsers && (
               <Grid width="90%" margin="10px 0">
                 {applyUsers.map((user, idx) => (

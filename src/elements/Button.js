@@ -220,7 +220,7 @@ const TestButton = styled.button`
 
 const Common = styled.button`
   background-color: #fff;
-  height: ${props => props.bottom};
+  height: ${props => props.height};
   width: ${props => props.width};
   color: #b29cf4;
   margin-right: 3px;
