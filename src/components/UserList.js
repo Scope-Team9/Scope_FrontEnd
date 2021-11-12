@@ -25,9 +25,9 @@ const UserList = (props) => {
 };
 
 const Img = styled.img`
-  margin: 5px;
-  width: 36px;
-  height: 36px;
+  margin: 6px;
+  width: 48px;
+  height: 48px;
 `;
 
 export default UserList;

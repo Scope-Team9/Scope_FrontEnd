@@ -7,12 +7,13 @@ const ProjectJoinUser = (props) => {
   console.log("랜더링 됬다", props);
   return (
     <React.Fragment>
-      <Grid>
+      <Grid alignItems="center" textAlign="center">
         <Grid
-          width="45px"
-          height="45px"
+          width="60px"
+          height="60px"
           borderRadius="50%"
           backgroundColor="#C4C4C4"
+          margin="10px auto auto 16px"
         >
           {props.userPropensityType === "LVG" && <Img src="/img/호랑이.png" />}
           {props.userPropensityType === "LVP" && <Img src="/img/늑대.png" />}
@@ -28,7 +29,7 @@ const ProjectJoinUser = (props) => {
             <Image src="/img/너구리.png" />
           )}
         </Grid>
-        <Grid>{props.nickname}</Grid>
+        <Text size="20px">{props.nickname}</Text>
         <Grid>({props.userPropensityType})</Grid>
       </Grid>
     </React.Fragment>
@@ -36,9 +37,9 @@ const ProjectJoinUser = (props) => {
 };
 
 const Img = styled.img`
-  margin: 5px;
-  width: 36px;
-  height: 36px;
+  margin: 6px;
+  width: 48px;
+  height: 48px;
 `;
 
 export default React.memo(ProjectJoinUser);

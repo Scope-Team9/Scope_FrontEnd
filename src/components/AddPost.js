@@ -11,7 +11,7 @@ import Select from "react-select";
 import makeAnimated from "react-select/animated";
 
 import { Grid, Text, Input } from "../elements/Index";
-import Img from "../images/PostAdd 4.png";
+import Img from "../images/PostAdd.png";
 import { useDispatch } from "react-redux";
 import { postAddActions } from "../redux/modules/postadd";
 import { postActions } from "../redux/modules/post";
@@ -160,8 +160,6 @@ const AddPost = (props) => {
     formatTech();
   }, [techstack]);
 
-  console.log("이승민");
-
   return (
     <React.Fragment>
       <Grid
@@ -169,12 +167,11 @@ const AddPost = (props) => {
         justifyContent="center"
         maxWidth="1920px"
         height="100%"
-        margin="-100px auto"
+        margin="10px auto"
         border="1px solid #C4C4C4"
-        alignItems="center"
       >
         {/* 이미지 하나 */}
-        <SideBarImg src={Img} style={{ maxWidth: "100%", height: "100%" }} />
+        <SideBarImg src={Img} style={{ maxWidth: "620px", height: "100%" }} />
         {/* 텍스트 하나 */}
         <Grid padding="0px 16px">
           {/* Scoope */}
@@ -185,7 +182,7 @@ const AddPost = (props) => {
               게시글 작성하기
             </Text>
             {/* 제목 */}
-            <Grid>
+            <Grid margin="10px 0px 0px 0px">
               <Grid>제목</Grid>
               <Input
                 width="100%"
@@ -193,6 +190,7 @@ const AddPost = (props) => {
                 height="40px"
                 padding="10px"
                 border="1px solid #C4C4C4"
+                borderRadius="4px"
                 placeholder="제목을 입력해주세요."
                 inputFocusOutline="none"
                 fontSize="16px"
@@ -345,17 +343,19 @@ const Btn = styled.button`
   align-items: center;
   width: 140px;
   height: 35px;
-  border: none;
+  border: 1px solid #b29cf4;
   border-radius: 50px;
   color: #fff;
-  background: linear-gradient(
-    0deg,
-    rgba(83, 253, 100, 1) 0%,
-    rgba(161, 240, 182, 1) 0%,
-    rgba(255, 255, 255, 1) 100%
-  );
+  background: white;
+  color: #b29cf4;
   margin: 10px auto 10px auto;
   cursor: pointer;
+  &:hover {
+    color: white;
+    background-color: #b29cf4;
+    border: 1px solid;
+    transition-duration: 1s;
+  }
 `;
 
 const SideBarImg = styled.img`

@@ -7,8 +7,8 @@ import { postDetailActions } from "../redux/modules/postdetail";
 import { apis } from "../lib/axios";
 import { useHistory } from "react-router";
 import { postActions } from "../redux/modules/post";
-import { Grid, Text, Image, Input, Button } from "../elements/Index";
-import Img from "../images/DetailImg.png";
+import { Grid, Text, Button } from "../elements/Index";
+import Img from "../images/PostDetail.png";
 import UserList from "../components/UserList";
 import ApplyStatusModal from "../components/ApplyStatusModal";
 import ApplyUserModal from "../components/ApplyUserModal";
@@ -97,12 +97,12 @@ const PostDetail = (props) => {
         justifyContent="center"
         maxWidth="1920px"
         height="100%"
-        margin="-100px auto 0 auto"
+        margin="10px auto 0 auto"
         border="1px solid #C4C4C4"
         alignItems="center"
       >
-        <SideBarImg src={Img} style={{ maxWidth: "100%", height: "100%" }} />
-        <Grid margin="100px 20px auto 20px" position="relative">
+        <SideBarImg src={Img} style={{ maxWidth: "750px", height: "60%" }} />
+        <Grid margin="30px 20px auto 20px" position="relative">
           {userId !== postUserId && (
             <Grid width="50px" position="absolute" top="20px" right="20px">
               <Button _onClick={ToggleBookMark}>
@@ -110,7 +110,7 @@ const PostDetail = (props) => {
               </Button>
             </Grid>
           )}
-          {/* <Title>Scoope</Title> */}
+          <Title>Scoope</Title>
           <Text color="#C4C4C4" size="20px" bold>
             <span style={{ color: "black" }}>제목</span> : {passedData?.title}
             <hr width="92%" />
@@ -122,18 +122,27 @@ const PostDetail = (props) => {
               <hr width="92%" />
             </Text>
           </Grid>
-          <Grid margin="10px auto">
-            <Text>게시자 정보</Text>
-            <Grid display="column">
-              <Grid width="45px" borderRadius="50%" backgroundColor="#C4C4C4">
+          <Grid margin="20px auto">
+            <Text size="18px">프로젝트 게시자</Text>
+            <Grid margin="10px auto auto 24px">
+              <Grid
+                width="60px"
+                height="60px"
+                borderRadius="50%"
+                backgroundColor="#C4C4C4"
+              >
                 <UserList list={passedData?.propensityType}></UserList>
               </Grid>
-              <Text>{passedData?.nickname}</Text>
-              <Grid>({passedData?.propensityType})</Grid>
+              <Text size="20px">{passedData?.nickname}</Text>
+              <Grid margin="auto auto auto 8px">
+                ({passedData?.propensityType})
+              </Grid>
             </Grid>
             <Grid margin="10px auto">
-              <Text>프로젝트 인원</Text>
-              <Grid display="flex">
+              <Text size="18px" margin="auto auto auto 2px">
+                모집인원
+              </Text>
+              <Grid margin="20px auto auto 12px">
                 <Grid display="flex">
                   {passdedMenber?.map((item, index) => (
                     <ProjectJoinUser key={index} {...item} />
