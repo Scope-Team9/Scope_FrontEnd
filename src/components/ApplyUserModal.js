@@ -9,8 +9,19 @@ import CloseIcon from "@mui/icons-material/Close";
 
 const ApplyUserModal = props => {
   const dispatch = useDispatch();
-  const { applyUserModal, setApplyUserModal, applyValue, postId } = props;
+  const {
+    applyUserModal,
+    setApplyUserModal,
+    applyValue,
+    postId,
+    passdedMenber,
+  } = props;
+  const isMe = useSelector(state => state.user.userId);
   const [comment, setComment] = React.useState();
+  const [like, setLike] = React.useState([]);
+  const [preLike, setPreLike] = React.useState(false);
+
+  console.log(passdedMenber, isMe);
 
   const modalClose = () => {
     setApplyUserModal(false);
@@ -36,9 +47,30 @@ const ApplyUserModal = props => {
     console.log(_postId);
     dispatch(applyCreators.exitTeamAPI(_postId));
   };
+
+  const userLiked = () => {
+    const likeUsers = {
+      userIds: like,
+    };
+    dispatch(applyCreators.starterLikeAPI(postId, likeUsers));
+  };
+
+  const toggleLike = () => {
+    setPreLike(!preLike);
+    if (preLike) {
+      like.push(preLike);
+    }
+    dispatch(postDetailActions.bookMarkAPI(post_id));
+  };
+
   return (
     <>
-      <Dialog maxWidth={"sm"} scroll="paper" open={applyUserModal}>
+      <Dialog
+        maxWidth={"sm"}
+        scroll="paper"
+        open={applyUserModal}
+        onClose={modalClose}
+      >
         {applyValue === "apply" && (
           <ModalWrap>
             <Grid height="10%" position="relative">
@@ -165,6 +197,134 @@ const ApplyUserModal = props => {
             </Grid>
           </ModalWrap>
         )}
+        {applyValue === "end" && (
+          <ModalWrap>
+            <Grid height="10%" position="relative">
+              <Grid
+                position="absolute"
+                top="0px"
+                right="10px"
+                width="20px"
+                padding="10px"
+              >
+                <CloseIcon fontSize="large" onClick={modalClose} />
+              </Grid>
+            </Grid>
+
+            <Grid
+              margin="auto"
+              height="90%"
+              // justifyContent="center"
+              width="90%"
+              alignItems="center"
+              textAlign="center"
+            >
+              <Grid height="10%" textAlign="center">
+                <Text size="30px" bold>
+                  프로젝트 마감
+                </Text>
+              </Grid>
+
+              <Grid height="14%" margin="10px 0">
+                <Text size="14px">
+                  프로젝트는 어떠셨나요? <br /> 각 팀원들이 어떠셨는지
+                  평가해주시면 추천알고리즘이 정교해집니다.
+                </Text>
+              </Grid>
+              {/* 유저평가부분 */}
+              <Grid height="50%" bg="#222" width="90%" margin="auto">
+                {passdedMenber.map((user, idx) => (
+                  <Grid
+                    margin="10px auto"
+                    height="100px"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="space-around"
+                    width="100%"
+                    key={idx}
+                    {...user}
+                  >
+                    <Grid margin="auto" width="10%">
+                      {passdedMenber[idx].userPropensityType === "LVG" && (
+                        <UserImg src="/img/호랑이.png"></UserImg>
+                      )}
+                      {passdedMenber[idx].userPropensityType === "LVP" && (
+                        <UserImg src="/img/늑대.png"></UserImg>
+                      )}
+                      {passdedMenber[idx].userPropensityType === "LHG" && (
+                        <UserImg src="/img/여우.png"></UserImg>
+                      )}
+                      {passdedMenber[idx].userPropensityType === "LHP" && (
+                        <UserImg src="/img/판다.png"></UserImg>
+                      )}
+                      {passdedMenber[idx].userPropensityType === "FVG" && (
+                        <UserImg src="/img/토끼.png"></UserImg>
+                      )}
+                      {passdedMenber[idx].userPropensityType === "FVP" && (
+                        <UserImg src="/img/허스키.png"></UserImg>
+                      )}
+                      {passdedMenber[idx].userPropensityType === "FHG" && (
+                        <UserImg src="/img/고양이.png"></UserImg>
+                      )}
+                      {passdedMenber[idx].userPropensityType === "FHP" && (
+                        <UserImg src="/img/물개.png"></UserImg>
+                      )}
+                    </Grid>
+                    <Grid height="100%" width="80%" margin="auto">
+                      <Grid display="flex" height="60%" margin="auto">
+                        <Grid
+                          margin="auto"
+                          height="50px"
+                          display="flex"
+                          justifyContent="space-between"
+                        >
+                          <Grid height="100%" textAlign="center">
+                            <Grid bg="#eee" height="50%">
+                              닉네임
+                            </Grid>
+                            <Grid bg="#aaa" height="50%">
+                              타입
+                            </Grid>
+                          </Grid>
+                          <Grid margin="auto" height="100%" textAlign="center">
+                            <Grid height="50%">
+                              {passdedMenber[idx].nickname}
+                            </Grid>
+                            <Grid height="50%">
+                              {passdedMenber[idx].userPropensityType}
+                            </Grid>
+                          </Grid>
+                        </Grid>
+                        <Grid margin="auto" height="50px" width="60%">
+                          {passdedMenber[idx].userId !== isMe && (
+                            <Button
+                              common
+                              isId={passdedMenber[idx]}
+                              isValue={passdedMenber[idx].userId}
+                              _onClick={e => {
+                                console.log(e);
+                                toggleLike(e.target.id);
+                                userLiked(e.target.value);
+                              }}
+                            >
+                              좋았어요!
+                            </Button>
+                          )}
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                ))}
+              </Grid>
+
+              <Grid height="10%">
+                <Button borderRadius="25px" _onClick={exitTeam}>
+                  팀원평가
+                </Button>
+              </Grid>
+            </Grid>
+          </ModalWrap>
+        )}
       </Dialog>
     </>
   );
@@ -172,8 +332,16 @@ const ApplyUserModal = props => {
 
 const ModalWrap = styled.div`
   width: 550px;
-  height: 250px;
+  height: 500px;
   position: relative;
+`;
+
+const UserImg = styled.img`
+  object-fit: cover;
+  width: 60px;
+  border-radius: 12px;
+  background-color: #ececec;
+  cursor: pointer;
 `;
 
 export default ApplyUserModal;

@@ -45,7 +45,12 @@ const ApplyStatusModal = props => {
 
   return (
     <>
-      <Dialog maxWidth={"sm"} scroll="paper" open={applyStatusModal}>
+      <Dialog
+        maxWidth={"sm"}
+        scroll="paper"
+        open={applyStatusModal}
+        onClose={modalClose}
+      >
         <ModalWrap>
           <Grid
             height="10%"

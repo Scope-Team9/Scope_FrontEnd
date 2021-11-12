@@ -22,7 +22,8 @@ const PostDetail = props => {
   const [checkPost, setCheckPost] = React.useState();
   const [bookmark, setBookmark] = React.useState(false);
   const [applyStatusModal, setApplyStatusModal] = React.useState(false); //신청현황
-  const [applyUserModal, setApplyUserModal] = React.useState(false); //지원취소
+  const [applyUserModal, setApplyUserModal] = React.useState(false); //지원취소/팀탈퇴/프로젝트마감
+
   const [applyValue, setApplyValue] = React.useState();
   const [projectStatus, setProjectstatus] = React.useState(""); // 프로젝트 상태
   const [loading, setLoding] = React.useState(null);
@@ -81,6 +82,7 @@ const PostDetail = props => {
   const passedData = checkPost?.data["data"].post;
   const passdedMenber = checkPost?.data["data"].members;
 
+  console.log(passdedMenber);
   const DeletePost = async () => {
     try {
       const deletePost = await apis.deletePost(post_id);
@@ -210,15 +212,24 @@ const PostDetail = props => {
                 {userId === postUserId ? (
                   <Grid display="flex" justifyContent="center">
                     {passedData?.projectStatus === "진행중" && (
-                      <Btn
-                        onClick={() => {
-                          edit_status("종료");
+                      <Button
+                        common
+                        width="120px"
+                        isValue="end"
+                        _onClick={e => {
+                          applyUserModalOpen(e.target.value);
                         }}
                       >
                         프로젝트 마감하기
-                      </Btn>
+                      </Button>
                     )}
-
+                    <ApplyUserModal
+                      applyUserModal={applyUserModal}
+                      setApplyUserModal={setApplyUserModal}
+                      applyValue={applyValue}
+                      postId={post_id}
+                      passdedMenber={passdedMenber}
+                    />
                     {passedData?.projectStatus === "모집중" && (
                       <Btn
                         onClick={() => {
@@ -263,6 +274,7 @@ const PostDetail = props => {
                       setApplyUserModal={setApplyUserModal}
                       applyValue={applyValue}
                       postId={post_id}
+                      passdedMenber={passdedMenber}
                     />
                     <Button
                       common

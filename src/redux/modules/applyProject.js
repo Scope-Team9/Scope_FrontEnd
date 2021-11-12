@@ -112,6 +112,21 @@ const exitTeamAPI = postId => {
       });
   };
 };
+
+// 팀장의 프로젝트 완료후 평가
+const starterLikeAPI = userIds => {
+  return function (dispatch, getState, { history }) {
+    apis
+      .strterLike(userIds)
+      .then(res => {
+        console.log(res);
+        window.alert("팀원 평가 정보가 성공적으로 저장되었습니다.");
+      })
+      .catch(err => {
+        console.timeLog(err);
+      });
+  };
+};
 // 리듀서
 export default handleActions(
   {
@@ -130,6 +145,7 @@ const applyCreators = {
   applyProjectAPI,
   cancelProjectAPI,
   exitTeamAPI,
+  starterLikeAPI,
 };
 
 export { applyCreators };
