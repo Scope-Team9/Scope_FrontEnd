@@ -88,14 +88,11 @@ const HeaderRight = props => {
           </IconWrap>
           <ButtonWrap>
             <Button
-              height="50px"
-              width="132px"
+              common
+              width="120px"
               text="로그아웃"
               _onClick={logOut}
             ></Button>
-            {/* <Logout bg="#fff" height="50px" width="132px">
-              로그아웃
-            </Logout> */}
           </ButtonWrap>
         </HeaderWrapper>
       </Grid>
@@ -109,7 +106,12 @@ const HeaderRight = props => {
         height="auto"
       >
         <HeaderWrapper>
-          <Button width="100px" text="로그인" _onClick={modalOpen}></Button>
+          <Button
+            common
+            width="120px"
+            text="로그인"
+            _onClick={modalOpen}
+          ></Button>
           <LoginModal showModal={showModal} setShowModal={setShowModal} />
         </HeaderWrapper>
       </Grid>
@@ -150,15 +152,4 @@ const UserImg = styled.img`
   cursor: pointer;
 `;
 
-const Logout = styled.div`
-  background-color: #fff;
-  height: 30px;
-  width: 100px;
-  color: #b29cf4;
-  border: 1px solid #ddd;
-  &:hover {
-    background-color: #b29cf4;
-    color: #fff;
-  }
-`;
 export default HeaderRight;

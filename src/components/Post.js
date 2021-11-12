@@ -55,7 +55,7 @@ const Post = props => {
             <CardHeaderTwo />
           </CardHeader>
           <Grid
-            borderRadius="54px 54px 54px 54px"
+            borderRadius="64px 54px 54px 54px"
             bg="#fff"
             height="100px"
             position="absolute"
@@ -111,7 +111,7 @@ const CardHeader = styled.div`
   height: 63px;
   background-color: #f1bad1;
 
-  border-radius: 84px 54px 54px 54px;
+  border-radius: 94px 84px 84px 54px;
   background: rgb(83, 201, 253);
   background: linear-gradient(
     140deg,
@@ -200,10 +200,10 @@ const ProductImgWrap = styled.div`
   width: 330px;
   height: 330px;
   max-width: 350px;
-  margin: 70px 20px;
+  margin: 70px auto;
   margin-top: 70px;
   margin-bottom: 30px;
-  border-radius: 54px 32px 54px 54px;
+  border-radius: 54px 32px 35px 35px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.24);
   @media (max-width: 1700px) {
     margin: auto;

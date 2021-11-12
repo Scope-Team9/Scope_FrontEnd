@@ -27,9 +27,11 @@ const PostWrap = styled.div`
   width: 50%;
   margin: 0 0 0 33%;
   display: grid;
-  background-color: #ddd;
 
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  justify-content: center;
+  align-items: center;
+
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
   /* grid-gap: 1px; */
 `;
 

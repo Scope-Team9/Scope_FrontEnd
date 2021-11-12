@@ -148,8 +148,9 @@ const ApplyStatusModal = props => {
                             </Grid>
                           </Grid>
                         </Grid>
-                        <Grid margin="auto" height="50px">
+                        <Grid margin="auto" height="50px" width="80%">
                           <Button
+                            common
                             isValue={applyUsers[idx].userId}
                             _onClick={e => {
                               console.log(e);
@@ -159,10 +160,13 @@ const ApplyStatusModal = props => {
                             수락
                           </Button>
                         </Grid>
-                        <Grid margin="auto auto auto 3px" height="50px">
+                        <Grid
+                          margin="auto auto auto 3px"
+                          height="50px"
+                          width="80%"
+                        >
                           <Button
-                            _id="cancel"
-                            color="#fff"
+                            common
                             isValue={applyUsers[idx].userId}
                             _onClick={e => {
                               cancelOffer(e.target.value);
