@@ -18,8 +18,11 @@ const ApplyUserModal = props => {
   } = props;
   const isMe = useSelector(state => state.user.userId);
   const [comment, setComment] = React.useState();
-  const [like, setLike] = React.useState([]);
-  const [preLike, setPreLike] = React.useState(false);
+  const [currentLike, setCurrentLike] = React.useState(null);
+  const [preLike, setPreLike] = React.useState(null);
+  const [click, setClick] = React.useState(null);
+  const [likes, setLikes] = React.useState([]);
+  const [page, setPage] = React.useState(1);
 
   console.log(passdedMenber, isMe);
 
@@ -50,18 +53,43 @@ const ApplyUserModal = props => {
 
   const userLiked = () => {
     const likeUsers = {
-      userIds: like,
+      userIds: likes,
     };
+    console.log(likeUsers);
     dispatch(applyCreators.starterLikeAPI(postId, likeUsers));
+    setPage(page + 1);
   };
 
-  const toggleLike = () => {
-    setPreLike(!preLike);
-    if (preLike) {
-      like.push(preLike);
-    }
-    dispatch(postDetailActions.bookMarkAPI(post_id));
+  const toggleLike = id => {
+    setCurrentLike(id);
+    console.log(id);
   };
+
+  React.useEffect(
+    e => {
+      const clickAgain = likes.find(e => e === currentLike);
+      const toRemove = likes.filter(e => e !== currentLike);
+
+      if (currentLike !== null) {
+        let current = document.getElementById(currentLike);
+        current.style.backgroundColor = "#b29cf4";
+        current.style.color = "#fff";
+      }
+      if (preLike !== null && clickAgain === currentLike) {
+        let prev = document.getElementById(currentLike);
+        current.style.backgroundColor = "#fff";
+        current.style.color = "#b29cf4";
+      }
+      setPreLike(currentLike);
+
+      if (!clickAgain && currentLike !== null) {
+        setLikes(preList => [...preList, currentLike]);
+      } else if (clickAgain) {
+        setLikes(toRemove);
+      }
+    },
+    [currentLike]
+  );
 
   return (
     <>
@@ -197,7 +225,7 @@ const ApplyUserModal = props => {
             </Grid>
           </ModalWrap>
         )}
-        {applyValue === "end" && (
+        {applyValue === "end" && page === 1 && (
           <ModalWrap>
             <Grid height="10%" position="relative">
               <Grid
@@ -232,7 +260,7 @@ const ApplyUserModal = props => {
                 </Text>
               </Grid>
               {/* 유저평가부분 */}
-              <Grid height="50%" bg="#222" width="90%" margin="auto">
+              <Grid height="50%" width="90%" margin="auto">
                 {passdedMenber.map((user, idx) => (
                   <Grid
                     margin="10px auto"
@@ -270,7 +298,7 @@ const ApplyUserModal = props => {
                         <UserImg src="/img/물개.png"></UserImg>
                       )}
                     </Grid>
-                    <Grid height="100%" width="80%" margin="auto">
+                    <Grid height="100%" width=" 70%" margin="auto">
                       <Grid display="flex" height="60%" margin="auto">
                         <Grid
                           margin="auto"
@@ -278,24 +306,47 @@ const ApplyUserModal = props => {
                           display="flex"
                           justifyContent="space-between"
                         >
-                          <Grid height="100%" textAlign="center">
-                            <Grid bg="#eee" height="50%">
-                              닉네임
+                          <Grid height="100%" textAlign="center" width="50%">
+                            <Grid
+                              borderRadius="20px 0 0 20px"
+                              bg="#b29cf4"
+                              height="50%"
+                              margin="0 0 3px 0 "
+                            >
+                              <Text color="#fff">닉네임</Text>
                             </Grid>
-                            <Grid bg="#aaa" height="50%">
-                              타입
+                            <Grid
+                              borderRadius="20px 0 0 20px"
+                              bg="#b29cf4"
+                              height="50%"
+                            >
+                              <Text color="#fff">타입</Text>
                             </Grid>
                           </Grid>
-                          <Grid margin="auto" height="100%" textAlign="center">
-                            <Grid height="50%">
+                          <Grid
+                            margin="auto"
+                            height="100%"
+                            textAlign="center"
+                            width="50%"
+                          >
+                            <Grid
+                              height="50%"
+                              borderRadius="0 20px 20px 0"
+                              bg="#eee"
+                              margin="0 0 3px 0 "
+                            >
                               {passdedMenber[idx].nickname}
                             </Grid>
-                            <Grid height="50%">
+                            <Grid
+                              height="50%"
+                              borderRadius="0 20px 20px 0"
+                              bg="#eee"
+                            >
                               {passdedMenber[idx].userPropensityType}
                             </Grid>
                           </Grid>
                         </Grid>
-                        <Grid margin="auto" height="50px" width="60%">
+                        <Grid margin="auto" height="50px" width="80%">
                           {passdedMenber[idx].userId !== isMe && (
                             <Button
                               common
@@ -318,9 +369,93 @@ const ApplyUserModal = props => {
               </Grid>
 
               <Grid height="10%">
-                <Button borderRadius="25px" _onClick={exitTeam}>
+                <Button borderRadius="25px" _onClick={userLiked}>
                   팀원평가
                 </Button>
+              </Grid>
+            </Grid>
+          </ModalWrap>
+        )}
+        {applyValue === "end" && page === 2 && (
+          <ModalWrap>
+            <Grid height="10%" position="relative">
+              <Grid
+                position="absolute"
+                top="0px"
+                right="10px"
+                width="20px"
+                padding="10px"
+              >
+                <CloseIcon fontSize="large" onClick={modalClose} />
+              </Grid>
+            </Grid>
+            <Grid
+              margin="auto"
+              height="90%"
+              // justifyContent="center"
+              width="90%"
+              alignItems="center"
+              textAlign="center"
+            >
+              <Grid height="10%" textAlign="center">
+                <Text size="30px" bold>
+                  프로젝트주소 소개
+                </Text>
+              </Grid>
+              <Grid height="10%" margin="10px 0">
+                <Text size="14px">
+                  완료된 프로젝트를 소개해주시겠어요? <br />
+                </Text>
+              </Grid>
+              <Grid display="flex" height="40%" width="90%" margin="auto">
+                <Grid
+                  display="flex"
+                  flexDirection="column"
+                  height="80%"
+                  width="30%"
+                  margin="auto"
+                  bg="#222"
+                >
+                  <Grid
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <Text>프론트엔드</Text>
+                  </Grid>
+                  <Grid
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <Text>프론트엔드</Text>
+                  </Grid>
+                </Grid>
+                <Grid
+                  display="flex"
+                  flexDirection="column"
+                  height="80%"
+                  width="70%"
+                  margin="auto"
+                  bg="#222"
+                  alignItems="center"
+                >
+                  <Input height="100%"></Input>
+
+                  <Input height="100%"></Input>
+                </Grid>
+              </Grid>
+              <Grid display="flex" height="15%" margin="20px auto" width="90%">
+                <Grid>
+                  <Button borderRadius="25px" _onClick={exitTeam}>
+                    제출하기
+                  </Button>
+                </Grid>
+                <Grid>
+                  <Button borderRadius="25px" _onClick={exitTeam}>
+                    다음에제출
+                  </Button>
+                </Grid>
               </Grid>
             </Grid>
           </ModalWrap>
