@@ -21,7 +21,7 @@ import Select from "react-select";
 import EmailAuth from "./EmailAuth";
 import PropensityTest from "./propensityTest/PropensityTest";
 import Spinner from "../shared/Spinner";
-
+import DeleteUserModal from "../modal/DeleteUserModal";
 // MyPageInfo의 함수형 컴포넌트를 만든다.
 const MyPageInfo = (props) => {
   const dispatch = useDispatch();
@@ -44,6 +44,7 @@ const MyPageInfo = (props) => {
   // console.log(myType);
   const [modal, setModal] = React.useState(false);
   const [testmodal, setTestModal] = React.useState(false);
+  const [deleteModal, setDeleteModal] = React.useState(false);
   const [checkEmail, setCheckEmail] = React.useState();
 
   //click
@@ -175,6 +176,9 @@ const MyPageInfo = (props) => {
   };
   const editProfileCancle = () => {
     setEditMyProfile(false);
+  };
+  const deleteUser = () => {
+    setDeleteModal(true);
   };
 
   //테크스택 옵션
@@ -590,11 +594,22 @@ const MyPageInfo = (props) => {
                         text="취소하기"
                         _onClick={editProfileCancle}
                       ></Button>
+                      <Button
+                        margin="15px auto 15px 3%"
+                        height="40px"
+                        width="132px"
+                        text="회원탈퇴"
+                        _onClick={deleteUser}
+                      ></Button>
+                      <DeleteUserModal
+                        modal={deleteModal}
+                        setModal={setDeleteModal}
+                        userId={myUserId}
+                      />
                     </div>
                   </>
                 )}
               </Cards>
-
               {myType === "LVG" && ( //호랑이
                 <>
                   <Grid
@@ -620,7 +635,7 @@ const MyPageInfo = (props) => {
                     </Dialog>
                   </Grid>
                   <Grid margin="0 0 0 33.5%" width="600px">
-                    <Grid display="flex" width="600px">
+                    <Grid display="flex" width="30%">
                       <MyResultText2>리더형인 당신은 &nbsp; </MyResultText2>
                       <MyResultTextBold>
                         리더 이지만 수직적 리더십
@@ -636,7 +651,6 @@ const MyPageInfo = (props) => {
                   </Grid>
                 </>
               )}
-
               {myType === "LVP" && ( //늑대
                 <>
                   <Grid
@@ -719,7 +733,6 @@ const MyPageInfo = (props) => {
                   </Grid>
                 </>
               )}
-
               {myType === "LHP" && ( // 팬더
                 <>
                   <Grid
@@ -925,7 +938,6 @@ const MyPageInfo = (props) => {
                   </Grid>
                 </>
               )}
-
               <Grid
                 display="flex"
                 margin="auto"
@@ -979,20 +991,60 @@ const MyPageInfo = (props) => {
                   소개
                 </Filter>
               </Grid>
-
               {filter === "모집" && (
                 <MypagePostList {...recruitmentProject}></MypagePostList>
               )}
+
+              <Grid margin="0 0 0 34%" width="49%">
+                {filter === "모집" && recruitmentProject.length === 0 && (
+                  <>
+                    <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
+                    <NoIntroductionText>
+                      프로젝트가 아직 없네요.
+                    </NoIntroductionText>
+                  </>
+                )}
+              </Grid>
+
               {filter === "진행중" && (
                 <MypagePostList {...inProgressProject}></MypagePostList>
               )}
+              <Grid margin="0 0 0 34%" width="49%">
+                {filter === "진행중" && inProgressProject.length === 0 && (
+                  <>
+                    <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
+                    <NoIntroductionText>
+                      프로젝트가 아직 없네요.
+                    </NoIntroductionText>
+                  </>
+                )}
+              </Grid>
               {filter === "관심" && (
                 <MypagePostList {...bookMarkProject}></MypagePostList>
               )}
+              <Grid margin="0 0 0 34%" width="49%">
+                {filter === "관심" && bookMarkProject.length === 0 && (
+                  <>
+                    <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
+                    <NoIntroductionText>
+                      프로젝트가 아직 없네요.
+                    </NoIntroductionText>
+                  </>
+                )}
+              </Grid>
               {filter === "완료" && (
                 <MypagePostList {...endProject}></MypagePostList>
               )}
-
+              <Grid margin="0 0 0 34%" width="49%">
+                {filter === "완료" && endProject.length === 0 && (
+                  <>
+                    <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
+                    <NoIntroductionText>
+                      프로젝트가 아직 없네요.
+                    </NoIntroductionText>
+                  </>
+                )}
+              </Grid>
               {filter === "소개" && mydata?.isMyMypage === true && (
                 <button
                   style={{
@@ -1015,17 +1067,34 @@ const MyPageInfo = (props) => {
                   />
                 </button>
               )}
-              <Grid margin="0 0 0 34%" width="49%" border="1px solid #707070 ">
+              <Grid margin="0 0 0 34%" width="49%">
                 {filter === "소개" && introduction === true && (
-                  <MarkdownRead
-                    introduction={mydata?.user.introduction}
-                  ></MarkdownRead>
+                  <Grid border="1px solid #707070 ">
+                    <MarkdownRead
+                      introduction={mydata?.user.introduction}
+                    ></MarkdownRead>
+                  </Grid>
                 )}
               </Grid>
+              <Grid margin="0 0 0 34%" width="49%">
+                {filter === "소개" && introduction === false && (
+                  <>
+                    <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
+                    <NoIntroductionText>
+                      작성된 소개가 없네요.
+                    </NoIntroductionText>
+                  </>
+                )}
+              </Grid>
+
+              {/* 소개글 있거나 없거나 */}
             </>
           )}
+          {/* //  mydata와 myType가 있을때 */}
         </>
+        // 스피너를 감싸는 친구
       )}
+      {/* 스피너를 감싸는 괄호 */}
     </React.Fragment>
   );
 };
@@ -1050,6 +1119,14 @@ const Filter = styled.p`
   @media screen and (max-width: 750px) {
     /* margin-top: 1050px; */
   } ;
+`;
+
+const PullScreen = styled.div`
+  display: flex;
+  flex-direction: row;
+  @media screen and (max-width: 370px) {
+    flex-direction: column;
+  }
 `;
 
 const Cards = styled.div`
@@ -1247,5 +1324,23 @@ const MyResultTextBold = styled.p`
   color: black;
   font-size: 15px;
   font-weight: bold;
+`;
+const NoIntroduction = styled.img`
+  width: 50%;
+  height: 50%;
+  object-fit: cover;
+  position: relative;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+`;
+const NoIntroductionText = styled.p`
+  color: #737373;
+  font-size: 25px;
+  width: auto;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-left: 60px;
 `;
 export default MyPageInfo;

@@ -7,8 +7,8 @@ import { history } from "../redux/configureStore";
 import { Grid, Image, Progress } from "../elements/Index";
 import Img from "../images/flutter.png";
 
-const PostStacks = props => {
-  const whatPage = useSelector(state => state.post.whatPage);
+const PostStacks = (props) => {
+  const whatPage = useSelector((state) => state.post.whatPage);
   const [stacks, setStacks] = React.useState(9);
   // let stack = props.stack;
   // console.log(stack);

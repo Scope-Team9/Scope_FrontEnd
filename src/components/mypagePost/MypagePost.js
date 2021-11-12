@@ -11,7 +11,7 @@ import { history } from "../../redux/configureStore";
 import { Grid, Image, Text } from "../../elements/Index";
 
 // Post의 함수형 컴포넌트를 만든다.
-const MypagePost = props => {
+const MypagePost = (props) => {
   const dispatch = useDispatch();
   console.log(props);
 
@@ -230,7 +230,7 @@ const HighLight = styled.div`
   border-radius: 25px;
   background: #b29cf4;
   transition: 1s;
-  width: ${props => props.width};
+  width: ${(props) => props.width};
   height: 15px;
 `;
 
