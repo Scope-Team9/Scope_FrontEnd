@@ -105,7 +105,7 @@ const PostDetail = props => {
         <Grid margin="20px 20px auto 20px" position="relative">
           {userId !== postUserId && (
             <Grid width="50px" position="absolute" top="20px" right="50px">
-              <Grid _onClick={ToggleBookMark}>
+              <Grid _onClick={ToggleBookMark} cursor="pointer">
                 {!passedData?.bookmarkChecked ? (
                   <BookmarkBorderIcon sx={{ color: "#b29cf4", fontSize: 60 }} />
                 ) : (
