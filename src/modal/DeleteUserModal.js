@@ -22,13 +22,14 @@ const EmailAuth = (props) => {
     const fetchData = async () => {
       const result = await apis.deleteUser(props.userId);
       try {
-        console.log(result);
-        // window.alert(result.data.msg);
-        setModal(false);
-        deleteCookie("ScopeUser");
-        dispatch(userCreators.logOut());
-        history.replace("/");
+        // console.log(result);
+        window.alert(result.data.msg);
         Swal.fire(`${result.data.msg}`, "T.T", "info");
+        deleteCookie("ScopeUser");
+        history.replace("/");
+
+        dispatch(userCreators.logOut());
+        setModal(false);
       } catch (err) {
         console.log(err.response);
       }
