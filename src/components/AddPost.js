@@ -21,7 +21,6 @@ import { postActions } from "../redux/modules/post";
 const AddPost = (props) => {
   const dispatch = useDispatch();
   const animatedComponents = makeAnimated();
-
   const [title, setTitle] = React.useState("");
   const [summary, setSummary] = React.useState("");
   const [techstack, setTectstack] = React.useState([]);
@@ -55,6 +54,9 @@ const AddPost = (props) => {
   }, []);
 
   const scope_index = () => {
+    // console.log("시작시간", startDate.toISOString());
+    // console.log("마감시간", endDate.toISOString());
+    // debugger;
     const card = {
       title: title,
       summary: summary,
