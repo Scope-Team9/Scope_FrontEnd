@@ -9,6 +9,8 @@ const TEST_USER = "TEST_USER";
 const SET_USER = "SET_USER";
 const LOG_OUT = "LOG_OUT";
 
+const EMAIL = "EMAIL";
+
 const MODAL = "MODAL";
 
 //액션생성
@@ -16,6 +18,8 @@ const firstUser = createAction(FIRST_USER, user => ({ user }));
 const testUser = createAction(TEST_USER, user => ({ user }));
 const setUser = createAction(SET_USER, user => ({ user }));
 const logOut = createAction(LOG_OUT, user => ({ user }));
+
+export const email = createAction(EMAIL, user => ({ user }));
 
 export const modal = createAction(MODAL, user => ({ user }));
 //초기값
@@ -31,6 +35,7 @@ const initialState = {
   sigunupModalState: false,
   userPropensityType: null,
   memberPropensityType: null,
+  isEmail: false,
 };
 //카카오 로그인
 const kakaologinMiddleware = code => {
@@ -53,6 +58,7 @@ const kakaologinMiddleware = code => {
           return;
         }
         if (res.data.msg == "로그인이 완료되었습니다") {
+          let email = getState().user.isEmail;
           let userCookie = res.data.data.token;
           setCookie("ScopeUser", userCookie, 30);
           // const ACCESS_TOKEN = res.data.token;
@@ -65,8 +71,15 @@ const kakaologinMiddleware = code => {
               userPropensityType: res.data.data.userPropensityType,
             })
           );
-          history.replace("/");
-          return;
+          if (email) {
+            history.replace(`/mypage:${res.data.data.userId}`);
+            Swal.fire(
+              "완료된 프로젝트가 있습니다. 팀원들을 평가하러 가볼까요?",
+              "",
+              "info"
+            );
+          }
+          return history.replace("/");
         }
       })
       .catch(err => {
@@ -265,6 +278,10 @@ export default handleActions(
       produce(state, draft => {
         draft.sigunupModalState = false;
       }),
+    [EMAIL]: (state, action) =>
+      produce(state, draft => {
+        draft.isEmail = true;
+      }),
   },
   initialState
 );
@@ -280,6 +297,7 @@ const userCreators = {
   myUserAPI,
   logOut,
   modal,
+  email,
 };
 
 export { userCreators };

@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { applyCreators } from "../redux/modules/applyProject";
 import CloseIcon from "@mui/icons-material/Close";
 
-const ApplyUserModal = (props) => {
+const ApplyUserModal = props => {
   const dispatch = useDispatch();
   const {
     applyUserModal,
@@ -16,7 +16,7 @@ const ApplyUserModal = (props) => {
     postId,
     passdedMenber,
   } = props;
-  const isMe = useSelector((state) => state.user.userId);
+  const isMe = useSelector(state => state.user.userId);
   const [comment, setComment] = React.useState();
   const [currentLike, setCurrentLike] = React.useState(null);
   const [preLike, setPreLike] = React.useState(null);
@@ -63,7 +63,7 @@ const ApplyUserModal = (props) => {
     setPage(page + 1);
   };
 
-  const toggleLike = (id) => {
+  const toggleLike = id => {
     setCurrentLike(id);
     console.log(id);
   };
@@ -79,9 +79,9 @@ const ApplyUserModal = (props) => {
   };
   //팀원평가 눌렀는지 안눌렀는지 (버튼색상)
   React.useEffect(
-    (e) => {
-      const clickAgain = likes.find((e) => e === currentLike);
-      const toRemove = likes.filter((e) => e !== currentLike);
+    e => {
+      const clickAgain = likes.find(e => e === currentLike);
+      const toRemove = likes.filter(e => e !== currentLike);
 
       if (currentLike !== null) {
         let current = document.getElementById(currentLike);
@@ -96,7 +96,7 @@ const ApplyUserModal = (props) => {
       setPreLike(currentLike);
 
       if (!clickAgain && currentLike !== null) {
-        setLikes((preList) => [...preList, currentLike]);
+        setLikes(preList => [...preList, currentLike]);
       } else if (clickAgain) {
         setLikes(toRemove);
       }
@@ -145,7 +145,7 @@ const ApplyUserModal = (props) => {
                   height="100%"
                   backgroundColor="#fff"
                   placeholder="신청자분을 간단히 소개해주세요!"
-                  _onChange={(e) => {
+                  _onChange={e => {
                     console.log(e.target.value);
                     setComment(e.target.value);
                   }}
@@ -367,7 +367,7 @@ const ApplyUserModal = (props) => {
                               common
                               isId={passdedMenber[idx]}
                               isValue={passdedMenber[idx].userId}
-                              _onClick={(e) => {
+                              _onClick={e => {
                                 console.log(e);
                                 toggleLike(e.target.id);
                                 userLiked(e.target.value);
@@ -458,7 +458,7 @@ const ApplyUserModal = (props) => {
                 >
                   <Input
                     height="100%"
-                    _onChange={(e) => {
+                    _onChange={e => {
                       console.log(e.target.value);
                       setFront(e.target.value);
                     }}
@@ -466,7 +466,7 @@ const ApplyUserModal = (props) => {
 
                   <Input
                     height="100%"
-                    _onChange={(e) => {
+                    _onChange={e => {
                       console.log(e.target.value);
                       setBack(e.target.value);
                     }}

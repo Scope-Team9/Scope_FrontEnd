@@ -40,7 +40,7 @@ const ApplyStatusModal = props => {
     };
     console.log(acceptInfo);
     dispatch(applyCreators.acceptOfferAPI(postId, acceptInfo));
-    window.alert("신청을 수락하였습니다.");
+    window.alert("신청을 취소하였습니다.");
   };
 
   return (
