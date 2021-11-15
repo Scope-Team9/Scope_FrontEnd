@@ -1224,7 +1224,7 @@ const Banner = styled.div`
   width: 100%;
   margin: -100px auto;
   display: flex;
-  height: 650px;
+  height: 550px;
   overflow: hidden;
 `;
 const BannerImg = styled.img`

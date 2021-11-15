@@ -19,18 +19,18 @@ import { useHistory } from "react-router";
 const MainPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const is_stack_clicked = useSelector(state => state.stack.stack);
-  const is_sort_clicked = useSelector(state => state.sort.sort);
+  const is_stack_clicked = useSelector((state) => state.stack.stack);
+  const is_sort_clicked = useSelector((state) => state.sort.sort);
 
-  const is_loading = useSelector(state => state.post.is_loading);
-  const cards = useSelector(state => state.post.posts);
+  const is_loading = useSelector((state) => state.post.is_loading);
+  const cards = useSelector((state) => state.post.posts);
   // console.log(cards);
-  const is_reBook_clicked = useSelector(state => state.rebook.reBook);
-  const is_mainPage = useSelector(state => state.post.mainpage);
-  const pageCheck = useSelector(state => state.post.pageCheck);
-  const infinity = useSelector(state => state.infinity.paging);
-  const whatPage = useSelector(state => state.post.whatPage);
-  const Render = useSelector(state => state.post.render);
+  const is_reBook_clicked = useSelector((state) => state.rebook.reBook);
+  const is_mainPage = useSelector((state) => state.post.mainpage);
+  const pageCheck = useSelector((state) => state.post.pageCheck);
+  const infinity = useSelector((state) => state.infinity.paging);
+  const whatPage = useSelector((state) => state.post.whatPage);
+  const Render = useSelector((state) => state.post.render);
   const [ref, inView] = useInView();
   const [paging, setPaging] = React.useState(infinity.next);
   const [nowFilter, setNowFilter] = React.useState("최신");
@@ -38,9 +38,9 @@ const MainPage = () => {
   const [currentClick, setCurrentClick] = React.useState(null);
   const [prevClick, setPrevClick] = React.useState(null);
 
-  const post_list = useSelector(state => state.post.posts);
-  const isLoginUser = useSelector(state => state.user.userId);
-  console.log(isLoginUser);
+  const post_list = useSelector((state) => state.post.posts);
+  const isLoginUser = useSelector((state) => state.user.userId);
+  // console.log(isLoginUser);
   // console.log(pageCheck);
 
   // console.log(useSelector((state) => state.infinity.paging));
@@ -84,7 +84,7 @@ const MainPage = () => {
   }, [inView]);
 
   React.useEffect(
-    e => {
+    (e) => {
       if (currentClick !== null) {
         let current = document.getElementById(currentClick);
         current.style.color = "#333";
@@ -102,14 +102,14 @@ const MainPage = () => {
   );
 
   //sort
-  const onclickSort = data => {
+  const onclickSort = (data) => {
     dispatch(postActions.isMainPage(true));
     dispatch(sortAction.getSort(data));
     dispatch(bookRecommendAction.getRb(""));
     setPaging(12);
   };
   //bookmark,recommend
-  const onclickRb = data => {
+  const onclickRb = (data) => {
     dispatch(postActions.isMainPage(true));
     dispatch(bookRecommendAction.getRb(data));
     dispatch(sortAction.getSort(""));
@@ -119,11 +119,11 @@ const MainPage = () => {
     setPaging(12);
   };
 
-  const checkNowFilter = data => {
+  const checkNowFilter = (data) => {
     setNowFilter(data);
   };
 
-  const GetClick = e => {
+  const GetClick = (e) => {
     setCurrentClick(e);
     console.log(e);
   };
@@ -150,7 +150,7 @@ const MainPage = () => {
           <FilterBox>
             <Filtering
               id="new"
-              onClick={e => {
+              onClick={(e) => {
                 onclickSort("createdAt");
                 checkNowFilter("createdAt");
                 GetClick(e.target.id);
@@ -160,7 +160,7 @@ const MainPage = () => {
             </Filtering>
             <Filtering
               id="end"
-              onClick={e => {
+              onClick={(e) => {
                 onclickSort("deadline");
                 checkNowFilter("deadline");
                 GetClick(e.target.id);
@@ -170,7 +170,7 @@ const MainPage = () => {
             </Filtering>
             <Filtering
               id="bookmark"
-              onClick={e => {
+              onClick={(e) => {
                 onclickRb("bookmark");
                 checkNowFilter("bookmark");
                 if (isLoginUser !== null) {
@@ -182,7 +182,7 @@ const MainPage = () => {
             </Filtering>
             <Filtering
               id="recommend"
-              onClick={e => {
+              onClick={(e) => {
                 onclickRb("recommend");
                 checkNowFilter("recommend");
                 if (isLoginUser !== null) {

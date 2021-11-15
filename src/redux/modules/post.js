@@ -66,12 +66,8 @@ export const getPostAPI = () => {
         dispatch(getPosts(data));
       })
       .catch((err) => {
-        // console.log(err.response);
-        Swal.fire(
-          "로그인 후 이용하실 수 있습니다!",
-          "간단한 테스트를 진행해 주세요.",
-          "info"
-        );
+        console.log(err.response);
+        // Swal.fire(`${err.response}`, "간단한 테스트를 진행해 주세요.", "info");
       });
   };
 };
