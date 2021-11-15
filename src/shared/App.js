@@ -28,7 +28,6 @@ function App() {
   );
   const isCookie = document.cookie.split("=")[1];
   const dispatch = useDispatch();
-  console.log(isCookie);
 
   React.useEffect(() => {
     if (isCookie) {
