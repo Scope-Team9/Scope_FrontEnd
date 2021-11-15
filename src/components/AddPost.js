@@ -17,8 +17,8 @@ import { postAddActions } from "../redux/modules/postadd";
 import { postActions } from "../redux/modules/post";
 
 // AddPost의 함수형 컴포넌트를 만든다.
-// AddPost 안에 다뤄지는  특정 값(state) ex.title 값이 변화하였을 때, AddPost자체가 리랜더링 된다.
-const AddPost = props => {
+// AddPost 안에 다뤄지는  특정 값(state) ex.title 값이 변화하였을 때, AddPost자체가 리랜더링 된다..
+const AddPost = (props) => {
   const dispatch = useDispatch();
   const animatedComponents = makeAnimated();
   const [title, setTitle] = React.useState("");
@@ -131,11 +131,11 @@ const AddPost = props => {
   );
 
   const orderOptions = useCallback(
-    values =>
+    (values) =>
       values
-        .filter(v => v.isFixed)
+        .filter((v) => v.isFixed)
         .sort(orderByLabel)
-        .concat(values.filter(v => !v.isFixed).sort(orderByLabel)),
+        .concat(values.filter((v) => !v.isFixed).sort(orderByLabel)),
     [orderByLabel]
   );
 
@@ -196,7 +196,7 @@ const AddPost = props => {
                 placeholder="제목을 입력해주세요."
                 inputFocusOutline="none"
                 fontSize="16px"
-                _onChange={e => {
+                _onChange={(e) => {
                   setTitle(e.target.value);
                 }}
               ></Input>
@@ -214,7 +214,7 @@ const AddPost = props => {
                 border="1px solid #C4C4C4"
                 inputFocusOutline="none"
                 fontSize="16px"
-                _onChange={e => {
+                _onChange={(e) => {
                   setSummary(e.target.value);
                 }}
               ></Input>
@@ -225,7 +225,7 @@ const AddPost = props => {
               <Select
                 isMulti
                 components={animatedComponents}
-                isClearable={value.some(v => !v.isFixed)}
+                isClearable={value.some((v) => !v.isFixed)}
                 styles={styles}
                 options={stackSelect}
                 onChange={handleChange}
@@ -240,7 +240,7 @@ const AddPost = props => {
                 <SDatePicker
                   dateFormat="yyyy/MM/dd"
                   selected={startDate}
-                  onChange={date => setStartdate(date)}
+                  onChange={(date) => setStartdate(date)}
                   locale={ko}
                   minDate={new Date()}
                 />
@@ -250,7 +250,7 @@ const AddPost = props => {
                 <SDatePicker
                   dateFormat="yyyy/MM/dd"
                   selected={endDate}
-                  onChange={date => setEnddate(date)}
+                  onChange={(date) => setEnddate(date)}
                   locale={ko}
                   minDate={new Date()}
                 />
@@ -263,7 +263,7 @@ const AddPost = props => {
                 options={projectMembers}
                 isLoading
                 styles={styles}
-                onChange={e => {
+                onChange={(e) => {
                   let b;
                   b = e["label"];
                   setTotalmember(b);
@@ -278,7 +278,7 @@ const AddPost = props => {
                 options={projectstatus}
                 isLoading
                 styles={styles}
-                onChange={e => {
+                onChange={(e) => {
                   let a;
                   a = e["label"];
                   setProjectstatus(a);
@@ -300,7 +300,7 @@ const AddPost = props => {
                   outline: "none",
                 }}
                 placeholder="프로젝트 내용을 입력해주세요(X. 연락수단 필수)."
-                onChange={e => {
+                onChange={(e) => {
                   setContents(e.target.value);
                 }}
               ></textarea>
