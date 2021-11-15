@@ -26,6 +26,9 @@ const PostDetail = (props) => {
   const [applyUserModal, setApplyUserModal] = React.useState(false); //지원취소/팀탈퇴/프로젝트마감
 
   const [applyValue, setApplyValue] = React.useState();
+  const [isme, setIsme] = React.useState(null);
+
+  const myUserId = useSelector((state) => state.user.userId);
 
   const applyStatusModalOpen = () => {
     setApplyStatusModal(true);
@@ -71,6 +74,10 @@ const PostDetail = (props) => {
         const result = await apis.detailPost(post_id);
         setCheckPost(result);
         console.log(result);
+        // console.log(myUserId);
+        const members = result.data.data.members;
+        let imHere = members.find((e) => e.userId === myUserId);
+        setIsme(imHere);
       } catch (err) {
         console.log(err);
       }
@@ -280,20 +287,52 @@ const PostDetail = (props) => {
                   </Grid>
                 ) : (
                   <Grid textAlign="center">
-                    <Button
-                      common
-                      width="120px"
-                      isValue="apply"
-                      _onClick={(e) => {
-                        console.log(e);
-                        applyUserModalOpen(e.target.value);
-                      }}
-                      margin="auto 10px"
-                      border="1px solid #b29cf4"
-                      borderRadius="50px"
-                    >
-                      지원신청
-                    </Button>
+                    {passedData?.projectStatus === "모집중" && (
+                      <Grid>
+                        {!isme && (
+                          <>
+                            <Button
+                              common
+                              width="120px"
+                              isValue="apply"
+                              _onClick={(e) => {
+                                console.log(e);
+                                applyUserModalOpen(e.target.value);
+                              }}
+                              margin="auto 10px"
+                              border="1px solid #b29cf4"
+                              borderRadius="50px"
+                            >
+                              지원신청
+                            </Button>
+                            <Button
+                              common
+                              width="120px"
+                              isValue="cancel"
+                              _onClick={(e) => {
+                                applyUserModalOpen(e.target.value);
+                              }}
+                              width="120px"
+                            >
+                              지원취소
+                            </Button>
+                          </>
+                        )}
+                        {isme && (
+                          <Button
+                            common
+                            width="120px"
+                            isValue="teamExit"
+                            _onClick={(e) => {
+                              applyUserModalOpen(e.target.value);
+                            }}
+                          >
+                            팀탈퇴
+                          </Button>
+                        )}
+                      </Grid>
+                    )}
+
                     <ApplyUserModal
                       applyUserModal={applyUserModal}
                       setApplyUserModal={setApplyUserModal}
@@ -301,27 +340,6 @@ const PostDetail = (props) => {
                       postId={post_id}
                       passdedMenber={passdedMenber}
                     />
-                    <Button
-                      common
-                      width="120px"
-                      isValue="cancel"
-                      _onClick={(e) => {
-                        applyUserModalOpen(e.target.value);
-                      }}
-                      width="120px"
-                    >
-                      지원취소
-                    </Button>
-                    <Button
-                      common
-                      width="120px"
-                      isValue="teamExit"
-                      _onClick={(e) => {
-                        applyUserModalOpen(e.target.value);
-                      }}
-                    >
-                      팀탈퇴
-                    </Button>
                   </Grid>
                 )}
               </Grid>
