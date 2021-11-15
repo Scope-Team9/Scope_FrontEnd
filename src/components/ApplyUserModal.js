@@ -18,10 +18,9 @@ const ApplyUserModal = props => {
   } = props;
   const isMe = useSelector(state => state.user.userId);
   const [comment, setComment] = React.useState();
-  const [currentLike, setCurrentLike] = React.useState(null);
-  const [preLike, setPreLike] = React.useState(null);
-  const [click, setClick] = React.useState(null);
+  const [click, setClick] = React.useState(passdedMenber);
   const [likes, setLikes] = React.useState([]);
+
   const [page, setPage] = React.useState(1);
 
   const [front, setFront] = React.useState();
@@ -63,11 +62,6 @@ const ApplyUserModal = props => {
     setPage(page + 1);
   };
 
-  const toggleLike = id => {
-    setCurrentLike(id);
-    console.log(id);
-  };
-
   const submitUrl = () => {
     const github = {
       frontUrl: front,
@@ -78,31 +72,16 @@ const ApplyUserModal = props => {
     modalClose;
   };
   //팀원평가 눌렀는지 안눌렀는지 (버튼색상)
-  React.useEffect(
-    e => {
-      const clickAgain = likes.find(e => e === currentLike);
-      const toRemove = likes.filter(e => e !== currentLike);
-
-      if (currentLike !== null) {
-        let current = document.getElementById(currentLike);
-        current.style.backgroundColor = "#b29cf4";
-        current.style.color = "#fff";
-      }
-      if (preLike !== null && clickAgain === currentLike) {
-        let prev = document.getElementById(currentLike);
-        current.style.backgroundColor = "#fff";
-        current.style.color = "#b29cf4";
-      }
-      setPreLike(currentLike);
-
-      if (!clickAgain && currentLike !== null) {
-        setLikes(preList => [...preList, currentLike]);
-      } else if (clickAgain) {
-        setLikes(toRemove);
-      }
-    },
-    [currentLike]
-  );
+  const Filter = value => {
+    setArr(state => {
+      return state.map(stateItem => {
+        if (stateItem.userId === value) {
+          return { ...stateItem, active: !stateItem.active };
+        }
+        return stateItem;
+      });
+    });
+  };
 
   return (
     <>
@@ -368,9 +347,9 @@ const ApplyUserModal = props => {
                               isId={passdedMenber[idx]}
                               isValue={passdedMenber[idx].userId}
                               _onClick={e => {
-                                console.log(e);
-                                toggleLike(e.target.id);
-                                userLiked(e.target.value);
+                                // console.log(e);
+                                // Filter(e.target.value);
+                                userLiked;
                               }}
                             >
                               좋았어요!
@@ -489,6 +468,157 @@ const ApplyUserModal = props => {
                     다음에제출
                   </Button>
                 </Grid>
+              </Grid>
+            </Grid>
+          </ModalWrap>
+        )}
+        {applyValue === "memberLiked" && (
+          <ModalWrap>
+            <Grid height="10%" position="relative">
+              <Grid
+                position="absolute"
+                top="0px"
+                right="10px"
+                width="20px"
+                padding="10px"
+              >
+                <CloseIcon fontSize="large" onClick={modalClose} />
+              </Grid>
+            </Grid>
+
+            <Grid
+              margin="auto"
+              height="90%"
+              // justifyContent="center"
+              width="90%"
+              alignItems="center"
+              textAlign="center"
+            >
+              <Grid height="10%" textAlign="center">
+                <Text size="30px" bold>
+                  프로젝트 마감
+                </Text>
+              </Grid>
+
+              <Grid height="14%" margin="10px 0">
+                <Text size="14px">
+                  프로젝트는 어떠셨나요? <br /> 각 팀원들이 어떠셨는지
+                  평가해주시면 추천알고리즘이 정교해집니다.
+                </Text>
+              </Grid>
+              {/* 유저평가부분 */}
+              <Grid height="50%" width="90%" margin="auto" overflow="auto">
+                {passdedMenber.map((user, idx) => (
+                  <Grid
+                    margin="10px auto"
+                    height="100px"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="space-around"
+                    width="100%"
+                    key={idx}
+                    {...user}
+                  >
+                    <Grid margin="auto" width="10%">
+                      {passdedMenber[idx].userPropensityType === "LVG" && (
+                        <UserImg src="/img/호랑이.png"></UserImg>
+                      )}
+                      {passdedMenber[idx].userPropensityType === "LVP" && (
+                        <UserImg src="/img/늑대.png"></UserImg>
+                      )}
+                      {passdedMenber[idx].userPropensityType === "LHG" && (
+                        <UserImg src="/img/여우.png"></UserImg>
+                      )}
+                      {passdedMenber[idx].userPropensityType === "LHP" && (
+                        <UserImg src="/img/판다.png"></UserImg>
+                      )}
+                      {passdedMenber[idx].userPropensityType === "FVG" && (
+                        <UserImg src="/img/토끼.png"></UserImg>
+                      )}
+                      {passdedMenber[idx].userPropensityType === "FVP" && (
+                        <UserImg src="/img/허스키.png"></UserImg>
+                      )}
+                      {passdedMenber[idx].userPropensityType === "FHG" && (
+                        <UserImg src="/img/고양이.png"></UserImg>
+                      )}
+                      {passdedMenber[idx].userPropensityType === "FHP" && (
+                        <UserImg src="/img/물개.png"></UserImg>
+                      )}
+                    </Grid>
+                    <Grid height="100%" width=" 70%" margin="auto">
+                      <Grid display="flex" height="60%" margin="auto">
+                        <Grid
+                          margin="auto"
+                          height="50px"
+                          display="flex"
+                          justifyContent="space-between"
+                        >
+                          <Grid height="100%" textAlign="center" width="50%">
+                            <Grid
+                              borderRadius="20px 0 0 20px"
+                              bg="#b29cf4"
+                              height="50%"
+                              margin="0 0 3px 0 "
+                            >
+                              <Text color="#fff">닉네임</Text>
+                            </Grid>
+                            <Grid
+                              borderRadius="20px 0 0 20px"
+                              bg="#b29cf4"
+                              height="50%"
+                            >
+                              <Text color="#fff">타입</Text>
+                            </Grid>
+                          </Grid>
+                          <Grid
+                            margin="auto"
+                            height="100%"
+                            textAlign="center"
+                            width="50%"
+                          >
+                            <Grid
+                              height="50%"
+                              borderRadius="0 20px 20px 0"
+                              bg="#eee"
+                              margin="0 0 3px 0 "
+                            >
+                              {passdedMenber[idx].nickname}
+                            </Grid>
+                            <Grid
+                              height="50%"
+                              borderRadius="0 20px 20px 0"
+                              bg="#eee"
+                            >
+                              {passdedMenber[idx].userPropensityType}
+                            </Grid>
+                          </Grid>
+                        </Grid>
+                        <Grid margin="auto" height="50px" width="80%">
+                          {passdedMenber[idx].userId !== isMe && (
+                            <Button
+                              common
+                              isId={passdedMenber[idx]}
+                              isValue={passdedMenber[idx].userId}
+                              _onClick={e => {
+                                console.log(e);
+                                toggleLike(e.target.id);
+                                userLiked(e.target.value);
+                              }}
+                            >
+                              좋았어요!
+                            </Button>
+                          )}
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                ))}
+              </Grid>
+
+              <Grid height="10%">
+                <Button borderRadius="25px" _onClick={userLiked}>
+                  팀원평가
+                </Button>
               </Grid>
             </Grid>
           </ModalWrap>
