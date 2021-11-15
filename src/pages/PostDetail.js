@@ -13,6 +13,8 @@ import UserList from "../components/UserList";
 import ApplyStatusModal from "../components/ApplyStatusModal";
 import ApplyUserModal from "../components/ApplyUserModal";
 import ProjectJoinUser from "../components/ProjectJoinUser";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 
 // PostDetail의 함수형 컴포넌트를 만든다.
 const PostDetail = (props) => {
@@ -21,7 +23,8 @@ const PostDetail = (props) => {
   const [checkPost, setCheckPost] = React.useState();
   const [bookmark, setBookmark] = React.useState(false);
   const [applyStatusModal, setApplyStatusModal] = React.useState(false); //신청현황
-  const [applyUserModal, setApplyUserModal] = React.useState(false); //지원취소
+  const [applyUserModal, setApplyUserModal] = React.useState(false); //지원취소/팀탈퇴/프로젝트마감
+
   const [applyValue, setApplyValue] = React.useState();
 
   const applyStatusModalOpen = () => {
@@ -78,6 +81,7 @@ const PostDetail = (props) => {
   const passedData = checkPost?.data["data"].post;
   const passdedMenber = checkPost?.data["data"].members;
 
+  console.log(passdedMenber);
   const DeletePost = async () => {
     try {
       const deletePost = await apis.deletePost(post_id);
@@ -100,10 +104,14 @@ const PostDetail = (props) => {
         <SideBarImg src={Img} style={{ maxWidth: "650px", height: "100%" }} />
         <Grid margin="20px 20px auto 20px" position="relative">
           {userId !== postUserId && (
-            <Grid width="50px" position="absolute" top="20px" right="20px">
-              <Button _onClick={ToggleBookMark}>
-                {!passedData?.bookmarkChecked ? "관심없음" : "관심있음"}
-              </Button>
+            <Grid width="50px" position="absolute" top="20px" right="50px">
+              <Grid _onClick={ToggleBookMark} cursor="pointer">
+                {!passedData?.bookmarkChecked ? (
+                  <BookmarkBorderIcon sx={{ color: "#b29cf4", fontSize: 60 }} />
+                ) : (
+                  <BookmarkIcon sx={{ color: "#b29cf4", fontSize: 60 }} />
+                )}
+              </Grid>
             </Grid>
           )}
           <Title>Scoope</Title>
@@ -140,8 +148,8 @@ const PostDetail = (props) => {
             <Grid margin="20px auto ">
               <Text size="18px">모집인원</Text>
               <Grid display="flex" margin="10px auto">
-                {passdedMenber?.map((item, index) => (
-                  <ProjectJoinUser key={index} {...item} />
+                {passdedMenber?.map((item) => (
+                  <ProjectJoinUser key={item.userId} {...item} />
                 ))}
               </Grid>
               {userId === postUserId && (
@@ -154,9 +162,7 @@ const PostDetail = (props) => {
                   >
                     <Button
                       postion="absolute"
-                      width="100%"
-                      height="40px"
-                      borderRadius="50px"
+                      common
                       _onClick={applyStatusModalOpen}
                     >
                       신청현황 확인
@@ -218,51 +224,70 @@ const PostDetail = (props) => {
                 {userId === postUserId ? (
                   <Grid display="flex" justifyContent="center">
                     {passedData?.projectStatus === "진행중" && (
-                      <Btn
-                        onClick={() => {
-                          edit_status("종료");
+                      <Button
+                        common
+                        width="140px"
+                        height="35px"
+                        isValue="end"
+                        _onClick={(e) => {
+                          applyUserModalOpen(e.target.value);
                         }}
                       >
                         프로젝트 마감하기
-                      </Btn>
+                      </Button>
                     )}
-
+                    <ApplyUserModal
+                      applyUserModal={applyUserModal}
+                      setApplyUserModal={setApplyUserModal}
+                      applyValue={applyValue}
+                      postId={post_id}
+                      passdedMenber={passdedMenber}
+                    />
                     {passedData?.projectStatus === "모집중" && (
-                      <Btn
-                        onClick={() => {
+                      <Button
+                        common
+                        width="140px"
+                        height="35px"
+                        _onClick={() => {
                           edit_status("진행중");
                         }}
                       >
                         모집완료
-                      </Btn>
+                      </Button>
                     )}
 
-                    <Btn
-                      onClick={() => {
+                    <Button
+                      common
+                      width="140px"
+                      height="35px"
+                      _onClick={() => {
                         history.push({ pathname: `/postedit/${post_id}` });
                       }}
                     >
                       포스트수정
-                    </Btn>
-                    <Btn
-                      onClick={() => {
+                    </Button>
+                    <Button
+                      common
+                      width="140px"
+                      height="35px"
+                      _onClick={() => {
                         DeletePost();
                         window.alert("삭제되었습니다.");
                       }}
                     >
                       포스트삭제
-                    </Btn>
+                    </Button>
                   </Grid>
                 ) : (
                   <Grid textAlign="center">
                     <Button
+                      common
+                      width="120px"
                       isValue="apply"
                       _onClick={(e) => {
                         console.log(e);
                         applyUserModalOpen(e.target.value);
                       }}
-                      width="120px"
-                      height="40px"
                       margin="auto 10px"
                       border="1px solid #b29cf4"
                       borderRadius="50px"
@@ -274,27 +299,26 @@ const PostDetail = (props) => {
                       setApplyUserModal={setApplyUserModal}
                       applyValue={applyValue}
                       postId={post_id}
+                      passdedMenber={passdedMenber}
                     />
                     <Button
+                      common
+                      width="120px"
                       isValue="cancel"
                       _onClick={(e) => {
                         applyUserModalOpen(e.target.value);
                       }}
                       width="120px"
-                      height="40px"
-                      margin="auto 10px"
-                      borderRadius="50px"
                     >
                       지원취소
                     </Button>
                     <Button
+                      common
+                      width="120px"
                       isValue="teamExit"
                       _onClick={(e) => {
                         applyUserModalOpen(e.target.value);
                       }}
-                      width="120px"
-                      height="40px"
-                      margin="auto 10px"
                     >
                       팀탈퇴
                     </Button>

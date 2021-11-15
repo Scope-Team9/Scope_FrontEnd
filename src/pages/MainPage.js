@@ -34,8 +34,13 @@ const MainPage = () => {
   const [ref, inView] = useInView();
   const [paging, setPaging] = React.useState(infinity.next);
   const [nowFilter, setNowFilter] = React.useState("최신");
-  const post_list = useSelector((state) => state.post.posts);
+  //click
+  const [currentClick, setCurrentClick] = React.useState(null);
+  const [prevClick, setPrevClick] = React.useState(null);
 
+  const post_list = useSelector((state) => state.post.posts);
+  const isLoginUser = useSelector((state) => state.user.userId);
+  // console.log(isLoginUser);
   // console.log(pageCheck);
 
   // console.log(useSelector((state) => state.infinity.paging));
@@ -78,6 +83,24 @@ const MainPage = () => {
     } // 옵저버를 좀 더 위로
   }, [inView]);
 
+  React.useEffect(
+    (e) => {
+      if (currentClick !== null) {
+        let current = document.getElementById(currentClick);
+        current.style.color = "#333";
+        current.style.borderBottom = "2px solid";
+        current.style.borderBottomColor = "#707070";
+      }
+      if (prevClick !== null) {
+        let prev = document.getElementById(prevClick);
+        prev.style.color = "#333";
+        prev.style.borderBottom = "none";
+      }
+      setPrevClick(currentClick);
+    },
+    [currentClick]
+  );
+
   //sort
   const onclickSort = (data) => {
     dispatch(postActions.isMainPage(true));
@@ -98,6 +121,11 @@ const MainPage = () => {
 
   const checkNowFilter = (data) => {
     setNowFilter(data);
+  };
+
+  const GetClick = (e) => {
+    setCurrentClick(e);
+    console.log(e);
   };
 
   return (
@@ -121,33 +149,47 @@ const MainPage = () => {
           </Stacks>
           <FilterBox>
             <Filtering
-              onClick={() => {
+              id="new"
+              onClick={(e) => {
                 onclickSort("createdAt");
                 checkNowFilter("createdAt");
+                GetClick(e.target.id);
               }}
             >
               최신
             </Filtering>
             <Filtering
-              onClick={() => {
+              id="end"
+              onClick={(e) => {
                 onclickSort("deadline");
                 checkNowFilter("deadline");
+                GetClick(e.target.id);
               }}
             >
               마감순
             </Filtering>
             <Filtering
-              onClick={() => {
+              id="bookmark"
+              onClick={(e) => {
                 onclickRb("bookmark");
                 checkNowFilter("bookmark");
+                if (isLoginUser !== null) {
+                  GetClick(e.target.id);
+                }
               }}
             >
               북마크
             </Filtering>
             <Filtering
-              onClick={() => {
+              id="recommend"
+              onClick={(e) => {
                 onclickRb("recommend");
                 checkNowFilter("recommend");
+                if (isLoginUser !== null) {
+                  GetClick(e.target.id);
+                } else {
+                  GetClick("new");
+                }
               }}
             >
               추천
@@ -168,22 +210,22 @@ const MainPage = () => {
               ></div>
             </Grid>
           )}
-
-          <Btn
-            onClick={() => {
-              history.push("/postadd");
-            }}
-          >
-            {" "}
-            <i
-              style={{
-                fontSize: "25px",
-                margin: "auto",
-                color: "white",
+          {isLoginUser !== null && (
+            <Btn
+              onClick={() => {
+                history.push("/postadd");
               }}
-              className="fas fa-plus"
-            ></i>
-          </Btn>
+            >
+              <i
+                style={{
+                  fontSize: "25px",
+                  margin: "auto",
+                  color: "white",
+                }}
+                className="fas fa-plus"
+              ></i>
+            </Btn>
+          )}
         </Inside>
       </Grid>
     </>
@@ -243,7 +285,7 @@ const Filtering = styled.p`
     -moz-transform: scale(1.05);
     -ms-transform: scale(1.05);
     -o-transform: scale(1.05);
-    text-decoration: underline;
+    /* text-decoration: underline; */
     color: #dacceb;
   }
 `;
@@ -279,4 +321,22 @@ const Btn = styled.button`
   } ;
 `;
 
+const NoIntroduction = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  margin: auto;
+  display: flex;
+  justify-content: center;
+`;
+const NoIntroductionText = styled.p`
+  color: #737373;
+  font-size: 25px;
+  width: auto;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+`;
 export default MainPage;

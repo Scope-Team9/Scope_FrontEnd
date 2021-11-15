@@ -93,7 +93,7 @@ const TestFive = props => {
               handleMemberCreate(e.target.value);
             }}
           >
-            V. 능력에 따른 적절한 권한의 분배 하에 진행되는 회의
+            능력에 따른 적절한 권한의 분배 하에 진행되는 회의
           </Button>
           <Button
             isTest
@@ -104,7 +104,7 @@ const TestFive = props => {
               handleMemberCreate(e.target.value);
             }}
           >
-            H. 모두 동등한 권한을 가지고 진행되는 회의
+            모두 동등한 권한을 가지고 진행되는 회의
           </Button>
         </Grid>
       </Grid>

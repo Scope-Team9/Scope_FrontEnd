@@ -30,6 +30,7 @@ const ApplyStatusModal = props => {
     };
     console.log(acceptInfo);
     dispatch(applyCreators.acceptOfferAPI(postId, acceptInfo));
+    window.alert("신청을 수락하였습니다.");
   };
 
   const cancelOffer = cancelUser => {
@@ -39,11 +40,17 @@ const ApplyStatusModal = props => {
     };
     console.log(acceptInfo);
     dispatch(applyCreators.acceptOfferAPI(postId, acceptInfo));
+    window.alert("신청을 수락하였습니다.");
   };
 
   return (
     <>
-      <Dialog maxWidth={"sm"} scroll="paper" open={applyStatusModal}>
+      <Dialog
+        maxWidth={"sm"}
+        scroll="paper"
+        open={applyStatusModal}
+        onClose={modalClose}
+      >
         <ModalWrap>
           <Grid
             height="10%"
@@ -65,25 +72,25 @@ const ApplyStatusModal = props => {
               신청현황
             </Text>
           </Grid>
-          <Grid display="flex" height="85%" justifyContent="center">
-            {applyUsers == "" && (
+          {applyUsers == "" && (
+            <Grid height="0%" justifyContent="center">
               <Grid
-                display="flex"
                 justifyContent="center"
                 alignItems="center"
+                width="70%"
+                textAlign="center"
                 margin="auto"
               >
-                <Grid>
-                  <Image
-                    shape="rectangle"
-                    size="41"
-                    src="/img/호랑이배너.jpg"
-                  ></Image>
+                <Grid height="50%">
+                  <img width="100%" src="/img/step9.png" />
                 </Grid>
+                <Grid margin="250px 0">지원자가 아직 없습니다!</Grid>
               </Grid>
-            )}
+            </Grid>
+          )}
+          <Grid display="flex" height="85%" justifyContent="center">
             {applyUsers && (
-              <Grid width="80%" margin="10px 0">
+              <Grid width="90%" margin="10px 0">
                 {applyUsers.map((user, idx) => (
                   <Grid
                     margin="10px auto"
@@ -96,40 +103,84 @@ const ApplyStatusModal = props => {
                     key={idx}
                     {...user}
                   >
-                    <Grid margin="auto">
-                      <Image size="80"></Image>
+                    <Grid margin="auto" width="30%">
+                      {applyUsers[idx].userPropensityType === "LVG" && (
+                        <UserImg src="/img/호랑이.png"></UserImg>
+                      )}
+                      {applyUsers[idx].userPropensityType === "LVP" && (
+                        <UserImg src="/img/늑대.png"></UserImg>
+                      )}
+                      {applyUsers[idx].userPropensityType === "LHG" && (
+                        <UserImg src="/img/여우.png"></UserImg>
+                      )}
+                      {applyUsers[idx].userPropensityType === "LHP" && (
+                        <UserImg src="/img/판다.png"></UserImg>
+                      )}
+                      {applyUsers[idx].userPropensityType === "FVG" && (
+                        <UserImg src="/img/토끼.png"></UserImg>
+                      )}
+                      {applyUsers[idx].userPropensityType === "FVP" && (
+                        <UserImg src="/img/허스키.png"></UserImg>
+                      )}
+                      {applyUsers[idx].userPropensityType === "FHG" && (
+                        <UserImg src="/img/고양이.png"></UserImg>
+                      )}
+                      {applyUsers[idx].userPropensityType === "FHP" && (
+                        <UserImg src="/img/물개.png"></UserImg>
+                      )}
                     </Grid>
-                    <Grid margin="auto" height="50px">
-                      <Grid margin="auto" height="20px">
-                        {applyUsers[idx].nickname}
+                    <Grid height="100%" width="80%">
+                      <Grid display="flex" height="60%" margin="auto">
+                        <Grid
+                          margin="auto"
+                          height="50px"
+                          display="flex"
+                          justifyContent="space-between"
+                        >
+                          <Grid height="100%" textAlign="center">
+                            <Grid bg="#eee" height="50%">
+                              닉네임
+                            </Grid>
+                            <Grid bg="#aaa" height="50%">
+                              타입
+                            </Grid>
+                          </Grid>
+                          <Grid margin="auto" height="100%" textAlign="center">
+                            <Grid height="50%">{applyUsers[idx].nickname}</Grid>
+                            <Grid height="50%">
+                              {applyUsers[idx].userPropensityType}
+                            </Grid>
+                          </Grid>
+                        </Grid>
+                        <Grid margin="auto" height="50px" width="80%">
+                          <Button
+                            common
+                            isValue={applyUsers[idx].userId}
+                            _onClick={e => {
+                              console.log(e);
+                              acceptOffer(e.target.value);
+                            }}
+                          >
+                            수락
+                          </Button>
+                        </Grid>
+                        <Grid
+                          margin="auto auto auto 3px"
+                          height="50px"
+                          width="80%"
+                        >
+                          <Button
+                            common
+                            isValue={applyUsers[idx].userId}
+                            _onClick={e => {
+                              cancelOffer(e.target.value);
+                            }}
+                          >
+                            취소
+                          </Button>
+                        </Grid>
                       </Grid>
-                      <Grid margin="auto" height="20px">
-                        {applyUsers[idx].userPropensityType}
-                      </Grid>
-                    </Grid>
-                    <Grid margin="auto" height="50px">
-                      <Button
-                        isValue={applyUsers[idx].userId}
-                        _onClick={e => {
-                          console.log(e);
-                          acceptOffer(e.target.value);
-                        }}
-                      >
-                        수락
-                      </Button>
-                    </Grid>
-                    <Grid margin="auto auto auto 3px" height="50px">
-                      <Button
-                        _id="cancel"
-                        color="#fff"
-                        isValue={applyUsers[idx].userId}
-                        _onClick={e => {
-                          console.log(e);
-                          cancelOffer(e.target.value);
-                        }}
-                      >
-                        취소
-                      </Button>
+                      <CommentBubble>{applyUsers[idx].comment}</CommentBubble>
                     </Grid>
                   </Grid>
                 ))}
@@ -145,6 +196,34 @@ const ApplyStatusModal = props => {
 const ModalWrap = styled.div`
   width: 550px;
   height: 500px;
+`;
+const CommentBubble = styled.div`
+  position: relative;
+  background: #f1f9ff;
+  height: 40%;
+  /* border: #b29cf4 solid 1px; */
+  border-radius: 10px;
+  padding: 0 12px;
+  ::after {
+    content: "";
+    position: absolute;
+    border-style: solid;
+    border-width: 10px 15px 0;
+    border-color: #f1f9ff transparent;
+    display: block;
+    width: 0;
+    z-index: 1;
+    top: 10px;
+    left: -15px;
+  }
+`;
+
+const UserImg = styled.img`
+  object-fit: cover;
+  width: 100px;
+  border-radius: 12px;
+  background-color: #ececec;
+  cursor: pointer;
 `;
 
 export default ApplyStatusModal;

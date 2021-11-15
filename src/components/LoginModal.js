@@ -123,6 +123,7 @@ const LoginModal = props => {
     return (
       <Dialog maxWidth={"sm"} scroll="paper" open={showModal}>
         <ModalWrap>
+          {/* 테스트가 필요한경우 */}
           {!test ? (
             <Grid>
               {/* 헤더 */}
@@ -224,6 +225,7 @@ const LoginModal = props => {
                     </Grid>
                     <Grid height="25%" margin="16px 0">
                       <Input
+                        borderRadius="25px"
                         border="1px solid #ddd"
                         fontSize="16px"
                         padding="0 0 0 17px"

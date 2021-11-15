@@ -7,6 +7,7 @@ import { postActions } from "../redux/modules/post";
 import styled from "styled-components";
 // import { useInView } from "react-intersection-observer";
 import { height } from "@mui/system";
+import { Grid, Image, Text, Button } from "../elements/Index";
 
 const PostList = () => {
   const dispatch = useDispatch();
@@ -27,6 +28,17 @@ const PostList = () => {
             })}
           </>
         )}
+        {posts.length === 0 && (
+          <Grid margin="auto" width="100%" height="100%" display="flex">
+            <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
+            <NoIntroductionText>
+              아직 포스트가 없네요
+              <br /> .
+              <br /> .
+              <br /> .
+            </NoIntroductionText>
+          </Grid>
+        )}
       </PostWrap>
     </React.Fragment>
   );
@@ -42,6 +54,25 @@ const PostWrap = styled.div`
   @media (max-width: 1700px) {
     width: 100%;
   }
+`;
+const NoIntroduction = styled.img`
+  width: 100%;
+  height: 100%;
+  /* object-fit: cover; */
+
+  margin: auto;
+  display: flex;
+  justify-content: center;
+`;
+
+const NoIntroductionText = styled.p`
+  color: #737373;
+  font-size: 25px;
+  width: auto;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
 `;
 
 export default PostList;

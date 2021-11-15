@@ -25,23 +25,6 @@ const initialState = {
     TypeScript: "",
   },
 };
-// 스택 값들을 배열에 넣어서 보내기 시도 , 그러나 store에 제대로 반영되지 않음. 따라서 원안대로 키 밸류 값으로 진행.
-// const initialState = [
-//     "javascript",
-//     "typescript",
-//     "react",
-//     "vue",
-//     "node.js",
-//     "java",
-//     "spring",
-//     "kotlin",
-//     "c++",
-//     "go",
-//     "python",
-//     "django",
-//     "flutter",
-//     "swift",
-// ];
 
 export default handleActions(
   {

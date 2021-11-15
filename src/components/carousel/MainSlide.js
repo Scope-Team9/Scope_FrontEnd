@@ -8,12 +8,12 @@ import { Grid, Button, Text } from "../../elements/Index";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 
-import slideOne from "../../images/01.png";
-import slideTwo from "../../images/02.png";
+import slideOne from "../../images/03.png";
+import slideTwo from "../../images/06.png";
 import slideThree from "../../images/03.png";
-import slideFour from "../../images/04.png";
+import slideFour from "../../images/06.png";
 
-const images = [slideTwo, slideOne, slideThree, slideFour];
+const images = [slideOne, slideTwo, slideThree, slideFour];
 const is_token = document.cookie.split("=")[1];
 
 const MainSlide = () => {
@@ -38,7 +38,7 @@ const MainSlide = () => {
   const settings = {
     dots: false, //화면아래 컨텐츠 갯수 표시
     autoplay: true, // 자동 스크롤 사용 여부
-    autoplaySpeed: 10000, // 자동 스크롤 시 다음으로 넘어가는데 걸리는 시간 (ms)
+    autoplaySpeed: 20000, // 자동 스크롤 시 다음으로 넘어가는데 걸리는 시간 (ms)
     draggable: true, //드래그 가능 여부
     infinite: true, //무한반복옵션
     lazyLoad: true,

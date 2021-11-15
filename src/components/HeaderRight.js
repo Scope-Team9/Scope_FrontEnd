@@ -10,19 +10,17 @@ import { userCreators } from "../redux/modules/user";
 
 import { deleteCookie } from "../shared/Cookie";
 
-const HeaderRight = (props) => {
+const HeaderRight = props => {
   const dispatch = useDispatch();
   const isToken = document.cookie;
-  const userInfo = useSelector((state) => state.user);
+  const userInfo = useSelector(state => state.user);
   console.log(userInfo);
   // console.log(isToken);
   // console.log(isToken);
   // console.log(userInfo);
   // console.log("나의 타입은?", props);
   const [showModal, setShowModal] = React.useState(false);
-  const sigunupModalState = useSelector(
-    (state) => state.user.sigunupModalState
-  );
+  const sigunupModalState = useSelector(state => state.user.sigunupModalState);
   const modalOpen = () => {
     setShowModal(true);
   };
@@ -32,7 +30,12 @@ const HeaderRight = (props) => {
 
   const logOut = () => {
     deleteCookie("ScopeUser");
-    window.alert("로그아웃 됐습니다");
+    // window.alert("로그아웃 됐습니다");
+    // Swal.fire(
+    //   '로그아웃 됐습니다',
+    //   'You clicked the button!',
+    //   'success'
+    // )
     dispatch(userCreators.logOut());
     history.replace("/");
   };
@@ -58,35 +61,35 @@ const HeaderRight = (props) => {
               }}
             >
               {userInfo.userPropensityType === "LVG" && (
-                <Image size="50" src="/img/호랑이.png"></Image>
+                <UserImg size="50" src="/img/호랑이.png"></UserImg>
               )}
               {userInfo.userPropensityType === "LVP" && (
-                <Image src="/img/늑대.png"></Image>
+                <UserImg src="/img/늑대.png"></UserImg>
               )}
               {userInfo.userPropensityType === "LHG" && (
-                <Image src="/img/여우.png"></Image>
+                <UserImg src="/img/여우.png"></UserImg>
               )}
               {userInfo.userPropensityType === "LHP" && (
-                <Image src="/img/판다.png"></Image>
+                <UserImg src="/img/판다.png"></UserImg>
               )}
               {userInfo.userPropensityType === "FVG" && (
-                <Image src="/img/토끼.png"></Image>
+                <UserImg src="/img/토끼.png"></UserImg>
               )}
               {userInfo.userPropensityType === "FVP" && (
-                <Image src="/img/개.png"></Image>
+                <UserImg src="/img/개.png"></UserImg>
               )}
               {userInfo.userPropensityType === "FHG" && (
-                <Image src="/img/고양이.png"></Image>
+                <UserImg src="/img/고양이.png"></UserImg>
               )}
               {userInfo.userPropensityType === "FHP" && (
-                <Image src="/img/물개.png"></Image>
+                <UserImg src="/img/물개.png"></UserImg>
               )}
             </Grid>
           </IconWrap>
           <ButtonWrap>
             <Button
-              height="50px"
-              width="132px"
+              common
+              width="120px"
               text="로그아웃"
               _onClick={logOut}
             ></Button>
@@ -103,7 +106,12 @@ const HeaderRight = (props) => {
         height="auto"
       >
         <HeaderWrapper>
-          <Button width="100px" text="로그인" _onClick={modalOpen}></Button>
+          <Button
+            common
+            width="120px"
+            text="로그인"
+            _onClick={modalOpen}
+          ></Button>
           <LoginModal showModal={showModal} setShowModal={setShowModal} />
         </HeaderWrapper>
       </Grid>
@@ -138,6 +146,10 @@ const CardImg = styled.img`
 
 const UserImg = styled.img`
   object-fit: cover;
+  width: 50px;
+  border-radius: 12px;
+  background-color: #ececec;
+  cursor: pointer;
 `;
 
 export default HeaderRight;

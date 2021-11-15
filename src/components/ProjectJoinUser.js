@@ -1,8 +1,14 @@
 import React from "react";
 import { Grid, Text, Image } from "../elements/Index";
 import styled from "styled-components";
+import { useHistory } from "react-router";
+import ImgType from "../shared/ImgType";
 
 const ProjectJoinUser = (props) => {
+  const history = useHistory();
+  const goToMypage = (userId) => {
+    history.push(`/mypage/${userId}`);
+  };
   return (
     <React.Fragment>
       <Grid>
@@ -12,17 +18,7 @@ const ProjectJoinUser = (props) => {
           borderRadius="50%"
           backgroundColor="#C4C4C4"
         >
-          {props.userPropensityType === "LVG" && <Img src="/img/호랑이.png" />}
-          {props.userPropensityType === "LVP" && <Img src="/img/늑대.png" />}
-          {props.userPropensityType === "LHG" && <Img src="/img/여우.png" />}
-
-          {props.userPropensityType === "LHP" && <Img src="/img/판다.png" />}
-          {props.userPropensityType === "FVG" && <Img src="/img/토끼.png" />}
-          {props.userPropensityType === "FVP" && <Img src="/img/개.png" />}
-
-          {props.userPropensityType === "FHG" && <Img src="/img/고양이.png" />}
-          {props.userPropensityType === "FHP" && <Img src="/img/물개.png" />}
-          {props.userPropensityType === "RHP" && <Img src="/img/너구리.png" />}
+          <ImgType img={props.userPropensityType}></ImgType>
         </Grid>
         <Text size="20px">{props.nickname}</Text>
         <Grid>({props.userPropensityType})</Grid>
