@@ -7,9 +7,9 @@ import styled from "styled-components";
 import { applyCreators } from "../redux/modules/applyProject";
 import CloseIcon from "@mui/icons-material/Close";
 
-const ApplyStatusModal = props => {
+const ApplyStatusModal = (props) => {
   const dispatch = useDispatch();
-  const applyUsers = useSelector(state => state.apply.applyUsers);
+  const applyUsers = useSelector((state) => state.apply.applyUsers);
   const { applyStatusModal, setApplyStatusModal, postId } = props;
   const modalClose = () => {
     setApplyStatusModal(false);
@@ -17,13 +17,12 @@ const ApplyStatusModal = props => {
   console.log(applyUsers);
 
   React.useEffect(() => {
-    console.log(postId);
-    if (applyStatusModal) {
-      dispatch(applyCreators.applyUserAPI(postId));
-    }
+    console.log(applyUsers);
+
+    dispatch(applyCreators.applyUserAPI(postId));
   }, [applyStatusModal]);
 
-  const acceptOffer = acceptUser => {
+  const acceptOffer = (acceptUser) => {
     const acceptInfo = {
       userId: acceptUser,
       accept: true,
@@ -33,63 +32,64 @@ const ApplyStatusModal = props => {
     window.alert("신청을 수락하였습니다.");
   };
 
-  const cancelOffer = cancelUser => {
+  const cancelOffer = (cancelUser) => {
     const acceptInfo = {
       userId: cancelUser,
       accept: false,
     };
     console.log(acceptInfo);
     dispatch(applyCreators.acceptOfferAPI(postId, acceptInfo));
-    window.alert("신청을 수락하였습니다.");
+    window.alert("신청을 거절.");
   };
 
   return (
     <>
-      <Dialog
-        maxWidth={"sm"}
-        scroll="paper"
-        open={applyStatusModal}
-        onClose={modalClose}
-      >
-        <ModalWrap>
-          <Grid
-            height="10%"
-            bg="#B29CF4"
-            position="relative"
-            textAlign="center"
-            padding="10px 0 0 0"
-          >
+      {applyUsers && (
+        <Dialog
+          maxWidth={"sm"}
+          scroll="paper"
+          open={applyStatusModal}
+          onClose={modalClose}
+        >
+          <ModalWrap>
             <Grid
-              position="absolute"
-              top="0px"
-              right="10px"
-              width="20px"
-              padding="10px"
+              height="10%"
+              bg="#B29CF4"
+              position="relative"
+              textAlign="center"
+              padding="10px 0 0 0"
             >
-              <CloseIcon fontSize="large" onClick={modalClose} />
-            </Grid>
-            <Text size="30px" bold color="#fff">
-              신청현황
-            </Text>
-          </Grid>
-          {applyUsers == "" && (
-            <Grid height="0%" justifyContent="center">
               <Grid
-                justifyContent="center"
-                alignItems="center"
-                width="70%"
-                textAlign="center"
-                margin="auto"
+                position="absolute"
+                top="0px"
+                right="10px"
+                width="20px"
+                padding="10px"
               >
-                <Grid height="50%">
-                  <img width="100%" src="/img/step9.png" />
-                </Grid>
-                <Grid margin="250px 0">지원자가 아직 없습니다!</Grid>
+                <CloseIcon fontSize="large" onClick={modalClose} />
               </Grid>
+              <Text size="30px" bold color="#fff">
+                신청현황
+              </Text>
             </Grid>
-          )}
-          <Grid display="flex" height="85%" justifyContent="center">
-            {applyUsers && (
+            {applyUsers == "" && (
+              <Grid height="0%" justifyContent="center">
+                <Grid
+                  justifyContent="center"
+                  alignItems="center"
+                  width="70%"
+                  textAlign="center"
+                  margin="auto"
+                >
+                  <Grid height="50%">
+                    <img width="100%" src="/img/step9.png" />
+                  </Grid>
+                  <Grid margin="250px 0">지원자가 아직 없습니다!</Grid>
+                </Grid>
+              </Grid>
+            )}
+
+            <Grid display="flex" height="85%" justifyContent="center">
               <Grid width="90%" margin="10px 0">
                 {applyUsers.map((user, idx) => (
                   <Grid
@@ -100,7 +100,7 @@ const ApplyStatusModal = props => {
                     justifyContent="space-around"
                     padding="10px"
                     width="90%"
-                    key={idx}
+                    key={user.userId}
                     {...user}
                   >
                     <Grid margin="auto" width="30%">
@@ -156,7 +156,7 @@ const ApplyStatusModal = props => {
                           <Button
                             common
                             isValue={applyUsers[idx].userId}
-                            _onClick={e => {
+                            _onClick={(e) => {
                               console.log(e);
                               acceptOffer(e.target.value);
                             }}
@@ -172,7 +172,7 @@ const ApplyStatusModal = props => {
                           <Button
                             common
                             isValue={applyUsers[idx].userId}
-                            _onClick={e => {
+                            _onClick={(e) => {
                               cancelOffer(e.target.value);
                             }}
                           >
@@ -185,10 +185,10 @@ const ApplyStatusModal = props => {
                   </Grid>
                 ))}
               </Grid>
-            )}
-          </Grid>
-        </ModalWrap>
-      </Dialog>
+            </Grid>
+          </ModalWrap>
+        </Dialog>
+      )}
     </>
   );
 };

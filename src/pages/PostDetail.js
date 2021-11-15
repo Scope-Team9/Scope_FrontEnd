@@ -74,10 +74,7 @@ const PostDetail = (props) => {
         const result = await apis.detailPost(post_id);
         setCheckPost(result);
         console.log(result);
-        // console.log(myUserId);
-        const members = result.data.data.members;
-        let imHere = members.find((e) => e.userId === myUserId);
-        setIsme(imHere);
+        setIsme(result.data.data.userStatus);
       } catch (err) {
         console.log(err);
       }
@@ -289,7 +286,7 @@ const PostDetail = (props) => {
                   <Grid textAlign="center">
                     {passedData?.projectStatus === "모집중" && (
                       <Grid>
-                        {!isme && (
+                        {isme === "user" && (
                           <>
                             <Button
                               common
@@ -305,20 +302,23 @@ const PostDetail = (props) => {
                             >
                               지원신청
                             </Button>
-                            <Button
-                              common
-                              width="120px"
-                              isValue="cancel"
-                              _onClick={(e) => {
-                                applyUserModalOpen(e.target.value);
-                              }}
-                              width="120px"
-                            >
-                              지원취소
-                            </Button>
                           </>
                         )}
-                        {isme && (
+                        {isme === "applicant" && (
+                          <Button
+                            common
+                            width="120px"
+                            isValue="cancel"
+                            _onClick={(e) => {
+                              applyUserModalOpen(e.target.value);
+                            }}
+                            width="120px"
+                          >
+                            지원취소
+                          </Button>
+                        )}
+
+                        {isme === "member" && (
                           <Button
                             common
                             width="120px"

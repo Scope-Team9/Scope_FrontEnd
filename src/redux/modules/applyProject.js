@@ -29,7 +29,7 @@ const applyUserAPI = (postId) => {
       .applyUser(postId)
       .then((res) => {
         console.log(res.data.data);
-        window.alert("모집 지원 현황 조회 성공");
+        // window.alert("모집 지원 현황 조회 성공");
         dispatch(applyUsers(res.data.data));
       })
       .catch((err) => {
@@ -95,8 +95,10 @@ const cancelProjectAPI = (postId) => {
 //팀장이 수락한 프로젝트 탈퇴(팀원)
 const exitTeamAPI = (postId) => {
   return function (dispatch, getState, { history }) {
+    const PostId = postId.postId;
+    console.log(PostId);
     apis
-      .exitTeam(postId)
+      .exitTeam(PostId)
       .then((res) => {
         console.log(res);
         window.alert("팀에서 탈출하였습니다!");
@@ -104,7 +106,7 @@ const exitTeamAPI = (postId) => {
       .catch((err) => {
         console.log(err.response);
         if (err.response.data.msg === "입력 값이 잘못되었습니다.") {
-          return window.alert("신청결과를 기다리는 중입니다!");
+          return window.alert("입력 값이 잘못되었습니다.");
         }
         if (err.response.data.msg === "해당 프로젝트를 찾을 수 없습니다.") {
           return window.alert("해당 프로젝트를 찾을 수 없습니다.");
