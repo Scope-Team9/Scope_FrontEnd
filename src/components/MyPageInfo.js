@@ -22,6 +22,7 @@ import EmailAuth from "./EmailAuth";
 import PropensityTest from "./propensityTest/PropensityTest";
 import Spinner from "../shared/Spinner";
 import DeleteUserModal from "../modal/DeleteUserModal";
+
 // MyPageInfo의 함수형 컴포넌트를 만든다.
 const MyPageInfo = props => {
   const dispatch = useDispatch();
@@ -36,12 +37,9 @@ const MyPageInfo = props => {
   const [mydata, setMydata] = React.useState();
   const [editMyProfile, setEditMyProfile] = React.useState(false);
   const [techStack, setTeckstack] = React.useState([]);
-
   const [nickName, setNickName] = React.useState();
   const [email, setEmail] = React.useState();
-  // console.log(nickName);
   const myType = mydata?.user.userPropensityType;
-  // console.log(myType);
   const [modal, setModal] = React.useState(false);
   const [testmodal, setTestModal] = React.useState(false);
   const [deleteModal, setDeleteModal] = React.useState(false);
@@ -72,7 +70,6 @@ const MyPageInfo = props => {
     };
     fetchData();
   }, [filter, editMyProfile]);
-  // console.log(techStack);
 
   React.useEffect(
     e => {
