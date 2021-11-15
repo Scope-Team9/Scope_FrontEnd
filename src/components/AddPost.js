@@ -17,10 +17,11 @@ import { postAddActions } from "../redux/modules/postadd";
 import { postActions } from "../redux/modules/post";
 
 // AddPost의 함수형 컴포넌트를 만든다.
-// AddPost 안에 다뤄지는  특정 값(state) ex.title 값이 변화하였을 때, AddPost자체가 리랜더링 된다..
+// AddPost 안에 다뤄지는  특정 값(state) ex.title 값이 변화하였을 때, AddPost자체가 리랜더링 된다.
 const AddPost = (props) => {
   const dispatch = useDispatch();
   const animatedComponents = makeAnimated();
+
   const [title, setTitle] = React.useState("");
   const [summary, setSummary] = React.useState("");
   const [techstack, setTectstack] = React.useState([]);
@@ -36,7 +37,7 @@ const AddPost = (props) => {
     if (
       title.length > 0 &&
       summary.length > 0 &&
-      techstack.length <= 3 &&
+      techstack.length > 0 &&
       totalMember > 0 &&
       projectStatus.length > 0 &&
       contents.length > 0
@@ -44,7 +45,7 @@ const AddPost = (props) => {
       window.alert("프로젝트가 생성되었습니다.");
       scope_index();
     } else {
-      window.alert("값을 다시 입력해주세요.");
+      window.alert("값을 다 입력해주세요.");
     }
   };
 
@@ -54,9 +55,6 @@ const AddPost = (props) => {
   }, []);
 
   const scope_index = () => {
-    // console.log("시작시간", startDate.toISOString());
-    // console.log("마감시간", endDate.toISOString());
-    // debugger;
     const card = {
       title: title,
       summary: summary,
@@ -169,22 +167,23 @@ const AddPost = (props) => {
         justifyContent="center"
         maxWidth="1920px"
         height="100%"
-        margin="10px auto"
+        margin="auto"
         border="1px solid #C4C4C4"
+        alignItems="center"
       >
         {/* 이미지 하나 */}
-        <SideBarImg src={Img} style={{ maxWidth: "620px", height: "100%" }} />
+        <SideBarImg src={Img} style={{ maxWidth: "100%", height: "100%" }} />
         {/* 텍스트 하나 */}
         <Grid padding="0px 16px">
           {/* Scoope */}
-          <Title>SCOPE</Title>
+          <Title>Scoope</Title>
           <Grid>
             {/* 게시글 작성하기 */}
             <Text color="#C4C4C4" size="20px" bold>
               게시글 작성하기
             </Text>
             {/* 제목 */}
-            <Grid margin="10px 0px 0px 0px">
+            <Grid>
               <Grid>제목</Grid>
               <Input
                 width="100%"
@@ -192,7 +191,6 @@ const AddPost = (props) => {
                 height="40px"
                 padding="10px"
                 border="1px solid #C4C4C4"
-                borderRadius="4px"
                 placeholder="제목을 입력해주세요."
                 inputFocusOutline="none"
                 fontSize="16px"
@@ -229,7 +227,7 @@ const AddPost = (props) => {
                 styles={styles}
                 options={stackSelect}
                 onChange={handleChange}
-                placeholder={<div>기술 스택을 선택해주세요(3가지).</div>}
+                placeholder={<div>기술 스택을 선택해주세요.</div>}
               />
             </Grid>
             {/* 기간설정 */}
@@ -299,7 +297,7 @@ const AddPost = (props) => {
                   fontSize: "16px",
                   outline: "none",
                 }}
-                placeholder="프로젝트 내용을 입력해주세요(X. 연락수단 필수)."
+                placeholder="프로젝트 내용을 입력해주세요."
                 onChange={(e) => {
                   setContents(e.target.value);
                 }}
@@ -345,19 +343,18 @@ const Btn = styled.button`
   align-items: center;
   width: 140px;
   height: 35px;
-  border: 1px solid #b29cf4;
+  border: none;
   border-radius: 50px;
   color: #fff;
-  background: white;
-  color: #b29cf4;
+  background: linear-gradient(
+    0deg,
+    rgba(83, 201, 253, 1) 0%,
+    rgba(182, 161, 240, 1) 69%,
+    rgba(231, 170, 250, 1) 100%,
+    rgba(240, 247, 254, 1) 100%
+  );
   margin: 10px auto 10px auto;
   cursor: pointer;
-  &:hover {
-    color: white;
-    background-color: #b29cf4;
-    border: 1px solid;
-    transition-duration: 1s;
-  }
 `;
 
 const SideBarImg = styled.img`
