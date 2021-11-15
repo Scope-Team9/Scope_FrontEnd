@@ -8,6 +8,7 @@ import { apis } from "../lib/axios";
 import { useSelector, useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import { userCreators } from "../redux/modules/user";
+import { deleteCookie } from "../shared/Cookie";
 import { useHistory } from "react-router";
 const EmailAuth = (props) => {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ const EmailAuth = (props) => {
         window.alert(result.data.msg);
         Swal.fire(`${result.data.msg}`, "T.T", "info");
         deleteCookie("ScopeUser");
-        history.replace("/");
+        history.push("/");
 
         dispatch(userCreators.logOut());
         setModal(false);
