@@ -121,7 +121,12 @@ const LoginModal = props => {
   //회원이 아닐경우 회원가입, 회원일 경우 메인으로 이동
   if (sigunupModalState == true) {
     return (
-      <Dialog maxWidth={"sm"} scroll="paper" open={showModal}>
+      <Dialog
+        maxWidth={"sm"}
+        scroll="paper"
+        open={showModal}
+        onClose={modalClose}
+      >
         <ModalWrap>
           {/* 테스트가 필요한경우 */}
           {!test ? (

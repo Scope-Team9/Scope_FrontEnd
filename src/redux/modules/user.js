@@ -29,8 +29,8 @@ const initialState = {
   userList: [],
   userfirst: false,
   sigunupModalState: false,
-  userPropensityType: [],
-  memberPropensityType: [],
+  userPropensityType: null,
+  memberPropensityType: null,
 };
 //카카오 로그인
 const kakaologinMiddleware = code => {
@@ -134,8 +134,8 @@ const emailCheckMiddleWare = email => {
       })
       .catch(err => {
         console.log(err.response);
-        if (err.response.data.msg == "중복된 이메일이 존재합니다.") {
-          return window.alert("중복된 이메일이 존재합니다");
+        if (err.response.data.msg == "이미 사용중인 이메일입니다.") {
+          return window.alert("이미 사용중인 이메일입니다.");
         }
       });
   };
@@ -198,16 +198,13 @@ const signupMiddleware = signupInfo => {
     apis
       .signup(signupInfo)
       .then(res => {
-        console.log(res.response);
+        console.log(res);
         // const ACCESS_TOKEN = res.data.token;
         // localStorage.setItem("token", ACCESS_TOKEN);
         dispatch(
           setUser({
-            userPropensityType: res.data.data.userPropensityType,
-            memberPropensityType: res.data.data.memberPropensityType,
-            applicantDate: res.data.data.applicantDate,
-            comment: res.data.data.comment,
-            isAssessment: res.data.data.isAssessment,
+            userPropensityType: res.data.data.user.userPropensityType,
+            memberPropensityType: res.data.data.user.memberPropensityType,
           })
         );
       })
@@ -247,7 +244,7 @@ export default handleActions(
         draft.snsId = action.payload.user.snsId;
         draft.techStack = action.payload.user.techStack;
         draft.nickName = action.payload.user.nickName;
-        draft.userfirst = true;
+
         draft.sigunupModalState = true;
       }),
     [SET_USER]: (state, action) =>
@@ -259,9 +256,6 @@ export default handleActions(
         draft.is_login = true;
         draft.memberPropensityType = action.payload.user.memberPropensityType;
         draft.userPropensityType = action.payload.user.userPropensityType;
-        draft.applicantDate = action.payload.user.applicantDate;
-        draft.comment = action.payload.user.comment;
-        draft.isAssessment = action.payload.user.isAssessment;
       }),
     [LOG_OUT]: (state, action) =>
       produce(state, draft => {

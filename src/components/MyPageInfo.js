@@ -23,11 +23,11 @@ import PropensityTest from "./propensityTest/PropensityTest";
 import Spinner from "../shared/Spinner";
 import DeleteUserModal from "../modal/DeleteUserModal";
 // MyPageInfo의 함수형 컴포넌트를 만든다.
-const MyPageInfo = (props) => {
+const MyPageInfo = props => {
   const dispatch = useDispatch();
   // const userId = useSelector((state) => state.user.userId);
   const userId = props.match.params.id;
-  const myUserId = useSelector((state) => state.user.userId);
+  const myUserId = useSelector(state => state.user.userId);
   // console.log(props);
   console.log(userId);
   console.log(myUserId);
@@ -75,7 +75,7 @@ const MyPageInfo = (props) => {
   // console.log(techStack);
 
   React.useEffect(
-    (e) => {
+    e => {
       if (currentClick !== null) {
         let current = document.getElementById(currentClick);
         current.style.color = "#333";
@@ -91,7 +91,7 @@ const MyPageInfo = (props) => {
     },
     [currentClick]
   );
-  const GetClick = (e) => {
+  const GetClick = e => {
     setCurrentClick(e);
     // console.log(e);
   };
@@ -204,6 +204,10 @@ const MyPageInfo = (props) => {
 
   const EditTest = () => {
     setTestModal(true);
+  };
+
+  const TestClose = () => {
+    setTestModal(false);
   };
 
   return (
@@ -490,7 +494,7 @@ const MyPageInfo = (props) => {
                             padding: "7px",
                           }}
                           defaultValue={mydata.user.nickname}
-                          onChange={(e) => {
+                          onChange={e => {
                             setNickName(e.target.value);
                           }}
                         ></input>
@@ -524,7 +528,7 @@ const MyPageInfo = (props) => {
                             padding: "7px",
                           }}
                           defaultValue={mydata.user.email}
-                          onChange={(e) => {
+                          onChange={e => {
                             setEmail(e.target.value);
                           }}
                         ></input>
@@ -548,7 +552,7 @@ const MyPageInfo = (props) => {
                           styles={styles}
                           className="basic-multi-select"
                           classNamePrefix="select"
-                          onChange={(e) => {
+                          onChange={e => {
                             let techStack = [];
                             let arr = e;
                             let idx = 0;
@@ -669,7 +673,12 @@ const MyPageInfo = (props) => {
                         <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
                       </Grid>
                     )}
-                    <Dialog maxWidth={"sm"} scroll="paper" open={testmodal}>
+                    <Dialog
+                      maxWidth={"sm"}
+                      scroll="paper"
+                      open={testmodal}
+                      onClose={TestClose}
+                    >
                       <Grid width="550px" height="100%">
                         <PropensityTest />
                       </Grid>
@@ -710,7 +719,12 @@ const MyPageInfo = (props) => {
                         <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
                       </Grid>
                     )}
-                    <Dialog maxWidth={"sm"} scroll="paper" open={testmodal}>
+                    <Dialog
+                      maxWidth={"sm"}
+                      scroll="paper"
+                      open={testmodal}
+                      onClose={TestClose}
+                    >
                       <Grid width="550px" height="100%">
                         <PropensityTest />
                       </Grid>
@@ -751,7 +765,12 @@ const MyPageInfo = (props) => {
                         <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
                       </Grid>
                     )}
-                    <Dialog maxWidth={"sm"} scroll="paper" open={testmodal}>
+                    <Dialog
+                      maxWidth={"sm"}
+                      scroll="paper"
+                      open={testmodal}
+                      onClose={TestClose}
+                    >
                       <Grid width="550px" height="100%">
                         <PropensityTest />
                       </Grid>
@@ -792,7 +811,12 @@ const MyPageInfo = (props) => {
                         <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
                       </Grid>
                     )}
-                    <Dialog maxWidth={"sm"} scroll="paper" open={testmodal}>
+                    <Dialog
+                      maxWidth={"sm"}
+                      scroll="paper"
+                      open={testmodal}
+                      onClose={TestClose}
+                    >
                       <Grid width="550px" height="100%">
                         <PropensityTest />
                       </Grid>
@@ -833,7 +857,12 @@ const MyPageInfo = (props) => {
                         <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
                       </Grid>
                     )}
-                    <Dialog maxWidth={"sm"} scroll="paper" open={testmodal}>
+                    <Dialog
+                      maxWidth={"sm"}
+                      scroll="paper"
+                      open={testmodal}
+                      onClose={TestClose}
+                    >
                       <Grid width="550px" height="100%">
                         <PropensityTest />
                       </Grid>
@@ -874,7 +903,12 @@ const MyPageInfo = (props) => {
                         <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
                       </Grid>
                     )}
-                    <Dialog maxWidth={"sm"} scroll="paper" open={testmodal}>
+                    <Dialog
+                      maxWidth={"sm"}
+                      scroll="paper"
+                      open={testmodal}
+                      onClose={TestClose}
+                    >
                       <Grid width="550px" height="100%">
                         <PropensityTest />
                       </Grid>
@@ -915,7 +949,12 @@ const MyPageInfo = (props) => {
                         <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
                       </Grid>
                     )}
-                    <Dialog maxWidth={"sm"} scroll="paper" open={testmodal}>
+                    <Dialog
+                      maxWidth={"sm"}
+                      scroll="paper"
+                      open={testmodal}
+                      onClose={TestClose}
+                    >
                       <Grid width="550px" height="100%">
                         <PropensityTest />
                       </Grid>
@@ -947,7 +986,7 @@ const MyPageInfo = (props) => {
               >
                 <Filter
                   id="recruitment"
-                  onClick={(e) => {
+                  onClick={e => {
                     setFilter("모집");
                     GetClick(e.target.id);
                   }}
@@ -956,7 +995,7 @@ const MyPageInfo = (props) => {
                 </Filter>
                 <Filter
                   id="progress"
-                  onClick={(e) => {
+                  onClick={e => {
                     setFilter("진행중");
                     GetClick(e.target.id);
                   }}
@@ -965,7 +1004,7 @@ const MyPageInfo = (props) => {
                 </Filter>
                 <Filter
                   id="bookmark"
-                  onClick={(e) => {
+                  onClick={e => {
                     setFilter("관심");
                     GetClick(e.target.id);
                   }}
@@ -974,7 +1013,7 @@ const MyPageInfo = (props) => {
                 </Filter>
                 <Filter
                   id="finish"
-                  onClick={(e) => {
+                  onClick={e => {
                     setFilter("완료");
                     GetClick(e.target.id);
                   }}
@@ -983,7 +1022,7 @@ const MyPageInfo = (props) => {
                 </Filter>
                 <Filter
                   id="introduction"
-                  onClick={(e) => {
+                  onClick={e => {
                     setFilter("소개");
                     GetClick(e.target.id);
                   }}
