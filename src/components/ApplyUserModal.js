@@ -19,6 +19,7 @@ const ApplyUserModal = props => {
   const isMe = useSelector(state => state.user.userId);
   const [comment, setComment] = React.useState();
   const [likes, setLikes] = React.useState();
+  const [first, setFirst] = React.useState(false);
   const [page, setPage] = React.useState(1);
 
   const [front, setFront] = React.useState();
@@ -33,7 +34,7 @@ const ApplyUserModal = props => {
     );
   }, [passdedMenber]);
 
-  console.log(passdedMenber, isMe);
+  console.log(isMe);
 
   const modalClose = () => {
     setApplyUserModal(false);
@@ -61,12 +62,17 @@ const ApplyUserModal = props => {
   };
 
   const userLiked = () => {
+    const likeMember = likes.filter(user => user.active == true);
+    console.log(likeMember);
+    var result = likeMember.map(a => a.userId);
+    console.log(result);
+
     const likeUsers = {
-      userIds: likes,
+      userIds: result,
     };
     console.log(likeUsers);
-    dispatch(applyCreators.starterLikeAPI(postId, likeUsers));
-    setPage(page + 1);
+    // dispatch(applyCreators.starterLikeAPI(postId, likeUsers));
+    // setPage(page + 1);
   };
 
   const submitUrl = () => {
@@ -83,31 +89,16 @@ const ApplyUserModal = props => {
   //색상 기능
   const toggleLike = a => {
     console.log(likes);
-    setLikes(prev => {
-      prev.forEach(val => {
+    setLikes(state => {
+      return state.map(val => {
         if (val.userId === Number(a)) {
-          if (val.active == false) {
-            return (val.active = true);
-          }
-          return console.log(val.active);
+          return { ...val, active: !val.active };
         }
-        console.log(prev);
-        return prev;
+        return val;
       });
     });
   };
   console.log(likes);
-  // const a = () => {
-  //   setLikes((prev) => {
-  //     prev.forEach((val) => {
-  //       if((val.userId === userId) {
-  //         val.active == true
-  //       })
-  //       return prev;
-  //     })
-  //   })
-  // }
-  //
 
   return (
     <>
@@ -621,7 +612,7 @@ const ApplyUserModal = props => {
                           {passdedMenber[idx].userId !== isMe && (
                             <Button
                               common
-                              // active={}
+                              active={likes[idx].active}
                               isValue={passdedMenber[idx].userId}
                               _onClick={e => {
                                 console.log(e);
