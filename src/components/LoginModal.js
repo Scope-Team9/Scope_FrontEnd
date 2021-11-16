@@ -25,6 +25,7 @@ const LoginModal = (props) => {
   const techStackOption = [
     { value: "React", label: "React" },
     { value: "Java", label: "Java" },
+    { value: "Spring", label: "Spring" },
     { value: "JavaScript", label: "JavaScript" },
     { value: "Python", label: "Python" },
     { value: "Node", label: "Node" },

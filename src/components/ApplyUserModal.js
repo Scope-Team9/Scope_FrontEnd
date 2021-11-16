@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { applyCreators } from "../redux/modules/applyProject";
 import CloseIcon from "@mui/icons-material/Close";
 
-const ApplyUserModal = props => {
+const ApplyUserModal = (props) => {
   const dispatch = useDispatch();
   const {
     applyUserModal,
@@ -16,17 +16,23 @@ const ApplyUserModal = props => {
     postId,
     passdedMenber,
   } = props;
-  const isMe = useSelector(state => state.user.userId);
+  const isMe = useSelector((state) => state.user.userId);
   const [comment, setComment] = React.useState();
-  const [click, setClick] = React.useState(passdedMenber);
-  const [likes, setLikes] = React.useState([]);
-
+  const [likes, setLikes] = React.useState();
   const [page, setPage] = React.useState(1);
+  const [first, setFirst] = React.useState(true);
 
   const [front, setFront] = React.useState();
   const [back, setBack] = React.useState();
 
-  console.log(passdedMenber, isMe);
+  React.useEffect(() => {
+    setLikes(
+      passdedMenber?.map((stateItem) => {
+        let newStateItem = { ...stateItem, active: false };
+        return newStateItem;
+      })
+    );
+  }, [passdedMenber]);
 
   const modalClose = () => {
     setApplyUserModal(false);
@@ -72,16 +78,36 @@ const ApplyUserModal = props => {
     modalClose;
   };
   //팀원평가 눌렀는지 안눌렀는지 (버튼색상)
-  const Filter = value => {
-    setArr(state => {
-      return state.map(stateItem => {
-        if (stateItem.userId === value) {
-          return { ...stateItem, active: !stateItem.active };
+
+  //색상 기능
+  const toggleLike = (a) => {
+    // console.log(likes);
+    setLikes((state) => {
+      return state.map((val) => {
+        // forEach() 를 사용하면 다시 불러올때 undefined 가 뜸. forEach는 속도 때문에 map 대신 쓰는지?.... forEach는 항상 undefined 리턴
+        if (val.userId === Number(a)) {
+          if (val.active == false) {
+            val.active = true;
+            return val;
+          }
+          return val;
         }
-        return stateItem;
+        return val;
       });
     });
   };
+  console.log(likes);
+  // const a = () => {
+  //   setLikes((prev) => {
+  //     prev.forEach((val) => {
+  //       if((val.userId === userId) {
+  //         val.active == true
+  //       })
+  //       return prev;
+  //     })
+  //   })
+  // }
+  //
 
   return (
     <>
@@ -124,7 +150,7 @@ const ApplyUserModal = props => {
                   height="100%"
                   backgroundColor="#fff"
                   placeholder="신청자분을 간단히 소개해주세요!"
-                  _onChange={e => {
+                  _onChange={(e) => {
                     console.log(e.target.value);
                     setComment(e.target.value);
                   }}
@@ -342,18 +368,27 @@ const ApplyUserModal = props => {
                         </Grid>
                         <Grid margin="auto" height="50px" width="80%">
                           {passdedMenber[idx].userId !== isMe && (
-                            <Button
-                              common
-                              isId={passdedMenber[idx]}
-                              isValue={passdedMenber[idx].userId}
-                              _onClick={e => {
-                                // console.log(e);
-                                // Filter(e.target.value);
-                                userLiked;
-                              }}
-                            >
-                              좋았어요!
-                            </Button>
+                            <>
+                              <Button
+                                common
+                                isValue={passdedMenber[idx].userId}
+                                _onClick={(e) => {
+                                  console.log(e);
+                                  toggleLike(e.target.value);
+                                }}
+                              >
+                                좋았어요!
+                              </Button>
+                              <Button
+                                common
+                                isValue={passdedMenber[idx].userId}
+                                _onClick={() => {
+                                  console.log(likes);
+                                }}
+                              >
+                                확인버튼
+                              </Button>
+                            </>
                           )}
                         </Grid>
                       </Grid>
@@ -437,7 +472,7 @@ const ApplyUserModal = props => {
                 >
                   <Input
                     height="100%"
-                    _onChange={e => {
+                    _onChange={(e) => {
                       console.log(e.target.value);
                       setFront(e.target.value);
                     }}
@@ -445,7 +480,7 @@ const ApplyUserModal = props => {
 
                   <Input
                     height="100%"
-                    _onChange={e => {
+                    _onChange={(e) => {
                       console.log(e.target.value);
                       setBack(e.target.value);
                     }}
@@ -516,7 +551,7 @@ const ApplyUserModal = props => {
                     alignItems="center"
                     justifyContent="space-around"
                     width="100%"
-                    key={idx}
+                    key={user.userId}
                     {...user}
                   >
                     <Grid margin="auto" width="10%">
@@ -597,12 +632,11 @@ const ApplyUserModal = props => {
                           {passdedMenber[idx].userId !== isMe && (
                             <Button
                               common
-                              isId={passdedMenber[idx]}
+                              // active={}
                               isValue={passdedMenber[idx].userId}
-                              _onClick={e => {
+                              _onClick={(e) => {
                                 console.log(e);
-                                toggleLike(e.target.id);
-                                userLiked(e.target.value);
+                                toggleLike(e.target.value);
                               }}
                             >
                               좋았어요!
@@ -642,4 +676,4 @@ const UserImg = styled.img`
   cursor: pointer;
 `;
 
-export default ApplyUserModal;
+export default React.memo(ApplyUserModal);
