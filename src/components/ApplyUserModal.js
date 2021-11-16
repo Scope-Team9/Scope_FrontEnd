@@ -19,9 +19,8 @@ const ApplyUserModal = (props) => {
   const isMe = useSelector((state) => state.user.userId);
   const [comment, setComment] = React.useState();
   const [likes, setLikes] = React.useState();
+  const [first, setFirst] = React.useState(false);
   const [page, setPage] = React.useState(1);
-  const [first, setFirst] = React.useState(true);
-
   const [front, setFront] = React.useState();
   const [back, setBack] = React.useState();
 
@@ -33,6 +32,8 @@ const ApplyUserModal = (props) => {
       })
     );
   }, [passdedMenber]);
+
+  console.log(isMe);
 
   const modalClose = () => {
     setApplyUserModal(false);
@@ -60,12 +61,17 @@ const ApplyUserModal = (props) => {
   };
 
   const userLiked = () => {
+    const likeMember = likes.filter((user) => user.active == true);
+    console.log(likeMember);
+    var result = likeMember.map((a) => a.userId);
+    console.log(result);
+
     const likeUsers = {
-      userIds: likes,
+      userIds: result,
     };
     console.log(likeUsers);
-    dispatch(applyCreators.starterLikeAPI(postId, likeUsers));
-    setPage(page + 1);
+    // dispatch(applyCreators.starterLikeAPI(postId, likeUsers));
+    // setPage(page + 1);
   };
 
   const submitUrl = () => {
@@ -81,33 +87,17 @@ const ApplyUserModal = (props) => {
 
   //색상 기능
   const toggleLike = (a) => {
-    // console.log(likes);
+    console.log(likes);
     setLikes((state) => {
       return state.map((val) => {
-        // forEach() 를 사용하면 다시 불러올때 undefined 가 뜸. forEach는 속도 때문에 map 대신 쓰는지?.... forEach는 항상 undefined 리턴
         if (val.userId === Number(a)) {
-          if (val.active == false) {
-            val.active = true;
-            return val;
-          }
-          return val;
+          return { ...val, active: !val.active };
         }
         return val;
       });
     });
   };
   console.log(likes);
-  // const a = () => {
-  //   setLikes((prev) => {
-  //     prev.forEach((val) => {
-  //       if((val.userId === userId) {
-  //         val.active == true
-  //       })
-  //       return prev;
-  //     })
-  //   })
-  // }
-  //
 
   return (
     <>
@@ -379,7 +369,7 @@ const ApplyUserModal = (props) => {
                               >
                                 좋았어요!
                               </Button>
-                              <Button
+                              {/* <Button
                                 common
                                 isValue={passdedMenber[idx].userId}
                                 _onClick={() => {
@@ -387,7 +377,7 @@ const ApplyUserModal = (props) => {
                                 }}
                               >
                                 확인버튼
-                              </Button>
+                              </Button> */}
                             </>
                           )}
                         </Grid>
@@ -632,7 +622,7 @@ const ApplyUserModal = (props) => {
                           {passdedMenber[idx].userId !== isMe && (
                             <Button
                               common
-                              // active={}
+                              active={likes[idx].active}
                               isValue={passdedMenber[idx].userId}
                               _onClick={(e) => {
                                 console.log(e);
