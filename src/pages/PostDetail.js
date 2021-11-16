@@ -44,8 +44,6 @@ const PostDetail = (props) => {
     const editstatus = {
       projectStatus: data,
     };
-    console.log("상태야", projectStatused[0].value);
-    console.log("상태입니다.");
     dispatch(postDetailActions.statusPostAPI(post_id, editstatus));
   };
 
@@ -85,10 +83,6 @@ const PostDetail = (props) => {
   const passedData = checkPost?.data["data"].post;
   const passedUserStatus = checkPost?.data["data"].userStatus;
   const passdedMenber = checkPost?.data["data"].members;
-
-  console.log(passdedMenber);
-  console.log(passedData);
-  console.log(passedUserStatus);
 
   const DeletePost = async () => {
     try {
@@ -263,17 +257,33 @@ const PostDetail = (props) => {
                         모집완료
                       </Button>
                     )}
+                    {passedData.projectStatus === "종료" && <div></div>}
 
-                    <Button
-                      common
-                      width="140px"
-                      height="35px"
-                      _onClick={() => {
-                        history.push({ pathname: `/postedit/${post_id}` });
-                      }}
-                    >
-                      포스트수정
-                    </Button>
+                    {passedData.projectStatus === "진행중" && (
+                      <Button
+                        common
+                        width="140px"
+                        height="35px"
+                        _onClick={() => {
+                          history.push({ pathname: `/postedit/${post_id}` });
+                        }}
+                      >
+                        포스트수정
+                      </Button>
+                    )}
+
+                    {passedData.projectStatus === "모집중" && (
+                      <Button
+                        common
+                        width="140px"
+                        height="35px"
+                        _onClick={() => {
+                          history.push({ pathname: `/postedit/${post_id}` });
+                        }}
+                      >
+                        포스트수정
+                      </Button>
+                    )}
                     <Button
                       common
                       width="140px"
@@ -308,6 +318,7 @@ const PostDetail = (props) => {
                             </Button>
                           </>
                         )}
+
                         {isme === "applicant" && (
                           <Button
                             common

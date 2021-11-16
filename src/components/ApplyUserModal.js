@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { applyCreators } from "../redux/modules/applyProject";
 import CloseIcon from "@mui/icons-material/Close";
 
-const ApplyUserModal = props => {
+const ApplyUserModal = (props) => {
   const dispatch = useDispatch();
   const {
     applyUserModal,
@@ -16,7 +16,7 @@ const ApplyUserModal = props => {
     postId,
     passdedMenber,
   } = props;
-  const isMe = useSelector(state => state.user.userId);
+  const isMe = useSelector((state) => state.user.userId);
   const [comment, setComment] = React.useState();
   const [click, setClick] = React.useState(passdedMenber);
   const [likes, setLikes] = React.useState([]);
@@ -72,9 +72,9 @@ const ApplyUserModal = props => {
     modalClose;
   };
   //팀원평가 눌렀는지 안눌렀는지 (버튼색상)
-  const Filter = value => {
-    setArr(state => {
-      return state.map(stateItem => {
+  const Filter = (value) => {
+    setArr((state) => {
+      return state.map((stateItem) => {
         if (stateItem.userId === value) {
           return { ...stateItem, active: !stateItem.active };
         }
@@ -124,7 +124,7 @@ const ApplyUserModal = props => {
                   height="100%"
                   backgroundColor="#fff"
                   placeholder="신청자분을 간단히 소개해주세요!"
-                  _onChange={e => {
+                  _onChange={(e) => {
                     console.log(e.target.value);
                     setComment(e.target.value);
                   }}
@@ -346,7 +346,7 @@ const ApplyUserModal = props => {
                               common
                               isId={passdedMenber[idx]}
                               isValue={passdedMenber[idx].userId}
-                              _onClick={e => {
+                              _onClick={(e) => {
                                 // console.log(e);
                                 // Filter(e.target.value);
                                 userLiked;
@@ -437,7 +437,7 @@ const ApplyUserModal = props => {
                 >
                   <Input
                     height="100%"
-                    _onChange={e => {
+                    _onChange={(e) => {
                       console.log(e.target.value);
                       setFront(e.target.value);
                     }}
@@ -445,7 +445,7 @@ const ApplyUserModal = props => {
 
                   <Input
                     height="100%"
-                    _onChange={e => {
+                    _onChange={(e) => {
                       console.log(e.target.value);
                       setBack(e.target.value);
                     }}
@@ -459,12 +459,7 @@ const ApplyUserModal = props => {
                   </Button>
                 </Grid>
                 <Grid>
-                  <Button
-                    borderRadius="25px"
-                    _onClick={() => {
-                      history.push("/");
-                    }}
-                  >
+                  <Button borderRadius="25px" _onClick={() => {}}>
                     다음에제출
                   </Button>
                 </Grid>
@@ -599,7 +594,7 @@ const ApplyUserModal = props => {
                               common
                               isId={passdedMenber[idx]}
                               isValue={passdedMenber[idx].userId}
-                              _onClick={e => {
+                              _onClick={(e) => {
                                 console.log(e);
                                 toggleLike(e.target.id);
                                 userLiked(e.target.value);

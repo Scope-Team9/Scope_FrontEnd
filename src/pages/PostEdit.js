@@ -50,7 +50,7 @@ const PostEdit = (props) => {
       startDate: startDate,
       endDate: endDate,
     };
-    console.log("시간", editcard);
+    console.log("데이터", projectStatus.label);
     dispatch(postDetailActions.editPostAPI(post_id, editcard));
   };
 
@@ -311,19 +311,6 @@ const PostEdit = (props) => {
             </Grid>
             <Grid>
               <Text>프로젝트 내용적기</Text>
-              {/* <Input
-                width="100%"
-                height="200px"
-                padding="10px"
-                border="1px solid #E7E1FF"
-                inputFocusOutline="none"
-                fontSize="16px"
-                type="text"
-                editValue={contents}
-                _onChange={(e) => {
-                  setContents(e.target.value);
-                }}
-              /> */}
               <TextArea
                 value={contents}
                 s
