@@ -16,7 +16,7 @@ import ProjectJoinUser from "../components/ProjectJoinUser";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 
-// PostDetail의 함수형 컴포넌트를 만든다.
+// PostDetail의 함수형 컴포넌트를 만든다..
 const PostDetail = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
