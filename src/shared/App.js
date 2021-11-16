@@ -22,13 +22,12 @@ import Header from "../components/Header";
 import PropensityTest from "../components/propensityTest/PropensityTest";
 
 function App() {
-  const isLogin = useSelector((state) => state.user.is_login);
+  const isLogin = useSelector(state => state.user.is_login);
   const userPropensityType = useSelector(
-    (state) => state.user.userPropensityType
+    state => state.user.userPropensityType
   );
   const isCookie = document.cookie.split("=")[1];
   const dispatch = useDispatch();
-  console.log(isCookie);
 
   React.useEffect(() => {
     if (isCookie) {

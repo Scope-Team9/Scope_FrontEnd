@@ -5,6 +5,7 @@ import UserType from "./UserType";
 
 const TestResult = props => {
   const userType = useSelector(state => state.user.userPropensityType);
+  console.log(props.userType);
   console.log(userType);
 
   return (

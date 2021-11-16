@@ -18,7 +18,13 @@ const ProjectJoinUser = (props) => {
           borderRadius="50%"
           backgroundColor="#C4C4C4"
         >
-          <ImgType img={props.userPropensityType}></ImgType>
+          <ImgType
+            img={props.userPropensityType}
+            cursor="pointer"
+            _onClick={() => {
+              goToMypage(props.userId);
+            }}
+          ></ImgType>
         </Grid>
         <Text size="20px">{props.nickname}</Text>
         <Grid>({props.userPropensityType})</Grid>
@@ -26,11 +32,4 @@ const ProjectJoinUser = (props) => {
     </React.Fragment>
   );
 };
-
-const Img = styled.img`
-  margin: 6px;
-  width: 48px;
-  height: 48px;
-`;
-
 export default ProjectJoinUser;

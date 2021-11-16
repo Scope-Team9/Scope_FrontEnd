@@ -37,21 +37,13 @@ export const getPostAPI = () => {
     let reBook = getState().rebook.reBook;
     let mainPage = getState().post.mainpage;
     let whatPages = getState().post.whatPage;
-    // console.log("mainPage메인페이지", mainPage);
 
-    // if (mainPage === false) {
-    //   console.log("끊겠음1");
-    //   return;
-    // }
     if (whatPages.now !== whatPages.pre) {
       console.log(whatPages.now, whatPages.pre);
       console.log("끊겠음2");
       dispatch(whatPage("mainPage"));
       return;
     }
-
-    // console.log(_paging);
-
     apis
       .getPost(stack, _paging.next + 1, sort, reBook)
       .then((res) => {
@@ -81,22 +73,19 @@ export default handleActions(
         let stacks = action.payload.data.stack;
         let sorts = action.payload.data.sort;
         let reBook = action.payload.data.reBook;
+        // draft.paging = action.payload.data.paging;
+        // draft.posts = action.payload.data.posts;
+        draft.is_loading = false;
         if (!draft.stacks || !draft.sorts || !draft.reBook) {
           draft.stacks = stacks;
           draft.sorts = sorts;
           draft.reBook = reBook;
-          // console.log("우선 스택을 넣고", draft.stacks);
-          // console.log("우선 스택을 넣고", draft.sorts);
-          // console.log(state);
         }
         if (
           state.stacks !== stacks ||
           state.sorts !== sorts ||
           state.reBook !== reBook
         ) {
-          // console.log(draft.stacks !== stacks);
-          // console.log("받아온 스택", stacks);
-          // console.log("draft스택", state.stacks);
           console.log("스택이 달라졌을때");
           console.log(action);
           draft.paging = action.payload.data.paging;

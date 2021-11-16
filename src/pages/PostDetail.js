@@ -26,6 +26,9 @@ const PostDetail = (props) => {
   const [applyUserModal, setApplyUserModal] = React.useState(false); //지원취소/팀탈퇴/프로젝트마감
 
   const [applyValue, setApplyValue] = React.useState();
+  const [isme, setIsme] = React.useState(null);
+
+  const myUserId = useSelector((state) => state.user.userId);
 
   const applyStatusModalOpen = () => {
     setApplyStatusModal(true);
@@ -71,6 +74,7 @@ const PostDetail = (props) => {
         const result = await apis.detailPost(post_id);
         setCheckPost(result);
         console.log(result);
+        setIsme(result.data.data.userStatus);
       } catch (err) {
         console.log(err);
       }
@@ -79,9 +83,13 @@ const PostDetail = (props) => {
   }, [bookmark]);
 
   const passedData = checkPost?.data["data"].post;
+  const passedUserStatus = checkPost?.data["data"].userStatus;
   const passdedMenber = checkPost?.data["data"].members;
 
   console.log(passdedMenber);
+  console.log(passedData);
+  console.log(passedUserStatus);
+
   const DeletePost = async () => {
     try {
       const deletePost = await apis.deletePost(post_id);
@@ -152,7 +160,7 @@ const PostDetail = (props) => {
                   <ProjectJoinUser key={item.userId} {...item} />
                 ))}
               </Grid>
-              {userId === postUserId && (
+              {userId === postUserId && passedData?.projectStatus === "모집중" && (
                 <Grid position="relative" width="100%">
                   <Grid
                     position="absolute"
@@ -280,20 +288,55 @@ const PostDetail = (props) => {
                   </Grid>
                 ) : (
                   <Grid textAlign="center">
-                    <Button
-                      common
-                      width="120px"
-                      isValue="apply"
-                      _onClick={(e) => {
-                        console.log(e);
-                        applyUserModalOpen(e.target.value);
-                      }}
-                      margin="auto 10px"
-                      border="1px solid #b29cf4"
-                      borderRadius="50px"
-                    >
-                      지원신청
-                    </Button>
+                    {passedData?.projectStatus === "모집중" && (
+                      <Grid>
+                        {isme === "user" && (
+                          <>
+                            <Button
+                              common
+                              width="120px"
+                              isValue="apply"
+                              _onClick={(e) => {
+                                console.log(e);
+                                applyUserModalOpen(e.target.value);
+                              }}
+                              margin="auto 10px"
+                              border="1px solid #b29cf4"
+                              borderRadius="50px"
+                            >
+                              지원신청
+                            </Button>
+                          </>
+                        )}
+                        {isme === "applicant" && (
+                          <Button
+                            common
+                            width="120px"
+                            isValue="cancel"
+                            _onClick={(e) => {
+                              applyUserModalOpen(e.target.value);
+                            }}
+                            width="120px"
+                          >
+                            지원취소
+                          </Button>
+                        )}
+
+                        {isme === "member" && (
+                          <Button
+                            common
+                            width="120px"
+                            isValue="teamExit"
+                            _onClick={(e) => {
+                              applyUserModalOpen(e.target.value);
+                            }}
+                          >
+                            팀탈퇴
+                          </Button>
+                        )}
+                      </Grid>
+                    )}
+
                     <ApplyUserModal
                       applyUserModal={applyUserModal}
                       setApplyUserModal={setApplyUserModal}
@@ -301,27 +344,25 @@ const PostDetail = (props) => {
                       postId={post_id}
                       passdedMenber={passdedMenber}
                     />
-                    <Button
-                      common
-                      width="120px"
-                      isValue="cancel"
-                      _onClick={(e) => {
-                        applyUserModalOpen(e.target.value);
-                      }}
-                      width="120px"
-                    >
-                      지원취소
-                    </Button>
-                    <Button
-                      common
-                      width="120px"
-                      isValue="teamExit"
-                      _onClick={(e) => {
-                        applyUserModalOpen(e.target.value);
-                      }}
-                    >
-                      팀탈퇴
-                    </Button>
+                    {passedData?.projectStatus === "종료" &&
+                      passedUserStatus === "member" && (
+                        <Grid>
+                          <Button
+                            common
+                            width="120px"
+                            isValue="memberLiked"
+                            _onClick={(e) => {
+                              console.log(e);
+                              applyUserModalOpen(e.target.value);
+                            }}
+                            margin="auto 10px"
+                            border="1px solid #b29cf4"
+                            borderRadius="50px"
+                          >
+                            지원신청
+                          </Button>
+                        </Grid>
+                      )}
                   </Grid>
                 )}
               </Grid>
