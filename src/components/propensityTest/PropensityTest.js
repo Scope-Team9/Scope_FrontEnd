@@ -137,9 +137,7 @@ const PropensityTest = props => {
       return;
     } else {
       dispatch(userCreators.signupMiddleware(registerInfo));
-      if (userType) {
-        setpage(page => page + 1);
-      }
+      setpage(page => page + 1);
     }
 
     // console.log(userPropensityType.length, memberPropensityType.length);
@@ -155,10 +153,6 @@ const PropensityTest = props => {
     dispatch(userCreators.modal());
     history.push("/");
   };
-
-  React.useEffect(() => {
-    dispatch(userCreators.myUserAPI());
-  }, [userType]);
 
   return (
     <Grid>
@@ -274,7 +268,7 @@ const PropensityTest = props => {
             handleMemberCreate={handleMemberCreate}
           />
         )}
-        {page === 10 && <TestResult />}
+        {page === 10 && <TestResult userType={userType} />}
       </Grid>
 
       <Grid

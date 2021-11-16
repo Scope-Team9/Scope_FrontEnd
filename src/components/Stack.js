@@ -121,6 +121,7 @@ const Stack = () => {
             item={item}
             key={item.id}
             onClick={() => {
+              console.log(item)
               Filter(item);
             }}
           ></LogoButton>

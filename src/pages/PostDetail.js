@@ -83,9 +83,13 @@ const PostDetail = (props) => {
   }, [bookmark]);
 
   const passedData = checkPost?.data["data"].post;
+  const passedUserStatus = checkPost?.data["data"].userStatus;
   const passdedMenber = checkPost?.data["data"].members;
 
   console.log(passdedMenber);
+  console.log(passedData);
+  console.log(passedUserStatus);
+
   const DeletePost = async () => {
     try {
       const deletePost = await apis.deletePost(post_id);
@@ -156,7 +160,7 @@ const PostDetail = (props) => {
                   <ProjectJoinUser key={item.userId} {...item} />
                 ))}
               </Grid>
-              {userId === postUserId && (
+              {userId === postUserId && passedData?.projectStatus === "모집중" && (
                 <Grid position="relative" width="100%">
                   <Grid
                     position="absolute"
@@ -340,6 +344,25 @@ const PostDetail = (props) => {
                       postId={post_id}
                       passdedMenber={passdedMenber}
                     />
+                    {passedData?.projectStatus === "종료" &&
+                      passedUserStatus === "member" && (
+                        <Grid>
+                          <Button
+                            common
+                            width="120px"
+                            isValue="memberLiked"
+                            _onClick={(e) => {
+                              console.log(e);
+                              applyUserModalOpen(e.target.value);
+                            }}
+                            margin="auto 10px"
+                            border="1px solid #b29cf4"
+                            borderRadius="50px"
+                          >
+                            지원신청
+                          </Button>
+                        </Grid>
+                      )}
                   </Grid>
                 )}
               </Grid>

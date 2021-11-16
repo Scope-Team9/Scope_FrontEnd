@@ -68,7 +68,7 @@ const applyProjectAPI = (postId, comment) => {
         if (err.response.data.msg === "모집중인 프로젝트가 아닙니다.") {
           return window.alert("모집중인 프로젝트가 아닙니다.");
         }
-        if (err.response.data.msg === "이미 지원한 프로젝트 입니다.") {
+        if (err.response.data.msg === "이미 지원한 프로젝트입니다.") {
           return window.alert("이미 지원한 프로젝트 입니다.");
         } else {
           window.alert("해당 지원 정보를 찾을 수 없습니다.");
@@ -119,10 +119,10 @@ const exitTeamAPI = (postId) => {
 };
 
 // 팀장의 프로젝트 완료후 평가
-const starterLikeAPI = (userIds) => {
+const starterLikeAPI = (postId, userIds) => {
   return function (dispatch, getState, { history }) {
     apis
-      .strterLike(userIds)
+      .strterLike(postId, userIds)
       .then((res) => {
         console.log(res);
         window.alert("팀원 평가 정보가 성공적으로 저장되었습니다.");

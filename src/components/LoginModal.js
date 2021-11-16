@@ -121,7 +121,12 @@ const LoginModal = props => {
   //회원이 아닐경우 회원가입, 회원일 경우 메인으로 이동
   if (sigunupModalState == true) {
     return (
-      <Dialog maxWidth={"sm"} scroll="paper" open={showModal}>
+      <Dialog
+        maxWidth={"sm"}
+        scroll="paper"
+        open={showModal}
+        onClose={modalClose}
+      >
         <ModalWrap>
           {/* 테스트가 필요한경우 */}
           {!test ? (
@@ -365,7 +370,8 @@ const LoginModal = props => {
                   onClick={() => {
                     setShowModal(true);
                     window.location.href =
-                      "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=http://localhost:3000/user/github/callback";
+                      "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=http://kbumsoo.s3-website.ap-northeast-2.amazonaws.com/user/github/callback";
+                    // "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=http://localhost:3000/user/github/callback";
                   }}
                 >
                   깃허브로그인
@@ -374,7 +380,8 @@ const LoginModal = props => {
                   onClick={() => {
                     setShowModal(true);
                     window.location.href =
-                      "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code";
+                      "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://kbumsoo.s3-website.ap-northeast-2.amazonaws.com/user/kakao/callback&response_type=code";
+                    // "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code";
                   }}
                 >
                   카카오로그인
