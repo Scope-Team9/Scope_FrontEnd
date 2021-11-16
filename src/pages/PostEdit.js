@@ -5,7 +5,7 @@
 import React, { useCallback, useMemo, useEffect } from "react";
 import styled from "styled-components";
 import { Grid, Text, Image, Button, Input } from "../elements/Index";
-import Img from "../images/DetailImg.png";
+import Img from "../images/PostDetail.png";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { apis } from "../lib/axios";
@@ -37,28 +37,6 @@ const PostEdit = (props) => {
   const [techStackList, setTest] = React.useState();
   const [loaded, setLoaded] = React.useState(false);
 
-  // console.log("타이틀", title);
-  // console.log("한줄소개", summary);
-  // console.log("기술스택", techstack);
-  // console.log("총인원", totalMember);
-  // console.log("프로젝트 상태", typeof projectStatus);
-  // console.log("내용", contents);
-  // 예외처리
-  // const editHandler = () => {
-  //   if (
-  //     title.length > 0 &&
-  //     summary.length > 0 &&
-  //     techstack.length > 0 &&
-  //     totalMember > 0 &&
-  //     projectStatus.length > 0 &&
-  //     contents.length > 0
-  //   ) {
-  //     window.alert("값이 수정이 되었습니다.");
-  //   } else {
-  //     window.alert("모든 값을 입력해주세요.");
-  //   }
-  // };
-
   // 수정
   let post_id = props.match.params.id;
   const scope_edit = () => {
@@ -72,8 +50,16 @@ const PostEdit = (props) => {
       startDate: startDate,
       endDate: endDate,
     };
-
+    console.log("시간", editcard);
     dispatch(postDetailActions.editPostAPI(post_id, editcard));
+  };
+
+  const editHandler = () => {
+    if (techstack.length <= 3) {
+      scope_edit();
+    } else {
+      window.alert("기술선택을 4개 이하로 입력해주세요.");
+    }
   };
 
   React.useEffect(() => {
@@ -325,11 +311,10 @@ const PostEdit = (props) => {
             </Grid>
             <Grid>
               <Text>프로젝트 내용적기</Text>
-              <Input
+              {/* <Input
                 width="100%"
                 height="200px"
                 padding="10px"
-                value="3000"
                 border="1px solid #E7E1FF"
                 inputFocusOutline="none"
                 fontSize="16px"
@@ -338,12 +323,19 @@ const PostEdit = (props) => {
                 _onChange={(e) => {
                   setContents(e.target.value);
                 }}
+              /> */}
+              <TextArea
+                value={contents}
+                s
+                onChange={(e) => {
+                  setContents(e.target.value);
+                }}
               />
               <Grid display="flex" padding="16px">
                 <Btn
                   onClick={() => {
-                    // editHandler();
-                    scope_edit();
+                    editHandler();
+                    // scope_edit();
                   }}
                 >
                   포스트수정 완료
@@ -381,18 +373,27 @@ const Btn = styled.button`
   align-items: center;
   width: 140px;
   height: 35px;
-  border: none;
+  border: 1px solid #b29cf4;
   border-radius: 50px;
   color: #fff;
-  background: linear-gradient(
-    0deg,
-    rgba(83, 201, 253, 1) 0%,
-    rgba(182, 161, 240, 1) 69%,
-    rgba(231, 170, 250, 1) 100%,
-    rgba(240, 247, 254, 1) 100%
-  );
+  background: white;
+  color: #b29cf4;
   margin: 10px auto 10px auto;
   cursor: pointer;
+  &:hover {
+    color: white;
+    background-color: #b29cf4;
+    border: 1px solid;
+    transition-duration: 1s;
+  }
+`;
+
+const TextArea = styled.textarea`
+  width: 100%;
+  height: 200px;
+  border: 1px solid #e7e1ff;
+  font-size: 16px;
+  outline: none;
 `;
 
 const SideBarImg = styled.img`

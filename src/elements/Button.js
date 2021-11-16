@@ -26,6 +26,11 @@ const Button = props => {
     isValue,
     disabled,
     isChecked,
+    hoverBg,
+    hoberCl,
+    common,
+    border,
+    active,
   } = props;
 
   if (isFloat) {
@@ -51,6 +56,38 @@ const Button = props => {
       </>
     );
   }
+  if (common) {
+    const styles = {
+      margin,
+      width,
+      padding,
+      color,
+      height,
+      fontSize,
+      borderRadius,
+      top,
+      bottom,
+      left,
+      right,
+      border,
+      backgroundColor,
+    };
+    return (
+      <>
+        <Common
+          {...styles}
+          onClick={_onClick}
+          value={isValue}
+          disabled={disabled}
+          isChecked={isChecked}
+          id={isId}
+          active={active}
+        >
+          {text ? text : children}
+        </Common>
+      </>
+    );
+  }
 
   const styles = {
     margin,
@@ -67,6 +104,8 @@ const Button = props => {
     right,
     hover,
     display,
+    hoverBg,
+    hoberCl,
   };
 
   return (
@@ -108,11 +147,11 @@ const ElButton = styled.button`
   ${props =>
     props.backgroundColor
       ? `background-color:${props.backgroundColor}`
-      : "background-color: #B29CF4"};
+      : "background-color: #b29cf4"};
   box-sizing: border-box;
   border-radius: 5px;
   font-weight: bold;
-  border: none;
+  ${props => (props.border ? `border:${props.border}` : "border: none")};
   ${props =>
     props.borderRadius
       ? `border-radius:${props.borderRadius}`
@@ -120,7 +159,8 @@ const ElButton = styled.button`
   cursor: pointer;
   flex-shrink: 0;
   &:hover {
-    background-color: ${props => props.hover};
+    background-color: ${props => props.hoverBg};
+    color: ${props => props.hoverCl};
   }
   vertical-align: middle;
   top: ${props => props.top};
@@ -181,4 +221,23 @@ const TestButton = styled.button`
   } */
 `;
 
+const Common = styled.button`
+  background-color: ${props => (props.active === true ? "#b29cf4" : "#fff")};
+  height: ${props => props.height};
+  width: ${props => props.width};
+  color: ${props => (props.active === true ? "#fff" : "#b29cf4")};
+  margin-right: 3px;
+  border-radius: 25px;
+  border: 1px solid #b29cf4;
+  cursor: pointer;
+  top: ${props => props.top};
+  bottom: ${props => props.bottom};
+  left: ${props => props.left};
+  right: ${props => props.right};
+  position: ${props => props.position};
+  &:hover {
+    background-color: #b29cf4;
+    color: #fff;
+  }
+`;
 export default Button;

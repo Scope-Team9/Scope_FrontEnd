@@ -7,6 +7,7 @@ import { postActions } from "../redux/modules/post";
 import styled from "styled-components";
 // import { useInView } from "react-intersection-observer";
 import { height } from "@mui/system";
+import { Grid, Image, Text, Button } from "../elements/Index";
 
 const PostList = () => {
   const dispatch = useDispatch();
@@ -15,12 +16,7 @@ const PostList = () => {
   let paging = useSelector((state) => state.infinity.paging.next);
   let reBook = useSelector((state) => state.rebook.reBook);
   let post_list = useSelector((state) => state.post.posts);
-
-  // console.log(post_list);
-  // console.log(paging);
-
   let posts = post_list.slice(0, paging);
-  // console.log(posts);
 
   return (
     <React.Fragment>
@@ -32,20 +28,51 @@ const PostList = () => {
             })}
           </>
         )}
+        {posts.length === 0 && (
+          <Grid margin="auto" width="100%" height="100%" display="flex">
+            <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
+            <NoIntroductionText>
+              아직 포스트가 없네요
+              <br /> .
+              <br /> .
+              <br /> .
+            </NoIntroductionText>
+          </Grid>
+        )}
       </PostWrap>
     </React.Fragment>
   );
 };
 
 const PostWrap = styled.div`
-  max-width: 90%;
+  max-width: 100%;
   margin: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(390px, 1fr));
+
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   /* grid-gap: 1px; */
   @media (max-width: 1700px) {
     width: 100%;
   }
+`;
+const NoIntroduction = styled.img`
+  width: 100%;
+  height: 100%;
+  /* object-fit: cover; */
+
+  margin: auto;
+  display: flex;
+  justify-content: center;
+`;
+
+const NoIntroductionText = styled.p`
+  color: #737373;
+  font-size: 25px;
+  width: auto;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
 `;
 
 export default PostList;

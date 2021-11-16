@@ -11,7 +11,7 @@ import Select from "react-select";
 import makeAnimated from "react-select/animated";
 
 import { Grid, Text, Input } from "../elements/Index";
-import Img from "../images/PostAdd 4.png";
+import Img from "../images/PostAdd.jpg";
 import { useDispatch } from "react-redux";
 import { postAddActions } from "../redux/modules/postadd";
 import { postActions } from "../redux/modules/post";

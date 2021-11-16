@@ -1,6 +1,7 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../../lib/axios";
+import Swal from "sweetalert2";
 
 const GET_POST = "GET_POST";
 const LOADING = "LOADING";
@@ -25,6 +26,7 @@ const initialState = {
   mainpage: true,
   whatPage: { pre: "mainPage", now: "mainPage" },
   pageCheck: false,
+  render: false,
 };
 
 export const getPostAPI = () => {
@@ -35,21 +37,13 @@ export const getPostAPI = () => {
     let reBook = getState().rebook.reBook;
     let mainPage = getState().post.mainpage;
     let whatPages = getState().post.whatPage;
-    // console.log("mainPage메인페이지", mainPage);
 
-    // if (mainPage === false) {
-    //   console.log("끊겠음1");
-    //   return;
-    // }
     if (whatPages.now !== whatPages.pre) {
       console.log(whatPages.now, whatPages.pre);
       console.log("끊겠음2");
       dispatch(whatPage("mainPage"));
       return;
     }
-
-    // console.log(_paging);
-
     apis
       .getPost(stack, _paging.next + 1, sort, reBook)
       .then((res) => {
@@ -65,6 +59,7 @@ export const getPostAPI = () => {
       })
       .catch((err) => {
         console.log(err.response);
+        // Swal.fire(`${err.response}`, "간단한 테스트를 진행해 주세요.", "info");
       });
   };
 };
@@ -78,30 +73,28 @@ export default handleActions(
         let stacks = action.payload.data.stack;
         let sorts = action.payload.data.sort;
         let reBook = action.payload.data.reBook;
+        // draft.paging = action.payload.data.paging;
+        // draft.posts = action.payload.data.posts;
+        draft.is_loading = false;
         if (!draft.stacks || !draft.sorts || !draft.reBook) {
           draft.stacks = stacks;
           draft.sorts = sorts;
           draft.reBook = reBook;
-          // console.log("우선 스택을 넣고", draft.stacks);
-          // console.log("우선 스택을 넣고", draft.sorts);
-          // console.log(state);
         }
         if (
           state.stacks !== stacks ||
           state.sorts !== sorts ||
           state.reBook !== reBook
         ) {
-          // console.log(draft.stacks !== stacks);
-          // console.log("받아온 스택", stacks);
-          // console.log("draft스택", state.stacks);
           console.log("스택이 달라졌을때");
           console.log(action);
-          draft.posts = action.payload.data.posts;
           draft.paging = action.payload.data.paging;
+          draft.posts = action.payload.data.posts;
           draft.is_loading = false;
           draft.stacks = stacks;
           draft.sorts = sorts;
           draft.reBook = reBook;
+          draft.render = true;
         } else if (
           state.stacks === stacks ||
           state.sorts === sorts ||
@@ -113,6 +106,7 @@ export default handleActions(
           draft.posts = action.payload.data.posts;
           draft.paging = action.payload.data.paging;
           draft.is_loading = false;
+          draft.render = false;
         }
       }),
 

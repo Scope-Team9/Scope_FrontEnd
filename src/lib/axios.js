@@ -5,7 +5,7 @@ import { history } from "../redux/configureStore";
 export const instance = axios.create({
   // baseURL: "http://localhost:3000",
   // baseURL: "http://localhost:4000",
-  // baseURL: "http://3.36.94.200",
+  // baseURL: "http://3.35.219.232",
 
   baseURL: "http://15.165.159.211",
   headers: {
@@ -21,8 +21,8 @@ instance.interceptors.request.use(
     if (cookie === "") {
       return config;
     }
-    // console.log(cookie);
 
+    // console.log(cookie);
     // const cookieSplitUndefined = cookie.split('=')[1];
     // console.log(cookieSplitUndefined);
     // const cookieSplit = cookieSplitUndefined.split(';')[0];
@@ -62,7 +62,10 @@ export const apis = {
   applyProject: (postId, comment) =>
     instance.post(`/api/applicant/${postId}`, comment),
   cancelProject: (postId) => instance.delete(`/api/applicant/${postId}`),
-  exitTeam: (postId) => instance.delete("/api/team/secession", postId),
+  exitTeam: (postId) => instance.delete(`/api/team/secession/${postId}`),
+  strterLike: (postId, likeUsers) =>
+    instance.post(`/api/assessment/${postId}`, likeUsers),
+  sumbitUrl: (postId, urls) => instance.post(`/api/post/${postId}/url`, urls),
 
   getUserInfo: () => instance.get("/user/info"),
   getAllUserList: () => instance.get("/user/list"),
@@ -91,6 +94,9 @@ export const apis = {
   deletePost: (postId) => instance.delete(`/api/post/${postId}`),
   statusPost: (postId, data) =>
     instance.post(`/api/post/${postId}/status`, data),
+  serachTeamUser: (postId) => instance.get(`/api/team/${postId}`),
+  exileUser: (postId, userId) =>
+    instance.delete(`/api/team/resignation/${postId}?userId=${userId}`),
 
   //data.json용
   // getPost: () => instance.get(`/post`),

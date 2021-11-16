@@ -2,12 +2,16 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis, instance } from "../../lib/axios";
 import { setCookie } from "../../shared/Cookie";
-
+import Swal from "sweetalert2";
 //액션타입
 const FIRST_USER = "FIRST_USER";
 const TEST_USER = "TEST_USER";
 const SET_USER = "SET_USER";
 const LOG_OUT = "LOG_OUT";
+
+const EMAIL = "EMAIL";
+
+const MODAL = "MODAL";
 
 //액션생성
 const firstUser = createAction(FIRST_USER, user => ({ user }));
@@ -15,6 +19,9 @@ const testUser = createAction(TEST_USER, user => ({ user }));
 const setUser = createAction(SET_USER, user => ({ user }));
 const logOut = createAction(LOG_OUT, user => ({ user }));
 
+export const email = createAction(EMAIL, user => ({ user }));
+
+export const modal = createAction(MODAL, user => ({ user }));
 //초기값
 const initialState = {
   nickname: "guest",
@@ -26,8 +33,9 @@ const initialState = {
   userList: [],
   userfirst: false,
   sigunupModalState: false,
-  userPropensityType: [],
-  memberPropensityType: [],
+  userPropensityType: null,
+  memberPropensityType: null,
+  isEmail: false,
 };
 //카카오 로그인
 const kakaologinMiddleware = code => {
@@ -38,7 +46,8 @@ const kakaologinMiddleware = code => {
       .then(res => {
         console.log(res);
         if (res.data.msg == "추가 정보 작성이 필요한 사용자입니다.") {
-          window.alert("추가정보 작성이 필요합니다.");
+          // window.alert("추가정보 작성이 필요합니다.");
+          Swal.fire("추가정보 작성이 필요합니다.", "info");
           dispatch(
             firstUser({
               email: res.data.data.email,
@@ -49,6 +58,7 @@ const kakaologinMiddleware = code => {
           return;
         }
         if (res.data.msg == "로그인이 완료되었습니다") {
+          let email = getState().user.isEmail;
           let userCookie = res.data.data.token;
           setCookie("ScopeUser", userCookie, 30);
           // const ACCESS_TOKEN = res.data.token;
@@ -58,17 +68,25 @@ const kakaologinMiddleware = code => {
               email: res.data.data.mail,
               nickname: res.data.data.nickname,
               userId: res.data.data.userId,
+              userPropensityType: res.data.data.userPropensityType,
             })
           );
-          window.alert("로그인성공");
-          history.replace("/");
-          return;
+          if (email) {
+            history.replace(`/mypage:${res.data.data.userId}`);
+            Swal.fire(
+              "완료된 프로젝트가 있습니다. 팀원들을 평가하러 가볼까요?",
+              "",
+              "info"
+            );
+          }
+          return history.replace("/");
         }
       })
       .catch(err => {
         console.log("소셜로그인 에러", err);
-        alert("로그인에 실패하였습니다.");
+        // alert("로그인에 실패하였습니다.");
         history.replace("/"); // 로그인 실패하면 로그인화면으로 돌려보냄
+        Swal.fire("로그인에 실패하였습니다!", "", "warning");
       });
   };
 };
@@ -80,8 +98,10 @@ const githubLoginMiddleware = code => {
     apis
       .githubLogin(code)
       .then(res => {
+        console.log(res);
         if (res.data.msg == "추가 정보 작성이 필요한 사용자입니다.") {
-          window.alert("추가정보 작성이 필요합니다.");
+          // window.alert("추가정보 작성이 필요합니다.");
+          Swal.fire("추가정보 작성이 필요합니다.", "", "info");
           dispatch(
             firstUser({
               email: res.data.data.email,
@@ -103,15 +123,14 @@ const githubLoginMiddleware = code => {
               userPropensityType: res.data.data.userPropensityType,
             })
           );
-          window.alert("로그인성공");
           history.replace("/");
         }
-        // window.location.href = "/";
       })
       .catch(err => {
         console.log("소셜로그인 에러", err);
-        alert("로그인에 실패하였습니다.");
+        // alert("로그인에 실패하였습니다.");
         history.replace("/"); // 로그인 실패하면 로그인화면으로 돌려보냄
+        Swal.fire("로그인에 실패하였습니다.", "", "warning");
       });
   };
 };
@@ -122,14 +141,14 @@ const emailCheckMiddleWare = email => {
       .checkEmail(email)
       .then(res => {
         console.log(res);
-        if (res.data.msg == "사용가능한 메일입니다.") {
-          return window.alert("사용가능한 메일입니다.");
+        if (res.data.msg == "사용 가능한 메일입니다.") {
+          return window.alert("사용 가능한 메일입니다.");
         }
       })
       .catch(err => {
         console.log(err.response);
-        if (err.response.data.msg == "중복된 이메일이 존재합니다.") {
-          return window.alert("중복된 이메일이 존재합니다");
+        if (err.response.data.msg == "이미 사용중인 이메일입니다.") {
+          return window.alert("이미 사용중인 이메일입니다.");
         }
       });
   };
@@ -143,8 +162,7 @@ const nickCheckMiddleWare = nickName => {
       .then(res => {
         console.log(res.data);
         if (res.data.msg == "사용가능한 닉네임입니다.") {
-          window.alert("사용가능한 닉네임입니다.");
-          return;
+          return window.alert("사용가능한 닉네임입니다.");
         }
       })
       .catch(err => {
@@ -186,27 +204,25 @@ const myUserAPI = () => {
       });
   };
 };
+
 //테스트 마친 회원가입
 const signupMiddleware = signupInfo => {
   return function (dispatch, getState, { history }) {
     apis
       .signup(signupInfo)
       .then(res => {
-        const ACCESS_TOKEN = res.data.token;
-        localStorage.setItem("token", ACCESS_TOKEN);
+        console.log(res);
+        // const ACCESS_TOKEN = res.data.token;
+        // localStorage.setItem("token", ACCESS_TOKEN);
         dispatch(
           setUser({
-            userPropensityType: res.data.data.userPropensityType,
-            memberPropensityType: res.data.data.memberPropensityType,
-            applicantDate: res.data.data.applicantDate,
-            comment: res.data.data.comment,
-            isAssessment: res.data.data.isAssessment,
+            userPropensityType: res.data.data.user.userPropensityType,
+            memberPropensityType: res.data.data.user.memberPropensityType,
           })
         );
-        history.replace("/");
       })
       .catch(err => {
-        console.log(err);
+        console.log(err.response);
       });
   };
 };
@@ -223,7 +239,8 @@ const editTestMiddleware = (userId, testInfo) => {
             memberPropensityType: res.data.data.memberPropensityType,
           })
         );
-        window.alert("성향 테스트가 업데이트 되었습니다!");
+
+        // Swal.fire("성향 캐릭터가 정해졌습니다!", "", "success");
       })
       .catch(err => {
         console.log(err);
@@ -240,7 +257,7 @@ export default handleActions(
         draft.snsId = action.payload.user.snsId;
         draft.techStack = action.payload.user.techStack;
         draft.nickName = action.payload.user.nickName;
-        draft.userfirst = true;
+
         draft.sigunupModalState = true;
       }),
     [SET_USER]: (state, action) =>
@@ -250,16 +267,20 @@ export default handleActions(
         draft.email = action.payload.user.email;
         draft.techStack = action.payload.user.techStack;
         draft.is_login = true;
-        draft.sigunupModalState = false;
         draft.memberPropensityType = action.payload.user.memberPropensityType;
         draft.userPropensityType = action.payload.user.userPropensityType;
-        draft.applicantDate = action.payload.user.applicantDate;
-        draft.comment = action.payload.user.comment;
-        draft.isAssessment = action.payload.user.isAssessment;
       }),
     [LOG_OUT]: (state, action) =>
       produce(state, draft => {
         draft.is_login = false;
+      }),
+    [MODAL]: (state, action) =>
+      produce(state, draft => {
+        draft.sigunupModalState = false;
+      }),
+    [EMAIL]: (state, action) =>
+      produce(state, draft => {
+        draft.isEmail = true;
       }),
   },
   initialState
@@ -275,6 +296,8 @@ const userCreators = {
   editTestMiddleware,
   myUserAPI,
   logOut,
+  modal,
+  email,
 };
 
 export { userCreators };

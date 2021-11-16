@@ -5,172 +5,130 @@ import { Grid } from "../elements/Index";
 import { useSelector, useDispatch } from "react-redux";
 import { postActions } from "../redux/modules/post";
 import { stackAction } from "../redux/modules/stack";
+import LogoButton from "../elements/LogoButton";
 
 const Stack = () => {
   const dispatch = useDispatch();
   const is_clicked = useSelector((state) => state.stack.stack);
+  //필터 클릭
+  const [arr, setArr] = React.useState([
+    {
+      id: "React",
+      img: "/img/react.png",
+      active: false,
+    },
+    {
+      id: "Java",
+      img: "/img/java.png",
+      active: false,
+    },
+    {
+      id: "JavaScript",
+      img: "/img/javascript.png",
+      active: false,
+    },
+    {
+      id: "Python",
+      img: "/img/python.png",
+      active: false,
+    },
+    {
+      id: "Node",
+      img: "/img/node.js.png",
+      active: false,
+    },
+    {
+      id: "cpp",
+      img: "/img/c__.png",
+      active: false,
+    },
+    {
+      id: "Flask",
+      img: "/img/flask.png",
+      active: false,
+    },
+    {
+      id: "Django",
+      img: "/img/django.png",
+      active: false,
+    },
+    {
+      id: "Vue",
+      img: "/img/vue.png",
+      active: false,
+    },
+    {
+      id: "Spring",
+      img: "/img/spring.png",
+      active: false,
+    },
+    {
+      id: "php",
+      img: "/img/php.png",
+      active: false,
+    },
+    {
+      id: "Swift",
+      img: "/img/swift.png",
+      active: false,
+    },
+    {
+      id: "Kotlin",
+      img: "/img/kotlin.png",
+      active: false,
+    },
+    {
+      id: "TypeScript",
+      img: "/img/typescript.png",
+      active: false,
+    },
+  ]);
 
-  // console.log(Object.keys(stackList));
+  const Filter = (item) => {
+    setArr((state) => {
+      return state.map((stateItem) => {
+        if (stateItem.id === item.id) {
+          return { ...stateItem, active: !stateItem.active };
+        }
+        return stateItem;
+      });
+    });
 
-  // 리덕스에서 filter가 잘 되지만, 다시 불러오면 그대로임 ㅡㅡ
-  const onclick = (stack) => {
-    // const testResult = Object.keys(stackList).find((item) => item === stack);
-    // console.log("희망", testResult);
-
-    //Object.key 또는 Object.values 로 배열의 키와 밸류 값들을 찾을 수 있다.
-    const result = Object.values(is_clicked).find((item) => item === stack);
+    const result = Object.values(is_clicked).find((r) => r === item.id);
     // console.log("이 값이 있으면 지워줘야함", result);
     if (result) {
       dispatch(postActions.isMainPage(true));
-      dispatch(stackAction.setStack(stack));
+      dispatch(stackAction.setStack(item.id));
     } else {
       dispatch(postActions.isMainPage(true));
-      dispatch(stackAction.getStack(stack));
+      dispatch(stackAction.getStack(item.id));
     }
-
-    // dispatch(stackAction.getStack(stack));
   };
-
-  // const test = () => {
-  //   console.log(is_clicked);
-  // };
 
   return (
     <Grid
       display="flex"
-      width="80%"
-      justifyContent="space-evenly"
-      margin="auto auto 20px auto"
+      width="73%"
+      margin="25px auto 20px auto"
       boxShadow="0px 0px 10px #ddd"
-      padding="5px 50px"
+      padding="5px 10px"
       borderRadius="20px"
       overflow="auto"
     >
-      <BorderRadius>
-        <IMGS
-          src="img/react.png"
-          onClick={() => {
-            onclick("React");
-          }}
-        ></IMGS>
-      </BorderRadius>
-      <BorderRadius>
-        <IMGS
-          src="img/java.png"
-          onClick={() => {
-            onclick("Java");
-          }}
-        ></IMGS>
-      </BorderRadius>
-      <BorderRadius>
-        <IMGS
-          src="img/javascript.png"
-          onClick={() => {
-            onclick("JavaScript");
-          }}
-        ></IMGS>
-      </BorderRadius>
-      <BorderRadius>
-        <IMGS
-          src="img/python.png"
-          onClick={() => {
-            // test();
-            onclick("Python");
-          }}
-        ></IMGS>
-      </BorderRadius>
-      <BorderRadius>
-        <IMGS
-          src="img/node.js.png"
-          onClick={() => {
-            onclick("Node");
-          }}
-        ></IMGS>
-      </BorderRadius>
-      <BorderRadius>
-        <IMGS
-          src="img/c__.png"
-          onClick={() => {
-            onclick("cpp");
-          }}
-        ></IMGS>
-      </BorderRadius>
-      <BorderRadius>
-        <IMGS
-          src="img/flask.png"
-          onClick={() => {
-            onclick("Flask");
-          }}
-        ></IMGS>
-      </BorderRadius>
-      <BorderRadius>
-        <IMGS
-          src="img/django.png"
-          onClick={() => {
-            onclick("Django");
-          }}
-        ></IMGS>
-      </BorderRadius>
-      <BorderRadius>
-        <IMGS
-          src="img/vue.png"
-          onClick={() => {
-            onclick("Vue");
-          }}
-        ></IMGS>
-      </BorderRadius>
-      <BorderRadius>
-        <IMGS
-          src="img/spring.png"
-          onClick={() => {
-            onclick("Spring");
-          }}
-        ></IMGS>
-      </BorderRadius>
-      <BorderRadius>
-        <IMGS
-          src="img/php.png"
-          onClick={() => {
-            onclick("php");
-          }}
-        ></IMGS>
-      </BorderRadius>
-      <BorderRadius>
-        <IMGS
-          src="img/swift.png"
-          onClick={() => {
-            onclick("Swift");
-          }}
-        ></IMGS>
-      </BorderRadius>
-      <BorderRadius>
-        <IMGS
-          src="img/kotlin.png"
-          onClick={() => {
-            onclick("Kotlin");
-          }}
-        ></IMGS>
-      </BorderRadius>
-      <BorderRadius>
-        <IMGS
-          src="img/typescript.png"
-          onClick={() => {
-            onclick("TypeScript");
-          }}
-        ></IMGS>
-      </BorderRadius>
+      {arr.map((item) => {
+        return (
+          <LogoButton
+            item={item}
+            key={item.id}
+            onClick={() => {
+              console.log(item)
+              Filter(item);
+            }}
+          ></LogoButton>
+        );
+      })}
     </Grid>
   );
 };
-
-const IMGS = styled.img`
-  cursor: pointer;
-  width: 80px;
-  margin: 10px;
-`;
-
-const BorderRadius = styled.div`
-  border-radius: 250px;
-`;
 
 export default Stack;

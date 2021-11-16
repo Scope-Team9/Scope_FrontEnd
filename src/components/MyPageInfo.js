@@ -1,8 +1,10 @@
 /* eslint-disable */
+
+// 나의 마이페이지에서 뜨는 버튼들과 다른사람 마이페이지에서 뜨는 버튼들
 // import를 한다.
 import React from "react";
 import { Dialog } from "@material-ui/core";
-
+import Swal from "sweetalert2";
 import Img from "../images/임시로고.jpg";
 import { Grid, Image, Text, Button } from "../elements/Index";
 import { postActions } from "../redux/modules/post";
@@ -18,13 +20,15 @@ import { history } from "../redux/configureStore";
 import Select from "react-select";
 import EmailAuth from "./EmailAuth";
 import PropensityTest from "./propensityTest/PropensityTest";
+import Spinner from "../shared/Spinner";
+import DeleteUserModal from "../modal/DeleteUserModal";
 
 // MyPageInfo의 함수형 컴포넌트를 만든다.
-const MyPageInfo = (props) => {
+const MyPageInfo = props => {
   const dispatch = useDispatch();
   // const userId = useSelector((state) => state.user.userId);
   const userId = props.match.params.id;
-  const myUserId = useSelector((state) => state.user.userId);
+  const myUserId = useSelector(state => state.user.userId);
   // console.log(props);
   console.log(userId);
   console.log(myUserId);
@@ -33,21 +37,23 @@ const MyPageInfo = (props) => {
   const [mydata, setMydata] = React.useState();
   const [editMyProfile, setEditMyProfile] = React.useState(false);
   const [techStack, setTeckstack] = React.useState([]);
-
   const [nickName, setNickName] = React.useState();
   const [email, setEmail] = React.useState();
-  // console.log(nickName);
   const myType = mydata?.user.userPropensityType;
-  // console.log(myType);
   const [modal, setModal] = React.useState(false);
   const [testmodal, setTestModal] = React.useState(false);
+  const [deleteModal, setDeleteModal] = React.useState(false);
   const [checkEmail, setCheckEmail] = React.useState();
+
+  //click
+  const [currentClick, setCurrentClick] = React.useState(null);
+  const [prevClick, setPrevClick] = React.useState(null);
+  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     // dispatch(myPageActions.getMypageAPI(userId));
     dispatch(postActions.isMainPage(false));
     dispatch(postActions.whatPage("myPage"));
-
     const fetchData = async () => {
       try {
         const result = await apis.getMypage(userId);
@@ -56,13 +62,35 @@ const MyPageInfo = (props) => {
         setNickName(result.data.data.user.nickname);
         setEmail(result.data.data.user.email);
         setTeckstack(result.data.data.user.techStackList);
+        setLoading(false);
       } catch (err) {
         console.log(err);
       }
     };
     fetchData();
   }, [filter, editMyProfile]);
-  console.log(techStack);
+
+  React.useEffect(
+    e => {
+      if (currentClick !== null) {
+        let current = document.getElementById(currentClick);
+        current.style.color = "#333";
+        current.style.borderBottom = "2px solid";
+        current.style.borderBottomColor = "#707070";
+      }
+      if (prevClick !== null) {
+        let prev = document.getElementById(prevClick);
+        prev.style.color = "#333";
+        prev.style.borderBottom = "none";
+      }
+      setPrevClick(currentClick);
+    },
+    [currentClick]
+  );
+  const GetClick = e => {
+    setCurrentClick(e);
+    // console.log(e);
+  };
 
   const introduction = mydata?.user.introduction ? true : false;
   const recruitmentProject = mydata?.recruitment;
@@ -71,11 +99,11 @@ const MyPageInfo = (props) => {
   const endProject = mydata?.end;
 
   console.log(mydata);
-  console.log(recruitmentProject);
-  console.log(inProgressProject);
-  console.log(bookMarkProject);
-  console.log(endProject);
-  const myInfo = mydata?.user;
+  // console.log(recruitmentProject);
+  // console.log(inProgressProject);
+  // console.log(bookMarkProject);
+  // console.log(endProject);
+  // const myInfo = mydata?.user;
 
   const editProfile = () => {
     setEditMyProfile(true);
@@ -107,21 +135,24 @@ const MyPageInfo = (props) => {
         email: email,
         userTechStack: techStack,
       };
-      console.log(userData);
+      // console.log(userData);
       const fetchData = async () => {
         try {
           const result = await apis.editUserInfo(userId, userData);
           console.log(result);
           setEditMyProfile(false);
-          window.alert("수정 완료!");
+          // window.alert("수정 완료!");
+          Swal.fire("수정 완료!", "", "success");
         } catch (err) {
-          console.log(err.response);
-          window.alert(err.response.data.msg);
+          console.log(err);
+          // window.alert(err.response.data.msg);
+          Swal.fire(`${err.response.data.msg}`, "", "warning");
         }
       };
       fetchData();
     } else {
-      window.alert("올바른 이메일을 입력해주세요.");
+      // window.alert("올바른 이메일을 입력해주세요.");
+      Swal.fire("올바른 이메일을 입력해주세요.", "", "warning");
       setCheckEmail(false);
       return;
     }
@@ -129,7 +160,8 @@ const MyPageInfo = (props) => {
 
   const setEditProfile = () => {
     if (techStack.length > 4) {
-      window.alert("기술은 4개 까지 선택 가능합니다.");
+      // window.alert("기술은 4개 까지 선택 가능합니다.");
+      Swal.fire("기술은 4개 까지 선택 가능합니다.", "", "warning");
       return;
     }
 
@@ -140,6 +172,9 @@ const MyPageInfo = (props) => {
   };
   const editProfileCancle = () => {
     setEditMyProfile(false);
+  };
+  const deleteUser = () => {
+    setDeleteModal(true);
   };
 
   //테크스택 옵션
@@ -167,765 +202,934 @@ const MyPageInfo = (props) => {
     setTestModal(true);
   };
 
+  const TestClose = () => {
+    setTestModal(false);
+  };
+
   return (
     <React.Fragment>
-      {mydata && myType && (
+      {loading ? (
+        <Spinner />
+      ) : (
         <>
-          <Banner>
-            {myType === "LVG" && (
-              <BannerTiger>
-                <BannerImg src="/img/호랑이배너.jpg"></BannerImg>
+          {mydata && myType && (
+            <>
+              <Banner>
+                {myType === "LVG" && (
+                  <BannerTiger>
+                    <BannerImg src="/img/호랑이배너.jpg"></BannerImg>
 
-                <Grid margin="-150px 0 0 35%">
-                  <WhiteP>LVG / 호랑이</WhiteP>
-                </Grid>
-                <Grid margin="-650px 0 0 90%" zIndex="2">
-                  <ConfirmEmail onClick={EmailConfirm}>
-                    이메일 인증하기
-                  </ConfirmEmail>
-                  <EmailAuth modal={modal} setModal={setModal} />
-                </Grid>
-              </BannerTiger>
-            )}
-            {myType === "LVP" && (
-              <BannerWolf>
-                <BannerImg src="/img/늑대배너.jpg"></BannerImg>
-                <Grid margin="-150px 0 0 35%">
-                  <WhiteP>LVP / 늑대</WhiteP>
-                </Grid>
-                <Grid margin="-650px 0 0 90%" zIndex="2">
-                  <ConfirmEmail onClick={EmailConfirm}>
-                    이메일 인증하기
-                  </ConfirmEmail>
-                  <EmailAuth modal={modal} setModal={setModal} />
-                </Grid>
-              </BannerWolf>
-            )}
-            {myType === "LHG" && (
-              <BannerFox>
-                <BannerImg src="/img/여우배너.jpg"></BannerImg>
-                <Grid margin="-150px 0 0 35%">
-                  <WhiteP>LHG / 여우</WhiteP>
-                </Grid>
-                <Grid margin="-650px 0 0 90%" zIndex="2">
-                  <ConfirmEmail onClick={EmailConfirm}>
-                    이메일 인증하기
-                  </ConfirmEmail>
-                  <EmailAuth modal={modal} setModal={setModal} />
-                </Grid>
-              </BannerFox>
-            )}
-            {myType === "LHP" && (
-              <BannerPanda>
-                <BannerImg src="/img/팬더배너.jpg"></BannerImg>
-                <Grid margin="-150px 0 0 35%">
-                  <WhiteP>LHP / 팬더</WhiteP>
-                </Grid>
-                <Grid margin="-650px 0 0 90%" zIndex="2">
-                  <ConfirmEmail onClick={EmailConfirm}>
-                    이메일 인증하기
-                  </ConfirmEmail>
-                  <EmailAuth modal={modal} setModal={setModal} />
-                </Grid>
-              </BannerPanda>
-            )}
-            {myType === "FVG" && (
-              <BannerRabbit>
-                <BannerImg src="/img/토끼배너.jpg"></BannerImg>
-                <Grid margin="-150px 0 0 35%">
-                  <WhiteP>FVG / 토끼</WhiteP>
-                </Grid>
-                <Grid margin="-650px 0 0 90%" zIndex="2">
-                  <ConfirmEmail onClick={EmailConfirm}>
-                    이메일 인증하기
-                  </ConfirmEmail>
-                  <EmailAuth modal={modal} setModal={setModal} />
-                </Grid>
-              </BannerRabbit>
-            )}
-            {myType === "FVP" && (
-              <BannerDog>
-                <BannerImg src="/img/강아지배너.jpg"></BannerImg>
-                <Grid margin="-150px 0 0 35%">
-                  <WhiteP>FVP / 강아지</WhiteP>
-                </Grid>
-                <Grid margin="-650px 0 0 90%" zIndex="2">
-                  <ConfirmEmail onClick={EmailConfirm}>
-                    이메일 인증하기
-                  </ConfirmEmail>
-                  <EmailAuth modal={modal} setModal={setModal} />
-                </Grid>
-              </BannerDog>
-            )}
-            {myType === "FHG" && (
-              <BannerCat>
-                <BannerImg src="/img/고양이배너.jpg"></BannerImg>
-                <Grid margin="-150px 0 0 35%">
-                  <WhiteP>FHG / 고양이</WhiteP>
-                </Grid>
-                <Grid margin="-650px 0 0 90%" zIndex="2">
-                  <ConfirmEmail onClick={EmailConfirm}>
-                    이메일 인증하기
-                  </ConfirmEmail>
-                  <EmailAuth modal={modal} setModal={setModal} />
-                </Grid>
-              </BannerCat>
-            )}
-            {myType === "FHP" && (
-              <BannerSeal>
-                <BannerImg src="/img/물개배너.jpg"></BannerImg>
-                <Grid margin="-150px 0 0 35%">
-                  <WhiteP>FHP / 물개</WhiteP>
-                </Grid>
-                <Grid margin="-650px 0 0 90%" zIndex="2">
-                  <ConfirmEmail onClick={EmailConfirm}>
-                    이메일 인증하기
-                  </ConfirmEmail>
-                  <EmailAuth modal={modal} setModal={setModal} />
-                </Grid>
-              </BannerSeal>
-            )}
-          </Banner>
+                    <Grid margin="-150px 0 0 35%">
+                      <WhiteP>LVG / 호랑이</WhiteP>
+                    </Grid>
+                    <Grid margin="-650px 0 0 90%" zIndex="2">
+                      {mydata?.isMyMypage === true && (
+                        <>
+                          <ConfirmEmail onClick={EmailConfirm}>
+                            이메일 인증하기
+                          </ConfirmEmail>
+                          <EmailAuth modal={modal} setModal={setModal} />
+                        </>
+                      )}
+                    </Grid>
+                  </BannerTiger>
+                )}
+                {myType === "LVP" && (
+                  <BannerWolf>
+                    <BannerImg src="/img/늑대배너.jpg"></BannerImg>
+                    <Grid margin="-150px 0 0 35%">
+                      <WhiteP>LVP / 늑대</WhiteP>
+                    </Grid>
+                    <Grid margin="-650px 0 0 90%" zIndex="2">
+                      {mydata?.isMyMypage === true && (
+                        <>
+                          <ConfirmEmail onClick={EmailConfirm}>
+                            이메일 인증하기
+                          </ConfirmEmail>
+                          <EmailAuth modal={modal} setModal={setModal} />
+                        </>
+                      )}
+                    </Grid>
+                  </BannerWolf>
+                )}
+                {myType === "LHG" && (
+                  <BannerFox>
+                    <BannerImg src="/img/여우배너.jpg"></BannerImg>
+                    <Grid margin="-150px 0 0 35%">
+                      <WhiteP>LHG / 여우</WhiteP>
+                    </Grid>
+                    <Grid margin="-650px 0 0 90%" zIndex="2">
+                      {mydata?.isMyMypage === true && (
+                        <>
+                          <ConfirmEmail onClick={EmailConfirm}>
+                            이메일 인증하기
+                          </ConfirmEmail>
+                          <EmailAuth modal={modal} setModal={setModal} />
+                        </>
+                      )}
+                    </Grid>
+                  </BannerFox>
+                )}
+                {myType === "LHP" && (
+                  <BannerPanda>
+                    <BannerImg src="/img/팬더배너.jpg"></BannerImg>
+                    <Grid margin="-150px 0 0 35%">
+                      <WhiteP>LHP / 팬더</WhiteP>
+                    </Grid>
+                    <Grid margin="-650px 0 0 90%" zIndex="2">
+                      {mydata?.isMyMypage === true && (
+                        <>
+                          <ConfirmEmail onClick={EmailConfirm}>
+                            이메일 인증하기
+                          </ConfirmEmail>
+                          <EmailAuth modal={modal} setModal={setModal} />
+                        </>
+                      )}
+                    </Grid>
+                  </BannerPanda>
+                )}
+                {myType === "FVG" && (
+                  <BannerRabbit>
+                    <BannerImg src="/img/토끼배너.jpg"></BannerImg>
+                    <Grid margin="-150px 0 0 35%">
+                      <WhiteP>FVG / 토끼</WhiteP>
+                    </Grid>
+                    <Grid margin="-650px 0 0 90%" zIndex="2">
+                      {mydata?.isMyMypage === true && (
+                        <>
+                          <ConfirmEmail onClick={EmailConfirm}>
+                            이메일 인증하기
+                          </ConfirmEmail>
+                          <EmailAuth modal={modal} setModal={setModal} />
+                        </>
+                      )}
+                    </Grid>
+                  </BannerRabbit>
+                )}
+                {myType === "FVP" && (
+                  <BannerDog>
+                    <BannerImg src="/img/강아지배너.jpg"></BannerImg>
+                    <Grid margin="-150px 0 0 35%">
+                      <WhiteP>FVP / 강아지</WhiteP>
+                    </Grid>
+                    <Grid margin="-650px 0 0 90%" zIndex="2">
+                      {mydata?.isMyMypage === true && (
+                        <>
+                          <ConfirmEmail onClick={EmailConfirm}>
+                            이메일 인증하기
+                          </ConfirmEmail>
+                          <EmailAuth modal={modal} setModal={setModal} />
+                        </>
+                      )}
+                    </Grid>
+                  </BannerDog>
+                )}
+                {myType === "FHG" && (
+                  <BannerCat>
+                    <BannerImg src="/img/고양이배너.jpg"></BannerImg>
+                    <Grid margin="-150px 0 0 35%">
+                      <WhiteP>FHG / 고양이</WhiteP>
+                    </Grid>
+                    <Grid margin="-650px 0 0 90%" zIndex="2">
+                      {mydata?.isMyMypage === true && (
+                        <>
+                          <ConfirmEmail onClick={EmailConfirm}>
+                            이메일 인증하기
+                          </ConfirmEmail>
+                          <EmailAuth modal={modal} setModal={setModal} />
+                        </>
+                      )}
+                    </Grid>
+                  </BannerCat>
+                )}
+                {myType === "FHP" && (
+                  <BannerSeal>
+                    <BannerImg src="/img/물개배너.jpg"></BannerImg>
+                    <Grid margin="-150px 0 0 35%">
+                      <WhiteP>FHP / 물개</WhiteP>
+                    </Grid>
+                    <Grid margin="-650px 0 0 90%" zIndex="2">
+                      {mydata?.isMyMypage === true && (
+                        <>
+                          <ConfirmEmail onClick={EmailConfirm}>
+                            이메일 인증하기
+                          </ConfirmEmail>
+                          <EmailAuth modal={modal} setModal={setModal} />
+                        </>
+                      )}
+                    </Grid>
+                  </BannerSeal>
+                )}
+              </Banner>
 
-          <Cards>
-            <div style={{}}>
-              {myType === "LVG" && <CardImg src="/img/호랑이.png"></CardImg>}
-              {myType === "LVP" && (
-                <CardImgForWolf src="/img/늑대.png"></CardImgForWolf>
-              )}
-              {myType === "LHG" && <CardImg src="/img/여우.png"></CardImg>}
-              {myType === "LHP" && <CardImg src="/img/판다.png"></CardImg>}
-              {myType === "FVG" && <CardImg src="/img/토끼.png"></CardImg>}
-              {myType === "FVP" && <CardImg src="/img/개.png"></CardImg>}
-              {myType === "FHG" && <CardImg src="/img/고양이.png"></CardImg>}
-              {myType === "FHP" && <CardImg src="/img/물개.png"></CardImg>}
-            </div>
-
-            {editMyProfile === false && (
-              <>
-                {/* 닉네임 */}
-                <MyInfoText1>
-                  <div style={{ width: "150px", marginLeft: "30px" }}>
-                    <p>NickName </p>
-                  </div>
-                  <div style={{ width: "150px" }}>
-                    <p>{mydata.user.nickname}</p>
-                  </div>
-                </MyInfoText1>
-                {/* Email */}
-                <MyInfoText1>
-                  <div
-                    style={{
-                      width: "150px",
-                      marginLeft: "30px",
-                    }}
-                  >
-                    <p>E-mail </p>
-                  </div>
-                  <div style={{ width: "150px" }}>
-                    <p>{mydata.user.email}</p>
-                  </div>
-                </MyInfoText1>
-                {/* 기술 스텍 */}
-                <MyInfoText1>
-                  <div
-                    style={{
-                      width: "150px",
-                      marginLeft: "30px",
-                      height: "150px",
-                    }}
-                  >
-                    <p>TechStack </p>
-                  </div>
-                  {techStack && (
-                    <>
-                      <div style={{ width: "150px" }}>
-                        {techStack?.map((p, idx) => {
-                          return <p key={idx}>{p}</p>;
-                        })}
-                      </div>
-                    </>
+              <Cards>
+                <div style={{}}>
+                  {myType === "LVG" && (
+                    <CardImg src="/img/호랑이.png"></CardImg>
                   )}
-                </MyInfoText1>
-                <Line></Line>
-                {/* 진행 프로젝트 */}
-                <MyInfoText2>
-                  <div style={{ width: "300px", marginLeft: "30px" }}>
-                    <p>모집 프로젝트 </p>
-                  </div>
-                  <div style={{ width: "50px", marginLeft: "100px" }}>
-                    <p>{mydata.recruitment.length}</p>
-                  </div>
-                </MyInfoText2>
-                {/* 참여 프로젝트 */}
-                <MyInfoText2>
-                  <div style={{ width: "300px", marginLeft: "30px" }}>
-                    <p>진행 프로젝트 </p>
-                  </div>
-                  <div style={{ width: "50px", marginLeft: "100px" }}>
-                    <p>{mydata.inProgress.length}</p>
-                  </div>
-                </MyInfoText2>
-                {/* 마감 프로젝트 */}
-                <MyInfoText2>
-                  <div style={{ width: "300px", marginLeft: "30px" }}>
-                    <p>완료 프로젝트 </p>
-                  </div>
-                  <div style={{ width: "50px", marginLeft: "100px" }}>
-                    <p>{mydata.end.length}</p>
-                  </div>
-                </MyInfoText2>
-                <Button
-                  margin="15px auto 15px 36%"
-                  height="40px"
-                  width="132px"
-                  text="프로필 수정하기"
-                  _onClick={editProfile}
-                ></Button>
-              </>
-            )}
-            {editMyProfile === true && (
-              <>
-                {/* 닉네임 */}
-                <MyInfoText1>
-                  <div style={{ width: "90px", marginLeft: "30px" }}>
-                    <p>NickName </p>
-                  </div>
-                  <div style={{ width: "150px", alignItems: "center" }}>
-                    <input
-                      style={{
-                        borderRadius: "5px",
-                        borderColor: "#707070",
-                        WebkitAppearance: "none",
-                        MozAppearance: "none",
-                        appearance: "none",
-                        color: "#707070",
-                        border: "1px solid #707070",
-                        outlineStyle: "none",
-                        margin: "13px 0 0 0",
-                        width: "150px",
-                        padding: "7px",
-                      }}
-                      defaultValue={mydata.user.nickname}
-                      onChange={(e) => {
-                        setNickName(e.target.value);
-                      }}
-                    ></input>
-                  </div>
-                </MyInfoText1>
-
-                {/* 이메일 */}
-                <MyInfoText1>
-                  <div
-                    style={{
-                      width: "90px",
-                      marginLeft: "30px",
-                      height: "80px",
-                    }}
-                  >
-                    <p style={{ marginTop: "20px" }}>E-mail </p>
-                  </div>
-                  <div style={{ width: "150px" }}>
-                    <input
-                      style={{
-                        borderRadius: "5px",
-                        borderColor: "#707070",
-                        WebkitAppearance: "none",
-                        MozAppearance: "none",
-                        appearance: "none",
-                        color: "#707070",
-                        border: "1px solid #707070",
-                        outlineStyle: "none",
-                        margin: "15px 0 0 0",
-                        width: "150px",
-                        padding: "7px",
-                      }}
-                      defaultValue={mydata.user.email}
-                      onChange={(e) => {
-                        setEmail(e.target.value);
-                      }}
-                    ></input>
-                  </div>
-                </MyInfoText1>
-                <MyInfoText1>
-                  <Grid height="100px" display="flex" width="100%">
-                    <div
-                      style={{
-                        width: "90px",
-                        marginLeft: "30px",
-                        height: "50px",
-                      }}
-                    >
-                      <p style={{}}>TechStack </p>
-                    </div>
-                    <Select
-                      isMulti
-                      name="techStack"
-                      options={techStackOption}
-                      styles={styles}
-                      className="basic-multi-select"
-                      classNamePrefix="select"
-                      onChange={(e) => {
-                        let techStack = [];
-                        let arr = e;
-                        let idx = 0;
-                        for (idx = 0; idx < e.length; idx++) {
-                          techStack.push(arr[idx]["value"]);
-                        }
-                        setTeckstack(techStack);
-                        console.log(techStack);
-                      }}
-                    >
-                      기술스택
-                    </Select>
-                  </Grid>
-                </MyInfoText1>
-                <Line></Line>
-                {/* 진행 프로젝트 */}
-                <MyInfoText2>
-                  <div style={{ width: "150px", marginLeft: "30px" }}></div>
-                  <div style={{ width: "50px", marginLeft: "100px" }}></div>
-                </MyInfoText2>
-                {/* 참여 프로젝트 */}
-                <MyInfoText2>
-                  <div style={{ width: "150px", marginLeft: "30px" }}></div>
-                  <div style={{ width: "50px", marginLeft: "100px" }}></div>
-                </MyInfoText2>
-                {/* 마감 프로젝트 */}
-                <MyInfoText2>
-                  <div style={{ width: "150px", marginLeft: "30px" }}></div>
-                  <div style={{ width: "50px", marginLeft: "100px" }}></div>
-                </MyInfoText2>
-                <div style={{ display: "flex" }}>
-                  <Button
-                    margin="15px auto 15px 14%"
-                    height="40px"
-                    width="132px"
-                    text="프로필 저장하기"
-                    _onClick={setEditProfile}
-                  ></Button>
-                  <Button
-                    margin="15px auto 15px 3%"
-                    height="40px"
-                    width="132px"
-                    text="취소하기"
-                    _onClick={editProfileCancle}
-                  ></Button>
+                  {myType === "LVP" && (
+                    <CardImgForWolf src="/img/늑대.png"></CardImgForWolf>
+                  )}
+                  {myType === "LHG" && <CardImg src="/img/여우.png"></CardImg>}
+                  {myType === "LHP" && <CardImg src="/img/판다.png"></CardImg>}
+                  {myType === "FVG" && <CardImg src="/img/토끼.png"></CardImg>}
+                  {myType === "FVP" && <CardImg src="/img/개.png"></CardImg>}
+                  {myType === "FHG" && (
+                    <CardImg src="/img/고양이.png"></CardImg>
+                  )}
+                  {myType === "FHP" && <CardImg src="/img/물개.png"></CardImg>}
                 </div>
-              </>
-            )}
-          </Cards>
 
-          {myType === "LVG" && ( //호랑이
-            <>
-              <Grid
-                margin="-1000px 0 0 33%"
-                display="flex"
-                width="50.3%"
-                justifyContent="space-between"
-              >
-                <MyResultDiv>
-                  <MyResultText>리더</MyResultText>
-                  <MyResultText>수직</MyResultText>
-                  <MyResultText>결과</MyResultText>
-                </MyResultDiv>
-                {userId == myUserId && (
-                  <Grid>
-                    <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
-                  </Grid>
+                {editMyProfile === false && (
+                  <>
+                    {/* 닉네임 */}
+                    <MyInfoText1>
+                      <div style={{ width: "150px", marginLeft: "30px" }}>
+                        <p>NickName </p>
+                      </div>
+                      <div style={{ width: "150px" }}>
+                        <p>{mydata.user.nickname}</p>
+                      </div>
+                    </MyInfoText1>
+                    {/* Email */}
+                    <MyInfoText1>
+                      <div
+                        style={{
+                          width: "150px",
+                          marginLeft: "30px",
+                        }}
+                      >
+                        <p>E-mail </p>
+                      </div>
+                      <div style={{ width: "150px" }}>
+                        <p>{mydata.user.email}</p>
+                      </div>
+                    </MyInfoText1>
+                    {/* 기술 스텍 */}
+                    <MyInfoText1>
+                      <div
+                        style={{
+                          width: "150px",
+                          marginLeft: "30px",
+                          height: "150px",
+                        }}
+                      >
+                        <p>TechStack </p>
+                      </div>
+                      {techStack && (
+                        <>
+                          <div style={{ width: "150px" }}>
+                            {techStack?.map((p, idx) => {
+                              return <p key={idx}>{p}</p>;
+                            })}
+                          </div>
+                        </>
+                      )}
+                    </MyInfoText1>
+                    <Line></Line>
+                    {/* 진행 프로젝트 */}
+                    <MyInfoText2>
+                      <div style={{ width: "300px", marginLeft: "30px" }}>
+                        <p>모집 프로젝트 </p>
+                      </div>
+                      <div style={{ width: "50px", marginLeft: "100px" }}>
+                        <p>{mydata.recruitment.length}</p>
+                      </div>
+                    </MyInfoText2>
+                    {/* 참여 프로젝트 */}
+                    <MyInfoText2>
+                      <div style={{ width: "300px", marginLeft: "30px" }}>
+                        <p>진행 프로젝트 </p>
+                      </div>
+                      <div style={{ width: "50px", marginLeft: "100px" }}>
+                        <p>{mydata.inProgress.length}</p>
+                      </div>
+                    </MyInfoText2>
+                    {/* 마감 프로젝트 */}
+                    <MyInfoText2>
+                      <div style={{ width: "300px", marginLeft: "30px" }}>
+                        <p>완료 프로젝트 </p>
+                      </div>
+                      <div style={{ width: "50px", marginLeft: "100px" }}>
+                        <p>{mydata.end.length}</p>
+                      </div>
+                    </MyInfoText2>
+                    {mydata?.isMyMypage === true && (
+                      <>
+                        <Button
+                          margin="15px auto 15px 36%"
+                          height="40px"
+                          width="132px"
+                          text="프로필 수정하기"
+                          _onClick={editProfile}
+                        ></Button>
+                      </>
+                    )}
+                  </>
                 )}
-                <Dialog maxWidth={"sm"} scroll="paper" open={testmodal}>
-                  <Grid width="550px" height="100%">
-                    <PropensityTest />
-                  </Grid>
-                </Dialog>
-              </Grid>
-              <Grid margin="0 0 0 33.5%" width="600px">
-                <Grid display="flex" width="600px">
-                  <MyResultText2>리더형인 당신은 &nbsp; </MyResultText2>
-                  <MyResultTextBold>리더 이지만 수직적 리더십</MyResultTextBold>
-                  <MyResultText2>을 원해요!</MyResultText2>
-                </Grid>
-                <Grid display="flex" width="600px">
-                  <MyResultText2>
-                    과정보다는 결과를 중요시하는 당신은 우리 스코프 사이드
-                    프로젝트에 적합한 사람!
-                  </MyResultText2>
-                </Grid>
-              </Grid>
-            </>
-          )}
+                {editMyProfile === true && (
+                  <>
+                    {/* 닉네임 */}
+                    <MyInfoText1>
+                      <div style={{ width: "90px", marginLeft: "30px" }}>
+                        <p>NickName </p>
+                      </div>
+                      <div style={{ width: "150px", alignItems: "center" }}>
+                        <input
+                          style={{
+                            borderRadius: "5px",
+                            borderColor: "#707070",
+                            WebkitAppearance: "none",
+                            MozAppearance: "none",
+                            appearance: "none",
+                            color: "#707070",
+                            border: "1px solid #707070",
+                            outlineStyle: "none",
+                            margin: "13px 0 0 0",
+                            width: "150px",
+                            padding: "7px",
+                          }}
+                          defaultValue={mydata.user.nickname}
+                          onChange={e => {
+                            setNickName(e.target.value);
+                          }}
+                        ></input>
+                      </div>
+                    </MyInfoText1>
 
-          {myType === "LVP" && ( //늑대
-            <>
-              <Grid
-                margin="-1000px 0 0 33%"
-                display="flex"
-                width="50.3%"
-                justifyContent="space-between"
-              >
-                <MyResultDiv>
-                  <MyResultText>리더</MyResultText>
-                  <MyResultText>수직</MyResultText>
-                  <MyResultText>과정</MyResultText>
-                </MyResultDiv>
-                {userId == myUserId && (
-                  <Grid>
-                    <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
-                  </Grid>
+                    {/* 이메일 */}
+                    <MyInfoText1>
+                      <div
+                        style={{
+                          width: "90px",
+                          marginLeft: "30px",
+                          height: "80px",
+                        }}
+                      >
+                        <p style={{ marginTop: "20px" }}>E-mail </p>
+                      </div>
+                      <div style={{ width: "150px" }}>
+                        <input
+                          style={{
+                            borderRadius: "5px",
+                            borderColor: "#707070",
+                            WebkitAppearance: "none",
+                            MozAppearance: "none",
+                            appearance: "none",
+                            color: "#707070",
+                            border: "1px solid #707070",
+                            outlineStyle: "none",
+                            margin: "15px 0 0 0",
+                            width: "150px",
+                            padding: "7px",
+                          }}
+                          defaultValue={mydata.user.email}
+                          onChange={e => {
+                            setEmail(e.target.value);
+                          }}
+                        ></input>
+                      </div>
+                    </MyInfoText1>
+                    <MyInfoText1>
+                      <Grid height="100px" display="flex" width="100%">
+                        <div
+                          style={{
+                            width: "90px",
+                            marginLeft: "30px",
+                            height: "50px",
+                          }}
+                        >
+                          <p style={{}}>TechStack </p>
+                        </div>
+                        <Select
+                          isMulti
+                          name="techStack"
+                          options={techStackOption}
+                          styles={styles}
+                          className="basic-multi-select"
+                          classNamePrefix="select"
+                          onChange={e => {
+                            let techStack = [];
+                            let arr = e;
+                            let idx = 0;
+                            for (idx = 0; idx < e.length; idx++) {
+                              techStack.push(arr[idx]["value"]);
+                            }
+                            setTeckstack(techStack);
+                            console.log(techStack);
+                          }}
+                        >
+                          기술스택
+                        </Select>
+                      </Grid>
+                    </MyInfoText1>
+                    <Line></Line>
+                    {/* 진행 프로젝트 */}
+                    <MyInfoText2>
+                      <div style={{ width: "150px", marginLeft: "30px" }}></div>
+                      <div style={{ width: "50px", marginLeft: "100px" }}></div>
+                    </MyInfoText2>
+                    {/* 참여 프로젝트 */}
+                    <MyInfoText2>
+                      <div style={{ width: "150px", marginLeft: "30px" }}></div>
+                      <div style={{ width: "50px", marginLeft: "100px" }}></div>
+                    </MyInfoText2>
+                    {/* 마감 프로젝트 */}
+                    <MyInfoText2>
+                      <div style={{ width: "150px", marginLeft: "30px" }}></div>
+                      <div style={{ width: "50px", marginLeft: "100px" }}></div>
+                    </MyInfoText2>
+                    <div style={{ display: "flex" }}>
+                      <Button
+                        margin="15px auto 15px 14%"
+                        height="40px"
+                        width="132px"
+                        text="프로필 저장하기"
+                        _onClick={setEditProfile}
+                      ></Button>
+                      <Button
+                        margin="15px auto 15px 3%"
+                        height="40px"
+                        width="132px"
+                        text="취소하기"
+                        _onClick={editProfileCancle}
+                      ></Button>
+                      <Button
+                        margin="15px auto 15px 3%"
+                        height="40px"
+                        width="132px"
+                        text="회원탈퇴"
+                        _onClick={deleteUser}
+                      ></Button>
+                      <DeleteUserModal
+                        modal={deleteModal}
+                        setModal={setDeleteModal}
+                        userId={myUserId}
+                      />
+                    </div>
+                  </>
                 )}
-                <Dialog maxWidth={"sm"} scroll="paper" open={testmodal}>
-                  <Grid width="550px" height="100%">
-                    <PropensityTest />
+              </Cards>
+              {myType === "LVG" && ( //호랑이
+                <>
+                  <Grid
+                    margin="-1000px 0 0 33%"
+                    display="flex"
+                    width="50.3%"
+                    justifyContent="space-between"
+                  >
+                    <MyResultDiv>
+                      <MyResultText>리더</MyResultText>
+                      <MyResultText>수직</MyResultText>
+                      <MyResultText>결과</MyResultText>
+                    </MyResultDiv>
+                    {userId == myUserId && mydata?.isMyMypage === true && (
+                      <Grid>
+                        <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
+                      </Grid>
+                    )}
+                    <Dialog maxWidth={"sm"} scroll="paper" open={testmodal}>
+                      <Grid width="550px" height="100%">
+                        <PropensityTest />
+                      </Grid>
+                    </Dialog>
                   </Grid>
-                </Dialog>
-              </Grid>
-              <Grid margin="0 0 0 33.5%" width="600px">
-                <Grid display="flex" width="600px">
-                  <MyResultText2>리더형인 당신은 &nbsp; </MyResultText2>
-                  <MyResultTextBold>리더 이지만 수직적 리더십</MyResultTextBold>
-                  <MyResultText2>을 원해요!</MyResultText2>
-                </Grid>
-                <Grid display="flex" width="600px">
-                  <MyResultText2>
-                    결과보다는 과정을 중요시하는 당신은 우리 스코프 사이드
-                    프로젝트에 적합한 사람!
-                  </MyResultText2>
-                </Grid>
-              </Grid>
-            </>
-          )}
-          {myType === "LHG" && ( //여우
-            <>
+                  <Grid margin="0 0 0 33.5%" width="600px">
+                    <Grid display="flex" width="30%">
+                      <MyResultText2>리더형인 당신은 &nbsp; </MyResultText2>
+                      <MyResultTextBold>
+                        리더 이지만 수직적 리더십
+                      </MyResultTextBold>
+                      <MyResultText2>을 원해요!</MyResultText2>
+                    </Grid>
+                    <Grid display="flex" width="600px">
+                      <MyResultText2>
+                        과정보다는 결과를 중요시하는 당신은 우리 스코프 사이드
+                        프로젝트에 적합한 사람!
+                      </MyResultText2>
+                    </Grid>
+                  </Grid>
+                </>
+              )}
+              {myType === "LVP" && ( //늑대
+                <>
+                  <Grid
+                    margin="-1000px 0 0 33%"
+                    display="flex"
+                    width="50.3%"
+                    justifyContent="space-between"
+                  >
+                    <MyResultDiv>
+                      <MyResultText>리더</MyResultText>
+                      <MyResultText>수직</MyResultText>
+                      <MyResultText>과정</MyResultText>
+                    </MyResultDiv>
+                    {userId == myUserId && mydata?.isMyMypage === true && (
+                      <Grid>
+                        <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
+                      </Grid>
+                    )}
+                    <Dialog
+                      maxWidth={"sm"}
+                      scroll="paper"
+                      open={testmodal}
+                      onClose={TestClose}
+                    >
+                      <Grid width="550px" height="100%">
+                        <PropensityTest />
+                      </Grid>
+                    </Dialog>
+                  </Grid>
+                  <Grid margin="0 0 0 33.5%" width="600px">
+                    <Grid display="flex" width="600px">
+                      <MyResultText2>리더형인 당신은 &nbsp; </MyResultText2>
+                      <MyResultTextBold>
+                        리더 이지만 수직적 리더십
+                      </MyResultTextBold>
+                      <MyResultText2>을 원해요!</MyResultText2>
+                    </Grid>
+                    <Grid display="flex" width="600px">
+                      <MyResultText2>
+                        결과보다는 과정을 중요시하는 당신은 우리 스코프 사이드
+                        프로젝트에 적합한 사람!
+                      </MyResultText2>
+                    </Grid>
+                  </Grid>
+                </>
+              )}
+              {myType === "LHG" && ( //여우
+                <>
+                  <Grid
+                    margin="-1000px 0 0 33%"
+                    display="flex"
+                    width="50.3%"
+                    justifyContent="space-between"
+                  >
+                    <MyResultDiv>
+                      <MyResultText>리더</MyResultText>
+                      <MyResultText>수평</MyResultText>
+                      <MyResultText>결과</MyResultText>
+                    </MyResultDiv>
+                    {userId == myUserId && mydata?.isMyMypage === true && (
+                      <Grid>
+                        <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
+                      </Grid>
+                    )}
+                    <Dialog
+                      maxWidth={"sm"}
+                      scroll="paper"
+                      open={testmodal}
+                      onClose={TestClose}
+                    >
+                      <Grid width="550px" height="100%">
+                        <PropensityTest />
+                      </Grid>
+                    </Dialog>
+                  </Grid>
+                  <Grid margin="0 0 0 33.5%" width="600px">
+                    <Grid display="flex" width="600px">
+                      <MyResultText2>리더형인 당신은 &nbsp; </MyResultText2>
+                      <MyResultTextBold>
+                        리더 이지만 수평적 리더십
+                      </MyResultTextBold>
+                      <MyResultText2>을 원해요!</MyResultText2>
+                    </Grid>
+                    <Grid display="flex" width="600px">
+                      <MyResultText2>
+                        과정보다는 결과를 중요시하는 당신은 우리 스코프 사이드
+                        프로젝트에 적합한 사람!
+                      </MyResultText2>
+                    </Grid>
+                  </Grid>
+                </>
+              )}
+              {myType === "LHP" && ( // 팬더
+                <>
+                  <Grid
+                    margin="-1000px 0 0 33%"
+                    display="flex"
+                    width="50.3%"
+                    justifyContent="space-between"
+                  >
+                    <MyResultDiv>
+                      <MyResultText>리더</MyResultText>
+                      <MyResultText>수평</MyResultText>
+                      <MyResultText>과정</MyResultText>
+                    </MyResultDiv>
+                    {userId == myUserId && mydata?.isMyMypage === true && (
+                      <Grid>
+                        <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
+                      </Grid>
+                    )}
+                    <Dialog
+                      maxWidth={"sm"}
+                      scroll="paper"
+                      open={testmodal}
+                      onClose={TestClose}
+                    >
+                      <Grid width="550px" height="100%">
+                        <PropensityTest />
+                      </Grid>
+                    </Dialog>
+                  </Grid>
+                  <Grid margin="0 0 0 33.5%" width="600px">
+                    <Grid display="flex" width="600px">
+                      <MyResultText2>리더형인 당신은 &nbsp; </MyResultText2>
+                      <MyResultTextBold>
+                        리더 이지만 수평적 리더십
+                      </MyResultTextBold>
+                      <MyResultText2>을 원해요!</MyResultText2>
+                    </Grid>
+                    <Grid display="flex" width="600px">
+                      <MyResultText2>
+                        결과보다는 과정을 중요시하는 당신은 우리 스코프 사이드
+                        프로젝트에 적합한 사람!
+                      </MyResultText2>
+                    </Grid>
+                  </Grid>
+                </>
+              )}
+              {myType === "FVG" && ( // 토끼
+                <>
+                  <Grid
+                    margin="-1000px 0 0 33%"
+                    display="flex"
+                    width="50.3%"
+                    justifyContent="space-between"
+                  >
+                    <MyResultDiv>
+                      <MyResultText>팔로워</MyResultText>
+                      <MyResultText>수직</MyResultText>
+                      <MyResultText>결과</MyResultText>
+                    </MyResultDiv>
+                    {userId == myUserId && mydata?.isMyMypage === true && (
+                      <Grid>
+                        <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
+                      </Grid>
+                    )}
+                    <Dialog
+                      maxWidth={"sm"}
+                      scroll="paper"
+                      open={testmodal}
+                      onClose={TestClose}
+                    >
+                      <Grid width="550px" height="100%">
+                        <PropensityTest />
+                      </Grid>
+                    </Dialog>
+                  </Grid>
+                  <Grid margin="0 0 0 33.5%" width="600px">
+                    <Grid display="flex" width="600px">
+                      <MyResultText2>팔로우형 당신은 &nbsp; </MyResultText2>
+                      <MyResultTextBold>
+                        팔로워 이지만 수직적 팔로워십
+                      </MyResultTextBold>
+                      <MyResultText2>을 원해요!</MyResultText2>
+                    </Grid>
+                    <Grid display="flex" width="600px">
+                      <MyResultText2>
+                        과정보다는 결과를 중요시하는 당신은 우리 스코프 사이드
+                        프로젝트에 적합한 사람!
+                      </MyResultText2>
+                    </Grid>
+                  </Grid>
+                </>
+              )}
+              {myType === "FVP" && ( // 강아지
+                <>
+                  <Grid
+                    margin="-1000px 0 0 33%"
+                    display="flex"
+                    width="50.3%"
+                    justifyContent="space-between"
+                  >
+                    <MyResultDiv>
+                      <MyResultText>팔로워</MyResultText>
+                      <MyResultText>수직</MyResultText>
+                      <MyResultText>과정</MyResultText>
+                    </MyResultDiv>
+                    {userId == myUserId && mydata?.isMyMypage === true && (
+                      <Grid>
+                        <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
+                      </Grid>
+                    )}
+                    <Dialog
+                      maxWidth={"sm"}
+                      scroll="paper"
+                      open={testmodal}
+                      onClose={TestClose}
+                    >
+                      <Grid width="550px" height="100%">
+                        <PropensityTest />
+                      </Grid>
+                    </Dialog>
+                  </Grid>
+                  <Grid margin="0 0 0 33.5%" width="600px">
+                    <Grid display="flex" width="600px">
+                      <MyResultText2>팔로우형 당신은 &nbsp; </MyResultText2>
+                      <MyResultTextBold>
+                        팔로워 이지만 수직적 팔로워십
+                      </MyResultTextBold>
+                      <MyResultText2>을 원해요!</MyResultText2>
+                    </Grid>
+                    <Grid display="flex" width="600px">
+                      <MyResultText2>
+                        결과보다는 과정을 중요시하는 당신은 우리 스코프 사이드
+                        프로젝트에 적합한 사람!
+                      </MyResultText2>
+                    </Grid>
+                  </Grid>
+                </>
+              )}
+              {myType === "FHG" && ( // 고양이
+                <>
+                  <Grid
+                    margin="-1000px 0 0 33%"
+                    display="flex"
+                    width="50.3%"
+                    justifyContent="space-between"
+                  >
+                    <MyResultDiv>
+                      <MyResultText>팔로워</MyResultText>
+                      <MyResultText>수평</MyResultText>
+                      <MyResultText>결과</MyResultText>
+                    </MyResultDiv>
+                    {userId == myUserId && mydata?.isMyMypage === true && (
+                      <Grid>
+                        <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
+                      </Grid>
+                    )}
+                    <Dialog
+                      maxWidth={"sm"}
+                      scroll="paper"
+                      open={testmodal}
+                      onClose={TestClose}
+                    >
+                      <Grid width="550px" height="100%">
+                        <PropensityTest />
+                      </Grid>
+                    </Dialog>
+                  </Grid>
+                  <Grid margin="0 0 0 33.5%" width="600px">
+                    <Grid display="flex" width="600px">
+                      <MyResultText2>팔로우형 당신은 &nbsp; </MyResultText2>
+                      <MyResultTextBold>
+                        팔로워 이지만 수평적 팔로워십
+                      </MyResultTextBold>
+                      <MyResultText2>을 원해요!</MyResultText2>
+                    </Grid>
+                    <Grid display="flex" width="600px">
+                      <MyResultText2>
+                        과정보다는 결과를 중요시하는 당신은 우리 스코프 사이드
+                        프로젝트에 적합한 사람!
+                      </MyResultText2>
+                    </Grid>
+                  </Grid>
+                </>
+              )}
+              {myType === "FHP" && ( // 물개
+                <>
+                  <Grid
+                    margin="-1000px 0 0 33%"
+                    display="flex"
+                    width="50.3%"
+                    justifyContent="space-between"
+                  >
+                    <MyResultDiv>
+                      <MyResultText>팔로워</MyResultText>
+                      <MyResultText>수평</MyResultText>
+                      <MyResultText>과정</MyResultText>
+                    </MyResultDiv>
+                    {userId == myUserId && mydata?.isMyMypage === true && (
+                      <Grid>
+                        <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
+                      </Grid>
+                    )}
+                    <Dialog
+                      maxWidth={"sm"}
+                      scroll="paper"
+                      open={testmodal}
+                      onClose={TestClose}
+                    >
+                      <Grid width="550px" height="100%">
+                        <PropensityTest />
+                      </Grid>
+                    </Dialog>
+                  </Grid>
+                  <Grid margin="0 0 0 33.5%" width="600px">
+                    <Grid display="flex" width="600px">
+                      <MyResultText2>팔로우형 당신은 &nbsp; </MyResultText2>
+                      <MyResultTextBold>
+                        팔로워 이지만 수평적 팔로워십
+                      </MyResultTextBold>
+                      <MyResultText2>을 원해요!</MyResultText2>
+                    </Grid>
+                    <Grid display="flex" width="600px">
+                      <MyResultText2>
+                        결과보다는 과정을 중요시하는 당신은 우리 스코프 사이드
+                        프로젝트에 적합한 사람!
+                      </MyResultText2>
+                    </Grid>
+                  </Grid>
+                </>
+              )}
               <Grid
-                margin="-1000px 0 0 33%"
                 display="flex"
-                width="50.3%"
-                justifyContent="space-between"
+                margin="auto"
+                justifyContent="center"
+                margin="0px 0 0 150px"
+                width="auto"
               >
-                <MyResultDiv>
-                  <MyResultText>리더</MyResultText>
-                  <MyResultText>수평</MyResultText>
-                  <MyResultText>결과</MyResultText>
-                </MyResultDiv>
-                {userId == myUserId && (
-                  <Grid>
-                    <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
-                  </Grid>
-                )}
-                <Dialog maxWidth={"sm"} scroll="paper" open={testmodal}>
-                  <Grid width="550px" height="100%">
-                    <PropensityTest />
-                  </Grid>
-                </Dialog>
+                <Filter
+                  id="recruitment"
+                  onClick={e => {
+                    setFilter("모집");
+                    GetClick(e.target.id);
+                  }}
+                >
+                  모집
+                </Filter>
+                <Filter
+                  id="progress"
+                  onClick={e => {
+                    setFilter("진행중");
+                    GetClick(e.target.id);
+                  }}
+                >
+                  진행중
+                </Filter>
+                <Filter
+                  id="bookmark"
+                  onClick={e => {
+                    setFilter("관심");
+                    GetClick(e.target.id);
+                  }}
+                >
+                  관심
+                </Filter>
+                <Filter
+                  id="finish"
+                  onClick={e => {
+                    setFilter("완료");
+                    GetClick(e.target.id);
+                  }}
+                >
+                  완료
+                </Filter>
+                <Filter
+                  id="introduction"
+                  onClick={e => {
+                    setFilter("소개");
+                    GetClick(e.target.id);
+                  }}
+                >
+                  소개
+                </Filter>
               </Grid>
-              <Grid margin="0 0 0 33.5%" width="600px">
-                <Grid display="flex" width="600px">
-                  <MyResultText2>리더형인 당신은 &nbsp; </MyResultText2>
-                  <MyResultTextBold>리더 이지만 수평적 리더십</MyResultTextBold>
-                  <MyResultText2>을 원해요!</MyResultText2>
-                </Grid>
-                <Grid display="flex" width="600px">
-                  <MyResultText2>
-                    과정보다는 결과를 중요시하는 당신은 우리 스코프 사이드
-                    프로젝트에 적합한 사람!
-                  </MyResultText2>
-                </Grid>
-              </Grid>
-            </>
-          )}
+              {filter === "모집" && (
+                <MypagePostList {...recruitmentProject}></MypagePostList>
+              )}
 
-          {myType === "LHP" && ( // 팬더
-            <>
-              <Grid
-                margin="-1000px 0 0 33%"
-                display="flex"
-                width="50.3%"
-                justifyContent="space-between"
-              >
-                <MyResultDiv>
-                  <MyResultText>리더</MyResultText>
-                  <MyResultText>수평</MyResultText>
-                  <MyResultText>과정</MyResultText>
-                </MyResultDiv>
-                {userId == myUserId && (
-                  <Grid>
-                    <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
-                  </Grid>
+              <Grid margin="0 0 0 34%" width="49%">
+                {filter === "모집" && recruitmentProject.length === 0 && (
+                  <>
+                    <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
+                    <NoIntroductionText>
+                      프로젝트가 아직 없네요.
+                    </NoIntroductionText>
+                  </>
                 )}
-                <Dialog maxWidth={"sm"} scroll="paper" open={testmodal}>
-                  <Grid width="550px" height="100%">
-                    <PropensityTest />
-                  </Grid>
-                </Dialog>
               </Grid>
-              <Grid margin="0 0 0 33.5%" width="600px">
-                <Grid display="flex" width="600px">
-                  <MyResultText2>리더형인 당신은 &nbsp; </MyResultText2>
-                  <MyResultTextBold>리더 이지만 수평적 리더십</MyResultTextBold>
-                  <MyResultText2>을 원해요!</MyResultText2>
-                </Grid>
-                <Grid display="flex" width="600px">
-                  <MyResultText2>
-                    결과보다는 과정을 중요시하는 당신은 우리 스코프 사이드
-                    프로젝트에 적합한 사람!
-                  </MyResultText2>
-                </Grid>
-              </Grid>
-            </>
-          )}
-          {myType === "FVG" && ( // 토끼
-            <>
-              <Grid
-                margin="-1000px 0 0 33%"
-                display="flex"
-                width="50.3%"
-                justifyContent="space-between"
-              >
-                <MyResultDiv>
-                  <MyResultText>팔로워</MyResultText>
-                  <MyResultText>수직</MyResultText>
-                  <MyResultText>결과</MyResultText>
-                </MyResultDiv>
-                {userId == myUserId && (
-                  <Grid>
-                    <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
-                  </Grid>
-                )}
-                <Dialog maxWidth={"sm"} scroll="paper" open={testmodal}>
-                  <Grid width="550px" height="100%">
-                    <PropensityTest />
-                  </Grid>
-                </Dialog>
-              </Grid>
-              <Grid margin="0 0 0 33.5%" width="600px">
-                <Grid display="flex" width="600px">
-                  <MyResultText2>팔로우형 당신은 &nbsp; </MyResultText2>
-                  <MyResultTextBold>
-                    팔로워 이지만 수직적 팔로워십
-                  </MyResultTextBold>
-                  <MyResultText2>을 원해요!</MyResultText2>
-                </Grid>
-                <Grid display="flex" width="600px">
-                  <MyResultText2>
-                    과정보다는 결과를 중요시하는 당신은 우리 스코프 사이드
-                    프로젝트에 적합한 사람!
-                  </MyResultText2>
-                </Grid>
-              </Grid>
-            </>
-          )}
-          {myType === "FVP" && ( // 강아지
-            <>
-              <Grid
-                margin="-1000px 0 0 33%"
-                display="flex"
-                width="50.3%"
-                justifyContent="space-between"
-              >
-                <MyResultDiv>
-                  <MyResultText>팔로워</MyResultText>
-                  <MyResultText>수직</MyResultText>
-                  <MyResultText>과정</MyResultText>
-                </MyResultDiv>
-                {userId == myUserId && (
-                  <Grid>
-                    <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
-                  </Grid>
-                )}
-                <Dialog maxWidth={"sm"} scroll="paper" open={testmodal}>
-                  <Grid width="550px" height="100%">
-                    <PropensityTest />
-                  </Grid>
-                </Dialog>
-              </Grid>
-              <Grid margin="0 0 0 33.5%" width="600px">
-                <Grid display="flex" width="600px">
-                  <MyResultText2>팔로우형 당신은 &nbsp; </MyResultText2>
-                  <MyResultTextBold>
-                    팔로워 이지만 수직적 팔로워십
-                  </MyResultTextBold>
-                  <MyResultText2>을 원해요!</MyResultText2>
-                </Grid>
-                <Grid display="flex" width="600px">
-                  <MyResultText2>
-                    결과보다는 과정을 중요시하는 당신은 우리 스코프 사이드
-                    프로젝트에 적합한 사람!
-                  </MyResultText2>
-                </Grid>
-              </Grid>
-            </>
-          )}
-          {myType === "FHG" && ( // 고양이
-            <>
-              <Grid
-                margin="-1000px 0 0 33%"
-                display="flex"
-                width="50.3%"
-                justifyContent="space-between"
-              >
-                <MyResultDiv>
-                  <MyResultText>팔로워</MyResultText>
-                  <MyResultText>수평</MyResultText>
-                  <MyResultText>결과</MyResultText>
-                </MyResultDiv>
-                {userId == myUserId && (
-                  <Grid>
-                    <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
-                  </Grid>
-                )}
-                <Dialog maxWidth={"sm"} scroll="paper" open={testmodal}>
-                  <Grid width="550px" height="100%">
-                    <PropensityTest />
-                  </Grid>
-                </Dialog>
-              </Grid>
-              <Grid margin="0 0 0 33.5%" width="600px">
-                <Grid display="flex" width="600px">
-                  <MyResultText2>팔로우형 당신은 &nbsp; </MyResultText2>
-                  <MyResultTextBold>
-                    팔로워 이지만 수평적 팔로워십
-                  </MyResultTextBold>
-                  <MyResultText2>을 원해요!</MyResultText2>
-                </Grid>
-                <Grid display="flex" width="600px">
-                  <MyResultText2>
-                    과정보다는 결과를 중요시하는 당신은 우리 스코프 사이드
-                    프로젝트에 적합한 사람!
-                  </MyResultText2>
-                </Grid>
-              </Grid>
-            </>
-          )}
-          {myType === "FHP" && ( // 물개
-            <>
-              <Grid
-                margin="-1000px 0 0 33%"
-                display="flex"
-                width="50.3%"
-                justifyContent="space-between"
-              >
-                <MyResultDiv>
-                  <MyResultText>팔로워</MyResultText>
-                  <MyResultText>수평</MyResultText>
-                  <MyResultText>과정</MyResultText>
-                </MyResultDiv>
-                {userId == myUserId && (
-                  <Grid>
-                    <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
-                  </Grid>
-                )}
-                <Dialog maxWidth={"sm"} scroll="paper" open={testmodal}>
-                  <Grid width="550px" height="100%">
-                    <PropensityTest />
-                  </Grid>
-                </Dialog>
-              </Grid>
-              <Grid margin="0 0 0 33.5%" width="600px">
-                <Grid display="flex" width="600px">
-                  <MyResultText2>팔로우형 당신은 &nbsp; </MyResultText2>
-                  <MyResultTextBold>
-                    팔로워 이지만 수평적 팔로워십
-                  </MyResultTextBold>
-                  <MyResultText2>을 원해요!</MyResultText2>
-                </Grid>
-                <Grid display="flex" width="600px">
-                  <MyResultText2>
-                    결과보다는 과정을 중요시하는 당신은 우리 스코프 사이드
-                    프로젝트에 적합한 사람!
-                  </MyResultText2>
-                </Grid>
-              </Grid>
-            </>
-          )}
 
-          <Grid
-            display="flex"
-            margin="auto"
-            justifyContent="center"
-            margin="0px 0 0 150px"
-            width="auto"
-          >
-            <Filter
-              onClick={() => {
-                setFilter("모집");
-              }}
-            >
-              모집
-            </Filter>
-            <Filter
-              onClick={() => {
-                setFilter("진행중");
-              }}
-            >
-              진행중
-            </Filter>
-            <Filter
-              onClick={() => {
-                setFilter("관심");
-              }}
-            >
-              관심
-            </Filter>
-            <Filter
-              onClick={() => {
-                setFilter("완료");
-              }}
-            >
-              완료
-            </Filter>
-            <Filter
-              onClick={() => {
-                setFilter("소개");
-              }}
-            >
-              소개
-            </Filter>
-          </Grid>
+              {filter === "진행중" && (
+                <MypagePostList {...inProgressProject}></MypagePostList>
+              )}
+              <Grid margin="0 0 0 34%" width="49%">
+                {filter === "진행중" && inProgressProject.length === 0 && (
+                  <>
+                    <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
+                    <NoIntroductionText>
+                      프로젝트가 아직 없네요.
+                    </NoIntroductionText>
+                  </>
+                )}
+              </Grid>
+              {filter === "관심" && (
+                <MypagePostList {...bookMarkProject}></MypagePostList>
+              )}
+              <Grid margin="0 0 0 34%" width="49%">
+                {filter === "관심" && bookMarkProject.length === 0 && (
+                  <>
+                    <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
+                    <NoIntroductionText>
+                      프로젝트가 아직 없네요.
+                    </NoIntroductionText>
+                  </>
+                )}
+              </Grid>
+              {filter === "완료" && (
+                <MypagePostList {...endProject}></MypagePostList>
+              )}
+              <Grid margin="0 0 0 34%" width="49%">
+                {filter === "완료" && endProject.length === 0 && (
+                  <>
+                    <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
+                    <NoIntroductionText>
+                      프로젝트가 아직 없네요.
+                    </NoIntroductionText>
+                  </>
+                )}
+              </Grid>
+              {filter === "소개" && mydata?.isMyMypage === true && (
+                <button
+                  style={{
+                    float: "right",
+                    margin: "10px 18% 0 0",
+                    border: "none",
+                    cursor: "pointer",
+                    backgroundColor: " transparent ",
+                  }}
+                  onClick={() => {
+                    history.push({
+                      pathname: "/addmarkdown",
+                      state: { userId: userId },
+                    });
+                  }}
+                >
+                  <img
+                    src="/img/소개글.png"
+                    style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
+                  />
+                </button>
+              )}
+              <Grid margin="0 0 0 34%" width="49%">
+                {filter === "소개" && introduction === true && (
+                  <Grid border="1px solid #707070 ">
+                    <MarkdownRead
+                      introduction={mydata?.user.introduction}
+                    ></MarkdownRead>
+                  </Grid>
+                )}
+              </Grid>
+              <Grid margin="0 0 0 34%" width="49%">
+                {filter === "소개" && introduction === false && (
+                  <>
+                    <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
+                    <NoIntroductionText>
+                      작성된 소개가 없네요.
+                    </NoIntroductionText>
+                  </>
+                )}
+              </Grid>
 
-          {filter === "모집" && (
-            <MypagePostList {...recruitmentProject}></MypagePostList>
+              {/* 소개글 있거나 없거나 */}
+            </>
           )}
-          {filter === "진행중" && (
-            <MypagePostList {...inProgressProject}></MypagePostList>
-          )}
-          {filter === "관심" && (
-            <MypagePostList {...bookMarkProject}></MypagePostList>
-          )}
-          {filter === "완료" && (
-            <MypagePostList {...endProject}></MypagePostList>
-          )}
-          {filter === "소개" && (
-            <button
-              style={{
-                float: "right",
-                margin: "10px 18% 0 0",
-                border: "none",
-                cursor: "pointer",
-                backgroundColor: " transparent ",
-              }}
-              onClick={() => {
-                history.push({
-                  pathname: "/addmarkdown",
-                  state: { userId: userId },
-                });
-              }}
-            >
-              <img
-                src="/img/소개글.png"
-                style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
-              />
-            </button>
-          )}
-          <Grid margin="0 0 0 34%" width="49%" border="1px solid #707070 ">
-            {filter === "소개" && introduction === true && (
-              <MarkdownRead
-                introduction={mydata?.user.introduction}
-              ></MarkdownRead>
-            )}
-          </Grid>
+          {/* //  mydata와 myType가 있을때 */}
         </>
+        // 스피너를 감싸는 친구
       )}
+      {/* 스피너를 감싸는 괄호 */}
     </React.Fragment>
   );
 };
@@ -941,7 +1145,7 @@ const Filter = styled.p`
     -moz-transform: scale(1.05);
     -ms-transform: scale(1.05);
     -o-transform: scale(1.05);
-    text-decoration: underline;
+    /* text-decoration: underline; */
     color: #737373;
   }
   @media screen and (max-width: 1400px) {
@@ -950,6 +1154,14 @@ const Filter = styled.p`
   @media screen and (max-width: 750px) {
     /* margin-top: 1050px; */
   } ;
+`;
+
+const PullScreen = styled.div`
+  display: flex;
+  flex-direction: row;
+  @media screen and (max-width: 370px) {
+    flex-direction: column;
+  }
 `;
 
 const Cards = styled.div`
@@ -1008,7 +1220,7 @@ const Banner = styled.div`
   width: 100%;
   margin: -100px auto;
   display: flex;
-  height: 650px;
+  height: 550px;
   overflow: hidden;
 `;
 const BannerImg = styled.img`
@@ -1147,5 +1359,23 @@ const MyResultTextBold = styled.p`
   color: black;
   font-size: 15px;
   font-weight: bold;
+`;
+const NoIntroduction = styled.img`
+  width: 50%;
+  height: 50%;
+  object-fit: cover;
+  position: relative;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+`;
+const NoIntroductionText = styled.p`
+  color: #737373;
+  font-size: 25px;
+  width: auto;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-left: 60px;
 `;
 export default MyPageInfo;

@@ -11,15 +11,16 @@ import { history } from "../redux/configureStore";
 import { Grid, Image, Text } from "../elements/Index";
 
 // Post의 함수형 컴포넌트를 만든다.
-const Post = props => {
+const Post = (props) => {
   const dispatch = useDispatch();
-  const is_mainPage = useSelector(state => state.post.mainpage);
+  const is_mainPage = useSelector((state) => state.post.mainpage);
   const [stacks, setStacks] = React.useState();
-
+  // console.log("내가", props);
   let totalmember = props.totalMember;
   let recruitmentMember = props.recruitmentMember;
   // console.log("게시자", props.recruitmentMember);
   // console.log("메인포스트아이디", props);
+
   React.useEffect(() => {
     let stack = props.techStack;
     setStacks(stack);
@@ -35,29 +36,80 @@ const Post = props => {
         }}
       >
         <DDescriptionBox>
-          <CardHeader>
-            <Grid>{/* <TitleDate>D-2</TitleDate> */}</Grid>
-            <Grid
-              position="relative"
-              zIndex="10"
-              display="flex"
-              width="80%"
-              margin="auto"
-            >
-              {props.techStack.map((p, idx) => {
-                return (
-                  <Grid width="30%" key={idx}>
-                    <PostStacks stack={p}></PostStacks>
-                  </Grid>
-                );
-              })}
-            </Grid>
-            <CardHeaderTwo />
-          </CardHeader>
+          {props.projectStatus === "모집중" && (
+            <>
+              <CardHeaderDoing id="headerOne" className="headerOne">
+                <Grid>{/* <TitleDate>D-2</TitleDate> */}</Grid>
+                <Grid
+                  position="relative"
+                  zIndex="10"
+                  display="flex"
+                  width="80%"
+                  margin="auto"
+                >
+                  {props.techStack.map((p, idx) => {
+                    return (
+                      <Grid width="30%" key={idx}>
+                        <PostStacks stack={p}></PostStacks>
+                      </Grid>
+                    );
+                  })}
+                </Grid>
+                <CardHeaderTwoDoing id="headerTwo" className="headerTwo" />
+              </CardHeaderDoing>
+            </>
+          )}
+          {props.projectStatus === "종료" && (
+            <>
+              <CardHeaderDone id="headerOne" className="headerOne">
+                <Grid>{/* <TitleDate>D-2</TitleDate> */}</Grid>
+                <Grid
+                  position="relative"
+                  zIndex="10"
+                  display="flex"
+                  width="80%"
+                  margin="auto"
+                >
+                  {props.techStack.map((p, idx) => {
+                    return (
+                      <Grid width="30%" key={idx}>
+                        <PostStacks stack={p}></PostStacks>
+                      </Grid>
+                    );
+                  })}
+                </Grid>
+                <CardHeaderTwoDone id="headerTwo" className="headerTwo" />
+              </CardHeaderDone>
+            </>
+          )}
+          {props.projectStatus === "진행중" && (
+            <>
+              <CardHeaderReady id="headerOne" className="headerOne">
+                <Grid>{/* <TitleDate>D-2</TitleDate> */}</Grid>
+                <Grid
+                  position="relative"
+                  zIndex="10"
+                  display="flex"
+                  width="80%"
+                  margin="auto"
+                >
+                  {props.techStack.map((p, idx) => {
+                    return (
+                      <Grid width="30%" key={idx}>
+                        <PostStacks stack={p}></PostStacks>
+                      </Grid>
+                    );
+                  })}
+                </Grid>
+                <CardHeaderTwoReady id="headerTwo" className="headerTwo" />
+              </CardHeaderReady>
+            </>
+          )}
+
           <Grid
-            borderRadius="54px 54px 54px 54px"
+            borderRadius="64px 54px 54px 54px"
             bg="#fff"
-            height="245px"
+            height="100px"
             position="absolute"
           ></Grid>
           <DescriptionBox>
@@ -73,11 +125,28 @@ const Post = props => {
             <Grid display="flex" width="100%" justifyContent="space-between">
               <Grid width="100%">
                 <Grid display="flex" margin="10px 0">
-                  <ProgressBar>
-                    <HighLight
-                      width={(recruitmentMember / totalmember) * 100 + "%"}
-                    />
-                  </ProgressBar>
+                  {props.projectStatus === "모집중" && (
+                    <ProgressBarDoing>
+                      <HighLightDoing
+                        width={(recruitmentMember / totalmember) * 100 + "%"}
+                      />
+                    </ProgressBarDoing>
+                  )}
+                  {props.projectStatus === "종료" && (
+                    <ProgressBarDone>
+                      <HighLightDone
+                        width={(recruitmentMember / totalmember) * 100 + "%"}
+                      />
+                    </ProgressBarDone>
+                  )}
+                  {props.projectStatus === "진행중" && (
+                    <ProgressBarReady>
+                      <HighLightReady
+                        width={(recruitmentMember / totalmember) * 100 + "%"}
+                      />
+                    </ProgressBarReady>
+                  )}
+
                   <Text margin="0 0 0 10px">
                     {recruitmentMember + "/" + totalmember}
                   </Text>
@@ -104,46 +173,62 @@ const DDescriptionBox = styled.div`
   height: 100%;
 `;
 
-const CardHeader = styled.div`
-  /* z-index: -1; */
+//카드 헤더
+const CardHeaderDoing = styled.div`
   position: relative;
   width: 100%;
-  height: 70px;
-  background-color: #f1bad1;
-
-  border-radius: 54px 54px 54px 54px;
-  background: rgb(83, 201, 253);
-  background: linear-gradient(
-    140deg,
-    rgba(83, 201, 253, 1) 0%,
-    rgba(231, 170, 250, 1) 74%,
-    rgba(231, 170, 250, 1) 100%
-  );
+  height: 63px;
+  border-radius: 94px 84px 84px 54px;
+  background-color: #ecc0f1;
+`;
+const CardHeaderDone = styled.div`
+  position: relative;
+  width: 100%;
+  height: 63px;
+  border-radius: 94px 84px 84px 54px;
+  background-color: #49cbfd;
+`;
+const CardHeaderReady = styled.div`
+  position: relative;
+  width: 100%;
+  height: 63px;
+  border-radius: 94px 84px 84px 54px;
+  background-color: #b29cf4;
 `;
 
-const CardHeaderTwo = styled.div`
-  /* z-index: -1; */
+const CardHeaderTwoDoing = styled.div`
   position: absolute;
   top: 0px;
   left: 0px;
   width: 70%;
   height: 160px;
-  background-color: #f1bad1;
-
-  border-radius: 43 px 54px 54px 54px;
-  background: rgb(83, 201, 253);
-  background: linear-gradient(
-    140deg,
-    rgba(83, 201, 253, 1) 0%,
-    rgba(231, 170, 250, 1) 74%,
-    rgba(231, 170, 250, 1) 100%
-  );
+  border-radius: 43px 54px 54px 54px;
+  background-color: #ecc0f1;
 `;
+const CardHeaderTwoDone = styled.div`
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 70%;
+  height: 160px;
+  border-radius: 43px 54px 54px 54px;
+  background-color: #49cbfd;
+`;
+const CardHeaderTwoReady = styled.div`
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 70%;
+  height: 160px;
+  border-radius: 43px 54px 54px 54px;
+  background-color: #b29cf4;
+`;
+//헤더 까지
 
 const Title = styled.h1`
-  margin-top: 8%;
+  margin-top: 10%;
   margin-bottom: 10px;
-  font-size: 25px;
+  font-size: 20px;
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
@@ -152,7 +237,7 @@ const Title = styled.h1`
 `;
 
 const Summary = styled.div`
-  font-size: 14px;
+  font-size: 12px;
   color: gray;
 
   /* margin-top: 8%; */
@@ -165,7 +250,7 @@ const Summary = styled.div`
 const Date = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin: 10% auto 10px auto;
+  margin: 20% auto 10px auto;
   width: 100%;
   text-overflow: ellipsis;
 
@@ -191,68 +276,80 @@ const ProjectState = styled.div`
 
   background-color: #eee;
   margin: auto 0;
-  /* margin-left: 80%;
-  margin-bottom: 55px; */
-
-  @media (max-width: 750px) {
-    margin-left: 60%;
-  }
-  @media (max-width: 370px) {
-    margin-left: 60%;
-  }
 `;
 
 const ProductImgWrap = styled.div`
   z-index: 1;
   position: relative;
   background-color: white;
-  width: 77%;
-  height: 77%;
+  width: 330px;
+  height: 330px;
   max-width: 350px;
-  margin: auto;
-  margin-top: 70px;
-  margin-bottom: 30px;
-  border-radius: 54px;
+  margin: 30px auto;
+
+  border-radius: 54px 32px 35px 35px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.24);
   @media (max-width: 1700px) {
-    width: 77%;
-    height: 90%;
     margin: auto;
     margin-top: 30px;
     margin-bottom: 30px;
   }
-  @media (max-width: 1200px) {
-    width: 300px;
-    height: 80%;
+  @media (max-width: 1300px) {
     margin: auto;
     margin-top: 30px;
     margin-bottom: 30px;
   }
 
   @media (max-width: 450px) {
-    width: 300px;
-    height: 280px;
     margin: auto;
-    margin-left: 1%;
     margin-top: 30px;
     margin-bottom: 30px;
   }
 `;
-
-const ProgressBar = styled.div`
-  border: 3px solid #b29cf4;
+//프로그래스바
+const ProgressBarDoing = styled.div`
+  border: 1px solid #ecc0f1;
   border-radius: 25px;
-  background: #f1f9ff;
+  background: #bb9ab6;
+  width: 100%;
+  height: 15px;
+`;
+const ProgressBarDone = styled.div`
+  border: 1px solid #49cbfd;
+  border-radius: 25px;
+  background: #bb9ab6;
+  width: 100%;
+  height: 15px;
+`;
+const ProgressBarReady = styled.div`
+  border: 1px solid #b29cf4;
+  border-radius: 25px;
+  background: #bb9ab6;
   width: 100%;
   height: 15px;
 `;
 
-const HighLight = styled.div`
+const HighLightDoing = styled.div`
+  border-radius: 25px;
+  background: #ecc0f1;
+  transition: 1s;
+  width: ${(props) => props.width};
+  height: 15px;
+`;
+const HighLightDone = styled.div`
+  border-radius: 25px;
+  background: #49cbfd;
+  transition: 1s;
+  width: ${(props) => props.width};
+  height: 15px;
+`;
+const HighLightReady = styled.div`
   border-radius: 25px;
   background: #b29cf4;
   transition: 1s;
-  width: ${props => props.width};
+  width: ${(props) => props.width};
   height: 15px;
 `;
+//프로그래스바 까지
 
 export default Post;

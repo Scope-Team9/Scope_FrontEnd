@@ -42,10 +42,7 @@ export const addPostAPI = (card) => {
 // 리듀서
 export default handleActions(
   {
-    [ADD_POST]: (state, action) =>
-      produce(state, (draft) => {
-        console.log("요~비치", action.payload);
-      }),
+    [ADD_POST]: (state, action) => produce(state, (draft) => {}),
   },
   initialState
 );

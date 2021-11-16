@@ -30,11 +30,22 @@ const MainPage = () => {
   const pageCheck = useSelector((state) => state.post.pageCheck);
   const infinity = useSelector((state) => state.infinity.paging);
   const whatPage = useSelector((state) => state.post.whatPage);
+  const Render = useSelector((state) => state.post.render);
+
+  const PostStack = useSelector((state) => state.post.stacks);
+  const PostSorts = useSelector((state) => state.post.sorts);
+  const PostReBook = useSelector((state) => state.post.reBook);
+
   const [ref, inView] = useInView();
   const [paging, setPaging] = React.useState(infinity.next);
   const [nowFilter, setNowFilter] = React.useState("최신");
-  const post_list = useSelector((state) => state.post.posts);
+  //click
+  const [currentClick, setCurrentClick] = React.useState(null);
+  const [prevClick, setPrevClick] = React.useState(null);
 
+  const post_list = useSelector((state) => state.post.posts);
+  const isLoginUser = useSelector((state) => state.user.userId);
+  // console.log(isLoginUser);
   // console.log(pageCheck);
 
   // console.log(useSelector((state) => state.infinity.paging));
@@ -52,9 +63,9 @@ const MainPage = () => {
     // console.log("무얏호우", whatPage);
     console.log("어떻게오느냐 을랴랴랴랴랴랴ㅑ랴랴", post_list);
     dispatch(postActions.getPostAPI());
-
     console.log("?? 여기서 되는거임?");
-  }, [is_stack_clicked, is_sort_clicked, is_reBook_clicked, pageCheck]);
+  }, [is_stack_clicked, is_sort_clicked, is_reBook_clicked, pageCheck, Render]);
+  // }, [PostStack, PostSorts, PostReBook, pageCheck, Render]);
 
   // 요청에 대한 속도가 다를때. 다른것이 띄워질 수 있는 버그성.
 
@@ -78,6 +89,24 @@ const MainPage = () => {
     } // 옵저버를 좀 더 위로
   }, [inView]);
 
+  React.useEffect(
+    (e) => {
+      if (currentClick !== null) {
+        let current = document.getElementById(currentClick);
+        current.style.color = "#333";
+        current.style.borderBottom = "2px solid";
+        current.style.borderBottomColor = "#707070";
+      }
+      if (prevClick !== null) {
+        let prev = document.getElementById(prevClick);
+        prev.style.color = "#333";
+        prev.style.borderBottom = "none";
+      }
+      setPrevClick(currentClick);
+    },
+    [currentClick]
+  );
+
   //sort
   const onclickSort = (data) => {
     dispatch(postActions.isMainPage(true));
@@ -100,10 +129,15 @@ const MainPage = () => {
     setNowFilter(data);
   };
 
+  const GetClick = (e) => {
+    setCurrentClick(e);
+    console.log(e);
+  };
+
   return (
     <>
       <Grid
-        maxWidth="1920"
+        maxWidth="1920px"
         height="100%"
         bg="#ffff"
         padding="0px 0px 10px 0"
@@ -121,33 +155,47 @@ const MainPage = () => {
           </Stacks>
           <FilterBox>
             <Filtering
-              onClick={() => {
+              id="new"
+              onClick={(e) => {
                 onclickSort("createdAt");
                 checkNowFilter("createdAt");
+                GetClick(e.target.id);
               }}
             >
               최신
             </Filtering>
             <Filtering
-              onClick={() => {
+              id="end"
+              onClick={(e) => {
                 onclickSort("deadline");
                 checkNowFilter("deadline");
+                GetClick(e.target.id);
               }}
             >
               마감순
             </Filtering>
             <Filtering
-              onClick={() => {
+              id="bookmark"
+              onClick={(e) => {
                 onclickRb("bookmark");
                 checkNowFilter("bookmark");
+                if (isLoginUser !== null) {
+                  GetClick(e.target.id);
+                }
               }}
             >
               북마크
             </Filtering>
             <Filtering
-              onClick={() => {
+              id="recommend"
+              onClick={(e) => {
                 onclickRb("recommend");
                 checkNowFilter("recommend");
+                if (isLoginUser !== null) {
+                  GetClick(e.target.id);
+                } else {
+                  GetClick("new");
+                }
               }}
             >
               추천
@@ -168,22 +216,22 @@ const MainPage = () => {
               ></div>
             </Grid>
           )}
-
-          <Btn
-            onClick={() => {
-              history.push("/postadd");
-            }}
-          >
-            {" "}
-            <i
-              style={{
-                fontSize: "30px",
-                margin: "12px auto",
-                color: "white",
+          {isLoginUser !== null && (
+            <Btn
+              onClick={() => {
+                history.push("/postadd");
               }}
-              className="fas fa-plus"
-            ></i>
-          </Btn>
+            >
+              <i
+                style={{
+                  fontSize: "25px",
+                  margin: "auto",
+                  color: "white",
+                }}
+                className="fas fa-plus"
+              ></i>
+            </Btn>
+          )}
         </Inside>
       </Grid>
     </>
@@ -197,14 +245,18 @@ const ResponsiveSidebar = styled.div`
 `;
 
 const Inside = styled.div`
+  margin: auto;
   @media screen and (max-width: 750px) {
     /* margin-left: -100px; */
   } ;
 `;
 
 const InsideCard = styled.div`
+  margin: 10px auto;
+  width: 75%;
+  max-width: 1920px;
   @media screen and (max-width: 750px) {
-    margin-left: 0px;
+    margin: auto;
   } ;
 `;
 
@@ -217,16 +269,19 @@ const Stacks = styled.div`
 const FilterBox = styled.div`
   display: flex;
   font-size: 20px;
-  margin-top: 20px;
+  margin: 10px auto;
   justify-content: flex-end;
-  max-width: 1790px;
+  width: 75%;
+  max-width: 1920px;
   @media screen and (max-width: 1850px) {
     justify-content: center;
   }
   @media screen and (max-width: 750px) {
     justify-content: center;
-  } ;
+    font-size: 12px;
+  }
 `;
+
 const Filtering = styled.p`
   margin: 20px;
   cursor: pointer;
@@ -236,7 +291,7 @@ const Filtering = styled.p`
     -moz-transform: scale(1.05);
     -ms-transform: scale(1.05);
     -o-transform: scale(1.05);
-    text-decoration: underline;
+    /* text-decoration: underline; */
     color: #dacceb;
   }
 `;
@@ -253,10 +308,41 @@ const Btn = styled.button`
   margin: auto;
   background: #c4c4c4;
   cursor: pointer;
+  z-index: 999;
 
   @media screen and (max-width: 750px) {
-    right: 34%;
+    position: fixed;
+
+    border: 1px solid #42309b;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    right: 5px;
+    bottom: 5px;
+    margin: auto;
+    background: #42309b;
+    cursor: pointer;
+    z-index: 999;
   } ;
 `;
 
+const NoIntroduction = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  margin: auto;
+  display: flex;
+  justify-content: center;
+`;
+const NoIntroductionText = styled.p`
+  color: #737373;
+  font-size: 25px;
+  width: auto;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+`;
 export default MainPage;
