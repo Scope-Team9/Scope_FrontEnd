@@ -291,7 +291,7 @@ const PostEdit = (props) => {
               <Text>프로젝트 총 인원</Text>
               <Select
                 options={projectMembers}
-                isLoading
+                // isLoading
                 styles={styles}
                 value={totalMember}
                 onChange={setTotalmember}
@@ -302,7 +302,7 @@ const PostEdit = (props) => {
               <Text>프로젝트 상태체크</Text>
               <Select
                 options={projectStatused}
-                isLoading
+                // isLoading
                 styles={styles}
                 value={projectStatus}
                 onChange={setProjectstatus}

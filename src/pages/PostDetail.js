@@ -8,13 +8,13 @@ import { apis } from "../lib/axios";
 import { useHistory } from "react-router";
 import { postActions } from "../redux/modules/post";
 import { Grid, Text, Button } from "../elements/Index";
-import Img from "../images/PostDetail.png";
 import UserList from "../components/UserList";
 import ApplyStatusModal from "../components/ApplyStatusModal";
 import ApplyUserModal from "../components/ApplyUserModal";
 import ProjectJoinUser from "../components/ProjectJoinUser";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import LeftBanner from "../components/postDetail/leftBanner";
 
 // PostDetail의 함수형 컴포넌트를 만든다..
 const PostDetail = (props) => {
@@ -103,7 +103,7 @@ const PostDetail = (props) => {
         border="1px solid #C4C4C4"
         margin="auto"
       >
-        <SideBarImg src={Img} style={{ maxWidth: "650px", height: "100%" }} />
+        <LeftBanner />
         <Grid margin="20px 20px auto 20px" position="relative">
           {userId !== postUserId && (
             <Grid width="50px" position="absolute" top="20px" right="50px">
@@ -419,12 +419,6 @@ const Btn = styled.button`
     background-color: #b29cf4;
     border: 1px solid;
     transition-duration: 1s;
-  }
-`;
-
-const SideBarImg = styled.img`
-  @media screen and (max-width: 800px) {
-    display: none;
   }
 `;
 

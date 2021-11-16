@@ -32,7 +32,7 @@ const ApplyStatusModal = (props) => {
     fetchData();
 
     // dispatch(applyCreators.applyUserAPI(postId));
-  }, [applyStatusModal, acceptButton, applyedUsers]);
+  }, [applyStatusModal, acceptButton]);
 
   const acceptOffer = (acceptUser) => {
     const acceptInfo = {
