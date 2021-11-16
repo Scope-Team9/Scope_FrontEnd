@@ -15,6 +15,7 @@ import ApplyUserModal from "../components/ApplyUserModal";
 import ProjectJoinUser from "../components/ProjectJoinUser";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import ExileUserModal from "../components/modal/ExileUserModal";
 
 // PostDetail의 함수형 컴포넌트를 만든다.
 const PostDetail = (props) => {
@@ -24,6 +25,7 @@ const PostDetail = (props) => {
   const [bookmark, setBookmark] = React.useState(false);
   const [applyStatusModal, setApplyStatusModal] = React.useState(false); //신청현황
   const [applyUserModal, setApplyUserModal] = React.useState(false); //지원취소/팀탈퇴/프로젝트마감
+  const [exileUserModal, setExileUserModal] = React.useState(false); // 강퇴
 
   const [applyValue, setApplyValue] = React.useState();
   const [isme, setIsme] = React.useState(null);
@@ -32,6 +34,10 @@ const PostDetail = (props) => {
 
   const applyStatusModalOpen = () => {
     setApplyStatusModal(true);
+  };
+
+  const exileUserModalOpen = () => {
+    setExileUserModal(true);
   };
 
   const applyUserModalOpen = (value) => {
@@ -80,7 +86,7 @@ const PostDetail = (props) => {
       }
     };
     CheckPost();
-  }, [bookmark]);
+  }, [applyStatusModal, exileUserModal]);
 
   const passedData = checkPost?.data["data"].post;
   const passedUserStatus = checkPost?.data["data"].userStatus;
@@ -175,11 +181,23 @@ const PostDetail = (props) => {
                     >
                       신청현황 확인
                     </Button>
+                    <Button
+                      postion="absolute"
+                      common
+                      _onClick={exileUserModalOpen}
+                    >
+                      팀원 추방
+                    </Button>
                     <ApplyStatusModal
                       applyStatusModal={applyStatusModal}
                       setApplyStatusModal={setApplyStatusModal}
                       postId={post_id}
                     />
+                    <ExileUserModal
+                      applyStatusModal={exileUserModal}
+                      setApplyStatusModal={setExileUserModal}
+                      postId={post_id}
+                    ></ExileUserModal>
                   </Grid>
                 </Grid>
               )}
@@ -344,7 +362,7 @@ const PostDetail = (props) => {
                       postId={post_id}
                       passdedMenber={passdedMenber}
                     />
-                    {passedData?.projectStatus === "종료" &&
+                    {/* {passedData?.projectStatus === "종료" &&
                       passedUserStatus === "member" && (
                         <Grid>
                           <Button
@@ -362,7 +380,7 @@ const PostDetail = (props) => {
                             지원신청
                           </Button>
                         </Grid>
-                      )}
+                      )} */}
                   </Grid>
                 )}
               </Grid>
