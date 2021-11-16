@@ -21,7 +21,7 @@ const ApplyStatusModal = props => {
     if (applyStatusModal) {
       dispatch(applyCreators.applyUserAPI(postId));
     }
-  }, [applyUsers]);
+  }, [applyStatusModal]);
 
   const acceptOffer = acceptUser => {
     const acceptInfo = {
