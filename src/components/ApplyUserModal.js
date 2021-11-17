@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { applyCreators } from "../redux/modules/applyProject";
 import CloseIcon from "@mui/icons-material/Close";
 
-const ApplyUserModal = props => {
+const ApplyUserModal = (props) => {
   const dispatch = useDispatch();
   const {
     applyUserModal,
@@ -16,18 +16,17 @@ const ApplyUserModal = props => {
     postId,
     passdedMenber,
   } = props;
-  const isMe = useSelector(state => state.user.userId);
+  const isMe = useSelector((state) => state.user.userId);
   const [comment, setComment] = React.useState();
   const [likes, setLikes] = React.useState();
   const [first, setFirst] = React.useState(false);
   const [page, setPage] = React.useState(1);
-
   const [front, setFront] = React.useState();
   const [back, setBack] = React.useState();
 
   React.useEffect(() => {
     setLikes(
-      passdedMenber?.map(stateItem => {
+      passdedMenber?.map((stateItem) => {
         let newStateItem = { ...stateItem, active: false };
         return newStateItem;
       })
@@ -62,9 +61,9 @@ const ApplyUserModal = props => {
   };
 
   const userLiked = () => {
-    const likeMember = likes.filter(user => user.active == true);
+    const likeMember = likes.filter((user) => user.active == true);
     console.log(likeMember);
-    var result = likeMember.map(a => a.userId);
+    var result = likeMember.map((a) => a.userId);
     console.log(result);
 
     const likeUsers = {
@@ -87,10 +86,10 @@ const ApplyUserModal = props => {
   //팀원평가 눌렀는지 안눌렀는지 (버튼색상)
 
   //색상 기능
-  const toggleLike = a => {
+  const toggleLike = (a) => {
     console.log(likes);
-    setLikes(state => {
-      return state.map(val => {
+    setLikes((state) => {
+      return state.map((val) => {
         if (val.userId === Number(a)) {
           return { ...val, active: !val.active };
         }
@@ -140,7 +139,7 @@ const ApplyUserModal = props => {
                   height="100%"
                   backgroundColor="#fff"
                   placeholder="신청자분을 간단히 소개해주세요!"
-                  _onChange={e => {
+                  _onChange={(e) => {
                     console.log(e.target.value);
                     setComment(e.target.value);
                   }}
@@ -362,7 +361,7 @@ const ApplyUserModal = props => {
                               common
                               isActive={likes[idx].active}
                               isValue={passdedMenber[idx].userId}
-                              _onClick={e => {
+                              _onClick={(e) => {
                                 console.log(
                                   likes[idx].userId,
                                   likes[idx].active
@@ -455,7 +454,7 @@ const ApplyUserModal = props => {
                 >
                   <Input
                     height="100%"
-                    _onChange={e => {
+                    _onChange={(e) => {
                       console.log(e.target.value);
                       setFront(e.target.value);
                     }}
@@ -463,7 +462,7 @@ const ApplyUserModal = props => {
 
                   <Input
                     height="100%"
-                    _onChange={e => {
+                    _onChange={(e) => {
                       console.log(e.target.value);
                       setBack(e.target.value);
                     }}
@@ -612,7 +611,7 @@ const ApplyUserModal = props => {
                               common
                               active={likes[idx].active}
                               isValue={passdedMenber[idx].userId}
-                              _onClick={e => {
+                              _onClick={(e) => {
                                 console.log(likes[idx].active);
                                 toggleLike(e.target.value);
                               }}
@@ -702,7 +701,7 @@ const ApplyUserModal = props => {
                 >
                   <Input
                     height="100%"
-                    _onChange={e => {
+                    _onChange={(e) => {
                       console.log(e.target.value);
                       setFront(e.target.value);
                     }}
@@ -710,7 +709,7 @@ const ApplyUserModal = props => {
 
                   <Input
                     height="100%"
-                    _onChange={e => {
+                    _onChange={(e) => {
                       console.log(e.target.value);
                       setBack(e.target.value);
                     }}

@@ -5,7 +5,7 @@ import { history } from "../redux/configureStore";
 export const instance = axios.create({
   // baseURL: "http://localhost:3000",
   // baseURL: "http://localhost:4000",
-  // baseURL: "http://3.36.94.200",
+  // baseURL: "http://3.35.219.232",
 
   baseURL: "http://15.165.159.211",
   headers: {
@@ -95,6 +95,9 @@ export const apis = {
   deletePost: postId => instance.delete(`/api/post/${postId}`),
   statusPost: (postId, data) =>
     instance.post(`/api/post/${postId}/status`, data),
+  serachTeamUser: (postId) => instance.get(`/api/team/${postId}`),
+  exileUser: (postId, userId) =>
+    instance.delete(`/api/team/resignation/${postId}?userId=${userId}`),
 
   //data.json용
   // getPost: () => instance.get(`/post`),
