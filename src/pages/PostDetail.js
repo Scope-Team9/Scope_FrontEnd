@@ -247,16 +247,22 @@ const PostDetail = (props) => {
                   <Content>{passedData?.contents}</Content>
                 </Grid>
                 {/* 깃허브 주소 */}
-                <Grid display="flex">
-                  <Text margin="auto 10px auto 0px">
-                    프론트엔드 GitHub 주소 :
-                  </Text>
-                  <Text>{passedData?.frontUrl}</Text>
-                </Grid>
-                <Grid display="flex">
-                  <Text margin="auto 10px auto 0px">백엔드 GitHub 주소 :</Text>
-                  <Text>{passedData?.backUrl}</Text>
-                </Grid>
+                {passedData?.projectStatus === "종료" && (
+                  <>
+                    <Grid display="flex">
+                      <Text margin="auto 10px auto 0px">
+                        프론트엔드 GitHub 주소 :
+                      </Text>
+                      <Text>{passedData?.frontUrl}</Text>
+                    </Grid>
+                    <Grid display="flex">
+                      <Text margin="auto 10px auto 0px">
+                        백엔드 GitHub 주소 :
+                      </Text>
+                      <Text>{passedData?.backUrl}</Text>
+                    </Grid>
+                  </>
+                )}
 
                 <Grid>
                   {userId === postUserId ? (

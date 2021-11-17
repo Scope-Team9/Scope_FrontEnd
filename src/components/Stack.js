@@ -7,9 +7,9 @@ import { postActions } from "../redux/modules/post";
 import { stackAction } from "../redux/modules/stack";
 import LogoButton from "../elements/LogoButton";
 
-const Stack = () => {
+const Stack = (props) => {
   const dispatch = useDispatch();
-  const is_clicked = useSelector((state) => state.stack.stack);
+  const stack = useSelector((state) => state.stack.stack);
   //필터 클릭
   const [arr, setArr] = React.useState([
     {
@@ -83,6 +83,24 @@ const Stack = () => {
       active: false,
     },
   ]);
+  React.useEffect(() => {
+    const stacks = Object.entries(stack);
+    console.log(stacks);
+    setArr((state) => {
+      return state.map((stateItem, idx) => {
+        if (stateItem.id === stacks[idx][1]) {
+          return { ...stateItem, active: !stateItem.active };
+        }
+        return stateItem;
+      });
+    });
+
+    // arr.map((arrItem, idx) => {
+    //   if (arrItem.id === stacks[idx][1]) {
+    //     setArr({ ...arrItem, active: !arrItem.active });
+    //   }
+    // });
+  }, []);
 
   const Filter = (item) => {
     setArr((state) => {
@@ -94,7 +112,7 @@ const Stack = () => {
       });
     });
 
-    const result = Object.values(is_clicked).find((r) => r === item.id);
+    const result = Object.values(stack).find((r) => r === item.id);
     // console.log("이 값이 있으면 지워줘야함", result);
     if (result) {
       dispatch(postActions.isMainPage(true));
@@ -121,8 +139,9 @@ const Stack = () => {
             item={item}
             key={item.id}
             onClick={() => {
-              console.log(item)
-              Filter(item);
+              if (props.do === "StacksComponent") {
+                Filter(item);
+              }
             }}
           ></LogoButton>
         );
