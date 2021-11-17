@@ -98,7 +98,7 @@ const ApplyUserModal = props => {
       });
     });
   };
-  console.log(likes);
+  console.log(likes[0].active, likes[1].active, likes[2].active);
 
   return (
     <>
@@ -361,9 +361,13 @@ const ApplyUserModal = props => {
                           {passdedMenber[idx].userId !== isMe && (
                             <Button
                               common
+                              isActive={likes[idx].active}
                               isValue={passdedMenber[idx].userId}
                               _onClick={e => {
-                                console.log(e);
+                                console.log(
+                                  likes[idx].userId,
+                                  likes[idx].active
+                                );
                                 toggleLike(e.target.value);
                               }}
                             >
@@ -615,7 +619,7 @@ const ApplyUserModal = props => {
                               active={likes[idx].active}
                               isValue={passdedMenber[idx].userId}
                               _onClick={e => {
-                                console.log(e);
+                                console.log(likes[idx].active);
                                 toggleLike(e.target.value);
                               }}
                             >
