@@ -478,12 +478,7 @@ const ApplyUserModal = props => {
                   </Button>
                 </Grid>
                 <Grid>
-                  <Button
-                    borderRadius="25px"
-                    _onClick={() => {
-                      history.push("/");
-                    }}
-                  >
+                  <Button borderRadius="25px" _onClick={() => {}}>
                     다음에제출
                   </Button>
                 </Grid>

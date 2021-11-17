@@ -31,6 +31,11 @@ const MainPage = () => {
   const infinity = useSelector((state) => state.infinity.paging);
   const whatPage = useSelector((state) => state.post.whatPage);
   const Render = useSelector((state) => state.post.render);
+
+  const PostStack = useSelector((state) => state.post.stacks);
+  const PostSorts = useSelector((state) => state.post.sorts);
+  const PostReBook = useSelector((state) => state.post.reBook);
+
   const [ref, inView] = useInView();
   const [paging, setPaging] = React.useState(infinity.next);
   const [nowFilter, setNowFilter] = React.useState("최신");
@@ -60,6 +65,7 @@ const MainPage = () => {
     dispatch(postActions.getPostAPI());
     console.log("?? 여기서 되는거임?");
   }, [is_stack_clicked, is_sort_clicked, is_reBook_clicked, pageCheck, Render]);
+  // }, [PostStack, PostSorts, PostReBook, pageCheck, Render]);
 
   // 요청에 대한 속도가 다를때. 다른것이 띄워질 수 있는 버그성.
 

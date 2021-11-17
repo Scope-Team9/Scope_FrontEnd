@@ -8,16 +8,16 @@ import { apis } from "../lib/axios";
 import { useHistory } from "react-router";
 import { postActions } from "../redux/modules/post";
 import { Grid, Text, Button } from "../elements/Index";
-import Img from "../images/PostDetail.png";
 import UserList from "../components/UserList";
 import ApplyStatusModal from "../components/ApplyStatusModal";
 import ApplyUserModal from "../components/ApplyUserModal";
 import ProjectJoinUser from "../components/ProjectJoinUser";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import LeftBanner from "../components/postDetail/leftBanner";
 
-// PostDetail의 함수형 컴포넌트를 만든다.
-const PostDetail = props => {
+// PostDetail의 함수형 컴포넌트를 만든다..
+const PostDetail = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [checkPost, setCheckPost] = React.useState();
@@ -28,24 +28,22 @@ const PostDetail = props => {
   const [applyValue, setApplyValue] = React.useState();
   const [isme, setIsme] = React.useState(null);
 
-  const myUserId = useSelector(state => state.user.userId);
+  const myUserId = useSelector((state) => state.user.userId);
 
   const applyStatusModalOpen = () => {
     setApplyStatusModal(true);
   };
 
-  const applyUserModalOpen = value => {
+  const applyUserModalOpen = (value) => {
     setApplyValue(value);
     setApplyUserModal(true);
   };
 
   // 상태변경
-  const edit_status = data => {
+  const edit_status = (data) => {
     const editstatus = {
       projectStatus: data,
     };
-    console.log("상태야", projectStatused[0].value);
-    console.log("상태입니다.");
     dispatch(postDetailActions.statusPostAPI(post_id, editstatus));
   };
 
@@ -57,7 +55,7 @@ const PostDetail = props => {
   ];
 
   let post_id = props.match.params.id;
-  const userId = useSelector(state => state.user.userId); //로그인 유저아이디
+  const userId = useSelector((state) => state.user.userId); //로그인 유저아이디
   const postUserId = checkPost?.data.data.post.userId;
 
   //북마크 토글
@@ -74,10 +72,7 @@ const PostDetail = props => {
         const result = await apis.detailPost(post_id);
         setCheckPost(result);
         console.log(result);
-        // console.log(myUserId);
-        const members = result.data.data.members;
-        let imHere = members.find(e => e.userId === myUserId);
-        setIsme(imHere);
+        setIsme(result.data.data.userStatus);
       } catch (err) {
         console.log(err);
       }
@@ -88,10 +83,6 @@ const PostDetail = props => {
   const passedData = checkPost?.data["data"].post;
   const passedUserStatus = checkPost?.data["data"].userStatus;
   const passdedMenber = checkPost?.data["data"].members;
-
-  console.log(passdedMenber);
-  console.log(passedData);
-  console.log(passedUserStatus);
 
   const DeletePost = async () => {
     try {
@@ -112,7 +103,7 @@ const PostDetail = props => {
         border="1px solid #C4C4C4"
         margin="auto"
       >
-        <SideBarImg src={Img} style={{ maxWidth: "650px", height: "100%" }} />
+        <LeftBanner />
         <Grid margin="20px 20px auto 20px" position="relative">
           {userId !== postUserId && (
             <Grid width="50px" position="absolute" top="20px" right="50px">
@@ -159,7 +150,7 @@ const PostDetail = props => {
             <Grid margin="20px auto ">
               <Text size="18px">모집인원</Text>
               <Grid display="flex" margin="10px auto">
-                {passdedMenber?.map(item => (
+                {passdedMenber?.map((item) => (
                   <ProjectJoinUser key={item.userId} {...item} />
                 ))}
               </Grid>
@@ -240,7 +231,7 @@ const PostDetail = props => {
                         width="140px"
                         height="35px"
                         isValue="end"
-                        _onClick={e => {
+                        _onClick={(e) => {
                           applyUserModalOpen(e.target.value);
                         }}
                       >
@@ -266,17 +257,33 @@ const PostDetail = props => {
                         모집완료
                       </Button>
                     )}
+                    {passedData.projectStatus === "종료" && <div></div>}
 
-                    <Button
-                      common
-                      width="140px"
-                      height="35px"
-                      _onClick={() => {
-                        history.push({ pathname: `/postedit/${post_id}` });
-                      }}
-                    >
-                      포스트수정
-                    </Button>
+                    {passedData.projectStatus === "진행중" && (
+                      <Button
+                        common
+                        width="140px"
+                        height="35px"
+                        _onClick={() => {
+                          history.push({ pathname: `/postedit/${post_id}` });
+                        }}
+                      >
+                        포스트수정
+                      </Button>
+                    )}
+
+                    {passedData.projectStatus === "모집중" && (
+                      <Button
+                        common
+                        width="140px"
+                        height="35px"
+                        _onClick={() => {
+                          history.push({ pathname: `/postedit/${post_id}` });
+                        }}
+                      >
+                        포스트수정
+                      </Button>
+                    )}
                     <Button
                       common
                       width="140px"
@@ -293,13 +300,13 @@ const PostDetail = props => {
                   <Grid textAlign="center">
                     {passedData?.projectStatus === "모집중" && (
                       <Grid>
-                        {!isme && (
+                        {isme === "user" && (
                           <>
                             <Button
                               common
                               width="120px"
                               isValue="apply"
-                              _onClick={e => {
+                              _onClick={(e) => {
                                 console.log(e);
                                 applyUserModalOpen(e.target.value);
                               }}
@@ -309,25 +316,29 @@ const PostDetail = props => {
                             >
                               지원신청
                             </Button>
-                            <Button
-                              common
-                              width="120px"
-                              isValue="cancel"
-                              _onClick={e => {
-                                applyUserModalOpen(e.target.value);
-                              }}
-                              width="120px"
-                            >
-                              지원취소
-                            </Button>
                           </>
                         )}
-                        {isme && (
+
+                        {isme === "applicant" && (
+                          <Button
+                            common
+                            width="120px"
+                            isValue="cancel"
+                            _onClick={(e) => {
+                              applyUserModalOpen(e.target.value);
+                            }}
+                            width="120px"
+                          >
+                            지원취소
+                          </Button>
+                        )}
+
+                        {isme === "member" && (
                           <Button
                             common
                             width="120px"
                             isValue="teamExit"
-                            _onClick={e => {
+                            _onClick={(e) => {
                               applyUserModalOpen(e.target.value);
                             }}
                           >
@@ -351,7 +362,7 @@ const PostDetail = props => {
                             common
                             width="120px"
                             isValue="memberLiked"
-                            _onClick={e => {
+                            _onClick={(e) => {
                               console.log(e);
                               applyUserModalOpen(e.target.value);
                             }}
@@ -408,12 +419,6 @@ const Btn = styled.button`
     background-color: #b29cf4;
     border: 1px solid;
     transition-duration: 1s;
-  }
-`;
-
-const SideBarImg = styled.img`
-  @media screen and (max-width: 800px) {
-    display: none;
   }
 `;
 

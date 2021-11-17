@@ -8,7 +8,6 @@ const Button = props => {
     color,
     text,
     _onClick,
-    isFloat,
     children,
     margin,
     width,
@@ -33,14 +32,6 @@ const Button = props => {
     isActive,
   } = props;
 
-  if (isFloat) {
-    return (
-      <>
-        <FloatButton onClick={_onClick}></FloatButton>
-      </>
-    );
-  }
-
   if (isTest) {
     return (
       <>
@@ -56,6 +47,7 @@ const Button = props => {
       </>
     );
   }
+
   if (common) {
     const styles = {
       margin,
