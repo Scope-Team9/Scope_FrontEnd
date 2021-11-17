@@ -30,6 +30,7 @@ const Button = props => {
     hoberCl,
     common,
     border,
+    active,
   } = props;
 
   if (isFloat) {
@@ -79,6 +80,7 @@ const Button = props => {
           disabled={disabled}
           isChecked={isChecked}
           id={isId}
+          active={active}
         >
           {text ? text : children}
         </Common>
@@ -219,10 +221,10 @@ const TestButton = styled.button`
 `;
 
 const Common = styled.button`
-  background-color: #fff;
+  background-color: ${props => (props.active ? "#b29cf4" : "#fff")};
   height: ${props => props.height};
   width: ${props => props.width};
-  color: #b29cf4;
+  color: ${props => (props.active ? "#fff" : "#b29cf4")};
   margin-right: 3px;
   border-radius: 25px;
   border: 1px solid #b29cf4;

@@ -18,13 +18,20 @@ const ApplyUserModal = (props) => {
   } = props;
   const isMe = useSelector((state) => state.user.userId);
   const [comment, setComment] = React.useState();
-  const [click, setClick] = React.useState(passdedMenber);
-  const [likes, setLikes] = React.useState([]);
-
+  const [likes, setLikes] = React.useState();
   const [page, setPage] = React.useState(1);
 
   const [front, setFront] = React.useState();
   const [back, setBack] = React.useState();
+
+  React.useEffect(() => {
+    setLikes(
+      passdedMenber?.map((stateItem) => {
+        let newStateItem = { ...stateItem, active: false };
+        return newStateItem;
+      })
+    );
+  }, [passdedMenber]);
 
   console.log(passdedMenber, isMe);
 
@@ -78,10 +85,23 @@ const ApplyUserModal = (props) => {
         if (stateItem.userId === value) {
           return { ...stateItem, active: !stateItem.active };
         }
-        return stateItem;
+        console.log(prev);
+        return prev;
       });
     });
   };
+  console.log(likes);
+  // const a = () => {
+  //   setLikes((prev) => {
+  //     prev.forEach((val) => {
+  //       if((val.userId === userId) {
+  //         val.active == true
+  //       })
+  //       return prev;
+  //     })
+  //   })
+  // }
+  //
 
   return (
     <>
@@ -344,12 +364,10 @@ const ApplyUserModal = (props) => {
                           {passdedMenber[idx].userId !== isMe && (
                             <Button
                               common
-                              isId={passdedMenber[idx]}
                               isValue={passdedMenber[idx].userId}
                               _onClick={(e) => {
-                                // console.log(e);
-                                // Filter(e.target.value);
-                                userLiked;
+                                console.log(e);
+                                toggleLike(e.target.value);
                               }}
                             >
                               좋았어요!
@@ -511,7 +529,7 @@ const ApplyUserModal = (props) => {
                     alignItems="center"
                     justifyContent="space-around"
                     width="100%"
-                    key={idx}
+                    key={user.userId}
                     {...user}
                   >
                     <Grid margin="auto" width="10%">
@@ -592,12 +610,11 @@ const ApplyUserModal = (props) => {
                           {passdedMenber[idx].userId !== isMe && (
                             <Button
                               common
-                              isId={passdedMenber[idx]}
+                              // active={}
                               isValue={passdedMenber[idx].userId}
                               _onClick={(e) => {
                                 console.log(e);
-                                toggleLike(e.target.id);
-                                userLiked(e.target.value);
+                                toggleLike(e.target.value);
                               }}
                             >
                               좋았어요!
@@ -637,4 +654,4 @@ const UserImg = styled.img`
   cursor: pointer;
 `;
 
-export default ApplyUserModal;
+export default React.memo(ApplyUserModal);
