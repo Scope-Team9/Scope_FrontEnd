@@ -26,7 +26,7 @@ const Button = props => {
     disabled,
     isChecked,
     hoverBg,
-    hoberCl,
+    hoverCl,
     common,
     border,
     isActive,
@@ -98,7 +98,7 @@ const Button = props => {
     hover,
     display,
     hoverBg,
-    hoberCl,
+    hoverCl,
     zIndex,
   };
 

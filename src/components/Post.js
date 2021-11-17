@@ -55,6 +55,8 @@ const Post = props => {
   }, []);
 
   console.log(member);
+  let as = member?.find(e => e.userId === myUserId);
+  console.log(as);
 
   return (
     <React.Fragment>
@@ -70,6 +72,7 @@ const Post = props => {
           props.mypage &&
           props.projectStatus === "종료" &&
           member[0]?.assessment === true &&
+          as.assessment === false &&
           props.userId === myUserId && (
             <Grid
               bg="#111"
@@ -85,6 +88,8 @@ const Post = props => {
                 backgroundColor="#fff"
                 width="50%"
                 color="#111"
+                hoverBg="#b29cf4"
+                hoverCl="#fff"
                 _onClick={e => {
                   e.stopPropagation();
                   console.log(e.target.value, props.postId);

@@ -412,6 +412,7 @@ const PostDetail = props => {
                         applyValue={applyValue}
                         postId={post_id}
                         passdedMenber={passdedMenber}
+                        passedUserStatus={passedUserStatus}
                       />
                       {/* {passedData?.projectStatus === "종료" &&
                       passedUserStatus === "member" && (
