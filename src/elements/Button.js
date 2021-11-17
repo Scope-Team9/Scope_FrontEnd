@@ -30,6 +30,7 @@ const Button = props => {
     common,
     border,
     isActive,
+    zIndex,
   } = props;
 
   if (isTest) {
@@ -98,6 +99,7 @@ const Button = props => {
     display,
     hoverBg,
     hoberCl,
+    zIndex,
   };
 
   return (
@@ -162,6 +164,7 @@ const ElButton = styled.button`
   position: ${props => props.position};
   flex-shrink: 0;
   display: ${props => props.display};
+  z-index: ${props => props.zIndex};
 `;
 
 const FloatButton = styled.div`

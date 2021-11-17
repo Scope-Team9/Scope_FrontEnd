@@ -5,36 +5,102 @@
 import React from "react";
 import styled from "styled-components";
 import PostStacks from "./PostStacks";
+import ApplyUserModal from "./ApplyUserModal";
 import { useSelector, useDispatch } from "react-redux";
+import { applyCreators } from "../redux/modules/applyProject";
+import { apis } from "../lib/axios";
 
 import { history } from "../redux/configureStore";
-import { Grid, Image, Text } from "../elements/Index";
+import { Grid, Image, Text, Button } from "../elements/Index";
 
 // Post의 함수형 컴포넌트를 만든다.
-const Post = (props) => {
+const Post = props => {
   const dispatch = useDispatch();
-  const is_mainPage = useSelector((state) => state.post.mainpage);
+  const is_mainPage = useSelector(state => state.post.mainpage);
+  const myUserId = useSelector(state => state.user.userId);
   const [stacks, setStacks] = React.useState();
+  const [applyUserModal, setApplyUserModal] = React.useState(false); //지원취소/팀탈퇴/프로젝트마감
+  const [applyValue, setApplyValue] = React.useState();
+  const [member, setMember] = React.useState();
   // console.log("내가", props);
   let totalmember = props.totalMember;
   let recruitmentMember = props.recruitmentMember;
+
+  console.log(props, props.postId, props.mypage, props.projectStatus);
   // console.log("게시자", props.recruitmentMember);
   // console.log("메인포스트아이디", props);
 
+  const modalOpen = (value, postId) => {
+    setApplyValue(value);
+    setApplyUserModal(true);
+  };
+
+  // React.useEffect(() => {
+  //   let postId = props.postId;
+  //   dispatch(applyCreators.getMemberAPI(postId));
+  // }, [props.mypage]);
+
   React.useEffect(() => {
-    let stack = props.techStack;
-    setStacks(stack);
-  }, [props, is_mainPage]);
+    let postId = props.postId;
+    const getMembers = async () => {
+      try {
+        const result = await apis.getMember(postId);
+        console.log(result);
+        setMember(result.data.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getMembers();
+  }, []);
+
+  console.log(member);
 
   return (
     <React.Fragment>
       <ProductImgWrap
-        onClick={() => {
+        onClick={e => {
+          e.stopPropagation();
           history.push({
             pathname: `/postdetail/${props.postId}`,
           });
         }}
       >
+        {member &&
+          props.mypage &&
+          props.projectStatus === "종료" &&
+          member[0]?.assessment === true &&
+          props.userId === myUserId && (
+            <Grid
+              bg="#111"
+              width="100%"
+              position="absolute"
+              zIndex="11"
+              borderRadius="34px"
+              opacity="0.8"
+              display="flex"
+            >
+              <Button
+                isValue="memberLiked"
+                backgroundColor="#fff"
+                width="50%"
+                color="#111"
+                _onClick={e => {
+                  e.stopPropagation();
+                  console.log(e.target.value, props.postId);
+                  modalOpen(e.target.value, props.postId);
+                }}
+              >
+                팀원평가하기
+              </Button>
+              <ApplyUserModal
+                applyUserModal={applyUserModal}
+                setApplyUserModal={setApplyUserModal}
+                applyValue={applyValue}
+                passdedMenber={member}
+              />
+            </Grid>
+          )}
         <DDescriptionBox>
           {props.projectStatus === "모집중" && (
             <>
@@ -333,21 +399,21 @@ const HighLightDoing = styled.div`
   border-radius: 25px;
   background: #ecc0f1;
   transition: 1s;
-  width: ${(props) => props.width};
+  width: ${props => props.width};
   height: 15px;
 `;
 const HighLightDone = styled.div`
   border-radius: 25px;
   background: #49cbfd;
   transition: 1s;
-  width: ${(props) => props.width};
+  width: ${props => props.width};
   height: 15px;
 `;
 const HighLightReady = styled.div`
   border-radius: 25px;
   background: #b29cf4;
   transition: 1s;
-  width: ${(props) => props.width};
+  width: ${props => props.width};
   height: 15px;
 `;
 //프로그래스바 까지

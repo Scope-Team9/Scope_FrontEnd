@@ -14,6 +14,7 @@ import ApplyUserModal from "../components/ApplyUserModal";
 import ProjectJoinUser from "../components/ProjectJoinUser";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import ExileUserModal from "../components/modal/ExileUserModal";
 import LeftBanner from "../components/postDetail/leftBanner";
 
 // PostDetail의 함수형 컴포넌트를 만든다..
@@ -24,6 +25,7 @@ const PostDetail = props => {
   const [bookmark, setBookmark] = React.useState(false);
   const [applyStatusModal, setApplyStatusModal] = React.useState(false); //신청현황
   const [applyUserModal, setApplyUserModal] = React.useState(false); //지원취소/팀탈퇴/프로젝트마감
+  const [exileUserModal, setExileUserModal] = React.useState(false); // 강퇴
 
   const [applyValue, setApplyValue] = React.useState();
   const [isme, setIsme] = React.useState(null);
@@ -32,6 +34,10 @@ const PostDetail = props => {
 
   const applyStatusModalOpen = () => {
     setApplyStatusModal(true);
+  };
+
+  const exileUserModalOpen = () => {
+    setExileUserModal(true);
   };
 
   const applyUserModalOpen = value => {
@@ -67,6 +73,7 @@ const PostDetail = props => {
   React.useEffect(() => {
     dispatch(postActions.isMainPage(false));
     dispatch(postActions.whatPage("postDetail"));
+    console.log(passedData);
     const CheckPost = async () => {
       try {
         const result = await apis.detailPost(post_id);
@@ -78,7 +85,7 @@ const PostDetail = props => {
       }
     };
     CheckPost();
-  }, [bookmark]);
+  }, [applyStatusModal, exileUserModal, bookmark]);
 
   const passedData = checkPost?.data["data"].post;
   const passedUserStatus = checkPost?.data["data"].userStatus;
@@ -95,283 +102,318 @@ const PostDetail = props => {
 
   return (
     <React.Fragment>
-      <Grid
-        display="flex"
-        justifyContent="center"
-        maxWidth="1920px"
-        height="100%"
-        border="1px solid #C4C4C4"
-        margin="auto"
-      >
-        <LeftBanner />
-        <Grid margin="20px 20px auto 20px" position="relative">
-          {userId !== postUserId && (
-            <Grid width="50px" position="absolute" top="20px" right="50px">
-              <Grid _onClick={ToggleBookMark} cursor="pointer">
-                {!passedData?.bookmarkChecked ? (
-                  <BookmarkBorderIcon sx={{ color: "#b29cf4", fontSize: 60 }} />
-                ) : (
-                  <BookmarkIcon sx={{ color: "#b29cf4", fontSize: 60 }} />
-                )}
-              </Grid>
-            </Grid>
-          )}
-          <Title>Scoope</Title>
-          {/* 제목 */}
-          <Grid>
-            <Text color="#C4C4C4" size="20px" bold>
-              <span style={{ color: "black" }}>제목</span> : {passedData?.title}
-              <hr width="92%" />
-            </Text>
-          </Grid>
-          {/* 소개 */}
-          <Grid margin="10px auto">
-            <Text color="#C4C4C4" size="20px" bold>
-              <span style={{ color: "black" }}>소개 : </span>{" "}
-              {passedData?.summary}
-              <hr width="92%" />
-            </Text>
-          </Grid>
-          <Grid margin="20px auto">
-            <Grid>
-              <Text size="18px">프로젝트 게시자</Text>
-              <Grid
-                width="60px"
-                height="60px"
-                borderRadius="50%"
-                backgroundColor="#C4C4C4"
-                margin="10px 0px 0px"
-              >
-                <UserList list={passedData?.propensityType}></UserList>
-              </Grid>
-              <Text size="20px">{passedData?.nickname}</Text>
-              <Grid>({passedData?.propensityType})</Grid>
-            </Grid>
-            <Grid margin="20px auto ">
-              <Text size="18px">모집인원</Text>
-              <Grid display="flex" margin="10px auto">
-                {passdedMenber?.map(item => (
-                  <ProjectJoinUser key={item.userId} {...item} />
-                ))}
-              </Grid>
-              {userId === postUserId && passedData?.projectStatus === "모집중" && (
-                <Grid position="relative" width="100%">
-                  <Grid
-                    position="absolute"
-                    right="20px"
-                    width="120px"
-                    padding="10px"
-                  >
-                    <Button
-                      postion="absolute"
-                      common
-                      _onClick={applyStatusModalOpen}
-                    >
-                      신청현황 확인
-                    </Button>
-                    <ApplyStatusModal
-                      applyStatusModal={applyStatusModal}
-                      setApplyStatusModal={setApplyStatusModal}
-                      postId={post_id}
+      {passedData && (
+        <Grid
+          display="flex"
+          justifyContent="center"
+          maxWidth="1920px"
+          height="100%"
+          border="1px solid #C4C4C4"
+          margin="auto"
+        >
+          <LeftBanner />
+          <Grid margin="20px 20px auto 20px" position="relative">
+            {userId !== postUserId && (
+              <Grid width="50px" position="absolute" top="20px" right="50px">
+                <Grid _onClick={ToggleBookMark} cursor="pointer">
+                  {!passedData.bookmarkChecked ? (
+                    <BookmarkBorderIcon
+                      sx={{ color: "#b29cf4", fontSize: 60 }}
                     />
-                  </Grid>
+                  ) : (
+                    <BookmarkIcon sx={{ color: "#b29cf4", fontSize: 60 }} />
+                  )}
                 </Grid>
-              )}
+              </Grid>
+            )}
+            <Title>Scoope</Title>
+            {/* 제목 */}
+            <Grid>
+              <Text color="#C4C4C4" size="20px" bold>
+                <span style={{ color: "black" }}>제목</span> :{" "}
+                {passedData?.title}
+                <hr width="92%" />
+              </Text>
+            </Grid>
+            {/* 소개 */}
+            <Grid margin="10px auto">
+              <Text color="#C4C4C4" size="20px" bold>
+                <span style={{ color: "black" }}>소개 : </span>{" "}
+                {passedData?.summary}
+                <hr width="92%" />
+              </Text>
+            </Grid>
+            <Grid margin="20px auto">
+              <Grid>
+                <Text size="18px">프로젝트 게시자</Text>
+                <Grid
+                  width="60px"
+                  height="60px"
+                  borderRadius="50%"
+                  backgroundColor="#C4C4C4"
+                  margin="10px 0px 0px"
+                >
+                  <UserList list={passedData?.propensityType}></UserList>
+                </Grid>
+                <Text size="20px">{passedData?.nickname}</Text>
+                <Grid>({passedData?.propensityType})</Grid>
+              </Grid>
+              <Grid margin="20px auto ">
+                <Text size="18px">모집인원</Text>
+                <Grid display="flex" margin="10px auto">
+                  {passdedMenber?.map(item => (
+                    <ProjectJoinUser key={item.userId} {...item} />
+                  ))}
+                </Grid>
+                {userId === postUserId &&
+                  passedData?.projectStatus === "모집중" && (
+                    <Grid position="relative" width="100%">
+                      <Grid
+                        position="absolute"
+                        right="20px"
+                        width="120px"
+                        padding="10px"
+                      >
+                        <Button
+                          postion="absolute"
+                          common
+                          _onClick={applyStatusModalOpen}
+                        >
+                          신청현황 확인
+                        </Button>
+                        <Button
+                          postion="absolute"
+                          common
+                          _onClick={exileUserModalOpen}
+                        >
+                          팀원 추방
+                        </Button>
+                        <ApplyStatusModal
+                          applyStatusModal={applyStatusModal}
+                          setApplyStatusModal={setApplyStatusModal}
+                          postId={post_id}
+                        />
+                        <ExileUserModal
+                          applyStatusModal={exileUserModal}
+                          setApplyStatusModal={setExileUserModal}
+                          postId={post_id}
+                        ></ExileUserModal>
+                      </Grid>
+                    </Grid>
+                  )}
 
-              <Grid display="flex" margin="10px auto">
-                <Text margin="auto 10px auto 0px">기술스택 :</Text>
-                {passedData?.techStack.map((item, index) => {
-                  return (
-                    <Text margin="auto 5px" key={index}>
-                      <span
-                        style={{
-                          color: "white",
-                          textAlign: "center",
-                          padding: "4px 10px",
-                          border: "1px solid #E6DDF2",
-                          background: "#E6DDF2",
-                          borderRadius: "10px",
-                        }}
-                      >
-                        {item}
-                      </span>
-                    </Text>
-                  );
-                })}
-              </Grid>
-              <Grid display="flex" margin="20px auto">
-                <Text margin="auto 10px auto 0px">프로젝트 기간 :</Text>
-                <Text>
-                  <span
-                    style={{
-                      color: "black",
-                      textAlign: "center",
-                      padding: "4px 10px",
-                      border: "1px solid #E6DDF2",
-                      borderRadius: "10px",
-                    }}
-                  >
-                    {passedData?.startDate} ~ {passedData?.endDate}
-                  </span>
-                </Text>
-              </Grid>
-              <Grid display="flex">
-                <Text margin="auto 10px auto 0px">프로젝트 상태 :</Text>
-                <Text>{passedData?.projectStatus}</Text>
-              </Grid>
-              <Grid>
-                <Content>{passedData?.contents}</Content>
-              </Grid>
-              <Grid>
-                {userId === postUserId ? (
-                  <Grid display="flex" justifyContent="center">
-                    {passedData?.projectStatus === "진행중" && (
-                      <Button
-                        common
-                        width="140px"
-                        height="35px"
-                        isValue="end"
-                        _onClick={e => {
-                          applyUserModalOpen(e.target.value);
-                        }}
-                      >
-                        프로젝트 마감하기
-                      </Button>
-                    )}
-                    <ApplyUserModal
-                      applyUserModal={applyUserModal}
-                      setApplyUserModal={setApplyUserModal}
-                      applyValue={applyValue}
-                      postId={post_id}
-                      passdedMenber={passdedMenber}
-                    />
-                    {passedData?.projectStatus === "모집중" && (
-                      <Button
-                        common
-                        width="140px"
-                        height="35px"
-                        _onClick={() => {
-                          edit_status("진행중");
-                        }}
-                      >
-                        모집완료
-                      </Button>
-                    )}
-                    {passedData.projectStatus === "종료" &&
-                      passdedMenber[0].assessment == true && (
+                <Grid display="flex" margin="10px auto">
+                  <Text margin="auto 10px auto 0px">기술스택 :</Text>
+                  {passedData?.techStack.map((item, index) => {
+                    return (
+                      <Text margin="auto 5px" key={index}>
+                        <span
+                          style={{
+                            color: "white",
+                            textAlign: "center",
+                            padding: "4px 10px",
+                            border: "1px solid #E6DDF2",
+                            background: "#E6DDF2",
+                            borderRadius: "10px",
+                          }}
+                        >
+                          {item}
+                        </span>
+                      </Text>
+                    );
+                  })}
+                </Grid>
+                <Grid display="flex" margin="20px auto">
+                  <Text margin="auto 10px auto 0px">프로젝트 기간 :</Text>
+                  <Text>
+                    <span
+                      style={{
+                        color: "black",
+                        textAlign: "center",
+                        padding: "4px 10px",
+                        border: "1px solid #E6DDF2",
+                        borderRadius: "10px",
+                      }}
+                    >
+                      {passedData?.startDate} ~ {passedData?.endDate}
+                    </span>
+                  </Text>
+                </Grid>
+                <Grid display="flex">
+                  <Text margin="auto 10px auto 0px">프로젝트 상태 :</Text>
+                  <Text>{passedData?.projectStatus}</Text>
+                </Grid>
+                <Grid>
+                  <Content>{passedData?.contents}</Content>
+                </Grid>
+                {/* 깃허브 주소 */}
+                {passedData?.projectStatus === "종료" && (
+                  <>
+                    <Grid display="flex">
+                      <Text margin="auto 10px auto 0px">
+                        프론트엔드 GitHub 주소 :
+                      </Text>
+                      <Text>{passedData?.frontUrl}</Text>
+                    </Grid>
+                    <Grid display="flex">
+                      <Text margin="auto 10px auto 0px">
+                        백엔드 GitHub 주소 :
+                      </Text>
+                      <Text>{passedData?.backUrl}</Text>
+                    </Grid>
+                  </>
+                )}
+
+                <Grid>
+                  {userId === postUserId ? (
+                    <Grid display="flex" justifyContent="center">
+                      {passedData?.projectStatus === "진행중" && (
                         <Button
                           common
                           width="140px"
                           height="35px"
-                          isValue="submit"
+                          isValue="end"
                           _onClick={e => {
-                            console.log(e);
                             applyUserModalOpen(e.target.value);
                           }}
-                          margin="auto 10px"
-                          border="1px solid #b29cf4"
-                          borderRadius="50px"
                         >
-                          깃허브 제출하기
+                          프로젝트 마감하기
                         </Button>
                       )}
-                    {passedData.projectStatus === "진행중" && (
-                      <Button
-                        common
-                        width="140px"
-                        height="35px"
-                        _onClick={() => {
-                          history.push({ pathname: `/postedit/${post_id}` });
-                        }}
-                      >
-                        포스트수정
-                      </Button>
-                    )}
+                      <ApplyUserModal
+                        applyUserModal={applyUserModal}
+                        setApplyUserModal={setApplyUserModal}
+                        applyValue={applyValue}
+                        postId={post_id}
+                        passdedMenber={passdedMenber}
+                      />
+                      {passedData?.projectStatus === "모집중" && (
+                        <Button
+                          common
+                          width="140px"
+                          height="35px"
+                          _onClick={() => {
+                            edit_status("진행중");
+                          }}
+                        >
+                          모집완료
+                        </Button>
+                      )}
+                      {passedData.projectStatus === "종료" &&
+                        passdedMenber[0].assessment === true && (
+                          <Button
+                            common
+                            width="140px"
+                            height="35px"
+                            isValue="submit"
+                            _onClick={e => {
+                              console.log(e);
+                              applyUserModalOpen(e.target.value);
+                            }}
+                            margin="auto 10px"
+                            border="1px solid #b29cf4"
+                            borderRadius="50px"
+                          >
+                            깃허브 제출하기
+                          </Button>
+                        )}
+                      {passedData.projectStatus === "진행중" && (
+                        <Button
+                          common
+                          width="140px"
+                          height="35px"
+                          _onClick={() => {
+                            history.push({ pathname: `/postedit/${post_id}` });
+                          }}
+                        >
+                          포스트수정
+                        </Button>
+                      )}
 
-                    {passedData.projectStatus === "모집중" && (
+                      {passedData.projectStatus === "모집중" && (
+                        <Button
+                          common
+                          width="140px"
+                          height="35px"
+                          _onClick={() => {
+                            history.push({ pathname: `/postedit/${post_id}` });
+                          }}
+                        >
+                          포스트수정
+                        </Button>
+                      )}
                       <Button
                         common
                         width="140px"
                         height="35px"
                         _onClick={() => {
-                          history.push({ pathname: `/postedit/${post_id}` });
+                          DeletePost();
+                          window.alert("삭제되었습니다.");
                         }}
                       >
-                        포스트수정
+                        포스트삭제
                       </Button>
-                    )}
-                    <Button
-                      common
-                      width="140px"
-                      height="35px"
-                      _onClick={() => {
-                        DeletePost();
-                        window.alert("삭제되었습니다.");
-                      }}
-                    >
-                      포스트삭제
-                    </Button>
-                  </Grid>
-                ) : (
-                  <Grid textAlign="center">
-                    {passedData?.projectStatus === "모집중" && (
-                      <Grid>
-                        {isme === "user" && (
-                          <>
+                    </Grid>
+                  ) : (
+                    <Grid textAlign="center">
+                      {passedData?.projectStatus === "모집중" && (
+                        <Grid>
+                          {isme === "user" && (
+                            <>
+                              <Button
+                                common
+                                width="120px"
+                                isValue="apply"
+                                _onClick={e => {
+                                  console.log(e);
+                                  applyUserModalOpen(e.target.value);
+                                }}
+                                margin="auto 10px"
+                                border="1px solid #b29cf4"
+                                borderRadius="50px"
+                              >
+                                지원신청
+                              </Button>
+                            </>
+                          )}
+
+                          {isme === "applicant" && (
                             <Button
                               common
                               width="120px"
-                              isValue="apply"
+                              isValue="cancel"
                               _onClick={e => {
-                                console.log(e);
                                 applyUserModalOpen(e.target.value);
                               }}
-                              margin="auto 10px"
-                              border="1px solid #b29cf4"
-                              borderRadius="50px"
+                              width="120px"
                             >
-                              지원신청
+                              지원취소
                             </Button>
-                          </>
-                        )}
+                          )}
 
-                        {isme === "applicant" && (
-                          <Button
-                            common
-                            width="120px"
-                            isValue="cancel"
-                            _onClick={e => {
-                              applyUserModalOpen(e.target.value);
-                            }}
-                            width="120px"
-                          >
-                            지원취소
-                          </Button>
-                        )}
+                          {isme === "member" && (
+                            <Button
+                              common
+                              width="120px"
+                              isValue="teamExit"
+                              _onClick={e => {
+                                applyUserModalOpen(e.target.value);
+                              }}
+                            >
+                              팀탈퇴
+                            </Button>
+                          )}
+                        </Grid>
+                      )}
 
-                        {isme === "member" && (
-                          <Button
-                            common
-                            width="120px"
-                            isValue="teamExit"
-                            _onClick={e => {
-                              applyUserModalOpen(e.target.value);
-                            }}
-                          >
-                            팀탈퇴
-                          </Button>
-                        )}
-                      </Grid>
-                    )}
-
-                    <ApplyUserModal
-                      applyUserModal={applyUserModal}
-                      setApplyUserModal={setApplyUserModal}
-                      applyValue={applyValue}
-                      postId={post_id}
-                      passdedMenber={passdedMenber}
-                    />
-                    {passedData?.projectStatus === "종료" &&
+                      <ApplyUserModal
+                        applyUserModal={applyUserModal}
+                        setApplyUserModal={setApplyUserModal}
+                        applyValue={applyValue}
+                        postId={post_id}
+                        passdedMenber={passdedMenber}
+                      />
+                      {/* {passedData?.projectStatus === "종료" &&
                       passedUserStatus === "member" && (
                         <Grid>
                           <Button
@@ -389,14 +431,15 @@ const PostDetail = props => {
                             지원신청
                           </Button>
                         </Grid>
-                      )}
-                  </Grid>
-                )}
+                      )} */}
+                    </Grid>
+                  )}
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      )}
     </React.Fragment>
   );
 };
