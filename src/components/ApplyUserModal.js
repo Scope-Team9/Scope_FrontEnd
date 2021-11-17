@@ -7,6 +7,7 @@ import styled from "styled-components";
 import { applyCreators } from "../redux/modules/applyProject";
 import CloseIcon from "@mui/icons-material/Close";
 
+import { Apply, Cancel, TeamExit } from "./applyUserModal/ApplyIndex";
 const ApplyUserModal = props => {
   const dispatch = useDispatch();
   const {
@@ -18,9 +19,8 @@ const ApplyUserModal = props => {
     passedUserStatus,
   } = props;
   const isMe = useSelector(state => state.user.userId);
-  const [comment, setComment] = React.useState();
+
   const [likes, setLikes] = React.useState();
-  const [first, setFirst] = React.useState(false);
   const [page, setPage] = React.useState(1);
   const [front, setFront] = React.useState();
   const [back, setBack] = React.useState();
@@ -34,43 +34,19 @@ const ApplyUserModal = props => {
     );
   }, [passdedMenber]);
 
-  console.log(isMe, passdedMenber);
+  console.log(isMe, passdedMenber, passedUserStatus);
 
   const modalClose = () => {
     setApplyUserModal(false);
   };
 
-  const apply = () => {
-    console.log(postId);
-    const applyComment = {
-      comment: comment,
-    };
-    console.log(applyComment);
-    dispatch(applyCreators.applyProjectAPI(postId, applyComment));
-  };
-
-  const cancel = () => {
-    dispatch(applyCreators.cancelProjectAPI(postId));
-  };
-
-  const exitTeam = () => {
-    const _postId = {
-      postId: postId,
-    };
-    console.log(_postId);
-    dispatch(applyCreators.exitTeamAPI(_postId));
-  };
-
   const userLiked = () => {
     const likeMember = likes.filter(user => user.active == true);
-    console.log(likeMember);
     var result = likeMember.map(a => a.userId);
-    console.log(result);
-
     const likeUsers = {
       userIds: result,
     };
-    console.log(likeUsers);
+
     dispatch(applyCreators.starterLikeAPI(postId, likeUsers));
     setPage(page + 1);
   };
@@ -80,7 +56,7 @@ const ApplyUserModal = props => {
       frontUrl: front,
       backUrl: back,
     };
-    console.log(github);
+
     dispatch(applyCreators.submitUrlAPI(postId, github));
     modalClose;
   };
@@ -88,7 +64,6 @@ const ApplyUserModal = props => {
 
   //색상 기능
   const toggleLike = a => {
-    console.log(likes);
     setLikes(state => {
       return state.map(val => {
         if (val.userId === Number(a)) {
@@ -108,132 +83,13 @@ const ApplyUserModal = props => {
         onClose={modalClose}
       >
         {applyValue === "apply" && (
-          <ModalWrap>
-            <Grid height="10%" position="relative">
-              <Grid
-                position="absolute"
-                top="0px"
-                right="10px"
-                width="20px"
-                padding="10px"
-              >
-                <CloseIcon fontSize="large" onClick={modalClose} />
-              </Grid>
-            </Grid>
-            <Grid
-              margin="auto"
-              height="90%"
-              // justifyContent="center"
-              width="320px"
-              alignItems="center"
-            >
-              <Grid height="20%" textAlign="center">
-                <Text size="30px" bold>
-                  지원신청
-                </Text>
-              </Grid>
-              <Grid height="22%" margin="10px 0" textAlign="center">
-                <Input
-                  padding="0 0 0 60px"
-                  borderRadius="25px"
-                  border="1px solid #eee"
-                  height="100%"
-                  backgroundColor="#fff"
-                  placeholder="신청자분을 간단히 소개해주세요!"
-                  _onChange={e => {
-                    console.log(e.target.value);
-                    setComment(e.target.value);
-                  }}
-                ></Input>
-              </Grid>
-              <Grid height="10%">
-                <Button borderRadius="25px" _onClick={apply}>
-                  지원신청
-                </Button>
-              </Grid>
-            </Grid>
-          </ModalWrap>
+          <Apply modalClose={modalClose} postId={postId} />
         )}{" "}
         {applyValue === "cancel" && (
-          <ModalWrap>
-            <Grid height="10%" position="relative">
-              <Grid
-                position="absolute"
-                top="0px"
-                right="10px"
-                width="20px"
-                padding="10px"
-              >
-                <CloseIcon fontSize="large" onClick={modalClose} />
-              </Grid>
-            </Grid>
-
-            <Grid
-              margin="auto"
-              height="90%"
-              // justifyContent="center"
-              width="320px"
-              alignItems="center"
-              textAlign="center"
-            >
-              <Grid height="20%">
-                <Text size="30px" bold>
-                  지원취소
-                </Text>
-              </Grid>
-              <Grid height="25%" margin="10px 0">
-                <Text size="14px">
-                  지원취소를 원하시면 아래 버튼을 클릭해주세요
-                </Text>
-              </Grid>
-              <Grid height="10%">
-                <Button borderRadius="25px" _onClick={cancel}>
-                  지원취소
-                </Button>
-              </Grid>
-            </Grid>
-          </ModalWrap>
+          <Cancel modalClose={modalClose} postId={postId} />
         )}
         {applyValue === "teamExit" && (
-          <ModalWrap>
-            <Grid height="10%" position="relative">
-              <Grid
-                position="absolute"
-                top="0px"
-                right="10px"
-                width="20px"
-                padding="10px"
-              >
-                <CloseIcon fontSize="large" onClick={modalClose} />
-              </Grid>
-            </Grid>
-
-            <Grid
-              margin="auto"
-              height="90%"
-              // justifyContent="center"
-              width="320px"
-              alignItems="center"
-              textAlign="center"
-            >
-              <Grid height="20%" textAlign="center">
-                <Text size="30px" bold>
-                  팀탈퇴
-                </Text>
-              </Grid>
-              <Grid height="25%" margin="10px 0">
-                <Text size="14px">
-                  정말로 탈퇴하시겠습니까? <br /> 한번 탈퇴하면 다시 신청이
-                  불가능할 수 있습니다.
-                </Text>
-              </Grid>
-              <Grid height="10%">
-                <Button borderRadius="25px" _onClick={exitTeam}>
-                  팀탈퇴
-                </Button>
-              </Grid>
-            </Grid>
-          </ModalWrap>
+          <TeamExit modalClose={modalClose} postId={postId} />
         )}
         {applyValue === "end" && page === 1 && (
           <ModalWrap>
@@ -636,7 +492,7 @@ const ApplyUserModal = props => {
             </Grid>
           </ModalWrap>
         )}
-        {applyValue === "submit" && passedUserStatus === "starter" && (
+        {applyValue === "submit" && passdedMenber[0].userId === isMe && (
           <ModalWrap>
             <Grid height="10%" position="relative">
               <Grid
