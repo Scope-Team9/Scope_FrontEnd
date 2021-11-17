@@ -73,6 +73,7 @@ const PostDetail = (props) => {
   React.useEffect(() => {
     dispatch(postActions.isMainPage(false));
     dispatch(postActions.whatPage("postDetail"));
+    console.log(passedData);
     const CheckPost = async () => {
       try {
         const result = await apis.detailPost(post_id);
@@ -245,6 +246,18 @@ const PostDetail = (props) => {
                 <Grid>
                   <Content>{passedData?.contents}</Content>
                 </Grid>
+                {/* 깃허브 주소 */}
+                <Grid display="flex">
+                  <Text margin="auto 10px auto 0px">
+                    프론트엔드 GitHub 주소 :
+                  </Text>
+                  <Text>{passedData?.frontUrl}</Text>
+                </Grid>
+                <Grid display="flex">
+                  <Text margin="auto 10px auto 0px">백엔드 GitHub 주소 :</Text>
+                  <Text>{passedData?.backUrl}</Text>
+                </Grid>
+
                 <Grid>
                   {userId === postUserId ? (
                     <Grid display="flex" justifyContent="center">
@@ -281,7 +294,7 @@ const PostDetail = (props) => {
                         </Button>
                       )}
                       {passedData.projectStatus === "종료" &&
-                        passdedMenber[0].assessment == true && (
+                        passdedMenber[0].assessment === true && (
                           <Button
                             common
                             width="140px"
