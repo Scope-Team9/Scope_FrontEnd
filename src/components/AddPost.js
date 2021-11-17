@@ -21,7 +21,6 @@ import { postActions } from "../redux/modules/post";
 const AddPost = (props) => {
   const dispatch = useDispatch();
   const animatedComponents = makeAnimated();
-
   const [title, setTitle] = React.useState("");
   const [summary, setSummary] = React.useState("");
   const [techstack, setTectstack] = React.useState([]);
@@ -30,7 +29,7 @@ const AddPost = (props) => {
   const [startDate, setStartdate] = React.useState(new Date());
   const [endDate, setEnddate] = React.useState(new Date());
   const [contents, setContents] = React.useState("");
-  const [techStackList, setTest] = React.useState();
+  const [techStackList, setTechStackList] = React.useState();
 
   // 예외처리
   const submitHandler = () => {
@@ -153,7 +152,7 @@ const AddPost = (props) => {
     for (index = 0; index < techstack.length; index++) {
       tamarray.push(techstack[index]["label"]);
     }
-    setTest(tamarray);
+    setTechStackList(tamarray);
   };
 
   useEffect(() => {
