@@ -3,7 +3,7 @@ import { Grid, Text } from "../../../elements/Index";
 
 import Select from "react-select";
 
-const StectWrite = (props) => {
+const StactWrite = (props) => {
   // 기술 스택 선택
   const stackSelect = [
     { value: "React", label: "React" },
@@ -77,4 +77,4 @@ const StectWrite = (props) => {
   );
 };
 
-export default StectWrite;
+export default StactWrite;

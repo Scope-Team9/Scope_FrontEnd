@@ -1,5 +1,6 @@
 import React from "react";
-import { Grid, Text } from "../../elements/Index";
+import styled from "styled-components";
+import { Grid } from "../../elements/Index";
 
 import { useDispatch } from "react-redux";
 import { postAddActions } from "../../redux/modules/postadd";
@@ -8,7 +9,7 @@ import { postActions } from "../../redux/modules/post";
 import makeAnimated from "react-select/animated";
 import TitleWrite from "./rightContents/TitleWrite";
 import SummaryWrite from "./rightContents/SummaryWrite";
-import StectWrite from "./rightContents/SteckWrite";
+import StectWrite from "./rightContents/StackWrite";
 import DateWrite from "./rightContents/DateWrite";
 import TotalMenber from "./rightContents/TotalMenber";
 import StatusWrite from "./rightContents/StatusWrite";
@@ -80,14 +81,10 @@ const RightWrite = (props) => {
 
   return (
     <React.Fragment>
-      <Grid padding="0px 16px">
-        <Text size="36px" bold>
-          Scoope
-        </Text>
+      <Grid padding="66px">
+        <Title>Scoope</Title>
         <Grid>
-          <Text color="#C4C4C4" size="20px" bold>
-            게시글 작성하기
-          </Text>
+          <SecondTitle>게시글 작성하기</SecondTitle>
           <TitleWrite setTitle={setTitle} />
           <SummaryWrite setSummary={setSummary} />
           <StectWrite
@@ -113,4 +110,16 @@ const RightWrite = (props) => {
   );
 };
 
+const Title = styled.div`
+  color: black;
+  font-size: 36px;
+  font-weight: 800;
+`;
+
+const SecondTitle = styled.div`
+  color: black;
+  font-size: 20px;
+  font-weight: 500;
+  margin: 16px auto;
+`;
 export default RightWrite;

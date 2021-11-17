@@ -1,19 +1,19 @@
 import React from "react";
-import { Grid, Input } from "../../../elements/Index";
+import { Grid, Input, Text } from "../../../elements/Index";
 
 const TitleWrite = (props) => {
   return (
     <React.Fragment>
       <Grid>
-        {/* 제목 */}
-        <Grid>제목</Grid>
+        <Text>제목</Text>
         <Input
           width="100%"
-          maxLength="35"
           height="40px"
           padding="10px"
           border="1px solid #C4C4C4"
+          borderRadius="10px"
           placeholder="제목을 입력해주세요."
+          maxLength="35"
           inputFocusOutline="none"
           fontSize="16px"
           _onChange={(e) => {

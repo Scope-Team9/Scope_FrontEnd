@@ -8,16 +8,13 @@ import { ko } from "date-fns/esm/locale";
 const DateWrite = (props) => {
   return (
     <React.Fragment>
-      {/* 기간설정 */}
       <Grid display="flex">
         <Grid>기간설정</Grid>
-        {/* 프로젝트 시작일 */}
         <DateForm
           title={"프로젝트 시작일"}
           setDate={props.setStartdate}
           dateData={props.startDate}
         />
-        {/* 프로젝트 종료일 */}
         <DateForm
           title={"프로젝트 종료일"}
           setDate={props.setEnddate}

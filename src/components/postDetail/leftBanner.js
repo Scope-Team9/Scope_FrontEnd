@@ -3,12 +3,11 @@ import styled from "styled-components";
 import bannerImg from "../../images/PostDetail.png";
 
 const LeftBanner = (props) => {
-  console.log("메모");
   return (
     <React.Fragment>
       <SideBarImg
         src={bannerImg}
-        style={{ maxWidth: "650px", height: "100%" }}
+        style={{ maxWidth: "100%", height: "940px" }}
       />
     </React.Fragment>
   );

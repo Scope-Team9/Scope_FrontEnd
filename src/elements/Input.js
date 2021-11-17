@@ -32,6 +32,7 @@ const Input = (props) => {
     inputFocusBoxShadow,
     fontSize,
   } = props;
+
   const styles = {
     padding,
     height,

@@ -7,14 +7,20 @@ import { postDetailActions } from "../redux/modules/postdetail";
 import { apis } from "../lib/axios";
 import { useHistory } from "react-router";
 import { postActions } from "../redux/modules/post";
-import { Grid, Text, Button } from "../elements/Index";
-import UserList from "../components/UserList";
+import { Grid, Button } from "../elements/Index";
+
 import ApplyStatusModal from "../components/ApplyStatusModal";
 import ApplyUserModal from "../components/ApplyUserModal";
-import ProjectJoinUser from "../components/ProjectJoinUser";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
-import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import LeftBanner from "../components/postDetail/LeftBanner";
+import TitleDetail from "../components/postDetail/rightContents/TitleDetail";
+import SummaryDetail from "../components/postDetail/rightContents/SummaryDetail";
+import PosterDetail from "../components/postDetail/rightContents/PosterDetail";
+import ApplicantDetail from "../components/postDetail/rightContents/ApplicantDetail";
+import StackDetail from "../components/postDetail/rightContents/StackDetail";
+import DateDetail from "../components/postDetail/rightContents/DateDetail";
+import StatusDetail from "../components/postDetail/rightContents/StatusDetail";
+import ContentDetail from "../components/postDetail/rightContents/ContentDetail";
+import BookMark from "../components/postDetail/rightContents/BookMark";
 
 // PostDetail의 함수형 컴포넌트를 만든다..
 const PostDetail = (props) => {
@@ -105,55 +111,20 @@ const PostDetail = (props) => {
       >
         <LeftBanner />
         <Grid margin="20px 20px auto 20px" position="relative">
-          {userId !== postUserId && (
-            <Grid width="50px" position="absolute" top="20px" right="50px">
-              <Grid _onClick={ToggleBookMark} cursor="pointer">
-                {!passedData?.bookmarkChecked ? (
-                  <BookmarkBorderIcon sx={{ color: "#b29cf4", fontSize: 60 }} />
-                ) : (
-                  <BookmarkIcon sx={{ color: "#b29cf4", fontSize: 60 }} />
-                )}
-              </Grid>
-            </Grid>
-          )}
+          <BookMark
+            userId={userId}
+            postUserId={postUserId}
+            ToggleBookMark={ToggleBookMark}
+            passedData={passedData}
+          />
           <Title>Scoope</Title>
-          {/* 제목 */}
-          <Grid>
-            <Text color="#C4C4C4" size="20px" bold>
-              <span style={{ color: "black" }}>제목</span> : {passedData?.title}
-              <hr width="92%" />
-            </Text>
-          </Grid>
-          {/* 소개 */}
-          <Grid margin="10px auto">
-            <Text color="#C4C4C4" size="20px" bold>
-              <span style={{ color: "black" }}>소개 : </span>{" "}
-              {passedData?.summary}
-              <hr width="92%" />
-            </Text>
-          </Grid>
+          <TitleDetail passedData={passedData} />
+
+          <SummaryDetail passedData={passedData} />
           <Grid margin="20px auto">
-            <Grid>
-              <Text size="18px">프로젝트 게시자</Text>
-              <Grid
-                width="60px"
-                height="60px"
-                borderRadius="50%"
-                backgroundColor="#C4C4C4"
-                margin="10px 0px 0px"
-              >
-                <UserList list={passedData?.propensityType}></UserList>
-              </Grid>
-              <Text size="20px">{passedData?.nickname}</Text>
-              <Grid>({passedData?.propensityType})</Grid>
-            </Grid>
+            <PosterDetail passedData={passedData} />
             <Grid margin="20px auto ">
-              <Text size="18px">모집인원</Text>
-              <Grid display="flex" margin="10px auto">
-                {passdedMenber?.map((item) => (
-                  <ProjectJoinUser key={item.userId} {...item} />
-                ))}
-              </Grid>
+              <ApplicantDetail passdedMenber={passdedMenber} />
               {userId === postUserId && passedData?.projectStatus === "모집중" && (
                 <Grid position="relative" width="100%">
                   <Grid
@@ -178,50 +149,10 @@ const PostDetail = (props) => {
                 </Grid>
               )}
 
-              <Grid display="flex" margin="10px auto">
-                <Text margin="auto 10px auto 0px">기술스택 :</Text>
-                {passedData?.techStack.map((item, index) => {
-                  return (
-                    <Text margin="auto 5px" key={index}>
-                      <span
-                        style={{
-                          color: "white",
-                          textAlign: "center",
-                          padding: "4px 10px",
-                          border: "1px solid #E6DDF2",
-                          background: "#E6DDF2",
-                          borderRadius: "10px",
-                        }}
-                      >
-                        {item}
-                      </span>
-                    </Text>
-                  );
-                })}
-              </Grid>
-              <Grid display="flex" margin="20px auto">
-                <Text margin="auto 10px auto 0px">프로젝트 기간 :</Text>
-                <Text>
-                  <span
-                    style={{
-                      color: "black",
-                      textAlign: "center",
-                      padding: "4px 10px",
-                      border: "1px solid #E6DDF2",
-                      borderRadius: "10px",
-                    }}
-                  >
-                    {passedData?.startDate} ~ {passedData?.endDate}
-                  </span>
-                </Text>
-              </Grid>
-              <Grid display="flex">
-                <Text margin="auto 10px auto 0px">프로젝트 상태 :</Text>
-                <Text>{passedData?.projectStatus}</Text>
-              </Grid>
-              <Grid>
-                <Content>{passedData?.contents}</Content>
-              </Grid>
+              <StackDetail passedData={passedData} />
+              <DateDetail passedData={passedData} />
+              <StatusDetail passedData={passedData} />
+              <ContentDetail passedData={passedData} />
               <Grid>
                 {userId === postUserId ? (
                   <Grid display="flex" justifyContent="center">

@@ -2,12 +2,12 @@
 // AddPost.js
 
 import React from "react";
-import LeftBanner from "./postAdd/LeftBanner";
-import RightWrite from "./postAdd/RightWrite";
+import LeftBanner from "../components/postWrite/LeftBanner";
+import RightWrite from "../components/postWrite/RightWrite";
 
 import { Grid } from "../elements/Index";
 
-const AddPost = (props) => {
+const WritePost = (props) => {
   return (
     <React.Fragment>
       <Grid
@@ -17,9 +17,7 @@ const AddPost = (props) => {
         height="100%"
         margin="auto"
         border="1px solid #C4C4C4"
-        alignItems="center"
       >
-        {/* 이미지 */}
         <LeftBanner />
         <RightWrite />
       </Grid>
@@ -27,4 +25,4 @@ const AddPost = (props) => {
   );
 };
 
-export default AddPost;
+export default WritePost;
