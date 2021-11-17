@@ -73,6 +73,7 @@ const Button = props => {
           disabled={disabled}
           isChecked={isChecked}
           id={isId}
+          isActive={isActive}
         >
           {text ? text : children}
         </Common>
@@ -213,10 +214,10 @@ const TestButton = styled.button`
 `;
 
 const Common = styled.button`
-  background-color: ${props => (props.isActive ? "#b29cf4" : "#fff")};
+  background-color: ${props => (props.isActive == true ? "#b29cf4" : "#fff")};
   height: ${props => props.height};
   width: ${props => props.width};
-  color: ${props => (props.isActive ? "#fff" : "#b29cf4")};
+  color: ${props => (props.isActive == true ? "#fff" : "#b29cf4")};
   margin-right: 3px;
   border-radius: 25px;
   border: 1px solid #b29cf4;
