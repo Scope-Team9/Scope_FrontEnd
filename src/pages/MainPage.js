@@ -64,9 +64,9 @@ const MainPage = () => {
       setPPaging(pPaging + 12);
       // console.log("내가 페이지", infinity);
       // dispatch(pageAction.getPage(paging));
-      // if (post_list.length === 0 && pageCheck === false) {
-      //   dispatch(postActions.pageCheck(true));
-      // }
+      if (post_list.length === 0 && pageCheck === false) {
+        dispatch(postActions.pageCheck(true));
+      }
     } // 옵저버를 좀 더 위로
     // console.log(pPaging);
   }, [inView]);
