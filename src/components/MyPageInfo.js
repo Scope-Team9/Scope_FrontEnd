@@ -616,7 +616,9 @@ const MyPageInfo = (props) => {
                     </MyResultDiv>
                     {userId == myUserId && mydata?.isMyMypage === true && (
                       <Grid>
-                        <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
+                        <GotoTest onClick={EditTest}>
+                          성향 테스트 다시하기⇀
+                        </GotoTest>
                       </Grid>
                     )}
                     <Dialog maxWidth={"sm"} scroll="paper" open={testmodal}>
@@ -657,7 +659,9 @@ const MyPageInfo = (props) => {
                     </MyResultDiv>
                     {userId == myUserId && mydata?.isMyMypage === true && (
                       <Grid>
-                        <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
+                        <GotoTest onClick={EditTest}>
+                          성향 테스트 다시하기⇀
+                        </GotoTest>
                       </Grid>
                     )}
                     <Dialog
@@ -703,7 +707,9 @@ const MyPageInfo = (props) => {
                     </MyResultDiv>
                     {userId == myUserId && mydata?.isMyMypage === true && (
                       <Grid>
-                        <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
+                        <GotoTest onClick={EditTest}>
+                          성향 테스트 다시하기⇀
+                        </GotoTest>
                       </Grid>
                     )}
                     <Dialog
@@ -749,7 +755,9 @@ const MyPageInfo = (props) => {
                     </MyResultDiv>
                     {userId == myUserId && mydata?.isMyMypage === true && (
                       <Grid>
-                        <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
+                        <GotoTest onClick={EditTest}>
+                          성향 테스트 다시하기⇀
+                        </GotoTest>
                       </Grid>
                     )}
                     <Dialog
@@ -795,7 +803,9 @@ const MyPageInfo = (props) => {
                     </MyResultDiv>
                     {userId == myUserId && mydata?.isMyMypage === true && (
                       <Grid>
-                        <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
+                        <GotoTest onClick={EditTest}>
+                          성향 테스트 다시하기⇀
+                        </GotoTest>
                       </Grid>
                     )}
                     <Dialog
@@ -841,7 +851,9 @@ const MyPageInfo = (props) => {
                     </MyResultDiv>
                     {userId == myUserId && mydata?.isMyMypage === true && (
                       <Grid>
-                        <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
+                        <GotoTest onClick={EditTest}>
+                          성향 테스트 다시하기⇀
+                        </GotoTest>
                       </Grid>
                     )}
                     <Dialog
@@ -887,7 +899,9 @@ const MyPageInfo = (props) => {
                     </MyResultDiv>
                     {userId == myUserId && mydata?.isMyMypage === true && (
                       <Grid>
-                        <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
+                        <GotoTest onClick={EditTest}>
+                          성향 테스트 다시하기⇀
+                        </GotoTest>
                       </Grid>
                     )}
                     <Dialog
@@ -933,7 +947,9 @@ const MyPageInfo = (props) => {
                     </MyResultDiv>
                     {userId == myUserId && mydata?.isMyMypage === true && (
                       <Grid>
-                        <GotoTest onClick={EditTest}>성향 테스트하기⇀</GotoTest>
+                        <GotoTest onClick={EditTest}>
+                          성향 테스트 다시하기⇀
+                        </GotoTest>
                       </Grid>
                     )}
                     <Dialog
@@ -1159,7 +1175,7 @@ const Cards = styled.div`
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
     rgba(0, 0, 0, 0.22) 0px 15px 12px;
   margin: -220px 0 -600px 55px;
-  width: 505px;
+  width: 405px;
   height: 1300px;
   /* background-color: rgba(255, 255, 255, 0); */
   background-color: white;

@@ -35,6 +35,7 @@ const Sort = (props) => {
   ]);
 
   const onclickSort = (data) => {
+    console.log("최신 마감순", data);
     dispatch(postActions.isMainPage(true));
     dispatch(sortAction.getSort(data));
     dispatch(bookRecommendAction.getRb(""));
@@ -42,6 +43,7 @@ const Sort = (props) => {
   };
   //bookmark,recommend
   const onclickRb = (data) => {
+    console.log("북마크 추천", data);
     dispatch(postActions.isMainPage(true));
     dispatch(bookRecommendAction.getRb(data));
     dispatch(sortAction.getSort(""));

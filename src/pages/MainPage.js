@@ -22,11 +22,11 @@ const MainPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const stack = useSelector((state) => state.stack.stack);
-  const sort = useSelector((state) => state.sort.sort);
-  const is_loading = useSelector((state) => state.post.is_loading);
-  const cards = useSelector((state) => state.post.posts);
+  const sortC = useSelector((state) => state.sort.sort);
+  // const is_loading = useSelector((state) => state.post.is_loading);
+  // const cards = useSelector((state) => state.post.posts);
   // console.log(cards);
-  const reBook = useSelector((state) => state.rebook.reBook);
+  const reBookC = useSelector((state) => state.rebook.reBook);
   const pageCheck = useSelector((state) => state.post.pageCheck);
   const infinity = useSelector((state) => state.infinity.paging);
   const Render = useSelector((state) => state.post.render);
@@ -35,6 +35,10 @@ const MainPage = () => {
   const [pPaging, setPPaging] = React.useState(12);
   const [nowFilter, setNowFilter] = React.useState("최신");
   const [post, setPost] = React.useState();
+
+  // const pSorts = useSelector((state) => state.post.sorts);
+  // const pReBook = useSelector((state) => state.post.stacks);
+  // console.log("나만봐", pStack);
 
   const post_list = useSelector((state) => state.post.posts);
   const isLoginUser = useSelector((state) => state.user.userId);
@@ -54,7 +58,7 @@ const MainPage = () => {
     //   }
     // };
     // GetPost();
-  }, [stack, sort, reBook, pageCheck, Render]);
+  }, [stack, sortC, reBookC, pageCheck, Render]);
 
   // 요청에 대한 속도가 다를때. 다른것이 띄워질 수 있는 버그성.
 

@@ -14,10 +14,10 @@ import { history } from "../redux/configureStore";
 import { Grid, Image, Text, Button } from "../elements/Index";
 
 // Post의 함수형 컴포넌트를 만든다.
-const Post = props => {
+const Post = (props) => {
   const dispatch = useDispatch();
-  const is_mainPage = useSelector(state => state.post.mainpage);
-  const myUserId = useSelector(state => state.user.userId);
+  const is_mainPage = useSelector((state) => state.post.mainpage);
+  const myUserId = useSelector((state) => state.user.userId);
   const [stacks, setStacks] = React.useState();
   const [applyUserModal, setApplyUserModal] = React.useState(false); //지원취소/팀탈퇴/프로젝트마감
   const [applyValue, setApplyValue] = React.useState();
@@ -26,7 +26,7 @@ const Post = props => {
   let totalmember = props.totalMember;
   let recruitmentMember = props.recruitmentMember;
 
-  console.log(props, props.postId, props.mypage, props.projectStatus);
+  // console.log(props, props.postId, props.mypage, props.projectStatus);
   // console.log("게시자", props.recruitmentMember);
   // console.log("메인포스트아이디", props);
 
@@ -45,7 +45,7 @@ const Post = props => {
     const getMembers = async () => {
       try {
         const result = await apis.getMember(postId);
-        console.log(result);
+        // console.log(result);
         setMember(result.data.data);
       } catch (err) {
         console.log(err);
@@ -54,14 +54,14 @@ const Post = props => {
     getMembers();
   }, []);
 
-  console.log(member);
-  let as = member?.find(e => e.userId === myUserId);
-  console.log(as);
+  // console.log(member);
+  let as = member?.find((e) => e.userId === myUserId);
+  // console.log(as);
 
   return (
     <React.Fragment>
       <ProductImgWrap
-        onClick={e => {
+        onClick={(e) => {
           e.stopPropagation();
           history.push({
             pathname: `/postdetail/${props.postId}`,
@@ -72,8 +72,7 @@ const Post = props => {
           props.mypage &&
           props.projectStatus === "종료" &&
           member[0]?.assessment === true &&
-          as.assessment === false &&
-          props.userId === myUserId && (
+          as.assessment === false && (
             <Grid
               bg="#111"
               width="100%"
@@ -90,7 +89,7 @@ const Post = props => {
                 color="#111"
                 hoverBg="#b29cf4"
                 hoverCl="#fff"
-                _onClick={e => {
+                _onClick={(e) => {
                   e.stopPropagation();
                   console.log(e.target.value, props.postId);
                   modalOpen(e.target.value, props.postId);
@@ -107,7 +106,7 @@ const Post = props => {
             </Grid>
           )}
         <DDescriptionBox>
-          {props.projectStatus === "모집중" && (
+          {props.projectStatus === "종료" && (
             <>
               <CardHeaderDoing id="headerOne" className="headerOne">
                 <Grid>{/* <TitleDate>D-2</TitleDate> */}</Grid>
@@ -130,7 +129,7 @@ const Post = props => {
               </CardHeaderDoing>
             </>
           )}
-          {props.projectStatus === "종료" && (
+          {props.projectStatus === "모집중" && (
             <>
               <CardHeaderDone id="headerOne" className="headerOne">
                 <Grid>{/* <TitleDate>D-2</TitleDate> */}</Grid>
@@ -184,46 +183,65 @@ const Post = props => {
             position="absolute"
           ></Grid>
           <DescriptionBox>
-            <ProjectState>{props.projectStatus}</ProjectState>
+            {props.projectStatus === "모집중" && (
+              <ProjectStateReady>{props.projectStatus}</ProjectStateReady>
+            )}
+            {props.projectStatus === "진행중" && (
+              <ProjectState>{props.projectStatus}</ProjectState>
+            )}
+            {props.projectStatus === "종료" && (
+              <ProjectState>{props.projectStatus}</ProjectState>
+            )}
+
             <Title>{props.title}</Title>
-            <Summary>{props.summary}</Summary>
+            {/* <Summary>{props.summary}</Summary> */}
             <Date>
-              <Grid width="70%">
-                {props.startDate}~{props.endDate}
+              <Grid width="87%">
+                {props.startDate} ~ {props.endDate}
               </Grid>
             </Date>
             <Line />
+            {/* 프로그래스바 */}
             <Grid display="flex" width="100%" justifyContent="space-between">
               <Grid width="100%">
-                <Grid display="flex" margin="10px 0">
-                  {props.projectStatus === "모집중" && (
-                    <ProgressBarDoing>
-                      <HighLightDoing
-                        width={(recruitmentMember / totalmember) * 100 + "%"}
-                      />
-                    </ProgressBarDoing>
-                  )}
-                  {props.projectStatus === "종료" && (
-                    <ProgressBarDone>
-                      <HighLightDone
-                        width={(recruitmentMember / totalmember) * 100 + "%"}
-                      />
-                    </ProgressBarDone>
-                  )}
-                  {props.projectStatus === "진행중" && (
-                    <ProgressBarReady>
-                      <HighLightReady
-                        width={(recruitmentMember / totalmember) * 100 + "%"}
-                      />
-                    </ProgressBarReady>
-                  )}
-
-                  <Text margin="0 0 0 10px">
-                    {recruitmentMember + "/" + totalmember}
-                  </Text>
+                <Grid margin="10px 0">
+                  <Grid
+                    display="flex"
+                    justifyContent="space-between"
+                    margin="5px 0"
+                  >
+                    <Text> 참여율</Text>
+                    <Text margin="0 0 0 10px">
+                      {recruitmentMember + "/" + totalmember} 명
+                    </Text>
+                  </Grid>
+                  <Grid>
+                    {props.projectStatus === "모집중" && (
+                      <ProgressBarDoing>
+                        <HighLightDoing
+                          width={(recruitmentMember / totalmember) * 100 + "%"}
+                        />
+                      </ProgressBarDoing>
+                    )}
+                    {props.projectStatus === "종료" && (
+                      <ProgressBarDone>
+                        <HighLightDone
+                          width={(recruitmentMember / totalmember) * 100 + "%"}
+                        />
+                      </ProgressBarDone>
+                    )}
+                    {props.projectStatus === "진행중" && (
+                      <ProgressBarReady>
+                        <HighLightReady
+                          width={(recruitmentMember / totalmember) * 100 + "%"}
+                        />
+                      </ProgressBarReady>
+                    )}
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
+            {/* 프로그래스바까지 */}
           </DescriptionBox>
         </DDescriptionBox>
       </ProductImgWrap>
@@ -301,10 +319,18 @@ const Title = styled.h1`
   margin-bottom: 10px;
   font-size: 20px;
   width: 100%;
-  white-space: nowrap;
+  /* white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: #606060;
+  color: #606060; */
+  white-space: normal;
+  line-height: 1.2;
+  height: 2.4em;
+  text-align: left;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 `;
 
 const Summary = styled.div`
@@ -340,12 +366,23 @@ const Line = styled.hr`
   border: 1px solid #9e9e9e;
 `;
 
+const ProjectStateReady = styled.div`
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  color: #333;
+  background-color: #fffca8;
+  border-radius: 8px;
+  margin: auto 0;
+`;
+
 const ProjectState = styled.div`
   position: absolute;
-  top: 10px;
+  top: 18px;
   right: 15px;
-
-  background-color: #eee;
+  color: #333;
+  background-color: #ebebeb;
+  border-radius: 5px;
   margin: auto 0;
 `;
 
@@ -381,21 +418,21 @@ const ProductImgWrap = styled.div`
 const ProgressBarDoing = styled.div`
   border: 1px solid #ecc0f1;
   border-radius: 25px;
-  background: #bb9ab6;
+  background: #f6f4f6;
   width: 100%;
   height: 15px;
 `;
 const ProgressBarDone = styled.div`
   border: 1px solid #49cbfd;
   border-radius: 25px;
-  background: #bb9ab6;
+  background: #f6f4f6;
   width: 100%;
   height: 15px;
 `;
 const ProgressBarReady = styled.div`
   border: 1px solid #b29cf4;
   border-radius: 25px;
-  background: #bb9ab6;
+  background: #f6f4f6;
   width: 100%;
   height: 15px;
 `;
@@ -404,21 +441,21 @@ const HighLightDoing = styled.div`
   border-radius: 25px;
   background: #ecc0f1;
   transition: 1s;
-  width: ${props => props.width};
+  width: ${(props) => props.width};
   height: 15px;
 `;
 const HighLightDone = styled.div`
   border-radius: 25px;
   background: #49cbfd;
   transition: 1s;
-  width: ${props => props.width};
+  width: ${(props) => props.width};
   height: 15px;
 `;
 const HighLightReady = styled.div`
   border-radius: 25px;
   background: #b29cf4;
   transition: 1s;
-  width: ${props => props.width};
+  width: ${(props) => props.width};
   height: 15px;
 `;
 //프로그래스바 까지

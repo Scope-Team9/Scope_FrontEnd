@@ -8,6 +8,7 @@ import { apis } from "../lib/axios";
 import { useHistory } from "react-router";
 import { postActions } from "../redux/modules/post";
 import { Grid, Button } from "../elements/Index";
+import Swal from "sweetalert2";
 
 import ApplyStatusModal from "../components/ApplyStatusModal";
 import ApplyUserModal from "../components/ApplyUserModal";
@@ -21,6 +22,7 @@ import DateDetail from "../components/postDetail/rightContents/DateDetail";
 import StatusDetail from "../components/postDetail/rightContents/StatusDetail";
 import ContentDetail from "../components/postDetail/rightContents/ContentDetail";
 import BookMark from "../components/postDetail/rightContents/BookMark";
+import ExileUserModal from "../components/modal/ExileUserModal";
 
 // PostDetail의 함수형 컴포넌트를 만든다..
 const PostDetail = (props) => {
@@ -30,15 +32,21 @@ const PostDetail = (props) => {
   const [bookmark, setBookmark] = React.useState(false);
   const [applyStatusModal, setApplyStatusModal] = React.useState(false); //신청현황
   const [applyUserModal, setApplyUserModal] = React.useState(false); //지원취소/팀탈퇴/프로젝트마감
-  const [recruitmentFinish, setRecruitmentFinish] = React.useState();
+  const [exileStatusModal, setExileStatusModal] = React.useState(false); //강퇴
+  const [recruitmentFinish, setRecruitmentFinish] = React.useState(); // 모집완료 체크 for리렌더링
 
   const [applyValue, setApplyValue] = React.useState();
+  const [exileValue, setExileValues] = React.useState();
   const [isme, setIsme] = React.useState(null);
 
   const myUserId = useSelector((state) => state.user.userId);
 
   const applyStatusModalOpen = () => {
     setApplyStatusModal(true);
+  };
+
+  const exileStatusModalOpen = () => {
+    setExileStatusModal(true);
   };
 
   const applyUserModalOpen = (value) => {
@@ -55,6 +63,7 @@ const PostDetail = (props) => {
       try {
         const result = await apis.statusPost(post_id, editstatus);
         setRecruitmentFinish(!recruitmentFinish);
+        Swal.fire("모집 완료 되었습니다!", "", "success");
       } catch (err) {
         console.log(err);
       }
@@ -102,7 +111,13 @@ const PostDetail = (props) => {
       }
     };
     CheckPost();
-  }, [bookmark, applyStatusModal, recruitmentFinish]);
+  }, [
+    bookmark,
+    applyStatusModal,
+    recruitmentFinish,
+    exileStatusModal,
+    applyUserModal,
+  ]);
 
   const passedData = checkPost?.data["data"].post;
   const passedUserStatus = checkPost?.data["data"].userStatus;
@@ -161,11 +176,24 @@ const PostDetail = (props) => {
                           >
                             신청현황 확인
                           </Button>
+                          <Button
+                            postion="absolute"
+                            common
+                            _onClick={exileStatusModalOpen}
+                          >
+                            팀원 강퇴
+                          </Button>
+
                           <ApplyStatusModal
                             applyStatusModal={applyStatusModal}
                             setApplyStatusModal={setApplyStatusModal}
                             postId={post_id}
                           />
+                          <ExileUserModal
+                            applyStatusModal={exileStatusModal}
+                            setApplyStatusModal={setExileStatusModal}
+                            postId={post_id}
+                          ></ExileUserModal>
                         </Grid>
                       </Grid>
                     )}

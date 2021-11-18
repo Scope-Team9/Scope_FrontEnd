@@ -45,7 +45,7 @@ export const getPostAPI = () => {
       return;
     }
     apis
-      .getPost(stack, _paging.next + 1, sort, reBook)
+      .getPost(stack, sort, reBook)
       .then((res) => {
         console.log(_paging);
         const posts = res.data.data;
