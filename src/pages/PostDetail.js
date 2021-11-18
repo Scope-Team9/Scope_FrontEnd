@@ -31,6 +31,7 @@ const PostDetail = props => {
   const [applyStatusModal, setApplyStatusModal] = React.useState(false); //신청현황
   const [applyUserModal, setApplyUserModal] = React.useState(false); //지원취소/팀탈퇴/프로젝트마감
   const [recruitmentFinish, setRecruitmentFinish] = React.useState();
+  const [projectStatus, setProjectStatus] = React.useState();
 
   const [applyValue, setApplyValue] = React.useState();
   const [isme, setIsme] = React.useState(null);
@@ -97,12 +98,13 @@ const PostDetail = props => {
         setCheckPost(result);
         console.log(result);
         setIsme(result.data.data.userStatus);
+        setProjectStatus(result.data.data.post.projectStatus);
       } catch (err) {
         console.log(err);
       }
     };
     CheckPost();
-  }, [bookmark, applyStatusModal, recruitmentFinish]);
+  }, [bookmark, applyStatusModal, recruitmentFinish, projectStatus]);
 
   const passedData = checkPost?.data["data"].post;
   const passedUserStatus = checkPost?.data["data"].userStatus;
@@ -112,6 +114,7 @@ const PostDetail = props => {
     try {
       const deletePost = await apis.deletePost(post_id);
       console.log("삭제", deletePost);
+      history.push("/");
     } catch (err) {
       console.log(err);
     }
@@ -209,7 +212,19 @@ const PostDetail = props => {
                             모집완료
                           </Button>
                         )}
-                        {passedData.projectStatus === "종료" && <div></div>}
+                        {passedData.projectStatus === "종료" && (
+                          <Button
+                            common
+                            width="140px"
+                            height="35px"
+                            isValue="submit"
+                            _onClick={e => {
+                              applyUserModalOpen(e.target.value);
+                            }}
+                          >
+                            깃허브제출
+                          </Button>
+                        )}
 
                         {passedData.projectStatus === "진행중" && (
                           <Button
@@ -310,6 +325,7 @@ const PostDetail = props => {
                           applyValue={applyValue}
                           postId={post_id}
                           passdedMenber={passdedMenber}
+                          projectStatus={passedData.projectStatus}
                         />
                         {passedData?.projectStatus === "종료" &&
                           passedUserStatus === "member" && (

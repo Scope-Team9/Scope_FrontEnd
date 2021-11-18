@@ -26,7 +26,7 @@ const Post = props => {
   let totalmember = props.totalMember;
   let recruitmentMember = props.recruitmentMember;
 
-  console.log(props, props.postId, props.mypage, props.projectStatus);
+  console.log(props.postId, props.mypage, props.projectStatus);
   // console.log("게시자", props.recruitmentMember);
   // console.log("메인포스트아이디", props);
 
@@ -62,7 +62,7 @@ const Post = props => {
     <React.Fragment>
       <ProductImgWrap
         onClick={e => {
-          e.stopPropagation();
+          e.preventDefault();
           history.push({
             pathname: `/postdetail/${props.postId}`,
           });
@@ -71,9 +71,8 @@ const Post = props => {
         {member &&
           props.mypage &&
           props.projectStatus === "종료" &&
-          member[0]?.assessment === true &&
-          as.assessment === false &&
-          props.userId === myUserId && (
+          member[0].assessment === true &&
+          as.assessment === false && (
             <Grid
               bg="#111"
               width="100%"
@@ -103,6 +102,7 @@ const Post = props => {
                 setApplyUserModal={setApplyUserModal}
                 applyValue={applyValue}
                 passdedMenber={member}
+                postId={props.postId}
               />
             </Grid>
           )}
@@ -186,44 +186,54 @@ const Post = props => {
           <DescriptionBox>
             <ProjectState>{props.projectStatus}</ProjectState>
             <Title>{props.title}</Title>
-            <Summary>{props.summary}</Summary>
+            {/* <Summary>{props.summary}</Summary> */}
             <Date>
               <Grid width="70%">
                 {props.startDate}~{props.endDate}
               </Grid>
             </Date>
             <Line />
+            {/* 프로그래스바 */}
             <Grid display="flex" width="100%" justifyContent="space-between">
               <Grid width="100%">
-                <Grid display="flex" margin="10px 0">
-                  {props.projectStatus === "모집중" && (
-                    <ProgressBarDoing>
-                      <HighLightDoing
-                        width={(recruitmentMember / totalmember) * 100 + "%"}
-                      />
-                    </ProgressBarDoing>
-                  )}
-                  {props.projectStatus === "종료" && (
-                    <ProgressBarDone>
-                      <HighLightDone
-                        width={(recruitmentMember / totalmember) * 100 + "%"}
-                      />
-                    </ProgressBarDone>
-                  )}
-                  {props.projectStatus === "진행중" && (
-                    <ProgressBarReady>
-                      <HighLightReady
-                        width={(recruitmentMember / totalmember) * 100 + "%"}
-                      />
-                    </ProgressBarReady>
-                  )}
-
-                  <Text margin="0 0 0 10px">
-                    {recruitmentMember + "/" + totalmember}
-                  </Text>
+                <Grid margin="10px 0">
+                  <Grid
+                    display="flex"
+                    justifyContent="space-between"
+                    margin="5px 0"
+                  >
+                    <Text> 참여율</Text>
+                    <Text margin="0 0 0 10px">
+                      {recruitmentMember + "/" + totalmember} 명
+                    </Text>
+                  </Grid>
+                  <Grid>
+                    {props.projectStatus === "모집중" && (
+                      <ProgressBarDoing>
+                        <HighLightDoing
+                          width={(recruitmentMember / totalmember) * 100 + "%"}
+                        />
+                      </ProgressBarDoing>
+                    )}
+                    {props.projectStatus === "종료" && (
+                      <ProgressBarDone>
+                        <HighLightDone
+                          width={(recruitmentMember / totalmember) * 100 + "%"}
+                        />
+                      </ProgressBarDone>
+                    )}
+                    {props.projectStatus === "진행중" && (
+                      <ProgressBarReady>
+                        <HighLightReady
+                          width={(recruitmentMember / totalmember) * 100 + "%"}
+                        />
+                      </ProgressBarReady>
+                    )}
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
+            {/* 프로그래스바까지 */}
           </DescriptionBox>
         </DDescriptionBox>
       </ProductImgWrap>
@@ -297,7 +307,7 @@ const CardHeaderTwoReady = styled.div`
 //헤더 까지
 
 const Title = styled.h1`
-  margin-top: 10%;
+  margin-top: 15%;
   margin-bottom: 10px;
   font-size: 20px;
   width: 100%;
@@ -342,10 +352,11 @@ const Line = styled.hr`
 
 const ProjectState = styled.div`
   position: absolute;
-  top: 10px;
+  top: 25px;
   right: 15px;
-
-  background-color: #eee;
+  color: #333;
+  background-color: #85ff7a;
+  border-radius: 5px;
   margin: auto 0;
 `;
 
@@ -381,21 +392,21 @@ const ProductImgWrap = styled.div`
 const ProgressBarDoing = styled.div`
   border: 1px solid #ecc0f1;
   border-radius: 25px;
-  background: #bb9ab6;
+  background: #f6f4f6;
   width: 100%;
   height: 15px;
 `;
 const ProgressBarDone = styled.div`
   border: 1px solid #49cbfd;
   border-radius: 25px;
-  background: #bb9ab6;
+  background: #f6f4f6;
   width: 100%;
   height: 15px;
 `;
 const ProgressBarReady = styled.div`
   border: 1px solid #b29cf4;
   border-radius: 25px;
-  background: #bb9ab6;
+  background: #f6f4f6;
   width: 100%;
   height: 15px;
 `;
