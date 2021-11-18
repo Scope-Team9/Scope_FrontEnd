@@ -1,14 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import bannerImg from "../../images/PostDetail.png";
+import Img from "../../images/PostAdd.jpg";
 
 const LeftBanner = (props) => {
   return (
     <React.Fragment>
-      <SideBarImg
-        src={bannerImg}
-        style={{ maxWidth: "100%", height: "940px" }}
-      />
+      <SideBarImg src={Img} style={{ maxWidth: "100%", height: "940px" }} />
     </React.Fragment>
   );
 };
@@ -19,5 +16,4 @@ const SideBarImg = styled.img`
   }
 `;
 
-// memo를 쓰면 리랜더링 방지
-export default React.memo(LeftBanner);
+export default LeftBanner;

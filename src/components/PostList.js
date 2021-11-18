@@ -9,13 +9,16 @@ import styled from "styled-components";
 import { height } from "@mui/system";
 import { Grid, Image, Text, Button } from "../elements/Index";
 
-const PostList = () => {
+const PostList = (props) => {
   const dispatch = useDispatch();
   let stack = useSelector((state) => state.stack.stack);
   let sort = useSelector((state) => state.sort.sort);
-  let paging = useSelector((state) => state.infinity.paging.next);
+  // let paging = useSelector((state) => state?.infinity.paging.next);
+  let paging = props.paging;
   let reBook = useSelector((state) => state.rebook.reBook);
   let post_list = useSelector((state) => state.post.posts);
+  // console.log(props);
+  // let post_list = props.post.data.data;
   let posts = post_list.slice(0, paging);
 
   return (

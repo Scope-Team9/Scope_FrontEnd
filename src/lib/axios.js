@@ -72,7 +72,7 @@ export const apis = {
   getAllUserList: () => instance.get("/user/list"),
 
   //포스트 관련 api
-  getPost: (stack, paging, sort, reBook) =>
+  getPost: (stack, sort, reBook) =>
     instance.get(
       `/api/post?filter=${stack.React};${stack.Spring};${stack.Swift};${stack.TypeScript};${stack.cpp};${stack.Django};${stack.Flask};${stack.Java};${stack.JavaScript};${stack.Kotlin};${stack.Node};${stack.php};${stack.Python};${stack.Vue};&sort=${sort}&bookmarkRecommend=${reBook}`
     ),
