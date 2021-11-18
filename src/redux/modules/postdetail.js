@@ -56,7 +56,7 @@ export const statusPostAPI = (post_id, editstatus) => {
     apis
       .statusPost(post_id, editstatus)
       .then((res) => {
-        history.goBack();
+        // history.goBack();
       })
       .catch((err) => {
         console.log(err.response);

@@ -8,7 +8,6 @@ const Button = props => {
     color,
     text,
     _onClick,
-    isFloat,
     children,
     margin,
     width,
@@ -27,19 +26,12 @@ const Button = props => {
     disabled,
     isChecked,
     hoverBg,
-    hoberCl,
+    hoverCl,
     common,
     border,
-    active,
+    isActive,
+    zIndex,
   } = props;
-
-  if (isFloat) {
-    return (
-      <>
-        <FloatButton onClick={_onClick}></FloatButton>
-      </>
-    );
-  }
 
   if (isTest) {
     return (
@@ -56,6 +48,7 @@ const Button = props => {
       </>
     );
   }
+
   if (common) {
     const styles = {
       margin,
@@ -70,6 +63,7 @@ const Button = props => {
       left,
       right,
       border,
+      backgroundColor,
     };
     return (
       <>
@@ -80,7 +74,7 @@ const Button = props => {
           disabled={disabled}
           isChecked={isChecked}
           id={isId}
-          active={active}
+          isActive={isActive}
         >
           {text ? text : children}
         </Common>
@@ -104,7 +98,8 @@ const Button = props => {
     hover,
     display,
     hoverBg,
-    hoberCl,
+    hoverCl,
+    zIndex,
   };
 
   return (
@@ -169,6 +164,7 @@ const ElButton = styled.button`
   position: ${props => props.position};
   flex-shrink: 0;
   display: ${props => props.display};
+  z-index: ${props => props.zIndex};
 `;
 
 const FloatButton = styled.div`
@@ -221,10 +217,10 @@ const TestButton = styled.button`
 `;
 
 const Common = styled.button`
-  background-color: ${props => (props.active ? "#b29cf4" : "#fff")};
+  background-color: ${props => (props.isActive == true ? "#b29cf4" : "#fff")};
   height: ${props => props.height};
   width: ${props => props.width};
-  color: ${props => (props.active ? "#fff" : "#b29cf4")};
+  color: ${props => (props.isActive == true ? "#fff" : "#b29cf4")};
   margin-right: 3px;
   border-radius: 25px;
   border: 1px solid #b29cf4;

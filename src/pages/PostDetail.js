@@ -30,6 +30,7 @@ const PostDetail = (props) => {
   const [bookmark, setBookmark] = React.useState(false);
   const [applyStatusModal, setApplyStatusModal] = React.useState(false); //신청현황
   const [applyUserModal, setApplyUserModal] = React.useState(false); //지원취소/팀탈퇴/프로젝트마감
+  const [recruitmentFinish, setRecruitmentFinish] = React.useState();
 
   const [applyValue, setApplyValue] = React.useState();
   const [isme, setIsme] = React.useState(null);
@@ -50,7 +51,16 @@ const PostDetail = (props) => {
     const editstatus = {
       projectStatus: data,
     };
-    dispatch(postDetailActions.statusPostAPI(post_id, editstatus));
+    const statusDoing = async () => {
+      try {
+        const result = await apis.statusPost(post_id, editstatus);
+        setRecruitmentFinish(!recruitmentFinish);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    statusDoing();
+    // dispatch(postDetailActions.statusPostAPI(post_id, editstatus));
   };
 
   // 게시글 작성(프로젝트 상태)
@@ -66,8 +76,16 @@ const PostDetail = (props) => {
 
   //북마크 토글
   const ToggleBookMark = () => {
-    setBookmark(!bookmark);
-    dispatch(postDetailActions.bookMarkAPI(post_id));
+    const bookMark = async () => {
+      try {
+        const result = await apis.bookMarkChecked(post_id);
+        setBookmark(!bookmark);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    bookMark();
+    // dispatch(postDetailActions.bookMarkAPI(post_id));
   };
 
   React.useEffect(() => {
@@ -84,7 +102,7 @@ const PostDetail = (props) => {
       }
     };
     CheckPost();
-  }, [bookmark]);
+  }, [bookmark, applyStatusModal, recruitmentFinish]);
 
   const passedData = checkPost?.data["data"].post;
   const passedUserStatus = checkPost?.data["data"].userStatus;

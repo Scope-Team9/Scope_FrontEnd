@@ -5,6 +5,8 @@ import Post from "../Post";
 import { Grid, Image } from "../../elements/Index";
 import styled from "styled-components";
 const MypagePostList = props => {
+  const mypage = true;
+
   const myCards = props;
   const newMyCards = Object.values(myCards);
   console.log(myCards);
@@ -15,7 +17,7 @@ const MypagePostList = props => {
         <React.Fragment>
           <PostWrap>
             {newMyCards.map((p, idx) => {
-              return <Post key={idx} {...p}></Post>;
+              return <Post mypage={mypage} key={idx} {...p}></Post>;
             })}
           </PostWrap>
         </React.Fragment>
