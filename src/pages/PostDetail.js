@@ -22,7 +22,7 @@ import StatusDetail from "../components/postDetail/rightContents/StatusDetail";
 import ContentDetail from "../components/postDetail/rightContents/ContentDetail";
 import BookMark from "../components/postDetail/rightContents/BookMark";
 
-// PostDetail의 함수형 컴포넌트를 만든다..
+// PostDetail의 함수형 컴포넌트를 만든다...
 const PostDetail = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
