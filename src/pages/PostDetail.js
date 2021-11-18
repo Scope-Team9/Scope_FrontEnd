@@ -119,142 +119,200 @@ const PostDetail = props => {
 
   return (
     <React.Fragment>
-      <Grid
-        display="flex"
-        justifyContent="center"
-        maxWidth="1920px"
-        height="100%"
-        border="1px solid #C4C4C4"
-        margin="auto"
-      >
-        <LeftBanner />
-        <Grid margin="20px 20px auto 20px" position="relative">
-          <BookMark
-            userId={userId}
-            postUserId={postUserId}
-            ToggleBookMark={ToggleBookMark}
-            passedData={passedData}
-          />
-          <Title>Scoope</Title>
-          <TitleDetail passedData={passedData} />
+      {passedData?.projectStatus && (
+        <Grid
+          display="flex"
+          justifyContent="center"
+          maxWidth="1920px"
+          height="100%"
+          border="1px solid #C4C4C4"
+          margin="auto"
+        >
+          <LeftBanner />
+          <Grid margin="20px 20px auto 20px" position="relative">
+            <BookMark
+              userId={userId}
+              postUserId={postUserId}
+              ToggleBookMark={ToggleBookMark}
+              passedData={passedData}
+            />
+            <Title>Scoope</Title>
+            <TitleDetail passedData={passedData} />
 
-          <SummaryDetail passedData={passedData} />
-          <Grid margin="20px auto">
-            <PosterDetail passedData={passedData} />
-            <Grid margin="20px auto ">
-              <ApplicantDetail passdedMenber={passdedMenber} />
-              {userId === postUserId && passedData?.projectStatus === "모집중" && (
-                <Grid position="relative" width="100%">
-                  <Grid
-                    position="absolute"
-                    right="20px"
-                    width="120px"
-                    padding="10px"
-                  >
-                    <Button
-                      postion="absolute"
-                      common
-                      _onClick={applyStatusModalOpen}
-                    >
-                      신청현황 확인
-                    </Button>
-                    <ApplyStatusModal
-                      applyStatusModal={applyStatusModal}
-                      setApplyStatusModal={setApplyStatusModal}
-                      postId={post_id}
-                    />
-                  </Grid>
-                </Grid>
-              )}
-
-              <StackDetail passedData={passedData} />
-              <DateDetail passedData={passedData} />
-              <StatusDetail passedData={passedData} />
-              <ContentDetail passedData={passedData} />
-              <Grid>
-                {userId === postUserId ? (
-                  <Grid display="flex" justifyContent="center">
-                    {passedData?.projectStatus === "진행중" && (
-                      <Button
-                        common
-                        width="140px"
-                        height="35px"
-                        isValue="end"
-                        _onClick={e => {
-                          applyUserModalOpen(e.target.value);
-                        }}
+            <SummaryDetail passedData={passedData} />
+            <Grid margin="20px auto">
+              <PosterDetail passedData={passedData} />
+              <Grid margin="20px auto ">
+                <ApplicantDetail passdedMenber={passdedMenber} />
+                {userId === postUserId &&
+                  passedData?.projectStatus === "모집중" && (
+                    <Grid position="relative" width="100%">
+                      <Grid
+                        position="absolute"
+                        right="20px"
+                        width="120px"
+                        padding="10px"
                       >
-                        프로젝트 마감하기
-                      </Button>
-                    )}
-                    <ApplyUserModal
-                      applyUserModal={applyUserModal}
-                      setApplyUserModal={setApplyUserModal}
-                      applyValue={applyValue}
-                      postId={post_id}
-                      passdedMenber={passdedMenber}
-                    />
-                    {passedData?.projectStatus === "모집중" && (
+                        <Button
+                          postion="absolute"
+                          common
+                          _onClick={applyStatusModalOpen}
+                        >
+                          신청현황 확인
+                        </Button>
+                        <ApplyStatusModal
+                          applyStatusModal={applyStatusModal}
+                          setApplyStatusModal={setApplyStatusModal}
+                          postId={post_id}
+                        />
+                      </Grid>
+                    </Grid>
+                  )}
+
+                <StackDetail passedData={passedData} />
+                <DateDetail passedData={passedData} />
+                <StatusDetail passedData={passedData} />
+                <ContentDetail passedData={passedData} />
+                <Grid>
+                  {userId === postUserId ? (
+                    <Grid display="flex" justifyContent="center">
+                      {passedData?.projectStatus === "진행중" && (
+                        <Button
+                          common
+                          width="140px"
+                          height="35px"
+                          isValue="end"
+                          _onClick={e => {
+                            applyUserModalOpen(e.target.value);
+                          }}
+                        >
+                          프로젝트 마감하기
+                        </Button>
+                      )}
+                      <ApplyUserModal
+                        applyUserModal={applyUserModal}
+                        setApplyUserModal={setApplyUserModal}
+                        applyValue={applyValue}
+                        postId={post_id}
+                        passdedMenber={passdedMenber}
+                      />
+                      {passedData?.projectStatus === "모집중" && (
+                        <Button
+                          common
+                          width="140px"
+                          height="35px"
+                          _onClick={() => {
+                            edit_status("진행중");
+                          }}
+                        >
+                          모집완료
+                        </Button>
+                      )}
+                      {passedData.projectStatus === "종료" && <div></div>}
+
+                      {passedData.projectStatus === "진행중" && (
+                        <Button
+                          common
+                          width="140px"
+                          height="35px"
+                          _onClick={() => {
+                            history.push({ pathname: `/postedit/${post_id}` });
+                          }}
+                        >
+                          포스트수정
+                        </Button>
+                      )}
+
+                      {passedData.projectStatus === "모집중" && (
+                        <Button
+                          common
+                          width="140px"
+                          height="35px"
+                          _onClick={() => {
+                            history.push({ pathname: `/postedit/${post_id}` });
+                          }}
+                        >
+                          포스트수정
+                        </Button>
+                      )}
                       <Button
                         common
                         width="140px"
                         height="35px"
                         _onClick={() => {
-                          edit_status("진행중");
+                          DeletePost();
+                          window.alert("삭제되었습니다.");
                         }}
                       >
-                        모집완료
+                        포스트삭제
                       </Button>
-                    )}
-                    {passedData.projectStatus === "종료" && <div></div>}
+                    </Grid>
+                  ) : (
+                    <Grid textAlign="center">
+                      {passedData?.projectStatus === "모집중" && (
+                        <Grid>
+                          {isme === "user" && (
+                            <>
+                              <Button
+                                common
+                                width="120px"
+                                isValue="apply"
+                                _onClick={e => {
+                                  console.log(e);
+                                  applyUserModalOpen(e.target.value);
+                                }}
+                                margin="auto 10px"
+                                border="1px solid #b29cf4"
+                                borderRadius="50px"
+                              >
+                                지원신청
+                              </Button>
+                            </>
+                          )}
 
-                    {passedData.projectStatus === "진행중" && (
-                      <Button
-                        common
-                        width="140px"
-                        height="35px"
-                        _onClick={() => {
-                          history.push({ pathname: `/postedit/${post_id}` });
-                        }}
-                      >
-                        포스트수정
-                      </Button>
-                    )}
-
-                    {passedData.projectStatus === "모집중" && (
-                      <Button
-                        common
-                        width="140px"
-                        height="35px"
-                        _onClick={() => {
-                          history.push({ pathname: `/postedit/${post_id}` });
-                        }}
-                      >
-                        포스트수정
-                      </Button>
-                    )}
-                    <Button
-                      common
-                      width="140px"
-                      height="35px"
-                      _onClick={() => {
-                        DeletePost();
-                        window.alert("삭제되었습니다.");
-                      }}
-                    >
-                      포스트삭제
-                    </Button>
-                  </Grid>
-                ) : (
-                  <Grid textAlign="center">
-                    {passedData?.projectStatus === "모집중" && (
-                      <Grid>
-                        {isme === "user" && (
-                          <>
+                          {isme === "applicant" && (
                             <Button
                               common
                               width="120px"
-                              isValue="apply"
+                              isValue="cancel"
+                              _onClick={e => {
+                                applyUserModalOpen(e.target.value);
+                              }}
+                              width="120px"
+                            >
+                              지원취소
+                            </Button>
+                          )}
+
+                          {isme === "member" && (
+                            <Button
+                              common
+                              width="120px"
+                              isValue="teamExit"
+                              _onClick={e => {
+                                applyUserModalOpen(e.target.value);
+                              }}
+                            >
+                              팀탈퇴
+                            </Button>
+                          )}
+                        </Grid>
+                      )}
+
+                      <ApplyUserModal
+                        applyUserModal={applyUserModal}
+                        setApplyUserModal={setApplyUserModal}
+                        applyValue={applyValue}
+                        postId={post_id}
+                        passdedMenber={passdedMenber}
+                      />
+                      {passedData?.projectStatus === "종료" &&
+                        passedUserStatus === "member" && (
+                          <Grid>
+                            <Button
+                              common
+                              width="120px"
+                              isValue="memberLiked"
                               _onClick={e => {
                                 console.log(e);
                                 applyUserModalOpen(e.target.value);
@@ -265,71 +323,16 @@ const PostDetail = props => {
                             >
                               지원신청
                             </Button>
-                          </>
+                          </Grid>
                         )}
-
-                        {isme === "applicant" && (
-                          <Button
-                            common
-                            width="120px"
-                            isValue="cancel"
-                            _onClick={e => {
-                              applyUserModalOpen(e.target.value);
-                            }}
-                            width="120px"
-                          >
-                            지원취소
-                          </Button>
-                        )}
-
-                        {isme === "member" && (
-                          <Button
-                            common
-                            width="120px"
-                            isValue="teamExit"
-                            _onClick={e => {
-                              applyUserModalOpen(e.target.value);
-                            }}
-                          >
-                            팀탈퇴
-                          </Button>
-                        )}
-                      </Grid>
-                    )}
-
-                    <ApplyUserModal
-                      applyUserModal={applyUserModal}
-                      setApplyUserModal={setApplyUserModal}
-                      applyValue={applyValue}
-                      postId={post_id}
-                      passdedMenber={passdedMenber}
-                    />
-                    {passedData?.projectStatus === "종료" &&
-                      passedUserStatus === "member" && (
-                        <Grid>
-                          <Button
-                            common
-                            width="120px"
-                            isValue="memberLiked"
-                            _onClick={e => {
-                              console.log(e);
-                              applyUserModalOpen(e.target.value);
-                            }}
-                            margin="auto 10px"
-                            border="1px solid #b29cf4"
-                            borderRadius="50px"
-                          >
-                            지원신청
-                          </Button>
-                        </Grid>
-                      )}
-                  </Grid>
-                )}
+                    </Grid>
+                  )}
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      )}
     </React.Fragment>
   );
 };
