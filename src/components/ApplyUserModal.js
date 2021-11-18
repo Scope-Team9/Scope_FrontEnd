@@ -8,7 +8,7 @@ import { applyCreators } from "../redux/modules/applyProject";
 import CloseIcon from "@mui/icons-material/Close";
 
 import { Apply, Cancel, TeamExit } from "./applyUserModal/ApplyIndex";
-const ApplyUserModal = props => {
+const ApplyUserModal = (props) => {
   const dispatch = useDispatch();
   const {
     applyUserModal,
@@ -18,7 +18,7 @@ const ApplyUserModal = props => {
     passdedMenber,
     passedUserStatus,
   } = props;
-  const isMe = useSelector(state => state.user.userId);
+  const isMe = useSelector((state) => state.user.userId);
 
   const [likes, setLikes] = React.useState();
   const [page, setPage] = React.useState(1);
@@ -27,7 +27,7 @@ const ApplyUserModal = props => {
 
   React.useEffect(() => {
     setLikes(
-      passdedMenber?.map(stateItem => {
+      passdedMenber?.map((stateItem) => {
         let newStateItem = { ...stateItem, active: false };
         return newStateItem;
       })
@@ -41,8 +41,8 @@ const ApplyUserModal = props => {
   };
 
   const userLiked = () => {
-    const likeMember = likes.filter(user => user.active == true);
-    var result = likeMember.map(a => a.userId);
+    const likeMember = likes.filter((user) => user.active == true);
+    var result = likeMember.map((a) => a.userId);
     const likeUsers = {
       userIds: result,
     };
@@ -63,9 +63,9 @@ const ApplyUserModal = props => {
   //팀원평가 눌렀는지 안눌렀는지 (버튼색상)
 
   //색상 기능
-  const toggleLike = a => {
-    setLikes(state => {
-      return state.map(val => {
+  const toggleLike = (a) => {
+    setLikes((state) => {
+      return state.map((val) => {
         if (val.userId === Number(a)) {
           return { ...val, active: !val.active };
         }
@@ -218,7 +218,7 @@ const ApplyUserModal = props => {
                               common
                               isActive={likes[idx].active}
                               isValue={passdedMenber[idx].userId}
-                              _onClick={e => {
+                              _onClick={(e) => {
                                 e.stopPropagation();
                                 console.log(
                                   likes[idx].userId,
@@ -312,7 +312,7 @@ const ApplyUserModal = props => {
                 >
                   <Input
                     height="100%"
-                    _onChange={e => {
+                    _onChange={(e) => {
                       console.log(e.target.value);
                       setFront(e.target.value);
                     }}
@@ -320,7 +320,7 @@ const ApplyUserModal = props => {
 
                   <Input
                     height="100%"
-                    _onChange={e => {
+                    _onChange={(e) => {
                       console.log(e.target.value);
                       setBack(e.target.value);
                     }}
@@ -469,7 +469,7 @@ const ApplyUserModal = props => {
                               common
                               active={likes[idx].active}
                               isValue={passdedMenber[idx].userId}
-                              _onClick={e => {
+                              _onClick={(e) => {
                                 console.log(likes[idx].active);
                                 toggleLike(e.target.value);
                               }}
@@ -559,7 +559,7 @@ const ApplyUserModal = props => {
                 >
                   <Input
                     height="100%"
-                    _onChange={e => {
+                    _onChange={(e) => {
                       console.log(e.target.value);
                       setFront(e.target.value);
                     }}
@@ -567,7 +567,7 @@ const ApplyUserModal = props => {
 
                   <Input
                     height="100%"
-                    _onChange={e => {
+                    _onChange={(e) => {
                       console.log(e.target.value);
                       setBack(e.target.value);
                     }}
@@ -716,7 +716,7 @@ const ApplyUserModal = props => {
                               common
                               active={likes[idx].active}
                               isValue={passdedMenber[idx].userId}
-                              _onClick={e => {
+                              _onClick={(e) => {
                                 e.stopPropagation();
                                 console.log(likes[idx].active);
                                 toggleLike(e.target.value);
