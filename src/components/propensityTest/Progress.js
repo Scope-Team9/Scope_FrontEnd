@@ -1,12 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { Grid, Text } from "../../elements/Index";
-import { useSelector } from "react-redux";
 
 const Progress = props => {
   let count = 10;
   let currentStep = props.page;
-  console.log(count);
+
   return (
     <Grid
       position="relative"

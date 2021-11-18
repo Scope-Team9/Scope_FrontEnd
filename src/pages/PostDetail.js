@@ -18,7 +18,7 @@ import ExileUserModal from "../components/modal/ExileUserModal";
 import LeftBanner from "../components/postDetail/leftBanner";
 
 // PostDetail의 함수형 컴포넌트를 만든다..
-const PostDetail = (props) => {
+const PostDetail = props => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [checkPost, setCheckPost] = React.useState();
@@ -30,7 +30,7 @@ const PostDetail = (props) => {
   const [applyValue, setApplyValue] = React.useState();
   const [isme, setIsme] = React.useState(null);
 
-  const myUserId = useSelector((state) => state.user.userId);
+  const myUserId = useSelector(state => state.user.userId);
 
   const applyStatusModalOpen = () => {
     setApplyStatusModal(true);
@@ -40,13 +40,13 @@ const PostDetail = (props) => {
     setExileUserModal(true);
   };
 
-  const applyUserModalOpen = (value) => {
+  const applyUserModalOpen = value => {
     setApplyValue(value);
     setApplyUserModal(true);
   };
 
   // 상태변경
-  const edit_status = (data) => {
+  const edit_status = data => {
     const editstatus = {
       projectStatus: data,
     };
@@ -61,7 +61,7 @@ const PostDetail = (props) => {
   ];
 
   let post_id = props.match.params.id;
-  const userId = useSelector((state) => state.user.userId); //로그인 유저아이디
+  const userId = useSelector(state => state.user.userId); //로그인 유저아이디
   const postUserId = checkPost?.data.data.post.userId;
 
   //북마크 토글
@@ -161,7 +161,7 @@ const PostDetail = (props) => {
               <Grid margin="20px auto ">
                 <Text size="18px">모집인원</Text>
                 <Grid display="flex" margin="10px auto">
-                  {passdedMenber?.map((item) => (
+                  {passdedMenber?.map(item => (
                     <ProjectJoinUser key={item.userId} {...item} />
                   ))}
                 </Grid>
@@ -273,7 +273,7 @@ const PostDetail = (props) => {
                           width="140px"
                           height="35px"
                           isValue="end"
-                          _onClick={(e) => {
+                          _onClick={e => {
                             applyUserModalOpen(e.target.value);
                           }}
                         >
@@ -306,7 +306,7 @@ const PostDetail = (props) => {
                             width="140px"
                             height="35px"
                             isValue="submit"
-                            _onClick={(e) => {
+                            _onClick={e => {
                               console.log(e);
                               applyUserModalOpen(e.target.value);
                             }}
@@ -364,7 +364,7 @@ const PostDetail = (props) => {
                                 common
                                 width="120px"
                                 isValue="apply"
-                                _onClick={(e) => {
+                                _onClick={e => {
                                   console.log(e);
                                   applyUserModalOpen(e.target.value);
                                 }}
@@ -382,7 +382,7 @@ const PostDetail = (props) => {
                               common
                               width="120px"
                               isValue="cancel"
-                              _onClick={(e) => {
+                              _onClick={e => {
                                 applyUserModalOpen(e.target.value);
                               }}
                               width="120px"
@@ -396,7 +396,7 @@ const PostDetail = (props) => {
                               common
                               width="120px"
                               isValue="teamExit"
-                              _onClick={(e) => {
+                              _onClick={e => {
                                 applyUserModalOpen(e.target.value);
                               }}
                             >
@@ -412,6 +412,7 @@ const PostDetail = (props) => {
                         applyValue={applyValue}
                         postId={post_id}
                         passdedMenber={passdedMenber}
+                        passedUserStatus={passedUserStatus}
                       />
                       {/* {passedData?.projectStatus === "종료" &&
                       passedUserStatus === "member" && (

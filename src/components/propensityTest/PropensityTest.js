@@ -1,6 +1,5 @@
 /* eslint-disable */
 import React, { useState } from "react";
-import Symbol from "../../images/tiger.jpg";
 import {
   TestOne,
   TestTwo,
@@ -18,7 +17,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { Grid, Button, Image, Text } from "../../elements/Index";
 import { userCreators } from "../../redux/modules/user";
 import { history } from "../../redux/configureStore";
-import Swal from "sweetalert2";
 
 const PropensityTest = props => {
   const isToken = document.cookie.split("=")[1];
@@ -139,14 +137,6 @@ const PropensityTest = props => {
       dispatch(userCreators.signupMiddleware(registerInfo));
       setpage(page => page + 1);
     }
-
-    // console.log(userPropensityType.length, memberPropensityType.length);
-    // if (userPropensityType.length === 9 && memberPropensityType.length === 9) {
-
-    // } else {
-    //   window.alert("설문지가 정확히 작성되지 않았습니다!");
-    //   return false;
-    // }
   };
 
   const exitResult = () => {
@@ -216,14 +206,12 @@ const PropensityTest = props => {
           <TestOne
             handleUserCreate={handleUserCreate}
             handleMemberCreate={handleMemberCreate}
-            // ToggleButton={ToggleButton}
           />
         )}
         {page === 2 && (
           <TestTwo
             handleUserCreate={handleUserCreate}
             handleMemberCreate={handleMemberCreate}
-            ToggleButton={ToggleButton}
           />
         )}
         {page === 3 && (
