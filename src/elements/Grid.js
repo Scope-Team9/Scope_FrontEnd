@@ -44,6 +44,7 @@ const Grid = props => {
     bgImg,
     verticalAlign,
     cursor,
+    opacity,
   } = props;
 
   const styles = {
@@ -86,6 +87,7 @@ const Grid = props => {
     bgImg,
     verticalAlign,
     cursor,
+    opacity,
   };
   return (
     <GridBox {...styles} onClick={_onClick} id={id}>
@@ -172,6 +174,7 @@ const GridBox = styled.div`
   z-index: ${props => props.zIndex};
   background-image: ${props => props.bgImg};
   cursor: ${props => props.cursor};
+  opacity: ${props => props.opacity};
 
   :hover {
     ${props =>

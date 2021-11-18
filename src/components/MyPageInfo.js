@@ -30,8 +30,6 @@ const MyPageInfo = props => {
   const userId = props.match.params.id;
   const myUserId = useSelector(state => state.user.userId);
   // console.log(props);
-  console.log(userId);
-  console.log(myUserId);
 
   const [filter, setFilter] = React.useState("소개");
   const [mydata, setMydata] = React.useState();

@@ -156,6 +156,21 @@ const submitUrlAPI = (postId, urls) => {
       });
   };
 };
+
+//마이페이지 프로젝트 팀원정보 조회
+const getMemberAPI = postId => {
+  return function (dispatch, getState, { history }) {
+    apis
+      .getMember(postId)
+      .then(res => {
+        console.log(res);
+        window.alert("모라공?");
+      })
+      .catch(err => {
+        console.log(err.response);
+      });
+  };
+};
 // 리듀서
 export default handleActions(
   {
@@ -176,6 +191,7 @@ const applyCreators = {
   exitTeamAPI,
   starterLikeAPI,
   submitUrlAPI,
+  getMemberAPI,
 };
 
 export { applyCreators };
