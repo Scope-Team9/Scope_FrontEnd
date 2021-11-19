@@ -6,15 +6,11 @@ import UserList from "../../UserList";
 const PosterDetail = (props) => {
   return (
     <React.Fragment>
-      <Grid>
-        <Text size="18px">프로젝트 게시자</Text>
-        <Grid
-          width="60px"
-          height="60px"
-          borderRadius="50%"
-          backgroundColor="#C4C4C4"
-          margin="10px 0px 0px"
-        >
+      <Grid textAlign="center" margin="0px">
+        <Text size="18px" bold>
+          게시자
+        </Text>
+        <Grid>
           <UserList list={props.passedData?.propensityType}></UserList>
         </Grid>
         <Text size="20px">{props.passedData?.nickname}</Text>

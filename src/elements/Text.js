@@ -10,6 +10,7 @@ const Text = (props) => {
     align,
     margin,
     padding,
+    underline,
     family,
     border,
     _onClick,
@@ -23,6 +24,7 @@ const Text = (props) => {
     align,
     margin,
     padding,
+    underline,
     family,
     border,
     cursor,
@@ -40,6 +42,7 @@ Text.defaultProps = {
   size: null,
   bold: false,
   align: null,
+  underline: null,
   margin: false,
   padding: false,
   family: false, //폰트 타입
@@ -52,6 +55,7 @@ const ElText = styled.span`
   color: ${(props) => props.color};
   font-size: ${(props) => props.size};
   font-weight: ${(props) => (props.bold ? "bold" : "400")};
+
   text-align: ${(props) => props.align};
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};

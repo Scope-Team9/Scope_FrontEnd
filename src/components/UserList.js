@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Image } from "../elements/Index";
+import { Grid } from "../elements/Index";
 import styled from "styled-components";
 
 const UserList = (props) => {
@@ -7,7 +7,13 @@ const UserList = (props) => {
 
   return (
     <React.Fragment>
-      <Grid>
+      <Grid
+        width="60px"
+        height="60px"
+        borderRadius="50%"
+        backgroundColor="#C4C4C4"
+        margin="10px auto auto auto"
+      >
         {list === "LVG" && <Img src="/img/호랑이.png" />}
         {list === "LVP" && <Img src="/img/늑대.png" />}
         {list === "LHG" && <Img src="/img/여우.png" />}

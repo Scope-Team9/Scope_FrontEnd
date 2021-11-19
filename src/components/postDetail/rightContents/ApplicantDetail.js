@@ -6,11 +6,15 @@ import ProjectJoinUser from "../../ProjectJoinUser";
 const ApplicantDetail = (props) => {
   return (
     <React.Fragment>
-      <Text size="18px">모집인원</Text>
-      <Grid display="flex" margin="10px auto">
-        {props.passdedMenber?.map((item) => (
-          <ProjectJoinUser key={item.userId} {...item} />
-        ))}
+      <Grid margin="4px 0px 0px 0px">
+        <Text size="18px" bold>
+          모집인원
+        </Text>
+        <Grid>
+          {props.passdedMenber?.map((item) => (
+            <ProjectJoinUser key={item.userId} {...item} />
+          ))}
+        </Grid>
       </Grid>
     </React.Fragment>
   );
