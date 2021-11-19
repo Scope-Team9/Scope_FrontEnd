@@ -9,7 +9,14 @@ import ImgType from "../../shared/ImgType";
 const Liked = props => {
   const dispatch = useDispatch();
   const [likes, setLikes] = React.useState();
-  const { modalClose, postId, passdedMenber, isMe, projectStatus } = props;
+  const {
+    modalClose,
+    postId,
+    passdedMenber,
+    isMe,
+    projectStatus,
+    statusCheck,
+  } = props;
 
   React.useEffect(() => {
     setLikes(
@@ -37,15 +44,15 @@ const Liked = props => {
   const userLiked = () => {
     console.log(likes);
     const likeMember = likes.filter(user => user.active == true);
-    var result = likeMember.map(a => a.userId);
+    const result = likeMember.map(a => a.userId);
     const likeUsers = {
       userIds: result,
     };
     console.log(likeUsers);
 
     dispatch(applyCreators.starterLikeAPI(postId, likeUsers));
-
-    // modalClose();
+    statusCheck("종료");
+    modalClose();
   };
   console.log(likes);
 

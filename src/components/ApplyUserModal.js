@@ -18,12 +18,17 @@ const ApplyUserModal = props => {
     passdedMenber,
     passedUserStatus,
     projectStatus,
+    statusCheck,
   } = props;
   const isMe = useSelector(state => state.user.userId);
   const [page, setPage] = React.useState(1);
 
-  const modalClose = () => {
+  const modalClose = a => {
+    console.log(a);
     setApplyUserModal(false);
+    if (a === "종료") {
+      statusCheck(a);
+    }
   };
 
   return (
@@ -55,6 +60,7 @@ const ApplyUserModal = props => {
             isMe={isMe}
             page={page}
             setPage={setPage}
+            statusCheck={statusCheck}
           />
         )}
         {applyValue === "end" && page === 2 && (

@@ -47,6 +47,9 @@ const PostDetail = props => {
     setApplyUserModal(true);
   };
 
+  const statusCheck = value => {
+    setProjectStatus(value);
+  };
   // 상태변경
   const edit_status = data => {
     const editstatus = {
@@ -199,6 +202,7 @@ const PostDetail = props => {
                           applyValue={applyValue}
                           postId={post_id}
                           passdedMenber={passdedMenber}
+                          statusCheck={statusCheck}
                         />
                         {passedData?.projectStatus === "모집중" && (
                           <Button

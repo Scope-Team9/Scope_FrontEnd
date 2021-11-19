@@ -1059,10 +1059,7 @@ const MyPageInfo = props => {
                 )}
               </Grid>
               {filter === "완료" && (
-                <MypagePostList
-                  filter={filter}
-                  {...endProject}
-                ></MypagePostList>
+                <MypagePostList {...endProject}></MypagePostList>
               )}
               <Grid margin="0 0 0 34%" width="49%">
                 {filter === "완료" && endProject.length === 0 && (
