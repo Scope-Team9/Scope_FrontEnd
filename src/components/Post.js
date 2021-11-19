@@ -9,7 +9,6 @@ import ApplyUserModal from "./ApplyUserModal";
 import { useSelector, useDispatch } from "react-redux";
 import { applyCreators } from "../redux/modules/applyProject";
 import { apis } from "../lib/axios";
-
 import { history } from "../redux/configureStore";
 import { Grid, Image, Text, Button } from "../elements/Index";
 
@@ -26,7 +25,7 @@ const Post = (props) => {
   let totalmember = props.totalMember;
   let recruitmentMember = props.recruitmentMember;
 
-  // console.log(props, props.postId, props.mypage, props.projectStatus);
+  console.log(props.postId, props.mypage, props.projectStatus);
   // console.log("게시자", props.recruitmentMember);
   // console.log("메인포스트아이디", props);
 
@@ -62,7 +61,7 @@ const Post = (props) => {
     <React.Fragment>
       <ProductImgWrap
         onClick={(e) => {
-          e.stopPropagation();
+          e.preventDefault();
           history.push({
             pathname: `/postdetail/${props.postId}`,
           });
@@ -71,7 +70,7 @@ const Post = (props) => {
         {member &&
           props.mypage &&
           props.projectStatus === "종료" &&
-          member[0]?.assessment === true &&
+          member[0].assessment === true &&
           as.assessment === false && (
             <Grid
               bg="#111"
@@ -102,6 +101,7 @@ const Post = (props) => {
                 setApplyUserModal={setApplyUserModal}
                 applyValue={applyValue}
                 passdedMenber={member}
+                postId={props.postId}
               />
             </Grid>
           )}
@@ -216,19 +216,19 @@ const Post = (props) => {
                     </Text>
                   </Grid>
                   <Grid>
-                    {props.projectStatus === "모집중" && (
-                      <ProgressBarDoing>
-                        <HighLightDoing
-                          width={(recruitmentMember / totalmember) * 100 + "%"}
-                        />
-                      </ProgressBarDoing>
-                    )}
                     {props.projectStatus === "종료" && (
                       <ProgressBarDone>
                         <HighLightDone
                           width={(recruitmentMember / totalmember) * 100 + "%"}
                         />
                       </ProgressBarDone>
+                    )}
+                    {props.projectStatus === "모집중" && (
+                      <ProgressBarDoing>
+                        <HighLightDoing
+                          width={(recruitmentMember / totalmember) * 100 + "%"}
+                        />
+                      </ProgressBarDoing>
                     )}
                     {props.projectStatus === "진행중" && (
                       <ProgressBarReady>
@@ -315,7 +315,7 @@ const CardHeaderTwoReady = styled.div`
 //헤더 까지
 
 const Title = styled.h1`
-  margin-top: 10%;
+  margin-top: 15%;
   margin-bottom: 10px;
   font-size: 20px;
   width: 100%;
@@ -368,20 +368,20 @@ const Line = styled.hr`
 
 const ProjectStateReady = styled.div`
   position: absolute;
-  top: 18px;
+  top: 25px;
   right: 15px;
   color: #333;
-  background-color: #fffca8;
-  border-radius: 8px;
+  background-color: #85ff7a;
+  border-radius: 5px;
   margin: auto 0;
 `;
 
 const ProjectState = styled.div`
   position: absolute;
-  top: 18px;
+  top: 25px;
   right: 15px;
   color: #333;
-  background-color: #ebebeb;
+  background-color: #85ff7a;
   border-radius: 5px;
   margin: auto 0;
 `;
@@ -415,14 +415,14 @@ const ProductImgWrap = styled.div`
   }
 `;
 //프로그래스바
-const ProgressBarDoing = styled.div`
+const ProgressBarDone = styled.div`
   border: 1px solid #ecc0f1;
   border-radius: 25px;
   background: #f6f4f6;
   width: 100%;
   height: 15px;
 `;
-const ProgressBarDone = styled.div`
+const ProgressBarDoing = styled.div`
   border: 1px solid #49cbfd;
   border-radius: 25px;
   background: #f6f4f6;
@@ -437,14 +437,14 @@ const ProgressBarReady = styled.div`
   height: 15px;
 `;
 
-const HighLightDoing = styled.div`
+const HighLightDone = styled.div`
   border-radius: 25px;
   background: #ecc0f1;
   transition: 1s;
   width: ${(props) => props.width};
   height: 15px;
 `;
-const HighLightDone = styled.div`
+const HighLightDoing = styled.div`
   border-radius: 25px;
   background: #49cbfd;
   transition: 1s;

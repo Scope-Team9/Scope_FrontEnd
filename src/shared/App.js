@@ -9,7 +9,7 @@ import { userCreators } from "../redux/modules/user";
 import MainPage from "../pages/MainPage";
 import KakaoRedirect from "./kakaoRedirect";
 import GitHubRedirect from "./GitHubRedirect";
-import MyPage from "../pages/MyPage";
+
 import MyPageInfo from "../components/MyPageInfo";
 import PostWrite from "../pages/PostWrite";
 import PostEdit from "../pages/PostEdit";

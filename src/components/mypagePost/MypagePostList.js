@@ -5,6 +5,7 @@ import Post from "../Post";
 import { Grid, Image } from "../../elements/Index";
 import styled from "styled-components";
 const MypagePostList = props => {
+  console.log(props);
   const mypage = true;
 
   const myCards = props;
