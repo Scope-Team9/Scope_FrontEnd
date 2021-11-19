@@ -198,6 +198,9 @@ const PropensityTest = props => {
         {page === 10 && userType === "FHP" && (
           <img width="50%" src="/img/물개결과.png" />
         )}
+        {page === 10 && userType === "RHP" && (
+          <img width="50%" src="/img/너구리결과.png" />
+        )}
       </Grid>
 
       {/* 컨텐츠자리 */}

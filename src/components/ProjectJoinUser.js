@@ -4,9 +4,9 @@ import styled from "styled-components";
 import { useHistory } from "react-router";
 import ImgType from "../shared/ImgType";
 
-const ProjectJoinUser = (props) => {
+const ProjectJoinUser = props => {
   const history = useHistory();
-  const goToMypage = (userId) => {
+  const goToMypage = userId => {
     history.push(`/mypage/${userId}`);
   };
   return (
@@ -19,7 +19,7 @@ const ProjectJoinUser = (props) => {
           backgroundColor="#C4C4C4"
         >
           <ImgType
-            img={props.userPropensityType}
+            type={props.userPropensityType}
             cursor="pointer"
             _onClick={() => {
               goToMypage(props.userId);

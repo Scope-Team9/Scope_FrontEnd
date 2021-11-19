@@ -51,6 +51,7 @@ const ApplyUserModal = props => {
             modalClose={modalClose}
             postId={postId}
             passdedMenber={passdedMenber}
+            projectStatus={projectStatus}
             isMe={isMe}
             page={page}
             setPage={setPage}

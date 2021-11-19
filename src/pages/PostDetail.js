@@ -178,7 +178,7 @@ const PostDetail = props => {
                   <StatusDetail passedData={passedData} />
                   <ContentDetail passedData={passedData} />
                   <Grid>
-                    {userId === postUserId ? (
+                    {userId === postUserId && (
                       <Grid display="flex" justifyContent="center">
                         {passedData?.projectStatus === "진행중" && (
                           <Button
@@ -266,86 +266,6 @@ const PostDetail = props => {
                         >
                           포스트삭제
                         </Button>
-                      </Grid>
-                    ) : (
-                      <Grid textAlign="center">
-                        {passedData?.projectStatus === "모집중" && (
-                          <Grid>
-                            {isme === "user" && (
-                              <>
-                                <Button
-                                  common
-                                  width="120px"
-                                  isValue="apply"
-                                  _onClick={e => {
-                                    console.log(e);
-                                    applyUserModalOpen(e.target.value);
-                                  }}
-                                  margin="auto 10px"
-                                  border="1px solid #b29cf4"
-                                  borderRadius="50px"
-                                >
-                                  지원신청
-                                </Button>
-                              </>
-                            )}
-
-                            {isme === "applicant" && (
-                              <Button
-                                common
-                                width="120px"
-                                isValue="cancel"
-                                _onClick={e => {
-                                  applyUserModalOpen(e.target.value);
-                                }}
-                                width="120px"
-                              >
-                                지원취소
-                              </Button>
-                            )}
-
-                            {isme === "member" && (
-                              <Button
-                                common
-                                width="120px"
-                                isValue="teamExit"
-                                _onClick={e => {
-                                  applyUserModalOpen(e.target.value);
-                                }}
-                              >
-                                팀탈퇴
-                              </Button>
-                            )}
-                          </Grid>
-                        )}
-
-                        <ApplyUserModal
-                          applyUserModal={applyUserModal}
-                          setApplyUserModal={setApplyUserModal}
-                          applyValue={applyValue}
-                          postId={post_id}
-                          passdedMenber={passdedMenber}
-                          projectStatus={passedData.projectStatus}
-                        />
-                        {passedData?.projectStatus === "종료" &&
-                          passedUserStatus === "member" && (
-                            <Grid>
-                              <Button
-                                common
-                                width="120px"
-                                isValue="memberLiked"
-                                _onClick={e => {
-                                  console.log(e);
-                                  applyUserModalOpen(e.target.value);
-                                }}
-                                margin="auto 10px"
-                                border="1px solid #b29cf4"
-                                borderRadius="50px"
-                              >
-                                지원신청
-                              </Button>
-                            </Grid>
-                          )}
                       </Grid>
                     )}
                   </Grid>

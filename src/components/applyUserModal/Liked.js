@@ -4,11 +4,12 @@ import { useDispatch } from "react-redux";
 import { applyCreators } from "../../redux/modules/applyProject";
 import styled from "styled-components";
 import CloseIcon from "@mui/icons-material/Close";
+import ImgType from "../../shared/ImgType";
 
 const Liked = props => {
   const dispatch = useDispatch();
   const [likes, setLikes] = React.useState();
-  const { modalClose, postId, passdedMenber, isMe, page, setPage } = props;
+  const { modalClose, postId, passdedMenber, isMe, projectStatus } = props;
 
   React.useEffect(() => {
     setLikes(
@@ -17,7 +18,7 @@ const Liked = props => {
         return newStateItem;
       })
     );
-  }, [passdedMenber]);
+  }, [passdedMenber, projectStatus]);
 
   //색상 기능 눌렀는지 안눌렀는지 (버튼색상)
   const toggleLike = a => {
@@ -43,8 +44,8 @@ const Liked = props => {
     console.log(likeUsers);
 
     dispatch(applyCreators.starterLikeAPI(postId, likeUsers));
-    modalClose();
-    setPage(page + 1);
+
+    // modalClose();
   };
   console.log(likes);
 
@@ -104,30 +105,7 @@ const Liked = props => {
                   {...user}
                 >
                   <Grid margin="auto" width="10%">
-                    {passdedMenber[idx].userPropensityType === "LVG" && (
-                      <UserImg src="/img/호랑이.png"></UserImg>
-                    )}
-                    {passdedMenber[idx].userPropensityType === "LVP" && (
-                      <UserImg src="/img/늑대.png"></UserImg>
-                    )}
-                    {passdedMenber[idx].userPropensityType === "LHG" && (
-                      <UserImg src="/img/여우.png"></UserImg>
-                    )}
-                    {passdedMenber[idx].userPropensityType === "LHP" && (
-                      <UserImg src="/img/판다.png"></UserImg>
-                    )}
-                    {passdedMenber[idx].userPropensityType === "FVG" && (
-                      <UserImg src="/img/토끼.png"></UserImg>
-                    )}
-                    {passdedMenber[idx].userPropensityType === "FVP" && (
-                      <UserImg src="/img/허스키.png"></UserImg>
-                    )}
-                    {passdedMenber[idx].userPropensityType === "FHG" && (
-                      <UserImg src="/img/고양이.png"></UserImg>
-                    )}
-                    {passdedMenber[idx].userPropensityType === "FHP" && (
-                      <UserImg src="/img/물개.png"></UserImg>
-                    )}
+                    <ImgType type={passdedMenber[idx].userPropensityType} />
                   </Grid>
                   <Grid height="100%" width=" 70%" margin="auto">
                     <Grid display="flex" height="60%" margin="auto">

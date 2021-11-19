@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Grid } from "../elements/Index";
-const ImgType = (props) => {
+const ImgType = props => {
   const { margin, width, height, _onClick, cursor } = props;
   const styles = {
     margin,
@@ -59,8 +59,8 @@ const ImgType = (props) => {
   const [result, setResult] = React.useState();
   React.useEffect(() => {
     // console.table(props);
-    imges.map((item) => {
-      if (item.type === props.img) {
+    imges.map(item => {
+      if (item.type === props.type) {
         setResult(item.img);
         return item;
       }
@@ -84,9 +84,9 @@ ImgType.defaultProps = {
 };
 
 const Img = styled.img`
-  width: ${(props) => props.width};
-  height: ${(props) => props.height};
-  margin: ${(props) => props.margin};
-  cursor: ${(props) => props.cursor};
+  width: ${props => props.width};
+  height: ${props => props.height};
+  margin: ${props => props.margin};
+  cursor: ${props => props.cursor};
 `;
 export default ImgType;
