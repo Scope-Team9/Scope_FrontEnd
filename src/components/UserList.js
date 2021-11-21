@@ -12,7 +12,7 @@ const UserList = (props) => {
         height="60px"
         borderRadius="50%"
         backgroundColor="#C4C4C4"
-        margin="10px auto auto auto"
+        margin="10px"
       >
         {list === "LVG" && <Img src="/img/호랑이.png" />}
         {list === "LVP" && <Img src="/img/늑대.png" />}

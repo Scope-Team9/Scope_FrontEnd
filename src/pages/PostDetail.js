@@ -110,7 +110,7 @@ const PostDetail = (props) => {
             ToggleBookMark={ToggleBookMark}
             passedData={passedData}
           />
-          <Title>Scoope</Title>
+          {/* <Title>Scoope</Title> */}
           <TitleDetail passedData={passedData} />
 
           {/* <SummaryDetail passedData={passedData} /> */}
@@ -187,11 +187,11 @@ const PostDetail = (props) => {
 };
 
 // styled-components를 사용한다.
-const Title = styled.h1`
-  color: black;
-  font-size: 32px;
-  font-weight: 800;
-`;
+// const Title = styled.h1`
+//   color: black;
+//   font-size: 32px;
+//   font-weight: 800;
+// `;
 
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default PostDetail;

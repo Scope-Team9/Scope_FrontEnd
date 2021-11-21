@@ -17,6 +17,7 @@ const ProjectJoinUser = (props) => {
           height="60px"
           borderRadius="50%"
           backgroundColor="#C4C4C4"
+          margin="6px auto"
         >
           <ImgType
             img={props.userPropensityType}
@@ -26,7 +27,7 @@ const ProjectJoinUser = (props) => {
             }}
           ></ImgType>
         </Grid>
-        <Text size="20px">{props.nickname}</Text>
+        <Text size="16px">{props.nickname}</Text>
         <Grid>({props.userPropensityType})</Grid>
       </Grid>
     </React.Fragment>

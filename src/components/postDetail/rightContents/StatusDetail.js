@@ -8,7 +8,7 @@ const StatusDetail = (props) => {
         <Text size="18px" bold margin="auto 10px auto 0px">
           프로젝트 상태
         </Text>
-        <Text underline="1px solid black">
+        <Text size="18px" color="#9D81F0">
           {props.passedData?.projectStatus}
         </Text>
       </Grid>
