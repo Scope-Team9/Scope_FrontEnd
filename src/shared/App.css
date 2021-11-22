@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  font-family: "GmarketSans";
 }
 
 .App-logo {
@@ -35,4 +35,25 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+@font-face {
+  font-family: "GmarketSans";
+  src: url("../styles/fonts/GmarketSansLight.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GmarketSans";
+  src: url("../styles/fonts/GmarketSansBold.otf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GmarketSans";
+  src: url("../styles/fonts/GmarketSansMedium.otf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
 }
