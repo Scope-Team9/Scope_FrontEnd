@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Button = props => {
+const Button = (props) => {
   const {
     isId,
     isTest,
@@ -132,46 +132,48 @@ Button.defaultProps = {
 };
 
 const ElButton = styled.button`
-  width: ${props => props.width};
-  color: ${props => props.color};
-  padding: ${props => props.padding};
-  height: ${props => props.height};
-  font-size: ${props => props.fontSize};
-  margin: ${props => props.margin};
-  ${props =>
+  width: ${(props) => props.width};
+  color: ${(props) => props.color};
+  padding: ${(props) => props.padding};
+  height: ${(props) => props.height};
+  font-size: ${(props) => props.fontSize};
+  margin: ${(props) => props.margin};
+  ${(props) =>
     props.backgroundColor
       ? `background-color:${props.backgroundColor}`
       : "background-color: #b29cf4"};
   box-sizing: border-box;
   border-radius: 5px;
   font-weight: bold;
-  ${props => (props.border ? `border:${props.border}` : "border: none")};
-  ${props =>
+  ${(props) => (props.border ? `border:${props.border}` : "border: none")};
+  ${(props) =>
     props.borderRadius
       ? `border-radius:${props.borderRadius}`
       : "border-radius: 25px"};
   cursor: pointer;
   flex-shrink: 0;
   &:hover {
-    background-color: ${props => props.hoverBg};
-    color: ${props => props.hoverCl};
+    background-color: ${(props) => props.hoverBg};
+    color: ${(props) => props.hoverCl};
+    transform: translate();
+    transition: 0.3s ease-out;
   }
   vertical-align: middle;
-  top: ${props => props.top};
-  bottom: ${props => props.bottom};
-  left: ${props => props.left};
-  right: ${props => props.right};
-  position: ${props => props.position};
+  top: ${(props) => props.top};
+  bottom: ${(props) => props.bottom};
+  left: ${(props) => props.left};
+  right: ${(props) => props.right};
+  position: ${(props) => props.position};
   flex-shrink: 0;
-  display: ${props => props.display};
-  z-index: ${props => props.zIndex};
+  display: ${(props) => props.display};
+  z-index: ${(props) => props.zIndex};
 `;
 
 const FloatButton = styled.div`
   width: 50px;
   height: 50px;
   background-color: #ffffff;
-  color: ${props => props.color};
+  color: ${(props) => props.color};
   box-sizing: border-box;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.24);
   font-size: 36px;
@@ -183,7 +185,7 @@ const FloatButton = styled.div`
   vertical-align: middle;
   border: none;
   border-radius: 50px;
-  display: ${props => props.display};
+  display: ${(props) => props.display};
 `;
 
 const TestButton = styled.button`
@@ -191,11 +193,12 @@ const TestButton = styled.button`
   text-align: center;
   border: 1px solid #b29cf4;
   border-radius: 25px;
-  ${props =>
+  ${(props) =>
     props.isChecked === "#B29CF4"
       ? "background-color:#B29CF4"
       : "background-color:#fff"};
-  ${props => (props.isChecked === "#B29CF4" ? "color:#fff" : "color:#B29CF4")};
+  ${(props) =>
+    props.isChecked === "#B29CF4" ? "color:#fff" : "color:#B29CF4"};
   padding: 20px;
   margin: 5px;
   box-shadow: 0px 2px 2px #ddd;
@@ -205,6 +208,8 @@ const TestButton = styled.button`
     cursor: pointer;
     color: #fff;
     box-shadow: 0px 3px 2px #ddd;
+    transform: translate();
+    transition: 0.3s ease-out;
   }
   /* &::active {
     box-shadow: 0px 1px 2px #111;
@@ -217,22 +222,24 @@ const TestButton = styled.button`
 `;
 
 const Common = styled.button`
-  background-color: ${props => (props.isActive == true ? "#b29cf4" : "#fff")};
-  height: ${props => props.height};
-  width: ${props => props.width};
-  color: ${props => (props.isActive == true ? "#fff" : "#b29cf4")};
+  background-color: ${(props) => (props.isActive == true ? "#b29cf4" : "#fff")};
+  height: ${(props) => props.height};
+  width: ${(props) => props.width};
+  color: ${(props) => (props.isActive == true ? "#fff" : "#b29cf4")};
   margin-right: 3px;
   border-radius: 25px;
   border: 1px solid #b29cf4;
   cursor: pointer;
-  top: ${props => props.top};
-  bottom: ${props => props.bottom};
-  left: ${props => props.left};
-  right: ${props => props.right};
-  position: ${props => props.position};
+  top: ${(props) => props.top};
+  bottom: ${(props) => props.bottom};
+  left: ${(props) => props.left};
+  right: ${(props) => props.right};
+  position: ${(props) => props.position};
   &:hover {
     background-color: #b29cf4;
     color: #fff;
+    transform: translate();
+    transition: 0.3s ease-out;
   }
 `;
 export default Button;

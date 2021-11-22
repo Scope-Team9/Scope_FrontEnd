@@ -45,13 +45,13 @@ const RightWrite = (props) => {
       contents.length > 0
     ) {
       window.alert("프로젝트가 생성되었습니다.");
-      scope_index();
+      scopeIndex();
     } else {
       window.alert("값을 다 입력해주세요.");
     }
   };
 
-  const scope_index = () => {
+  const scopeIndex = () => {
     const card = {
       title: title,
       summary: summary,
@@ -71,6 +71,8 @@ const RightWrite = (props) => {
       ...base,
       boxShadow: state.isFocused ? 0 : 0,
       borderWidth: 2,
+      borderRadius: 10,
+      marginTop: 4,
       minHeight: 40,
       borderColor: state.isFocused ? "#C4C4C4" : base.borderColor,
       "&:hover": {
@@ -81,10 +83,10 @@ const RightWrite = (props) => {
 
   return (
     <React.Fragment>
-      <Grid padding="66px">
+      <Grid margin="46px 106px 0px">
         <Title>Scoope</Title>
-        <Grid>
-          <SecondTitle>게시글 작성하기</SecondTitle>
+        <SecondTitle>게시글 작성하기</SecondTitle>
+        <Grid margin="40px auto">
           <TitleWrite setTitle={setTitle} />
           <SummaryWrite setSummary={setSummary} />
           <StectWrite
@@ -112,14 +114,13 @@ const RightWrite = (props) => {
 
 const Title = styled.div`
   color: black;
-  font-size: 36px;
+  font-size: 32px;
   font-weight: 800;
 `;
 
 const SecondTitle = styled.div`
   color: black;
   font-size: 20px;
-  font-weight: 500;
   margin: 16px auto;
 `;
 export default RightWrite;

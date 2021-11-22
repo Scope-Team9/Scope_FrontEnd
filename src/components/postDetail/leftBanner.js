@@ -7,7 +7,7 @@ const LeftBanner = (props) => {
     <React.Fragment>
       <SideBarImg
         src={bannerImg}
-        style={{ maxWidth: "100%", height: "940px" }}
+        style={{ maxWidth: "100%", height: "920px" }}
       />
     </React.Fragment>
   );

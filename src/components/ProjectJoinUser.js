@@ -17,16 +17,17 @@ const ProjectJoinUser = (props) => {
           height="60px"
           borderRadius="50%"
           backgroundColor="#C4C4C4"
+          margin="6px 0px"
         >
           <ImgType
-            img={props.userPropensityType}
+            type={props.userPropensityType}
             cursor="pointer"
             _onClick={() => {
               goToMypage(props.userId);
             }}
           ></ImgType>
         </Grid>
-        <Text size="20px">{props.nickname}</Text>
+        <Text size="16px">{props.nickname}</Text>
         <Grid>({props.userPropensityType})</Grid>
       </Grid>
     </React.Fragment>

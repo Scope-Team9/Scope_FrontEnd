@@ -3,8 +3,13 @@ import { Grid, Text } from "../../../elements/Index";
 
 import Select from "react-select";
 
-const StatusWrite = (props) => {
-  const projectstatus = [{ value: "모집중", label: "모집중" }];
+const StatusEdit = (props) => {
+  // 게시글 작성(프로젝트 상태)
+  const projectStatused = [
+    { value: "done", label: "모집중" },
+    { value: "doing", label: "진행중" },
+    { value: "ready", label: "종료" },
+  ];
 
   return (
     <React.Fragment>
@@ -13,13 +18,10 @@ const StatusWrite = (props) => {
           프로젝트 상태체크
         </Text>
         <Select
-          options={projectstatus}
+          options={projectStatused}
           styles={props.styles}
-          onChange={(e) => {
-            let a;
-            a = e["label"];
-            props.setProjectstatus(a);
-          }}
+          value={props.projectStatus}
+          onChange={props.setProjectstatus}
           placeholder={<div>상태를 설정해주세요.</div>}
         ></Select>
       </Grid>
@@ -27,4 +29,4 @@ const StatusWrite = (props) => {
   );
 };
 
-export default StatusWrite;
+export default StatusEdit;

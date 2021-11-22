@@ -17,10 +17,10 @@ const pageCheck = createAction(PAGECHECK, (data) => ({ data }));
 
 const initialState = {
   posts: [],
-  is_loaded: false,
+  isLoaded: false,
   infinityposts: [],
   // paging: { start: null, next: null },
-  is_loading: false,
+  isLoading: false,
   sorts: "createdAt",
   reBook: "",
   mainpage: true,
@@ -45,7 +45,7 @@ export const getPostAPI = () => {
       return;
     }
     apis
-      .getPost(stack, _paging.next + 1, sort, reBook)
+      .getPost(stack, sort, reBook)
       .then((res) => {
         console.log(_paging);
         const posts = res.data.data;
@@ -75,7 +75,7 @@ export default handleActions(
         let reBook = action.payload.data.reBook;
         // draft.paging = action.payload.data.paging;
         // draft.posts = action.payload.data.posts;
-        draft.is_loading = false;
+        draft.isLoading = false;
         if (!draft.stacks || !draft.sorts || !draft.reBook) {
           draft.stacks = stacks;
           draft.sorts = sorts;
@@ -90,7 +90,7 @@ export default handleActions(
           console.log(action);
           draft.paging = action.payload.data.paging;
           draft.posts = action.payload.data.posts;
-          draft.is_loading = false;
+          draft.isLoading = false;
           draft.stacks = stacks;
           draft.sorts = sorts;
           draft.reBook = reBook;
@@ -105,14 +105,14 @@ export default handleActions(
           // draft.posts.push(...action.payload.data.posts);
           draft.posts = action.payload.data.posts;
           draft.paging = action.payload.data.paging;
-          draft.is_loading = false;
+          draft.isLoading = false;
           draft.render = false;
         }
       }),
 
     [LOADING]: (state, action) =>
       produce(state, (draft) => {
-        draft.is_loading = action.payload.loading;
+        draft.isLoading = action.payload.loading;
       }),
     [MAINPAGE]: (state, action) =>
       produce(state, (draft) => {

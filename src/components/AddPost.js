@@ -14,7 +14,6 @@ const WritePost = (props) => {
         display="flex"
         justifyContent="center"
         maxWidth="1920px"
-        height="100%"
         margin="auto"
         border="1px solid #C4C4C4"
       >

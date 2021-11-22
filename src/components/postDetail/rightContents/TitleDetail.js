@@ -5,9 +5,9 @@ import { Grid, Text } from "../../../elements/Index";
 const TitleDetail = (props) => {
   return (
     <React.Fragment>
-      <Grid>
-        <Text color="#C4C4C4" size="20px" bold>
-          <Text>제목</Text> : {props.passedData?.title}
+      <Grid margin="40px auto auto">
+        <Text size="40px" bold>
+          {props.passedData?.title}
           <Line />
         </Text>
       </Grid>
@@ -16,7 +16,7 @@ const TitleDetail = (props) => {
 };
 
 const Line = styled.hr`
-  width: 92%;
+  width: 100%;
 `;
 
 export default TitleDetail;
