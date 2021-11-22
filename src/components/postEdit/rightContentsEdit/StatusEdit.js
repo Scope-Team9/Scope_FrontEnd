@@ -13,11 +13,12 @@ const StatusEdit = (props) => {
 
   return (
     <React.Fragment>
-      <Grid margin="10px auto">
-        <Text>프로젝트 상태체크</Text>
+      <Grid margin="20px auto">
+        <Text size="18px" bold>
+          프로젝트 상태체크
+        </Text>
         <Select
           options={projectStatused}
-          // isLoading
           styles={props.styles}
           value={props.projectStatus}
           onChange={props.setProjectstatus}

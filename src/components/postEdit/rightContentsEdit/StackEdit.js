@@ -74,8 +74,10 @@ const StackEdit = (props) => {
 
   return (
     <React.Fragment>
-      <Grid margin="10px auto">
-        <Text>기술스택 선택</Text>
+      <Grid margin="20px auto">
+        <Text size="18px" bold>
+          기술스택 선택
+        </Text>
         {/* 1차방안 */}
         <Select
           isMulti

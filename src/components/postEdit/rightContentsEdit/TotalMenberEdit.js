@@ -14,8 +14,10 @@ const totalMemberEdit = (props) => {
 
   return (
     <React.Fragment>
-      <Grid>
-        <Text>프로젝트 총 인원</Text>
+      <Grid margin="20px auto">
+        <Text size="18px" bold>
+          프로젝트 총 인원
+        </Text>
         <Select
           options={projectMembers}
           styles={props.styles}

@@ -5,8 +5,10 @@ import { Grid, Text } from "../../../elements/Index";
 const ContentEdit = (props) => {
   return (
     <React.Fragment>
-      <Grid>
-        <Text>프로젝트 내용적기</Text>
+      <Grid margin="20px auto">
+        <Text size="18px" bold>
+          프로젝트 내용적기
+        </Text>
         <TextArea
           value={props.contents}
           s
@@ -20,9 +22,12 @@ const ContentEdit = (props) => {
 };
 
 const TextArea = styled.textarea`
-  width: 100%;
+  width: 97%;
   height: 200px;
-  border: 1px solid #e7e1ff;
+  padding: 10px;
+  margin: 4px auto;
+  border: 1px solid #c4c4c4;
+  border-radius: 10px;
   font-size: 16px;
   outline: none;
 `;

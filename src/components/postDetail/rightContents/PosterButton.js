@@ -16,6 +16,9 @@ const PosterButton = (props) => {
       console.log(err);
     }
   };
+
+  console.log("프로젝트 상테", props);
+
   return (
     <React.Fragment>
       <Grid display="flex" justifyContent="center">
@@ -51,9 +54,9 @@ const PosterButton = (props) => {
             모집완료
           </Button>
         )}
-        {props.passedData.projectStatus === "종료" && <div></div>}
+        {props.passedData?.projectStatus === "종료" && <div></div>}
 
-        {props.passedData.projectStatus === "진행중" && (
+        {props.passedData?.projectStatus === "진행중" && (
           <Button
             common
             width="140px"
@@ -66,7 +69,7 @@ const PosterButton = (props) => {
           </Button>
         )}
 
-        {props.passedData.projectStatus === "모집중" && (
+        {props.passedData?.projectStatus === "모집중" && (
           <Button
             common
             width="140px"

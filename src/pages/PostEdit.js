@@ -13,14 +13,13 @@ import { postDetailActions } from "../redux/modules/postdetail";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
-import Select from "react-select";
 import makeAnimated from "react-select/animated";
 
 import LeftBanner from "../components/postEdit/LeftBanner";
 import TitleEdit from "../components/postEdit/rightContentsEdit/TitleEdit";
 import SummaryEdit from "../components/postEdit/rightContentsEdit/SummaryEdit";
 import StackEdit from "../components/postEdit/rightContentsEdit/StackEdit";
-import totalMemberEdit from "../components/postEdit/rightContentsEdit/TotalMenberEdit";
+import TotalMemberEdit from "../components/postEdit/rightContentsEdit/TotalMenberEdit";
 import StatusEdit from "../components/postEdit/rightContentsEdit/StatusEdit";
 import ContentEdit from "../components/postEdit/rightContentsEdit/ContentEdit";
 
@@ -95,12 +94,14 @@ const PostEdit = (props) => {
     if (loaded === false) CheckPost();
   }, []);
 
-  // 게시글 작성(스택선택)
+  // Select 공통 스타일
   const styles = {
     control: (base, state) => ({
       ...base,
       boxShadow: state.isFocused ? 0 : 0,
       borderWidth: 2,
+      borderRadius: 10,
+      marginTop: 4,
       minHeight: 40,
       borderColor: state.isFocused ? "#C4C4C4" : base.borderColor,
       "&:hover": {
@@ -121,16 +122,16 @@ const PostEdit = (props) => {
         alignItems="center"
       >
         <LeftBanner />
-        <Grid padding="0px 16px">
+        <Grid margin="46px 106px 0px" position="relative">
           <Title>Scoope</Title>
           <Grid>
-            <Text color="#C4C4C4" size="20px" bold>
+            <Text color="black" size="20px">
               게시글 수정하기
             </Text>
           </Grid>
-          <Grid>
+          <Grid margin="40px auto">
             <TitleEdit title={title} setTitle={setTitle} />
-            <SummaryEdit summary={summary} setSummary={setSummary} />
+            {/* <SummaryEdit summary={summary} setSummary={setSummary} /> */}
             <StackEdit
               setTectstack={setTectstack}
               techstack={techstack}
@@ -138,12 +139,14 @@ const PostEdit = (props) => {
               animatedComponents={animatedComponents}
               styles={styles}
             />
-            <Grid margin="10px auto">
+            <Grid>
               <Grid>
-                <Text>기간설정</Text>
+                <Text size="18px" bold>
+                  기간설정
+                </Text>
               </Grid>
-              <Grid display="colum">
-                <Text>프로젝트 시작 일 :</Text>
+              <Grid display="flex" textAlign="center" margin="20px auto">
+                {/* <Text>프로젝트 시작 일 :</Text> */}
                 <SDatePicker
                   selected={new Date(startDate)}
                   onChange={(date) => setStartdate(date)}
@@ -153,7 +156,7 @@ const PostEdit = (props) => {
                   minDate={new Date()}
                   placeholderText="프로젝트 시작일 입력"
                 />
-                <Text>프로젝트 종료 일 :</Text>
+                {/* <Text>프로젝트 종료 일 :</Text> */}
                 <SDatePicker
                   selected={new Date(endDate)}
                   onChange={(date) => setEnddate(date)}
@@ -166,7 +169,7 @@ const PostEdit = (props) => {
                 />
               </Grid>
             </Grid>
-            <totalMemberEdit
+            <TotalMemberEdit
               styles={styles}
               totalMember={totalMember}
               setTotalmember={setTotalmember}
@@ -198,19 +201,22 @@ const PostEdit = (props) => {
 
 // styled-components를 사용한다.
 const Title = styled.h1`
-  margin: "auto 20px";
-  color: #c4c4c4;
-  font-size: 40px;
+  color: black;
+  font-size: 32px;
+  font-weight: 800;
 `;
 
 const SDatePicker = styled(DatePicker)`
   box-sizing: border-box;
-  width: 100%;
+  width: 350px;
+  text-align: center;
+  font-size: 16px;
+  color: black;
   height: 40px;
-  padding: 8px 20px;
-  margin-top: 1.5rem;
+  margin-top: 0.6rem;
+  margin-left: 10px;
   outline: none;
-  border-radius: 4px;
+  border-radius: 10px;
   border: 1px solid #c4c4c4;
 `;
 
