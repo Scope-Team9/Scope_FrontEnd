@@ -5,7 +5,10 @@ import Img from "../../images/PostAdd.jpg";
 const LeftBanner = (props) => {
   return (
     <React.Fragment>
-      <SideBarImg src={Img} style={{ maxWidth: "100%", height: "100%" }} />
+      <SideBarImg
+        src={Img}
+        style={{ maxWidth: "100%", height: "100%", borderRadius: "20px" }}
+      />
     </React.Fragment>
   );
 };

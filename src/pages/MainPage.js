@@ -22,11 +22,11 @@ const MainPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const stack = useSelector((state) => state.stack.stack);
-  const sort = useSelector((state) => state.sort.sort);
-  const is_loading = useSelector((state) => state.post.is_loading);
+  const sortC = useSelector((state) => state.sort.sort);
+
   const cards = useSelector((state) => state.post.posts);
   // console.log(cards);
-  const reBook = useSelector((state) => state.rebook.reBook);
+  const reBookC = useSelector((state) => state.rebook.reBook);
   const pageCheck = useSelector((state) => state.post.pageCheck);
   const infinity = useSelector((state) => state.infinity.paging);
   const Render = useSelector((state) => state.post.render);
@@ -36,13 +36,17 @@ const MainPage = () => {
   const [nowFilter, setNowFilter] = React.useState("최신");
   const [post, setPost] = React.useState();
 
-  const post_list = useSelector((state) => state.post.posts);
+  // const pSorts = useSelector((state) => state.post.sorts);
+  // const pReBook = useSelector((state) => state.post.stacks);
+  // console.log("나만봐", pStack);
+
+  const postList = useSelector((state) => state.post.posts);
   const isLoginUser = useSelector((state) => state.user.userId);
 
   React.useEffect(() => {
     dispatch(postActions.whatPage("mainPage"));
-    // console.log("어떻게오느냐 을랴랴랴랴랴랴ㅑ랴랴", post_list);
     dispatch(postActions.getPostAPI());
+    console.log(cards);
     // const GetPost = async () => {
     //   console.log("스택", stack);
     //   try {
@@ -54,7 +58,7 @@ const MainPage = () => {
     //   }
     // };
     // GetPost();
-  }, [stack, sort, reBook, pageCheck, Render]);
+  }, [stack, sortC, reBookC, pageCheck, Render]);
 
   // 요청에 대한 속도가 다를때. 다른것이 띄워질 수 있는 버그성.
 
@@ -64,16 +68,16 @@ const MainPage = () => {
       setPPaging(pPaging + 12);
       // console.log("내가 페이지", infinity);
       // dispatch(pageAction.getPage(paging));
-      // if (post_list.length === 0 && pageCheck === false) {
-      //   dispatch(postActions.pageCheck(true));
-      // }
+      if (postList.length === 0 && pageCheck === false) {
+        dispatch(postActions.pageCheck(true));
+      }
     } // 옵저버를 좀 더 위로
     // console.log(pPaging);
   }, [inView]);
 
   return (
     <>
-      {post_list && (
+      {postList && (
         <>
           <Grid
             maxWidth="1920px"
@@ -126,12 +130,6 @@ const MainPage = () => {
   );
 };
 
-const ResponsiveSidebar = styled.div`
-  @media screen and (max-width: 750px) {
-    display: none;
-  } ;
-`;
-
 const Inside = styled.div`
   margin: auto;
   @media screen and (max-width: 750px) {
@@ -152,36 +150,6 @@ const Stacks = styled.div`
   display: flex;
   font-size: 50px;
   margin-top: 20px;
-`;
-
-const FilterBox = styled.div`
-  display: flex;
-  font-size: 20px;
-  margin: 10px auto;
-  justify-content: flex-end;
-  width: 75%;
-  max-width: 1920px;
-  @media screen and (max-width: 1850px) {
-    justify-content: center;
-  }
-  @media screen and (max-width: 750px) {
-    justify-content: center;
-    font-size: 12px;
-  }
-`;
-
-const Filtering = styled.p`
-  margin: 20px;
-  cursor: pointer;
-  &:hover {
-    transform: scale(1.05);
-    -webkit-transform: scale(1.05);
-    -moz-transform: scale(1.05);
-    -ms-transform: scale(1.05);
-    -o-transform: scale(1.05);
-    /* text-decoration: underline; */
-    color: #dacceb;
-  }
 `;
 
 const Btn = styled.button`
@@ -215,22 +183,4 @@ const Btn = styled.button`
   } ;
 `;
 
-const NoIntroduction = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-
-  margin: auto;
-  display: flex;
-  justify-content: center;
-`;
-const NoIntroductionText = styled.p`
-  color: #737373;
-  font-size: 25px;
-  width: auto;
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  margin-left: auto;
-`;
 export default MainPage;

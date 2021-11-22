@@ -41,6 +41,7 @@ const PosterButton = (props) => {
           applyValue={props.applyValue}
           postId={props.post_id}
           passdedMenber={props.passdedMenber}
+          statusCheck={props.statusCheck}
         />
         {props.passedData?.projectStatus === "모집중" && (
           <Button
@@ -67,7 +68,6 @@ const PosterButton = (props) => {
             깃허브제출
           </Button>
         )}
-
         {props.passedData?.projectStatus === "종료" && <div></div>}
 
         {props.passedData?.projectStatus === "진행중" && (

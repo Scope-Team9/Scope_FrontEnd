@@ -20,7 +20,7 @@ const ProjectJoinUser = (props) => {
           margin="6px 0px"
         >
           <ImgType
-            img={props.userPropensityType}
+            type={props.userPropensityType}
             cursor="pointer"
             _onClick={() => {
               goToMypage(props.userId);

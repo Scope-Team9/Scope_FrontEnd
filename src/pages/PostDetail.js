@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { apis } from "../lib/axios";
 import { postActions } from "../redux/modules/post";
 import { Grid, Button } from "../elements/Index";
+import Swal from "sweetalert2";
 
 import ApplyStatusModal from "../components/ApplyStatusModal";
 import LeftBanner from "../components/postDetail/LeftBanner";
@@ -23,25 +24,37 @@ import BookMark from "../components/postDetail/rightContents/BookMark";
 import ApplicantButton from "../components/postDetail/rightContents/ApplicantButton";
 import PosterButton from "../components/postDetail/rightContents/PosterButton";
 
-// PostDetail의 함수형 컴포넌트를 만든다...
+// PostDetail의 함수형 컴포넌트를 만든다
 const PostDetail = (props) => {
   const dispatch = useDispatch();
   const [checkPost, setCheckPost] = React.useState();
   const [bookmark, setBookmark] = React.useState(false);
   const [applyStatusModal, setApplyStatusModal] = React.useState(false); //신청현황
   const [applyUserModal, setApplyUserModal] = React.useState(false); //지원취소/팀탈퇴/프로젝트마감
-  const [recruitmentFinish, setRecruitmentFinish] = React.useState();
+  const [exileStatusModal, setExileStatusModal] = React.useState(false); //강퇴
+  const [recruitmentFinish, setRecruitmentFinish] = React.useState(); // 모집완료 체크 for리렌더링
+  const [projectStatus, setProjectStatus] = React.useState();
   const [applyValue, setApplyValue] = React.useState();
+  const [exileValue, setExileValues] = React.useState();
   const [isme, setIsme] = React.useState(null);
 
   const applyStatusModalOpen = () => {
     setApplyStatusModal(true);
   };
+
+  const exileStatusModalOpen = () => {
+    setExileStatusModal(true);
+  };
+
   const applyUserModalOpen = (value) => {
     setApplyValue(value);
     setApplyUserModal(true);
   };
 
+  const statusCheck = (value) => {
+    console.log(value);
+    setProjectStatus(value);
+  };
   // 상태변경
   const edit_status = (data) => {
     const editstatus = {
@@ -51,6 +64,7 @@ const PostDetail = (props) => {
       try {
         const result = await apis.statusPost(post_id, editstatus);
         setRecruitmentFinish(!recruitmentFinish);
+        Swal.fire("모집 완료 되었습니다!", "", "success");
       } catch (err) {
         console.log(err);
       }
@@ -74,12 +88,20 @@ const PostDetail = (props) => {
         setCheckPost(result);
         console.log(result);
         setIsme(result.data.data.userStatus);
+        setProjectStatus(result.data.data.post.projectStatus);
       } catch (err) {
         console.log(err);
       }
     };
     CheckPost();
-  }, [bookmark, applyStatusModal, recruitmentFinish]);
+  }, [
+    bookmark,
+    applyStatusModal,
+    recruitmentFinish,
+    exileStatusModal,
+    applyUserModal,
+    projectStatus,
+  ]);
 
   //북마크 토글
   const ToggleBookMark = () => {
@@ -150,11 +172,11 @@ const PostDetail = (props) => {
                       setApplyStatusModal={setApplyStatusModal}
                       postId={post_id}
                     />
-                    {/* <ExileUserModal
+                    <ExileUserModal
                       applyStatusModal={exileStatusModal}
                       setApplyStatusModal={setExileStatusModal}
                       postId={post_id}
-                    ></ExileUserModal> */}
+                    ></ExileUserModal>
                   </Grid>
                 </Grid>
               )}
@@ -176,6 +198,7 @@ const PostDetail = (props) => {
                     post_id={post_id}
                     passdedMenber={passdedMenber}
                     edit_status={edit_status}
+                    statusCheck={statusCheck}
                   />
                 ) : (
                   <Grid textAlign="center">

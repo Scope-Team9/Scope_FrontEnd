@@ -123,7 +123,7 @@ const PostEdit = (props) => {
       >
         <LeftBanner />
         <Grid margin="46px 106px 0px" position="relative">
-          <Title>Scoope</Title>
+          {/* <Title>Scoope</Title> */}
           <Grid>
             <Text color="black" size="20px">
               게시글 수정하기

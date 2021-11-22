@@ -6,40 +6,48 @@ import DatePicker from "react-datepicker";
 import { ko } from "date-fns/esm/locale";
 
 const DateWrite = (props) => {
+  console.log("빼기", props.startDate > props.endDate);
+
+  const startDate = (date) => {
+    if (date <= props.endDate) {
+      props.setStartdate(date);
+    } else {
+      window.alert("시작일을 잘못 설정했습니다.");
+    }
+  };
+
+  const endDate = (date) => {
+    props.setEnddate(date);
+  };
+
   return (
     <React.Fragment>
       <Text size="18px" bold>
         기간설정
       </Text>
       <Grid display="flex" textAlign="center" margin="20px auto">
-        <DateForm
-          title={"프로젝트 시작 일"}
-          setDate={props.setStartdate}
-          dateData={props.startDate}
-        />
-        <DateForm
-          title={"프로젝트 종료 일"}
-          setDate={props.setEnddate}
-          dateData={props.endDate}
-        />
-      </Grid>
-    </React.Fragment>
-  );
-};
-
-// DateForm은 공통컴포넌트로 활용
-const DateForm = (props) => {
-  return (
-    <React.Fragment>
-      <Grid>
-        <Text>{props.title}</Text>
-        <SDatePicker
-          dateFormat="yyyy - MM - dd"
-          selected={props.dateData}
-          onChange={(date) => props.setDate(date)}
-          locale={ko}
-          minDate={new Date()}
-        />
+        {/* 시작 일*/}
+        <Grid>
+          <Text>프로젝트 시작일</Text>
+          <SDatePicker
+            dateFormat="yyyy - MM - dd"
+            selected={props.startDate}
+            onChange={startDate}
+            locale={ko}
+            minDate={new Date()}
+          />
+        </Grid>
+        {/* 종료 일*/}
+        <Grid>
+          <Text>프로젝트 종료일</Text>
+          <SDatePicker
+            dateFormat="yyyy - MM - dd"
+            selected={props.endDate}
+            onChange={endDate}
+            locale={ko}
+            minDate={new Date()}
+          />
+        </Grid>
       </Grid>
     </React.Fragment>
   );

@@ -9,7 +9,7 @@ import { userCreators } from "../redux/modules/user";
 import MainPage from "../pages/MainPage";
 import KakaoRedirect from "./kakaoRedirect";
 import GitHubRedirect from "./GitHubRedirect";
-import MyPage from "../pages/MyPage";
+
 import MyPageInfo from "../components/MyPageInfo";
 import PostWrite from "../pages/PostWrite";
 import PostEdit from "../pages/PostEdit";
@@ -22,9 +22,9 @@ import Header from "../components/Header";
 import PropensityTest from "../components/propensityTest/PropensityTest";
 
 function App() {
-  const isLogin = useSelector((state) => state.user.is_login);
+  const isLogin = useSelector(state => state.user.isLogin);
   const userPropensityType = useSelector(
-    (state) => state.user.userPropensityType
+    state => state.user.userPropensityType
   );
   const isCookie = document.cookie.split("=")[1];
   const dispatch = useDispatch();
@@ -58,9 +58,6 @@ function App() {
             exact
             component={GitHubRedirect}
           ></Route>
-
-          {/* 테스트용입니다. */}
-          <Route path="/test" exact component={PropensityTest}></Route>
         </Switch>
       </ConnectedRouter>
     </React.Fragment>

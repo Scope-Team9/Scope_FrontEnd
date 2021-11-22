@@ -5,8 +5,8 @@ import { postActions } from "../redux/modules/post";
 import { useSelector, useDispatch } from "react-redux";
 
 const Infinity = (props) => {
-  const { children, callNext, paging, is_loading, is_next } = props;
-  const is_mainPage = useSelector((state) => state.post.mainpage);
+  const { children, callNext, paging, isLoading, isNext } = props;
+  const isMainPage = useSelector((state) => state.post.mainpage);
   // console.log("이거 확인좀 해봐야겠네", props);
 
   const _handleScroll = _.throttle(() => {
@@ -24,11 +24,11 @@ const Infinity = (props) => {
   const handleScroll = useCallback(_handleScroll, []);
   // 메인페이지에서 Hook으로 커스텀 HOOK
   useEffect(() => {
-    if (is_loading) {
+    if (isLoading) {
       return;
     }
 
-    if (is_mainPage === true) {
+    if (isMainPage === true) {
       window.addEventListener("scroll", () => {
         handleScroll();
       });
@@ -37,14 +37,14 @@ const Infinity = (props) => {
       window.removeEventListener("scroll", handleScroll);
     }
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [paging, is_mainPage]);
+  }, [paging, isMainPage]);
   return <div>{children}</div>;
 };
 
 Infinity.defaultProps = {
   chidlren: null,
   callNext: () => {},
-  is_loading: false,
+  isLoading: false,
 };
 
 export default Infinity;

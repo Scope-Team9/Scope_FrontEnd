@@ -20,8 +20,12 @@ const StatusEdit = (props) => {
         <Select
           options={projectStatused}
           styles={props.styles}
-          value={props.projectStatus}
-          onChange={props.setProjectstatus}
+          value={projectStatused.filter(
+            ({ label }) => label === props.projectStatus
+          )}
+          onChange={(data) => {
+            props.setProjectstatus(data.label);
+          }}
           placeholder={<div>상태를 설정해주세요.</div>}
         ></Select>
       </Grid>
