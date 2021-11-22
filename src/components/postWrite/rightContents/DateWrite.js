@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Grid } from "../../../elements/Index";
+import { Grid, Text } from "../../../elements/Index";
 
 import DatePicker from "react-datepicker";
 import { ko } from "date-fns/esm/locale";
@@ -8,15 +8,17 @@ import { ko } from "date-fns/esm/locale";
 const DateWrite = (props) => {
   return (
     <React.Fragment>
-      <Grid display="flex">
-        <Grid>기간설정</Grid>
+      <Text size="18px" bold>
+        기간설정
+      </Text>
+      <Grid display="flex" textAlign="center" margin="20px auto">
         <DateForm
-          title={"프로젝트 시작일"}
+          title={"프로젝트 시작 일"}
           setDate={props.setStartdate}
           dateData={props.startDate}
         />
         <DateForm
-          title={"프로젝트 종료일"}
+          title={"프로젝트 종료 일"}
           setDate={props.setEnddate}
           dateData={props.endDate}
         />
@@ -30,9 +32,9 @@ const DateForm = (props) => {
   return (
     <React.Fragment>
       <Grid>
-        <Grid>{props.title}</Grid>
+        <Text>{props.title}</Text>
         <SDatePicker
-          dateFormat="yyyy/MM/dd"
+          dateFormat="yyyy - MM - dd"
           selected={props.dateData}
           onChange={(date) => props.setDate(date)}
           locale={ko}
@@ -45,12 +47,15 @@ const DateForm = (props) => {
 
 const SDatePicker = styled(DatePicker)`
   box-sizing: border-box;
-  width: 120px;
+  width: 350px;
+  text-align: center;
+  font-size: 16px;
+  color: black;
   height: 40px;
-  padding: 8px 20px;
-  margin-top: 1.5rem;
+  margin-top: 0.6rem;
+  margin-left: 10px;
   outline: none;
-  border-radius: 4px;
+  border-radius: 10px;
   border: 1px solid #c4c4c4;
 `;
 

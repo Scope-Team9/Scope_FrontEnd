@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Grid, Text } from "../../../elements/Index";
 
-const ContentWrite = (props) => {
+const ContentEdit = (props) => {
   return (
     <React.Fragment>
       <Grid margin="20px auto">
@@ -10,11 +10,12 @@ const ContentWrite = (props) => {
           프로젝트 내용적기
         </Text>
         <TextArea
-          placeholder="프로젝트 내용을 입력해주세요."
+          value={props.contents}
+          s
           onChange={(e) => {
             props.setContents(e.target.value);
           }}
-        ></TextArea>
+        />
       </Grid>
     </React.Fragment>
   );
@@ -31,4 +32,4 @@ const TextArea = styled.textarea`
   outline: none;
 `;
 
-export default ContentWrite;
+export default ContentEdit;

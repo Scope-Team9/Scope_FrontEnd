@@ -4,8 +4,10 @@ import { Grid, Text } from "../../../elements/Index";
 const StackDetail = (props) => {
   return (
     <React.Fragment>
-      <Grid display="flex" margin="10px auto">
-        <Text margin="auto 10px auto 0px">기술스택 :</Text>
+      <Grid display="flex" margin="20px auto">
+        <Text size="18px" bold margin="auto 10px auto 0px">
+          기술스택
+        </Text>
         {props.passedData?.techStack.map((item, index) => {
           return (
             <Text margin="auto 5px" key={index}>

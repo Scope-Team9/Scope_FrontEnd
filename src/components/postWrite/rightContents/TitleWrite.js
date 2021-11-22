@@ -5,11 +5,14 @@ const TitleWrite = (props) => {
   return (
     <React.Fragment>
       <Grid>
-        <Text>제목</Text>
+        <Text size="18px" bold>
+          제목
+        </Text>
         <Input
           width="100%"
           height="40px"
           padding="10px"
+          margin="4px auto"
           border="1px solid #C4C4C4"
           borderRadius="10px"
           placeholder="제목을 입력해주세요."

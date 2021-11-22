@@ -5,7 +5,9 @@ const DateDetail = (props) => {
   return (
     <React.Fragment>
       <Grid display="flex" margin="20px auto">
-        <Text margin="auto 10px auto 0px">프로젝트 기간 :</Text>
+        <Text size="18px" bold margin="auto 10px auto 0px">
+          프로젝트 기간{" "}
+        </Text>
         <Text>
           <span
             style={{
