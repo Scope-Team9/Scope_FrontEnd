@@ -42,23 +42,13 @@ const MainPage = () => {
 
   const postList = useSelector((state) => state.post.posts);
   const isLoginUser = useSelector((state) => state.user.userId);
+  const isLogin = useSelector((state) => state.user.isLogin);
 
   React.useEffect(() => {
     dispatch(postActions.whatPage("mainPage"));
     dispatch(postActions.getPostAPI());
     console.log(cards);
-    // const GetPost = async () => {
-    //   console.log("스택", stack);
-    //   try {
-    //     const result = await apis.getPost(stack, sort, reBook);
-    //     setPost(result);
-    //     console.log("자 들어옵니다", result);
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // };
-    // GetPost();
-  }, [stack, sortC, reBookC, pageCheck, Render]);
+  }, [stack, sortC, reBookC, pageCheck, Render, isLogin]);
 
   // 요청에 대한 속도가 다를때. 다른것이 띄워질 수 있는 버그성.
 
@@ -106,7 +96,7 @@ const MainPage = () => {
                   ></div>
                 </Grid>
               )}
-              {isLoginUser !== null && (
+              {isLoginUser && (
                 <Btn
                   onClick={() => {
                     history.push("/postadd");

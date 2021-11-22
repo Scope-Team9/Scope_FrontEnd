@@ -8,9 +8,11 @@ import { sortAction } from "../../redux/modules/sort";
 import { bookRecommendAction } from "../../redux/modules/bookRecommend";
 import { pageAction } from "../../redux/modules/infinity";
 import { useSelector, useDispatch } from "react-redux";
+import Swal from "sweetalert2";
 
 const Sort = (props) => {
   const dispatch = useDispatch();
+  const isLoginUser = useSelector((state) => state.user.userId);
   const [arr, setArr] = React.useState([
     {
       id: "최신",
@@ -78,8 +80,15 @@ const Sort = (props) => {
                   Filter(item);
                   if (item.id === "최신" || item.id === "마감순") {
                     onclickSort(item.status);
-                  } else {
+                  }
+                  if (isLoginUser) {
                     onclickRb(item.status);
+                  } else {
+                    Swal.fire(
+                      "로그인 후 이용하실 수 있습니다!",
+                      "로그인하고 프로젝트를 추천받아 보세요!",
+                      "warning"
+                    );
                   }
                 }}
               ></SortText>
