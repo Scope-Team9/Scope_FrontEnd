@@ -17,6 +17,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Grid, Button, Image, Text } from "../../elements/Index";
 import { userCreators } from "../../redux/modules/user";
 import { history } from "../../redux/configureStore";
+import ImgType from "../../shared/ImgType";
 
 const PropensityTest = props => {
   const isToken = document.cookie.split("=")[1];

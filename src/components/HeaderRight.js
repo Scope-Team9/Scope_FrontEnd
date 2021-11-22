@@ -9,6 +9,7 @@ import LoginModal from "./LoginModal";
 import { userCreators } from "../redux/modules/user";
 
 import { deleteCookie } from "../shared/Cookie";
+import ImgType from "../shared/ImgType";
 
 const HeaderRight = props => {
   const dispatch = useDispatch();
@@ -30,12 +31,6 @@ const HeaderRight = props => {
 
   const logOut = () => {
     deleteCookie("ScopeUser");
-    // window.alert("로그아웃 됐습니다");
-    // Swal.fire(
-    //   '로그아웃 됐습니다',
-    //   'You clicked the button!',
-    //   'success'
-    // )
     dispatch(userCreators.logOut());
     history.replace("/");
   };
@@ -83,6 +78,9 @@ const HeaderRight = props => {
               )}
               {userInfo.userPropensityType === "FHP" && (
                 <UserImg src="/img/물개.png"></UserImg>
+              )}
+              {userInfo.userPropensityType === "RHP" && (
+                <UserImg src="/img/너구리.png"></UserImg>
               )}
             </Grid>
           </IconWrap>
