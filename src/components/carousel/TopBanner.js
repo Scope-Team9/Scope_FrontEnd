@@ -8,7 +8,7 @@ import PropensityTest from "../propensityTest/PropensityTest";
 import { Dialog } from "@material-ui/core";
 
 const TopBanner = () => {
-  const is_token = document.cookie.split("=")[1];
+  const isToken = document.cookie.split("=")[1];
   const [showModal, setShowModal] = React.useState(false);
 
   return (
@@ -24,7 +24,7 @@ const TopBanner = () => {
             <Button
               width="150px"
               _onClick={() => {
-                is_token
+                isToken
                   ? setShowModal(true)
                   : window.alert("로그인이 필요합니다");
               }}
