@@ -25,9 +25,6 @@ const HeaderRight = props => {
   const modalOpen = () => {
     setShowModal(true);
   };
-  const modalClose = () => {
-    setShowModal(false);
-  };
 
   const logOut = () => {
     deleteCookie("ScopeUser");

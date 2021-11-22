@@ -60,7 +60,7 @@ const LoginModal = props => {
   console.log("기술스택", techStack);
   console.log("sns아이디", userInfo.snsId);
 
-  //닉네임 체크 미들웨어
+  //닉네임 체크 api
   const nickCheck = nickName => {
     if (nickName === undefined) {
       alert("닉네임을 입력 해주세요.");
@@ -74,7 +74,7 @@ const LoginModal = props => {
     dispatch(userCreators.nickCheckMiddleWare(nickName));
   };
 
-  //이메일 체크 미들웨어
+  //이메일 체크 api
   const emailCheck = email => {
     if (nickName === "") {
       alert("이메일을 입력 해주세요.");
@@ -88,7 +88,7 @@ const LoginModal = props => {
     dispatch(userCreators.emailCheckMiddleWare(email));
   };
 
-  //테스트 마친 회원가입 미들웨어 전송
+  //테스트 마친 회원가입 api
   const preSignUP = () => {
     if (techStack.length === 0) {
       alert("기술스택을 선택 해주세요.");
