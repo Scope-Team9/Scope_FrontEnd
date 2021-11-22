@@ -27,7 +27,7 @@ const ApplyUserModal = props => {
     console.log(a);
     setApplyUserModal(false);
     if (a === "종료") {
-      statusCheck(a);
+      return statusCheck(a);
     }
   };
 

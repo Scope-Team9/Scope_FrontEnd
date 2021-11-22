@@ -51,8 +51,7 @@ const Liked = props => {
     console.log(likeUsers);
 
     dispatch(applyCreators.starterLikeAPI(postId, likeUsers));
-    statusCheck("종료");
-    modalClose();
+    modalClose("종료");
   };
   console.log(likes);
 

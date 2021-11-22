@@ -9,7 +9,6 @@ import LoginModal from "./LoginModal";
 import { userCreators } from "../redux/modules/user";
 
 import { deleteCookie } from "../shared/Cookie";
-import ImgType from "../shared/ImgType";
 
 const HeaderRight = props => {
   const dispatch = useDispatch();
@@ -135,15 +134,11 @@ const IconWrap = styled.div`
   } ;
 `;
 
-const CardImg = styled.img`
-  object-fit: cover;
-`;
-
 const UserImg = styled.img`
   object-fit: cover;
   width: 50px;
-  border-radius: 12px;
-  background-color: #ececec;
+  border-radius: 50px;
+  box-shadow: 0 0 3px #ddd;
   cursor: pointer;
 `;
 
