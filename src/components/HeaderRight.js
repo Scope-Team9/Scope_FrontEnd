@@ -24,18 +24,9 @@ const HeaderRight = props => {
   const modalOpen = () => {
     setShowModal(true);
   };
-  const modalClose = () => {
-    setShowModal(false);
-  };
 
   const logOut = () => {
     deleteCookie("ScopeUser");
-    // window.alert("로그아웃 됐습니다");
-    // Swal.fire(
-    //   '로그아웃 됐습니다',
-    //   'You clicked the button!',
-    //   'success'
-    // )
     dispatch(userCreators.logOut());
     history.replace("/");
   };
@@ -83,6 +74,9 @@ const HeaderRight = props => {
               )}
               {userInfo.userPropensityType === "FHP" && (
                 <UserImg src="/img/물개.png"></UserImg>
+              )}
+              {userInfo.userPropensityType === "RHP" && (
+                <UserImg src="/img/너구리.png"></UserImg>
               )}
             </Grid>
           </IconWrap>
@@ -140,15 +134,11 @@ const IconWrap = styled.div`
   } ;
 `;
 
-const CardImg = styled.img`
-  object-fit: cover;
-`;
-
 const UserImg = styled.img`
   object-fit: cover;
   width: 50px;
-  border-radius: 12px;
-  background-color: #ececec;
+  border-radius: 50px;
+  box-shadow: 0 0 3px #ddd;
   cursor: pointer;
 `;
 

@@ -5,7 +5,7 @@ import ApplyUserModal from "../../ApplyUserModal";
 import { useHistory } from "react-router";
 import { apis } from "../../../lib/axios";
 
-const PosterButton = (props) => {
+const PosterButton = props => {
   const history = useHistory();
 
   const DeletePost = async () => {
@@ -28,7 +28,7 @@ const PosterButton = (props) => {
             width="140px"
             height="35px"
             isValue="end"
-            _onClick={(e) => {
+            _onClick={e => {
               props.applyUserModalOpen(e.target.value);
             }}
           >
@@ -41,6 +41,7 @@ const PosterButton = (props) => {
           applyValue={props.applyValue}
           postId={props.post_id}
           passdedMenber={props.passdedMenber}
+          statusCheck={props.statusCheck}
         />
         {props.passedData?.projectStatus === "모집중" && (
           <Button
@@ -61,7 +62,7 @@ const PosterButton = (props) => {
             width="140px"
             height="35px"
             isValue="submit"
-            _onClick={(e) => {
+            _onClick={e => {
               props.applyUserModalOpen(e.target.value);
             }}
           >

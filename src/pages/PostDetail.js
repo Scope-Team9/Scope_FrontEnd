@@ -51,6 +51,7 @@ const PostDetail = (props) => {
   };
 
   const statusCheck = (value) => {
+    console.log(value);
     setProjectStatus(value);
   };
   // 상태변경
@@ -98,6 +99,7 @@ const PostDetail = (props) => {
     recruitmentFinish,
     exileStatusModal,
     applyUserModal,
+    projectStatus,
   ]);
 
   //북마크 토글
@@ -195,6 +197,7 @@ const PostDetail = (props) => {
                     post_id={post_id}
                     passdedMenber={passdedMenber}
                     edit_status={edit_status}
+                    statusCheck={statusCheck}
                   />
                 ) : (
                   <Grid textAlign="center">

@@ -90,7 +90,7 @@ const LoginModal = (props) => {
     dispatch(userCreators.emailCheckMiddleWare(email));
   };
 
-  //테스트 마친 회원가입 미들웨어 전송
+  //테스트 마친 회원가입 api
   const preSignUP = () => {
     if (techStack.length === 0) {
       alert("기술스택을 선택 해주세요.");
@@ -380,7 +380,8 @@ const LoginModal = (props) => {
                       "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=http://localhost:3000/user/github/callback";
 
                     // 최종 주소
-                    // "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=https://scopewith.com/";
+
+                    // "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=http://scopewith.com/user/github/callback";
                   }}
                 >
                   깃허브로그인
@@ -396,7 +397,7 @@ const LoginModal = (props) => {
                       "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code";
 
                     // 최종 주소
-                    // "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=https://scopewith.com/";
+                    // "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=https://scopewith.com/user/github/callback";
                   }}
                 >
                   카카오로그인
