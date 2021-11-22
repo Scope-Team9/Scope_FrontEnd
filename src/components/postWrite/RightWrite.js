@@ -45,13 +45,13 @@ const RightWrite = (props) => {
       contents.length > 0
     ) {
       window.alert("프로젝트가 생성되었습니다.");
-      scope_index();
+      scopeIndex();
     } else {
       window.alert("값을 다 입력해주세요.");
     }
   };
 
-  const scope_index = () => {
+  const scopeIndex = () => {
     const card = {
       title: title,
       summary: summary,

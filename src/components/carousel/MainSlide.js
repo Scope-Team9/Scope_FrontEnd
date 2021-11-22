@@ -14,7 +14,7 @@ import slideThree from "../../images/03.png";
 import slideFour from "../../images/06.png";
 
 const images = [slideOne, slideTwo, slideThree, slideFour];
-const is_token = document.cookie.split("=")[1];
+const isToken = document.cookie.split("=")[1];
 
 const MainSlide = () => {
   const [imageIndex, setImageIndex] = useState(0);

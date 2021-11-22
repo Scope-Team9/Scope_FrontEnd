@@ -22,7 +22,7 @@ import Header from "../components/Header";
 import PropensityTest from "../components/propensityTest/PropensityTest";
 
 function App() {
-  const isLogin = useSelector((state) => state.user.is_login);
+  const isLogin = useSelector((state) => state.user.isLogin);
   const userPropensityType = useSelector(
     (state) => state.user.userPropensityType
   );
