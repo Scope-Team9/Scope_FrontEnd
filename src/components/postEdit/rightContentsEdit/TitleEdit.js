@@ -1,31 +1,33 @@
 import React from "react";
 import { Grid, Text, Input } from "../../../elements/Index";
 
-const SummaryWrite = (props) => {
+const TitleEdit = (props) => {
   return (
     <React.Fragment>
-      <Grid margin="20px auto">
+      <Grid>
         <Text size="18px" bold>
-          한줄소개
+          제목
         </Text>
         <Input
           width="100%"
+          maxLength="35"
           height="40px"
           padding="10px"
           margin="4px auto"
           border="1px solid #C4C4C4"
           borderRadius="10px"
-          placeholder="프로젝트를 한줄소개를 소개해주세요."
-          maxLength="60"
+          placeholder="제목을 입력해주세요."
           inputFocusOutline="none"
           fontSize="16px"
+          type="text"
+          editValue={props.title}
           _onChange={(e) => {
-            props.setSummary(e.target.value);
+            props.setTitle(e.target.value);
           }}
-        ></Input>
+        />
       </Grid>
     </React.Fragment>
   );
 };
 
-export default SummaryWrite;
+export default TitleEdit;

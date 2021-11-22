@@ -4,9 +4,9 @@ import styled from "styled-components";
 import { useHistory } from "react-router";
 import ImgType from "../shared/ImgType";
 
-const ProjectJoinUser = props => {
+const ProjectJoinUser = (props) => {
   const history = useHistory();
-  const goToMypage = userId => {
+  const goToMypage = (userId) => {
     history.push(`/mypage/${userId}`);
   };
   return (
@@ -17,6 +17,7 @@ const ProjectJoinUser = props => {
           height="60px"
           borderRadius="50%"
           backgroundColor="#C4C4C4"
+          margin="6px 0px"
         >
           <ImgType
             type={props.userPropensityType}
@@ -26,7 +27,7 @@ const ProjectJoinUser = props => {
             }}
           ></ImgType>
         </Grid>
-        <Text size="20px">{props.nickname}</Text>
+        <Text size="16px">{props.nickname}</Text>
         <Grid>({props.userPropensityType})</Grid>
       </Grid>
     </React.Fragment>

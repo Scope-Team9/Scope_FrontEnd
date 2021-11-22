@@ -1,18 +1,17 @@
 import React from "react";
 import styled from "styled-components";
-
 import { Grid } from "../../../elements/Index";
 
-const GenerateButton = (props) => {
+const EditButton = (props) => {
   return (
     <React.Fragment>
-      <Grid>
+      <Grid display="flex" padding="16px">
         <Btn
           onClick={() => {
-            props.submitHandler();
+            props.editHandler();
           }}
         >
-          프로젝트 생성하기
+          포스트수정 완료
         </Btn>
       </Grid>
     </React.Fragment>
@@ -25,18 +24,19 @@ const Btn = styled.button`
   align-items: center;
   width: 140px;
   height: 35px;
-  border: 1px solid #c0aef6;
+  border: 1px solid #b29cf4;
   border-radius: 50px;
-  color: #c0aef6;
-  margin: 10px auto auto auto;
+  color: #fff;
+  background: white;
+  color: #b29cf4;
+  margin: 10px auto 10px auto;
   cursor: pointer;
-  background-color: white;
   &:hover {
     color: white;
-    background-color: #c0aef6;
-    transform: translate();
-    transition: 0.3s ease-out;
+    background-color: #b29cf4;
+    border: 1px solid;
+    transition-duration: 1s;
   }
 `;
 
-export default GenerateButton;
+export default EditButton;

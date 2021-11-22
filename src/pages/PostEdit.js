@@ -5,7 +5,6 @@
 import React, { useCallback, useMemo, useEffect } from "react";
 import styled from "styled-components";
 import { Grid, Text, Image, Button, Input } from "../elements/Index";
-import Img from "../images/PostDetail.png";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { apis } from "../lib/axios";
@@ -14,8 +13,15 @@ import { postDetailActions } from "../redux/modules/postdetail";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
-import Select from "react-select";
 import makeAnimated from "react-select/animated";
+
+import LeftBanner from "../components/postEdit/LeftBanner";
+import TitleEdit from "../components/postEdit/rightContentsEdit/TitleEdit";
+import SummaryEdit from "../components/postEdit/rightContentsEdit/SummaryEdit";
+import StackEdit from "../components/postEdit/rightContentsEdit/StackEdit";
+import TotalMemberEdit from "../components/postEdit/rightContentsEdit/TotalMenberEdit";
+import StatusEdit from "../components/postEdit/rightContentsEdit/StatusEdit";
+import ContentEdit from "../components/postEdit/rightContentsEdit/ContentEdit";
 
 // PostEdit의 함수형 컴포넌트를 만든다.
 const PostEdit = (props) => {
@@ -50,7 +56,6 @@ const PostEdit = (props) => {
       startDate: startDate,
       endDate: endDate,
     };
-    console.log("데이터", projectStatus.label);
     dispatch(postDetailActions.editPostAPI(post_id, editcard));
   };
 
@@ -89,47 +94,14 @@ const PostEdit = (props) => {
     if (loaded === false) CheckPost();
   }, []);
 
-  // 기술 스택 선택
-  const stackSelect = [
-    // object형태(value는 키값, ""는 value 값), object의 값을 가져오기 위해서는 키값을 알아야한다.
-    { value: "React", label: "React" },
-    { value: "Java", label: "Java" },
-    { value: "Javascript", label: "Javascript" },
-    { value: "Python", label: "Python" },
-    { value: "Nodejs", label: "Nodejs" },
-    { value: "Flask", label: "Flask" },
-    { value: "cpp", label: "cpp" },
-    { value: "Django", label: "Django" },
-    { value: "php", label: "php" },
-    { value: "Vue", label: "Vue" },
-    { value: "Spring", label: "Spring" },
-    { value: "Swift", label: "Swift" },
-    { value: "Kotlin", label: "Kotlin" },
-    { value: "Typescript", label: "Typescript" },
-  ];
-
-  // 게시글 작성(프로젝트 상태)
-  const projectStatused = [
-    { value: "done", label: "모집중" },
-    { value: "doing", label: "진행중" },
-    { value: "ready", label: "종료" },
-  ];
-
-  // 게시글 작성(프로젝트 인원)
-  const projectMembers = [
-    { value: 2, label: 2 },
-    { value: 3, label: 3 },
-    { value: 4, label: 4 },
-    { value: 5, label: 5 },
-    { value: 6, label: 6 },
-  ];
-
-  // 게시글 작성(스택선택)
+  // Select 공통 스타일
   const styles = {
     control: (base, state) => ({
       ...base,
       boxShadow: state.isFocused ? 0 : 0,
       borderWidth: 2,
+      borderRadius: 10,
+      marginTop: 4,
       minHeight: 40,
       borderColor: state.isFocused ? "#C4C4C4" : base.borderColor,
       "&:hover": {
@@ -137,57 +109,6 @@ const PostEdit = (props) => {
       },
     }),
   };
-
-  const orderByLabel = useCallback(
-    (a, b) => a.label.localeCompare(b.label),
-    []
-  );
-
-  const orderOptions = useCallback(
-    (values) =>
-      values
-        .filter((v) => v.isFixed)
-        .sort(orderByLabel)
-        .concat(values.filter((v) => !v.isFixed).sort(orderByLabel)),
-    [orderByLabel]
-  );
-
-  const [value, setValue] = React.useState(orderOptions(stackSelect));
-  const handleChange = useCallback(
-    (inputValue, { action, removedValue }) => {
-      switch (action) {
-        case "remove-value":
-        case "pop-value":
-          if (removedValue.isFixed) {
-            setValue(orderOptions([...inputValue, removedValue]));
-
-            return;
-          }
-          break;
-        case "clear":
-          setValue(stackSelect.filter((v) => v.isFixed));
-          return;
-        default:
-      }
-
-      setValue(inputValue);
-      setTectstack(inputValue);
-    },
-    [stackSelect, orderOptions]
-  );
-
-  const formatTech = () => {
-    let tamarray = [];
-    let index;
-    for (index = 0; index < techstack.length; index++) {
-      tamarray.push(techstack[index]["label"]);
-    }
-    setTest(tamarray);
-  };
-
-  useEffect(() => {
-    formatTech();
-  }, [techstack]);
 
   return (
     <React.Fragment>
@@ -200,71 +121,32 @@ const PostEdit = (props) => {
         border="1px solid #C4C4C4"
         alignItems="center"
       >
-        <SideBarImg src={Img} style={{ maxWidth: "100%", height: "100%" }} />
-        <Grid padding="0px 16px">
+        <LeftBanner />
+        <Grid margin="46px 106px 0px" position="relative">
           <Title>Scoope</Title>
           <Grid>
-            <Text color="#C4C4C4" size="20px" bold>
+            <Text color="black" size="20px">
               게시글 수정하기
             </Text>
           </Grid>
-          <Grid>
+          <Grid margin="40px auto">
+            <TitleEdit title={title} setTitle={setTitle} />
+            {/* <SummaryEdit summary={summary} setSummary={setSummary} /> */}
+            <StackEdit
+              setTectstack={setTectstack}
+              techstack={techstack}
+              setTest={setTest}
+              animatedComponents={animatedComponents}
+              styles={styles}
+            />
             <Grid>
-              <Text>제목</Text>
-              <Input
-                width="100%"
-                maxLength="35"
-                height="40px"
-                padding="10px"
-                border="1px solid #C4C4C4"
-                placeholder="제목을 입력해주세요."
-                inputFocusOutline="none"
-                fontSize="16px"
-                type="text"
-                editValue={title}
-                _onChange={(e) => {
-                  setTitle(e.target.value);
-                }}
-              />
-            </Grid>
-            <Grid margin="10px auto">
-              <Text>한줄소개</Text>
-              <Input
-                width="100%"
-                maxLength="60"
-                height="40px"
-                padding="10px"
-                placeholder="프로젝트를 한줄소개를 소개해주세요."
-                border="1px solid #C4C4C4"
-                inputFocusOutline="none"
-                fontSize="16px"
-                type="text"
-                editValue={summary}
-                _onChange={(e) => {
-                  setSummary(e.target.value);
-                }}
-              />
-            </Grid>
-            <Grid margin="10px auto">
-              <Text>기술스택 선택</Text>
-              {/* 1차방안 */}
-              <Select
-                isMulti
-                components={animatedComponents}
-                isClearable={value.some((v) => !v.isFixed)}
-                styles={styles}
-                value={techstack}
-                options={stackSelect}
-                onChange={handleChange}
-                placeholder={<div>기술 스택을 선택해주세요.</div>}
-              />
-            </Grid>
-            <Grid margin="10px auto">
               <Grid>
-                <Text>기간설정</Text>
+                <Text size="18px" bold>
+                  기간설정
+                </Text>
               </Grid>
-              <Grid display="colum">
-                <Text>프로젝트 시작 일 :</Text>
+              <Grid display="flex" textAlign="center" margin="20px auto">
+                {/* <Text>프로젝트 시작 일 :</Text> */}
                 <SDatePicker
                   selected={new Date(startDate)}
                   onChange={(date) => setStartdate(date)}
@@ -274,7 +156,7 @@ const PostEdit = (props) => {
                   minDate={new Date()}
                   placeholderText="프로젝트 시작일 입력"
                 />
-                <Text>프로젝트 종료 일 :</Text>
+                {/* <Text>프로젝트 종료 일 :</Text> */}
                 <SDatePicker
                   selected={new Date(endDate)}
                   onChange={(date) => setEnddate(date)}
@@ -287,37 +169,18 @@ const PostEdit = (props) => {
                 />
               </Grid>
             </Grid>
+            <TotalMemberEdit
+              styles={styles}
+              totalMember={totalMember}
+              setTotalmember={setTotalmember}
+            />
+            <StatusEdit
+              styles={styles}
+              projectStatus={projectStatus}
+              setProjectstatus={setProjectstatus}
+            />
             <Grid>
-              <Text>프로젝트 총 인원</Text>
-              <Select
-                options={projectMembers}
-                // isLoading
-                styles={styles}
-                value={totalMember}
-                onChange={setTotalmember}
-                placeholder={<div>총인원을 선택해주세요.</div>}
-              ></Select>
-            </Grid>
-            <Grid margin="10px auto">
-              <Text>프로젝트 상태체크</Text>
-              <Select
-                options={projectStatused}
-                // isLoading
-                styles={styles}
-                value={projectStatus}
-                onChange={setProjectstatus}
-                placeholder={<div>상태를 설정해주세요.</div>}
-              ></Select>
-            </Grid>
-            <Grid>
-              <Text>프로젝트 내용적기</Text>
-              <TextArea
-                value={contents}
-                s
-                onChange={(e) => {
-                  setContents(e.target.value);
-                }}
-              />
+              <ContentEdit contents={contents} setContents={setContents} />
               <Grid display="flex" padding="16px">
                 <Btn
                   onClick={() => {
@@ -338,19 +201,22 @@ const PostEdit = (props) => {
 
 // styled-components를 사용한다.
 const Title = styled.h1`
-  margin: "auto 20px";
-  color: #c4c4c4;
-  font-size: 40px;
+  color: black;
+  font-size: 32px;
+  font-weight: 800;
 `;
 
 const SDatePicker = styled(DatePicker)`
   box-sizing: border-box;
-  width: 100%;
+  width: 350px;
+  text-align: center;
+  font-size: 16px;
+  color: black;
   height: 40px;
-  padding: 8px 20px;
-  margin-top: 1.5rem;
+  margin-top: 0.6rem;
+  margin-left: 10px;
   outline: none;
-  border-radius: 4px;
+  border-radius: 10px;
   border: 1px solid #c4c4c4;
 `;
 
@@ -372,20 +238,6 @@ const Btn = styled.button`
     background-color: #b29cf4;
     border: 1px solid;
     transition-duration: 1s;
-  }
-`;
-
-const TextArea = styled.textarea`
-  width: 100%;
-  height: 200px;
-  border: 1px solid #e7e1ff;
-  font-size: 16px;
-  outline: none;
-`;
-
-const SideBarImg = styled.img`
-  @media screen and (max-width: 800px) {
-    display: none;
   }
 `;
 

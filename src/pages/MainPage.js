@@ -45,7 +45,6 @@ const MainPage = () => {
 
   React.useEffect(() => {
     dispatch(postActions.whatPage("mainPage"));
-    // console.log("어떻게오느냐 을랴랴랴랴랴랴ㅑ랴랴", post_list);
     dispatch(postActions.getPostAPI());
     // const GetPost = async () => {
     //   console.log("스택", stack);
