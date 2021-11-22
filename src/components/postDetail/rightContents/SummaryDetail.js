@@ -7,7 +7,7 @@ const SummaryDetail = (props) => {
     <React.Fragment>
       <Grid margin="10px auto">
         <Text color="#C4C4C4" size="20px" bold>
-          <Text>소개 : </Text> {props.passedData?.summary}
+          <Text>소개 </Text> {props.passedData?.summary}
           <Line />
         </Text>
       </Grid>

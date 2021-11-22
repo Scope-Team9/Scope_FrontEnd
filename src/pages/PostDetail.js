@@ -110,13 +110,14 @@ const PostDetail = (props) => {
             ToggleBookMark={ToggleBookMark}
             passedData={passedData}
           />
+
           {/* <Title>Scoope</Title> */}
           <TitleDetail passedData={passedData} />
 
           {/* <SummaryDetail passedData={passedData} /> */}
           <Grid margin="20px auto">
             <Grid display="flex">
-              <PosterDetail passedData={passedData} />
+              {/* <PosterDetail passedData={passedData} /> */}
               <ApplicantDetail passdedMenber={passdedMenber} />
             </Grid>
             <Grid margin="10px auto ">

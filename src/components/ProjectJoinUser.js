@@ -17,7 +17,7 @@ const ProjectJoinUser = (props) => {
           height="60px"
           borderRadius="50%"
           backgroundColor="#C4C4C4"
-          margin="6px auto"
+          margin="6px 0px"
         >
           <ImgType
             img={props.userPropensityType}
