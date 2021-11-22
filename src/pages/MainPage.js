@@ -23,7 +23,7 @@ const MainPage = () => {
   const history = useHistory();
   const stack = useSelector((state) => state.stack.stack);
   const sortC = useSelector((state) => state.sort.sort);
-  // const is_loading = useSelector((state) => state.post.is_loading);
+
   // const cards = useSelector((state) => state.post.posts);
   // console.log(cards);
   const reBookC = useSelector((state) => state.rebook.reBook);
