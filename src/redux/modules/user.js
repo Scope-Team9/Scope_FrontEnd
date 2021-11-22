@@ -101,7 +101,7 @@ const githubLoginMiddleware = code => {
         console.log(res);
         if (res.data.msg == "추가 정보 작성이 필요한 사용자입니다.") {
           // window.alert("추가정보 작성이 필요합니다.");
-          Swal.fire("추가정보 작성이 필요합니다.", "", "info");
+
           dispatch(
             firstUser({
               email: res.data.data.email,

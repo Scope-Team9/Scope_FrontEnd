@@ -38,7 +38,7 @@ const ApplyUserModal = props => {
         scroll="paper"
         open={applyUserModal}
         onClose={e => {
-          // e.stopPropagation();
+          e.stopPropagation();
           modalClose();
         }}
       >
