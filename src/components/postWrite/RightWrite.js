@@ -88,7 +88,7 @@ const RightWrite = (props) => {
         <SecondTitle>게시글 작성하기</SecondTitle>
         <Grid margin="40px auto">
           <TitleWrite setTitle={setTitle} />
-          {/* <SummaryWrite setSummary={setSummary} /> */}
+          <SummaryWrite setSummary={setSummary} />
           <StectWrite
             animatedComponents={animatedComponents}
             styles={styles}

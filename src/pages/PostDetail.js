@@ -12,6 +12,8 @@ import LeftBanner from "../components/postDetail/LeftBanner";
 import TitleDetail from "../components/postDetail/rightContents/TitleDetail";
 import SummaryDetail from "../components/postDetail/rightContents/SummaryDetail";
 import PosterDetail from "../components/postDetail/rightContents/PosterDetail";
+import exileStatusModalOpen from "../components/modal/ExileUserModal";
+import ExileUserModal from "../components/modal/ExileUserModal";
 import ApplicantDetail from "../components/postDetail/rightContents/ApplicantDetail";
 import StackDetail from "../components/postDetail/rightContents/StackDetail";
 import DateDetail from "../components/postDetail/rightContents/DateDetail";
@@ -136,11 +138,23 @@ const PostDetail = (props) => {
                     >
                       신청현황 확인
                     </Button>
+                    <Button
+                      postion="absolute"
+                      common
+                      _onClick={exileStatusModalOpen}
+                    >
+                      팀원 강퇴
+                    </Button>
                     <ApplyStatusModal
                       applyStatusModal={applyStatusModal}
                       setApplyStatusModal={setApplyStatusModal}
                       postId={post_id}
                     />
+                    {/* <ExileUserModal
+                      applyStatusModal={exileStatusModal}
+                      setApplyStatusModal={setExileStatusModal}
+                      postId={post_id}
+                    ></ExileUserModal> */}
                   </Grid>
                 </Grid>
               )}
