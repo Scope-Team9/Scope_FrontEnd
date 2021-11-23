@@ -3,24 +3,15 @@
 // 나의 마이페이지에서 뜨는 버튼들과 다른사람 마이페이지에서 뜨는 버튼들
 // import를 한다.
 import React from "react";
-import { Dialog } from "@material-ui/core";
-import Swal from "sweetalert2";
 import { Grid, Image, Text, Button } from "../elements/Index";
 import { postActions } from "../redux/modules/post";
-import { myPageActions } from "../redux/modules/myPage";
 import { useSelector, useDispatch } from "react-redux";
-import Header from "./Header";
 import styled from "styled-components";
-import Markdown from "./Markdown";
 import { apis } from "../lib/axios";
 import MypagePostList from "./mypagePost/MypagePostList";
 import MarkdownRead from "./MarkdownRead";
 import { history } from "../redux/configureStore";
-import Select from "react-select";
-import EmailAuth from "./EmailAuth";
-import PropensityTest from "./propensityTest/PropensityTest";
 import Spinner from "../shared/Spinner";
-
 import Banners from "./myPage/Banners";
 import MypageCard from "./myPage/MypageCard";
 import TypeResultTest from "./myPage/TypeResultTest";
@@ -44,8 +35,7 @@ const MyPageInfo = (props) => {
   const [testmodal, setTestModal] = React.useState(false);
 
   //click
-  const [currentClick, setCurrentClick] = React.useState(null);
-  const [prevClick, setPrevClick] = React.useState(null);
+
   const [loading, setLoading] = React.useState(true);
 
   const SetFilter = (data) => {
@@ -64,19 +54,35 @@ const MyPageInfo = (props) => {
       try {
         const result = await apis.getMypage(userId);
 
-        setMydata(result.data.data);
+        // setMydata(result.data.data);
         setNickName(result.data.data.user.nickname);
         setEmail(result.data.data.user.email);
         setTeckstack(result.data.data.user.techStackList);
         setLoading(false);
-        console.log(result);
+        // console.log(result);
       } catch (err) {
         console.log(err);
       }
     };
     fetchData();
     console.log(mydata);
-  }, [filter, editMyProfile]);
+  }, [editMyProfile]);
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await apis.getMypage(userId);
+        console.log(result);
+        setMydata(result.data.data);
+
+        setLoading(false);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+    console.log(mydata);
+  }, [filter]);
 
   const introduction = mydata?.user.introduction ? true : false;
   const recruitmentProject = mydata?.recruitment;
@@ -105,7 +111,7 @@ const MyPageInfo = (props) => {
   };
 
   return (
-    <React.Fragment>
+    <Grid margin="0 0 250px 0">
       {loading ? (
         <Spinner />
       ) : (
@@ -116,11 +122,11 @@ const MyPageInfo = (props) => {
                 <Banners
                   type={myType}
                   myPage={mydata?.isMyMypage}
-                  setModal={setModal}
-                  modal={modal}
-                  onClick={() => {
-                    EmailConfirm();
-                  }}
+                  // setModal={setModal}
+                  // modal={modal}
+                  // onClick={() => {
+                  //   EmailConfirm();
+                  // }}
                 ></Banners>
               </Banner>
               <MypageCard
@@ -145,6 +151,11 @@ const MyPageInfo = (props) => {
                 testmodal={testmodal}
                 EditTest={EditTest}
                 TestClose={TestClose}
+                setModal={setModal}
+                modal={modal}
+                onClick={() => {
+                  EmailConfirm();
+                }}
               />
               <Grid
                 display="flex"
@@ -153,7 +164,7 @@ const MyPageInfo = (props) => {
                 margin="0px 0 0 150px"
                 width="auto"
               >
-                <MypageFilter onClick={SetFilter} />
+                <MypageFilter filter={filter} onClicks={SetFilter} />
               </Grid>
 
               {filter === "모집" && (
@@ -210,31 +221,34 @@ const MyPageInfo = (props) => {
                   </>
                 )}
               </Grid>
-              {filter === "소개" && mydata?.isMyMypage === true && (
-                <button
-                  style={{
-                    float: "right",
-                    margin: "10px 18% 0 0",
-                    border: "none",
-                    cursor: "pointer",
-                    backgroundColor: " transparent ",
-                  }}
-                  onClick={() => {
-                    history.push({
-                      pathname: "/addmarkdown",
-                      state: { userId: userId },
-                    });
-                  }}
-                >
-                  <img
-                    src="/img/소개글.png"
-                    style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
-                  />
-                </button>
-              )}
+              {filter === "소개" &&
+                mydata?.isMyMypage === true &&
+                introduction === true && (
+                  <button
+                    style={{
+                      float: "right",
+                      margin: "55px 18% 0 0",
+                      border: "none",
+                      borderRadius: "15px",
+                      cursor: "pointer",
+                      backgroundColor: " transparent ",
+                    }}
+                    onClick={() => {
+                      history.push({
+                        pathname: "/addmarkdown",
+                        state: { userId: userId },
+                      });
+                    }}
+                  >
+                    <img
+                      src="/img/소개글.png"
+                      style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
+                    />
+                  </button>
+                )}
               <Grid margin="0 0 0 34%" width="49%">
                 {filter === "소개" && introduction === true && (
-                  <Grid border="1px solid #707070 ">
+                  <Grid margin="50px 0 0 0" border="1px solid #707070 ">
                     <MarkdownRead
                       introduction={mydata?.user.introduction}
                     ></MarkdownRead>
@@ -248,6 +262,21 @@ const MyPageInfo = (props) => {
                     <NoIntroductionText>
                       작성된 소개가 없네요.
                     </NoIntroductionText>
+                    {mydata?.isMyMypage === true && (
+                      <Button
+                        width="150px"
+                        margin="0px 0 0 45%"
+                        _onClick={() => {
+                          history.push({
+                            pathname: "/addmarkdown",
+                            state: { userId: userId },
+                          });
+                        }}
+                      >
+                        {" "}
+                        소개글 작성하기
+                      </Button>
+                    )}
                   </>
                 )}
               </Grid>
@@ -260,37 +289,15 @@ const MyPageInfo = (props) => {
         // 스피너를 감싸는 친구
       )}
       {/* 스피너를 감싸는 괄호 */}
-    </React.Fragment>
+    </Grid>
   );
 };
-
-const Filter = styled.p`
-  margin-left: 10%;
-  margin-top: 100px;
-  margin-bottom: 50px;
-  cursor: pointer;
-  &:hover {
-    transform: scale(1.05);
-    -webkit-transform: scale(1.05);
-    -moz-transform: scale(1.05);
-    -ms-transform: scale(1.05);
-    -o-transform: scale(1.05);
-    /* text-decoration: underline; */
-    color: #737373;
-  }
-  @media screen and (max-width: 1400px) {
-    /* margin-top: 1050px; */
-  }
-  @media screen and (max-width: 750px) {
-    /* margin-top: 1050px; */
-  } ;
-`;
 
 const Banner = styled.div`
   width: 100%;
   margin: -100px auto;
   display: flex;
-  height: 550px;
+  height: 457px;
   overflow: hidden;
 `;
 const NoIntroduction = styled.img`

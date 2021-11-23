@@ -47,7 +47,7 @@ const MainPage = () => {
   React.useEffect(() => {
     dispatch(postActions.whatPage("mainPage"));
     dispatch(postActions.getPostAPI());
-    console.log(cards);
+    // console.log(cards);
   }, [stack, sortC, reBookC, pageCheck, Render, isLogin]);
 
   // 요청에 대한 속도가 다를때. 다른것이 띄워질 수 있는 버그성.
@@ -64,6 +64,13 @@ const MainPage = () => {
     } // 옵저버를 좀 더 위로
     // console.log(pPaging);
   }, [inView]);
+
+  const goPage = () => {
+    window.open(
+      "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfl6t0O_P5mXR6wo1cqIZ7TWkYduTkZiNlx0r5HynoArgS9Tg/formResponse",
+      "_blank"
+    );
+  };
 
   return (
     <>
@@ -112,6 +119,12 @@ const MainPage = () => {
                   ></i>
                 </Btn>
               )}
+              <BtnFeedback
+                src="/img/FeedbackBox.png"
+                onClick={() => {
+                  goPage();
+                }}
+              ></BtnFeedback>
             </Inside>
           </Grid>
         </>
@@ -155,6 +168,41 @@ const Btn = styled.button`
   background: #c4c4c4;
   cursor: pointer;
   z-index: 999;
+
+  @media screen and (max-width: 750px) {
+    position: fixed;
+
+    border: 1px solid #42309b;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    right: 5px;
+    bottom: 5px;
+    margin: auto;
+    background: #42309b;
+    cursor: pointer;
+    z-index: 999;
+  } ;
+`;
+
+const BtnFeedback = styled.img`
+  position: fixed;
+  bottom: 70px;
+  /* border: 1px solid #c4c4c4; */
+  /* border-radius: 50%; */
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  left: 50px;
+  margin: auto;
+  /* background: #c4c4c4; */
+  cursor: pointer;
+  z-index: 999;
+  transition: all ease 0.3s;
+  &:hover {
+    transform: rotate(45deg);
+  }
 
   @media screen and (max-width: 750px) {
     position: fixed;

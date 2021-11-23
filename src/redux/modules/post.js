@@ -39,11 +39,13 @@ export const getPostAPI = () => {
     let whatPages = getState().post.whatPage;
 
     if (whatPages.now !== whatPages.pre) {
-      console.log(whatPages.now, whatPages.pre);
       console.log("끊겠음2");
       dispatch(whatPage("mainPage"));
       return;
     }
+    console.log("리북 정보", reBook);
+    console.log("소트 정보", sort);
+
     apis
       .getPost(stack, sort, reBook)
       .then((res) => {
@@ -69,7 +71,7 @@ export default handleActions(
     // 백엔드와 통신
     [GET_POST]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action);
+        // console.log(action);
         let stacks = action.payload.data.stack;
         let sorts = action.payload.data.sort;
         let reBook = action.payload.data.reBook;
@@ -87,7 +89,7 @@ export default handleActions(
           state.reBook !== reBook
         ) {
           console.log("스택이 달라졌을때");
-          console.log(action);
+          // console.log(action);
           draft.paging = action.payload.data.paging;
           draft.posts = action.payload.data.posts;
           draft.isLoading = false;

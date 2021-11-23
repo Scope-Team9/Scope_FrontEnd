@@ -18,8 +18,11 @@ const SortText = (props) => {
 };
 
 const Filtering = styled.p`
-  margin: 20px;
+  margin: 25px;
   cursor: pointer;
+  font-weight: bold;
+  border-bottom: ${(props) =>
+    props.active ? "1mm ridge rgb(170, 50, 220, .6)" : null};
   &:hover {
     transform: scale(1.05);
     -webkit-transform: scale(1.05);

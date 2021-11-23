@@ -64,6 +64,15 @@ const Sort = (props) => {
         return stateItem;
       });
     });
+
+    setArr((state) => {
+      return state.map((stateItem) => {
+        if (stateItem.id !== getItem.id && stateItem.active === true) {
+          return { ...stateItem, active: !stateItem.active };
+        }
+        return stateItem;
+      });
+    });
   };
 
   return (
