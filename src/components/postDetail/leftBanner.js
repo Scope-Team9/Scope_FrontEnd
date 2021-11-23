@@ -1,10 +1,12 @@
-// TitleDetail.js
+// LeftBanner.js
+/* eslint-disable */
+
 // import를 한다.
 import React from "react";
 import styled from "styled-components";
 import bannerImg from "../../images/PostDetail.png";
 
-// TitleDetail의 함수형 컴포넌트를 만든다.
+// LeftBanner의 함수형 컴포넌트를 만든다.
 const LeftBanner = (props) => {
   return (
     <React.Fragment>
@@ -16,11 +18,11 @@ const LeftBanner = (props) => {
 // styled-components
 const SideBarImg = styled.img`
   max-width: 100%;
-  height: 1000px;
+  height: 1020px;
   @media screen and (max-width: 800px) {
     display: none;
   }
 `;
 
-// export
+// export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default LeftBanner;

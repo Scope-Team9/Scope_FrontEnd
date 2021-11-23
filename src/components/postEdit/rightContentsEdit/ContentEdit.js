@@ -1,4 +1,6 @@
 // ContentEdit.js
+/* eslint-disable */
+
 // import를 한다.
 import React from "react";
 import styled from "styled-components";

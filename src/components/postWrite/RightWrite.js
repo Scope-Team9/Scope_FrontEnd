@@ -1,7 +1,7 @@
 // RightWrite.js
 /* eslint-disable */
 
-// import
+// import를 한다.
 import React from "react";
 import styled from "styled-components";
 import { Grid } from "../../elements/Index";
@@ -10,13 +10,13 @@ import { postAddActions } from "../../redux/modules/postadd";
 import { postActions } from "../../redux/modules/post";
 import makeAnimated from "react-select/animated";
 import TitleWrite from "./rightContents/TitleWrite";
-import StactWrite from "./rightContents/StackWrite";
+import StackWrite from "./rightContents/StackWrite";
 import DateWrite from "./rightContents/DateWrite";
 import TotalMember from "./rightContents/TotalMember";
 import ContentWrite from "./rightContents/ContentWrite";
 import GenerateButton from "./rightContents/GenerateButton";
 
-// RightWrite 함수형 컴포넌트 생성
+// RightWrite의 함수형 컴포넌트를 만든다.
 const RightWrite = (props) => {
   React.useEffect(() => {
     dispatch(postActions.isMainPage(false));
@@ -64,6 +64,7 @@ const RightWrite = (props) => {
       projectStatus: projectStatus,
       contents: contents,
     };
+    console.log("카드들", card);
     dispatch(postAddActions.addPostAPI(card));
   };
 
@@ -89,7 +90,7 @@ const RightWrite = (props) => {
         <Title>게시글 작성하기</Title>
         <Grid margin="40px auto">
           <TitleWrite setTitle={setTitle} />
-          <StactWrite
+          <StackWrite
             animatedComponents={animatedComponents}
             styles={styles}
             setTectstack={setTectstack}
@@ -118,5 +119,5 @@ const Title = styled.div`
   font-weight: 800;
 `;
 
-// export
+// export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default RightWrite;

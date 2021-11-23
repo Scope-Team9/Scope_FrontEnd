@@ -1,4 +1,6 @@
 // StatusDetail.js
+/* eslint-disable */
+
 // import를 한다.
 import React from "react";
 import { Grid, Text } from "../../../elements/Index";

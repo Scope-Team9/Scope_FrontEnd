@@ -1,4 +1,6 @@
 // PosterButton.js
+/* eslint-disable */
+
 // import를 한다.
 import React from "react";
 import { Grid, Button } from "../../../elements/Index";

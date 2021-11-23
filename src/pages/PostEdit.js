@@ -13,7 +13,7 @@ import makeAnimated from "react-select/animated";
 import LeftBanner from "../components/postEdit/LeftBanner";
 import TitleEdit from "../components/postEdit/rightContentsEdit/TitleEdit";
 import StackEdit from "../components/postEdit/rightContentsEdit/StackEdit";
-import TotalMemberEdit from "../components/postEdit/rightContentsEdit/TotalMenberEdit";
+import TotalMemberEdit from "../components/postEdit/rightContentsEdit/TotalMemberEdit";
 import StatusEdit from "../components/postEdit/rightContentsEdit/StatusEdit";
 import ContentEdit from "../components/postEdit/rightContentsEdit/ContentEdit";
 import DateEdit from "../components/postEdit/rightContentsEdit/DateEdit";

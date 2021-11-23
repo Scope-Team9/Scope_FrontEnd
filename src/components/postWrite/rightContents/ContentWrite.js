@@ -1,12 +1,12 @@
 // ContentWrite.js
 /* eslint-disable */
 
-// import
+// import를 한다.
 import React from "react";
 import styled from "styled-components";
 import { Grid, Text } from "../../../elements/Index";
 
-// ContentWrite 함수형 컴포넌트 생성
+// ContentWrite의 함수형 컴포넌트를 만든다.
 const ContentWrite = (props) => {
   return (
     <React.Fragment>
@@ -37,5 +37,5 @@ const TextArea = styled.textarea`
   outline: none;
 `;
 
-// export
+// export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default ContentWrite;

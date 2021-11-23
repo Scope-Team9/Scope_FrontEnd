@@ -1,4 +1,6 @@
 // TitleEdit.js
+/* eslint-disable */
+
 // import를 한다.
 import React from "react";
 import { Grid, Text, Input } from "../../../elements/Index";

@@ -3,24 +3,27 @@ import React from "react";
 import styled from "styled-components";
 import { history } from "../redux/configureStore";
 
+import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { Grid, Text, Image, Button } from "../elements/Index";
 import LoginModal from "./LoginModal";
 import { userCreators } from "../redux/modules/user";
-
 import { deleteCookie } from "../shared/Cookie";
 
-const HeaderRight = props => {
+const HeaderRight = (props) => {
   const dispatch = useDispatch();
   const isToken = document.cookie;
-  const userInfo = useSelector(state => state.user);
+  const history = useHistory();
+  const userInfo = useSelector((state) => state.user);
   console.log(userInfo);
   // console.log(isToken);
   // console.log(isToken);
   // console.log(userInfo);
   // console.log("나의 타입은?", props);
   const [showModal, setShowModal] = React.useState(false);
-  const sigunupModalState = useSelector(state => state.user.sigunupModalState);
+  const sigunupModalState = useSelector(
+    (state) => state.user.sigunupModalState
+  );
   const modalOpen = () => {
     setShowModal(true);
   };
@@ -41,6 +44,18 @@ const HeaderRight = props => {
         width="auto"
       >
         <HeaderWrapper>
+          {/* 메시지 */}
+          <Message
+            onClick={() => {
+              history.push(`/message`);
+            }}
+          >
+            <i class="far fa-envelope"></i>
+          </Message>
+          {/* 알람 */}
+          <Bell>
+            <i class="far fa-bell"></i>
+          </Bell>
           <IconWrap>
             <Grid
               display="flex"
@@ -122,6 +137,19 @@ const HeaderWrapper = styled.div`
     width: 20%;
   } ;
 `;
+
+const Message = styled.div`
+  font-size: 30px;
+  margin-top: 8px;
+  margin-right: 16px;
+  cursor: pointer;
+`;
+const Bell = styled.div`
+  margin-top: 8px;
+  font-size: 30px;
+  cursor: pointer;
+`;
+
 const ButtonWrap = styled.div`
   @media screen and (max-width: 595px) {
     display: none;

@@ -1,4 +1,6 @@
 // StackEdit.js
+/* eslint-disable */
+
 // import를 한다.
 import React, { useEffect, useCallback } from "react";
 import { Grid, Text } from "../../../elements/Index";

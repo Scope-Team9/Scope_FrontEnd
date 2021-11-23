@@ -1,4 +1,6 @@
 // LeftBanner.js
+/* eslint-disable */
+
 // import를 한다.
 import React from "react";
 import styled from "styled-components";
@@ -22,5 +24,5 @@ const SideBarImg = styled.img`
   }
 `;
 
-// export
+// export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default LeftBanner;

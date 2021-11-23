@@ -1,4 +1,6 @@
 // Bookmark.js
+/* eslint-disable */
+
 // import를 한다.
 import React from "react";
 import { Grid } from "../../../elements/Index";
