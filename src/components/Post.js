@@ -48,13 +48,12 @@ const Post = props => {
 
   // console.log(member);
   let as = member?.find(e => e.userId === myUserId);
-  // console.log(as);
+  console.log(as);
 
   return (
     <React.Fragment>
       <ProductImgWrap
-        onClick={e => {
-          e.preventDefault();
+        onClick={() => {
           history.push({
             pathname: `/postdetail/${props.postId}`,
           });
@@ -199,9 +198,9 @@ const CardHeader = styled.div`
   height: 63px;
   border-radius: 94px 84px 84px 54px;
   background-color: #ecc0f1;
-  ${props => props.projectStatus === "모집중" && `background-color: #49CBFD;`};
-  ${props => props.projectStatus === "진행중" && `background-color: #B29CF4;`};
-  ${props => props.projectStatus === "종료" && `background-color: #ECC0F1;`};
+  ${props => props.projectStatus === "모집중" && `background-color: #554475;`};
+  ${props => props.projectStatus === "진행중" && `background-color: #af8bb7;`};
+  ${props => props.projectStatus === "종료" && `background-color:#bebac9;`};
 `;
 
 const CardHeaderTwo = styled.div`
@@ -212,9 +211,9 @@ const CardHeaderTwo = styled.div`
   height: 160px;
   border-radius: 43px 54px 54px 54px;
   background-color: #ecc0f1;
-  ${props => props.projectStatus === "모집중" && `background-color: #49CBFD;`};
-  ${props => props.projectStatus === "진행중" && `background-color: #B29CF4;`};
-  ${props => props.projectStatus === "종료" && `background-color: #ECC0F1;`};
+  ${props => props.projectStatus === "모집중" && `background-color: #554475;`};
+  ${props => props.projectStatus === "진행중" && `background-color: #af8bb7;`};
+  ${props => props.projectStatus === "종료" && `background-color: #bebac9;`};
 `;
 
 //헤더 까지
@@ -267,12 +266,15 @@ const ProjectState = styled.div`
   color: #fff;
   border-radius: 15px;
   width: 58px;
-  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
   height: 24px;
   margin: auto 0;
-  ${props => props.projectStatus === "모집중" && `background-color: #49CBFD;`};
-  ${props => props.projectStatus === "진행중" && `background-color: #B29CF4;`};
-  ${props => props.projectStatus === "종료" && `background-color: #ECC0F1;`};
+  font-weight: 500;
+  ${props => props.projectStatus === "모집중" && `background-color: #554475;`};
+  ${props => props.projectStatus === "진행중" && `background-color: #af8bb7;`};
+  ${props => props.projectStatus === "종료" && `background-color: #a49cbb;`};
 `;
 
 const ProductImgWrap = styled.div`
@@ -308,18 +310,18 @@ const ProgressBar = styled.div`
   background: #f6f4f6;
   width: 100%;
   height: 15px;
-  ${props => props.projectStatus === "모집중" && `border: 1px solid #49CBFD`};
-  ${props => props.projectStatus === "진행중" && `border: 1px solid #B29CF4;`};
-  ${props => props.projectStatus === "종료" && `border: 1px solid #ECC0F1;`};
+  ${props => props.projectStatus === "모집중" && `border: 1px solid #554475`};
+  ${props => props.projectStatus === "진행중" && `border: 1px solid #af8bb7;`};
+  ${props => props.projectStatus === "종료" && `border: 1px solid #a49cbb;`};
 `;
 
 const HighLight = styled.div`
   border-radius: 25px;
   transition: 1s;
   width: ${props => props.width};
-  ${props => props.projectStatus === "모집중" && `background-color: #49CBFD;`};
-  ${props => props.projectStatus === "진행중" && `background-color: #B29CF4;`};
-  ${props => props.projectStatus === "종료" && `background-color: #ECC0F1;`};
+  ${props => props.projectStatus === "모집중" && `background-color: #554475;`};
+  ${props => props.projectStatus === "진행중" && `background-color: #af8bb7;`};
+  ${props => props.projectStatus === "종료" && `background-color:#a49cbb;`};
   height: 15px;
 `;
 

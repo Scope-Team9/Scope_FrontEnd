@@ -21,13 +21,13 @@ const TestThree = props => {
       //값이 들어오면 해당 버튼 css 변경
       if (nowClickU !== null) {
         let current = document.getElementById(nowClickU);
-        current.style.backgroundColor = "#B29CF4";
+        current.style.backgroundColor = "#554475";
         current.style.color = "#fff";
       }
       //다른 버튼이 클릭될경우 기존 스테이트값이 이전버튼스테이트로 이동
       if (prevClickU !== null) {
         let prev = document.getElementById(prevClickU);
-        prev.style.color = "#B29CF4";
+        prev.style.color = "#554475";
         prev.style.backgroundColor = "#fff";
       }
       setPrevClickU(nowClickU);
@@ -40,13 +40,13 @@ const TestThree = props => {
     e => {
       if (nowClickMB !== null) {
         let current = document.getElementById(nowClickMB);
-        current.style.backgroundColor = "#B29CF4";
+        current.style.backgroundColor = "#554475";
         current.style.color = "#fff";
       }
 
       if (prevClickMB !== null) {
         let prev = document.getElementById(prevClickMB);
-        prev.style.color = "#B29CF4";
+        prev.style.color = "#554475";
         prev.style.backgroundColor = "#fff";
       }
       setPrevClickMB(nowClickMB);
@@ -59,7 +59,8 @@ const TestThree = props => {
       <Grid display="flex" flexDirection="column">
         <Grid margin="20px 0">
           <Grid>
-            Q3. 나는 큰 보상과 무거운 책임보다는 평범한 보상과 책임이 더 좋다.
+            Q3. <b>나는 큰 보상과 무거운 책임</b>보다는{" "}
+            <b>평범한 보상과 책임</b>이 더 좋다.
             <Button
               isId="UL"
               isTest
@@ -86,8 +87,8 @@ const TestThree = props => {
         </Grid>
         <Grid>
           <Grid>
-            Q3. <b>내 팀원</b>은 큰 보상과 무거운 책임보다는 평범한 보상과
-            책임을 더 좋아했으면 좋겠다.
+            Q3. <b>내 팀원은 큰 보상과 무거운 책임</b>보다는{" "}
+            <b>평범한 보상과 책임을 더 좋아했으면</b> 좋겠다.
           </Grid>
           <Button
             isTest

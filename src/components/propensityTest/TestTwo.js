@@ -21,13 +21,13 @@ const TestTwo = props => {
       //값이 들어오면 해당 버튼 css 변경
       if (nowClickU !== null) {
         let current = document.getElementById(nowClickU);
-        current.style.backgroundColor = "#B29CF4";
+        current.style.backgroundColor = "#554475";
         current.style.color = "#fff";
       }
       //다른 버튼이 클릭될경우 기존 스테이트값이 이전버튼스테이트로 이동
       if (prevClickU !== null) {
         let prev = document.getElementById(prevClickU);
-        prev.style.color = "#B29CF4";
+        prev.style.color = "#554475";
         prev.style.backgroundColor = "#fff";
       }
       setPrevClickU(nowClickU);
@@ -40,13 +40,13 @@ const TestTwo = props => {
     e => {
       if (nowClickMB !== null) {
         let current = document.getElementById(nowClickMB);
-        current.style.backgroundColor = "#B29CF4";
+        current.style.backgroundColor = "#554475";
         current.style.color = "#fff";
       }
 
       if (prevClickMB !== null) {
         let prev = document.getElementById(prevClickMB);
-        prev.style.color = "#B29CF4";
+        prev.style.color = "#554475";
         prev.style.backgroundColor = "#fff";
       }
       setPrevClickMB(nowClickMB);
@@ -59,8 +59,8 @@ const TestTwo = props => {
       <Grid display="flex" flexDirection="column">
         <Grid margin="20px 0">
           <Grid>
-            Q2. 새로운 스터디 사람들과의 첫만남! 스터디의 운영을 맡길 스터디
-            장을 뽑아야 하는데 이때 당신의 행동은?
+            Q2. 새로운 스터디 사람들과의 첫만남! 스터디의 운영을 맡길{" "}
+            <b>스터디 장을 뽑아야 하는데 이때 당신의 행동</b>은?
           </Grid>
           <Button
             isId="UL"
@@ -87,8 +87,8 @@ const TestTwo = props => {
         </Grid>
         <Grid>
           <Grid>
-            Q2. 새로운 스터디 사람들과의 첫만남! 스터디의 운영을 맡길 스터디
-            장을 뽑아야 하는데 이때 당신이 선호하는 팀원의 행동은?
+            Q2. 새로운 스터디 사람들과의 첫만남! 스터디의 운영을 맡길{" "}
+            <b>스터디 장을 뽑아야 하는데 이때 당신이 선호하는 팀원의 행동</b>은?
           </Grid>
           <Button
             isTest

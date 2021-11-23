@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Text } from "../../../elements/Index";
 
-const StackDetail = (props) => {
+const StackDetail = props => {
   return (
     <React.Fragment>
       <Grid display="flex" margin="20px auto">
@@ -13,7 +13,7 @@ const StackDetail = (props) => {
             <Text margin="auto 5px" key={index}>
               <span
                 style={{
-                  color: "white",
+                  color: "#554475",
                   textAlign: "center",
                   padding: "4px 10px",
                   border: "1px solid #E6DDF2",
