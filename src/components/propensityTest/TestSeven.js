@@ -21,13 +21,13 @@ const TestSeven = props => {
       //값이 들어오면 해당 버튼 css 변경
       if (nowClickU !== null) {
         let current = document.getElementById(nowClickU);
-        current.style.backgroundColor = "#B29CF4";
+        current.style.backgroundColor = "#554475";
         current.style.color = "#fff";
       }
       //다른 버튼이 클릭될경우 기존 스테이트값이 이전버튼스테이트로 이동
       if (prevClickU !== null) {
         let prev = document.getElementById(prevClickU);
-        prev.style.color = "#B29CF4";
+        prev.style.color = "#554475";
         prev.style.backgroundColor = "#fff";
       }
       setPrevClickU(nowClickU);
@@ -40,13 +40,13 @@ const TestSeven = props => {
     e => {
       if (nowClickMB !== null) {
         let current = document.getElementById(nowClickMB);
-        current.style.backgroundColor = "#B29CF4";
+        current.style.backgroundColor = "#554475";
         current.style.color = "#fff";
       }
 
       if (prevClickMB !== null) {
         let prev = document.getElementById(prevClickMB);
-        prev.style.color = "#B29CF4";
+        prev.style.color = "#554475";
         prev.style.backgroundColor = "#fff";
       }
       setPrevClickMB(nowClickMB);
@@ -58,7 +58,7 @@ const TestSeven = props => {
       <Grid display="flex" flexDirection="column">
         <Grid margin="20px 0">
           <Grid>
-            Q. 어떤 문장이 당신과 더 어울리나요
+            Q. <b>당신과 어울리는 문장</b>은 무엇인가요?
             <Button
               isTest
               isId="UP"
@@ -87,7 +87,7 @@ const TestSeven = props => {
         </Grid>
         <Grid>
           <Grid>
-            Q. 어떤 문장이 당신이 선호하는 팀원의 모습과 더 어울리나요
+            Q. 어떤 문장이 <b>당신이 선호하는 팀원의 모습</b>과 더 어울리나요?
           </Grid>
           <Button
             isTest

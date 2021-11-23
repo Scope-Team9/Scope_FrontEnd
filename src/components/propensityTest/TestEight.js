@@ -21,13 +21,13 @@ const TestEight = props => {
       //값이 들어오면 해당 버튼 css 변경
       if (nowClickU !== null) {
         let current = document.getElementById(nowClickU);
-        current.style.backgroundColor = "#B29CF4";
+        current.style.backgroundColor = "#554475";
         current.style.color = "#fff";
       }
       //다른 버튼이 클릭될경우 기존 스테이트값이 이전버튼스테이트로 이동
       if (prevClickU !== null) {
         let prev = document.getElementById(prevClickU);
-        prev.style.color = "#B29CF4";
+        prev.style.color = "#554475";
         prev.style.backgroundColor = "#fff";
       }
       setPrevClickU(nowClickU);
@@ -40,13 +40,13 @@ const TestEight = props => {
     e => {
       if (nowClickMB !== null) {
         let current = document.getElementById(nowClickMB);
-        current.style.backgroundColor = "#B29CF4";
+        current.style.backgroundColor = "#554475";
         current.style.color = "#fff";
       }
 
       if (prevClickMB !== null) {
         let prev = document.getElementById(prevClickMB);
-        prev.style.color = "#B29CF4";
+        prev.style.color = "#554475";
         prev.style.backgroundColor = "#fff";
       }
       setPrevClickMB(nowClickMB);
@@ -59,7 +59,8 @@ const TestEight = props => {
       <Grid display="flex" flexDirection="column">
         <Grid margin="20px 0">
           <Grid>
-            Q8.프로젝트에서 문제가 생겼을 때 당신이 생각하는 더 나은 방법은?
+            Q8.<b>프로젝트에서 문제</b>가 생겼을 때{" "}
+            <b>당신이 생각하는 더 나은 방법</b>은?
           </Grid>
           <Button
             isTest
@@ -88,8 +89,8 @@ const TestEight = props => {
         </Grid>
         <Grid>
           <Grid>
-            Q8.프로젝트에서 문제가 생겼을 때 당신의 팀원이 생각했으면 하는
-            방법은?
+            Q8.<b>프로젝트에서 문제</b>가 생겼을 때{" "}
+            <b>당신의 팀원이 생각했으면 하는 방법</b>은?
           </Grid>
           <Button
             isTest

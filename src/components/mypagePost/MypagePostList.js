@@ -4,7 +4,7 @@ import React from "react";
 import Post from "../Post";
 import { Grid, Image } from "../../elements/Index";
 import styled from "styled-components";
-const MypagePostList = props => {
+const MypagePostList = (props) => {
   console.log(props);
   const mypage = true;
 
@@ -17,8 +17,8 @@ const MypagePostList = props => {
       {newMyCards && (
         <React.Fragment>
           <PostWrap>
-            {newMyCards.map((p, idx) => {
-              return <Post mypage={mypage} key={idx} {...p}></Post>;
+            {newMyCards.map((p) => {
+              return <Post mypage={mypage} key={p.postId} {...p}></Post>;
             })}
           </PostWrap>
         </React.Fragment>

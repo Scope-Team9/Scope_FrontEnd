@@ -48,13 +48,12 @@ const Post = props => {
 
   // console.log(member);
   let as = member?.find(e => e.userId === myUserId);
-  // console.log(as);
+  console.log(as);
 
   return (
     <React.Fragment>
       <ProductImgWrap
-        onClick={e => {
-          e.preventDefault();
+        onClick={() => {
           history.push({
             pathname: `/postdetail/${props.postId}`,
           });
@@ -95,9 +94,11 @@ const Post = props => {
                 applyValue={applyValue}
                 passdedMenber={member}
                 postId={props.postId}
+                myPage={props.mypage}
               />
             </Grid>
           )}
+        {/* 전체크기 */}
         <DDescriptionBox>
           <CardHeader
             projectStatus={props.projectStatus}
@@ -114,25 +115,14 @@ const Post = props => {
             >
               {props.techStack.map((p, idx) => {
                 return (
-                  <Grid width="30%" key={idx}>
+                  <Grid margin="4% 0 0 -1% " width="20%" key={idx}>
                     <PostStacks stack={p}></PostStacks>
                   </Grid>
                 );
               })}
             </Grid>
-            <CardHeaderTwo
-              projectStatus={props.projectStatus}
-              id="headerTwo"
-              className="headerTwo"
-            />
           </CardHeader>
 
-          <Grid
-            borderRadius="64px 54px 54px 54px"
-            bg="#fff"
-            height="100px"
-            position="absolute"
-          ></Grid>
           <DescriptionBox>
             <ProjectState projectStatus={props.projectStatus}>
               {props.projectStatus}
@@ -141,34 +131,26 @@ const Post = props => {
             <Title>{props.title}</Title>
             {/* <Summary>{props.summary}</Summary> */}
             <Date>
-              <Grid width="87%">
-                {props.startDate} ~ {props.endDate}
-              </Grid>
+              {props.startDate} ~ {props.endDate}
             </Date>
-            <Line />
+
             {/* 프로그래스바 */}
-            <Grid display="flex" width="100%" justifyContent="space-between">
-              <Grid width="100%">
-                <Grid margin="10px 0">
-                  <Grid
-                    display="flex"
-                    justifyContent="space-between"
-                    margin="5px 0"
-                  >
-                    <Text> 참여율</Text>
-                    <Text margin="0 0 0 10px">
-                      {recruitmentMember + "/" + totalmember} 명
-                    </Text>
-                  </Grid>
-                  <Grid>
-                    <ProgressBar projectStatus={props.projectStatus}>
-                      <HighLight
-                        projectStatus={props.projectStatus}
-                        width={(recruitmentMember / totalmember) * 100 + "%"}
-                      />
-                    </ProgressBar>
-                  </Grid>
-                </Grid>
+            <Grid
+              display="flex"
+              width="100%"
+              justifyContent="space-between"
+              height="20%"
+            >
+              <ProgressBar projectStatus={props.projectStatus}>
+                <HighLight
+                  projectStatus={props.projectStatus}
+                  width={(recruitmentMember / totalmember) * 100 + "%"}
+                />
+              </ProgressBar>
+              <Grid width="43%" textAlign="right">
+                <Text size="15px" margin="0 0 0 10px" bold="500">
+                  {recruitmentMember + "/" + totalmember} 명 참여중
+                </Text>
               </Grid>
             </Grid>
             {/* 프로그래스바까지 */}
@@ -181,49 +163,38 @@ const Post = props => {
 
 const DescriptionBox = styled.div`
   position: relative;
-  margin: 5px 20px;
-  padding: 20px;
+  margin: 25px 20px;
+  padding: 10px;
 `;
 const DDescriptionBox = styled.div`
   /* background-color: #fff5f9; */
-  border-radius: 54px;
+  border-radius: 21px;
   margin: auto;
   position: relative;
   height: 100%;
+  width: 100%;
 `;
 
 //카드 헤더
 const CardHeader = styled.div`
   position: relative;
   width: 100%;
-  height: 63px;
-  border-radius: 94px 84px 84px 54px;
+  height: 55px;
+  border-radius: 21px 21px 0px 0px;
   background-color: #ecc0f1;
-  ${props => props.projectStatus === "모집중" && `background-color: #49CBFD;`};
-  ${props => props.projectStatus === "진행중" && `background-color: #B29CF4;`};
-  ${props => props.projectStatus === "종료" && `background-color: #ECC0F1;`};
-`;
-
-const CardHeaderTwo = styled.div`
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 70%;
-  height: 160px;
-  border-radius: 43px 54px 54px 54px;
-  background-color: #ecc0f1;
-  ${props => props.projectStatus === "모집중" && `background-color: #49CBFD;`};
-  ${props => props.projectStatus === "진행중" && `background-color: #B29CF4;`};
-  ${props => props.projectStatus === "종료" && `background-color: #ECC0F1;`};
+  ${props => props.projectStatus === "모집중" && `background-color: #17334A;`};
+  ${props => props.projectStatus === "진행중" && `background-color: #17334A;`};
+  ${props => props.projectStatus === "종료" && `background-color: #878787;`};
 `;
 
 //헤더 까지
 
-const Title = styled.h1`
-  margin-top: 18%;
-  margin-bottom: 10px;
+const Title = styled.span`
+  margin-top: 8%;
+  margin-bottom: 14%;
   font-size: 20px;
   width: 100%;
+  font-weight: 500;
   /* white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -240,39 +211,34 @@ const Title = styled.h1`
 
 const Date = styled.div`
   display: flex;
-  justify-content: flex-end;
-  margin: 13% auto 1px auto;
+  justify-content: flex-start;
+  margin: 8% auto 15% auto;
   width: 100%;
+  font-size: 14px;
   text-overflow: ellipsis;
   @media (max-width: 750px) {
-    font-size: 15px;
+    font-size: 14px;
     margin-left: 0%;
   }
   @media (max-width: 360px) {
-    font-size: 15px;
+    font-size: 14px;
     margin-left: 0%;
   }
 `;
 
-const Line = styled.hr`
-  width: 100%;
-  margin: 6px 0 -1px 0;
-  border: 1px solid #eeee;
-`;
-
 const ProjectState = styled.div`
-  position: absolute;
-  top: 29px;
-  right: 15px;
   color: #fff;
   border-radius: 15px;
   width: 58px;
-  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
   height: 24px;
-  margin: auto 0;
-  ${props => props.projectStatus === "모집중" && `background-color: #49CBFD;`};
-  ${props => props.projectStatus === "진행중" && `background-color: #B29CF4;`};
-  ${props => props.projectStatus === "종료" && `background-color: #ECC0F1;`};
+  margin: 4% 0;
+  font-size: 13px;
+  ${props => props.projectStatus === "모집중" && `background-color: #2699FB;`};
+  ${props => props.projectStatus === "진행중" && `background-color: #15B915;`};
+  ${props => props.projectStatus === "종료" && `background-color: #878787;`};
 `;
 
 const ProductImgWrap = styled.div`
@@ -283,7 +249,7 @@ const ProductImgWrap = styled.div`
   height: 330px;
   max-width: 350px;
   margin: 30px auto;
-  border-radius: 54px 32px 35px 35px;
+  border-radius: 20px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.24);
   @media (max-width: 1700px) {
     margin: auto;
@@ -303,23 +269,22 @@ const ProductImgWrap = styled.div`
 `;
 //프로그래스바
 const ProgressBar = styled.div`
-  border: 1px solid #ecc0f1;
-  border-radius: 25px;
+  border: 1px solid #111;
   background: #f6f4f6;
-  width: 100%;
+  width: 55%;
   height: 15px;
-  ${props => props.projectStatus === "모집중" && `border: 1px solid #49CBFD`};
-  ${props => props.projectStatus === "진행중" && `border: 1px solid #B29CF4;`};
-  ${props => props.projectStatus === "종료" && `border: 1px solid #ECC0F1;`};
+  border: none;
+  ${props => props.projectStatus === "모집중" && `background-color: #BCE0FD;`};
+  ${props => props.projectStatus === "진행중" && `background-color: #DFDFDF;`};
+  ${props => props.projectStatus === "종료" && `background-color: #DFDFDF;`};
 `;
 
 const HighLight = styled.div`
-  border-radius: 25px;
   transition: 1s;
   width: ${props => props.width};
-  ${props => props.projectStatus === "모집중" && `background-color: #49CBFD;`};
-  ${props => props.projectStatus === "진행중" && `background-color: #B29CF4;`};
-  ${props => props.projectStatus === "종료" && `background-color: #ECC0F1;`};
+  ${props => props.projectStatus === "모집중" && `background-color: #2699FB;`};
+  ${props => props.projectStatus === "진행중" && `background-color: #878787 ;`};
+  ${props => props.projectStatus === "종료" && `background-color: #878787;`};
   height: 15px;
 `;
 

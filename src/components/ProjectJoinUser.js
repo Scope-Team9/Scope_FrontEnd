@@ -7,7 +7,6 @@ import { Grid, Text } from "../elements/Index";
 import { useHistory } from "react-router";
 import ImgType from "../shared/ImgType";
 
-// ProjectJoinUser의 함수형 컴포넌트를 만든다.
 const ProjectJoinUser = (props) => {
   const history = useHistory();
   const goToMypage = (userId) => {
@@ -15,7 +14,14 @@ const ProjectJoinUser = (props) => {
   };
   return (
     <React.Fragment>
-      <Grid>
+      <Grid
+        textAlign="center"
+        height="120px"
+        width="80px"
+        margin="0 11px 0 0"
+        display="flex"
+        justifyContent="center"
+      >
         <Grid
           width="60px"
           height="60px"
@@ -30,9 +36,9 @@ const ProjectJoinUser = (props) => {
               goToMypage(props.userId);
             }}
           ></ImgType>
+          <Text size="16px">{props.nickname}</Text>
+          <Grid>({props.userPropensityType})</Grid>
         </Grid>
-        <Text size="16px">{props.nickname}</Text>
-        <Grid>({props.userPropensityType})</Grid>
       </Grid>
     </React.Fragment>
   );

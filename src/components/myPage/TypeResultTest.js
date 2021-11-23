@@ -184,6 +184,11 @@ const TypeResultTest = (props) => {
                   <EmailAuth modal={props.modal} setModal={props.setModal} />
                 </Grid>
               )}
+            <Dialog maxWidth={"sm"} scroll="paper" open={props.testmodal}>
+              <Grid width="550px" height="100%">
+                <PropensityTest TestClose={props.TestClose} />
+              </Grid>
+            </Dialog>
           </Grid>
         </Grid>
       )}

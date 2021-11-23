@@ -50,6 +50,7 @@ const PostDetail = (props) => {
     console.log(value);
     setProjectStatus(value);
   };
+  // 상태변경
   const edit_status = (data) => {
     const editstatus = {
       projectStatus: data,
@@ -95,6 +96,7 @@ const PostDetail = (props) => {
     exileStatusModal,
     applyUserModal,
     projectStatus,
+    applyValue,
   ]);
 
   //북마크 토글

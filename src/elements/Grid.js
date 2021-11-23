@@ -175,6 +175,7 @@ const GridBox = styled.div`
   background-image: ${props => props.bgImg};
   cursor: ${props => props.cursor};
   opacity: ${props => props.opacity};
+  font-family: "GmarketSans";
 
   :hover {
     ${props =>

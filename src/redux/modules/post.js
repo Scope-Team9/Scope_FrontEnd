@@ -38,14 +38,12 @@ export const getPostAPI = () => {
     let mainPage = getState().post.mainpage;
     let whatPages = getState().post.whatPage;
 
-    if (whatPages.now !== whatPages.pre) {
-      console.log("끊겠음2");
-      dispatch(whatPage("mainPage"));
-      return;
-    }
-    console.log("리북 정보", reBook);
-    console.log("소트 정보", sort);
-
+    // if (whatPages.now !== whatPages.pre) {
+    //   console.log(whatPages.now, whatPages.pre);
+    //   console.log("끊겠음2");
+    //   dispatch(whatPage("mainPage"));
+    //   return;
+    // }
     apis
       .getPost(stack, sort, reBook)
       .then((res) => {

@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { history } from "../redux/configureStore";
 
-import { useHistory } from "react-router";
+// import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { Grid, Text, Image, Button } from "../elements/Index";
 import LoginModal from "./LoginModal";
@@ -13,7 +13,7 @@ import { deleteCookie } from "../shared/Cookie";
 const HeaderRight = (props) => {
   const dispatch = useDispatch();
   const isToken = document.cookie;
-  const history = useHistory();
+  // const history = useHistory();
   const userInfo = useSelector((state) => state.user);
   console.log(userInfo);
   // console.log(isToken);
@@ -44,7 +44,7 @@ const HeaderRight = (props) => {
         width="auto"
       >
         <HeaderWrapper>
-          {/* 메시지 */}
+          {/*           
           <Message
             onClick={() => {
               history.push(`/message`);
@@ -52,17 +52,16 @@ const HeaderRight = (props) => {
           >
             <i class="far fa-envelope"></i>
           </Message>
-          {/* 알람 */}
+          
           <Bell>
             <i class="far fa-bell"></i>
-          </Bell>
+          </Bell> */}
           <IconWrap>
             <Grid
               display="flex"
               alignItems="center"
               margin="0 20px"
               _onClick={() => {
-                console.log;
                 history.push(`/mypage/${userInfo.userId}`);
               }}
             >
