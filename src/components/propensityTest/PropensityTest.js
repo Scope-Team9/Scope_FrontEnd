@@ -167,11 +167,16 @@ const PropensityTest = props => {
         >
           <CloseIcon
             sx={{ color: "#fff", fontSize: 35 }}
-            onClick={props.modalClose}
+            onClick={props.TestClose}
             cursor="pointer"
           />
         </Grid>
-        <Grid>
+        <Grid
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          height="40px"
+        >
           <Text size="20px" bold color="#fff">
             협업테스트
           </Text>

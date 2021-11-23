@@ -19,6 +19,7 @@ const ApplyUserModal = props => {
     passedUserStatus,
     projectStatus,
     statusCheck,
+    mypage,
   } = props;
   const isMe = useSelector(state => state.user.userId);
   const [page, setPage] = React.useState(1);
@@ -87,6 +88,7 @@ const ApplyUserModal = props => {
             isMe={isMe}
             page={page}
             setPage={setPage}
+            mypage={mypage}
           />
         )}
       </Dialog>

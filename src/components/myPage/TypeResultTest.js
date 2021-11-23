@@ -7,7 +7,7 @@ import PropensityTest from "../propensityTest/PropensityTest";
 import styled from "styled-components";
 import { map } from "lodash";
 
-const TypeResultTest = (props) => {
+const TypeResultTest = props => {
   const [myData, setMyData] = React.useState();
   const [arr, setArr] = React.useState([
     {
@@ -113,7 +113,7 @@ const TypeResultTest = (props) => {
 
   React.useEffect(() => {
     console.log("테스트결과", props);
-    arr.map((item) => {
+    arr.map(item => {
       if (item.id === props.myType) {
         setMyData(item);
       }
@@ -149,7 +149,7 @@ const TypeResultTest = (props) => {
               )}
             <Dialog maxWidth={"sm"} scroll="paper" open={props.testmodal}>
               <Grid width="550px" height="100%">
-                <PropensityTest />
+                <PropensityTest TestClose={props.TestClose} />
               </Grid>
             </Dialog>
           </Grid>

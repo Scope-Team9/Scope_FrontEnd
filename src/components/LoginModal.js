@@ -39,8 +39,8 @@ const LoginModal = props => {
   //모달
   const { showModal, setShowModal } = props;
 
-  const modalOpen = () => {
-    setShowModal(true);
+  const TestClose = () => {
+    setShowModal(false);
   };
   const modalClose = () => {
     setShowModal(false);
@@ -321,7 +321,7 @@ const LoginModal = props => {
               </Grid>
             </Grid>
           ) : (
-            <PropensityTest modalClose={modalClose} />
+            <PropensityTest modalClose={TestClose} />
           )}
           <Grid display="flex" justifyContent="center" margin="10px 0 30px 0">
             <Grid width="20%" backgroundColor="#554475" height="3px"></Grid>

@@ -16,6 +16,7 @@ const Liked = props => {
     isMe,
     projectStatus,
     statusCheck,
+    mypage,
   } = props;
 
   React.useEffect(() => {
@@ -49,9 +50,12 @@ const Liked = props => {
       userIds: result,
     };
     console.log(likeUsers);
-
+    if (!mypage) {
+      dispatch(applyCreators.starterLikeAPI(postId, likeUsers));
+      modalClose("종료");
+    }
     dispatch(applyCreators.starterLikeAPI(postId, likeUsers));
-    modalClose("종료");
+    modalClose();
   };
   console.log(likes);
 

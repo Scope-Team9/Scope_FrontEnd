@@ -3,15 +3,26 @@ import { Grid, Text } from "../../../elements/Index";
 
 import ProjectJoinUser from "../../ProjectJoinUser";
 
-const ApplicantDetail = (props) => {
+const ApplicantDetail = props => {
   return (
     <React.Fragment>
       <Grid margin="4px 0px 0px 0px">
-        <Text size="18px" bold>
-          게시자
-        </Text>
+        <Grid width="100%" display="flex">
+          <Grid width="80px" textAlign="center">
+            <Text size="18px" bold>
+              게시자
+            </Text>
+          </Grid>
+
+          <Grid width="80px" margin="0 0 0 10px" textAlign="center">
+            <Text size="18px" bold>
+              참여자
+            </Text>
+          </Grid>
+        </Grid>
+
         <Grid display="flex" margin="6px 0px 0px 0px">
-          {props.passdedMenber?.map((item) => (
+          {props.passdedMenber?.map(item => (
             <ProjectJoinUser key={item.userId} {...item} />
           ))}
         </Grid>
