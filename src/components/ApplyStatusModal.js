@@ -7,9 +7,9 @@ import styled from "styled-components";
 import { applyCreators } from "../redux/modules/applyProject";
 import CloseIcon from "@mui/icons-material/Close";
 import { apis } from "../lib/axios";
-const ApplyStatusModal = (props) => {
+const ApplyStatusModal = props => {
   const dispatch = useDispatch();
-  const applyUsers = useSelector((state) => state.apply.applyUsers);
+  const applyUsers = useSelector(state => state.apply.applyUsers);
   const [applyedUsers, setApplyUsers] = React.useState();
   const [acceptButton, setAcceptButton] = React.useState();
   const { applyStatusModal, setApplyStatusModal, postId } = props;
@@ -34,7 +34,7 @@ const ApplyStatusModal = (props) => {
     // dispatch(applyCreators.applyUserAPI(postId));
   }, [applyStatusModal, acceptButton]);
 
-  const acceptOffer = (acceptUser) => {
+  const acceptOffer = acceptUser => {
     const acceptInfo = {
       userId: acceptUser,
       accept: true,
@@ -55,7 +55,7 @@ const ApplyStatusModal = (props) => {
     // dispatch(applyCreators.acceptOfferAPI(postId, acceptInfo));
   };
 
-  const cancelOffer = (cancelUser) => {
+  const cancelOffer = cancelUser => {
     const acceptInfo = {
       userId: cancelUser,
       accept: false,
@@ -77,7 +77,7 @@ const ApplyStatusModal = (props) => {
           <ModalWrap>
             <Grid
               height="10%"
-              bg="#B29CF4"
+              bg="#17334A"
               position="relative"
               textAlign="center"
               padding="10px 0 0 0"
@@ -89,11 +89,22 @@ const ApplyStatusModal = (props) => {
                 width="20px"
                 padding="10px"
               >
-                <CloseIcon fontSize="large" onClick={modalClose} />
+                <CloseIcon
+                  sx={{ color: "#fff", fontSize: 35 }}
+                  onClick={modalClose}
+                  cursor="pointer"
+                />
               </Grid>
-              <Text size="30px" bold color="#fff">
-                신청현황
-              </Text>
+              <Grid
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                height="40px"
+              >
+                <Text size="20px" bold color="#fff">
+                  신청현황
+                </Text>
+              </Grid>
             </Grid>
             {applyedUsers == "" && (
               <Grid height="0%" justifyContent="center">
@@ -181,7 +192,7 @@ const ApplyStatusModal = (props) => {
                           <Button
                             common
                             isValue={applyedUsers[idx].userId}
-                            _onClick={(e) => {
+                            _onClick={e => {
                               console.log(e);
                               acceptOffer(e.target.value);
                             }}
@@ -197,7 +208,7 @@ const ApplyStatusModal = (props) => {
                           <Button
                             common
                             isValue={applyedUsers[idx].userId}
-                            _onClick={(e) => {
+                            _onClick={e => {
                               cancelOffer(e.target.value);
                             }}
                           >

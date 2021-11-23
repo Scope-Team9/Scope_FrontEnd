@@ -161,7 +161,7 @@ const LoginModal = props => {
               {/* 헤더 */}
               <Grid
                 height="15%"
-                bg="#554475"
+                bg="#17334A"
                 position="relative"
                 textAlign="center"
                 padding="10px 0 10px 0"

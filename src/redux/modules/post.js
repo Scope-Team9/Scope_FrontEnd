@@ -9,11 +9,11 @@ const MAINPAGE = "MAINPAGE";
 const WHATPAGE = "WHATPAGE";
 const PAGECHECK = "PAGECHECK";
 
-const getPosts = createAction(GET_POST, (data) => ({ data }));
-const isLoading = createAction(LOADING, (loading) => ({ loading }));
-const isMainPage = createAction(MAINPAGE, (data) => ({ data }));
-const whatPage = createAction(WHATPAGE, (data) => ({ data }));
-const pageCheck = createAction(PAGECHECK, (data) => ({ data }));
+const getPosts = createAction(GET_POST, data => ({ data }));
+const isLoading = createAction(LOADING, loading => ({ loading }));
+const isMainPage = createAction(MAINPAGE, data => ({ data }));
+const whatPage = createAction(WHATPAGE, data => ({ data }));
+const pageCheck = createAction(PAGECHECK, data => ({ data }));
 
 const initialState = {
   posts: [],
@@ -38,15 +38,15 @@ export const getPostAPI = () => {
     let mainPage = getState().post.mainpage;
     let whatPages = getState().post.whatPage;
 
-    if (whatPages.now !== whatPages.pre) {
-      console.log(whatPages.now, whatPages.pre);
-      console.log("끊겠음2");
-      dispatch(whatPage("mainPage"));
-      return;
-    }
+    // if (whatPages.now !== whatPages.pre) {
+    //   console.log(whatPages.now, whatPages.pre);
+    //   console.log("끊겠음2");
+    //   dispatch(whatPage("mainPage"));
+    //   return;
+    // }
     apis
       .getPost(stack, sort, reBook)
-      .then((res) => {
+      .then(res => {
         console.log(_paging);
         const posts = res.data.data;
 
@@ -57,7 +57,7 @@ export const getPostAPI = () => {
 
         dispatch(getPosts(data));
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err.response);
         // Swal.fire(`${err.response}`, "간단한 테스트를 진행해 주세요.", "info");
       });
@@ -68,7 +68,7 @@ export default handleActions(
   {
     // 백엔드와 통신
     [GET_POST]: (state, action) =>
-      produce(state, (draft) => {
+      produce(state, draft => {
         console.log(action);
         let stacks = action.payload.data.stack;
         let sorts = action.payload.data.sort;
@@ -111,16 +111,16 @@ export default handleActions(
       }),
 
     [LOADING]: (state, action) =>
-      produce(state, (draft) => {
+      produce(state, draft => {
         draft.isLoading = action.payload.loading;
       }),
     [MAINPAGE]: (state, action) =>
-      produce(state, (draft) => {
+      produce(state, draft => {
         // console.log("여기가 메인페이지인가", action.payload.data);
         draft.mainpage = action.payload.data;
       }),
     [WHATPAGE]: (state, action) =>
-      produce(state, (draft) => {
+      produce(state, draft => {
         // console.log("현재페이지", action.payload.data);
         // console.log(state);
         let page = {
@@ -131,7 +131,7 @@ export default handleActions(
         draft.whatPage = page;
       }),
     [PAGECHECK]: (state, action) =>
-      produce(state, (draft) => {
+      produce(state, draft => {
         console.log("페이지 체크", action);
         draft.pageCheck = action.payload.data;
       }),

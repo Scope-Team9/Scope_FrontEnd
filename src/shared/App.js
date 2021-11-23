@@ -19,9 +19,6 @@ import Markdown from "../components/Markdown";
 import MarkdownRead from "../components/MarkdownRead";
 import Header from "../components/Header";
 
-//테스트용입니다.
-import PropensityTest from "../components/propensityTest/PropensityTest";
-
 function App() {
   const isLogin = useSelector(state => state.user.isLogin);
   const userPropensityType = useSelector(

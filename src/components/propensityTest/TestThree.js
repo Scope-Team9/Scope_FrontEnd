@@ -62,9 +62,9 @@ const TestThree = props => {
             Q3. <b>나는 큰 보상과 무거운 책임</b>보다는{" "}
             <b>평범한 보상과 책임</b>이 더 좋다.
             <Button
-              isId="UL"
+              isId="UF"
               isTest
-              isValue="L"
+              isValue="F"
               _onClick={e => {
                 clickUser(e.target.id);
                 handleUserCreate(e.target.value);
@@ -73,9 +73,9 @@ const TestThree = props => {
               평범한 보상과 평범한 책임
             </Button>
             <Button
-              isId="UF"
+              isId="UL"
               isTest
-              isValue="F"
+              isValue="L"
               _onClick={e => {
                 clickUser(e.target.id);
                 handleUserCreate(e.target.value);

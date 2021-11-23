@@ -4,37 +4,29 @@ import { Grid, Button, Text } from "../../elements/Index";
 
 const TestOne = props => {
   const { handleUserCreate, handleMemberCreate } = props;
-  const [nowClickU, setNowClickU] = React.useState(null);
+  const [nowClickU, setNowClickU] = React.useState([
+    { id: "UL", active: false },
+    { id: "UF", active: false },
+  ]);
   const [prevClickU, setPrevClickU] = React.useState(null);
   const [nowClickMB, setNowClickMB] = React.useState(null);
   const [prevClickMB, setPrevClickMB] = React.useState(null);
 
-  const clickUser = answer => {
-    setNowClickU(answer);
-  };
   const clickMember = answer => {
     setNowClickMB(answer);
   };
 
-  //유저 설문 버튼 클릭유지
-  React.useEffect(
-    e => {
-      //값이 들어오면 해당 버튼 css 변경
-      if (nowClickU !== null) {
-        let current = document.getElementById(nowClickU);
-        current.style.backgroundColor = "#554475";
-        current.style.color = "#fff";
-      }
-      //다른 버튼이 클릭될경우 기존 스테이트값이 이전버튼스테이트로 이동
-      if (prevClickU !== null) {
-        let prev = document.getElementById(prevClickU);
-        prev.style.color = "#554475";
-        prev.style.backgroundColor = "#fff";
-      }
-      setPrevClickU(nowClickU);
-    },
-    [nowClickU]
-  );
+  //색상 기능 눌렀는지 안눌렀는지 (버튼색상)
+  const clickUser = id => {
+    setNowClickU(state => {
+      return state.map(val => {
+        if (val.id === id) {
+          return { ...val, active: !val.active };
+        }
+        return val;
+      });
+    });
+  };
 
   //멤버 설문 버튼 클릭유지
   React.useEffect(
