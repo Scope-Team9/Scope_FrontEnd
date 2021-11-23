@@ -1,19 +1,14 @@
 // PostDetail.js
 // import를 한다.
 import React from "react";
-import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { apis } from "../lib/axios";
 import { postActions } from "../redux/modules/post";
 import { Grid, Button } from "../elements/Index";
 import Swal from "sweetalert2";
-
 import ApplyStatusModal from "../components/ApplyStatusModal";
 import LeftBanner from "../components/postDetail/LeftBanner";
 import TitleDetail from "../components/postDetail/rightContents/TitleDetail";
-import SummaryDetail from "../components/postDetail/rightContents/SummaryDetail";
-import PosterDetail from "../components/postDetail/rightContents/PosterDetail";
-import exileStatusModalOpen from "../components/modal/ExileUserModal";
 import ExileUserModal from "../components/modal/ExileUserModal";
 import ApplicantDetail from "../components/postDetail/rightContents/ApplicantDetail";
 import StackDetail from "../components/postDetail/rightContents/StackDetail";
@@ -36,7 +31,6 @@ const PostDetail = (props) => {
   const [recruitmentFinish, setRecruitmentFinish] = React.useState(); // 모집완료 체크 for리렌더링
   const [projectStatus, setProjectStatus] = React.useState();
   const [applyValue, setApplyValue] = React.useState();
-  const [exileValue, setExileValues] = React.useState();
   const [isme, setIsme] = React.useState(null);
 
   const applyStatusModalOpen = () => {
@@ -56,7 +50,6 @@ const PostDetail = (props) => {
     console.log(value);
     setProjectStatus(value);
   };
-  // 상태변경
   const edit_status = (data) => {
     const editstatus = {
       projectStatus: data,
@@ -79,7 +72,6 @@ const PostDetail = (props) => {
   const passedData = checkPost?.data["data"].post;
   const passedUserStatus = checkPost?.data["data"].userStatus;
   const passdedMenber = checkPost?.data["data"].members;
-  console.log("총인원", passedData);
 
   React.useEffect(() => {
     dispatch(postActions.isMainPage(false));
@@ -136,14 +128,9 @@ const PostDetail = (props) => {
             ToggleBookMark={ToggleBookMark}
             passedData={passedData}
           />
-
-          {/* <Title>Scoope</Title> */}
           <TitleDetail passedData={passedData} />
-
-          {/* <SummaryDetail passedData={passedData} /> */}
           <Grid margin="20px auto">
             <Grid display="flex">
-              {/* <PosterDetail passedData={passedData} /> */}
               <ApplicantDetail passdedMenber={passdedMenber} />
             </Grid>
             <Grid margin="10px auto ">
@@ -230,13 +217,6 @@ const PostDetail = (props) => {
     </React.Fragment>
   );
 };
-
-// styled-components를 사용한다.
-// const Title = styled.h1`
-//   color: black;
-//   font-size: 32px;
-//   font-weight: 800;
-// `;
 
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default PostDetail;

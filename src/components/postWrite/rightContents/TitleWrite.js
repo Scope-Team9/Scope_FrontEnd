@@ -1,6 +1,11 @@
+// TitleWrite.js
+/* eslint-disable */
+
+// import
 import React from "react";
 import { Grid, Input, Text } from "../../../elements/Index";
 
+// TitleWrite 함수형 컴포넌트 생성
 const TitleWrite = (props) => {
   return (
     <React.Fragment>
@@ -28,4 +33,5 @@ const TitleWrite = (props) => {
   );
 };
 
+// export
 export default TitleWrite;

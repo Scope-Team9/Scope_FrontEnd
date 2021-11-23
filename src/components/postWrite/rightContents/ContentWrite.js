@@ -1,7 +1,12 @@
+// ContentWrite.js
+/* eslint-disable */
+
+// import
 import React from "react";
 import styled from "styled-components";
 import { Grid, Text } from "../../../elements/Index";
 
+// ContentWrite 함수형 컴포넌트 생성
 const ContentWrite = (props) => {
   return (
     <React.Fragment>
@@ -20,6 +25,7 @@ const ContentWrite = (props) => {
   );
 };
 
+// styled-components
 const TextArea = styled.textarea`
   width: 97%;
   height: 360px;
@@ -31,4 +37,5 @@ const TextArea = styled.textarea`
   outline: none;
 `;
 
+// export
 export default ContentWrite;

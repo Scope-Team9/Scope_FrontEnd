@@ -1,8 +1,12 @@
+// GenerateButton.js
+/* eslint-disable */
+
+// import
 import React from "react";
 import styled from "styled-components";
-
 import { Grid } from "../../../elements/Index";
 
+// GenerateButton 함수형 컴포넌트 생성
 const GenerateButton = (props) => {
   return (
     <React.Fragment>
@@ -19,6 +23,7 @@ const GenerateButton = (props) => {
   );
 };
 
+// styled-components
 const Btn = styled.button`
   display: flex;
   justify-content: center;
@@ -39,4 +44,5 @@ const Btn = styled.button`
   }
 `;
 
+// export
 export default GenerateButton;

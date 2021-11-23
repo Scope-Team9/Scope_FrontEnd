@@ -1,34 +1,34 @@
+// RightWrite.js
+/* eslint-disable */
+
+// import
 import React from "react";
 import styled from "styled-components";
 import { Grid } from "../../elements/Index";
-
 import { useDispatch } from "react-redux";
 import { postAddActions } from "../../redux/modules/postadd";
 import { postActions } from "../../redux/modules/post";
-
 import makeAnimated from "react-select/animated";
 import TitleWrite from "./rightContents/TitleWrite";
-// import SummaryWrite from "./rightContents/SummaryWrite";
-import StectWrite from "./rightContents/StackWrite";
+import StactWrite from "./rightContents/StackWrite";
 import DateWrite from "./rightContents/DateWrite";
-import TotalMenber from "./rightContents/TotalMenber";
-import StatusWrite from "./rightContents/StatusWrite";
+import TotalMember from "./rightContents/TotalMember";
 import ContentWrite from "./rightContents/ContentWrite";
 import GenerateButton from "./rightContents/GenerateButton";
 
+// RightWrite 함수형 컴포넌트 생성
 const RightWrite = (props) => {
   React.useEffect(() => {
     dispatch(postActions.isMainPage(false));
     dispatch(postActions.whatPage("addPostPage"));
   }, []);
 
-  const date = new Date();
   const dispatch = useDispatch();
   const animatedComponents = makeAnimated();
   const [title, setTitle] = React.useState("");
-  // const [summary, setSummary] = React.useState("");
   const [techstack, setTectstack] = React.useState([]);
   const [techStackList, setTechStackList] = React.useState();
+  const date = new Date();
   const [startDate, setStartdate] = React.useState(
     date.setDate(date.getDate())
   );
@@ -43,10 +43,8 @@ const RightWrite = (props) => {
   const submitHandler = () => {
     if (
       title.length > 0 &&
-      // summary.length > 0 &&
       techstack.length > 0 &&
       totalMember > 0 &&
-      // projectStatus.length > 0 &&
       contents.length > 0
     ) {
       window.alert("프로젝트가 생성되었습니다.");
@@ -59,7 +57,6 @@ const RightWrite = (props) => {
   const scopeIndex = () => {
     const card = {
       title: title,
-      // summary: summary,
       techStackList: techStackList,
       startDate: startDate,
       endDate: endDate,
@@ -67,7 +64,6 @@ const RightWrite = (props) => {
       projectStatus: projectStatus,
       contents: contents,
     };
-    console.log("카드들", card);
     dispatch(postAddActions.addPostAPI(card));
   };
 
@@ -93,8 +89,7 @@ const RightWrite = (props) => {
         <Title>게시글 작성하기</Title>
         <Grid margin="40px auto">
           <TitleWrite setTitle={setTitle} />
-          {/* <SummaryWrite setSummary={setSummary} /> */}
-          <StectWrite
+          <StactWrite
             animatedComponents={animatedComponents}
             styles={styles}
             setTectstack={setTectstack}
@@ -107,8 +102,7 @@ const RightWrite = (props) => {
             setEnddate={setEnddate}
             endDate={endDate}
           />
-          <TotalMenber setTotalmember={setTotalmember} styles={styles} />
-          {/* <StatusWrite setProjectstatus={setProjectstatus} styles={styles} /> */}
+          <TotalMember setTotalmember={setTotalmember} styles={styles} />
           <ContentWrite setContents={setContents} />
           <GenerateButton submitHandler={submitHandler} />
         </Grid>
@@ -117,10 +111,12 @@ const RightWrite = (props) => {
   );
 };
 
+// styled-components
 const Title = styled.div`
   color: black;
   font-size: 32px;
   font-weight: 800;
 `;
 
+// export
 export default RightWrite;

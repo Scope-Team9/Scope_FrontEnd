@@ -1,23 +1,17 @@
-/* eslint-disable */
 //PostEdit.js
+/* eslint-disable */
 
 // import를 한다.
-import React, { useCallback, useMemo, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import { Grid, Text, Image, Button, Input } from "../elements/Index";
-import { useHistory } from "react-router";
+import { Grid } from "../elements/Index";
 import { useDispatch } from "react-redux";
 import { apis } from "../lib/axios";
 import { postDetailActions } from "../redux/modules/postdetail";
-
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { ko } from "date-fns/esm/locale";
 import makeAnimated from "react-select/animated";
-
 import LeftBanner from "../components/postEdit/LeftBanner";
 import TitleEdit from "../components/postEdit/rightContentsEdit/TitleEdit";
-import SummaryEdit from "../components/postEdit/rightContentsEdit/SummaryEdit";
 import StackEdit from "../components/postEdit/rightContentsEdit/StackEdit";
 import TotalMemberEdit from "../components/postEdit/rightContentsEdit/TotalMenberEdit";
 import StatusEdit from "../components/postEdit/rightContentsEdit/StatusEdit";
@@ -27,10 +21,8 @@ import DateEdit from "../components/postEdit/rightContentsEdit/DateEdit";
 // PostEdit의 함수형 컴포넌트를 만든다.
 const PostEdit = (props) => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const animatedComponents = makeAnimated();
   const [checkPost, setCheckPost] = React.useState();
-
   const [postId, setPostId] = React.useState();
   const [title, setTitle] = React.useState("");
   const [summary, setSummary] = React.useState("");
@@ -49,7 +41,6 @@ const PostEdit = (props) => {
   const scope_edit = () => {
     const editcard = {
       title: title,
-      // summary: summary,
       contents: contents,
       techStackList: techStackList,
       totalMember: totalMember,
@@ -57,7 +48,6 @@ const PostEdit = (props) => {
       startDate: startDate,
       endDate: endDate,
     };
-    console.log("카드들", editcard);
     dispatch(postDetailActions.editPostAPI(post_id, editcard));
   };
 
@@ -127,13 +117,11 @@ const PostEdit = (props) => {
       >
         <LeftBanner />
         <Grid margin="46px 106px 0px" position="relative">
-          {/* <Title>Scoope</Title> */}
           <Grid>
             <Title>게시글 수정하기</Title>
           </Grid>
           <Grid margin="40px auto">
             <TitleEdit title={title} setTitle={setTitle} />
-            {/* <SummaryEdit summary={summary} setSummary={setSummary} /> */}
             <StackEdit
               setTectstack={setTectstack}
               techstack={techstack}
@@ -165,7 +153,6 @@ const PostEdit = (props) => {
                 <Btn
                   onClick={() => {
                     editHandler();
-                    // scope_edit();
                   }}
                 >
                   포스트수정 완료
@@ -184,20 +171,6 @@ const Title = styled.h1`
   color: black;
   font-size: 32px;
   font-weight: 800;
-`;
-
-const SDatePicker = styled(DatePicker)`
-  box-sizing: border-box;
-  width: 350px;
-  text-align: center;
-  font-size: 16px;
-  color: black;
-  height: 40px;
-  margin-top: 0.6rem;
-  margin-left: 10px;
-  outline: none;
-  border-radius: 10px;
-  border: 1px solid #c4c4c4;
 `;
 
 const Btn = styled.button`

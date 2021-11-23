@@ -1,11 +1,14 @@
+// StackWrite.js
+/* eslint-disable */
+
+// import
 import React, { useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { Grid, Text } from "../../../elements/Index";
-
 import Select from "react-select";
 
+// StactWrite 함수형 컴포넌트 생성
 const StactWrite = (props) => {
-  // 기술 스택 선택
   const stackSelect = [
     { value: "React", label: "React" },
     { value: "Java", label: "Java" },
@@ -75,9 +78,11 @@ const StactWrite = (props) => {
   );
 };
 
+// styled-components
 const SubDescription = styled.span`
   color: rgb(186, 187, 192);
   font-size: 12px;
 `;
 
+// export
 export default StactWrite;

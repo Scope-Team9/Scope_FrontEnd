@@ -1,7 +1,10 @@
+// ApplicantButton.js
+// import를 한다.
 import React from "react";
 import { Grid, Button } from "../../../elements/Index";
 import ApplyUserModal from "../../ApplyUserModal";
 
+// ApplicantButton의 함수형 컴포넌트를 만든다.
 const ApplicantButton = (props) => {
   return (
     <React.Fragment>
@@ -85,4 +88,5 @@ const ApplicantButton = (props) => {
   );
 };
 
+// export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default ApplicantButton;

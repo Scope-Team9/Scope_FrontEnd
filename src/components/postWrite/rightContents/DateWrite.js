@@ -1,10 +1,14 @@
+// DateWrite.js
+/* eslint-disable */
+
+// import
 import React from "react";
 import styled from "styled-components";
 import { Grid, Text } from "../../../elements/Index";
-
 import DatePicker from "react-datepicker";
 import { ko } from "date-fns/esm/locale";
 
+// DateWrite 함수형 컴포넌트 생성
 const DateWrite = (props) => {
   const startDate = (date) => {
     if (date <= props.endDate) {
@@ -51,18 +55,20 @@ const DateWrite = (props) => {
   );
 };
 
+// styled-components
 const SDatePicker = styled(DatePicker)`
   box-sizing: border-box;
   width: 350px;
-  text-align: center;
-  font-size: 16px;
-  color: black;
   height: 40px;
+  border-radius: 10px;
+  border: 1px solid #c4c4c4;
+  color: black;
+  font-size: 16px;
+  text-align: center;
   margin-top: 0.6rem;
   margin-left: 10px;
   outline: none;
-  border-radius: 10px;
-  border: 1px solid #c4c4c4;
 `;
 
+// export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default DateWrite;
