@@ -18,11 +18,10 @@ import PostDetail from "../pages/PostDetail";
 import Markdown from "../components/Markdown";
 import MarkdownRead from "../components/MarkdownRead";
 import Header from "../components/Header";
+import Message from "../components/headerFunction/Message";
 
 //테스트용입니다.
 import PropensityTest from "../components/propensityTest/PropensityTest";
-import HeaderMessage from "../pages/HeaderMessage";
-import Message from "../components/headerFunction/Message";
 
 function App() {
   const isLogin = useSelector((state) => state.user.isLogin);
