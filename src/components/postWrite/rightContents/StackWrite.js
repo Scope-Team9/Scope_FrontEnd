@@ -1,4 +1,5 @@
 import React, { useEffect, useCallback } from "react";
+import styled from "styled-components";
 import { Grid, Text } from "../../../elements/Index";
 
 import Select from "react-select";
@@ -22,28 +23,22 @@ const StactWrite = (props) => {
     { value: "Typescript", label: "Typescript" },
   ];
 
-  const orderByLabel = useCallback(
-    (a, b) => a.label.localeCompare(b.label),
-    []
-  );
-
-  const orderOptions = useCallback(
-    (values) =>
-      values
-        .filter((v) => v.isFixed)
-        .sort(orderByLabel)
-        .concat(values.filter((v) => !v.isFixed).sort(orderByLabel)),
-    [orderByLabel]
-  );
-
-  const [value, setValue] = React.useState(orderOptions(stackSelect));
-
   const handleChange = useCallback(
     (inputValue, { action, removedValue }) => {
-      setValue(inputValue);
-      props.setTectstack(inputValue);
+      if (props.techstack.length < 4) {
+        props.setTectstack(inputValue);
+      } else {
+        if (removedValue !== undefined) {
+          let temp = props.techstack.filter(
+            (item) => item["value"] !== removedValue["value"]
+          );
+          props.setTectstack(temp);
+        } else {
+          window.alert("최대 4가지만 선택 가능합니다.");
+        }
+      }
     },
-    [stackSelect, orderOptions]
+    [stackSelect]
   );
 
   const formatTech = () => {
@@ -64,11 +59,12 @@ const StactWrite = (props) => {
       <Grid margin="10px auto">
         <Text size="18px" bold>
           기술스택 선택
+          <SubDescription> (5개 이상 중복 X)</SubDescription>
         </Text>
         <Select
           isMulti
+          value={props.techstack}
           components={props.animatedComponents}
-          isClearable={value.some((v) => !v.isFixed)}
           styles={props.styles}
           options={stackSelect}
           onChange={handleChange}
@@ -78,5 +74,10 @@ const StactWrite = (props) => {
     </React.Fragment>
   );
 };
+
+const SubDescription = styled.span`
+  color: rgb(186, 187, 192);
+  font-size: 12px;
+`;
 
 export default StactWrite;

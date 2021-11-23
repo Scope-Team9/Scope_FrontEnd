@@ -24,7 +24,7 @@ const MainPage = () => {
   const stack = useSelector((state) => state.stack.stack);
   const sortC = useSelector((state) => state.sort.sort);
 
-  // const cards = useSelector((state) => state.post.posts);
+  const cards = useSelector((state) => state.post.posts);
   // console.log(cards);
   const reBookC = useSelector((state) => state.rebook.reBook);
   const pageCheck = useSelector((state) => state.post.pageCheck);
@@ -46,6 +46,7 @@ const MainPage = () => {
   React.useEffect(() => {
     dispatch(postActions.whatPage("mainPage"));
     dispatch(postActions.getPostAPI());
+    console.log(cards);
     // const GetPost = async () => {
     //   console.log("스택", stack);
     //   try {

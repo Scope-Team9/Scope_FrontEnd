@@ -8,7 +8,7 @@ import { postActions } from "../../redux/modules/post";
 
 import makeAnimated from "react-select/animated";
 import TitleWrite from "./rightContents/TitleWrite";
-import SummaryWrite from "./rightContents/SummaryWrite";
+// import SummaryWrite from "./rightContents/SummaryWrite";
 import StectWrite from "./rightContents/StackWrite";
 import DateWrite from "./rightContents/DateWrite";
 import TotalMenber from "./rightContents/TotalMenber";
@@ -22,39 +22,42 @@ const RightWrite = (props) => {
     dispatch(postActions.whatPage("addPostPage"));
   }, []);
 
+  const date = new Date();
   const dispatch = useDispatch();
   const animatedComponents = makeAnimated();
   const [title, setTitle] = React.useState("");
-  const [summary, setSummary] = React.useState("");
+  // const [summary, setSummary] = React.useState("");
   const [techstack, setTectstack] = React.useState([]);
   const [techStackList, setTechStackList] = React.useState();
   const [startDate, setStartdate] = React.useState(new Date());
-  const [endDate, setEnddate] = React.useState(new Date());
+  const [endDate, setEnddate] = React.useState(
+    date.setDate(date.getDate() + 1)
+  );
   const [totalMember, setTotalmember] = React.useState();
-  const [projectStatus, setProjectstatus] = React.useState("");
+  const [projectStatus, setProjectstatus] = React.useState("모집중");
   const [contents, setContents] = React.useState("");
 
   // 예외처리
   const submitHandler = () => {
     if (
       title.length > 0 &&
-      summary.length > 0 &&
+      // summary.length > 0 &&
       techstack.length > 0 &&
       totalMember > 0 &&
-      projectStatus.length > 0 &&
+      // projectStatus.length > 0 &&
       contents.length > 0
     ) {
       window.alert("프로젝트가 생성되었습니다.");
       scopeIndex();
     } else {
-      window.alert("값을 다 입력해주세요.");
+      window.alert("값을 다시 입력해주세요.");
     }
   };
 
   const scopeIndex = () => {
     const card = {
       title: title,
-      summary: summary,
+      // summary: summary,
       techStackList: techStackList,
       startDate: startDate,
       endDate: endDate,
@@ -84,11 +87,10 @@ const RightWrite = (props) => {
   return (
     <React.Fragment>
       <Grid margin="46px 106px 0px">
-        <Title>Scoope</Title>
-        <SecondTitle>게시글 작성하기</SecondTitle>
+        <Title>게시글 작성하기</Title>
         <Grid margin="40px auto">
           <TitleWrite setTitle={setTitle} />
-          <SummaryWrite setSummary={setSummary} />
+          {/* <SummaryWrite setSummary={setSummary} /> */}
           <StectWrite
             animatedComponents={animatedComponents}
             styles={styles}
@@ -103,7 +105,7 @@ const RightWrite = (props) => {
             endDate={endDate}
           />
           <TotalMenber setTotalmember={setTotalmember} styles={styles} />
-          <StatusWrite setProjectstatus={setProjectstatus} styles={styles} />
+          {/* <StatusWrite setProjectstatus={setProjectstatus} styles={styles} /> */}
           <ContentWrite setContents={setContents} />
           <GenerateButton submitHandler={submitHandler} />
         </Grid>
@@ -118,9 +120,4 @@ const Title = styled.div`
   font-weight: 800;
 `;
 
-const SecondTitle = styled.div`
-  color: black;
-  font-size: 20px;
-  margin: 16px auto;
-`;
 export default RightWrite;

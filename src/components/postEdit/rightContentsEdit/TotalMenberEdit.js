@@ -21,8 +21,13 @@ const totalMemberEdit = (props) => {
         <Select
           options={projectMembers}
           styles={props.styles}
-          value={props.totalMember}
-          onChange={props.setTotalmember}
+          value={projectMembers.filter(
+            ({ value }) => value === props.totalMember
+          )}
+          defaultValue={{ value: 6, label: 6 }}
+          onChange={(data) => {
+            props.setTotalmember(data.label);
+          }}
           placeholder={<div>총인원을 선택해주세요.</div>}
         ></Select>
       </Grid>

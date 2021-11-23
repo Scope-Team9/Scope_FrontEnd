@@ -9,22 +9,23 @@ import { Grid, Button } from "../elements/Index";
 import Swal from "sweetalert2";
 
 import ApplyStatusModal from "../components/ApplyStatusModal";
-import LeftBanner from "../components/postDetail/leftBanner";
+import LeftBanner from "../components/postDetail/LeftBanner";
 import TitleDetail from "../components/postDetail/rightContents/TitleDetail";
 import SummaryDetail from "../components/postDetail/rightContents/SummaryDetail";
 import PosterDetail from "../components/postDetail/rightContents/PosterDetail";
+import exileStatusModalOpen from "../components/modal/ExileUserModal";
+import ExileUserModal from "../components/modal/ExileUserModal";
 import ApplicantDetail from "../components/postDetail/rightContents/ApplicantDetail";
 import StackDetail from "../components/postDetail/rightContents/StackDetail";
 import DateDetail from "../components/postDetail/rightContents/DateDetail";
 import StatusDetail from "../components/postDetail/rightContents/StatusDetail";
 import ContentDetail from "../components/postDetail/rightContents/ContentDetail";
 import BookMark from "../components/postDetail/rightContents/BookMark";
-import ExileUserModal from "../components/modal/ExileUserModal";
 import ApplicantButton from "../components/postDetail/rightContents/ApplicantButton";
 import PosterButton from "../components/postDetail/rightContents/PosterButton";
 
-// PostDetail의 함수형 컴포넌트를 만든다...
-const PostDetail = props => {
+// PostDetail의 함수형 컴포넌트를 만든다
+const PostDetail = (props) => {
   const dispatch = useDispatch();
   const [checkPost, setCheckPost] = React.useState();
   const [bookmark, setBookmark] = React.useState(false);
@@ -45,17 +46,17 @@ const PostDetail = props => {
     setExileStatusModal(true);
   };
 
-  const applyUserModalOpen = value => {
+  const applyUserModalOpen = (value) => {
     setApplyValue(value);
     setApplyUserModal(true);
   };
 
-  const statusCheck = value => {
+  const statusCheck = (value) => {
     console.log(value);
     setProjectStatus(value);
   };
   // 상태변경
-  const edit_status = data => {
+  const edit_status = (data) => {
     const editstatus = {
       projectStatus: data,
     };
@@ -72,7 +73,7 @@ const PostDetail = props => {
   };
 
   let post_id = props.match.params.id;
-  const userId = useSelector(state => state.user.userId); //로그인 유저아이디
+  const userId = useSelector((state) => state.user.userId); //로그인 유저아이디
   const postUserId = checkPost?.data.data.post.userId;
   const passedData = checkPost?.data["data"].post;
   const passedUserStatus = checkPost?.data["data"].userStatus;
