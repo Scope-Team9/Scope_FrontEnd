@@ -1,7 +1,11 @@
+// UserList.js
+/* eslint-disable */
+
 import React from "react";
 import { Grid } from "../elements/Index";
 import styled from "styled-components";
 
+// UserList의 함수형 컴포넌트를 만든다.
 const UserList = (props) => {
   let list = props.list;
 
@@ -30,10 +34,12 @@ const UserList = (props) => {
   );
 };
 
+// styled-components
 const Img = styled.img`
   margin: 6px;
   width: 48px;
   height: 48px;
 `;
 
+// export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default UserList;

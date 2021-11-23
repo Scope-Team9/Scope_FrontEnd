@@ -1,21 +1,22 @@
+// RightWrite.js
+/* eslint-disable */
+
+// import를 한다.
 import React from "react";
 import styled from "styled-components";
 import { Grid } from "../../elements/Index";
-
 import { useDispatch } from "react-redux";
 import { postAddActions } from "../../redux/modules/postadd";
 import { postActions } from "../../redux/modules/post";
-
 import makeAnimated from "react-select/animated";
 import TitleWrite from "./rightContents/TitleWrite";
-import SummaryWrite from "./rightContents/SummaryWrite";
-import StectWrite from "./rightContents/StackWrite";
+import StackWrite from "./rightContents/StackWrite";
 import DateWrite from "./rightContents/DateWrite";
-import TotalMenber from "./rightContents/TotalMenber";
-import StatusWrite from "./rightContents/StatusWrite";
+import TotalMember from "./rightContents/TotalMember";
 import ContentWrite from "./rightContents/ContentWrite";
 import GenerateButton from "./rightContents/GenerateButton";
 
+// RightWrite의 함수형 컴포넌트를 만든다.
 const RightWrite = (props) => {
   React.useEffect(() => {
     dispatch(postActions.isMainPage(false));
@@ -25,36 +26,37 @@ const RightWrite = (props) => {
   const dispatch = useDispatch();
   const animatedComponents = makeAnimated();
   const [title, setTitle] = React.useState("");
-  const [summary, setSummary] = React.useState("");
   const [techstack, setTectstack] = React.useState([]);
   const [techStackList, setTechStackList] = React.useState();
-  const [startDate, setStartdate] = React.useState(new Date());
-  const [endDate, setEnddate] = React.useState(new Date());
+  const date = new Date();
+  const [startDate, setStartdate] = React.useState(
+    date.setDate(date.getDate())
+  );
+  const [endDate, setEnddate] = React.useState(
+    date.setDate(date.getDate() + 1)
+  );
   const [totalMember, setTotalmember] = React.useState();
-  const [projectStatus, setProjectstatus] = React.useState("");
+  const [projectStatus, setProjectstatus] = React.useState("모집중");
   const [contents, setContents] = React.useState("");
 
   // 예외처리
   const submitHandler = () => {
     if (
       title.length > 0 &&
-      summary.length > 0 &&
       techstack.length > 0 &&
       totalMember > 0 &&
-      projectStatus.length > 0 &&
       contents.length > 0
     ) {
       window.alert("프로젝트가 생성되었습니다.");
       scopeIndex();
     } else {
-      window.alert("값을 다 입력해주세요.");
+      window.alert("값을 다시 입력해주세요.");
     }
   };
 
   const scopeIndex = () => {
     const card = {
       title: title,
-      summary: summary,
       techStackList: techStackList,
       startDate: startDate,
       endDate: endDate,
@@ -62,6 +64,7 @@ const RightWrite = (props) => {
       projectStatus: projectStatus,
       contents: contents,
     };
+    console.log("카드들", card);
     dispatch(postAddActions.addPostAPI(card));
   };
 
@@ -84,12 +87,10 @@ const RightWrite = (props) => {
   return (
     <React.Fragment>
       <Grid margin="46px 106px 0px">
-        <Title>Scoope</Title>
-        <SecondTitle>게시글 작성하기</SecondTitle>
+        <Title>게시글 작성하기</Title>
         <Grid margin="40px auto">
           <TitleWrite setTitle={setTitle} />
-          <SummaryWrite setSummary={setSummary} />
-          <StectWrite
+          <StackWrite
             animatedComponents={animatedComponents}
             styles={styles}
             setTectstack={setTectstack}
@@ -102,8 +103,7 @@ const RightWrite = (props) => {
             setEnddate={setEnddate}
             endDate={endDate}
           />
-          <TotalMenber setTotalmember={setTotalmember} styles={styles} />
-          <StatusWrite setProjectstatus={setProjectstatus} styles={styles} />
+          <TotalMember setTotalmember={setTotalmember} styles={styles} />
           <ContentWrite setContents={setContents} />
           <GenerateButton submitHandler={submitHandler} />
         </Grid>
@@ -112,15 +112,12 @@ const RightWrite = (props) => {
   );
 };
 
+// styled-components
 const Title = styled.div`
   color: black;
   font-size: 32px;
   font-weight: 800;
 `;
 
-const SecondTitle = styled.div`
-  color: black;
-  font-size: 20px;
-  margin: 16px auto;
-`;
+// export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default RightWrite;

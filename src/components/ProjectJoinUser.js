@@ -1,9 +1,13 @@
+// ProjectJoinUser.js
+/* eslint-disable */
+
+// import를 한다.
 import React from "react";
-import { Grid, Text, Image } from "../elements/Index";
-import styled from "styled-components";
+import { Grid, Text } from "../elements/Index";
 import { useHistory } from "react-router";
 import ImgType from "../shared/ImgType";
 
+// ProjectJoinUser의 함수형 컴포넌트를 만든다.
 const ProjectJoinUser = (props) => {
   const history = useHistory();
   const goToMypage = (userId) => {
@@ -33,4 +37,6 @@ const ProjectJoinUser = (props) => {
     </React.Fragment>
   );
 };
+
+// export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default ProjectJoinUser;

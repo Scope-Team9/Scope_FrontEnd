@@ -1,6 +1,12 @@
+// StackDetail.js
+/* eslint-disable */
+
+// import를 한다.
 import React from "react";
+import styled from "styled-components";
 import { Grid, Text } from "../../../elements/Index";
 
+// StackDetail의 함수형 컴포넌트를 만든다.
 const StackDetail = (props) => {
   return (
     <React.Fragment>
@@ -11,18 +17,7 @@ const StackDetail = (props) => {
         {props.passedData?.techStack.map((item, index) => {
           return (
             <Text margin="auto 5px" key={index}>
-              <span
-                style={{
-                  color: "white",
-                  textAlign: "center",
-                  padding: "4px 10px",
-                  border: "1px solid #E6DDF2",
-                  background: "#E6DDF2",
-                  borderRadius: "10px",
-                }}
-              >
-                {item}
-              </span>
+              <StackBox>{item}</StackBox>
             </Text>
           );
         })}
@@ -31,4 +26,15 @@ const StackDetail = (props) => {
   );
 };
 
+// styled-components
+const StackBox = styled.div`
+  color: white;
+  background-color: #554475;
+  border: 1px solid #554475;
+  border-radius: 10px;
+  padding: 4px 10px;
+  text-align: center;
+`;
+
+// export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default StackDetail;

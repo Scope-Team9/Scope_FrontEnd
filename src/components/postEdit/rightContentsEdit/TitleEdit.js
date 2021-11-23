@@ -1,6 +1,11 @@
+// TitleEdit.js
+/* eslint-disable */
+
+// import를 한다.
 import React from "react";
 import { Grid, Text, Input } from "../../../elements/Index";
 
+// TitleEdit의 함수형 컴포넌트를 만든다.
 const TitleEdit = (props) => {
   return (
     <React.Fragment>
@@ -30,4 +35,5 @@ const TitleEdit = (props) => {
   );
 };
 
+// export
 export default TitleEdit;

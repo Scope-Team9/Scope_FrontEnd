@@ -1,7 +1,12 @@
+// ContentEdit.js
+/* eslint-disable */
+
+// import를 한다.
 import React from "react";
 import styled from "styled-components";
 import { Grid, Text } from "../../../elements/Index";
 
+// ContentEdit의 함수형 컴포넌트를 만든다.
 const ContentEdit = (props) => {
   return (
     <React.Fragment>
@@ -11,7 +16,6 @@ const ContentEdit = (props) => {
         </Text>
         <TextArea
           value={props.contents}
-          s
           onChange={(e) => {
             props.setContents(e.target.value);
           }}
@@ -21,9 +25,10 @@ const ContentEdit = (props) => {
   );
 };
 
+// styled-components
 const TextArea = styled.textarea`
   width: 97%;
-  height: 200px;
+  height: 300px;
   padding: 10px;
   margin: 4px auto;
   border: 1px solid #c4c4c4;
@@ -32,4 +37,5 @@ const TextArea = styled.textarea`
   outline: none;
 `;
 
+// export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default ContentEdit;

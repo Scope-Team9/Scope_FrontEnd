@@ -1,11 +1,15 @@
+// PosterButton.js
+/* eslint-disable */
+
+// import를 한다.
 import React from "react";
 import { Grid, Button } from "../../../elements/Index";
-
 import ApplyUserModal from "../../ApplyUserModal";
 import { useHistory } from "react-router";
 import { apis } from "../../../lib/axios";
 
-const PosterButton = props => {
+// PosterButton의 함수형 컴포넌트를 만든다.
+const PosterButton = (props) => {
   const history = useHistory();
 
   const DeletePost = async () => {
@@ -17,8 +21,6 @@ const PosterButton = props => {
     }
   };
 
-  console.log("프로젝트 상테", props);
-
   return (
     <React.Fragment>
       <Grid display="flex" justifyContent="center">
@@ -28,7 +30,7 @@ const PosterButton = props => {
             width="140px"
             height="35px"
             isValue="end"
-            _onClick={e => {
+            _onClick={(e) => {
               props.applyUserModalOpen(e.target.value);
             }}
           >
@@ -55,14 +57,13 @@ const PosterButton = props => {
             모집완료
           </Button>
         )}
-
         {props.passedData?.projectStatus === "종료" && (
           <Button
             common
             width="140px"
             height="35px"
             isValue="submit"
-            _onClick={e => {
+            _onClick={(e) => {
               props.applyUserModalOpen(e.target.value);
             }}
           >
@@ -112,4 +113,5 @@ const PosterButton = props => {
   );
 };
 
+// export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default PosterButton;
