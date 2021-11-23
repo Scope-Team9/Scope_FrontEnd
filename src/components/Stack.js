@@ -126,12 +126,14 @@ const Stack = (props) => {
   return (
     <Grid
       display="flex"
-      width="73%"
+      width="75%"
       margin="25px auto 20px auto"
       boxShadow="0px 0px 10px #ddd"
       padding="5px 10px"
       borderRadius="20px"
       overflow="auto"
+      alignItems="center"
+      maxWidth="1900px"
     >
       {arr.map((item) => {
         return (
