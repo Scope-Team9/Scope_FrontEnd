@@ -19,7 +19,7 @@ const TestResult = props => {
         {userType === "LVG" && (
           <Grid>
             <Grid
-              bg="#B29CF4"
+              bg="#554475"
               borderRadius="20px"
               padding="12px 0"
               margin="12px 0"
@@ -31,7 +31,7 @@ const TestResult = props => {
             <Grid
               margin="12px 0"
               borderRadius="20px"
-              border="1px solid #B29CF4"
+              border="1px solid #554475"
               padding="40px 0"
             >
               <Text size="12px">
@@ -46,7 +46,7 @@ const TestResult = props => {
         {userType === "LVP" && (
           <Grid>
             <Grid
-              bg="#B29CF4"
+              bg="#554475"
               borderRadius="20px"
               padding="12px 0"
               margin="12px 0"
@@ -58,7 +58,7 @@ const TestResult = props => {
             <Grid
               margin="12px 0"
               borderRadius="20px"
-              border="1px solid #B29CF4"
+              border="1px solid #554475"
               padding="40px 0"
             >
               <Text size="12px">
@@ -74,7 +74,7 @@ const TestResult = props => {
         {userType === "LHG" && (
           <Grid>
             <Grid
-              bg="#B29CF4"
+              bg="#554475"
               borderRadius="20px"
               padding="12px 0"
               margin="12px 0"
@@ -86,7 +86,7 @@ const TestResult = props => {
             <Grid
               margin="12px 0"
               borderRadius="20px"
-              border="1px solid #B29CF4"
+              border="1px solid #554475"
               padding="40px 0"
             >
               <Text size="12px">
@@ -102,7 +102,7 @@ const TestResult = props => {
         {userType === "LHP" && (
           <Grid>
             <Grid
-              bg="#B29CF4"
+              bg="#554475"
               borderRadius="20px"
               padding="12px 0"
               margin="12px 0"
@@ -114,7 +114,7 @@ const TestResult = props => {
             <Grid
               margin="12px 0"
               borderRadius="20px"
-              border="1px solid #B29CF4"
+              border="1px solid #554475"
               padding="40px 0"
             >
               <Text size="12px">
@@ -129,7 +129,7 @@ const TestResult = props => {
         {userType === "FVG" && (
           <Grid>
             <Grid
-              bg="#B29CF4"
+              bg="#554475"
               borderRadius="20px"
               padding="12px 0"
               margin="12px 0"
@@ -141,7 +141,7 @@ const TestResult = props => {
             <Grid
               margin="12px 0"
               borderRadius="20px"
-              border="1px solid #B29CF4"
+              border="1px solid #554475"
               padding="40px 0"
             >
               <Text size="12px">
@@ -156,7 +156,7 @@ const TestResult = props => {
         {userType === "FVP" && (
           <Grid>
             <Grid
-              bg="#B29CF4"
+              bg="#554475"
               borderRadius="20px"
               padding="12px 0"
               margin="12px 0"
@@ -168,7 +168,7 @@ const TestResult = props => {
             <Grid
               margin="12px 0"
               borderRadius="20px"
-              border="1px solid #B29CF4"
+              border="1px solid #554475"
               padding="40px 0"
             >
               <Text size="12px">
@@ -183,7 +183,7 @@ const TestResult = props => {
         {userType === "FHG" && (
           <Grid>
             <Grid
-              bg="#B29CF4"
+              bg="#554475"
               borderRadius="20px"
               padding="12px 0"
               margin="12px 0"
@@ -195,7 +195,7 @@ const TestResult = props => {
             <Grid
               margin="12px 0"
               borderRadius="20px"
-              border="1px solid #B29CF4"
+              border="1px solid #554475"
               padding="40px 0"
             >
               <Text size="12px">
@@ -210,7 +210,7 @@ const TestResult = props => {
         {userType === "FHP" && (
           <Grid>
             <Grid
-              bg="#B29CF4"
+              bg="#554475"
               borderRadius="20px"
               padding="12px 0"
               margin="12px 0"
@@ -222,7 +222,7 @@ const TestResult = props => {
             <Grid
               margin="12px 0"
               borderRadius="20px"
-              border="1px solid #B29CF4"
+              border="1px solid #554475"
               padding="40px 0"
             >
               <Text size="12px">

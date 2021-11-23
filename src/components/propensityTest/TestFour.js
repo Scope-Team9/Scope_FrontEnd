@@ -21,13 +21,13 @@ const TestFour = props => {
       //값이 들어오면 해당 버튼 css 변경
       if (nowClickU !== null) {
         let current = document.getElementById(nowClickU);
-        current.style.backgroundColor = "#B29CF4";
+        current.style.backgroundColor = "#554475";
         current.style.color = "#fff";
       }
       //다른 버튼이 클릭될경우 기존 스테이트값이 이전버튼스테이트로 이동
       if (prevClickU !== null) {
         let prev = document.getElementById(prevClickU);
-        prev.style.color = "#B29CF4";
+        prev.style.color = "#554475";
         prev.style.backgroundColor = "#fff";
       }
       setPrevClickU(nowClickU);
@@ -40,13 +40,13 @@ const TestFour = props => {
     e => {
       if (nowClickMB !== null) {
         let current = document.getElementById(nowClickMB);
-        current.style.backgroundColor = "#B29CF4";
+        current.style.backgroundColor = "#554475";
         current.style.color = "#fff";
       }
 
       if (prevClickMB !== null) {
         let prev = document.getElementById(prevClickMB);
-        prev.style.color = "#B29CF4";
+        prev.style.color = "#B25544759CF4";
         prev.style.backgroundColor = "#fff";
       }
       setPrevClickMB(nowClickMB);
@@ -59,7 +59,8 @@ const TestFour = props => {
       <Grid display="flex" flexDirection="column">
         <Grid margin="20px 0">
           <Grid>
-            Q4.프로젝트를 진행함에 있어서 당신의 생각에 더 가까운 문장은?
+            Q4.<b>프로젝트를 진행</b>함에 있어서 <b>당신의 생각</b>에 더 가까운
+            문장은?
           </Grid>
           <Button
             isTest
@@ -87,8 +88,8 @@ const TestFour = props => {
         </Grid>
         <Grid>
           <Grid>
-            Q4.프로젝트를 진행함에 있어서 당신이 원하는 팀원의 생각에 더
-            가까웠으면 하는 문장은?
+            Q4.<b>프로젝트를 진행</b>함에 있어서 당신이 원하는{" "}
+            <b>팀원의 생각</b>에 더 가까웠으면 하는 문장은?
           </Grid>
           <Button
             isTest

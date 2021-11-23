@@ -20,8 +20,10 @@ const Progress = props => {
         left={(currentStep / count) * 100 - 8 + "%"}
       >
         <ArrowBubbleTwo>
-          <Grid textAlign="center">
-            <Text size="12px">{(currentStep / count) * 100 + "%"}</Text>
+          <Grid display="flex" justifyContent="center" alignItems="center">
+            <Text bold size="12px">
+              {(currentStep / count) * 100 + "%"}
+            </Text>
           </Grid>
         </ArrowBubbleTwo>
       </Grid>
@@ -33,7 +35,7 @@ const Progress = props => {
 };
 
 const ProgressBar = styled.div`
-  border: 3px solid #b29cf4;
+  border: 3px solid #554475;
   border-radius: 25px;
   background: #f1f9ff;
   width: 100%;
@@ -42,7 +44,8 @@ const ProgressBar = styled.div`
 
 const HighLight = styled.div`
   border-radius: 25px;
-  background: #b29cf4;
+  border: none;
+  background: #554475;
   transition: 1s;
   width: ${props => props.width};
   height: 15px;
@@ -57,7 +60,7 @@ const ArrowBubbleTwo = styled.div`
   /* -webkit-border-radius: 35px;
   -moz-border-radius: 35px; */
   border-radius: 10px;
-  border: #b29cf4 solid 3px;
+  border: #554475 solid 3px;
 
   ::after {
     content: "";
@@ -77,7 +80,7 @@ const ArrowBubbleTwo = styled.div`
     position: absolute;
     border-style: solid;
     border-width: 8px 12px 0;
-    border-color: #b29cf4 transparent;
+    border-color: #554475 transparent;
     display: block;
     width: 0;
     z-index: 0;

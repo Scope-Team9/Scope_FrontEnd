@@ -167,6 +167,7 @@ const ElButton = styled.button`
   flex-shrink: 0;
   display: ${(props) => props.display};
   z-index: ${(props) => props.zIndex};
+  font-family: "GmarketSans";
 `;
 
 const FloatButton = styled.div`
@@ -202,6 +203,8 @@ const TestButton = styled.button`
   padding: 20px;
   margin: 5px;
   box-shadow: 0px 2px 2px #ddd;
+  font-family: "GmarketSans";
+  font-weight: 400;
 
   &:hover {
     background-color: #554475;
@@ -241,5 +244,6 @@ const Common = styled.button`
     transform: translate();
     transition: 0.3s ease-out;
   }
+  font-family: "GmarketSans";
 `;
 export default Button;

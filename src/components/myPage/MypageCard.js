@@ -92,6 +92,7 @@ const MypageCard = (props) => {
     { value: "Java", label: "Java" },
     { value: "JavaScript", label: "JavaScript" },
     { value: "Python", label: "Python" },
+    { value: "Spring", label: "Spring" },
     { value: "Node", label: "Node" },
     { value: "cpp", label: "C++" },
     { value: "Flask", label: "Flask" },
@@ -104,7 +105,7 @@ const MypageCard = (props) => {
   ];
 
   return (
-    <div>
+    <Grid>
       <Cards>
         <CardImgs myType={props.myType} />
 
@@ -254,32 +255,27 @@ const MypageCard = (props) => {
                   props.onClick2();
                 }}
               ></Button>
-              <Button
-                margin="15px auto 15px 3%"
-                height="40px"
-                width="132px"
-                text="회원탈퇴"
-                _onClick={deleteUser}
-              ></Button>
+
               <DeleteUserModal
                 modal={deleteModal}
                 setModal={setDeleteModal}
                 userId={props.myUserId}
               />
             </div>
+            <Exit onClick={deleteUser}> 회원탈퇴 </Exit>
           </>
         )}
       </Cards>
-    </div>
+    </Grid>
   );
 };
 
 const Cards = styled.div`
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
     rgba(0, 0, 0, 0.22) 0px 15px 12px;
-  margin: -220px 0 -600px 55px;
+  margin: -220px 0 0px 55px;
   width: 405px;
-  height: 1300px;
+  height: 1000px;
   /* background-color: rgba(255, 255, 255, 0); */
   background-color: white;
   border-radius: 20px;
@@ -309,21 +305,18 @@ const Line = styled.hr`
   width: 80%;
   color: black;
 `;
-
-const CardImg = styled.img`
-  width: 160%;
-  height: 100%;
-  object-fit: cover;
-  position: relative;
-  right: 60px;
+const Exit = styled.button`
+  margin: 30px auto 15px 35%;
+  height: 40px;
+  width: 132px;
+  background-color: white;
+  border: 1px solid #d1d1d1;
+  border-radius: 25px;
+  cursor: pointer;
+  &:hover {
+    color: black;
+    background-color: #d1d1d1;
+    opacity: 0.7;
+  }
 `;
-const CardImgForWolf = styled.img`
-  width: 160%;
-  height: 100%;
-  object-fit: cover;
-  position: relative;
-  right: 0px;
-  bottom: 50px;
-`;
-
 export default MypageCard;

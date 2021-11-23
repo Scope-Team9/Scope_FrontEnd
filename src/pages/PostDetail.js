@@ -7,7 +7,7 @@ import { postActions } from "../redux/modules/post";
 import { Grid, Button } from "../elements/Index";
 import Swal from "sweetalert2";
 import ApplyStatusModal from "../components/ApplyStatusModal";
-import LeftBanner from "../components/postDetail/LeftBanner";
+import LeftBanner from "../components/postDetail/leftBanner";
 import TitleDetail from "../components/postDetail/rightContents/TitleDetail";
 import ExileUserModal from "../components/modal/ExileUserModal";
 import ApplicantDetail from "../components/postDetail/rightContents/ApplicantDetail";
@@ -50,6 +50,7 @@ const PostDetail = (props) => {
     console.log(value);
     setProjectStatus(value);
   };
+  // 상태변경
   const edit_status = (data) => {
     const editstatus = {
       projectStatus: data,
@@ -95,6 +96,7 @@ const PostDetail = (props) => {
     exileStatusModal,
     applyUserModal,
     projectStatus,
+    applyValue,
   ]);
 
   //북마크 토글

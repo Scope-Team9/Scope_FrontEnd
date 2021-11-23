@@ -15,6 +15,7 @@ const PosterButton = (props) => {
   const DeletePost = async () => {
     try {
       const deletePost = await apis.deletePost(props.post_id);
+      history.push("/");
       console.log("삭제", deletePost);
     } catch (err) {
       console.log(err);

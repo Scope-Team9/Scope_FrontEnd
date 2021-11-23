@@ -1,23 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Grid, Input, Text, Button, Image } from "../elements/Index";
 import { Dialog } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { userCreators } from "../redux/modules/user";
 import Select from "react-select";
-import { history } from "../redux/configureStore";
+
 import PropensityTest from "./propensityTest/PropensityTest";
 import CloseIcon from "@mui/icons-material/Close";
-import Symbol from "../images/tiger.jpg";
 
-const LoginModal = (props) => {
+const LoginModal = props => {
   const dispatch = useDispatch();
-  const userInfo = useSelector((state) => state.user);
-  const sigunupModalState = useSelector(
-    (state) => state.user.sigunupModalState
-  );
+  const userInfo = useSelector(state => state.user);
+  const sigunupModalState = useSelector(state => state.user.sigunupModalState);
 
-  var regExpNick = /^[a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{2,10}$/;
+  var regExpNick = /^[a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{2,5}$/;
   var regExpEmail =
     /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 
@@ -42,8 +39,8 @@ const LoginModal = (props) => {
   //모달
   const { showModal, setShowModal } = props;
 
-  const modalOpen = () => {
-    setShowModal(true);
+  const TestClose = () => {
+    setShowModal(false);
   };
   const modalClose = () => {
     setShowModal(false);
@@ -63,21 +60,21 @@ const LoginModal = (props) => {
   console.log("sns아이디", userInfo.snsId);
 
   //닉네임 체크 미들웨어
-  const nickCheck = (nickName) => {
+  const nickCheck = nickName => {
     if (nickName === undefined) {
       alert("닉네임을 입력 해주세요.");
       return false;
     }
 
     if (!regExpNick.test(nickName)) {
-      alert("닉네임은 4~10자 숫자 조합만 가능합니다.");
+      alert("닉네임은 2~5자 숫자 조합만 가능합니다.");
       return false;
     }
     dispatch(userCreators.nickCheckMiddleWare(nickName));
   };
 
   //이메일 체크 미들웨어
-  const emailCheck = (email) => {
+  const emailCheck = email => {
     if (nickName === "") {
       alert("이메일을 입력 해주세요.");
       return false;
@@ -96,23 +93,50 @@ const LoginModal = (props) => {
       alert("기술스택을 선택 해주세요.");
       return false;
     }
-    if (emailDup === false) {
-      alert("이메일 중복확인을 해주세요.");
-      return false;
-    }
+    // if (emailDup === false) {
+    //   alert("이메일 중복확인을 해주세요.");
+    //   return false;
+    // }
     if (nameDup === false) {
       alert("닉네임 중복확인을 해주세요.");
       return false;
     }
     const registerInfo = {
       snsId: userInfo.snsId,
-      email: email,
+      email: userInfo.email,
       nickName: nickName,
       techStack: techStack,
     };
     console.log(registerInfo);
     dispatch(userCreators.testUserMiddleWare(registerInfo));
     setTest(true);
+  };
+
+  const customStyles = {
+    control: styles => ({
+      ...styles,
+      backgroundColor: "white",
+      borderRadius: "20px",
+    }),
+    multiValue: (styles, { data }) => ({
+      ...styles,
+      color: data.color,
+      backgroundColor: "#554475",
+      color: "white",
+      borderRadius: "20px",
+    }),
+    multiValueLabel: (styles, { data }) => ({
+      ...styles,
+      color: data.color,
+    }),
+    multiValueRemove: (styles, { data }) => ({
+      ...styles,
+      color: data.color,
+      ":hover": {
+        backgroundColor: data.color,
+        color: "white",
+      },
+    }),
   };
   //회원가입이 필요한 유저일경우 모달창 활성화
   React.useEffect(() => {
@@ -128,7 +152,7 @@ const LoginModal = (props) => {
         maxWidth={"sm"}
         scroll="paper"
         open={showModal}
-        onClose={modalClose}
+        // onClose={modalClose}
       >
         <ModalWrap>
           {/* 테스트가 필요한경우 */}
@@ -137,7 +161,7 @@ const LoginModal = (props) => {
               {/* 헤더 */}
               <Grid
                 height="15%"
-                bg="#B29CF4"
+                bg="#17334A"
                 position="relative"
                 textAlign="center"
                 padding="10px 0 10px 0"
@@ -150,19 +174,24 @@ const LoginModal = (props) => {
                   padding="10px"
                 >
                   <CloseIcon
-                    fontSize="large"
-                    backgroundColor="white"
+                    sx={{ color: "#fff", fontSize: 35 }}
                     onClick={modalClose}
+                    cursor="pointer"
                   />
                 </Grid>
-                <Grid>
+                <Grid
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  height="40px"
+                >
                   <Text size="20px" bold color="#fff">
                     회원가입
                   </Text>
                 </Grid>
               </Grid>
               {/* 타이틀 */}
-              <Grid textAlign="center" margin="30px 0 20px 0">
+              <Grid textAlign="center" margin="40px 0 10px 0">
                 <Text bold size="33px">
                   Welcome to Scope!
                 </Text>
@@ -171,39 +200,31 @@ const LoginModal = (props) => {
               <Grid
                 display="flex"
                 justifyContent="center"
-                height="15%"
+                height="10%"
                 textAlign="center"
                 padding="10px 0"
                 margin="auto"
               >
-                <Grid width="90%" height="90%" display="flex">
+                <Grid width="90%" height="70%" display="flex">
                   {/* 라벨 */}
                   <Grid
                     width="15%"
                     display="flex"
                     flexDirection="column"
-                    justifyContent="center"
-                    margin="10px auto"
-                    height="230px"
+                    justifyContent="top"
+                    margin="5px auto"
+                    height="280px"
                   >
                     <Grid
-                      height="25%"
+                      height="29%"
                       display="flex"
                       alignItems="center"
                       justifyContent="center"
-                    >
-                      <Text color="#111">이메일</Text>
-                    </Grid>
-                    <Grid
-                      height="25%"
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="center"
-                      margin="16px 0"
+                      margin="20px 0 10px 0"
                     >
                       <Text color="#111">닉네임</Text>
                     </Grid>
-                    <Grid height="40%" padding="10px 0 0 0">
+                    <Grid padding="10px 0 0 0">
                       <Text color="#111">기술스택</Text>
                     </Grid>
                   </Grid>
@@ -212,34 +233,19 @@ const LoginModal = (props) => {
                     width="60%"
                     display="flex"
                     flexDirection="column"
-                    justifyContent="center"
-                    margin="10px auto"
-                    height="230px"
+                    justifyContent="top"
+                    margin="15px auto"
+                    height="280px"
                   >
-                    <Grid height="25%">
+                    <Grid height="14%" margin="16px 0">
                       <Input
                         borderRadius="25px"
                         border="1px solid #ddd"
                         fontSize="16px"
-                        padding="0 0 0 17px"
-                        height="100%"
-                        placeholder="이메일을 입력해주세요"
-                        _onChange={(e) => {
-                          setEmail(e.target.value);
-                        }}
-                      >
-                        이메일
-                      </Input>
-                    </Grid>
-                    <Grid height="25%" margin="16px 0">
-                      <Input
-                        borderRadius="25px"
-                        border="1px solid #ddd"
-                        fontSize="16px"
-                        padding="0 0 0 17px"
+                        padding="0 0 0 23px"
                         height="100%"
                         placeholder="닉네임을 입력해주세요"
-                        _onChange={(e) => {
+                        _onChange={e => {
                           setNickName(e.target.value);
                         }}
                       >
@@ -248,14 +254,14 @@ const LoginModal = (props) => {
                     </Grid>
                     <Grid height="40%" padding="0 0 10px 0">
                       <Select
-                        style={{ borderRadius: "10px" }}
+                        styles={customStyles}
                         placeholder="보유중인 기술을 선택해주세요!"
                         isMulti
                         name="techStack"
                         options={techStackOption}
                         className="basic-multi-select"
                         classNamePrefix="select"
-                        onChange={(e) => {
+                        onChange={e => {
                           let techStack = [];
                           let arr = e;
                           let idx = 0;
@@ -276,9 +282,9 @@ const LoginModal = (props) => {
                     flexDirection="column"
                     justifyContent="center"
                     margin="10px auto"
-                    height="230px"
+                    height="280px"
                   >
-                    <Grid height="20%" margin="0 0 22px 0">
+                    {/* <Grid height="20%" margin="0 0 22px 0">
                       <Button
                         height="52px"
                         fontSize="12px"
@@ -288,16 +294,13 @@ const LoginModal = (props) => {
                           setEmailDup(true);
                         }}
                       ></Button>
-                    </Grid>
-                    <Grid height="70%">
+                    </Grid> */}
+                    <Grid height="85%">
                       <Button
-                        height="52px"
+                        height="38px"
                         fontSize="12px"
                         text="닉네임 중복"
                         _onClick={() => {
-                          if (!regExpNick.test(nickName)) {
-                            return false;
-                          }
                           nickCheck(nickName);
                           setNameDup(true);
                         }}
@@ -318,10 +321,10 @@ const LoginModal = (props) => {
               </Grid>
             </Grid>
           ) : (
-            <PropensityTest />
+            <PropensityTest modalClose={TestClose} />
           )}
           <Grid display="flex" justifyContent="center" margin="10px 0 30px 0">
-            <Grid width="20%" backgroundColor="#B29CF4" height="3px"></Grid>
+            <Grid width="20%" backgroundColor="#554475" height="3px"></Grid>
           </Grid>
         </ModalWrap>
       </Dialog>
@@ -332,22 +335,31 @@ const LoginModal = (props) => {
         <ModalWrap>
           <Grid
             height="15%"
-            bg="#B29CF4"
+            bg="#554475"
+            width
             position="relative"
-            textAlign="center"
             padding="10px 0 10px 0"
           >
             <Grid
               position="absolute"
               top="0px"
-              right="10px"
-              width="20px"
+              right="4%"
+              width="3%"
               padding="10px"
             >
-              <CloseIcon fontSize="large" onClick={modalClose} />
+              <CloseIcon
+                sx={{ color: "#fff", fontSize: 35 }}
+                onClick={modalClose}
+                cursor="pointer"
+              />
             </Grid>
-            <Grid>
-              <Text size="20px" bold color="#fff">
+            <Grid
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              height="40px"
+            >
+              <Text size="25px" bold color="#fff">
                 로그인
               </Text>
             </Grid>
@@ -358,14 +370,12 @@ const LoginModal = (props) => {
               flexDirection="column"
               alignItems="center"
               position="relative"
+              justifyContent="center"
             >
-              <img width="40%" src={Symbol} />
-              <Text
-                size="30px"
-                bold="800"
-                margin="0 0 30px 0"
-                justifyContent="center"
-              >
+              <Grid margin="20px" display="flex" justifyContent="center">
+                <img width="40%" src="/img/호랑이.png" />
+              </Grid>
+              <Text size="30px" bold="800" margin="0 0 30px 0">
                 Welcome to Scope!
               </Text>
               <Grid display="flex" flexDirection="column">
@@ -397,7 +407,7 @@ const LoginModal = (props) => {
                       "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code";
 
                     // 최종 주소
-                    // "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=https://scopewith.com/user/github/callback";
+                    // "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://scopewith.com/user/kakao/callback&response_type=code";
                   }}
                 >
                   카카오로그인
@@ -417,6 +427,9 @@ const LoginModal = (props) => {
 const ModalWrap = styled.div`
   width: 550px;
   height: 100%;
+  @media (max-width: 570px) {
+    width: 82vw;
+  }
 `;
 
 const GithubBtn = styled.div`

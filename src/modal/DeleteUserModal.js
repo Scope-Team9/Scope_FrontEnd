@@ -24,8 +24,8 @@ const EmailAuth = (props) => {
       const result = await apis.deleteUser(props.userId);
       try {
         // console.log(result);
-        window.alert(result.data.msg);
-        Swal.fire(`${result.data.msg}`, "T.T", "info");
+        // window.alert(result.data.msg);
+        Swal.fire(`${result.data.msg}`, "", "info");
         deleteCookie("ScopeUser");
         history.push("/");
 
@@ -66,15 +66,15 @@ const EmailAuth = (props) => {
             </Grid>
           </Grid>
           {/* 내용작성 */}
-          <Grid height="45%">
-            <Dec>정말 탈퇴하시겠..</Dec>
+          <Grid margin="60px 0 0 0">
+            <Dec>정말 탈퇴 하시겠습니까?</Dec>
 
-            <Grid margin="10px 0 0 18%" width="320px"></Grid>
+            {/* <Grid margin="10px 0 0 18%" width="320px"></Grid> */}
 
             <Button
               width="320px"
-              height="50px"
-              margin="-90px 0 0 18%"
+              // height="50px"
+              margin="50px 0 0 21%"
               _onClick={() => {
                 UserDelete();
               }}
@@ -89,9 +89,10 @@ const EmailAuth = (props) => {
 };
 
 const ModalWrap = styled.div`
-  width: 500px;
+  width: 550px;
   height: 300px;
   border-radius: 20px;
+  overflow: hidden;
 `;
 const Dec = styled.p`
   color: #08061d;
@@ -99,7 +100,7 @@ const Dec = styled.p`
   align-items: center;
   display: flex;
   justify-content: center;
-  margin-top: 25px;
+  /* margin-top: 80px; */
 `;
 
 export default EmailAuth;
