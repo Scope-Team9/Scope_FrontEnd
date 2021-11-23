@@ -16,10 +16,6 @@ const HeaderRight = (props) => {
   // const history = useHistory();
   const userInfo = useSelector((state) => state.user);
   console.log(userInfo);
-  // console.log(isToken);
-  // console.log(isToken);
-  // console.log(userInfo);
-  // console.log("나의 타입은?", props);
   const [showModal, setShowModal] = React.useState(false);
   const sigunupModalState = useSelector(
     (state) => state.user.sigunupModalState

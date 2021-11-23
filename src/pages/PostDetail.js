@@ -7,7 +7,7 @@ import { postActions } from "../redux/modules/post";
 import { Grid, Button } from "../elements/Index";
 import Swal from "sweetalert2";
 import ApplyStatusModal from "../components/ApplyStatusModal";
-import LeftBanner from "../components/postDetail/leftBanner";
+import LeftBanner from "../components/postDetail/LeftBanner";
 import TitleDetail from "../components/postDetail/rightContents/TitleDetail";
 import ExileUserModal from "../components/modal/ExileUserModal";
 import ApplicantDetail from "../components/postDetail/rightContents/ApplicantDetail";
@@ -164,22 +164,25 @@ const PostDetail = (props) => {
               </Grid>
               <Grid display="flex">
                 <TotalMemberDetail passedData={passedData} />
-                <Grid display="flex" width="200px">
-                  <Button
-                    postion="absolute"
-                    common
-                    _onClick={applyStatusModalOpen}
-                  >
-                    신청 현황
-                  </Button>
-                  <Button
-                    postion="absolute"
-                    common
-                    _onClick={exileStatusModalOpen}
-                  >
-                    팀원 강퇴
-                  </Button>
-                </Grid>
+
+                {passedData?.projectStatus === "모집중" && (
+                  <Grid display="flex" width="200px">
+                    <Button
+                      postion="absolute"
+                      common
+                      _onClick={applyStatusModalOpen}
+                    >
+                      신청 현황
+                    </Button>
+                    <Button
+                      postion="absolute"
+                      common
+                      _onClick={exileStatusModalOpen}
+                    >
+                      팀원 강퇴
+                    </Button>
+                  </Grid>
+                )}
               </Grid>
               <StatusDetail passedData={passedData} />
               <ContentDetail passedData={passedData} />
