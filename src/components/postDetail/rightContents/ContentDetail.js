@@ -21,7 +21,7 @@ const ContentDetail = (props) => {
 // styled-components
 const Content = styled.h4`
   width: 100%;
-  height: 280px;
+  height: 340px;
   padding: 10px;
   border: 1px solid #c4c4c4;
   border-radius: 5px;

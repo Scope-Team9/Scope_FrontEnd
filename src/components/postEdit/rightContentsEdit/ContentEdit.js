@@ -14,7 +14,6 @@ const ContentEdit = (props) => {
         </Text>
         <TextArea
           value={props.contents}
-          s
           onChange={(e) => {
             props.setContents(e.target.value);
           }}

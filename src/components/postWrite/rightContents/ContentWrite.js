@@ -28,7 +28,7 @@ const ContentWrite = (props) => {
 // styled-components
 const TextArea = styled.textarea`
   width: 97%;
-  height: 360px;
+  height: 440px;
   padding: 10px;
   margin: 4px auto;
   border: 1px solid #c4c4c4;
