@@ -25,15 +25,15 @@ const Btn = styled.button`
   align-items: center;
   width: 140px;
   height: 35px;
-  border: 1px solid #c0aef6;
+  border: 1px solid #554475;
   border-radius: 50px;
-  color: #c0aef6;
+  color: #554475;
   margin: 10px auto auto auto;
   cursor: pointer;
   background-color: white;
   &:hover {
     color: white;
-    background-color: #c0aef6;
+    background-color: #554475;
     transform: translate();
     transition: 0.3s ease-out;
   }

@@ -29,7 +29,9 @@ const RightWrite = (props) => {
   // const [summary, setSummary] = React.useState("");
   const [techstack, setTectstack] = React.useState([]);
   const [techStackList, setTechStackList] = React.useState();
-  const [startDate, setStartdate] = React.useState(new Date());
+  const [startDate, setStartdate] = React.useState(
+    date.setDate(date.getDate())
+  );
   const [endDate, setEnddate] = React.useState(
     date.setDate(date.getDate() + 1)
   );
@@ -65,6 +67,7 @@ const RightWrite = (props) => {
       projectStatus: projectStatus,
       contents: contents,
     };
+    console.log("카드들", card);
     dispatch(postAddActions.addPostAPI(card));
   };
 

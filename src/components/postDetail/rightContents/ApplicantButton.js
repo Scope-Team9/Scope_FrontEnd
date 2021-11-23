@@ -18,7 +18,7 @@ const ApplicantButton = (props) => {
                   props.applyUserModalOpen(e.target.value);
                 }}
                 margin="auto 10px"
-                border="1px solid #b29cf4"
+                border="1px solid #554475"
                 borderRadius="50px"
               >
                 지원신청
@@ -74,7 +74,7 @@ const ApplicantButton = (props) => {
                 props.applyUserModalOpen(e.target.value);
               }}
               margin="auto 10px"
-              border="1px solid #b29cf4"
+              border="1px solid #554475"
               borderRadius="50px"
             >
               지원신청

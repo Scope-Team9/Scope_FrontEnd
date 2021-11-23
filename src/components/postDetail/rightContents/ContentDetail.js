@@ -7,7 +7,7 @@ const ContentDetail = (props) => {
     <React.Fragment>
       <Grid margin="10px auto auto">
         <Text size="18px" bold margin="0px 10px 0px 0px">
-          프로젝트 내용
+          프로젝트 설명
         </Text>
         <Content>{props.passedData?.contents}</Content>
       </Grid>

@@ -16,8 +16,8 @@ const StackDetail = (props) => {
                   color: "white",
                   textAlign: "center",
                   padding: "4px 10px",
-                  border: "1px solid #E6DDF2",
-                  background: "#E6DDF2",
+                  border: "1px solid #554475",
+                  background: "#554475",
                   borderRadius: "10px",
                 }}
               >

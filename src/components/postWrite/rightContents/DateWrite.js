@@ -6,8 +6,6 @@ import DatePicker from "react-datepicker";
 import { ko } from "date-fns/esm/locale";
 
 const DateWrite = (props) => {
-  console.log("빼기", props.startDate > props.endDate);
-
   const startDate = (date) => {
     if (date <= props.endDate) {
       props.setStartdate(date);
@@ -16,8 +14,8 @@ const DateWrite = (props) => {
     }
   };
 
-  const endDate = (date) => {
-    props.setEnddate(date);
+  const endDate = (data) => {
+    props.setEnddate(data);
   };
 
   return (

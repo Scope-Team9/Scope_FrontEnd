@@ -23,6 +23,7 @@ import ContentDetail from "../components/postDetail/rightContents/ContentDetail"
 import BookMark from "../components/postDetail/rightContents/BookMark";
 import ApplicantButton from "../components/postDetail/rightContents/ApplicantButton";
 import PosterButton from "../components/postDetail/rightContents/PosterButton";
+import TotalMemberDetail from "../components/postDetail/rightContents/TotalMemberDetail";
 
 // PostDetail의 함수형 컴포넌트를 만든다
 const PostDetail = (props) => {
@@ -78,6 +79,7 @@ const PostDetail = (props) => {
   const passedData = checkPost?.data["data"].post;
   const passedUserStatus = checkPost?.data["data"].userStatus;
   const passdedMenber = checkPost?.data["data"].members;
+  console.log("총인원", passedData);
 
   React.useEffect(() => {
     dispatch(postActions.isMainPage(false));
@@ -153,20 +155,6 @@ const PostDetail = (props) => {
                     width="120px"
                     padding="10px"
                   >
-                    <Button
-                      postion="absolute"
-                      common
-                      _onClick={applyStatusModalOpen}
-                    >
-                      신청현황 확인
-                    </Button>
-                    <Button
-                      postion="absolute"
-                      common
-                      _onClick={exileStatusModalOpen}
-                    >
-                      팀원 강퇴
-                    </Button>
                     <ApplyStatusModal
                       applyStatusModal={applyStatusModal}
                       setApplyStatusModal={setApplyStatusModal}
@@ -184,6 +172,25 @@ const PostDetail = (props) => {
               <Grid display="flex">
                 <DateDetail passedData={passedData} />
                 <StackDetail passedData={passedData} />
+              </Grid>
+              <Grid display="flex">
+                <TotalMemberDetail passedData={passedData} />
+                <Grid display="flex" width="200px">
+                  <Button
+                    postion="absolute"
+                    common
+                    _onClick={applyStatusModalOpen}
+                  >
+                    신청 현황
+                  </Button>
+                  <Button
+                    postion="absolute"
+                    common
+                    _onClick={exileStatusModalOpen}
+                  >
+                    팀원 강퇴
+                  </Button>
+                </Grid>
               </Grid>
               <StatusDetail passedData={passedData} />
               <ContentDetail passedData={passedData} />

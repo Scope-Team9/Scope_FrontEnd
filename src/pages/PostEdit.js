@@ -22,6 +22,7 @@ import StackEdit from "../components/postEdit/rightContentsEdit/StackEdit";
 import TotalMemberEdit from "../components/postEdit/rightContentsEdit/TotalMenberEdit";
 import StatusEdit from "../components/postEdit/rightContentsEdit/StatusEdit";
 import ContentEdit from "../components/postEdit/rightContentsEdit/ContentEdit";
+import DateEdit from "../components/postEdit/rightContentsEdit/DateEdit";
 
 // PostEdit의 함수형 컴포넌트를 만든다.
 const PostEdit = (props) => {
@@ -48,14 +49,15 @@ const PostEdit = (props) => {
   const scope_edit = () => {
     const editcard = {
       title: title,
-      summary: summary,
+      // summary: summary,
       contents: contents,
       techStackList: techStackList,
-      totalMember: totalMember.value,
-      projectStatus: projectStatus.label,
+      totalMember: totalMember,
+      projectStatus: projectStatus,
       startDate: startDate,
       endDate: endDate,
     };
+    console.log("카드들", editcard);
     dispatch(postDetailActions.editPostAPI(post_id, editcard));
   };
 
@@ -66,6 +68,8 @@ const PostEdit = (props) => {
       window.alert("기술선택을 4개 이하로 입력해주세요.");
     }
   };
+
+  console.log("총인원", totalMember);
 
   React.useEffect(() => {
     const CheckPost = async () => {
@@ -125,9 +129,7 @@ const PostEdit = (props) => {
         <Grid margin="46px 106px 0px" position="relative">
           {/* <Title>Scoope</Title> */}
           <Grid>
-            <Text color="black" size="20px">
-              게시글 수정하기
-            </Text>
+            <Title>게시글 수정하기</Title>
           </Grid>
           <Grid margin="40px auto">
             <TitleEdit title={title} setTitle={setTitle} />
@@ -140,34 +142,12 @@ const PostEdit = (props) => {
               styles={styles}
             />
             <Grid>
-              <Grid>
-                <Text size="18px" bold>
-                  기간설정
-                </Text>
-              </Grid>
-              <Grid display="flex" textAlign="center" margin="20px auto">
-                {/* <Text>프로젝트 시작 일 :</Text> */}
-                <SDatePicker
-                  selected={new Date(startDate)}
-                  onChange={(date) => setStartdate(date)}
-                  startdate={startDate}
-                  selectsStart
-                  locale={ko}
-                  minDate={new Date()}
-                  placeholderText="프로젝트 시작일 입력"
-                />
-                {/* <Text>프로젝트 종료 일 :</Text> */}
-                <SDatePicker
-                  selected={new Date(endDate)}
-                  onChange={(date) => setEnddate(date)}
-                  startdate={startDate}
-                  enddate={endDate}
-                  selectsEnd
-                  locale={ko}
-                  minDate={new Date()}
-                  placeholderText="프로젝트 종료일 입력"
-                />
-              </Grid>
+              <DateEdit
+                startDate={startDate}
+                endDate={endDate}
+                setStartdate={setStartdate}
+                setEnddate={setEnddate}
+              />
             </Grid>
             <TotalMemberEdit
               styles={styles}
