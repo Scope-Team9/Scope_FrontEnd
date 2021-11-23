@@ -21,13 +21,13 @@ const TestNine = props => {
       //값이 들어오면 해당 버튼 css 변경
       if (nowClickU !== null) {
         let current = document.getElementById(nowClickU);
-        current.style.backgroundColor = "#B29CF4";
+        current.style.backgroundColor = "#554475";
         current.style.color = "#fff";
       }
       //다른 버튼이 클릭될경우 기존 스테이트값이 이전버튼스테이트로 이동
       if (prevClickU !== null) {
         let prev = document.getElementById(prevClickU);
-        prev.style.color = "#B29CF4";
+        prev.style.color = "#554475";
         prev.style.backgroundColor = "#fff";
       }
       setPrevClickU(nowClickU);
@@ -40,13 +40,13 @@ const TestNine = props => {
     e => {
       if (nowClickMB !== null) {
         let current = document.getElementById(nowClickMB);
-        current.style.backgroundColor = "#B29CF4";
+        current.style.backgroundColor = "#554475";
         current.style.color = "#fff";
       }
 
       if (prevClickMB !== null) {
         let prev = document.getElementById(prevClickMB);
-        prev.style.color = "#B29CF4";
+        prev.style.color = "#554475";
         prev.style.backgroundColor = "#fff";
       }
       setPrevClickMB(nowClickMB);
@@ -59,8 +59,8 @@ const TestNine = props => {
       <Grid display="flex" flexDirection="column">
         <Grid margin="20px 0">
           <Grid>
-            Q9. 지금까지 진행했던 프로잭트를 떠올렸을 때 가장 먼저 생각나는
-            부분은?
+            Q9. 당신이 지금까지 진행했던{" "}
+            <b>프로젝트를 떠올렸을 때 가장 먼저 생각나는 부분</b>은?
           </Grid>
           <Button
             isTest
@@ -87,8 +87,9 @@ const TestNine = props => {
         </Grid>
         <Grid>
           <Grid>
-            Q9.당신의 팀원이 프로잭트를 떠올렸을 때 가장 먼저 생각났으면 하는
-            부분은?
+            Q9.당신의{" "}
+            <b>팀원이 프로젝트를 떠올렸을 때 가장 먼저 생각났으면 하는 부분</b>
+            은?
           </Grid>
           <Button
             isTest

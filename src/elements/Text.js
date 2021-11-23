@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Text = (props) => {
+const Text = props => {
   const {
     children,
     color,
@@ -52,16 +52,19 @@ Text.defaultProps = {
 };
 
 const ElText = styled.span`
-  color: ${(props) => props.color};
-  font-size: ${(props) => props.size};
-  font-weight: ${(props) => (props.bold ? "bold" : "400")};
+  color: ${props => props.color};
+  font-size: ${props => props.size};
+  font-weight: ${props => props.bold};
 
-  text-align: ${(props) => props.align};
-  margin: ${(props) => props.margin};
-  padding: ${(props) => props.padding};
-  family: ${(props) => props.family};
-  border: ${(props) => props.border};
-  cursor: ${(props) => props.cursor};
+  text-align: ${props => props.align};
+  margin: ${props => props.margin};
+  padding: ${props => props.padding};
+  family: ${props => props.family};
+  border: ${props => props.border};
+  cursor: ${props => props.cursor};
+  font-family: "GmarketSans";
+  line-height: 1.2;
+  letter-spacing: -0.0375em;
 `;
 
 export default Text;

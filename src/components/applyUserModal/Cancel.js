@@ -10,6 +10,7 @@ const Cancel = props => {
   const { modalClose, postId } = props;
   const cancel = () => {
     dispatch(applyCreators.cancelProjectAPI(postId));
+    modalClose();
   };
   return (
     <ModalWrap>

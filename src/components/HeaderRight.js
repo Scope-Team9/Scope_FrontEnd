@@ -3,39 +3,29 @@ import React from "react";
 import styled from "styled-components";
 import { history } from "../redux/configureStore";
 
+// import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { Grid, Text, Image, Button } from "../elements/Index";
 import LoginModal from "./LoginModal";
 import { userCreators } from "../redux/modules/user";
-
 import { deleteCookie } from "../shared/Cookie";
 
-const HeaderRight = props => {
+const HeaderRight = (props) => {
   const dispatch = useDispatch();
   const isToken = document.cookie;
-  const userInfo = useSelector(state => state.user);
+  // const history = useHistory();
+  const userInfo = useSelector((state) => state.user);
   console.log(userInfo);
-  // console.log(isToken);
-  // console.log(isToken);
-  // console.log(userInfo);
-  // console.log("나의 타입은?", props);
   const [showModal, setShowModal] = React.useState(false);
-  const sigunupModalState = useSelector(state => state.user.sigunupModalState);
+  const sigunupModalState = useSelector(
+    (state) => state.user.sigunupModalState
+  );
   const modalOpen = () => {
     setShowModal(true);
-  };
-  const modalClose = () => {
-    setShowModal(false);
   };
 
   const logOut = () => {
     deleteCookie("ScopeUser");
-    // window.alert("로그아웃 됐습니다");
-    // Swal.fire(
-    //   '로그아웃 됐습니다',
-    //   'You clicked the button!',
-    //   'success'
-    // )
     dispatch(userCreators.logOut());
     history.replace("/");
   };
@@ -50,13 +40,24 @@ const HeaderRight = props => {
         width="auto"
       >
         <HeaderWrapper>
+          {/*           
+          <Message
+            onClick={() => {
+              history.push(`/message`);
+            }}
+          >
+            <i class="far fa-envelope"></i>
+          </Message>
+          
+          <Bell>
+            <i class="far fa-bell"></i>
+          </Bell> */}
           <IconWrap>
             <Grid
               display="flex"
               alignItems="center"
               margin="0 20px"
               _onClick={() => {
-                console.log;
                 history.push(`/mypage/${userInfo.userId}`);
               }}
             >
@@ -83,6 +84,9 @@ const HeaderRight = props => {
               )}
               {userInfo.userPropensityType === "FHP" && (
                 <UserImg src="/img/물개.png"></UserImg>
+              )}
+              {userInfo.userPropensityType === "RHP" && (
+                <UserImg src="/img/너구리.png"></UserImg>
               )}
             </Grid>
           </IconWrap>
@@ -128,6 +132,19 @@ const HeaderWrapper = styled.div`
     width: 20%;
   } ;
 `;
+
+const Message = styled.div`
+  font-size: 30px;
+  margin-top: 8px;
+  margin-right: 16px;
+  cursor: pointer;
+`;
+const Bell = styled.div`
+  margin-top: 8px;
+  font-size: 30px;
+  cursor: pointer;
+`;
+
 const ButtonWrap = styled.div`
   @media screen and (max-width: 595px) {
     display: none;
@@ -140,15 +157,11 @@ const IconWrap = styled.div`
   } ;
 `;
 
-const CardImg = styled.img`
-  object-fit: cover;
-`;
-
 const UserImg = styled.img`
   object-fit: cover;
   width: 50px;
-  border-radius: 12px;
-  background-color: #ececec;
+  border-radius: 50px;
+  box-shadow: 0 0 3px #ddd;
   cursor: pointer;
 `;
 

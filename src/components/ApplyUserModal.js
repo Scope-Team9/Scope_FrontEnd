@@ -19,6 +19,7 @@ const ApplyUserModal = props => {
     passedUserStatus,
     projectStatus,
     statusCheck,
+    mypage,
   } = props;
   const isMe = useSelector(state => state.user.userId);
   const [page, setPage] = React.useState(1);
@@ -27,7 +28,7 @@ const ApplyUserModal = props => {
     console.log(a);
     setApplyUserModal(false);
     if (a === "종료") {
-      statusCheck(a);
+      return statusCheck(a);
     }
   };
 
@@ -87,6 +88,7 @@ const ApplyUserModal = props => {
             isMe={isMe}
             page={page}
             setPage={setPage}
+            mypage={mypage}
           />
         )}
       </Dialog>

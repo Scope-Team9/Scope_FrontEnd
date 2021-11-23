@@ -1,11 +1,11 @@
 import React from "react";
 
-const rightContent = () => {
+const Bell = (props) => {
   return (
     <React.Fragment>
-      <div></div>
+      <div>야호</div>
     </React.Fragment>
   );
 };
 
-export default rightContent;
+export default Bell;

@@ -1,30 +1,27 @@
 // PostDetail.js
 // import를 한다.
 import React from "react";
-import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { apis } from "../lib/axios";
 import { postActions } from "../redux/modules/post";
 import { Grid, Button } from "../elements/Index";
 import Swal from "sweetalert2";
-
 import ApplyStatusModal from "../components/ApplyStatusModal";
 import LeftBanner from "../components/postDetail/leftBanner";
 import TitleDetail from "../components/postDetail/rightContents/TitleDetail";
-import SummaryDetail from "../components/postDetail/rightContents/SummaryDetail";
-import PosterDetail from "../components/postDetail/rightContents/PosterDetail";
+import ExileUserModal from "../components/modal/ExileUserModal";
 import ApplicantDetail from "../components/postDetail/rightContents/ApplicantDetail";
 import StackDetail from "../components/postDetail/rightContents/StackDetail";
 import DateDetail from "../components/postDetail/rightContents/DateDetail";
 import StatusDetail from "../components/postDetail/rightContents/StatusDetail";
 import ContentDetail from "../components/postDetail/rightContents/ContentDetail";
 import BookMark from "../components/postDetail/rightContents/BookMark";
-import ExileUserModal from "../components/modal/ExileUserModal";
 import ApplicantButton from "../components/postDetail/rightContents/ApplicantButton";
 import PosterButton from "../components/postDetail/rightContents/PosterButton";
+import TotalMemberDetail from "../components/postDetail/rightContents/TotalMemberDetail";
 
-// PostDetail의 함수형 컴포넌트를 만든다...
-const PostDetail = (props) => {
+// PostDetail의 함수형 컴포넌트를 만든다
+const PostDetail = props => {
   const dispatch = useDispatch();
   const [checkPost, setCheckPost] = React.useState();
   const [bookmark, setBookmark] = React.useState(false);
@@ -34,7 +31,6 @@ const PostDetail = (props) => {
   const [recruitmentFinish, setRecruitmentFinish] = React.useState(); // 모집완료 체크 for리렌더링
   const [projectStatus, setProjectStatus] = React.useState();
   const [applyValue, setApplyValue] = React.useState();
-  const [exileValue, setExileValues] = React.useState();
   const [isme, setIsme] = React.useState(null);
 
   const applyStatusModalOpen = () => {
@@ -45,16 +41,17 @@ const PostDetail = (props) => {
     setExileStatusModal(true);
   };
 
-  const applyUserModalOpen = (value) => {
+  const applyUserModalOpen = value => {
     setApplyValue(value);
     setApplyUserModal(true);
   };
 
-  const statusCheck = (value) => {
+  const statusCheck = value => {
+    console.log(value);
     setProjectStatus(value);
   };
   // 상태변경
-  const edit_status = (data) => {
+  const edit_status = data => {
     const editstatus = {
       projectStatus: data,
     };
@@ -71,7 +68,7 @@ const PostDetail = (props) => {
   };
 
   let post_id = props.match.params.id;
-  const userId = useSelector((state) => state.user.userId); //로그인 유저아이디
+  const userId = useSelector(state => state.user.userId); //로그인 유저아이디
   const postUserId = checkPost?.data.data.post.userId;
   const passedData = checkPost?.data["data"].post;
   const passedUserStatus = checkPost?.data["data"].userStatus;
@@ -98,6 +95,8 @@ const PostDetail = (props) => {
     recruitmentFinish,
     exileStatusModal,
     applyUserModal,
+    projectStatus,
+    applyValue,
   ]);
 
   //북마크 토글
@@ -131,14 +130,9 @@ const PostDetail = (props) => {
             ToggleBookMark={ToggleBookMark}
             passedData={passedData}
           />
-
-          {/* <Title>Scoope</Title> */}
           <TitleDetail passedData={passedData} />
-
-          {/* <SummaryDetail passedData={passedData} /> */}
           <Grid margin="20px auto">
             <Grid display="flex">
-              {/* <PosterDetail passedData={passedData} /> */}
               <ApplicantDetail passdedMenber={passdedMenber} />
             </Grid>
             <Grid margin="10px auto ">
@@ -150,20 +144,6 @@ const PostDetail = (props) => {
                     width="120px"
                     padding="10px"
                   >
-                    <Button
-                      postion="absolute"
-                      common
-                      _onClick={applyStatusModalOpen}
-                    >
-                      신청현황 확인
-                    </Button>
-                    <Button
-                      postion="absolute"
-                      common
-                      _onClick={exileStatusModalOpen}
-                    >
-                      팀원 강퇴
-                    </Button>
                     <ApplyStatusModal
                       applyStatusModal={applyStatusModal}
                       setApplyStatusModal={setApplyStatusModal}
@@ -182,6 +162,28 @@ const PostDetail = (props) => {
                 <DateDetail passedData={passedData} />
                 <StackDetail passedData={passedData} />
               </Grid>
+              <Grid display="flex">
+                <TotalMemberDetail passedData={passedData} />
+
+                {passedData?.projectStatus === "모집중" && (
+                  <Grid display="flex" width="200px">
+                    <Button
+                      postion="absolute"
+                      common
+                      _onClick={applyStatusModalOpen}
+                    >
+                      신청 현황
+                    </Button>
+                    <Button
+                      postion="absolute"
+                      common
+                      _onClick={exileStatusModalOpen}
+                    >
+                      팀원 강퇴
+                    </Button>
+                  </Grid>
+                )}
+              </Grid>
               <StatusDetail passedData={passedData} />
               <ContentDetail passedData={passedData} />
               <Grid>
@@ -195,6 +197,7 @@ const PostDetail = (props) => {
                     post_id={post_id}
                     passdedMenber={passdedMenber}
                     edit_status={edit_status}
+                    statusCheck={statusCheck}
                   />
                 ) : (
                   <Grid textAlign="center">
@@ -219,13 +222,6 @@ const PostDetail = (props) => {
     </React.Fragment>
   );
 };
-
-// styled-components를 사용한다.
-// const Title = styled.h1`
-//   color: black;
-//   font-size: 32px;
-//   font-weight: 800;
-// `;
 
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default PostDetail;

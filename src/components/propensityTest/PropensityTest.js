@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React, { useState } from "react";
+import styled from "styled-components";
 import {
   TestOne,
   TestTwo,
@@ -17,12 +18,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { Grid, Button, Image, Text } from "../../elements/Index";
 import { userCreators } from "../../redux/modules/user";
 import { history } from "../../redux/configureStore";
+import ImgType from "../../shared/ImgType";
+import CloseIcon from "@mui/icons-material/Close";
 
 const PropensityTest = props => {
   const isToken = document.cookie.split("=")[1];
   const dispatch = useDispatch();
   const userInfo = useSelector(state => state.user);
   const userType = useSelector(state => state.user.userPropensityType);
+  const memberType = useSelector(state => state.user.memberPropensityType);
   // const [active, setActive] = React.useState(preUserPropensityType);
   const [isChecked, setIsChecked] = React.useState("#fff");
   const ToggleButton = answer => {
@@ -145,16 +149,34 @@ const PropensityTest = props => {
   };
 
   return (
-    <Grid>
+    <TestWrap>
       {/* 상단헤더 */}
       <Grid
         height="10%"
-        bg="#B29CF4"
+        bg="#554475"
         position="relative"
         textAlign="center"
         padding="10px 0 10px 0"
       >
-        <Grid>
+        <Grid
+          position="absolute"
+          top="0px"
+          right="10px"
+          width="20px"
+          padding="10px"
+        >
+          <CloseIcon
+            sx={{ color: "#fff", fontSize: 35 }}
+            onClick={props.TestClose}
+            cursor="pointer"
+          />
+        </Grid>
+        <Grid
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          height="40px"
+        >
           <Text size="20px" bold color="#fff">
             협업테스트
           </Text>
@@ -291,8 +313,14 @@ const PropensityTest = props => {
           </Button>
         )}
       </Grid>
-    </Grid>
+    </TestWrap>
   );
 };
 
+const TestWrap = styled.div`
+  width: 100%;
+  @media (width: 550px) {
+    width: 90vw;
+  }
+`;
 export default PropensityTest;

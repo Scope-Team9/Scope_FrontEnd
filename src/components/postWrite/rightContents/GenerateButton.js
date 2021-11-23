@@ -1,8 +1,12 @@
+// GenerateButton.js
+/* eslint-disable */
+
+// import를 한다.
 import React from "react";
 import styled from "styled-components";
-
 import { Grid } from "../../../elements/Index";
 
+// GenerateButton의 함수형 컴포넌트를 만든다.
 const GenerateButton = (props) => {
   return (
     <React.Fragment>
@@ -19,24 +23,26 @@ const GenerateButton = (props) => {
   );
 };
 
+// styled-components
 const Btn = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 140px;
   height: 35px;
-  border: 1px solid #c0aef6;
+  border: 1px solid #554475;
   border-radius: 50px;
-  color: #c0aef6;
+  color: #554475;
   margin: 10px auto auto auto;
   cursor: pointer;
   background-color: white;
   &:hover {
     color: white;
-    background-color: #c0aef6;
+    background-color: #554475;
     transform: translate();
     transition: 0.3s ease-out;
   }
 `;
 
+// export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default GenerateButton;

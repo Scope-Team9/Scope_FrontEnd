@@ -13,7 +13,6 @@ export default handleActions(
   {
     [GET_SORT]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action);
         draft.sort = action.payload.data;
       }),
   },

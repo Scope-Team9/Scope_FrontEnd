@@ -1,6 +1,9 @@
+// ProjectJoinUser.js
+/* eslint-disable */
+
+// import를 한다.
 import React from "react";
-import { Grid, Text, Image } from "../elements/Index";
-import styled from "styled-components";
+import { Grid, Text } from "../elements/Index";
 import { useHistory } from "react-router";
 import ImgType from "../shared/ImgType";
 
@@ -11,7 +14,14 @@ const ProjectJoinUser = (props) => {
   };
   return (
     <React.Fragment>
-      <Grid>
+      <Grid
+        textAlign="center"
+        height="120px"
+        width="80px"
+        margin="0 11px 0 0"
+        display="flex"
+        justifyContent="center"
+      >
         <Grid
           width="60px"
           height="60px"
@@ -26,11 +36,13 @@ const ProjectJoinUser = (props) => {
               goToMypage(props.userId);
             }}
           ></ImgType>
+          <Text size="16px">{props.nickname}</Text>
+          <Grid>({props.userPropensityType})</Grid>
         </Grid>
-        <Text size="16px">{props.nickname}</Text>
-        <Grid>({props.userPropensityType})</Grid>
       </Grid>
     </React.Fragment>
   );
 };
+
+// export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default ProjectJoinUser;

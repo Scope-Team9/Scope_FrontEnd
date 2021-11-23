@@ -7,11 +7,11 @@ const CardImgs = (props) => {
     <div>
       <ImgType
         type={props.myType}
-        width="160%"
+        width="100%"
         height="100%"
         object_fit="cover"
         position="relative"
-        right="60px"
+        // right="60px"
       />
     </div>
   );

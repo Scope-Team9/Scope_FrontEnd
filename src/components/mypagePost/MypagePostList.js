@@ -12,13 +12,14 @@ const MypagePostList = props => {
   const newMyCards = Object.values(myCards);
   console.log(myCards);
   console.log(newMyCards);
+
   return (
     <>
       {newMyCards && (
         <React.Fragment>
           <PostWrap>
-            {newMyCards.map((p, idx) => {
-              return <Post mypage={mypage} key={idx} {...p}></Post>;
+            {newMyCards.map(p => {
+              return <Post mypage={mypage} key={p.postId} {...p}></Post>;
             })}
           </PostWrap>
         </React.Fragment>

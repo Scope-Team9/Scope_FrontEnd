@@ -8,13 +8,11 @@ import { Grid, Button, Text } from "../../elements/Index";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 
-import slideOne from "../../images/03.png";
-import slideTwo from "../../images/06.png";
+import slideOne from "../../images/01.png";
+import slideTwo from "../../images/02.png";
 import slideThree from "../../images/03.png";
-import slideFour from "../../images/06.png";
 
-const images = [slideOne, slideTwo, slideThree, slideFour];
-const isToken = document.cookie.split("=")[1];
+const images = [slideOne, slideTwo, slideThree];
 
 const MainSlide = () => {
   const [imageIndex, setImageIndex] = useState(0);
@@ -42,7 +40,7 @@ const MainSlide = () => {
     draggable: true, //드래그 가능 여부
     infinite: true, //무한반복옵션
     lazyLoad: true,
-    speed: 300, //다음버튼 누르고 다음화면 뜨는데까지 걸리는 시간
+    speed: 400, //다음버튼 누르고 다음화면 뜨는데까지 걸리는 시간
     slidesToShow: 1, //화면에 보여질 개수
     centerMode: true, //활성화 된 슬라이드 가운데 배치
     centerPadding: 0, //center 슬라이드 패딩값

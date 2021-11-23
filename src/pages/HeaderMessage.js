@@ -1,11 +1,11 @@
 import React from "react";
 
-const RightContentEdit = (props) => {
+const HeaderMessage = (props) => {
   return (
     <React.Fragment>
-      <div></div>
+      <div>야호</div>
     </React.Fragment>
   );
 };
 
-export default RightContentEdit;
+export default HeaderMessage;

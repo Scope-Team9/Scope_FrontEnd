@@ -141,7 +141,7 @@ const ElButton = styled.button`
   ${(props) =>
     props.backgroundColor
       ? `background-color:${props.backgroundColor}`
-      : "background-color: #b29cf4"};
+      : "background-color: #554475"};
   box-sizing: border-box;
   border-radius: 5px;
   font-weight: bold;
@@ -167,6 +167,7 @@ const ElButton = styled.button`
   flex-shrink: 0;
   display: ${(props) => props.display};
   z-index: ${(props) => props.zIndex};
+  font-family: "GmarketSans";
 `;
 
 const FloatButton = styled.div`
@@ -191,20 +192,22 @@ const FloatButton = styled.div`
 const TestButton = styled.button`
   font-size: 12px;
   text-align: center;
-  border: 1px solid #b29cf4;
+  border: 1px solid #554475;
   border-radius: 25px;
   ${(props) =>
-    props.isChecked === "#B29CF4"
-      ? "background-color:#B29CF4"
+    props.isChecked === "#554475"
+      ? "background-color:#554475"
       : "background-color:#fff"};
   ${(props) =>
-    props.isChecked === "#B29CF4" ? "color:#fff" : "color:#B29CF4"};
+    props.isChecked === "#554475" ? "color:#fff" : "color:#554475"};
   padding: 20px;
   margin: 5px;
   box-shadow: 0px 2px 2px #ddd;
+  font-family: "GmarketSans";
+  font-weight: 400;
 
   &:hover {
-    background-color: #b29cf4;
+    background-color: #554475;
     cursor: pointer;
     color: #fff;
     box-shadow: 0px 3px 2px #ddd;
@@ -222,13 +225,13 @@ const TestButton = styled.button`
 `;
 
 const Common = styled.button`
-  background-color: ${(props) => (props.isActive == true ? "#b29cf4" : "#fff")};
+  background-color: ${(props) => (props.isActive == true ? "#554475" : "#fff")};
   height: ${(props) => props.height};
   width: ${(props) => props.width};
-  color: ${(props) => (props.isActive == true ? "#fff" : "#b29cf4")};
+  color: ${(props) => (props.isActive == true ? "#fff" : "#554475")};
   margin-right: 3px;
   border-radius: 25px;
-  border: 1px solid #b29cf4;
+  border: 1px solid #554475;
   cursor: pointer;
   top: ${(props) => props.top};
   bottom: ${(props) => props.bottom};
@@ -236,10 +239,11 @@ const Common = styled.button`
   right: ${(props) => props.right};
   position: ${(props) => props.position};
   &:hover {
-    background-color: #b29cf4;
+    background-color: #554475;
     color: #fff;
     transform: translate();
     transition: 0.3s ease-out;
   }
+  font-family: "GmarketSans";
 `;
 export default Button;
