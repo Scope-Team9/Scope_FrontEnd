@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Grid, Image, Text, Button } from "../../../elements/Index";
 
 const MyFilter = (props) => {
-  console.log(props);
+  // console.log(props);
   return (
     <>
       {props && (

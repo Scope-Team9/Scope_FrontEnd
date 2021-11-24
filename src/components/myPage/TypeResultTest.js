@@ -201,11 +201,11 @@ const MyResultDiv = styled.div`
   width: auto;
   align-items: center;
 
-  @media screen and (max-width: 1400px) {
-    margin-top: 1100px;
+  @media screen and (max-width: 1350px) {
+    margin-top: 800px;
   }
   @media screen and (max-width: 750px) {
-    margin-top: 1100px;
+    margin-top: 800px;
   } ;
 `;
 

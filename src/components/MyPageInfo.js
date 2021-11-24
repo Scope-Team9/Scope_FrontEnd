@@ -111,7 +111,7 @@ const MyPageInfo = (props) => {
   };
 
   return (
-    <Grid margin="0 0 250px 0">
+    <Grid margin="0 0 250px 0" minWidth="1373px">
       {loading ? (
         <Spinner />
       ) : (
