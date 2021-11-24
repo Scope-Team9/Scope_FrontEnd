@@ -48,7 +48,7 @@ const MainPage = () => {
     dispatch(postActions.whatPage("mainPage"));
     dispatch(postActions.getPostAPI());
     // console.log(cards);
-  }, [stack, sortC, reBookC, pageCheck, Render, isLogin]);
+  }, [stack, sortC, reBookC, Render, isLogin]);
 
   // 요청에 대한 속도가 다를때. 다른것이 띄워질 수 있는 버그성.
 
@@ -207,15 +207,12 @@ const BtnFeedback = styled.img`
   @media screen and (max-width: 750px) {
     position: fixed;
 
-    border: 1px solid #42309b;
-    border-radius: 50%;
     width: 40px;
     height: 40px;
     text-align: center;
-    right: 5px;
+    left: 5px;
     bottom: 5px;
     margin: auto;
-    background: #42309b;
     cursor: pointer;
     z-index: 999;
   } ;
