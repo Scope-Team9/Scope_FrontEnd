@@ -12,7 +12,7 @@ import { Grid, Image, Text, Button } from "../elements/Index";
 // Post의 함수형 컴포넌트를 만든다.
 const Post = props => {
   const dispatch = useDispatch();
-  const is_mainPage = useSelector(state => state.post.mainpage);
+  const myPage = useSelector(state => state.post.whatPage.now);
   const myUserId = useSelector(state => state.user.userId);
   const [stacks, setStacks] = React.useState();
   const [applyUserModal, setApplyUserModal] = React.useState(false); //지원취소/팀탈퇴/프로젝트마감
@@ -33,11 +33,14 @@ const Post = props => {
   // }, [props.mypage]);
 
   React.useEffect(() => {
+    if (myPage !== "myPage") {
+      return;
+    }
     let postId = props.postId;
     const getMembers = async () => {
       try {
         const result = await apis.getMember(postId);
-        // console.log(result);
+        console.log("호출되나", result);
         setMember(result.data.data);
       } catch (err) {
         console.log(err);
