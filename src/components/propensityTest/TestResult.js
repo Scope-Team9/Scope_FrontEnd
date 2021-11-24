@@ -74,7 +74,7 @@ const TestResult = props => {
         {userType === "LHG" && (
           <Grid>
             <Grid
-              bg="#554475"
+              bg="#17334A"
               borderRadius="20px"
               padding="12px 0"
               margin="12px 0"
@@ -86,7 +86,7 @@ const TestResult = props => {
             <Grid
               margin="12px 0"
               borderRadius="20px"
-              border="1px solid #554475"
+              border="1px solid #17334A"
               padding="40px 0"
             >
               <Text size="12px">

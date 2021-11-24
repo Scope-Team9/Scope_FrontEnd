@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { Grid, Image, Text, Button } from "../../../elements/Index";
 
-const CardUserInfo = (props) => {
+const CardUserInfo = props => {
   const [techStack, setTeckstack] = React.useState([]);
   const [nickName, setNickName] = React.useState();
   const [email, setEmail] = React.useState();
@@ -25,10 +25,10 @@ const CardUserInfo = (props) => {
       {props.nickName && props.email && (
         <>
           <MyInfoText1>
-            <div style={{ width: "150px", marginLeft: "30px" }}>
+            <div style={{ width: "95px", marginLeft: "25px" }}>
               <p>NickName </p>
             </div>
-            <div style={{ width: "150px" }}>
+            <div style={{ width: "100px" }}>
               <p>{props.nickName}</p>
             </div>
           </MyInfoText1>
@@ -36,13 +36,13 @@ const CardUserInfo = (props) => {
           <MyInfoText1>
             <div
               style={{
-                width: "150px",
-                marginLeft: "30px",
+                width: "95px",
+                marginLeft: "25px",
               }}
             >
               <p>E-mail </p>
             </div>
-            <div style={{ width: "150px" }}>
+            <div style={{ width: "90px" }}>
               <p>{props.email}</p>
             </div>
           </MyInfoText1>
@@ -53,8 +53,8 @@ const CardUserInfo = (props) => {
       <MyInfoText1>
         <div
           style={{
-            width: "150px",
-            marginLeft: "30px",
+            width: "95px",
+            marginLeft: "25px",
             height: "150px",
           }}
         >
@@ -62,7 +62,7 @@ const CardUserInfo = (props) => {
         </div>
         {props.techStack && (
           <>
-            <div style={{ width: "150px" }}>
+            <div style={{ width: "120px" }}>
               {props.techStack?.map((p, idx) => {
                 return <p key={idx}>{p}</p>;
               })}

@@ -52,36 +52,78 @@
     {
       "question": "Q4",
       "id": "UH",
-      "text": "평범한 보상과 평범한 책임",
+      "text": "소통이 원활하게만 잘 된다면 팀장이 없어도 문제없이 프로젝트를 진행할수 있다.",
       "value": "H",
       "active": false
     },
     {
       "question": "Q5",
       "id": "UV",
-      "text": "큰 보상과 무거운책임",
+      "text": "능력에 따른 적절한 권한의 분배 하에 진행되는 회의",
       "value": "V",
       "active": false
     },
     {
       "question": "Q5",
       "id": "UH",
-      "text": "평범한 보상과 평범한 책임",
+      "text": "모두 동등한 권한을 가지고 진행되는 회의",
       "value": "H",
       "active": false
     },
     {
       "question": "Q6",
       "id": "UV",
-      "text": "큰 보상과 무거운책임",
+      "text": "직책에 따라 책임이 분배되는 팀",
       "value": "V",
       "active": false
     },
     {
       "question": "Q6",
       "id": "UH",
-      "text": "평범한 보상과 평범한 책임",
+      "text": "책임이 균등하게 나누어진 팀",
       "value": "H",
+      "active": false
+    },
+    {
+      "question": "Q7",
+      "id": "UP",
+      "text": "문제를 해결하는 과정에서 얻는 성취감이 있다면 보상이 상대적으로 적더라도 만족한다.",
+      "value": "P",
+      "active": false
+    },
+    {
+      "question": "Q7",
+      "id": "UG",
+      "text": "결과를 위해서라면 과정에서 얻을 수 있는 심리적 만족감은 조금 내려놓을 수도 있어야 한다.",
+      "value": "G",
+      "active": false
+    },
+    {
+      "question": "Q8",
+      "id": "UP",
+      "text": "문제가 발생한 원인을 찾고 문제 해결 과정에서 얻은 지식과 노하우에 대해 생각한다.",
+      "value": "P",
+      "active": false
+    },
+    {
+      "question": "Q8",
+      "id": "UG",
+      "text": "문제를 해결할 수 있는 방안을 찾고 그 방안이 이끌어 낼 결과에 대해 생각한다.",
+      "value": "G",
+      "active": false
+    },
+    {
+      "question": "Q9",
+      "id": "UP",
+      "text": "프로젝트 과정에서 얻은 지식과 그에 따른 성취감",
+      "value": "P",
+      "active": false
+    },
+    {
+      "question": "Q9",
+      "id": "UG",
+      "text": "프로젝트가 이끌어낸 결과와 그에 따른 성취감",
+      "value": "G",
       "active": false
     }
   ],
@@ -152,22 +194,64 @@
     {
       "question": "Q5",
       "id": "MH",
-      "text": "평범한 보상과 평범한 책임",
+      "text": "모두 동등한 권한을 가지고 진행되는 회의",
       "value": "H",
       "active": false
     },
     {
       "question": "Q6",
       "id": "MV",
-      "text": "큰 보상과 무거운책임",
+      "text": "직책에 따라 책임이 분배되는 팀",
       "value": "V",
       "active": false
     },
     {
       "question": "Q6",
       "id": "MH",
-      "text": "평범한 보상과 평범한 책임",
+      "text": "책임이 균등하게 나누어진 팀",
       "value": "H",
+      "active": false
+    },
+    {
+      "question": "Q7",
+      "id": "MP",
+      "text": "문제를 해결하는 과정에서 얻는 성취감이 있다면 보상이 상대적으로 적더라도 만족한다.",
+      "value": "P",
+      "active": false
+    },
+    {
+      "question": "Q7",
+      "id": "MG",
+      "text": "결과를 위해서라면 과정에서 얻을 수 있는 심리적 만족감은 조금 내려놓을 수도 있어야 한다.",
+      "value": "G",
+      "active": false
+    },
+    {
+      "question": "Q8",
+      "id": "MP",
+      "text": "문제가 발생한 원인을 찾고 문제 해결 과정에서 얻은 지식과 노하우에 대해 생각한다.",
+      "value": "P",
+      "active": false
+    },
+    {
+      "question": "Q8",
+      "id": "MG",
+      "text": "문제를 해결할 수 있는 방안을 찾고 그 방안이 이끌어 낼 결과에 대해 생각한다.",
+      "value": "G",
+      "active": false
+    },
+    {
+      "question": "Q9",
+      "id": "MP",
+      "text": "프로젝트 과정에서 얻은 지식과 그에 따른 성취감",
+      "value": "P",
+      "active": false
+    },
+    {
+      "question": "Q9",
+      "id": "MG",
+      "text": "프로젝트가 이끌어낸 결과와 그에 따른 성취감",
+      "value": "G",
       "active": false
     }
   ]

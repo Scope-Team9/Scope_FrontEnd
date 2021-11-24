@@ -153,7 +153,7 @@ const PropensityTest = props => {
       {/* 상단헤더 */}
       <Grid
         height="10%"
-        bg="#554475"
+        bg="#17334A"
         position="relative"
         textAlign="center"
         padding="10px 0 10px 0"

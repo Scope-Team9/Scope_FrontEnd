@@ -10,16 +10,14 @@ import LoginModal from "./LoginModal";
 import { userCreators } from "../redux/modules/user";
 import { deleteCookie } from "../shared/Cookie";
 
-const HeaderRight = (props) => {
+const HeaderRight = props => {
   const dispatch = useDispatch();
   const isToken = document.cookie;
   // const history = useHistory();
-  const userInfo = useSelector((state) => state.user);
+  const userInfo = useSelector(state => state.user);
   console.log(userInfo);
   const [showModal, setShowModal] = React.useState(false);
-  const sigunupModalState = useSelector(
-    (state) => state.user.sigunupModalState
-  );
+  const sigunupModalState = useSelector(state => state.user.sigunupModalState);
   const modalOpen = () => {
     setShowModal(true);
   };

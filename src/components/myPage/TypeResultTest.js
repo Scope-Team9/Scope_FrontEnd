@@ -9,11 +9,12 @@ import { map, stubFalse } from "lodash";
 import { Grid4x4 } from "@mui/icons-material";
 import EmailAuth from "../EmailAuth";
 
-const TypeResultTest = (props) => {
+const TypeResultTest = props => {
   const [myData, setMyData] = React.useState();
   const [arr, setArr] = React.useState([
     {
       id: "LVG",
+      name: "호랑이",
       type: "리더",
       type2: "수직",
       type3: "결과",
@@ -25,6 +26,7 @@ const TypeResultTest = (props) => {
     },
     {
       id: "LVP",
+      name: "늑대",
       type: "리더",
       type2: "수직",
       type3: "과정",
@@ -36,6 +38,7 @@ const TypeResultTest = (props) => {
     },
     {
       id: "LHG",
+      name: "여우",
       type: "리더",
       type2: "수평",
       type3: "결과",
@@ -47,6 +50,7 @@ const TypeResultTest = (props) => {
     },
     {
       id: "LHP",
+      name: "팬더",
       type: "리더",
       type2: "수평",
       type3: "과정",
@@ -58,6 +62,7 @@ const TypeResultTest = (props) => {
     },
     {
       id: "FVG",
+      name: "토끼",
       type: "팔로워",
       type2: "수직",
       type3: "결과",
@@ -69,6 +74,7 @@ const TypeResultTest = (props) => {
     },
     {
       id: "FVP",
+      name: "강아지",
       type: "팔로워",
       type2: "수직",
       type3: "과정",
@@ -80,6 +86,7 @@ const TypeResultTest = (props) => {
     },
     {
       id: "FHG",
+      name: "고양이",
       type: "팔로워",
       type2: "수평",
       type3: "결과",
@@ -91,6 +98,7 @@ const TypeResultTest = (props) => {
     },
     {
       id: "FHP",
+      name: "물개",
       type: "팔로워",
       type2: "수평",
       type3: "과정",
@@ -102,6 +110,7 @@ const TypeResultTest = (props) => {
     },
     {
       id: "RHP",
+      name: "너구리",
       type: "팔로워",
       type2: "수평",
       type3: "과정",
@@ -115,7 +124,7 @@ const TypeResultTest = (props) => {
 
   React.useEffect(() => {
     console.log("테스트결과", props);
-    arr.map((item) => {
+    arr.map(item => {
       if (item.id === props.myType) {
         setMyData(item);
       }
@@ -123,49 +132,52 @@ const TypeResultTest = (props) => {
   }, []);
 
   return (
-    <Grid>
+    <Wrap>
       {myData && (
         <Grid
-          position="relative"
-          margin="-1020px 0 0 33%"
-          width="50.3%"
           zIndex="1"
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="center"
+          margin="auto"
         >
           <Grid
-            margin="-0px 0 0 0"
             display="flex"
-            width="100%"
-            justifyContent="space-between"
             // border="1px solid #333"
             borderRadius="15px"
+            height="1%"
           >
             <MyResultDiv>
-              <MyResultText>{myData.type}</MyResultText>
-              <MyResultText>{myData.type2}</MyResultText>
-              <MyResultText>{myData.type3}</MyResultText>
+              <MyResultText>#{myData.type}</MyResultText>
+              <MyResultText>#{myData.type2}</MyResultText>
+              <MyResultText>#{myData.type3}</MyResultText>
             </MyResultDiv>
           </Grid>
-          <Dialog maxWidth={"sm"} scroll="paper" open={props.testmodal}>
-            <Grid width="550px" height="100%">
-              <PropensityTest />
-            </Grid>
-          </Dialog>
-          <Grid margin="0 0 0 15px" width="600px">
-            <Grid display="flex" width="500px%">
+          <Grid height="23%">
+            <WhiteP>
+              {myData.id} / {myData.name}
+            </WhiteP>
+          </Grid>
+
+          <Grid margin="0 0 0 20px" height="11%">
+            <Grid display="flex">
               <MyResultText2>{myData.text1}</MyResultText2>
               <MyResultTextBold>{myData.text2}</MyResultTextBold>
               <MyResultText2>{myData.text3}</MyResultText2>
             </Grid>
-            <Grid display="flex" width="600px">
+            <Grid display="flex">
               <MyResultText2>{myData.text4}</MyResultText2>
             </Grid>
             {props.userId == props.myUserId &&
               props.mydata?.isMyMypage === true && (
                 <Grid
-                  width="140%"
                   display="flex"
                   justifyContent="space-between"
                   alignItems="center"
+                  height="100%"
+                  position="relative"
+                  margin="15px 0 0 0"
                 >
                   <GotoTest
                     onClick={() => {
@@ -174,6 +186,7 @@ const TypeResultTest = (props) => {
                   >
                     성향 테스트 다시하기⇀
                   </GotoTest>
+
                   <ConfirmEmail
                     onClick={() => {
                       props.onClick();
@@ -192,34 +205,42 @@ const TypeResultTest = (props) => {
           </Grid>
         </Grid>
       )}
-    </Grid>
+    </Wrap>
   );
 };
 
+const Wrap = styled.div`
+  height: 70%;
+  width: 58vw;
+  margin-left: 30%;
+  @media screen and (max-width: 1600px) {
+    margin: auto;
+  }
+  @media screen and (max-width: 1300px) {
+    width: 90vw;
+    margin: auto;
+  }
+  @media screen and (max-width: 750px) {
+    width: 90vw;
+    margin: auto;
+  } ;
+`;
 const MyResultDiv = styled.div`
   display: flex;
   width: auto;
   align-items: center;
-
-  @media screen and (max-width: 1400px) {
-    margin-top: 1100px;
-  }
-  @media screen and (max-width: 750px) {
-    margin-top: 1100px;
-  } ;
 `;
 
 const MyResultText = styled.div`
-  width: 70px;
-  height: 40px;
-  border-radius: 12px;
-  background-color: #b29cf4;
+  width: auto;
+  height: 32px;
+
   color: white;
   align-items: center;
   display: flex;
   justify-content: center;
   margin-left: 10px;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: bold;
 `;
 
@@ -230,6 +251,8 @@ const GotoTest = styled.p`
   /* float: right; */
   margin-right: 10px;
   margin-top: 30px;
+  position: relative;
+  z-index: 999;
 `;
 const MyResultText2 = styled.p`
   color: white;
@@ -254,6 +277,8 @@ const ConfirmEmail = styled.button`
   border-radius: 10px;
   z-index: 99999;
   cursor: pointer;
+  position: absolute;
+  right: -0px;
 
   &:hover {
     color: black;
@@ -264,5 +289,13 @@ const ConfirmEmail = styled.button`
   @media screen and (max-width: 750px) {
     color: black;
   } ;
+`;
+
+const WhiteP = styled.p`
+  font-size: 30px;
+  color: white;
+  font-weight: bold;
+  width: 300px;
+  margin-left: 13px;
 `;
 export default TypeResultTest;
