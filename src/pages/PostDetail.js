@@ -106,7 +106,8 @@ const PostDetail = props => {
         const result = await apis.bookMarkChecked(post_id);
         setBookmark(!bookmark);
       } catch (err) {
-        console.log(err);
+        console.log(err.response);
+        Swal.fire("로그인이 필요합니다!", "", "warning");
       }
     };
     bookMark();
