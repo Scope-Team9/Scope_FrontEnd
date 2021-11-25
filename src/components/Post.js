@@ -128,7 +128,7 @@ const Post = props => {
 
           <DescriptionBox>
             <ProjectState projectStatus={props.projectStatus}>
-              {props.projectStatus}
+              <Text>{props.projectStatus}</Text>
             </ProjectState>
 
             <Title>{props.title}</Title>
@@ -239,6 +239,7 @@ const ProjectState = styled.div`
   display: flex;
   height: 24px;
   margin: 4% 0;
+  padding: 1% 0 0 0;
   font-size: 13px;
   ${props => props.projectStatus === "모집중" && `background-color: #2699FB;`};
   ${props => props.projectStatus === "진행중" && `background-color: #15B915;`};
@@ -255,16 +256,7 @@ const ProductImgWrap = styled.div`
   margin: 30px auto;
   border-radius: 20px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.24);
-  @media (max-width: 1700px) {
-    margin: auto;
-    margin-top: 30px;
-    margin-bottom: 30px;
-  }
-  @media (max-width: 1300px) {
-    margin: auto;
-    margin-top: 30px;
-    margin-bottom: 30px;
-  }
+
   @media (max-width: 450px) {
     margin: auto;
     margin-top: 30px;
