@@ -10,17 +10,19 @@ import { Grid, Text } from "../../../elements/Index";
 const ContentEdit = (props) => {
   return (
     <React.Fragment>
-      <Grid margin="20px auto">
-        <Text size="18px" bold>
-          프로젝트 내용적기
-        </Text>
-        <TextArea
-          value={props.contents}
-          onChange={(e) => {
-            props.setContents(e.target.value);
-          }}
-        />
-      </Grid>
+      <ContentMedia>
+        <Grid margin="20px auto">
+          <Text size="18px" bold>
+            프로젝트 내용적기
+          </Text>
+          <TextArea
+            value={props.contents}
+            onChange={(e) => {
+              props.setContents(e.target.value);
+            }}
+          />
+        </Grid>
+      </ContentMedia>
     </React.Fragment>
   );
 };
@@ -35,6 +37,15 @@ const TextArea = styled.textarea`
   border-radius: 10px;
   font-size: 16px;
   outline: none;
+`;
+
+const ContentMedia = styled.div`
+  @media screen and (max-width: 360px) {
+    display: flex;
+    width: 350px;
+    height: 10px;
+    margin-bottom: 80px;
+  }
 `;
 
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.
