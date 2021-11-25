@@ -8,6 +8,7 @@ import { Grid } from "../../../elements/Index";
 
 // GenerateButton의 함수형 컴포넌트를 만든다.
 const GenerateButton = (props) => {
+  console.log();
   return (
     <React.Fragment>
       <Grid>
@@ -33,7 +34,7 @@ const Btn = styled.button`
   border: 1px solid #554475;
   border-radius: 50px;
   color: #554475;
-  margin: 10px auto auto auto;
+  margin: 10px auto 80px auto;
   cursor: pointer;
   background-color: white;
   &:hover {

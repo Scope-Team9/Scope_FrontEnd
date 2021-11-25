@@ -12,9 +12,7 @@ const TitleWrite = (props) => {
     <React.Fragment>
       <Grid>
         <TitleMedia>
-          <Text size="18px" bold>
-            제목
-          </Text>
+          <Text size="18px">제목</Text>
           <Input
             width="100%"
             height="40px"
@@ -36,7 +34,7 @@ const TitleWrite = (props) => {
   );
 };
 
-const TitleMedia = styled.h1`
+const TitleMedia = styled.p`
   @media screen and (max-width: 360px) {
     width: 350px;
     margin: auto;
