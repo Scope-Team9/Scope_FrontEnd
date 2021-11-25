@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 import { apis } from "../../lib/axios";
 import CardUserInfo from "./card/CardUserInfo";
 
-const MypageCard = props => {
+const MypageCard = (props) => {
   const [editMyProfile, setEditMyProfile] = React.useState(false); //
   const [checkEmail, setCheckEmail] = React.useState();
   const [deleteModal, setDeleteModal] = React.useState(false);
@@ -31,37 +31,38 @@ const MypageCard = props => {
   };
 
   function fn_submit(data) {
-    let text = data;
+    // let text = data;
 
-    let regEmail =
-      /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+    // let regEmail =
+    //   /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 
-    if (regEmail.test(text) === true) {
-      // window.alert("입력된 값은 이메일입니다.");
-      let userData = {
-        nickname: nickName,
-        email: email,
-        userTechStack: techStack,
-      };
-      // console.log(userData);
-      const fetchData = async () => {
-        try {
-          const result = await apis.editUserInfo(props.userId, userData);
-          //   console.log(result);
-          setEditMyProfile(false);
-          Swal.fire("수정 완료!", "", "success");
-        } catch (err) {
-          console.log(err);
-          //   Swal.fire(`${err.response.data.msg}`, "", "warning");
-        }
-      };
-      fetchData();
-    } else {
-      // window.alert("올바른 이메일을 입력해주세요.");
-      Swal.fire("올바른 이메일을 입력해주세요.", "", "warning");
-      setCheckEmail(false);
-      return;
-    }
+    // if (regEmail.test(text) === true) {
+    // window.alert("입력된 값은 이메일입니다.");
+    let userData = {
+      nickname: nickName,
+      email: email,
+      userTechStack: techStack,
+    };
+    console.log(userData);
+    const fetchData = async () => {
+      try {
+        const result = await apis.editUserInfo(props.userId, userData);
+        // console.log(result);
+        setEditMyProfile(false);
+        Swal.fire("수정 완료!", "", "success");
+      } catch (err) {
+        console.log(err);
+        //   Swal.fire(`${err.response.data.msg}`, "", "warning");
+      }
+      // };
+
+      // } else {
+      //   // window.alert("올바른 이메일을 입력해주세요.");
+      //   Swal.fire("올바른 이메일을 입력해주세요.", "", "warning");
+      //   setCheckEmail(false);
+      //   return;
+    };
+    fetchData();
   }
 
   const setEditProfile = () => {
@@ -72,9 +73,9 @@ const MypageCard = props => {
     }
 
     fn_submit(email);
-    if (checkEmail === false) {
-      return;
-    }
+    // if (checkEmail === false) {
+    //   return;
+    // }
     props.onClick2();
   };
   //   const editProfileCancle = () => {
@@ -148,7 +149,7 @@ const MypageCard = props => {
                   padding: "7px",
                 }}
                 defaultValue={props.nickName}
-                onChange={e => {
+                onChange={(e) => {
                   setNickName(e.target.value);
                 }}
               ></input>
@@ -182,7 +183,7 @@ const MypageCard = props => {
                   padding: "7px",
                 }}
                 defaultValue={props.email}
-                onChange={e => {
+                onChange={(e) => {
                   setEmail(e.target.value);
                 }}
               ></input>
@@ -207,7 +208,7 @@ const MypageCard = props => {
                 styles={styles}
                 className="basic-multi-select"
                 classNamePrefix="select"
-                onChange={e => {
+                onChange={(e) => {
                   let techStack = [];
                   let arr = e;
                   let idx = 0;

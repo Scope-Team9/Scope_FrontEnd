@@ -10,10 +10,10 @@ const Header = () => {
   return (
     <>
       <Wrap>
-        <Grid width="auto" height="auto" margin="0 0 0 0px">
+        <Grid width="auto" height="auto" margin="0 0 0 20px">
           <HeaderLeft />
         </Grid>
-        <Grid width="auto" height="auto" margin="0 0 0 0 ">
+        <Grid width="auto" height="auto" margin="0 20px 0 0 ">
           <HeaderRight />
         </Grid>
       </Wrap>
