@@ -32,7 +32,7 @@ const Post = props => {
   //   dispatch(applyCreators.getMemberAPI(postId));
   // }, [props.mypage]);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     if (myPage !== "myPage") {
       return;
     }
@@ -72,7 +72,7 @@ const Post = props => {
               width="100%"
               position="absolute"
               zIndex="11"
-              borderRadius="34px"
+              borderRadius="20px"
               opacity="0.8"
               display="flex"
             >

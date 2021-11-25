@@ -24,12 +24,13 @@ const ApplyUserModal = props => {
   const isMe = useSelector(state => state.user.userId);
   const [page, setPage] = React.useState(1);
 
-  const modalClose = a => {
-    console.log(a);
-    setApplyUserModal(false);
-    if (a === "종료") {
-      return statusCheck(a);
+  const modalClose = status => {
+    console.log(status);
+    if (status) {
+      statusCheck(status);
+      return setApplyUserModal(false);
     }
+    return setApplyUserModal(false);
   };
 
   return (

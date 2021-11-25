@@ -21,15 +21,15 @@ import { apis } from "../lib/axios";
 const MainPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const stack = useSelector((state) => state.stack.stack);
-  const sortC = useSelector((state) => state.sort.sort);
+  const stack = useSelector(state => state.stack.stack);
+  const sortC = useSelector(state => state.sort.sort);
 
   // const cards = useSelector((state) => state.post.posts);
   // console.log(cards);
-  const reBookC = useSelector((state) => state.rebook.reBook);
-  const pageCheck = useSelector((state) => state.post.pageCheck);
-  const infinity = useSelector((state) => state.infinity.paging);
-  const Render = useSelector((state) => state.post.render);
+  const reBookC = useSelector(state => state.rebook.reBook);
+  const pageCheck = useSelector(state => state.post.pageCheck);
+  const infinity = useSelector(state => state.infinity.paging);
+  const Render = useSelector(state => state.post.render);
   const [ref, inView] = useInView();
   const [paging, setPaging] = React.useState(infinity.next);
   const [pPaging, setPPaging] = React.useState(12);
@@ -45,9 +45,9 @@ const MainPage = () => {
   // const pReBook = useSelector((state) => state.post.stacks);
   // console.log("나만봐", pStack);
 
-  const postList = useSelector((state) => state.post.posts);
-  const isLoginUser = useSelector((state) => state.user.userId);
-  const isLogin = useSelector((state) => state.user.isLogin);
+  const postList = useSelector(state => state.post.posts);
+  const isLoginUser = useSelector(state => state.user.userId);
+  const isLogin = useSelector(state => state.user.isLogin);
 
   React.useLayoutEffect(() => {
     setPost();
@@ -210,20 +210,8 @@ const Btn = styled.button`
     transition: 0.1s ease-out;
   }
 
-  @media screen and (max-width: 750px) {
-    position: fixed;
-
-    border: 1px solid #42309b;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    text-align: center;
-    right: 5px;
-    bottom: 5px;
-    margin: auto;
-    background: #42309b;
-    cursor: pointer;
-    z-index: 999;
+  @media screen and (max-width: 767px) {
+    display: none;
   } ;
 `;
 
@@ -245,14 +233,14 @@ const BtnFeedback = styled.img`
     transform: rotate(45deg);
   }
 
-  @media screen and (max-width: 750px) {
+  @media screen and (max-width: 767px) {
     position: fixed;
 
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     text-align: center;
-    left: 5px;
-    bottom: 5px;
+    left: 30px;
+    bottom: 100px;
     margin: auto;
     cursor: pointer;
     z-index: 999;

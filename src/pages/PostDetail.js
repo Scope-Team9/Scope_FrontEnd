@@ -30,7 +30,7 @@ const PostDetail = props => {
   const [applyUserModal, setApplyUserModal] = React.useState(false); //지원취소/팀탈퇴/프로젝트마감
   const [exileStatusModal, setExileStatusModal] = React.useState(false); //강퇴
   const [recruitmentFinish, setRecruitmentFinish] = React.useState(); // 모집완료 체크 for리렌더링
-  const [projectStatus, setProjectStatus] = React.useState();
+  const [projectStatus, setProjectStatus] = React.useState(null);
   const [applyValue, setApplyValue] = React.useState();
   const [isme, setIsme] = React.useState(null);
 
@@ -237,6 +237,7 @@ const PostDetail = props => {
                       post_id={post_id}
                       passdedMenber={passdedMenber}
                       passedUserStatus={passedUserStatus}
+                      statusCheck={statusCheck}
                     />
                   </Grid>
                 )}

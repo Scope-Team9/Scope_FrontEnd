@@ -25,10 +25,8 @@ import Footer from "../components/Footer";
 import PropensityTest from "../components/propensityTest/PropensityTest";
 
 function App() {
-  const isLogin = useSelector((state) => state.user.isLogin);
-  const userPropensityType = useSelector(
-    (state) => state.user.userPropensityType
-  );
+  const isLogin = useSelector(state => state.user.isLogin);
+  const userInfo = useSelector(state => state.user);
   const isCookie = document.cookie.split("=")[1];
   const dispatch = useDispatch();
 
@@ -36,7 +34,7 @@ function App() {
     if (isCookie) {
       dispatch(userCreators.myUserAPI());
     }
-  }, [isLogin, userPropensityType]);
+  }, [isLogin, userInfo.userPropensityType]);
 
   return (
     <React.Fragment>
@@ -65,7 +63,7 @@ function App() {
             ></Route>
           </Switch>
         </ConnectedRouter>
-        <Footer />
+        <Footer userInfo={userInfo} />
       </div>
     </React.Fragment>
   );
