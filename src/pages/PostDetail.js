@@ -8,7 +8,7 @@ import { postActions } from "../redux/modules/post";
 import { Grid, Button, Text } from "../elements/Index";
 import Swal from "sweetalert2";
 import ApplyStatusModal from "../components/ApplyStatusModal";
-import LeftBanner from "../components/postDetail/leftBanner";
+import LeftBanner from "../components/postDetail/LeftBanner";
 import TitleDetail from "../components/postDetail/rightContents/TitleDetail";
 import ExileUserModal from "../components/modal/ExileUserModal";
 import ApplicantDetail from "../components/postDetail/rightContents/ApplicantDetail";
@@ -51,6 +51,14 @@ const PostDetail = (props) => {
   const statusCheck = (value) => {
     console.log(value);
     setProjectStatus(value);
+  };
+
+  const goFrontPage = () => {
+    window.open(passedData?.frontUrl);
+  };
+
+  const goBackPage = () => {
+    window.open(passedData?.frontUrl);
   };
   // 상태변경
   const edit_status = (data) => {
@@ -194,18 +202,14 @@ const PostDetail = (props) => {
                       passedData?.frontUrl !== "null" && (
                         <Grid display="flex" width="200px">
                           <Text>Frontend</Text>
-                          <Grid
-                            margin="0 10px"
-                            border="1px solid #BBB4D9"
-                            borderRadius="10px"
-                            padding="2px"
-                            backgroundColor="#BBB4D9"
-                            color="white"
-                            width="80px"
-                            height="20px"
-                            textAlign="center"
-                          >
-                            <Link to={passedData?.frontUrl}>프론트Url</Link>
+                          <Grid>
+                            <UrlButton
+                              onClick={() => {
+                                goFrontPage();
+                              }}
+                            >
+                              프론트URL
+                            </UrlButton>
                           </Grid>
                         </Grid>
                       )}
@@ -213,18 +217,16 @@ const PostDetail = (props) => {
                       passedData?.backUrl !== "null" && (
                         <Grid display="flex" width="200px">
                           <Text>Backend</Text>
-                          <Grid
-                            margin="0 10px"
-                            border="1px solid #BBB4D9"
-                            borderRadius="10px"
-                            padding="2px"
-                            backgroundColor="#BBB4D9"
-                            color="white"
-                            width="80px"
-                            height="20px"
-                            textAlign="center"
-                          >
-                            <Link to={passedData?.frontUrl}>백엔드Url</Link>
+                          <Grid>
+                            <Grid>
+                              <UrlButton
+                                onClick={() => {
+                                  goBackPage();
+                                }}
+                              >
+                                백엔드URL
+                              </UrlButton>
+                            </Grid>
                           </Grid>
                         </Grid>
                       )}
@@ -288,6 +290,18 @@ const FlexMedia = styled.div`
   @media screen and (max-width: 1000px) {
     flex-direction: column;
   }
+`;
+
+const UrlButton = styled.button`
+  width: 100px;
+  height: 20px;
+  font-size: 15px;
+  margin: auto 10px;
+  border: 1px solid #554475;
+  border-radius: 4px;
+  color: white;
+  background-color: #554475;
+  cursor: pointer;
 `;
 
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.

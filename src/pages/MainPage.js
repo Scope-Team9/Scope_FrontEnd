@@ -185,7 +185,6 @@ const MainPage = () => {
 const Inside = styled.div`
   margin: auto;
   @media screen and (max-width: 750px) {
-    /* margin-left: -100px; */
   } ;
 `;
 
