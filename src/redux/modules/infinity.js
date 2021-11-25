@@ -6,11 +6,14 @@ import { postActions } from "./post";
 import { useSelector, useDispatch } from "react-redux";
 
 const GET_PAGE = "GET_PAGE";
+const GET_SCROLL = "GET_SCROLL";
 
 const getPages = createAction(GET_PAGE, (data) => ({ data }));
+const getScroll = createAction(GET_SCROLL, (data) => ({ data }));
 
 const initialState = {
   paging: { start: 12, next: 12 },
+  currentScroll: null,
 };
 
 export const getPage = (data) => {
@@ -44,11 +47,17 @@ export default handleActions(
         // console.log("액션값을 받아야함2222", paging);
         draft.paging = paging;
       }),
+    [GET_SCROLL]: (state, action) =>
+      produce(state, (draft) => {
+        console.log("스크롤값 받아라", action);
+        draft.currentScroll = action.payload.data;
+      }),
   },
   initialState
 );
 
 const pageAction = {
   getPage,
+  getScroll,
 };
 export { pageAction };

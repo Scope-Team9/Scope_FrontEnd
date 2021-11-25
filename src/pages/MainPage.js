@@ -41,10 +41,6 @@ const MainPage = () => {
   const [sorts, setSrots] = React.useState();
   const [reBooks, setReBookss] = React.useState();
 
-  // const pSorts = useSelector((state) => state.post.sorts);
-  // const pReBook = useSelector((state) => state.post.stacks);
-  // console.log("나만봐", pStack);
-
   const postList = useSelector((state) => state.post.posts);
   const isLoginUser = useSelector((state) => state.user.userId);
   const isLogin = useSelector((state) => state.user.isLogin);
@@ -97,8 +93,25 @@ const MainPage = () => {
     );
   };
 
+  const lastScroll = useSelector((state) => state.infinity.current_scroll);
+  let timer;
+  const scroll = (e) => {
+    console.log(e);
+    if (timer) {
+      clearTimeout(timer);
+    }
+    timer = setTimeout(function () {
+      dispatch(pageAction.getScroll(e.target.scrollTop));
+    }, 500);
+  };
+
+  const container = React.useRef(null);
+  React.useEffect(() => {
+    container.current.scrollTo(0, lastScroll);
+  }, []);
+
   return (
-    <>
+    <div onScroll={scroll} ref={container}>
       <Grid
         maxWidth="1920px"
         height="100%"
@@ -165,7 +178,7 @@ const MainPage = () => {
           ></BtnFeedback>
         </Inside>
       </Grid>
-    </>
+    </div>
   );
 };
 
@@ -212,7 +225,7 @@ const Btn = styled.button`
 
   @media screen and (max-width: 750px) {
     position: fixed;
-
+    display: none;
     border: 1px solid #42309b;
     border-radius: 50%;
     width: 40px;
@@ -252,7 +265,7 @@ const BtnFeedback = styled.img`
     height: 40px;
     text-align: center;
     left: 5px;
-    bottom: 5px;
+    bottom: 80px;
     margin: auto;
     cursor: pointer;
     z-index: 999;

@@ -42,7 +42,6 @@ const PostList = (props) => {
   // let post_list = props.post;
   React.useLayoutEffect(() => {
     setPost();
-    setAllPost();
     if (stacks.length !== 0) {
       const postList = props.post.filter(findStack);
       let posts = postList.slice(0, paging);
@@ -50,7 +49,7 @@ const PostList = (props) => {
     }
     if (stacks.length === 0) {
       let posts = props.post.slice(0, paging);
-      setAllPost(posts);
+      setPost(posts);
     }
   }, [stacks, paging, sort, reBook, Render, isLogin]);
 
@@ -58,43 +57,12 @@ const PostList = (props) => {
     <React.Fragment>
       {post && (
         <>
-          <button
-            onClick={() => {
-              console.log(post);
-            }}
-          ></button>
           <PostWrap>
             {post.map((item) => {
               return <Post key={item.postId} {...item} />;
             })}
 
             {post.length === 0 && (
-              <Grid margin="auto" width="100%" height="100%" display="flex">
-                <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
-                <NoIntroductionText>
-                  아직 포스트가 없네요
-                  <br /> .
-                  <br /> .
-                  <br /> .
-                </NoIntroductionText>
-              </Grid>
-            )}
-          </PostWrap>
-        </>
-      )}
-      {allPost && (
-        <>
-          <button
-            onClick={() => {
-              console.log(allPost);
-            }}
-          ></button>
-          <PostWrap>
-            {allPost.map((item) => {
-              return <Post key={item.postId} {...item} />;
-            })}
-
-            {allPost.length === 0 && (
               <Grid margin="auto" width="100%" height="100%" display="flex">
                 <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
                 <NoIntroductionText>
