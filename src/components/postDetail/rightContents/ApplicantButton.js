@@ -7,7 +7,7 @@ import { Grid, Button } from "../../../elements/Index";
 import ApplyUserModal from "../../ApplyUserModal";
 
 // ApplicantButton의 함수형 컴포넌트를 만든다.
-const ApplicantButton = (props) => {
+const ApplicantButton = props => {
   return (
     <React.Fragment>
       {props.passedData?.projectStatus === "모집중" && (
@@ -18,7 +18,7 @@ const ApplicantButton = (props) => {
                 common
                 width="120px"
                 isValue="apply"
-                _onClick={(e) => {
+                _onClick={e => {
                   console.log(e);
                   props.applyUserModalOpen(e.target.value);
                 }}
@@ -36,7 +36,7 @@ const ApplicantButton = (props) => {
               common
               width="120px"
               isValue="cancel"
-              _onClick={(e) => {
+              _onClick={e => {
                 props.applyUserModalOpen(e.target.value);
               }}
               width="120px"
@@ -50,7 +50,7 @@ const ApplicantButton = (props) => {
               common
               width="120px"
               isValue="teamExit"
-              _onClick={(e) => {
+              _onClick={e => {
                 props.applyUserModalOpen(e.target.value);
               }}
             >
@@ -66,6 +66,7 @@ const ApplicantButton = (props) => {
         applyValue={props.applyValue}
         postId={props.post_id}
         passdedMenber={props.passdedMenber}
+        statusCheck={props.statusCheck}
       />
       {props.passedData?.projectStatus === "종료" &&
         props.passedUserStatus === "member" && (
@@ -74,7 +75,7 @@ const ApplicantButton = (props) => {
               common
               width="120px"
               isValue="memberLiked"
-              _onClick={(e) => {
+              _onClick={e => {
                 console.log(e);
                 props.applyUserModalOpen(e.target.value);
               }}

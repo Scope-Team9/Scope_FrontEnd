@@ -258,11 +258,11 @@ const BtnFeedback = styled.img`
     transform: rotate(45deg);
   }
 
-  @media screen and (max-width: 750px) {
+  @media screen and (max-width: 767px) {
     position: fixed;
 
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     text-align: center;
     left: 5px;
     bottom: 80px;

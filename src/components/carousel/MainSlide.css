@@ -2,7 +2,7 @@
 @import "slick-carousel/slick/slick-theme.css";
 
 .Container {
-  max-width: 1920px;
+  max-width: 1900px;
   width: 100vw;
   margin: auto;
   display: block;
@@ -26,7 +26,7 @@
 
 .arrow {
   background-color: #eee;
-  height: 50px;
+  height: 40px;
   border-radius: 10px;
   position: absolute;
   cursor: pointer;
@@ -36,8 +36,8 @@
 }
 .arrow svg {
   background-color: #eee;
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   border-radius: 50px;
   position: absolute;
   cursor: pointer;
@@ -48,8 +48,8 @@
 .arrow svg:hover {
   background-color: #17334a;
   border-radius: 50px;
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   color: #eee;
 }
 .next {

@@ -38,6 +38,13 @@ const PostWrap = styled.div`
 
   grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
   /* grid-gap: 1px; */
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+    margin: auto;
+  }
+  @media (max-width: 420px) {
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  }
 `;
 
 export default MypagePostList;

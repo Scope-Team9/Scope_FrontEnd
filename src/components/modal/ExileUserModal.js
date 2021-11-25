@@ -61,10 +61,10 @@ const ApplyStatusModal = props => {
           <ModalWrap>
             <Grid
               height="10%"
-              bg="#B29CF4"
+              bg="#17334A"
               position="relative"
               textAlign="center"
-              padding="10px 0 0 0"
+              padding="10px 0 10px 0"
             >
               <Grid
                 position="absolute"
@@ -73,7 +73,12 @@ const ApplyStatusModal = props => {
                 width="20px"
                 padding="10px"
               >
-                <CloseIcon fontSize="large" onClick={modalClose} />
+                <CloseIcon
+                  sx={{ color: "#fff", fontSize: 35 }}
+                  fontSize="large"
+                  cursor="pointer"
+                  onClick={modalClose}
+                />
               </Grid>
               <Text size="30px" bold color="#fff">
                 신청현황
