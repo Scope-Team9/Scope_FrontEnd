@@ -43,13 +43,13 @@ const Post = props => {
         console.log("호출되나", result);
         setMember(result.data.data);
       } catch (err) {
-        console.log(err);
+        console.log(err.response);
       }
     };
     getMembers();
   }, []);
 
-  // console.log(member);
+  console.log(member);
   let as = member?.find(e => e.userId === myUserId);
   console.log(as);
 
