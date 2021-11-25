@@ -4,7 +4,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { apis } from "../lib/axios";
 import { postActions } from "../redux/modules/post";
-import { Grid, Button } from "../elements/Index";
+import { Grid, Button, Text } from "../elements/Index";
 import Swal from "sweetalert2";
 import ApplyStatusModal from "../components/ApplyStatusModal";
 import LeftBanner from "../components/postDetail/leftBanner";
@@ -163,30 +163,53 @@ const PostDetail = props => {
                 <DateDetail passedData={passedData} />
                 <StackDetail passedData={passedData} />
               </Grid>
-              <Grid display="flex">
-                <TotalMemberDetail passedData={passedData} />
-
-                {passedData?.projectStatus === "모집중" && (
-                  <Grid display="flex" width="200px">
-                    <Button
-                      postion="absolute"
-                      common
-                      _onClick={applyStatusModalOpen}
-                    >
-                      신청 현황
-                    </Button>
-                    <Button
-                      postion="absolute"
-                      common
-                      _onClick={exileStatusModalOpen}
-                    >
-                      팀원 강퇴
-                    </Button>
+              <Grid>
+                <Grid display="flex">
+                  <TotalMemberDetail passedData={passedData} />
+                  {passedData?.projectStatus === "모집중" && (
+                    <Grid display="flex" width="200px">
+                      <Button
+                        postion="absolute"
+                        common
+                        _onClick={applyStatusModalOpen}
+                      >
+                        신청 현황
+                      </Button>
+                      <Button
+                        postion="absolute"
+                        common
+                        _onClick={exileStatusModalOpen}
+                      >
+                        팀원 강퇴
+                      </Button>
+                    </Grid>
+                  )}
+                  <Grid>
+                    {passedData?.projectStatus === "종료" &&
+                      passedData?.frontUrl !== "null" && (
+                        <Grid display="flex" width="200px">
+                          <Grid>
+                            <Text>프론트Url</Text>
+                          </Grid>
+                          <Grid>{passedData?.frontUrl}</Grid>
+                        </Grid>
+                      )}
+                    {passedData?.projectStatus === "종료" &&
+                      passedData?.backUrl !== "null" && (
+                        <Grid display="flex" width="200px" margin="5px 0">
+                          <Grid>
+                            <Text>백엔드Url</Text>
+                          </Grid>
+                          <Grid>{passedData?.frontUrl}</Grid>
+                        </Grid>
+                      )}
                   </Grid>
-                )}
+                </Grid>
+                <StatusDetail passedData={passedData} />
+
+                <ContentDetail passedData={passedData} />
               </Grid>
-              <StatusDetail passedData={passedData} />
-              <ContentDetail passedData={passedData} />
+
               <Grid>
                 {userId === postUserId ? (
                   <PosterButton
