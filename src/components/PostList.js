@@ -9,14 +9,14 @@ import styled from "styled-components";
 import { height } from "@mui/system";
 import { Grid, Image, Text, Button } from "../elements/Index";
 
-const PostList = (props) => {
+const PostList = props => {
   const dispatch = useDispatch();
-  let stack = useSelector((state) => state.stack.stack);
-  let sort = useSelector((state) => state.sort.sort);
+  let stack = useSelector(state => state.stack.stack);
+  let sort = useSelector(state => state.sort.sort);
   // let paging = useSelector((state) => state?.infinity.paging.next);
   let paging = props.paging;
-  let reBook = useSelector((state) => state.rebook.reBook);
-  let post_list = useSelector((state) => state.post.posts);
+  let reBook = useSelector(state => state.rebook.reBook);
+  let post_list = useSelector(state => state.post.posts);
   // console.log(props);
   // let post_list = props.post.data.data;
   let posts = post_list.slice(0, paging);
@@ -52,10 +52,10 @@ const PostWrap = styled.div`
   margin: auto;
   display: grid;
 
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
   /* grid-gap: 1px; */
-  @media (max-width: 1700px) {
-    width: 100%;
+  @media (max-width: 420px) {
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
   }
 `;
 const NoIntroduction = styled.img`

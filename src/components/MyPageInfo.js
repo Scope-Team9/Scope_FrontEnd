@@ -18,11 +18,11 @@ import TypeResultTest from "./myPage/TypeResultTest";
 import MypageFilter from "./myPage/MypageFilter";
 
 // MyPageInfo의 함수형 컴포넌트를 만든다.
-const MyPageInfo = (props) => {
+const MyPageInfo = props => {
   const dispatch = useDispatch();
 
   const userId = props.match.params.id;
-  const myUserId = useSelector((state) => state.user.userId);
+  const myUserId = useSelector(state => state.user.userId);
 
   const [filter, setFilter] = React.useState("소개");
   const [mydata, setMydata] = React.useState();
@@ -38,7 +38,7 @@ const MyPageInfo = (props) => {
 
   const [loading, setLoading] = React.useState(true);
 
-  const SetFilter = (data) => {
+  const SetFilter = data => {
     setFilter(data);
   };
 
@@ -117,172 +117,173 @@ const MyPageInfo = (props) => {
       ) : (
         <>
           {mydata && myType && (
-            <>
-              <Banner>
-                <Banners
-                  type={myType}
-                  myPage={mydata?.isMyMypage}
-                  // setModal={setModal}
-                  // modal={modal}
-                  // onClick={() => {
-                  //   EmailConfirm();
-                  // }}
-                ></Banners>
-              </Banner>
-              <MypageCard
-                setEditMyProfile={setEditMyProfile}
-                editMyProfile={editMyProfile}
-                mydata={mydata}
-                myType={myType}
-                myPage={mydata?.isMyMypage}
-                myUserId={myUserId}
-                userId={userId}
-                nickName={nickName}
-                email={email}
-                techStack={techStack}
-                onClick={EditProfile}
-                onClick2={editProfileCancle}
-              />
-              <TypeResultTest
-                myType={myType}
-                userId={userId}
-                myUserId={myUserId}
-                mydata={mydata}
-                testmodal={testmodal}
-                EditTest={EditTest}
-                TestClose={TestClose}
-                setModal={setModal}
-                modal={modal}
-                onClick={() => {
-                  EmailConfirm();
-                }}
-              />
-              <Grid
-                display="flex"
-                margin="auto"
-                justifyContent="center"
-                margin="0px 0 0 150px"
-                width="auto"
-              >
-                <MypageFilter filter={filter} onClicks={SetFilter} />
-              </Grid>
-
-              {filter === "모집" && (
-                <MypagePostList {...recruitmentProject}></MypagePostList>
-              )}
-
-              <Grid margin="0 0 0 34%" width="49%">
-                {filter === "모집" && recruitmentProject.length === 0 && (
-                  <>
-                    <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
-                    <NoIntroductionText>
-                      프로젝트가 아직 없네요.
-                    </NoIntroductionText>
-                  </>
-                )}
-              </Grid>
-
-              {filter === "진행중" && (
-                <MypagePostList {...inProgressProject}></MypagePostList>
-              )}
-              <Grid margin="0 0 0 34%" width="49%">
-                {filter === "진행중" && inProgressProject.length === 0 && (
-                  <>
-                    <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
-                    <NoIntroductionText>
-                      프로젝트가 아직 없네요.
-                    </NoIntroductionText>
-                  </>
-                )}
-              </Grid>
-              {filter === "관심" && (
-                <MypagePostList {...bookMarkProject}></MypagePostList>
-              )}
-              <Grid margin="0 0 0 34%" width="49%">
-                {filter === "관심" && bookMarkProject.length === 0 && (
-                  <>
-                    <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
-                    <NoIntroductionText>
-                      프로젝트가 아직 없네요.
-                    </NoIntroductionText>
-                  </>
-                )}
-              </Grid>
-              {filter === "완료" && (
-                <MypagePostList {...endProject}></MypagePostList>
-              )}
-              <Grid margin="0 0 0 34%" width="49%">
-                {filter === "완료" && endProject.length === 0 && (
-                  <>
-                    <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
-                    <NoIntroductionText>
-                      프로젝트가 아직 없네요.
-                    </NoIntroductionText>
-                  </>
-                )}
-              </Grid>
-              {filter === "소개" &&
-                mydata?.isMyMypage === true &&
-                introduction === true && (
-                  <button
-                    style={{
-                      float: "right",
-                      margin: "55px 18% 0 0",
-                      border: "none",
-                      borderRadius: "15px",
-                      cursor: "pointer",
-                      backgroundColor: " transparent ",
-                    }}
-                    onClick={() => {
-                      history.push({
-                        pathname: "/addmarkdown",
-                        state: { userId: userId },
-                      });
-                    }}
-                  >
-                    <img
-                      src="/img/소개글.png"
-                      style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
+            <Grid className="전체페이지" maxWidth="1900px" margin="auto">
+              <Grid height="30%" position="relative">
+                <Banner>
+                  <Banners
+                    type={myType}
+                    myPage={mydata?.isMyMypage}
+                    // setModal={setModal}
+                    // modal={modal}
+                    // onClick={() => {
+                    //   EmailConfirm();
+                    // }}
+                  ></Banners>
+                  <Grid position="absolute" top="120px" height="75%">
+                    <TypeResultTest
+                      myType={myType}
+                      userId={userId}
+                      myUserId={myUserId}
+                      mydata={mydata}
+                      testmodal={testmodal}
+                      EditTest={EditTest}
+                      TestClose={TestClose}
+                      setModal={setModal}
+                      modal={modal}
+                      onClick={() => {
+                        EmailConfirm();
+                      }}
                     />
-                  </button>
-                )}
-              <Grid margin="0 0 0 34%" width="49%">
-                {filter === "소개" && introduction === true && (
-                  <Grid margin="50px 0 0 0" border="1px solid #707070 ">
-                    <MarkdownRead
-                      introduction={mydata?.user.introduction}
-                    ></MarkdownRead>
                   </Grid>
-                )}
+                </Banner>
               </Grid>
-              <Grid margin="0 0 0 34%" width="49%">
-                {filter === "소개" && introduction === false && (
-                  <>
-                    <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
-                    <NoIntroductionText>
-                      작성된 소개가 없네요.
-                    </NoIntroductionText>
-                    {mydata?.isMyMypage === true && (
-                      <Button
-                        width="150px"
-                        margin="0px 0 0 45%"
-                        _onClick={() => {
-                          history.push({
-                            pathname: "/addmarkdown",
-                            state: { userId: userId },
-                          });
-                        }}
-                      >
-                        {" "}
-                        소개글 작성하기
-                      </Button>
-                    )}
-                  </>
-                )}
+              <Grid width="500px" height="10px" position="relative">
+                <MypageCard
+                  setEditMyProfile={setEditMyProfile}
+                  editMyProfile={editMyProfile}
+                  mydata={mydata}
+                  myType={myType}
+                  myPage={mydata?.isMyMypage}
+                  myUserId={myUserId}
+                  userId={userId}
+                  nickName={nickName}
+                  email={email}
+                  techStack={techStack}
+                  onClick={EditProfile}
+                  onClick2={editProfileCancle}
+                />
               </Grid>
+              <Grid margin="100px 0 0 0 ">
+                <FilterWrap>
+                  <MypageFilter filter={filter} onClicks={SetFilter} />
+                </FilterWrap>
 
+                {filter === "모집" && (
+                  <MypagePostList {...recruitmentProject}></MypagePostList>
+                )}
+
+                <Grid margin="0 0 0 25%" width="49%">
+                  {filter === "모집" && recruitmentProject.length === 0 && (
+                    <>
+                      <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
+                      <NoIntroductionText>
+                        프로젝트가 아직 없네요.
+                      </NoIntroductionText>
+                    </>
+                  )}
+                </Grid>
+
+                {filter === "진행중" && (
+                  <MypagePostList {...inProgressProject}></MypagePostList>
+                )}
+                <Grid margin="0 0 0 25%" width="49%">
+                  {filter === "진행중" && inProgressProject.length === 0 && (
+                    <>
+                      <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
+                      <NoIntroductionText>
+                        프로젝트가 아직 없네요.
+                      </NoIntroductionText>
+                    </>
+                  )}
+                </Grid>
+                {filter === "관심" && (
+                  <MypagePostList {...bookMarkProject}></MypagePostList>
+                )}
+                <Grid margin="0 0 0 25%" width="49%">
+                  {filter === "관심" && bookMarkProject.length === 0 && (
+                    <>
+                      <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
+                      <NoIntroductionText>
+                        프로젝트가 아직 없네요.
+                      </NoIntroductionText>
+                    </>
+                  )}
+                </Grid>
+                {filter === "완료" && (
+                  <MypagePostList {...endProject}></MypagePostList>
+                )}
+                <Grid margin="0 0 0 25%" width="49%">
+                  {filter === "완료" && endProject.length === 0 && (
+                    <>
+                      <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
+                      <NoIntroductionText>
+                        프로젝트가 아직 없네요.
+                      </NoIntroductionText>
+                    </>
+                  )}
+                </Grid>
+                {filter === "소개" &&
+                  mydata?.isMyMypage === true &&
+                  introduction === true && (
+                    <button
+                      style={{
+                        float: "right",
+                        margin: "55px 18% 0 0",
+                        border: "none",
+                        borderRadius: "15px",
+                        cursor: "pointer",
+                        backgroundColor: " transparent ",
+                      }}
+                      onClick={() => {
+                        history.push({
+                          pathname: "/addmarkdown",
+                          state: { userId: userId },
+                        });
+                      }}
+                    >
+                      <img
+                        src="/img/소개글.png"
+                        style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
+                      />
+                    </button>
+                  )}
+                <Grid margin="0 0 0 34%" width="49%">
+                  {filter === "소개" && introduction === true && (
+                    <Grid margin="50px 0 0 0" border="1px solid #707070 ">
+                      <MarkdownRead
+                        introduction={mydata?.user.introduction}
+                      ></MarkdownRead>
+                    </Grid>
+                  )}
+                </Grid>
+                <Grid margin="0 0 0 25%" width="49%">
+                  {filter === "소개" && introduction === false && (
+                    <>
+                      <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
+                      <NoIntroductionText>
+                        작성된 소개가 없네요.
+                      </NoIntroductionText>
+                      {mydata?.isMyMypage === true && (
+                        <IntroduceBtn>
+                          <Button
+                            _onClick={() => {
+                              history.push({
+                                pathname: "/addmarkdown",
+                                state: { userId: userId },
+                              });
+                            }}
+                          >
+                            {" "}
+                            소개글 작성하기
+                          </Button>
+                        </IntroduceBtn>
+                      )}
+                    </>
+                  )}
+                </Grid>
+              </Grid>
               {/* 소개글 있거나 없거나 */}
-            </>
+            </Grid>
           )}
           {/* //  mydata와 myType가 있을때 */}
         </>
@@ -295,17 +296,39 @@ const MyPageInfo = (props) => {
 
 const Banner = styled.div`
   width: 100%;
+  max-width: 1920px;
   margin: -100px auto;
   display: flex;
   height: 457px;
   overflow: hidden;
+`;
+
+const FilterWrap = styled.div`
+  max-width: 1000px;
+  display: flex;
+  margin-left: 30%;
+  width: 39vw;
+  z-index: 999;
+
+  @media screen and (max-width: 1600px) {
+    margin: auto;
+    justify-content: center;
+  }
+  @media screen and (max-width: 1300px) {
+    width: 90vw;
+    margin: auto;
+  }
+  @media screen and (max-width: 750px) {
+    width: 90vw;
+    margin: auto;
+  } ;
 `;
 const NoIntroduction = styled.img`
   width: 50%;
   height: 50%;
   object-fit: cover;
   position: relative;
-  margin: auto;
+  margin-left: 20%;
   display: flex;
   justify-content: center;
 `;
@@ -316,6 +339,20 @@ const NoIntroductionText = styled.p`
   align-items: center;
   display: flex;
   justify-content: center;
-  margin-left: 60px;
 `;
+
+const IntroduceBtn = styled.div`
+  margin: 0px 0 0 40%;
+  width: 150px;
+  @media screen and (max-width: 1600px) {
+    margin: 0px 0 0 38%;
+  }
+  @media screen and (max-width: 1300px) {
+    margin: 0px 0 0 32%;
+  }
+  @media screen and (max-width: 750px) {
+    margin: auto;
+  } ;
+`;
+
 export default MyPageInfo;

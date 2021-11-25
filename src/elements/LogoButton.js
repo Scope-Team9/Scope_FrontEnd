@@ -16,6 +16,7 @@ const LogoButton = (props) => {
 };
 const BorderRadius = styled.div`
   border-radius: 250px;
+  margin: auto;
 `;
 
 const IMGS = styled.img`

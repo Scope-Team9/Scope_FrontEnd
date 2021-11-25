@@ -19,6 +19,7 @@ import Markdown from "../components/Markdown";
 import MarkdownRead from "../components/MarkdownRead";
 import Header from "../components/Header";
 import Message from "../components/headerFunction/Message";
+import Footer from "../components/Footer";
 
 //테스트용입니다.
 import PropensityTest from "../components/propensityTest/PropensityTest";
@@ -64,6 +65,7 @@ function App() {
             ></Route>
           </Switch>
         </ConnectedRouter>
+        <Footer />
       </div>
     </React.Fragment>
   );

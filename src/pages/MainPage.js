@@ -21,15 +21,15 @@ import { apis } from "../lib/axios";
 const MainPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const stack = useSelector((state) => state.stack.stack);
-  const sortC = useSelector((state) => state.sort.sort);
+  const stack = useSelector(state => state.stack.stack);
+  const sortC = useSelector(state => state.sort.sort);
 
-  const cards = useSelector((state) => state.post.posts);
+  const cards = useSelector(state => state.post.posts);
   // console.log(cards);
-  const reBookC = useSelector((state) => state.rebook.reBook);
-  const pageCheck = useSelector((state) => state.post.pageCheck);
-  const infinity = useSelector((state) => state.infinity.paging);
-  const Render = useSelector((state) => state.post.render);
+  const reBookC = useSelector(state => state.rebook.reBook);
+  const pageCheck = useSelector(state => state.post.pageCheck);
+  const infinity = useSelector(state => state.infinity.paging);
+  const Render = useSelector(state => state.post.render);
   const [ref, inView] = useInView();
   const [paging, setPaging] = React.useState(infinity.next);
   const [pPaging, setPPaging] = React.useState(12);
@@ -40,9 +40,9 @@ const MainPage = () => {
   // const pReBook = useSelector((state) => state.post.stacks);
   // console.log("나만봐", pStack);
 
-  const postList = useSelector((state) => state.post.posts);
-  const isLoginUser = useSelector((state) => state.user.userId);
-  const isLogin = useSelector((state) => state.user.isLogin);
+  const postList = useSelector(state => state.post.posts);
+  const isLoginUser = useSelector(state => state.user.userId);
+  const isLogin = useSelector(state => state.user.isLogin);
 
   React.useEffect(() => {
     dispatch(postActions.whatPage("mainPage"));
@@ -168,6 +168,11 @@ const Btn = styled.button`
   background: #c4c4c4;
   cursor: pointer;
   z-index: 999;
+  &:hover {
+    background: #17334a;
+    transform: translate();
+    transition: 0.1s ease-out;
+  }
 
   @media screen and (max-width: 750px) {
     position: fixed;

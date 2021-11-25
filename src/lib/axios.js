@@ -66,6 +66,7 @@ export const apis = {
   strterLike: (postId, likeUsers) =>
     instance.post(`/api/assessment/${postId}`, likeUsers),
   sumbitUrl: (postId, urls) => instance.post(`/api/post/${postId}/url`, urls),
+
   getMember: postId => instance.get(`/api/team/${postId}`),
 
   getUserInfo: () => instance.get("/user/info"),
@@ -95,7 +96,7 @@ export const apis = {
   deletePost: postId => instance.delete(`/api/post/${postId}`),
   statusPost: (postId, data) =>
     instance.post(`/api/post/${postId}/status`, data),
-  serachTeamUser: (postId) => instance.get(`/api/team/${postId}`),
+  serachTeamUser: postId => instance.get(`/api/team/${postId}`),
   exileUser: (postId, userId) =>
     instance.delete(`/api/team/resignation/${postId}?userId=${userId}`),
 
