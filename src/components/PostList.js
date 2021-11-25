@@ -9,40 +9,105 @@ import styled from "styled-components";
 import { height } from "@mui/system";
 import { Grid, Image, Text, Button } from "../elements/Index";
 
-const PostList = props => {
+const PostList = (props) => {
   const dispatch = useDispatch();
-  let stack = useSelector(state => state.stack.stack);
-  let sort = useSelector(state => state.sort.sort);
+  const [post, setPost] = React.useState();
+  const [allPost, setAllPost] = React.useState();
+
   // let paging = useSelector((state) => state?.infinity.paging.next);
   let paging = props.paging;
-  let reBook = useSelector(state => state.rebook.reBook);
-  let post_list = useSelector(state => state.post.posts);
-  // console.log(props);
-  // let post_list = props.post.data.data;
-  let posts = post_list.slice(0, paging);
+  let reBook = useSelector((state) => state.rebook.reBook);
+  let sort = useSelector((state) => state.sort.sort);
+  let post_list = useSelector((state) => state.post.posts);
+  let stacks = useSelector((state) => state.stack.stacks);
+  let Render = props.Render;
+  let isLogin = props.isLogin;
+
+  // let stacks = props.stacks;
+  // console.log(stackss);
+
+  const findStack = (item) => {
+    const itemStack = item.techStack;
+    if (stacks) {
+      for (let i = 0; i < stacks.length; i++) {
+        for (let j = 0; j < itemStack.length; j++) {
+          if (stacks[i] === itemStack[j]) {
+            return true;
+          }
+        }
+      }
+    }
+  };
+
+  // let post_list = props.post;
+  React.useLayoutEffect(() => {
+    setPost();
+    setAllPost();
+    if (stacks.length !== 0) {
+      const postList = props.post.filter(findStack);
+      let posts = postList.slice(0, paging);
+      setPost(posts);
+    }
+    if (stacks.length === 0) {
+      let posts = props.post.slice(0, paging);
+      setAllPost(posts);
+    }
+  }, [stacks, paging, sort, reBook, Render, isLogin]);
 
   return (
     <React.Fragment>
-      <PostWrap>
-        {posts && (
-          <>
-            {posts.map((item, index) => {
-              return <Post key={index} {...item} />;
+      {post && (
+        <>
+          <button
+            onClick={() => {
+              console.log(post);
+            }}
+          ></button>
+          <PostWrap>
+            {post.map((item) => {
+              return <Post key={item.postId} {...item} />;
             })}
-          </>
-        )}
-        {posts.length === 0 && (
-          <Grid margin="auto" width="100%" height="100%" display="flex">
-            <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
-            <NoIntroductionText>
-              아직 포스트가 없네요
-              <br /> .
-              <br /> .
-              <br /> .
-            </NoIntroductionText>
-          </Grid>
-        )}
-      </PostWrap>
+
+            {post.length === 0 && (
+              <Grid margin="auto" width="100%" height="100%" display="flex">
+                <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
+                <NoIntroductionText>
+                  아직 포스트가 없네요
+                  <br /> .
+                  <br /> .
+                  <br /> .
+                </NoIntroductionText>
+              </Grid>
+            )}
+          </PostWrap>
+        </>
+      )}
+      {allPost && (
+        <>
+          <button
+            onClick={() => {
+              console.log(allPost);
+            }}
+          ></button>
+          <PostWrap>
+            {allPost.map((item) => {
+              return <Post key={item.postId} {...item} />;
+            })}
+
+            {allPost.length === 0 && (
+              <Grid margin="auto" width="100%" height="100%" display="flex">
+                <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
+                <NoIntroductionText>
+                  아직 포스트가 없네요
+                  <br /> .
+                  <br /> .
+                  <br /> .
+                </NoIntroductionText>
+              </Grid>
+            )}
+          </PostWrap>
+        </>
+      )}
     </React.Fragment>
   );
 };

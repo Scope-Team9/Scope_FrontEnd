@@ -18,11 +18,11 @@ import TypeResultTest from "./myPage/TypeResultTest";
 import MypageFilter from "./myPage/MypageFilter";
 
 // MyPageInfo의 함수형 컴포넌트를 만든다.
-const MyPageInfo = props => {
+const MyPageInfo = (props) => {
   const dispatch = useDispatch();
 
   const userId = props.match.params.id;
-  const myUserId = useSelector(state => state.user.userId);
+  const myUserId = useSelector((state) => state.user.userId);
 
   const [filter, setFilter] = React.useState("소개");
   const [mydata, setMydata] = React.useState();
@@ -38,7 +38,7 @@ const MyPageInfo = props => {
 
   const [loading, setLoading] = React.useState(true);
 
-  const SetFilter = data => {
+  const SetFilter = (data) => {
     setFilter(data);
   };
 
@@ -311,15 +311,16 @@ const FilterWrap = styled.div`
   z-index: 999;
 
   @media screen and (max-width: 1600px) {
-    margin: auto;
-    justify-content: center;
+    margin-left: 30%;
   }
-  @media screen and (max-width: 1300px) {
+  @media screen and (max-width: 1200px) {
     width: 90vw;
+    justify-content: center;
     margin: auto;
   }
   @media screen and (max-width: 750px) {
     width: 90vw;
+    justify-content: center;
     margin: auto;
   } ;
 `;

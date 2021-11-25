@@ -92,7 +92,12 @@ const Sort = (props) => {
                   }
                   if (isLoginUser) {
                     onclickRb(item.status);
-                  } else {
+                  }
+                  if (
+                    !isLoginUser &&
+                    (item.id === "북마크" || item.id === "추천")
+                  ) {
+                    console.log("나는 유저", isLoginUser);
                     Swal.fire(
                       "로그인 후 이용하실 수 있습니다!",
                       "로그인하고 프로젝트를 추천받아 보세요!",
