@@ -32,5 +32,12 @@ const DateBox = styled.div`
   text-align: center;
 `;
 
+const ButtonMedia = styled.p`
+  @media screen and (max-width: 1500px) {
+    width: 100px;
+    margin: auto;
+  }
+`;
+
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default DateDetail;

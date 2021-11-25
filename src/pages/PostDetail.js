@@ -1,6 +1,7 @@
 // PostDetail.js
 // import를 한다.
 import React from "react";
+import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { apis } from "../lib/axios";
 import { postActions } from "../redux/modules/post";
@@ -166,25 +167,27 @@ const PostDetail = props => {
               <Grid>
                 <Grid display="flex">
                   <TotalMemberDetail passedData={passedData} />
-                  {passedData?.projectStatus === "모집중" && (
-                    <Grid display="flex" width="200px">
-                      <Button
-                        postion="absolute"
-                        common
-                        _onClick={applyStatusModalOpen}
-                      >
-                        신청 현황
-                      </Button>
-                      <Button
-                        postion="absolute"
-                        common
-                        _onClick={exileStatusModalOpen}
-                      >
-                        팀원 강퇴
-                      </Button>
-                    </Grid>
-                  )}
-
+                  {userId === postUserId &&
+                    passedData?.projectStatus === "모집중" && (
+                      <Grid display="flex" width="200px">
+                        <ButtonMedia>
+                          <Button
+                            postion="absolute"
+                            common
+                            _onClick={applyStatusModalOpen}
+                          >
+                            신청 현황
+                          </Button>
+                          <Button
+                            postion="absolute"
+                            common
+                            _onClick={exileStatusModalOpen}
+                          >
+                            팀원 강퇴
+                          </Button>
+                        </ButtonMedia>
+                      </Grid>
+                    )}
                   {passedData?.projectStatus === "종료" &&
                     passedData?.frontUrl !== "null" && (
                       <Grid display="flex" width="200px">
@@ -245,6 +248,16 @@ const PostDetail = props => {
     </React.Fragment>
   );
 };
+
+const ButtonMedia = styled.p`
+  display: flex;
+  margin: auto;
+  @media screen and (max-width: 1500px) {
+    display: flex;
+    width: 100px;
+    margin: auto;
+  }
+`;
 
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default PostDetail;
