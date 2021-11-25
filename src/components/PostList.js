@@ -8,11 +8,11 @@ import styled from "styled-components";
 // import { useInView } from "react-intersection-observer";
 import { height } from "@mui/system";
 import { Grid, Image, Text, Button } from "../elements/Index";
-import { map } from "jquery";
 
 const PostList = (props) => {
   const dispatch = useDispatch();
-  const [post, setPost] = React.useState(props.post);
+  const [post, setPost] = React.useState();
+  const [allPost, setAllPost] = React.useState();
 
   // let paging = useSelector((state) => state?.infinity.paging.next);
   let paging = props.paging;
@@ -39,14 +39,16 @@ const PostList = (props) => {
 
   // let post_list = props.post;
   React.useLayoutEffect(() => {
-    if (stacks) {
+    setPost();
+    setAllPost();
+    if (stacks.length !== 0) {
       const postList = props.post.filter(findStack);
       let posts = postList.slice(0, paging);
       setPost(posts);
     }
     if (stacks.length === 0) {
       let posts = props.post.slice(0, paging);
-      setPost(posts);
+      setAllPost(posts);
     }
   }, [stacks, paging, sort, reBook]);
 
@@ -60,11 +62,37 @@ const PostList = (props) => {
             }}
           ></button>
           <PostWrap>
-            {post.map((item, index) => {
-              return <Post key={index} {...item} />;
+            {post.map((item) => {
+              return <Post key={item.postId} {...item} />;
             })}
 
             {post.length === 0 && (
+              <Grid margin="auto" width="100%" height="100%" display="flex">
+                <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
+                <NoIntroductionText>
+                  아직 포스트가 없네요
+                  <br /> .
+                  <br /> .
+                  <br /> .
+                </NoIntroductionText>
+              </Grid>
+            )}
+          </PostWrap>
+        </>
+      )}
+      {allPost && (
+        <>
+          <button
+            onClick={() => {
+              console.log(allPost);
+            }}
+          ></button>
+          <PostWrap>
+            {allPost.map((item) => {
+              return <Post key={item.postId} {...item} />;
+            })}
+
+            {allPost.length === 0 && (
               <Grid margin="auto" width="100%" height="100%" display="flex">
                 <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
                 <NoIntroductionText>

@@ -49,7 +49,7 @@ const MainPage = () => {
   const isLoginUser = useSelector((state) => state.user.userId);
   const isLogin = useSelector((state) => state.user.isLogin);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     setPost();
     dispatch(postActions.whatPage("mainPage"));
     // dispatch(postActions.getPostAPI());
