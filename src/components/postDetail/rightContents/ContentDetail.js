@@ -11,13 +11,11 @@ const ContentDetail = (props) => {
   return (
     <React.Fragment>
       <Grid margin="20px auto auto">
-        <ContentMedia>
-          <Text size="18px" bold margin="0px 10px 0px 0px">
-            프로젝트 설명
-          </Text>
+        <Text size="18px" bold margin="0px 10px 0px 0px">
+          프로젝트 설명
+        </Text>
 
-          <Content>{props.passedData?.contents}</Content>
-        </ContentMedia>
+        <Content>{props.passedData?.contents}</Content>
       </Grid>
     </React.Fragment>
   );

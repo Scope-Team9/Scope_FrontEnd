@@ -131,7 +131,7 @@ const FilterBox = styled.div`
   }
   @media screen and (max-width: 750px) {
     justify-content: center;
-    font-size: 12px;
+    font-size: 15px;
   }
 `;
 export default Sort;

@@ -5,7 +5,7 @@ import { applyCreators } from "../../redux/modules/applyProject";
 import styled from "styled-components";
 import CloseIcon from "@mui/icons-material/Close";
 
-const Apply = props => {
+const Apply = (props) => {
   const dispatch = useDispatch();
   const [comment, setComment] = React.useState();
   const { modalClose, postId } = props;
@@ -37,13 +37,13 @@ const Apply = props => {
         </Grid>
         <Grid height="22%" margin="10px 0" textAlign="center">
           <Input
-            padding="0 0 0 60px"
+            padding="0 0 0 30px"
             borderRadius="25px"
             border="1px solid #eee"
             height="100%"
             backgroundColor="#fff"
-            placeholder="신청자분을 간단히 소개해주세요!"
-            _onChange={e => {
+            placeholder="간단한 본인의 기술스택 및  자기소개 작성란"
+            _onChange={(e) => {
               console.log(e.target.value);
               setComment(e.target.value);
             }}
