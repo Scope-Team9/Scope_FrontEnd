@@ -215,10 +215,8 @@ const Wrap = styled.div`
   height: 100%;
   width: 58vw;
   margin-left: 30%;
-  @media screen and (max-width: 1600px) {
-    margin: auto;
-  }
-  @media screen and (max-width: 1300px) {
+
+  @media screen and (max-width: 1200px) {
     width: 90vw;
     margin: auto;
   }

@@ -311,15 +311,16 @@ const FilterWrap = styled.div`
   z-index: 999;
 
   @media screen and (max-width: 1600px) {
-    margin: auto;
-    justify-content: center;
+    margin-left: 30%;
   }
-  @media screen and (max-width: 1300px) {
+  @media screen and (max-width: 1200px) {
     width: 90vw;
+    justify-content: center;
     margin: auto;
   }
   @media screen and (max-width: 750px) {
     width: 90vw;
+    justify-content: center;
     margin: auto;
   } ;
 `;

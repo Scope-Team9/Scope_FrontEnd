@@ -282,9 +282,14 @@ const Cards = styled.div`
   overflow: hidden;
 
   position: absolute;
-  right: 0%;
+  right: 10%;
   top: -500%;
   @media screen and (max-width: 1600px) {
+    width: 60%;
+    position: absolute;
+    right: 30%;
+  }
+  @media screen and (max-width: 1200px) {
     display: none;
   }
 `;

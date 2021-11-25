@@ -31,7 +31,7 @@ const Footer = () => {
 };
 const Wrap = styled.div`
   display: none;
-  @media screen and (max-width: 1600px) {
+  @media screen and (max-width: 767px) {
     width: 100vw;
     margin: auto;
     height: 5.5%;
