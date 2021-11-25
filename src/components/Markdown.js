@@ -212,7 +212,7 @@ export default function Writer(props) {
           ></Editor>
           <Grid display="flex" margin="0 0 0 72% ">
             <Button
-              width="10%"
+              width="100px"
               height="50px"
               margin="20px"
               _onClick={() => {
@@ -222,7 +222,7 @@ export default function Writer(props) {
               뒤로가기
             </Button>
             <Button
-              width="10%"
+              width="100px"
               height="50px"
               margin="20px"
               _onClick={() => {
@@ -254,9 +254,9 @@ export default function Writer(props) {
               },
             }}
           ></Editor>
-          <Grid display="flex" margin="0 0 0 72% ">
+          <Grid display="flex" margin="0 0 0 2% ">
             <Button
-              width="10%"
+              width="100px"
               height="50px"
               margin="20px"
               _onClick={() => {
@@ -266,7 +266,7 @@ export default function Writer(props) {
               뒤로가기
             </Button>
             <Button
-              width="10%"
+              width="100px"
               height="50px"
               margin="20px"
               _onClick={() => {

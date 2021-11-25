@@ -9,7 +9,7 @@ import { map, stubFalse } from "lodash";
 import { Grid4x4 } from "@mui/icons-material";
 import EmailAuth from "../EmailAuth";
 
-const TypeResultTest = props => {
+const TypeResultTest = (props) => {
   const [myData, setMyData] = React.useState();
   const [arr, setArr] = React.useState([
     {
@@ -124,7 +124,7 @@ const TypeResultTest = props => {
 
   React.useEffect(() => {
     console.log("테스트결과", props);
-    arr.map(item => {
+    arr.map((item) => {
       if (item.id === props.myType) {
         setMyData(item);
       }
@@ -256,12 +256,18 @@ const GotoTest = styled.p`
   margin-top: 30px;
   position: relative;
   z-index: 999;
+  @media screen and (max-width: 370px) {
+    font-size: 12px;
+  } ;
 `;
 const MyResultText2 = styled.p`
   color: white;
   font-size: 17px;
   height: 17px;
   width: auto;
+  @media screen and (max-width: 670px) {
+    display: none;
+  } ;
 `;
 const MyResultTextBold = styled.p`
   color: white;

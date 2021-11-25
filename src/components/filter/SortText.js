@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from "react";
 import styled from "styled-components";
-
+import { Grid, Button } from "../../elements/Index";
 const SortText = (props) => {
   //   console.log("소트", props);
   return (
@@ -18,7 +18,7 @@ const SortText = (props) => {
 };
 
 const Filtering = styled.p`
-  margin: 25px;
+  margin: 25px 10px 25px 10px;
   cursor: pointer;
   font-weight: bold;
   border-bottom: ${(props) =>

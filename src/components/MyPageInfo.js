@@ -18,11 +18,11 @@ import TypeResultTest from "./myPage/TypeResultTest";
 import MypageFilter from "./myPage/MypageFilter";
 
 // MyPageInfo의 함수형 컴포넌트를 만든다.
-const MyPageInfo = props => {
+const MyPageInfo = (props) => {
   const dispatch = useDispatch();
 
   const userId = props.match.params.id;
-  const myUserId = useSelector(state => state.user.userId);
+  const myUserId = useSelector((state) => state.user.userId);
 
   const [filter, setFilter] = React.useState("소개");
   const [mydata, setMydata] = React.useState();
@@ -44,7 +44,7 @@ const MyPageInfo = props => {
 
   const [loading, setLoading] = React.useState(true);
 
-  const SetFilter = data => {
+  const SetFilter = (data) => {
     setFilter(data);
   };
 
@@ -72,7 +72,7 @@ const MyPageInfo = props => {
     };
     fetchData();
     console.log(mydata);
-  }, [editMyProfile, testmodal]);
+  }, [editMyProfile, testmodal, userId]);
 
   React.useLayoutEffect(() => {
     const fetchData = async () => {
@@ -263,19 +263,24 @@ const MyPageInfo = props => {
                         작성된 소개가 없네요.
                       </NoIntroductionText>
                       {mydata?.isMyMypage === true && (
-                        <IntroduceBtn>
-                          <Button
-                            _onClick={() => {
-                              history.push({
-                                pathname: "/addmarkdown",
-                                state: { userId: userId },
-                              });
-                            }}
-                          >
-                            {" "}
-                            소개글 작성하기
-                          </Button>
-                        </IntroduceBtn>
+                        <>
+                          <IntroduceBtn>
+                            <Button
+                              _onClick={() => {
+                                history.push({
+                                  pathname: "/addmarkdown",
+                                  state: { userId: userId },
+                                });
+                              }}
+                            >
+                              {" "}
+                              소개글 작성하기
+                            </Button>
+                          </IntroduceBtn>
+                          <NoticeText>
+                            소개 작성은 PC환경에서 작성 가능합니다.
+                          </NoticeText>
+                        </>
                       )}
                     </>
                   )}
@@ -350,8 +355,21 @@ const IntroduceBtn = styled.div`
   @media screen and (max-width: 1300px) {
     margin: 0px 0 0 38%;
   }
-  @media screen and (max-width: 750px) {
-    margin: auto;
+  @media screen and (max-width: 490px) {
+    display: none;
+  } ;
+`;
+
+const NoticeText = styled.div`
+  color: #737373;
+  font-size: 12px;
+
+  @media screen and (min-width: 490px) {
+    color: #737373;
+    font-size: 12px;
+  }
+  @media screen and (min-width: 491px) {
+    display: none;
   } ;
 `;
 

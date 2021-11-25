@@ -88,7 +88,7 @@ const HeaderRight = (props) => {
           <ButtonWrap>
             <Button
               common
-              width="120px"
+              width="100px"
               text="로그아웃"
               _onClick={logOut}
             ></Button>
@@ -124,7 +124,7 @@ const HeaderWrapper = styled.div`
   padding-right: 0px;
   justify-content: space-evenly;
   @media screen and (max-width: 595px) {
-    width: 20%;
+    width: 100px;
   } ;
 `;
 
@@ -142,12 +142,13 @@ const Bell = styled.div`
 
 const ButtonWrap = styled.div`
   @media screen and (max-width: 595px) {
-    display: none;
+    /* display: none; */
   } ;
 `;
 
 const IconWrap = styled.div`
   @media screen and (max-width: 595px) {
+    display: none;
     width: 90%;
   } ;
 `;
