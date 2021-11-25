@@ -37,7 +37,7 @@ const HeaderRight = (props) => {
         width="auto"
       >
         <HeaderWrapper>
-          <Message
+          {/* <Message
             onClick={() => {
               history.push(`/message`);
             }}
@@ -46,7 +46,7 @@ const HeaderRight = (props) => {
           </Message>
           <Bell>
             <i class="far fa-bell"></i>
-          </Bell>
+          </Bell> */}
           <IconWrap>
             <Grid
               display="flex"

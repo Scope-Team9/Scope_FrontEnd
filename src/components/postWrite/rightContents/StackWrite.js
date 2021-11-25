@@ -12,11 +12,11 @@ const StackWrite = (props) => {
   const stackSelect = [
     { value: "React", label: "React" },
     { value: "Java", label: "Java" },
-    { value: "Javascript", label: "Javascript" },
+    { value: "JavaScript", label: "JavaScript" },
     { value: "Python", label: "Python" },
     { value: "Nodejs", label: "Nodejs" },
     { value: "Flask", label: "Flask" },
-    { value: "cpp", label: "cpp" },
+    { value: "C++", label: "C++" },
     { value: "Django", label: "Django" },
     { value: "php", label: "php" },
     { value: "Vue", label: "Vue" },
@@ -63,7 +63,7 @@ const StackWrite = (props) => {
         <StackMedia>
           <Text size="18px" bold>
             기술스택 선택
-            <SubDescription> (5개 이상 중복 X)</SubDescription>
+            <SubDescription> (최대 4개)</SubDescription>
           </Text>
           <Select
             isMulti

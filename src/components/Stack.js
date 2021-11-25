@@ -39,7 +39,7 @@ const Stack = (props) => {
       active: false,
     },
     {
-      id: "cpp",
+      id: "C++",
       img: "/img/c__.png",
       active: false,
     },

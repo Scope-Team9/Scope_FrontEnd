@@ -3,6 +3,7 @@
 
 // import를 한다.
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Grid, Text } from "../../../elements/Index";
 
