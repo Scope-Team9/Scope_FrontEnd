@@ -3,6 +3,7 @@
 
 // import를 한다.
 import React from "react";
+import styled from "styled-components";
 import { Grid, Button } from "../../../elements/Index";
 import ApplyUserModal from "../../ApplyUserModal";
 import { useHistory } from "react-router";
@@ -25,94 +26,106 @@ const PosterButton = (props) => {
   return (
     <React.Fragment>
       <Grid display="flex" justifyContent="center">
-        {props.passedData?.projectStatus === "진행중" && (
-          <Button
-            common
-            width="140px"
-            height="35px"
-            isValue="end"
-            _onClick={(e) => {
-              props.applyUserModalOpen(e.target.value);
-            }}
-          >
-            프로젝트 마감하기
-          </Button>
-        )}
-        <ApplyUserModal
-          applyUserModal={props.applyUserModal}
-          setApplyUserModal={props.setApplyUserModal}
-          applyValue={props.applyValue}
-          postId={props.post_id}
-          passdedMenber={props.passdedMenber}
-          statusCheck={props.statusCheck}
-        />
-        {props.passedData?.projectStatus === "모집중" && (
-          <Button
-            common
-            width="140px"
-            height="35px"
-            _onClick={() => {
-              props.edit_status("진행중");
-            }}
-          >
-            모집완료
-          </Button>
-        )}
-        {props.passedData?.projectStatus === "종료" && (
-          <Button
-            common
-            width="140px"
-            height="35px"
-            isValue="submit"
-            _onClick={(e) => {
-              props.applyUserModalOpen(e.target.value);
-            }}
-          >
-            깃허브제출
-          </Button>
-        )}
-        {props.passedData?.projectStatus === "종료" && <div></div>}
+        <ContentMedia>
+          {props.passedData?.projectStatus === "진행중" && (
+            <Button
+              common
+              width="140px"
+              height="35px"
+              isValue="end"
+              _onClick={(e) => {
+                props.applyUserModalOpen(e.target.value);
+              }}
+            >
+              프로젝트 마감하기
+            </Button>
+          )}
+          <ApplyUserModal
+            applyUserModal={props.applyUserModal}
+            setApplyUserModal={props.setApplyUserModal}
+            applyValue={props.applyValue}
+            postId={props.post_id}
+            passdedMenber={props.passdedMenber}
+            statusCheck={props.statusCheck}
+          />
+          {props.passedData?.projectStatus === "모집중" && (
+            <Button
+              common
+              width="140px"
+              height="35px"
+              _onClick={() => {
+                props.edit_status("진행중");
+              }}
+            >
+              모집완료
+            </Button>
+          )}
+          {props.passedData?.projectStatus === "종료" && (
+            <Button
+              common
+              width="140px"
+              height="35px"
+              isValue="submit"
+              _onClick={(e) => {
+                props.applyUserModalOpen(e.target.value);
+              }}
+            >
+              깃허브제출
+            </Button>
+          )}
+          {props.passedData?.projectStatus === "종료" && <div></div>}
 
-        {props.passedData?.projectStatus === "진행중" && (
-          <Button
-            common
-            width="140px"
-            height="35px"
-            _onClick={() => {
-              history.push({ pathname: `/postedit/${props.post_id}` });
-            }}
-          >
-            포스트수정
-          </Button>
-        )}
+          {props.passedData?.projectStatus === "진행중" && (
+            <Button
+              common
+              width="140px"
+              height="35px"
+              _onClick={() => {
+                history.push({ pathname: `/postedit/${props.post_id}` });
+              }}
+            >
+              포스트수정
+            </Button>
+          )}
 
-        {props.passedData?.projectStatus === "모집중" && (
+          {props.passedData?.projectStatus === "모집중" && (
+            <Button
+              common
+              width="140px"
+              height="35px"
+              _onClick={() => {
+                history.push({ pathname: `/postedit/${props.post_id}` });
+              }}
+            >
+              포스트수정
+            </Button>
+          )}
           <Button
             common
             width="140px"
             height="35px"
             _onClick={() => {
-              history.push({ pathname: `/postedit/${props.post_id}` });
+              DeletePost();
+              window.alert("삭제되었습니다.");
             }}
           >
-            포스트수정
+            포스트삭제
           </Button>
-        )}
-        <Button
-          common
-          width="140px"
-          height="35px"
-          _onClick={() => {
-            DeletePost();
-            window.alert("삭제되었습니다.");
-          }}
-        >
-          포스트삭제
-        </Button>
+        </ContentMedia>
       </Grid>
     </React.Fragment>
   );
 };
+
+const ContentMedia = styled.div`
+  @media screen and (max-width: 1500px) {
+    display: flex;
+    width: 300px;
+    height: 10px;
+    margin: auto 100px;
+    margin-bottom: 80px;
+  }
+`;
 
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default PosterButton;
