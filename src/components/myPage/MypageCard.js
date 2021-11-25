@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 import { apis } from "../../lib/axios";
 import CardUserInfo from "./card/CardUserInfo";
 
-const MypageCard = (props) => {
+const MypageCard = props => {
   const [editMyProfile, setEditMyProfile] = React.useState(false); //
   const [checkEmail, setCheckEmail] = React.useState();
   const [deleteModal, setDeleteModal] = React.useState(false);
@@ -31,61 +31,37 @@ const MypageCard = (props) => {
   };
 
   function fn_submit(data) {
-    // let text = data;
-
-    // let regEmail =
-    //   /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
-
-    // if (regEmail.test(text) === true) {
-    // window.alert("입력된 값은 이메일입니다.");
     let userData = {
       nickname: nickName,
       email: email,
       userTechStack: techStack,
     };
-    console.log(userData);
+
     const fetchData = async () => {
       try {
+        console.log(userData);
         const result = await apis.editUserInfo(props.userId, userData);
         // console.log(result);
         setEditMyProfile(false);
+        props.onClick2();
         Swal.fire("수정 완료!", "", "success");
       } catch (err) {
-        console.log(err);
-        //   Swal.fire(`${err.response.data.msg}`, "", "warning");
+        console.log(err.response);
       }
-      // };
-
-      // } else {
-      //   // window.alert("올바른 이메일을 입력해주세요.");
-      //   Swal.fire("올바른 이메일을 입력해주세요.", "", "warning");
-      //   setCheckEmail(false);
-      //   return;
     };
     fetchData();
   }
 
   const setEditProfile = () => {
     if (techStack.length > 4) {
-      // window.alert("기술은 4개 까지 선택 가능합니다.");
       Swal.fire("기술은 4개 까지 선택 가능합니다.", "", "warning");
       return;
     }
-
     fn_submit(email);
-    // if (checkEmail === false) {
-    //   return;
-    // }
-    props.onClick2();
   };
-  //   const editProfileCancle = () => {
-  //     setEditMyProfile(false);
-  //   };
   const deleteUser = () => {
     setDeleteModal(true);
   };
-
-  //   console.log(props);
 
   //테크스택 옵션
   const techStackOption = [
@@ -148,7 +124,7 @@ const MypageCard = (props) => {
                   padding: "7px",
                 }}
                 defaultValue={props.nickName}
-                onChange={(e) => {
+                onChange={e => {
                   setNickName(e.target.value);
                 }}
               ></input>
@@ -182,7 +158,7 @@ const MypageCard = (props) => {
                   padding: "7px",
                 }}
                 defaultValue={props.email}
-                onChange={(e) => {
+                onChange={e => {
                   setEmail(e.target.value);
                 }}
               ></input>
@@ -207,7 +183,7 @@ const MypageCard = (props) => {
                 styles={styles}
                 className="basic-multi-select"
                 classNamePrefix="select"
-                onChange={(e) => {
+                onChange={e => {
                   let techStack = [];
                   let arr = e;
                   let idx = 0;
@@ -274,7 +250,7 @@ const Cards = styled.div`
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
     rgba(0, 0, 0, 0.22) 0px 15px 12px;
 
-  width: 70%;
+  width: 100%;
   height: 900px;
   /* background-color: rgba(255, 255, 255, 0); */
   background-color: white;
@@ -282,12 +258,12 @@ const Cards = styled.div`
   overflow: hidden;
 
   position: absolute;
-  right: 10%;
-  top: -500%;
+  right: -35%;
+  top: -600%;
   @media screen and (max-width: 1600px) {
-    width: 60%;
+    width: 90%;
     position: absolute;
-    right: 30%;
+    right: -15%;
   }
   @media screen and (max-width: 1200px) {
     display: none;

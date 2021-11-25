@@ -4,8 +4,8 @@ import styled from "styled-components";
 import { Grid, Image, Text, Button } from "../../elements/Index";
 import MyFilter from "./filter/MyFilter";
 
-const MypageFilter = props => {
-  console.log(props);
+const MypageFilter = (props) => {
+  // console.log(props);
   const [arr, setArr] = React.useState([
     {
       id: "소개",
@@ -28,17 +28,17 @@ const MypageFilter = props => {
       active: false,
     },
   ]);
-  const filters = item => {
-    setArr(state => {
-      return state.map(stateItem => {
+  const filters = (item) => {
+    setArr((state) => {
+      return state.map((stateItem) => {
         if (stateItem.id === item.id) {
           return { ...stateItem, active: !stateItem.active };
         }
         return stateItem;
       });
     });
-    setArr(state => {
-      return state.map(stateItem => {
+    setArr((state) => {
+      return state.map((stateItem) => {
         if (stateItem.id !== item.id && stateItem.active === true) {
           return { ...stateItem, active: !stateItem.active };
         }
@@ -51,7 +51,7 @@ const MypageFilter = props => {
     <>
       {arr && (
         <Grid display="flex" width="70%">
-          {arr.map(item => {
+          {arr.map((item) => {
             return (
               <MyFilter
                 onClick={() => {

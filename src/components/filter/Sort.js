@@ -56,6 +56,8 @@ const Sort = (props) => {
   };
 
   const Filter = (getItem) => {
+    const checked = arr.find((e) => e.active === true);
+    console.log("ddddd", checked);
     setArr((state) => {
       return state.map((stateItem) => {
         if (stateItem.id === getItem.id) {

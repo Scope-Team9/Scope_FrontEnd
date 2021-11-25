@@ -18,11 +18,11 @@ import TypeResultTest from "./myPage/TypeResultTest";
 import MypageFilter from "./myPage/MypageFilter";
 
 // MyPageInfo의 함수형 컴포넌트를 만든다.
-const MyPageInfo = (props) => {
+const MyPageInfo = props => {
   const dispatch = useDispatch();
 
   const userId = props.match.params.id;
-  const myUserId = useSelector((state) => state.user.userId);
+  const myUserId = useSelector(state => state.user.userId);
 
   const [filter, setFilter] = React.useState("소개");
   const [mydata, setMydata] = React.useState();
@@ -44,22 +44,22 @@ const MyPageInfo = (props) => {
 
   const [loading, setLoading] = React.useState(true);
 
-  const SetFilter = (data) => {
+  const SetFilter = data => {
     setFilter(data);
   };
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     // dispatch(myPageActions.getMypageAPI(userId));
-    console.log(editMyProfile);
-    setEmail(null);
-    setNickName(null);
+    // console.log(editMyProfile);
+    // setEmail(null);
+    // setNickName(null);
 
     dispatch(postActions.isMainPage(false));
     dispatch(postActions.whatPage("myPage"));
     const fetchData = async () => {
       try {
         const result = await apis.getMypage(userId);
-
+        console.log(result);
         // setMydata(result.data.data);
         setNickName(result.data.data.user.nickname);
         setEmail(result.data.data.user.email);
@@ -72,7 +72,7 @@ const MyPageInfo = (props) => {
     };
     fetchData();
     console.log(mydata);
-  }, [editMyProfile]);
+  }, [editMyProfile, testmodal]);
 
   React.useLayoutEffect(() => {
     const fetchData = async () => {
@@ -147,7 +147,7 @@ const MyPageInfo = (props) => {
                   </Grid>
                 </Banner>
               </Grid>
-              <Grid width="500px" height="10px" position="relative">
+              <Grid width="340px" height="10px" position="relative">
                 <MypageCard
                   setEditMyProfile={setEditMyProfile}
                   editMyProfile={editMyProfile}
@@ -310,7 +310,7 @@ const FilterWrap = styled.div`
   z-index: 999;
 
   @media screen and (max-width: 1600px) {
-    margin-left: 30%;
+    margin-left: 34%;
   }
   @media screen and (max-width: 1200px) {
     width: 90vw;
@@ -348,7 +348,7 @@ const IntroduceBtn = styled.div`
     margin: 0px 0 0 38%;
   }
   @media screen and (max-width: 1300px) {
-    margin: 0px 0 0 32%;
+    margin: 0px 0 0 38%;
   }
   @media screen and (max-width: 750px) {
     margin: auto;
