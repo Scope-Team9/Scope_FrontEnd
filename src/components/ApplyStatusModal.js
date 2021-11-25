@@ -7,9 +7,9 @@ import styled from "styled-components";
 import { applyCreators } from "../redux/modules/applyProject";
 import CloseIcon from "@mui/icons-material/Close";
 import { apis } from "../lib/axios";
-const ApplyStatusModal = props => {
+const ApplyStatusModal = (props) => {
   const dispatch = useDispatch();
-  const applyUsers = useSelector(state => state.apply.applyUsers);
+  const applyUsers = useSelector((state) => state.apply.applyUsers);
   const [applyedUsers, setApplyUsers] = React.useState();
   const [acceptButton, setAcceptButton] = React.useState();
   const { applyStatusModal, setApplyStatusModal, postId } = props;
@@ -34,7 +34,7 @@ const ApplyStatusModal = props => {
     // dispatch(applyCreators.applyUserAPI(postId));
   }, [applyStatusModal, acceptButton]);
 
-  const acceptOffer = acceptUser => {
+  const acceptOffer = (acceptUser) => {
     const acceptInfo = {
       userId: acceptUser,
       accept: true,
@@ -55,7 +55,7 @@ const ApplyStatusModal = props => {
     // dispatch(applyCreators.acceptOfferAPI(postId, acceptInfo));
   };
 
-  const cancelOffer = cancelUser => {
+  const cancelOffer = (cancelUser) => {
     const acceptInfo = {
       userId: cancelUser,
       accept: false,
@@ -76,7 +76,7 @@ const ApplyStatusModal = props => {
         >
           <ModalWrap>
             <Grid
-              height="10%"
+              height="12%"
               bg="#17334A"
               position="relative"
               textAlign="center"
@@ -101,7 +101,7 @@ const ApplyStatusModal = props => {
                 alignItems="center"
                 height="40px"
               >
-                <Text size="20px" bold color="#fff">
+                <Text size="40px" bold color="#fff">
                   신청현황
                 </Text>
               </Grid>
@@ -115,7 +115,7 @@ const ApplyStatusModal = props => {
                   textAlign="center"
                   margin="auto"
                 >
-                  <Grid height="50%">
+                  <Grid height="50%" margin="40px auto">
                     <img width="100%" src="/img/step9.png" />
                   </Grid>
                   <Grid margin="250px 0">지원자가 아직 없습니다!</Grid>
@@ -192,7 +192,7 @@ const ApplyStatusModal = props => {
                           <Button
                             common
                             isValue={applyedUsers[idx].userId}
-                            _onClick={e => {
+                            _onClick={(e) => {
                               console.log(e);
                               acceptOffer(e.target.value);
                             }}
@@ -208,7 +208,7 @@ const ApplyStatusModal = props => {
                           <Button
                             common
                             isValue={applyedUsers[idx].userId}
-                            _onClick={e => {
+                            _onClick={(e) => {
                               cancelOffer(e.target.value);
                             }}
                           >

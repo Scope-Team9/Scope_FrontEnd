@@ -9,7 +9,7 @@ import { map, stubFalse } from "lodash";
 import { Grid4x4 } from "@mui/icons-material";
 import EmailAuth from "../EmailAuth";
 
-const TypeResultTest = (props) => {
+const TypeResultTest = props => {
   const [myData, setMyData] = React.useState();
   const [arr, setArr] = React.useState([
     {
@@ -124,7 +124,7 @@ const TypeResultTest = (props) => {
 
   React.useEffect(() => {
     console.log("테스트결과", props);
-    arr.map((item) => {
+    arr.map(item => {
       if (item.id === props.myType) {
         setMyData(item);
       }
@@ -178,7 +178,7 @@ const TypeResultTest = (props) => {
                   height="100%"
                   position="relative"
                   margin="15px 0 0 0"
-                  width="90%"
+                  width="100%"
                   maxWidth="1150px"
                 >
                   <GotoTest
@@ -213,8 +213,11 @@ const TypeResultTest = (props) => {
 
 const Wrap = styled.div`
   height: 100%;
-  width: 58vw;
+  width: 60vw;
   margin-left: 30%;
+  @media screen and (max-width: 1600px) {
+    margin-left: 34%;
+  }
 
   @media screen and (max-width: 1200px) {
     width: 90vw;
@@ -275,7 +278,7 @@ const ConfirmEmail = styled.button`
   background-color: transparent;
   color: white;
   border-radius: 10px;
-  z-index: 99999;
+  z-index: 1;
   cursor: pointer;
 
   &:hover {

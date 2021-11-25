@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 import { apis } from "../../lib/axios";
 import CardUserInfo from "./card/CardUserInfo";
 
-const MypageCard = (props) => {
+const MypageCard = props => {
   const [editMyProfile, setEditMyProfile] = React.useState(false); //
   const [checkEmail, setCheckEmail] = React.useState();
   const [deleteModal, setDeleteModal] = React.useState(false);
@@ -124,7 +124,7 @@ const MypageCard = (props) => {
                   padding: "7px",
                 }}
                 defaultValue={props.nickName}
-                onChange={(e) => {
+                onChange={e => {
                   setNickName(e.target.value);
                 }}
               ></input>
@@ -158,7 +158,7 @@ const MypageCard = (props) => {
                   padding: "7px",
                 }}
                 defaultValue={props.email}
-                onChange={(e) => {
+                onChange={e => {
                   setEmail(e.target.value);
                 }}
               ></input>
@@ -183,7 +183,7 @@ const MypageCard = (props) => {
                 styles={styles}
                 className="basic-multi-select"
                 classNamePrefix="select"
-                onChange={(e) => {
+                onChange={e => {
                   let techStack = [];
                   let arr = e;
                   let idx = 0;
@@ -250,7 +250,7 @@ const Cards = styled.div`
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
     rgba(0, 0, 0, 0.22) 0px 15px 12px;
 
-  width: 70%;
+  width: 100%;
   height: 900px;
   /* background-color: rgba(255, 255, 255, 0); */
   background-color: white;
@@ -258,12 +258,12 @@ const Cards = styled.div`
   overflow: hidden;
 
   position: absolute;
-  right: 10%;
-  top: -500%;
+  right: -35%;
+  top: -600%;
   @media screen and (max-width: 1600px) {
-    width: 60%;
+    width: 90%;
     position: absolute;
-    right: 30%;
+    right: -15%;
   }
   @media screen and (max-width: 1200px) {
     display: none;
