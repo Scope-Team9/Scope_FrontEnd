@@ -260,6 +260,7 @@ const PostDetail = props => {
                       post_id={post_id}
                       passdedMenber={passdedMenber}
                       passedUserStatus={passedUserStatus}
+                      statusCheck={statusCheck}
                     />
                   </Grid>
                 )}
