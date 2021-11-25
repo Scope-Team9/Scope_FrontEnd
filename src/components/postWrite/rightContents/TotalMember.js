@@ -3,6 +3,7 @@
 
 // import를 한다.
 import React from "react";
+import styled from "styled-components";
 import { Grid, Text } from "../../../elements/Index";
 import Select from "react-select";
 
@@ -19,23 +20,33 @@ const TotalMember = (props) => {
   return (
     <React.Fragment>
       <Grid margin="20px auto">
-        <Text size="18px" bold>
-          프로젝트 총 인원
-        </Text>
-        <Select
-          options={projectMembers}
-          styles={props.styles}
-          onChange={(e) => {
-            let b;
-            b = e["label"];
-            props.setTotalmember(b);
-          }}
-          placeholder={<div>총 인원을 선택해주세요.</div>}
-        ></Select>
+        <TotalMemberMedia>
+          <Text size="18px" bold>
+            프로젝트 총 인원
+          </Text>
+          <Select
+            options={projectMembers}
+            styles={props.styles}
+            onChange={(e) => {
+              let b;
+              b = e["label"];
+              props.setTotalmember(b);
+            }}
+            placeholder={<div>총 인원을 선택해주세요.</div>}
+          ></Select>
+        </TotalMemberMedia>
       </Grid>
     </React.Fragment>
   );
 };
+
+// styled-components
+const TotalMemberMedia = styled.div`
+  @media screen and (max-width: 360px) {
+    width: 350px;
+    margin: auto;
+  }
+`;
 
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default TotalMember;

@@ -79,29 +79,21 @@ const TestFour = props => {
             Q4.<b>프로젝트를 진행</b>함에 있어서 당신이 원하는{" "}
             <b>팀원의 생각</b>에 더 가까웠으면 하는 문장은?
           </Grid>
-          <Button
-            isTest
-            isId="MV"
-            isValue="V"
-            _onClick={e => {
-              clickMember(e.target.id);
-              handleMemberCreate(e.target.value);
-            }}
-          >
-            팀장의 존재는 프로젝트를 진행함에 있어 필수적이다.
-          </Button>
-          <Button
-            isTest
-            isId="MH"
-            isValue="H"
-            _onClick={e => {
-              clickMember(e.target.id);
-              handleMemberCreate(e.target.value);
-            }}
-          >
-            소통이 원활하게만 잘 된다면 팀장이 없어도 문제없이 프로젝트를
-            진행할수 있다.
-          </Button>
+          {nowClickMB.map((btn, idx) => (
+            <Grid key={btn.id} {...btn}>
+              <Button
+                isId={btn.id}
+                isValue={btn.value}
+                isTest
+                text={btn.text}
+                isActive={btn.active}
+                _onClick={e => {
+                  clickMember(e.target.id);
+                  handleMemberCreate(e.target.value);
+                }}
+              ></Button>
+            </Grid>
+          ))}
         </Grid>
       </Grid>
     </Grid>

@@ -11,15 +11,17 @@ const ContentWrite = (props) => {
   return (
     <React.Fragment>
       <Grid margin="20px auto">
-        <Text size="18px" bold>
-          프로젝트 내용적기
-        </Text>
-        <TextArea
-          placeholder="프로젝트 내용을 입력해주세요."
-          onChange={(e) => {
-            props.setContents(e.target.value);
-          }}
-        ></TextArea>
+        <ContentMedia>
+          <Text size="18px" bold>
+            프로젝트 내용적기
+          </Text>
+          <TextArea
+            placeholder="프로젝트 내용을 입력해주세요."
+            onChange={(e) => {
+              props.setContents(e.target.value);
+            }}
+          ></TextArea>
+        </ContentMedia>
       </Grid>
     </React.Fragment>
   );
@@ -27,7 +29,7 @@ const ContentWrite = (props) => {
 
 // styled-components
 const TextArea = styled.textarea`
-  width: 97%;
+  width: 98%;
   height: 440px;
   padding: 10px;
   margin: 4px auto;
@@ -35,6 +37,13 @@ const TextArea = styled.textarea`
   border-radius: 10px;
   font-size: 16px;
   outline: none;
+`;
+
+const ContentMedia = styled.div`
+  @media screen and (max-width: 360px) {
+    width: 350px;
+    margin: auto;
+  }
 `;
 
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.

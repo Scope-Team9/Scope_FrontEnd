@@ -7,6 +7,7 @@ import { Grid, Text } from "../elements/Index";
 import { useHistory } from "react-router";
 import ImgType from "../shared/ImgType";
 
+// ProjectJoinUser의 함수형 컴포넌트를 만든다.
 const ProjectJoinUser = (props) => {
   const history = useHistory();
   const goToMypage = (userId) => {

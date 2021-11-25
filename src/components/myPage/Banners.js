@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { Grid, Image, Text, Button } from "../../elements/Index";
 import EmailAuth from "../EmailAuth";
-const Banners = (props) => {
+const Banners = props => {
   //   console.log(props);
   const [myData, setMyData] = React.useState();
   const [arr, setArr] = React.useState([
@@ -64,7 +64,7 @@ const Banners = (props) => {
   ]);
 
   React.useEffect(() => {
-    arr.map((item) => {
+    arr.map(item => {
       if (props.type === item.id) {
         setMyData(item);
       }
@@ -77,18 +77,19 @@ const Banners = (props) => {
       {myData && (
         <BannerAnimals color={myData.color}>
           <BannerImg src={myData.img}></BannerImg>
-          <Grid
+          {/* <Grid
             margin="-600px 0 0 33.5%"
             display="flex"
             height="200px"
             width="100%"
             justifyContent="space-between"
+            
           >
             <WhiteP>
               {myData.id} / {myData.name}
-            </WhiteP>
+            </WhiteP> */}
 
-            {/* {props.myPage === true && (
+          {/* {props.myPage === true && (
               <Grid alignItems="center" display="flex" justifyContent="center">
                 <ConfirmEmail
                   onClick={() => {
@@ -100,7 +101,7 @@ const Banners = (props) => {
                 <EmailAuth modal={props.modal} setModal={props.setModal} />
               </Grid>
             )} */}
-          </Grid>
+          {/* </Grid> */}
         </BannerAnimals>
       )}
     </React.Fragment>
@@ -116,7 +117,7 @@ const BannerAnimals = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
 
-  background-color: ${(props) => (props.color ? props.color : "#white")};
+  background-color: ${props => (props.color ? props.color : "#white")};
   z-index: 0;
 `;
 

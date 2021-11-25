@@ -20,6 +20,8 @@ const PostList = (props) => {
   let sort = useSelector((state) => state.sort.sort);
   let post_list = useSelector((state) => state.post.posts);
   let stacks = useSelector((state) => state.stack.stacks);
+  let Render = props.Render;
+  let isLogin = props.isLogin;
 
   // let stacks = props.stacks;
   // console.log(stackss);
@@ -50,7 +52,7 @@ const PostList = (props) => {
       let posts = props.post.slice(0, paging);
       setAllPost(posts);
     }
-  }, [stacks, paging, sort, reBook]);
+  }, [stacks, paging, sort, reBook, Render, isLogin]);
 
   return (
     <React.Fragment>
@@ -115,10 +117,10 @@ const PostWrap = styled.div`
   margin: auto;
   display: grid;
 
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
   /* grid-gap: 1px; */
-  @media (max-width: 1700px) {
-    width: 100%;
+  @media (max-width: 420px) {
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
   }
 `;
 const NoIntroduction = styled.img`

@@ -65,7 +65,7 @@ const MainPage = () => {
       }
     };
     fetchData();
-  }, [sortC, reBookC]);
+  }, [sortC, reBookC, Render, isLogin, Render]);
 
   // React.useLayoutEffect(() => {
   //   dispatch(postActions.whatPage("mainPage"));
@@ -123,6 +123,8 @@ const MainPage = () => {
                   post={post}
                   paging={pPaging}
                   stacks={stacks}
+                  Render={Render}
+                  isLogin={isLogin}
                 ></PostList>
               </InsideCard>
 
@@ -202,6 +204,11 @@ const Btn = styled.button`
   background: #c4c4c4;
   cursor: pointer;
   z-index: 999;
+  &:hover {
+    background: #17334a;
+    transform: translate();
+    transition: 0.1s ease-out;
+  }
 
   @media screen and (max-width: 750px) {
     position: fixed;

@@ -162,12 +162,12 @@ const MypageCard = (props) => {
               style={{
                 width: "90px",
                 marginLeft: "30px",
-                height: "80px",
+                height: "60px",
               }}
             >
               <p style={{ marginTop: "20px" }}>E-mail </p>
             </div>
-            <div style={{ width: "150px" }}>
+            <div style={{ width: "90px" }}>
               <input
                 style={{
                   borderRadius: "5px",
@@ -189,17 +189,18 @@ const MypageCard = (props) => {
               ></input>
             </div>
           </MyInfoText1>
+          {/* 기술스택 */}
           <MyInfoText1>
-            <Grid height="100px" display="flex" width="100%">
-              <div
-                style={{
-                  width: "90px",
-                  marginLeft: "30px",
-                  height: "50px",
-                }}
-              >
-                <p style={{}}>TechStack </p>
-              </div>
+            <div
+              style={{
+                width: "90px",
+                marginLeft: "30px",
+                height: "80px",
+              }}
+            >
+              <p style={{}}>TechStack </p>
+            </div>
+            <Grid width="167px">
               <Select
                 isMulti
                 name="techStack"
@@ -238,16 +239,17 @@ const MypageCard = (props) => {
             <div style={{ width: "150px", marginLeft: "30px" }}></div>
             <div style={{ width: "50px", marginLeft: "100px" }}></div>
           </MyInfoText2>
+
           <div style={{ display: "flex" }}>
             <Button
-              margin="15px auto 15px 14%"
+              margin="15px auto 15px 10%"
               height="40px"
               width="132px"
               text="프로필 저장하기"
               _onClick={setEditProfile}
             ></Button>
             <Button
-              margin="15px auto 15px 3%"
+              margin="15px auto 15px -9%"
               height="40px"
               width="132px"
               text="취소하기"
@@ -272,25 +274,19 @@ const MypageCard = (props) => {
 const Cards = styled.div`
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
     rgba(0, 0, 0, 0.22) 0px 15px 12px;
-  margin: -220px 0 0px 55px;
-  width: 405px;
-  height: 1000px;
+
+  width: 70%;
+  height: 900px;
   /* background-color: rgba(255, 255, 255, 0); */
   background-color: white;
   border-radius: 20px;
   overflow: hidden;
-  z-index: 1;
-  position: relative;
+
+  position: absolute;
+  right: 0%;
+  top: -500%;
   @media screen and (max-width: 1600px) {
-    width: 400px;
-  }
-  @media screen and (max-width: 1350px) {
     display: none;
-  }
-  @media screen and (max-width: 370px) {
-    display: none;
-    /* width: 250px;
-    margin-right: 250px; */
   }
 `;
 const MyInfoText1 = styled.div`
@@ -303,13 +299,12 @@ const MyInfoText2 = styled.div`
   display: flex;
   color: #737373;
 `;
-
 const Line = styled.hr`
   width: 80%;
   color: black;
 `;
 const Exit = styled.button`
-  margin: 30px auto 15px 35%;
+  margin: 0px auto 15px 30%;
   height: 40px;
   width: 132px;
   background-color: white;

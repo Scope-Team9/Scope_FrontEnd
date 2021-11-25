@@ -95,10 +95,10 @@ const LoginModal = (props) => {
       alert("기술스택을 선택 해주세요.");
       return false;
     }
-    // if (emailDup === false) {
-    //   alert("이메일 중복확인을 해주세요.");
-    //   return false;
-    // }
+    if (techStack.length <= 3) {
+      alert("기술선택을 4개 이하로 입력해주세요.");
+      return false;
+    }
     if (nameDup === false) {
       alert("닉네임 중복확인을 해주세요.");
       return false;
@@ -123,7 +123,7 @@ const LoginModal = (props) => {
     multiValue: (styles, { data }) => ({
       ...styles,
       color: data.color,
-      backgroundColor: "#554475",
+      backgroundColor: "#17334A",
       color: "white",
       borderRadius: "20px",
     }),
@@ -177,7 +177,7 @@ const LoginModal = (props) => {
                 >
                   <CloseIcon
                     sx={{ color: "#fff", fontSize: 35 }}
-                    onClick={modalClose}
+                    onClick={TestClose}
                     cursor="pointer"
                   />
                 </Grid>
