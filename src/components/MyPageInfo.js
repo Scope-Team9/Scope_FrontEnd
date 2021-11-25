@@ -48,18 +48,18 @@ const MyPageInfo = (props) => {
     setFilter(data);
   };
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     // dispatch(myPageActions.getMypageAPI(userId));
-    console.log(editMyProfile);
-    setEmail(null);
-    setNickName(null);
+    // console.log(editMyProfile);
+    // setEmail(null);
+    // setNickName(null);
 
     dispatch(postActions.isMainPage(false));
     dispatch(postActions.whatPage("myPage"));
     const fetchData = async () => {
       try {
         const result = await apis.getMypage(userId);
-
+        console.log(result);
         // setMydata(result.data.data);
         setNickName(result.data.data.user.nickname);
         setEmail(result.data.data.user.email);
@@ -72,7 +72,7 @@ const MyPageInfo = (props) => {
     };
     fetchData();
     console.log(mydata);
-  }, [editMyProfile]);
+  }, [editMyProfile, testmodal]);
 
   React.useLayoutEffect(() => {
     const fetchData = async () => {

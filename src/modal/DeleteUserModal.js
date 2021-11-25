@@ -17,7 +17,7 @@ const EmailAuth = (props) => {
   const modalClose = () => {
     setModal(false);
   };
-  console.log(props);
+  // console.log(props);
 
   const UserDelete = () => {
     const fetchData = async () => {
