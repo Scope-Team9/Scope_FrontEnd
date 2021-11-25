@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { Grid, Text } from "../../elements/Index";
+import { Grid } from "../../elements/Index";
 import ProjectJoinUser from "../ProjectJoinUser";
 import LeftBanner from "./LeftBanner";
+
 const Message = (props) => {
   return (
     <React.Fragment>
@@ -23,14 +24,6 @@ const Message = (props) => {
             <Title size="32px">보낸 쪽지함</Title>
           </Grid>
           <MessageBox>
-            <Grid display="flex" margin="30px auto auto">
-              <ProjectJoinUser />
-              <Grid margin="-14px 16px auto">
-                <NickName>닉네임</NickName>
-                <GetMessage>메시지입니다.</GetMessage>
-                <Line />
-              </Grid>
-            </Grid>
             <Grid display="flex" margin="30px auto auto">
               <ProjectJoinUser />
               <Grid margin="-14px 16px auto">
@@ -68,8 +61,8 @@ const GetMessage = styled.div`
 
 const MessageBox = styled.div`
   overflow: scroll;
-  width: 800px;
-  height: 550px;
+  width: 900px;
+  height: 650px;
   border: 5px solid #554475;
   border-radius: 20px;
   padding: 50px;

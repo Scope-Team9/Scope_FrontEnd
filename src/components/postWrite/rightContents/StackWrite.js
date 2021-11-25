@@ -60,19 +60,21 @@ const StackWrite = (props) => {
   return (
     <React.Fragment>
       <Grid margin="10px auto">
-        <Text size="18px" bold>
-          기술스택 선택
-          <SubDescription> (5개 이상 중복 X)</SubDescription>
-        </Text>
-        <Select
-          isMulti
-          value={props.techstack}
-          components={props.animatedComponents}
-          styles={props.styles}
-          options={stackSelect}
-          onChange={handleChange}
-          placeholder={<div>기술 스택을 선택해주세요.</div>}
-        />
+        <StackMedia>
+          <Text size="18px" bold>
+            기술스택 선택
+            <SubDescription> (5개 이상 중복 X)</SubDescription>
+          </Text>
+          <Select
+            isMulti
+            value={props.techstack}
+            components={props.animatedComponents}
+            styles={props.styles}
+            options={stackSelect}
+            onChange={handleChange}
+            placeholder={<div>기술 스택을 선택해주세요.</div>}
+          />
+        </StackMedia>
       </Grid>
     </React.Fragment>
   );
@@ -82,6 +84,13 @@ const StackWrite = (props) => {
 const SubDescription = styled.span`
   color: rgb(186, 187, 192);
   font-size: 12px;
+`;
+
+const StackMedia = styled.div`
+  @media screen and (max-width: 360px) {
+    width: 350px;
+    margin: auto;
+  }
 `;
 
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.

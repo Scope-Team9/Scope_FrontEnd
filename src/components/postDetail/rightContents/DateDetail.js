@@ -10,7 +10,7 @@ import { Grid, Text } from "../../../elements/Index";
 const DateDetail = (props) => {
   return (
     <React.Fragment>
-      <Grid display="flex" margin="20px auto">
+      <Grid display="flex" margin="20px auto auto">
         <Text size="18px" bold margin="auto 10px auto 0px">
           프로젝트 기간
         </Text>

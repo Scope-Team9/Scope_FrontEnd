@@ -10,7 +10,7 @@ import { Grid, Text } from "../../../elements/Index";
 const TitleDetail = (props) => {
   return (
     <React.Fragment>
-      <Grid margin="40px auto auto">
+      <Grid margin="60px auto auto">
         <Text size="40px" bold>
           {props.passedData?.title}
           <Line />

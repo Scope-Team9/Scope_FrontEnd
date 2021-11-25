@@ -45,7 +45,8 @@ const RightWrite = (props) => {
       title.length > 0 &&
       techstack.length > 0 &&
       totalMember > 0 &&
-      contents.length > 0
+      contents.length > 0 &&
+      startDate < endDate
     ) {
       window.alert("프로젝트가 생성되었습니다.");
       scopeIndex();
@@ -73,7 +74,7 @@ const RightWrite = (props) => {
     control: (base, state) => ({
       ...base,
       boxShadow: state.isFocused ? 0 : 0,
-      borderWidth: 2,
+      borderWidth: 1,
       borderRadius: 10,
       marginTop: 4,
       minHeight: 40,

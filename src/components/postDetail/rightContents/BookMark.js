@@ -15,8 +15,8 @@ const Bookmark = (props) => {
         <Grid
           width="50px"
           position="absolute"
-          top="20px"
-          right="50px"
+          top="0px"
+          right="10px"
           height="50px"
         >
           <Grid _onClick={props.ToggleBookMark} cursor="pointer">
