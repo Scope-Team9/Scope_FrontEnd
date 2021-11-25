@@ -116,7 +116,6 @@ const MypageCard = props => {
             setEditMyProfile={props.setEditMyProfile}
             mydata={props.mydata}
             myType={props.myType}
-            myPage={props.mydata.isMyMypage}
             myUserId={props.myUserId}
             userId={props.userId}
             nickName={props.nickName}

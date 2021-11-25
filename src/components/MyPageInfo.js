@@ -35,6 +35,12 @@ const MyPageInfo = props => {
   const [testmodal, setTestModal] = React.useState(false);
 
   //click
+  const introduction = mydata?.user.introduction ? true : false;
+
+  const recruitmentProject = mydata?.recruitment;
+  const inProgressProject = mydata?.inProgress;
+  const bookMarkProject = mydata?.bookmark;
+  const endProject = mydata?.end;
 
   const [loading, setLoading] = React.useState(true);
 
@@ -83,12 +89,6 @@ const MyPageInfo = props => {
     fetchData();
     console.log(mydata);
   }, [filter]);
-
-  const introduction = mydata?.user.introduction ? true : false;
-  const recruitmentProject = mydata?.recruitment;
-  const inProgressProject = mydata?.inProgress;
-  const bookMarkProject = mydata?.bookmark;
-  const endProject = mydata?.end;
 
   const EmailConfirm = () => {
     setModal(true);
@@ -153,7 +153,6 @@ const MyPageInfo = props => {
                   editMyProfile={editMyProfile}
                   mydata={mydata}
                   myType={myType}
-                  myPage={mydata?.isMyMypage}
                   myUserId={myUserId}
                   userId={userId}
                   nickName={nickName}

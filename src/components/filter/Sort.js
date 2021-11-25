@@ -90,7 +90,10 @@ const Sort = (props) => {
                   if (item.id === "최신" || item.id === "마감순") {
                     onclickSort(item.status);
                   }
-                  if (isLoginUser) {
+                  if (
+                    isLoginUser &&
+                    (item.id === "북마크" || item.id === "추천")
+                  ) {
                     onclickRb(item.status);
                   }
                   if (

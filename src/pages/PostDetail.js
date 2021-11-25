@@ -20,9 +20,10 @@ import BookMark from "../components/postDetail/rightContents/BookMark";
 import ApplicantButton from "../components/postDetail/rightContents/ApplicantButton";
 import PosterButton from "../components/postDetail/rightContents/PosterButton";
 import TotalMemberDetail from "../components/postDetail/rightContents/TotalMemberDetail";
+import { Link } from "react-router-dom";
 
 // PostDetail의 함수형 컴포넌트를 만든다
-const PostDetail = props => {
+const PostDetail = (props) => {
   const dispatch = useDispatch();
   const [checkPost, setCheckPost] = React.useState();
   const [bookmark, setBookmark] = React.useState(false);
@@ -30,7 +31,7 @@ const PostDetail = props => {
   const [applyUserModal, setApplyUserModal] = React.useState(false); //지원취소/팀탈퇴/프로젝트마감
   const [exileStatusModal, setExileStatusModal] = React.useState(false); //강퇴
   const [recruitmentFinish, setRecruitmentFinish] = React.useState(); // 모집완료 체크 for리렌더링
-  const [projectStatus, setProjectStatus] = React.useState(null);
+  const [projectStatus, setProjectStatus] = React.useState();
   const [applyValue, setApplyValue] = React.useState();
   const [isme, setIsme] = React.useState(null);
 
@@ -42,17 +43,17 @@ const PostDetail = props => {
     setExileStatusModal(true);
   };
 
-  const applyUserModalOpen = value => {
+  const applyUserModalOpen = (value) => {
     setApplyValue(value);
     setApplyUserModal(true);
   };
 
-  const statusCheck = value => {
+  const statusCheck = (value) => {
     console.log(value);
     setProjectStatus(value);
   };
   // 상태변경
-  const edit_status = data => {
+  const edit_status = (data) => {
     const editstatus = {
       projectStatus: data,
     };
@@ -69,7 +70,7 @@ const PostDetail = props => {
   };
 
   let post_id = props.match.params.id;
-  const userId = useSelector(state => state.user.userId); //로그인 유저아이디
+  const userId = useSelector((state) => state.user.userId); //로그인 유저아이디
   const postUserId = checkPost?.data.data.post.userId;
   const passedData = checkPost?.data["data"].post;
   const passedUserStatus = checkPost?.data["data"].userStatus;
@@ -160,10 +161,10 @@ const PostDetail = props => {
                 </Grid>
               )}
 
-              <Grid display="flex">
+              <FlexMedia display="flex">
                 <DateDetail passedData={passedData} />
                 <StackDetail passedData={passedData} />
-              </Grid>
+              </FlexMedia>
               <Grid>
                 <Grid display="flex">
                   <TotalMemberDetail passedData={passedData} />
@@ -188,24 +189,46 @@ const PostDetail = props => {
                         </ButtonMedia>
                       </Grid>
                     )}
-                  {passedData?.projectStatus === "종료" &&
-                    passedData?.frontUrl !== "null" && (
-                      <Grid display="flex" width="200px">
-                        <Grid>
-                          <Text>프론트Url</Text>
+                  <FlexMedia>
+                    {passedData?.projectStatus === "종료" &&
+                      passedData?.frontUrl !== "null" && (
+                        <Grid display="flex" width="200px">
+                          <Text>Frontend</Text>
+                          <Grid
+                            margin="0 10px"
+                            border="1px solid #BBB4D9"
+                            borderRadius="10px"
+                            padding="2px"
+                            backgroundColor="#BBB4D9"
+                            color="white"
+                            width="80px"
+                            height="20px"
+                            textAlign="center"
+                          >
+                            <Link to={passedData?.frontUrl}>프론트Url</Link>
+                          </Grid>
                         </Grid>
-                        <Grid>{passedData?.frontUrl}</Grid>
-                      </Grid>
-                    )}
-                  {passedData?.projectStatus === "종료" &&
-                    passedData?.backUrl !== "null" && (
-                      <Grid display="flex" width="200px" margin="5px 0">
-                        <Grid>
-                          <Text>백엔드Url</Text>
+                      )}
+                    {passedData?.projectStatus === "종료" &&
+                      passedData?.backUrl !== "null" && (
+                        <Grid display="flex" width="200px">
+                          <Text>Backend</Text>
+                          <Grid
+                            margin="0 10px"
+                            border="1px solid #BBB4D9"
+                            borderRadius="10px"
+                            padding="2px"
+                            backgroundColor="#BBB4D9"
+                            color="white"
+                            width="80px"
+                            height="20px"
+                            textAlign="center"
+                          >
+                            <Link to={passedData?.frontUrl}>백엔드Url</Link>
+                          </Grid>
                         </Grid>
-                        <Grid>{passedData?.frontUrl}</Grid>
-                      </Grid>
-                    )}
+                      )}
+                  </FlexMedia>
                 </Grid>
                 <StatusDetail passedData={passedData} />
 
@@ -237,7 +260,6 @@ const PostDetail = props => {
                       post_id={post_id}
                       passdedMenber={passdedMenber}
                       passedUserStatus={passedUserStatus}
-                      statusCheck={statusCheck}
                     />
                   </Grid>
                 )}
@@ -257,6 +279,13 @@ const ButtonMedia = styled.p`
     display: flex;
     width: 100px;
     margin: auto;
+  }
+`;
+
+const FlexMedia = styled.div`
+  display: flex;
+  @media screen and (max-width: 1000px) {
+    flex-direction: column;
   }
 `;
 

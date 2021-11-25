@@ -7,9 +7,9 @@ import { history } from "../redux/configureStore";
 import { Grid, Image, Progress } from "../elements/Index";
 import Img from "../images/flutter.png";
 
-const PostStacks = props => {
-  const whatPage = useSelector(state => state.post.whatPage);
-  const reduxstack = useSelector(state => state.stack.stack);
+const PostStacks = (props) => {
+  const whatPage = useSelector((state) => state.post.whatPage);
+  const reduxstack = useSelector((state) => state.stack.stack);
   const [stacks, setStacks] = React.useState(9);
   const [Stack, setStack] = React.useState([
     {
@@ -38,7 +38,7 @@ const PostStacks = props => {
       active: false,
     },
     {
-      id: "cpp",
+      id: "C++",
       img: "/img/c__.png",
       active: false,
     },
@@ -90,7 +90,7 @@ const PostStacks = props => {
   React.useEffect(() => {
     // let stack = props.stack;
     // setStacks(stack);
-    Stack.map(item => {
+    Stack.map((item) => {
       if (item.id === props.stack) {
         setStacks(item.img);
         return item;
