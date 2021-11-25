@@ -132,13 +132,10 @@ const PropensityTest = props => {
       userPropensityType: userPropensityType,
       memberPropensityType: memberPropensityType,
     };
-    console.log(realSnsId, registerInfo);
-    console.log(realUserId, testUpdateInfo);
-    console.log(isToken);
+
     if (isToken) {
-      setpage(page => page + 1);
       dispatch(userCreators.editTestMiddleware(realUserId, testUpdateInfo));
-      return;
+      return setpage(page => page + 1);
     } else {
       dispatch(userCreators.signupMiddleware(registerInfo));
       setpage(page => page + 1);

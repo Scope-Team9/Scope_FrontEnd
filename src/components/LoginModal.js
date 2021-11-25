@@ -93,7 +93,7 @@ const LoginModal = props => {
       alert("기술스택을 선택 해주세요.");
       return false;
     }
-    if (techStack.length <= 3) {
+    if (techStack.length >= 3) {
       alert("기술선택을 4개 이하로 입력해주세요.");
       return false;
     }
@@ -321,7 +321,7 @@ const LoginModal = props => {
               </Grid>
             </Grid>
           ) : (
-            <PropensityTest modalClose={TestClose} />
+            <PropensityTest TestClose={TestClose} />
           )}
           <Grid display="flex" justifyContent="center" margin="10px 0 30px 0">
             <Grid width="20%" backgroundColor="#554475" height="3px"></Grid>
