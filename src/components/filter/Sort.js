@@ -56,6 +56,8 @@ const Sort = (props) => {
   };
 
   const Filter = (getItem) => {
+    const checked = arr.find((e) => e.active === true);
+    console.log("ddddd", checked);
     setArr((state) => {
       return state.map((stateItem) => {
         if (stateItem.id === getItem.id) {
@@ -90,9 +92,17 @@ const Sort = (props) => {
                   if (item.id === "최신" || item.id === "마감순") {
                     onclickSort(item.status);
                   }
-                  if (isLoginUser) {
+                  if (
+                    isLoginUser &&
+                    (item.id === "북마크" || item.id === "추천")
+                  ) {
                     onclickRb(item.status);
-                  } else {
+                  }
+                  if (
+                    !isLoginUser &&
+                    (item.id === "북마크" || item.id === "추천")
+                  ) {
+                    console.log("나는 유저", isLoginUser);
                     Swal.fire(
                       "로그인 후 이용하실 수 있습니다!",
                       "로그인하고 프로젝트를 추천받아 보세요!",

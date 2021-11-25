@@ -36,5 +36,11 @@ const StackBox = styled.div`
   text-align: center;
 `;
 
+const StackMedia = styled.div`
+  @media screen and (max-width: 360px) {
+    flex-direction: column;
+  }
+`;
+
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default StackDetail;

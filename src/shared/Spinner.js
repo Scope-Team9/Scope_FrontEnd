@@ -7,7 +7,7 @@ const Spinner = () => {
   return (
     <React.Fragment>
       <Grid width="30%" margin="auto">
-        <IMG src="/img/spinner.gif" alt="spinner"></IMG>
+        <IMG src="/img/호랭이.gif" alt="spinner"></IMG>
       </Grid>
     </React.Fragment>
   );

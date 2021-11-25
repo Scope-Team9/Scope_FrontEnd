@@ -45,7 +45,8 @@ const RightWrite = (props) => {
       title.length > 0 &&
       techstack.length > 0 &&
       totalMember > 0 &&
-      contents.length > 0
+      contents.length > 0 &&
+      startDate < endDate
     ) {
       window.alert("프로젝트가 생성되었습니다.");
       scopeIndex();
@@ -73,7 +74,7 @@ const RightWrite = (props) => {
     control: (base, state) => ({
       ...base,
       boxShadow: state.isFocused ? 0 : 0,
-      borderWidth: 2,
+      borderWidth: 1,
       borderRadius: 10,
       marginTop: 4,
       minHeight: 40,
@@ -86,8 +87,11 @@ const RightWrite = (props) => {
 
   return (
     <React.Fragment>
-      <Grid margin="46px 106px 0px">
-        <Title>게시글 작성하기</Title>
+      <Grid margin="46px 85px 0px">
+        <TitleMedia>
+          <Title>게시글 작성하기</Title>
+        </TitleMedia>
+
         <Grid margin="40px auto">
           <TitleWrite setTitle={setTitle} />
           <StackWrite
@@ -113,10 +117,18 @@ const RightWrite = (props) => {
 };
 
 // styled-components
-const Title = styled.div`
+const Title = styled.p`
   color: black;
   font-size: 32px;
   font-weight: 800;
+`;
+
+const TitleMedia = styled.p`
+  @media screen and (max-width: 1000px) {
+    width: 350px;
+    margin: auto;
+    text-align: center;
+  }
 `;
 
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.

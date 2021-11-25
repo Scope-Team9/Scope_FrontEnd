@@ -5,7 +5,7 @@ import { Grid, Image, Text, Button } from "../../elements/Index";
 import MyFilter from "./filter/MyFilter";
 
 const MypageFilter = (props) => {
-  console.log(props);
+  // console.log(props);
   const [arr, setArr] = React.useState([
     {
       id: "소개",
@@ -50,7 +50,7 @@ const MypageFilter = (props) => {
   return (
     <>
       {arr && (
-        <Grid display="flex" margin=" 0 0 0 40%">
+        <Grid display="flex" width="70%">
           {arr.map((item) => {
             return (
               <MyFilter

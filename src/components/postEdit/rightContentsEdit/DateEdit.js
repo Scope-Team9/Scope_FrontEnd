@@ -66,7 +66,7 @@ const DateEdit = (props) => {
 // styled-components
 const SDatePicker = styled(DatePicker)`
   box-sizing: border-box;
-  width: 350px;
+  width: 96%;
   height: 40px;
   border-radius: 10px;
   border: 1px solid #c4c4c4;

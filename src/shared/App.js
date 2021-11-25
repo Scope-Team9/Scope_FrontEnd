@@ -18,17 +18,15 @@ import PostDetail from "../pages/PostDetail";
 import Markdown from "../components/Markdown";
 import MarkdownRead from "../components/MarkdownRead";
 import Header from "../components/Header";
+import Message from "../components/headerFunction/Message";
+import Footer from "../components/Footer";
 
 //테스트용입니다.
 import PropensityTest from "../components/propensityTest/PropensityTest";
-import HeaderMessage from "../pages/HeaderMessage";
-import Message from "../components/headerFunction/Message";
 
 function App() {
-  const isLogin = useSelector((state) => state.user.isLogin);
-  const userPropensityType = useSelector(
-    (state) => state.user.userPropensityType
-  );
+  const isLogin = useSelector(state => state.user.isLogin);
+  const userInfo = useSelector(state => state.user);
   const isCookie = document.cookie.split("=")[1];
   const dispatch = useDispatch();
 
@@ -36,7 +34,7 @@ function App() {
     if (isCookie) {
       dispatch(userCreators.myUserAPI());
     }
-  }, [isLogin, userPropensityType]);
+  }, [isLogin, userInfo.userPropensityType]);
 
   return (
     <React.Fragment>
@@ -65,6 +63,7 @@ function App() {
             ></Route>
           </Switch>
         </ConnectedRouter>
+        <Footer userInfo={userInfo} />
       </div>
     </React.Fragment>
   );

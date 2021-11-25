@@ -66,6 +66,7 @@ const ApplicantButton = (props) => {
         applyValue={props.applyValue}
         postId={props.post_id}
         passdedMenber={props.passdedMenber}
+        statusCheck={props.statusCheck}
       />
       {props.passedData?.projectStatus === "종료" &&
         props.passedUserStatus === "member" && (

@@ -10,7 +10,7 @@ import { Grid, Text } from "../../../elements/Index";
 const DateDetail = (props) => {
   return (
     <React.Fragment>
-      <Grid display="flex" margin="20px auto">
+      <Grid display="flex" margin="20px auto auto">
         <Text size="18px" bold margin="auto 10px auto 0px">
           프로젝트 기간
         </Text>
@@ -30,6 +30,13 @@ const DateBox = styled.div`
   border: 1px solid #e6ddf2;
   border-radius: 10px;
   text-align: center;
+`;
+
+const ButtonMedia = styled.p`
+  @media screen and (max-width: 1500px) {
+    width: 100px;
+    margin: auto;
+  }
 `;
 
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.

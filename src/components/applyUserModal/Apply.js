@@ -14,7 +14,7 @@ const Apply = props => {
       comment: comment,
     };
     dispatch(applyCreators.applyProjectAPI(postId, applyComment));
-    modalClose();
+    modalClose("신청");
   };
   return (
     <ModalWrap>

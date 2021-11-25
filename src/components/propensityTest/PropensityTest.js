@@ -13,6 +13,7 @@ import {
   TestNine,
   TestResult,
 } from "./TestIndex";
+import TestData from "./Testdata.json";
 import Progress from "./Progress";
 import { useSelector, useDispatch } from "react-redux";
 import { Grid, Button, Image, Text } from "../../elements/Index";
@@ -35,6 +36,7 @@ const PropensityTest = props => {
 
   //스텝별로 스테이트 변화값에 따라 텍스트가 바뀌는지 먼저 확인
   const [page, setpage] = useState(1);
+  console.log(page, TestData.teststep);
 
   // 최종 장소
   const [userPropensityType, setUserPropensityType] = useState([]);
@@ -153,7 +155,7 @@ const PropensityTest = props => {
       {/* 상단헤더 */}
       <Grid
         height="10%"
-        bg="#554475"
+        bg="#17334A"
         position="relative"
         textAlign="center"
         padding="10px 0 10px 0"
@@ -187,42 +189,17 @@ const PropensityTest = props => {
         <Progress page={page} />
       </Grid>
       <Grid display="flex" justifyContent="center" margin="10px 0">
-        {page === 1 && <img width="30%" src="/img/step1.png" />}
-        {page === 2 && <img width="40%" src="/img/step2.png" />}
-        {page === 3 && <img width="40%" src="/img/step3.png" />}
-        {page === 4 && <img width="40%" src="/img/step4.png" />}
-        {page === 5 && <img width="40%" src="/img/step5.png" />}
-        {page === 6 && <img width="40%" src="/img/step6.png" />}
-        {page === 7 && <img width="40%" src="/img/step7.png" />}
-        {page === 8 && <img width="40%" src="/img/step8.png" />}
-        {page === 9 && <img width="40%" src="/img/step9.png" />}
-        {page === 10 && userType === "LVG" && (
-          <img width="50%" src="/img/호랑이결과.png" />
-        )}
-        {page === 10 && userType === "LVP" && (
-          <img width="50%" src="/img/늑대결과.png" />
-        )}
-        {page === 10 && userType === "LHG" && (
-          <img width="50%" src="/img/여우결과.png" />
-        )}
-        {page === 10 && userType === "LHP" && (
-          <img width="50%" src="/img/판다결과.png" />
-        )}
-        {page === 10 && userType === "FVG" && (
-          <img width="50%" src="/img/토끼결과.png" />
-        )}
-        {page === 10 && userType === "FVP" && (
-          <img width="50%" src="/img/개결과.png" />
-        )}
-        {page === 10 && userType === "FHG" && (
-          <img width="50%" src="/img/고양이결과.png" />
-        )}
-        {page === 10 && userType === "FHP" && (
-          <img width="50%" src="/img/물개결과.png" />
-        )}
-        {page === 10 && userType === "RHP" && (
-          <img width="50%" src="/img/너구리결과.png" />
-        )}
+        {TestData.teststep.map(step => {
+          if (step.step === page) {
+            return <img width="40%" src={step.img} />;
+          }
+        })}
+        {page === 10 &&
+          TestData.testresult.map(result => {
+            if (result.type === userType) {
+              return <img width="50%" src={result.img} />;
+            }
+          })}
       </Grid>
 
       {/* 컨텐츠자리 */}

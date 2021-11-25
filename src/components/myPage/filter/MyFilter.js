@@ -4,11 +4,11 @@ import styled from "styled-components";
 import { Grid, Image, Text, Button } from "../../../elements/Index";
 
 const MyFilter = (props) => {
-  console.log(props);
+  // console.log(props);
   return (
     <>
       {props && (
-        <Grid width="11.5%">
+        <Grid>
           <FilterDiv active={props.active}>
             <Filter
               id={props.id}
@@ -29,17 +29,17 @@ const MyFilter = (props) => {
 
 const FilterDiv = styled.div`
   align-items: center;
-  width: 100px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  width: 80%;
   height: 35px;
+
   /* background-color: ${(props) => (props.active ? "black" : " yellow")}; */
-  border-bottom: ${(props) =>
-    props.active ? "1mm ridge rgb(170, 50, 220, .6)" : null};
+  border-bottom: ${(props) => (props.active ? "1mm ridge #554475" : null)};
 `;
 
 const Filter = styled.p`
   text-align: center;
-  margin-top: 100px;
-  margin-bottom: 50px;
   cursor: pointer;
   width: auto;
 

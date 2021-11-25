@@ -3,6 +3,7 @@
 
 // import를 한다.
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Grid, Text } from "../../../elements/Index";
 
@@ -10,7 +11,7 @@ import { Grid, Text } from "../../../elements/Index";
 const TitleDetail = (props) => {
   return (
     <React.Fragment>
-      <Grid margin="40px auto auto">
+      <Grid margin="60px auto auto">
         <Text size="40px" bold>
           {props.passedData?.title}
           <Line />

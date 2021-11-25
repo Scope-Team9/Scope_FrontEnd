@@ -10,6 +10,7 @@ import LogoButton from "../elements/LogoButton";
 const Stack = (props) => {
   const dispatch = useDispatch();
   const stack = useSelector((state) => state.stack.stack);
+  const stack2 = useSelector((state) => state.stack.stacks);
   //필터 클릭
   const [arr, setArr] = React.useState([
     {
@@ -38,7 +39,7 @@ const Stack = (props) => {
       active: false,
     },
     {
-      id: "cpp",
+      id: "C++",
       img: "/img/c__.png",
       active: false,
     },
@@ -85,7 +86,7 @@ const Stack = (props) => {
   ]);
   React.useEffect(() => {
     const stacks = Object.entries(stack);
-    console.log(stacks);
+    // console.log(stacks);
     setArr((state) => {
       return state.map((stateItem, idx) => {
         if (stateItem.id === stacks[idx][1]) {
@@ -121,6 +122,29 @@ const Stack = (props) => {
       dispatch(postActions.isMainPage(true));
       dispatch(stackAction.getStack(item.id));
     }
+    const result2 = stack2.find((r) => r === item.id);
+    if (result2) {
+      dispatch(stackAction.setStack2(item.id));
+    } else {
+      dispatch(stackAction.getStack2(item.id));
+    }
+
+    console.log("dodo", stack2);
+  };
+
+  const arrStack = (item) => {
+    const nowStack = props.stacks;
+    const alreadyChecked = nowStack.find((p) => p === item.id);
+    console.log(alreadyChecked);
+    if (!alreadyChecked) {
+      props.setStacks(nowStack.concat(item.id));
+    }
+    if (alreadyChecked) {
+      const deleteCheck = nowStack.filter((p) => p !== alreadyChecked);
+      props.setStacks(deleteCheck);
+    }
+
+    console.log(nowStack);
   };
 
   return (
@@ -143,6 +167,7 @@ const Stack = (props) => {
             onClick={() => {
               if (props.do === "StacksComponent") {
                 Filter(item);
+                arrStack(item);
               }
             }}
           ></LogoButton>

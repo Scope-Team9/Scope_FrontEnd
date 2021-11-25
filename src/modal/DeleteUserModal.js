@@ -17,7 +17,7 @@ const EmailAuth = (props) => {
   const modalClose = () => {
     setModal(false);
   };
-  console.log(props);
+  // console.log(props);
 
   const UserDelete = () => {
     const fetchData = async () => {
@@ -68,6 +68,8 @@ const EmailAuth = (props) => {
           {/* 내용작성 */}
           <Grid margin="60px 0 0 0">
             <Dec>정말 탈퇴 하시겠습니까?</Dec>
+            <Dec>게시자가 회원 탈퇴시 작성된 포스트는 모두 제거됩니다.</Dec>
+            <Dec>지원한 프로젝트는 모두 탈퇴됩니다.</Dec>
 
             {/* <Grid margin="10px 0 0 18%" width="320px"></Grid> */}
 
@@ -90,7 +92,7 @@ const EmailAuth = (props) => {
 
 const ModalWrap = styled.div`
   width: 550px;
-  height: 300px;
+  height: 350px;
   border-radius: 20px;
   overflow: hidden;
 `;

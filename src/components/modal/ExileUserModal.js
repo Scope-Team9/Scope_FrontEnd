@@ -5,11 +5,12 @@ import { Dialog } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { applyCreators } from "../../redux/modules/applyProject";
+
 import CloseIcon from "@mui/icons-material/Close";
 import { apis } from "../../lib/axios";
-const ApplyStatusModal = props => {
+const ApplyStatusModal = (props) => {
   const dispatch = useDispatch();
-  const applyUsers = useSelector(state => state.apply.applyUsers);
+  const applyUsers = useSelector((state) => state.apply.applyUsers);
   const [applyedUsers, setApplyUsers] = React.useState();
   const [acceptButton, setAcceptButton] = React.useState();
   const { applyStatusModal, setApplyStatusModal, postId } = props;
@@ -34,7 +35,7 @@ const ApplyStatusModal = props => {
     // dispatch(applyCreators.applyUserAPI(postId));
   }, [applyStatusModal, acceptButton]);
 
-  const exile = userId => {
+  const exile = (userId) => {
     console.log(userId);
     const fetchData = async () => {
       try {
@@ -46,7 +47,6 @@ const ApplyStatusModal = props => {
       }
     };
     fetchData();
-    // dispatch(applyCreators.acceptOfferAPI(postId, acceptInfo));
   };
 
   return (
@@ -61,10 +61,10 @@ const ApplyStatusModal = props => {
           <ModalWrap>
             <Grid
               height="10%"
-              bg="#B29CF4"
+              bg="#17334A"
               position="relative"
               textAlign="center"
-              padding="10px 0 0 0"
+              padding="10px 0 10px 0"
             >
               <Grid
                 position="absolute"
@@ -73,10 +73,15 @@ const ApplyStatusModal = props => {
                 width="20px"
                 padding="10px"
               >
-                <CloseIcon fontSize="large" onClick={modalClose} />
+                <CloseIcon
+                  sx={{ color: "#fff", fontSize: 35 }}
+                  fontSize="large"
+                  cursor="pointer"
+                  onClick={modalClose}
+                />
               </Grid>
-              <Text size="30px" bold color="#fff">
-                신청현황
+              <Text size="40px" bold color="#fff">
+                팀원강퇴
               </Text>
             </Grid>
             {applyedUsers == "" && (
@@ -162,16 +167,18 @@ const ApplyStatusModal = props => {
                           </Grid>
                         </Grid>
                         <Grid margin="auto" height="50px" width="80%">
-                          <Button
-                            common
-                            isValue={applyedUsers[idx].userId}
-                            _onClick={e => {
-                              window.confirm("추방하시겠습니까?");
-                              exile(e.target.value);
-                            }}
-                          >
-                            추방하기
-                          </Button>
+                          <Grid margin="auto 40px">
+                            <Button
+                              common
+                              isValue={applyedUsers[idx].userId}
+                              _onClick={(e) => {
+                                window.confirm("추방하시겠습니까?");
+                                exile(e.target.value);
+                              }}
+                            >
+                              추방하기
+                            </Button>
+                          </Grid>
                         </Grid>
                         <Grid
                           margin="auto auto auto 3px"

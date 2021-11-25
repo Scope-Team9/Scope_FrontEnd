@@ -3,6 +3,7 @@
 
 // import를 한다.
 import React from "react";
+import styled from "styled-components";
 import { Grid, Button } from "../../../elements/Index";
 import ApplyUserModal from "../../ApplyUserModal";
 import { useHistory } from "react-router";
@@ -10,6 +11,7 @@ import { apis } from "../../../lib/axios";
 
 // PosterButton의 함수형 컴포넌트를 만든다.
 const PosterButton = (props) => {
+  console.log(props);
   const history = useHistory();
 
   const DeletePost = async () => {
@@ -98,6 +100,7 @@ const PosterButton = (props) => {
             포스트수정
           </Button>
         )}
+
         <Button
           common
           width="140px"
@@ -113,6 +116,16 @@ const PosterButton = (props) => {
     </React.Fragment>
   );
 };
+
+const ContentMedia = styled.div`
+  @media screen and (max-width: 1500px) {
+    display: flex;
+    width: 300px;
+    height: 10px;
+    margin: auto 100px;
+    margin-bottom: 80px;
+  }
+`;
 
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default PosterButton;

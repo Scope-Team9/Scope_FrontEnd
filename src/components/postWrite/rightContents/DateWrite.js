@@ -11,15 +11,20 @@ import { ko } from "date-fns/esm/locale";
 // DateWrite의 함수형 컴포넌트를 만든다.
 const DateWrite = (props) => {
   const startDate = (date) => {
-    if (date <= props.endDate) {
-      props.setStartdate(date);
-    } else {
-      window.alert("시작일을 잘못 설정했습니다.");
-    }
+    props.setStartdate(date);
+    // if (date <= props.endDate) {
+    //   props.setStartdate(date);
+    // } else {
+    //   window.alert("시작일을 잘못 설정했습니다.");
+    // }
   };
 
-  const endDate = (data) => {
-    props.setEnddate(data);
+  const endDate = (date) => {
+    if (date > props.startDate) {
+      props.setEnddate(date);
+    } else {
+      window.alert("종료일을 잘못 설정했습니다.");
+    }
   };
 
   return (
@@ -58,7 +63,7 @@ const DateWrite = (props) => {
 // styled-components
 const SDatePicker = styled(DatePicker)`
   box-sizing: border-box;
-  width: 350px;
+  width: 96%;
   height: 40px;
   border-radius: 10px;
   border: 1px solid #c4c4c4;

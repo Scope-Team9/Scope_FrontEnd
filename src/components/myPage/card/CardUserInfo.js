@@ -7,28 +7,16 @@ const CardUserInfo = (props) => {
   const [techStack, setTeckstack] = React.useState([]);
   const [nickName, setNickName] = React.useState();
   const [email, setEmail] = React.useState();
-  //   console.log(props);
-
-  //   React.useEffect(() => {
-  //     setNickName(props.nickName);
-  //     setEmail(props.email);
-  //     setTeckstack(props.techStack);
-  //   }, [props.editMyProfile]);
-
-  const editProfile = () => {
-    // console.log(props);
-    props.setEditMyProfile(true);
-  };
 
   return (
     <div>
       {props.nickName && props.email && (
         <>
           <MyInfoText1>
-            <div style={{ width: "150px", marginLeft: "30px" }}>
+            <div style={{ width: "95px", marginLeft: "25px" }}>
               <p>NickName </p>
             </div>
-            <div style={{ width: "150px" }}>
+            <div style={{ width: "100px" }}>
               <p>{props.nickName}</p>
             </div>
           </MyInfoText1>
@@ -36,13 +24,13 @@ const CardUserInfo = (props) => {
           <MyInfoText1>
             <div
               style={{
-                width: "150px",
-                marginLeft: "30px",
+                width: "95px",
+                marginLeft: "25px",
               }}
             >
               <p>E-mail </p>
             </div>
-            <div style={{ width: "150px" }}>
+            <div style={{ width: "90px" }}>
               <p>{props.email}</p>
             </div>
           </MyInfoText1>
@@ -53,8 +41,8 @@ const CardUserInfo = (props) => {
       <MyInfoText1>
         <div
           style={{
-            width: "150px",
-            marginLeft: "30px",
+            width: "95px",
+            marginLeft: "25px",
             height: "150px",
           }}
         >
@@ -62,7 +50,7 @@ const CardUserInfo = (props) => {
         </div>
         {props.techStack && (
           <>
-            <div style={{ width: "150px" }}>
+            <div style={{ width: "120px" }}>
               {props.techStack?.map((p, idx) => {
                 return <p key={idx}>{p}</p>;
               })}
@@ -101,7 +89,7 @@ const CardUserInfo = (props) => {
       {props.mydata?.isMyMypage === true && (
         <>
           <Button
-            margin="15px auto 15px 36%"
+            margin="15px auto 15px 30%"
             height="40px"
             width="132px"
             text="프로필 수정하기"

@@ -93,10 +93,10 @@ const LoginModal = props => {
       alert("기술스택을 선택 해주세요.");
       return false;
     }
-    // if (emailDup === false) {
-    //   alert("이메일 중복확인을 해주세요.");
-    //   return false;
-    // }
+    if (techStack.length <= 3) {
+      alert("기술선택을 4개 이하로 입력해주세요.");
+      return false;
+    }
     if (nameDup === false) {
       alert("닉네임 중복확인을 해주세요.");
       return false;
@@ -121,7 +121,7 @@ const LoginModal = props => {
     multiValue: (styles, { data }) => ({
       ...styles,
       color: data.color,
-      backgroundColor: "#554475",
+      backgroundColor: "#17334A",
       color: "white",
       borderRadius: "20px",
     }),
@@ -175,7 +175,7 @@ const LoginModal = props => {
                 >
                   <CloseIcon
                     sx={{ color: "#fff", fontSize: 35 }}
-                    onClick={modalClose}
+                    onClick={TestClose}
                     cursor="pointer"
                   />
                 </Grid>
@@ -335,7 +335,7 @@ const LoginModal = props => {
         <ModalWrap>
           <Grid
             height="15%"
-            bg="#554475"
+            bg="#17334A"
             width
             position="relative"
             padding="10px 0 10px 0"
@@ -416,7 +416,7 @@ const LoginModal = props => {
             </Grid>
           </Grid>
           <Grid display="flex" justifyContent="center" margin="10px 0 30px 0">
-            <Grid width="20%" backgroundColor="#B29CF4" height="3px"></Grid>
+            <Grid width="20%" backgroundColor="#17334A" height="3px"></Grid>
           </Grid>
         </ModalWrap>
       </Dialog>

@@ -1,10 +1,11 @@
 // PostDetail.js
 // import를 한다.
 import React from "react";
+import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { apis } from "../lib/axios";
 import { postActions } from "../redux/modules/post";
-import { Grid, Button } from "../elements/Index";
+import { Grid, Button, Text } from "../elements/Index";
 import Swal from "sweetalert2";
 import ApplyStatusModal from "../components/ApplyStatusModal";
 import LeftBanner from "../components/postDetail/leftBanner";
@@ -19,6 +20,7 @@ import BookMark from "../components/postDetail/rightContents/BookMark";
 import ApplicantButton from "../components/postDetail/rightContents/ApplicantButton";
 import PosterButton from "../components/postDetail/rightContents/PosterButton";
 import TotalMemberDetail from "../components/postDetail/rightContents/TotalMemberDetail";
+import { Link } from "react-router-dom";
 
 // PostDetail의 함수형 컴포넌트를 만든다
 const PostDetail = props => {
@@ -106,7 +108,8 @@ const PostDetail = props => {
         const result = await apis.bookMarkChecked(post_id);
         setBookmark(!bookmark);
       } catch (err) {
-        console.log(err);
+        console.log(err.response);
+        Swal.fire("로그인이 필요합니다!", "", "warning");
       }
     };
     bookMark();
@@ -158,34 +161,80 @@ const PostDetail = props => {
                 </Grid>
               )}
 
-              <Grid display="flex">
+              <FlexMedia display="flex">
                 <DateDetail passedData={passedData} />
                 <StackDetail passedData={passedData} />
-              </Grid>
-              <Grid display="flex">
-                <TotalMemberDetail passedData={passedData} />
+              </FlexMedia>
+              <Grid>
+                <Grid display="flex">
+                  <TotalMemberDetail passedData={passedData} />
+                  {userId === postUserId &&
+                    passedData?.projectStatus === "모집중" && (
+                      <Grid display="flex" width="200px">
+                        <ButtonMedia>
+                          <Button
+                            postion="absolute"
+                            common
+                            _onClick={applyStatusModalOpen}
+                          >
+                            신청 현황
+                          </Button>
+                          <Button
+                            postion="absolute"
+                            common
+                            _onClick={exileStatusModalOpen}
+                          >
+                            팀원 강퇴
+                          </Button>
+                        </ButtonMedia>
+                      </Grid>
+                    )}
+                  <FlexMedia>
+                    {passedData?.projectStatus === "종료" &&
+                      passedData?.frontUrl !== "null" && (
+                        <Grid display="flex" width="200px">
+                          <Text>Frontend</Text>
+                          <Grid
+                            margin="0 10px"
+                            border="1px solid #BBB4D9"
+                            borderRadius="10px"
+                            padding="2px"
+                            backgroundColor="#BBB4D9"
+                            color="white"
+                            width="80px"
+                            height="20px"
+                            textAlign="center"
+                          >
+                            <Link to={passedData?.frontUrl}>프론트Url</Link>
+                          </Grid>
+                        </Grid>
+                      )}
+                    {passedData?.projectStatus === "종료" &&
+                      passedData?.backUrl !== "null" && (
+                        <Grid display="flex" width="200px">
+                          <Text>Backend</Text>
+                          <Grid
+                            margin="0 10px"
+                            border="1px solid #BBB4D9"
+                            borderRadius="10px"
+                            padding="2px"
+                            backgroundColor="#BBB4D9"
+                            color="white"
+                            width="80px"
+                            height="20px"
+                            textAlign="center"
+                          >
+                            <Link to={passedData?.frontUrl}>백엔드Url</Link>
+                          </Grid>
+                        </Grid>
+                      )}
+                  </FlexMedia>
+                </Grid>
+                <StatusDetail passedData={passedData} />
 
-                {passedData?.projectStatus === "모집중" && (
-                  <Grid display="flex" width="200px">
-                    <Button
-                      postion="absolute"
-                      common
-                      _onClick={applyStatusModalOpen}
-                    >
-                      신청 현황
-                    </Button>
-                    <Button
-                      postion="absolute"
-                      common
-                      _onClick={exileStatusModalOpen}
-                    >
-                      팀원 강퇴
-                    </Button>
-                  </Grid>
-                )}
+                <ContentDetail passedData={passedData} />
               </Grid>
-              <StatusDetail passedData={passedData} />
-              <ContentDetail passedData={passedData} />
+
               <Grid>
                 {userId === postUserId ? (
                   <PosterButton
@@ -222,6 +271,23 @@ const PostDetail = props => {
     </React.Fragment>
   );
 };
+
+const ButtonMedia = styled.p`
+  display: flex;
+  margin: auto;
+  @media screen and (max-width: 1500px) {
+    display: flex;
+    width: 100px;
+    margin: auto;
+  }
+`;
+
+const FlexMedia = styled.div`
+  display: flex;
+  @media screen and (max-width: 1000px) {
+    flex-direction: column;
+  }
+`;
 
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default PostDetail;

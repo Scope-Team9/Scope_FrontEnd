@@ -24,7 +24,7 @@ const MainPage = () => {
   const stack = useSelector((state) => state.stack.stack);
   const sortC = useSelector((state) => state.sort.sort);
 
-  const cards = useSelector((state) => state.post.posts);
+  // const cards = useSelector((state) => state.post.posts);
   // console.log(cards);
   const reBookC = useSelector((state) => state.rebook.reBook);
   const pageCheck = useSelector((state) => state.post.pageCheck);
@@ -36,20 +36,41 @@ const MainPage = () => {
   const [nowFilter, setNowFilter] = React.useState("최신");
   const [post, setPost] = React.useState();
 
-  // const pSorts = useSelector((state) => state.post.sorts);
-  // const pReBook = useSelector((state) => state.post.stacks);
-  // console.log("나만봐", pStack);
+  //프론트쪽에서 필터
+  const [stacks, setStacks] = React.useState([]);
+  const [sorts, setSrots] = React.useState();
+  const [reBooks, setReBookss] = React.useState();
 
   const postList = useSelector((state) => state.post.posts);
   const isLoginUser = useSelector((state) => state.user.userId);
   const isLogin = useSelector((state) => state.user.isLogin);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
+    setPost();
     dispatch(postActions.whatPage("mainPage"));
-    dispatch(postActions.getPostAPI());
+    // dispatch(postActions.getPostAPI());
     // console.log(cards);
-  }, [stack, sortC, reBookC, pageCheck, Render, isLogin]);
+    console.log("이러다 다 죽어");
+    const fetchData = async () => {
+      try {
+        const result = await apis.getPost(stack, sortC, reBookC);
+        setPost(result.data.data);
+        console.log(result);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, [sortC, reBookC, Render, isLogin, Render]);
 
+  // React.useLayoutEffect(() => {
+  //   dispatch(postActions.whatPage("mainPage"));
+  //   // dispatch(postActions.getPostAPI());
+  //   // console.log(cards);
+
+  //   // console.log(post);
+  // }, [sortC, stack, reBookC, Render, isLogin]);
+  // stack, sortC, reBookC, Render, isLogin
   // 요청에 대한 속도가 다를때. 다른것이 띄워질 수 있는 버그성.
 
   React.useEffect(() => {
@@ -72,26 +93,54 @@ const MainPage = () => {
     );
   };
 
+  const lastScroll = useSelector((state) => state.infinity.current_scroll);
+  let timer;
+  const scroll = (e) => {
+    console.log(e);
+    if (timer) {
+      clearTimeout(timer);
+    }
+    timer = setTimeout(function () {
+      dispatch(pageAction.getScroll(e.target.scrollTop));
+    }, 500);
+  };
+
+  const container = React.useRef(null);
+  React.useEffect(() => {
+    container.current.scrollTo(0, lastScroll);
+  }, []);
+
   return (
-    <>
-      {postList && (
-        <>
-          <Grid
-            maxWidth="1920px"
-            height="100%"
-            bg="#ffff"
-            padding="0px 0px 10px 0"
-          ></Grid>
-          <Grid margin="-10px 0 0 0 ">
-            <Inside>
-              <MainSlide />
-              <Stacks>
-                <Stack do={"StacksComponent"} />
-              </Stacks>
-              <Sort setPaging={setPaging} page="mainPage"></Sort>
+    <div onScroll={scroll} ref={container}>
+      <Grid
+        maxWidth="1920px"
+        height="100%"
+        bg="#ffff"
+        padding="0px 0px 10px 0"
+      ></Grid>
+      <Grid margin="-10px 0 0 0 ">
+        <Inside>
+          <MainSlide />
+          <Stacks>
+            <Stack
+              do={"StacksComponent"}
+              setStacks={setStacks}
+              stacks={stacks}
+            />
+          </Stacks>
+          <Sort setPaging={setPaging} page="mainPage"></Sort>
+          {post && (
+            <>
               <InsideCard>
-                <PostList post={post} paging={pPaging}></PostList>
+                <PostList
+                  post={post}
+                  paging={pPaging}
+                  stacks={stacks}
+                  Render={Render}
+                  isLogin={isLogin}
+                ></PostList>
               </InsideCard>
+
               {nowFilter !== "bookmark" && (
                 <Grid margin="-550px 0 0 0">
                   <div
@@ -103,33 +152,33 @@ const MainPage = () => {
                   ></div>
                 </Grid>
               )}
-              {isLoginUser && (
-                <Btn
-                  onClick={() => {
-                    history.push("/postadd");
-                  }}
-                >
-                  <i
-                    style={{
-                      fontSize: "25px",
-                      margin: "auto",
-                      color: "white",
-                    }}
-                    className="fas fa-plus"
-                  ></i>
-                </Btn>
-              )}
-              <BtnFeedback
-                src="/img/FeedbackBox.png"
-                onClick={() => {
-                  goPage();
+            </>
+          )}
+          {isLoginUser && (
+            <Btn
+              onClick={() => {
+                history.push("/postadd");
+              }}
+            >
+              <i
+                style={{
+                  fontSize: "25px",
+                  margin: "auto",
+                  color: "white",
                 }}
-              ></BtnFeedback>
-            </Inside>
-          </Grid>
-        </>
-      )}
-    </>
+                className="fas fa-plus"
+              ></i>
+            </Btn>
+          )}
+          <BtnFeedback
+            src="/img/FeedbackBox.png"
+            onClick={() => {
+              goPage();
+            }}
+          ></BtnFeedback>
+        </Inside>
+      </Grid>
+    </div>
   );
 };
 
@@ -168,10 +217,15 @@ const Btn = styled.button`
   background: #c4c4c4;
   cursor: pointer;
   z-index: 999;
+  &:hover {
+    background: #17334a;
+    transform: translate();
+    transition: 0.1s ease-out;
+  }
 
   @media screen and (max-width: 750px) {
     position: fixed;
-
+    display: none;
     border: 1px solid #42309b;
     border-radius: 50%;
     width: 40px;
@@ -204,18 +258,15 @@ const BtnFeedback = styled.img`
     transform: rotate(45deg);
   }
 
-  @media screen and (max-width: 750px) {
+  @media screen and (max-width: 767px) {
     position: fixed;
 
-    border: 1px solid #42309b;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     text-align: center;
-    right: 5px;
-    bottom: 5px;
+    left: 5px;
+    bottom: 80px;
     margin: auto;
-    background: #42309b;
     cursor: pointer;
     z-index: 999;
   } ;
