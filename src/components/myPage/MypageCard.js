@@ -274,7 +274,7 @@ const Cards = styled.div`
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
     rgba(0, 0, 0, 0.22) 0px 15px 12px;
 
-  width: 18%;
+  width: 70%;
   height: 900px;
   /* background-color: rgba(255, 255, 255, 0); */
   background-color: white;
@@ -282,8 +282,8 @@ const Cards = styled.div`
   overflow: hidden;
 
   position: absolute;
-  left: 8%;
-  top: -15%;
+  right: 0%;
+  top: -500%;
   @media screen and (max-width: 1600px) {
     display: none;
   }

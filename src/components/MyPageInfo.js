@@ -129,7 +129,7 @@ const MyPageInfo = props => {
                     //   EmailConfirm();
                     // }}
                   ></Banners>
-                  <Grid position="absolute" top="120px">
+                  <Grid position="absolute" top="120px" height="75%">
                     <TypeResultTest
                       myType={myType}
                       userId={userId}
@@ -147,8 +147,7 @@ const MyPageInfo = props => {
                   </Grid>
                 </Banner>
               </Grid>
-
-              <Grid position="relative" margin="100px 0 0 0 ">
+              <Grid width="500px" height="10px" position="relative">
                 <MypageCard
                   setEditMyProfile={setEditMyProfile}
                   editMyProfile={editMyProfile}
@@ -163,6 +162,8 @@ const MyPageInfo = props => {
                   onClick={EditProfile}
                   onClick2={editProfileCancle}
                 />
+              </Grid>
+              <Grid margin="100px 0 0 0 ">
                 <FilterWrap>
                   <MypageFilter filter={filter} onClicks={SetFilter} />
                 </FilterWrap>

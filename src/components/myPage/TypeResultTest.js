@@ -161,7 +161,7 @@ const TypeResultTest = props => {
           </Grid>
 
           <Grid margin="0 0 0 20px" height="11%">
-            <Grid display="flex">
+            <Grid display="flex" height="80%">
               <MyResultText2>{myData.text1}</MyResultText2>
               <MyResultTextBold>{myData.text2}</MyResultTextBold>
               <MyResultText2>{myData.text3}</MyResultText2>
@@ -178,6 +178,8 @@ const TypeResultTest = props => {
                   height="100%"
                   position="relative"
                   margin="15px 0 0 0"
+                  width="90%"
+                  maxWidth="1150px"
                 >
                   <GotoTest
                     onClick={() => {
@@ -210,7 +212,7 @@ const TypeResultTest = props => {
 };
 
 const Wrap = styled.div`
-  height: 70%;
+  height: 100%;
   width: 58vw;
   margin-left: 30%;
   @media screen and (max-width: 1600px) {
@@ -277,8 +279,6 @@ const ConfirmEmail = styled.button`
   border-radius: 10px;
   z-index: 99999;
   cursor: pointer;
-  position: absolute;
-  right: -0px;
 
   &:hover {
     color: black;
