@@ -21,7 +21,7 @@ import PosterButton from "../components/postDetail/rightContents/PosterButton";
 import TotalMemberDetail from "../components/postDetail/rightContents/TotalMemberDetail";
 
 // PostDetail의 함수형 컴포넌트를 만든다
-const PostDetail = (props) => {
+const PostDetail = props => {
   const dispatch = useDispatch();
   const [checkPost, setCheckPost] = React.useState();
   const [bookmark, setBookmark] = React.useState(false);
@@ -41,17 +41,17 @@ const PostDetail = (props) => {
     setExileStatusModal(true);
   };
 
-  const applyUserModalOpen = (value) => {
+  const applyUserModalOpen = value => {
     setApplyValue(value);
     setApplyUserModal(true);
   };
 
-  const statusCheck = (value) => {
+  const statusCheck = value => {
     console.log(value);
     setProjectStatus(value);
   };
   // 상태변경
-  const edit_status = (data) => {
+  const edit_status = data => {
     const editstatus = {
       projectStatus: data,
     };
@@ -68,7 +68,7 @@ const PostDetail = (props) => {
   };
 
   let post_id = props.match.params.id;
-  const userId = useSelector((state) => state.user.userId); //로그인 유저아이디
+  const userId = useSelector(state => state.user.userId); //로그인 유저아이디
   const postUserId = checkPost?.data.data.post.userId;
   const passedData = checkPost?.data["data"].post;
   const passedUserStatus = checkPost?.data["data"].userStatus;
