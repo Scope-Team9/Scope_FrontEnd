@@ -54,7 +54,8 @@ const kakaologinMiddleware = (code) => {
               snsId: res.data.data.id,
             })
           );
-          history.replace("/");
+          window.history.back();
+
           return;
         }
         if (res.data.msg == "로그인이 완료되었습니다") {
@@ -71,21 +72,22 @@ const kakaologinMiddleware = (code) => {
               userPropensityType: res.data.data.userPropensityType,
             })
           );
-          if (email) {
-            history.replace(`/mypage:${res.data.data.userId}`);
-            Swal.fire(
-              "완료된 프로젝트가 있습니다. 팀원들을 평가하러 가볼까요?",
-              "",
-              "info"
-            );
-          }
-          return history.replace("/");
+          // if (email) {
+          //   history.replace(`/mypage:${res.data.data.userId}`);
+          //   Swal.fire(
+          //     "완료된 프로젝트가 있습니다. 팀원들을 평가하러 가볼까요?",
+          //     "",
+          //     "info"
+          //   );
+          // }
+          window.history.back();
         }
       })
       .catch((err) => {
         console.log("소셜로그인 에러", err);
         // alert("로그인에 실패하였습니다.");
-        history.replace("/"); // 로그인 실패하면 로그인화면으로 돌려보냄
+        // history.replace("/"); // 로그인 실패하면 로그인화면으로 돌려보냄
+        window.history.back();
         Swal.fire("로그인에 실패하였습니다!", "", "warning");
       });
   };
@@ -109,7 +111,7 @@ const githubLoginMiddleware = (code) => {
             })
           );
 
-          // history.replace("/");
+          window.history.back();
           return;
         }
         if (res.data.msg == "로그인이 완료되었습니다") {
@@ -123,13 +125,13 @@ const githubLoginMiddleware = (code) => {
               userPropensityType: res.data.data.userPropensityType,
             })
           );
-          history.replace("/");
+          window.history.back();
         }
       })
       .catch((err) => {
         console.log("소셜로그인 에러", err);
         // alert("로그인에 실패하였습니다.");
-        history.replace("/"); // 로그인 실패하면 로그인화면으로 돌려보냄
+        window.history.back();
         Swal.fire("로그인에 실패하였습니다.", "", "warning");
       });
   };

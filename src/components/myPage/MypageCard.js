@@ -31,61 +31,37 @@ const MypageCard = props => {
   };
 
   function fn_submit(data) {
-    // let text = data;
-
-    // let regEmail =
-    //   /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
-
-    // if (regEmail.test(text) === true) {
-    // window.alert("입력된 값은 이메일입니다.");
     let userData = {
       nickname: nickName,
       email: email,
       userTechStack: techStack,
     };
-    console.log(userData);
+
     const fetchData = async () => {
       try {
+        console.log(userData);
         const result = await apis.editUserInfo(props.userId, userData);
         // console.log(result);
         setEditMyProfile(false);
+        props.onClick2();
         Swal.fire("수정 완료!", "", "success");
       } catch (err) {
-        console.log(err);
-        //   Swal.fire(`${err.response.data.msg}`, "", "warning");
+        console.log(err.response);
       }
-      // };
-
-      // } else {
-      //   // window.alert("올바른 이메일을 입력해주세요.");
-      //   Swal.fire("올바른 이메일을 입력해주세요.", "", "warning");
-      //   setCheckEmail(false);
-      //   return;
     };
     fetchData();
   }
 
   const setEditProfile = () => {
     if (techStack.length > 4) {
-      // window.alert("기술은 4개 까지 선택 가능합니다.");
       Swal.fire("기술은 4개 까지 선택 가능합니다.", "", "warning");
       return;
     }
-
     fn_submit(email);
-    // if (checkEmail === false) {
-    //   return;
-    // }
-    props.onClick2();
   };
-  //   const editProfileCancle = () => {
-  //     setEditMyProfile(false);
-  //   };
   const deleteUser = () => {
     setDeleteModal(true);
   };
-
-  //   console.log(props);
 
   //테크스택 옵션
   const techStackOption = [
