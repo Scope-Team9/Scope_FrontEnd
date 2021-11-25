@@ -161,7 +161,7 @@ const MypageCard = props => {
               style={{
                 width: "90px",
                 marginLeft: "30px",
-                height: "80px",
+                height: "60px",
               }}
             >
               <p style={{ marginTop: "20px" }}>E-mail </p>
@@ -188,18 +188,18 @@ const MypageCard = props => {
               ></input>
             </div>
           </MyInfoText1>
-
+          {/* 기술스택 */}
           <MyInfoText1>
-            <Grid height="100px" display="flex" width="100%">
-              <div
-                style={{
-                  width: "90px",
-                  marginLeft: "30px",
-                  height: "50px",
-                }}
-              >
-                <p style={{}}>TechStack </p>
-              </div>
+            <div
+              style={{
+                width: "90px",
+                marginLeft: "30px",
+                height: "80px",
+              }}
+            >
+              <p style={{}}>TechStack </p>
+            </div>
+            <Grid width="167px">
               <Select
                 isMulti
                 name="techStack"
@@ -241,14 +241,14 @@ const MypageCard = props => {
 
           <div style={{ display: "flex" }}>
             <Button
-              margin="15px auto 15px 5%"
+              margin="15px auto 15px 10%"
               height="40px"
               width="132px"
               text="프로필 저장하기"
               _onClick={setEditProfile}
             ></Button>
             <Button
-              margin="15px auto 15px 3%"
+              margin="15px auto 15px -9%"
               height="40px"
               width="132px"
               text="취소하기"
@@ -303,7 +303,7 @@ const Line = styled.hr`
   color: black;
 `;
 const Exit = styled.button`
-  margin: 10px auto 15px 29%;
+  margin: 0px auto 15px 30%;
   height: 40px;
   width: 132px;
   background-color: white;

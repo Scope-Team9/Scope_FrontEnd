@@ -29,7 +29,7 @@ const Wrap = styled.div`
   justify-content: space-between;
   align-items: center;
   background-color: rgba(255, 255, 255, 0);
-  padding: 20px;
+  padding: 20px 0;
   z-index: 10;
   position: relative;
 

@@ -101,7 +101,7 @@ const CardUserInfo = props => {
       {props.mydata?.isMyMypage === true && (
         <>
           <Button
-            margin="15px auto 15px 36%"
+            margin="15px auto 15px 30%"
             height="40px"
             width="132px"
             text="프로필 수정하기"

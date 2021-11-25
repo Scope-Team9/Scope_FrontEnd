@@ -151,7 +151,7 @@ const Post = props => {
                 />
               </ProgressBar>
               <Grid width="43%" textAlign="right">
-                <Text size="15px" margin="0 0 0 10px" bold="500">
+                <Text size="12px" margin="0 0 0 10px" bold="500">
                   {recruitmentMember + "/" + totalmember} 명 참여중
                 </Text>
               </Grid>
@@ -168,6 +168,7 @@ const DescriptionBox = styled.div`
   position: relative;
   margin: 25px 20px;
   padding: 10px;
+  height: 60%;
 `;
 const DDescriptionBox = styled.div`
   /* background-color: #fff5f9; */
@@ -223,9 +224,9 @@ const Date = styled.div`
     font-size: 14px;
     margin-left: 0%;
   }
-  @media (max-width: 360px) {
-    font-size: 14px;
-    margin-left: 0%;
+  @media (max-width: 450px) {
+    font-size: 10px;
+    margin: 0% auto 1% auto;
   }
 `;
 
@@ -268,6 +269,8 @@ const ProductImgWrap = styled.div`
     margin: auto;
     margin-top: 30px;
     margin-bottom: 30px;
+    width: 270px;
+    height: 270px;
   }
 `;
 //프로그래스바

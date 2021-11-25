@@ -10,7 +10,7 @@ import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 
 import slideOne from "../../images/01.jpg";
 import slideTwo from "../../images/02.jpg";
-import slideThree from "../../images/03.png";
+import slideThree from "../../images/03.jpg";
 
 const images = [slideOne, slideTwo, slideThree];
 
