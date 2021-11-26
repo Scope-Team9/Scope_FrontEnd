@@ -23,7 +23,7 @@ const MainPage = () => {
   const history = useHistory();
   const stack = useSelector((state) => state.stack.stack);
   const sortC = useSelector((state) => state.sort.sort);
-
+  const isToken = document.cookie;
   // const cards = useSelector((state) => state.post.posts);
   // console.log(cards);
   const reBookC = useSelector((state) => state.rebook.reBook);
@@ -45,7 +45,7 @@ const MainPage = () => {
   const isLoginUser = useSelector((state) => state.user.userId);
   const isLogin = useSelector((state) => state.user.isLogin);
 
-  let container = React.useRef();
+  // let container = React.useRef();
   React.useLayoutEffect(() => {
     setPost();
     dispatch(postActions.whatPage("mainPage"));
@@ -55,13 +55,13 @@ const MainPage = () => {
         const result = await apis.getPost(stack, sortC, reBookC);
         setPost(result.data.data);
         console.log(result);
-        container.current.scrollTo(0, lastScroll);
+        // container.current.scrollTo(0, lastScroll);
       } catch (err) {
         console.log(err);
       }
     };
     fetchData();
-  }, [sortC, reBookC, Render, isLogin, Render]);
+  }, [sortC, reBookC, Render, isToken, Render]);
 
   // React.useLayoutEffect(() => {
   //   dispatch(postActions.whatPage("mainPage"));
@@ -92,22 +92,22 @@ const MainPage = () => {
     );
   };
 
-  const lastScroll = useSelector((state) => state.infinity.current_scroll);
-  let timer;
-  const scroll = (e) => {
-    console.log(e);
-    if (timer) {
-      clearTimeout(timer);
-    }
-    timer = setTimeout(function () {
-      dispatch(pageAction.getScroll(e.target.scrollTop));
-    }, 500);
-  };
+  // const lastScroll = useSelector((state) => state.infinity.current_scroll);
+  // let timer;
+  // const scroll = (e) => {
+  //   console.log(e);
+  //   if (timer) {
+  //     clearTimeout(timer);
+  //   }
+  //   timer = setTimeout(function () {
+  //     dispatch(pageAction.getScroll(e.target.scrollTop));
+  //   }, 500);
+  // };
 
   // React.useEffect(() => {
 
   // }, []);
-
+  // onScroll={scroll} ref={container}
   return (
     <div>
       <Grid
@@ -129,7 +129,7 @@ const MainPage = () => {
           <Sort setPaging={setPaging} page="mainPage"></Sort>
           {post && (
             <>
-              <InsideCard onScroll={scroll} ref={container}>
+              <InsideCard>
                 <PostList
                   post={post}
                   paging={pPaging}
