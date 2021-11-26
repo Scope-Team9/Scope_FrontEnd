@@ -45,17 +45,17 @@ const MainPage = () => {
   const isLoginUser = useSelector((state) => state.user.userId);
   const isLogin = useSelector((state) => state.user.isLogin);
 
+  let container = React.useRef();
   React.useLayoutEffect(() => {
     setPost();
     dispatch(postActions.whatPage("mainPage"));
-    // dispatch(postActions.getPostAPI());
-    // console.log(cards);
-    console.log("이러다 다 죽어");
+
     const fetchData = async () => {
       try {
         const result = await apis.getPost(stack, sortC, reBookC);
         setPost(result.data.data);
         console.log(result);
+        container.current.scrollTo(0, lastScroll);
       } catch (err) {
         console.log(err);
       }
@@ -71,7 +71,6 @@ const MainPage = () => {
   //   // console.log(post);
   // }, [sortC, stack, reBookC, Render, isLogin]);
   // stack, sortC, reBookC, Render, isLogin
-  // 요청에 대한 속도가 다를때. 다른것이 띄워질 수 있는 버그성.
 
   React.useEffect(() => {
     if (inView === true) {
@@ -105,13 +104,12 @@ const MainPage = () => {
     }, 500);
   };
 
-  const container = React.useRef(null);
-  React.useEffect(() => {
-    container.current.scrollTo(0, lastScroll);
-  }, []);
+  // React.useEffect(() => {
+
+  // }, []);
 
   return (
-    <div onScroll={scroll} ref={container}>
+    <div>
       <Grid
         maxWidth="1920px"
         height="100%"
@@ -131,7 +129,7 @@ const MainPage = () => {
           <Sort setPaging={setPaging} page="mainPage"></Sort>
           {post && (
             <>
-              <InsideCard>
+              <InsideCard onScroll={scroll} ref={container}>
                 <PostList
                   post={post}
                   paging={pPaging}
@@ -170,6 +168,7 @@ const MainPage = () => {
               ></i>
             </Btn>
           )}
+
           <BtnFeedback
             src="/img/FeedbackBox.png"
             onClick={() => {
@@ -177,6 +176,7 @@ const MainPage = () => {
             }}
           ></BtnFeedback>
         </Inside>
+        <Grid height="600px"></Grid>
       </Grid>
     </div>
   );

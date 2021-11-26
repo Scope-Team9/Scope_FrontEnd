@@ -1,9 +1,11 @@
+/* eslint-disable */
 import React from "react";
 import { Grid, Button, Input, Text } from "../elements/Index";
 import styled from "styled-components";
 import { Dialog } from "@material-ui/core";
 import CloseIcon from "@mui/icons-material/Close";
 import { apis } from "../lib/axios";
+import Swal from "sweetalert2";
 
 const EmailAuth = (props) => {
   const [email, setEmail] = React.useState();
@@ -19,8 +21,9 @@ const EmailAuth = (props) => {
     const fetchData = async () => {
       const result = await apis.authEmail(email);
       try {
-        console.log(result);
-        window.alert(result.data.msg);
+        props.setModal();
+        // window.alert(result.data.msg);
+        Swal.fire(`${result.data.msg}`, "", "success");
       } catch (err) {
         console.log(err.response);
       }

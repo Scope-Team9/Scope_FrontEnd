@@ -12,7 +12,7 @@ const HeaderRight = (props) => {
   const dispatch = useDispatch();
   const isToken = document.cookie;
   const userInfo = useSelector((state) => state.user);
-  console.log(userInfo);
+  // console.log(userInfo);
   const [showModal, setShowModal] = React.useState(false);
   const sigunupModalState = useSelector(
     (state) => state.user.sigunupModalState

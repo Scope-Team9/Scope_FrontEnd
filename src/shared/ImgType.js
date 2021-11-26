@@ -2,7 +2,7 @@ import { NoEncryption } from "@material-ui/icons";
 import React from "react";
 import styled from "styled-components";
 import { Grid } from "../elements/Index";
-const ImgType = props => {
+const ImgType = (props) => {
   const {
     margin,
     width,
@@ -73,8 +73,8 @@ const ImgType = props => {
   ]);
   const [result, setResult] = React.useState();
   React.useEffect(() => {
-    console.log("여기좀 보슈", props.type);
-    imges.map(item => {
+    // console.log("여기좀 보슈", props.type);
+    imges.map((item) => {
       if (item.type === props.type) {
         setResult(item.img);
         return item;
@@ -103,13 +103,13 @@ ImgType.defaultProps = {
 };
 
 const Img = styled.img`
-  width: ${props => props.width};
-  height: ${props => props.height};
-  margin: ${props => props.margin};
-  cursor: ${props => props.cursor};
-  object-fit: ${props => props.object_fit};
-  position: ${props => props.position};
-  right: ${props => (props.src === "LVP" ? "0px" : props.right)};
-  bottom: ${props => (props.src === "LVP" ? "50px" : null)};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  margin: ${(props) => props.margin};
+  cursor: ${(props) => props.cursor};
+  object-fit: ${(props) => props.object_fit};
+  position: ${(props) => props.position};
+  right: ${(props) => (props.src === "LVP" ? "0px" : props.right)};
+  bottom: ${(props) => (props.src === "LVP" ? "50px" : null)};
 `;
 export default ImgType;

@@ -50,7 +50,7 @@ export const getPostAPI = () => {
         console.log(_paging);
         const posts = res.data.data;
 
-        console.log("어떻게 오는지", res.data.data);
+        // console.log("어떻게 오는지", res.data.data);
 
         dispatch(isLoading(true));
         let data = { _paging, posts, stack, sort, reBook };
@@ -86,7 +86,7 @@ export default handleActions(
           state.sorts !== sorts ||
           state.reBook !== reBook
         ) {
-          console.log("스택이 달라졌을때");
+          // console.log("스택이 달라졌을때");
           // console.log(action);
           draft.paging = action.payload.data.paging;
           draft.posts = action.payload.data.posts;
@@ -101,7 +101,7 @@ export default handleActions(
           state.reBook === reBook
         ) {
           // console.log(draft.stacks === stacks);
-          console.log("스택이 그대로일때");
+          // console.log("스택이 그대로일때");
           // draft.posts.push(...action.payload.data.posts);
           draft.posts = action.payload.data.posts;
           draft.paging = action.payload.data.paging;
@@ -127,12 +127,12 @@ export default handleActions(
           pre: state.whatPage.now,
           now: action.payload.data,
         };
-        console.log(page);
+        // console.log(page);
         draft.whatPage = page;
       }),
     [PAGECHECK]: (state, action) =>
       produce(state, (draft) => {
-        console.log("페이지 체크", action);
+        // console.log("페이지 체크", action);
         draft.pageCheck = action.payload.data;
       }),
   },

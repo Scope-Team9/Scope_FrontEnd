@@ -7,19 +7,21 @@ import styled from "styled-components";
 import { applyCreators } from "../redux/modules/applyProject";
 import CloseIcon from "@mui/icons-material/Close";
 import { apis } from "../lib/axios";
+import { useHistory } from "react-router";
 const ApplyStatusModal = (props) => {
   const dispatch = useDispatch();
   const applyUsers = useSelector((state) => state.apply.applyUsers);
   const [applyedUsers, setApplyUsers] = React.useState();
   const [acceptButton, setAcceptButton] = React.useState();
   const { applyStatusModal, setApplyStatusModal, postId } = props;
+  const history = useHistory();
 
   const modalClose = () => {
     setApplyStatusModal(false);
   };
 
   React.useEffect(() => {
-    console.log(applyedUsers);
+    // console.log(applyedUsers);
     const fetchData = async () => {
       try {
         const result = await apis.applyUser(postId);
@@ -39,12 +41,12 @@ const ApplyStatusModal = (props) => {
       userId: acceptUser,
       accept: true,
     };
-    console.log(acceptInfo);
+    // console.log(acceptInfo);
 
     const fetchData = async () => {
       try {
         const result = await apis.aceeptOffer(postId, acceptInfo);
-        console.log(result);
+        // console.log(result);
         setAcceptButton(result);
         // window.alert("신청을 수락하였습니다.");
       } catch (err) {
@@ -60,7 +62,7 @@ const ApplyStatusModal = (props) => {
       userId: cancelUser,
       accept: false,
     };
-    console.log(acceptInfo);
+    // console.log(acceptInfo);
     dispatch(applyCreators.acceptOfferAPI(postId, acceptInfo));
     // window.alert("신청을 취소하였습니다.");
   };
@@ -137,7 +139,13 @@ const ApplyStatusModal = (props) => {
                     key={user.userId}
                     {...user}
                   >
-                    <Grid margin="auto" width="30%">
+                    <Grid
+                      margin="auto"
+                      width="30%"
+                      _onClick={() => {
+                        history.push(`/mypage/${user.userId}`);
+                      }}
+                    >
                       {applyedUsers[idx].userPropensityType === "LVG" && (
                         <UserImg src="/img/호랑이.png"></UserImg>
                       )}

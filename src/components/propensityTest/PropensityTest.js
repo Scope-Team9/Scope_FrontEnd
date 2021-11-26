@@ -22,15 +22,15 @@ import { history } from "../../redux/configureStore";
 import ImgType from "../../shared/ImgType";
 import CloseIcon from "@mui/icons-material/Close";
 
-const PropensityTest = props => {
+const PropensityTest = (props) => {
   const isToken = document.cookie.split("=")[1];
   const dispatch = useDispatch();
-  const userInfo = useSelector(state => state.user);
-  const userType = useSelector(state => state.user.userPropensityType);
-  const memberType = useSelector(state => state.user.memberPropensityType);
+  const userInfo = useSelector((state) => state.user);
+  const userType = useSelector((state) => state.user.userPropensityType);
+  const memberType = useSelector((state) => state.user.memberPropensityType);
   // const [active, setActive] = React.useState(preUserPropensityType);
   const [isChecked, setIsChecked] = React.useState("#fff");
-  const ToggleButton = answer => {
+  const ToggleButton = (answer) => {
     isChecked === "#fff" ? setIsChecked("#170184") : setIsChecked("#fff");
   };
 
@@ -46,11 +46,11 @@ const PropensityTest = props => {
   const [preMemberPropensityType, setPreMemberPropensityType] = useState("");
 
   //자식요소의 밸류값을 가져와 임시에 저장
-  const handleUserCreate = answer => {
+  const handleUserCreate = (answer) => {
     setPreUserPropensityType(answer);
     console.log("나의항목 임시저장", answer);
   };
-  const handleMemberCreate = answer => {
+  const handleMemberCreate = (answer) => {
     setPreMemberPropensityType(answer);
     console.log("상대방의 항목 임시저장", answer);
   };
@@ -71,7 +71,7 @@ const PropensityTest = props => {
       //   'info'
       // )
     } else {
-      setpage(page => page + 1);
+      setpage((page) => page + 1);
       setPreUserPropensityType("");
       setPreMemberPropensityType("");
       preMy.push(preUserPropensityType);
@@ -87,7 +87,7 @@ const PropensityTest = props => {
 
   //이전버튼 누를시에 마지막으로 저장된값을 스테이트에 삭제함
   const preStep = () => {
-    setpage(page => page - 1);
+    setpage((page) => page - 1);
 
     // 이전으로가면 마지막항목 제거 (나의것)
     let toPopMy = userPropensityType;
@@ -135,16 +135,17 @@ const PropensityTest = props => {
 
     if (isToken) {
       dispatch(userCreators.editTestMiddleware(realUserId, testUpdateInfo));
-      return setpage(page => page + 1);
+      return setpage((page) => page + 1);
     } else {
       dispatch(userCreators.signupMiddleware(registerInfo));
-      setpage(page => page + 1);
+      setpage((page) => page + 1);
     }
   };
 
   const exitResult = () => {
     dispatch(userCreators.modal());
     history.push("/");
+    props.TestClose();
   };
 
   return (
@@ -186,13 +187,13 @@ const PropensityTest = props => {
         <Progress page={page} />
       </Grid>
       <Grid display="flex" justifyContent="center" margin="10px 0">
-        {TestData.teststep.map(step => {
+        {TestData.teststep.map((step) => {
           if (step.step === page) {
             return <img width="40%" src={step.img} />;
           }
         })}
         {page === 10 &&
-          TestData.testresult.map(result => {
+          TestData.testresult.map((result) => {
             if (result.type === userType) {
               return <img width="50%" src={result.img} />;
             }
