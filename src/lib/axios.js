@@ -45,8 +45,8 @@ instance.interceptors.request.use(
 
 export const apis = {
   //회원가입 및 로그인 관련 api
-  kakaoLogin: (code) => instance.get(`/api/login/kakao?code=${code}`, code),
-  githubLogin: (code) => instance.get(`/api/login/github?code=${code}`, code),
+  kakaoLogin: (code) => instance.get(`/api/login/kakao?code=${code}`),
+  githubLogin: (code) => instance.get(`/api/login/github?code=${code}`),
   register: (registerInfo) => instance.post("/api/signup", registerInfo),
   checkEmail: (email) => instance.get(`/api/login/email?email=${email}`, email),
   checkNick: (nickName) =>
