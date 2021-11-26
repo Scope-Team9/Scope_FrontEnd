@@ -1,28 +1,29 @@
+/* eslint-disable */
 import React from "react";
 import TestData from "./Testdata.json";
 import { Grid, Button, Text } from "../../elements/Index";
 
-const TestFive = props => {
+const TestFive = (props) => {
   const { handleUserCreate, handleMemberCreate } = props;
   const [nowClickU, setNowClickU] = React.useState(
-    TestData.userbtn.filter(btn => btn.question === "Q5")
+    TestData.userbtn.filter((btn) => btn.question === "Q5")
   );
   const [nowClickMB, setNowClickMB] = React.useState(
-    TestData.memberbtn.filter(btn => btn.question === "Q5")
+    TestData.memberbtn.filter((btn) => btn.question === "Q5")
   );
 
-  const clickUser = btnUserId => {
+  const clickUser = (btnUserId) => {
     console.log(btnUserId);
-    setNowClickU(state => {
-      return state.map(stateItem => {
+    setNowClickU((state) => {
+      return state.map((stateItem) => {
         if (stateItem.id === btnUserId) {
           return { ...stateItem, active: !stateItem.active };
         }
         return stateItem;
       });
     });
-    setNowClickU(state => {
-      return state.map(stateItem => {
+    setNowClickU((state) => {
+      return state.map((stateItem) => {
         if (stateItem.id !== btnUserId && stateItem.active === true) {
           return { ...stateItem, active: !stateItem.active };
         }
@@ -31,8 +32,8 @@ const TestFive = props => {
     });
   };
 
-  const clickMember = btnMemberId => {
-    setNowClickMB(state => {
+  const clickMember = (btnMemberId) => {
+    setNowClickMB((state) => {
       return state.map((stateItem, idx) => {
         if (stateItem.id === btnMemberId) {
           return { ...stateItem, active: !stateItem.active };
@@ -40,8 +41,8 @@ const TestFive = props => {
         return stateItem;
       });
     });
-    setNowClickMB(state => {
-      return state.map(stateItem => {
+    setNowClickMB((state) => {
+      return state.map((stateItem) => {
         if (stateItem.id !== btnMemberId && stateItem.active === true) {
           return { ...stateItem, active: !stateItem.active };
         }
@@ -65,7 +66,7 @@ const TestFive = props => {
                 isTest
                 text={btn.text}
                 isActive={btn.active}
-                _onClick={e => {
+                _onClick={(e) => {
                   clickUser(e.target.id);
                   handleUserCreate(e.target.value);
                 }}
@@ -85,7 +86,7 @@ const TestFive = props => {
                 isTest
                 text={btn.text}
                 isActive={btn.active}
-                _onClick={e => {
+                _onClick={(e) => {
                   clickMember(e.target.id);
                   handleMemberCreate(e.target.value);
                 }}

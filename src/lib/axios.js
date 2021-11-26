@@ -1,3 +1,4 @@
+/* eslint-disable */
 import axios from "axios";
 import { setCookie } from "../shared/Cookie";
 import { history } from "../redux/configureStore";

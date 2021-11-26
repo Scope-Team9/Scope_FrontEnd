@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 import { Grid, Input, Text, Button } from "../../elements/Index";
 import { useDispatch } from "react-redux";
@@ -5,7 +6,7 @@ import { applyCreators } from "../../redux/modules/applyProject";
 import styled from "styled-components";
 import CloseIcon from "@mui/icons-material/Close";
 
-const Apply = props => {
+const Apply = (props) => {
   const dispatch = useDispatch();
   const [comment, setComment] = React.useState();
   const { modalClose, postId } = props;
@@ -43,7 +44,7 @@ const Apply = props => {
             height="100%"
             backgroundColor="#fff"
             placeholder="간단한 본인의 기술스택 및  자기소개 작성란"
-            _onChange={e => {
+            _onChange={(e) => {
               console.log(e.target.value);
               setComment(e.target.value);
             }}

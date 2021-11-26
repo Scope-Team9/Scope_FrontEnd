@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../../lib/axios";
@@ -6,7 +7,7 @@ import { apis } from "../../lib/axios";
 const APPLY_PROJEFCT = "APPLY_POST";
 
 // 액션생성
-const applyUsers = createAction(APPLY_PROJEFCT, applyUsers => ({
+const applyUsers = createAction(APPLY_PROJEFCT, (applyUsers) => ({
   applyUsers,
 }));
 
@@ -23,16 +24,16 @@ const initialState = {
 };
 
 // 내가만든 프로젝트 신청자 현황 불러오기
-const applyUserAPI = postId => {
+const applyUserAPI = (postId) => {
   return function (dispatch, getState, { history }) {
     apis
       .applyUser(postId)
-      .then(res => {
+      .then((res) => {
         console.log(res.data.data);
         // window.alert("모집 지원 현황 조회 성공");
         dispatch(applyUsers(res.data.data));
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err.response);
         window.alert("4444신청자를 못찾겠네용!");
       });
@@ -43,12 +44,12 @@ const acceptOfferAPI = (postId, acceptInfo) => {
   return function (dispatch, getState, { history }) {
     apis
       .aceeptOffer(postId, acceptInfo)
-      .then(res => {
+      .then((res) => {
         console.log(res.data.data);
         console.log(res);
         dispatch(applyUsers(res.data.users));
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err.response);
         window.alert("88888신청자를 못찾겠네용!");
       });
@@ -59,11 +60,11 @@ const applyProjectAPI = (postId, comment) => {
   return function (dispatch, getState, { history }) {
     apis
       .applyProject(postId, comment)
-      .then(res => {
+      .then((res) => {
         console.log(res);
         return window.alert("프로젝트에 지원되었습니다.");
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err.response);
         if (err.response.data.msg === "모집중인 프로젝트가 아닙니다.") {
           return window.alert("모집중인 프로젝트가 아닙니다.");
@@ -78,32 +79,32 @@ const applyProjectAPI = (postId, comment) => {
   };
 };
 //모집중인 프로젝트 지원취소(팀원)
-const cancelProjectAPI = postId => {
+const cancelProjectAPI = (postId) => {
   return function (dispatch, getState, { history }) {
     apis
       .cancelProject(postId)
-      .then(res => {
+      .then((res) => {
         console.log(res);
         window.alert("프로젝트 지원이 취소되었습니다.!");
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err.response);
         window.alert("신청자 정보를 찾을 수 없습니다!");
       });
   };
 };
 //팀장이 수락한 프로젝트 탈퇴(팀원)
-const exitTeamAPI = postId => {
+const exitTeamAPI = (postId) => {
   return function (dispatch, getState, { history }) {
     const PostId = postId.postId;
     console.log(PostId);
     apis
       .exitTeam(PostId)
-      .then(res => {
+      .then((res) => {
         console.log(res);
         window.alert("팀에서 탈출하였습니다!");
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err.response);
         if (err.response.data.msg === "입력 값이 잘못되었습니다.") {
           return window.alert("입력 값이 잘못되었습니다.");
@@ -123,11 +124,11 @@ const starterLikeAPI = (postId, userIds) => {
   return function (dispatch, getState, { history }) {
     apis
       .strterLike(postId, userIds)
-      .then(res => {
+      .then((res) => {
         console.log(res);
         window.alert("팀원 평가 정보가 성공적으로 저장되었습니다.");
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err.response);
         if (err.response.data.msg === "입력 값이 잘못되었습니다.") {
           return window.alert("팀원 평가가 이루어지지 않았습니다.");
@@ -147,26 +148,26 @@ const submitUrlAPI = (postId, urls) => {
   return function (dispatch, getState, { history }) {
     apis
       .sumbitUrl(postId, urls)
-      .then(res => {
+      .then((res) => {
         console.log(res);
         window.alert("프로젝트 URL이 성공적으로 저장되었습니다.");
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err.response);
       });
   };
 };
 
 //마이페이지 프로젝트 팀원정보 조회
-const getMemberAPI = postId => {
+const getMemberAPI = (postId) => {
   return function (dispatch, getState, { history }) {
     apis
       .getMember(postId)
-      .then(res => {
+      .then((res) => {
         console.log(res);
         window.alert("모라공?");
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err.response);
       });
   };
@@ -175,7 +176,7 @@ const getMemberAPI = postId => {
 export default handleActions(
   {
     [APPLY_PROJEFCT]: (state, action) =>
-      produce(state, draft => {
+      produce(state, (draft) => {
         console.log("신청자정보", action);
         draft.applyUsers = action.payload.applyUsers;
       }),

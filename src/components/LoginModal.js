@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from "react";
 import { Grid, Input, Text, Button, Image } from "../elements/Index";
 import { Dialog } from "@material-ui/core";

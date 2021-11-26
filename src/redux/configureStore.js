@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { createBrowserHistory } from "history";
 import thunk from "redux-thunk";
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
