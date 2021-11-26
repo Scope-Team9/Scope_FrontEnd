@@ -108,7 +108,9 @@ const RightWrite = (props) => {
             endDate={endDate}
           />
           <TotalMember setTotalmember={setTotalmember} styles={styles} />
+
           <ContentWrite setContents={setContents} />
+
           <GenerateButton submitHandler={submitHandler} />
         </Grid>
       </Grid>
