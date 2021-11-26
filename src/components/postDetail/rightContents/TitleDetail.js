@@ -12,10 +12,12 @@ const TitleDetail = (props) => {
   return (
     <React.Fragment>
       <Grid margin="60px auto auto">
-        <Text size="40px" bold>
-          {props.passedData?.title}
-          <Line />
-        </Text>
+        <TitleMedia>
+          <Text size="40px" bold>
+            {props.passedData?.title}
+            <Line />
+          </Text>
+        </TitleMedia>
       </Grid>
     </React.Fragment>
   );
@@ -24,6 +26,12 @@ const TitleDetail = (props) => {
 // styled-components
 const Line = styled.hr`
   width: 100%;
+`;
+
+const TitleMedia = styled.p`
+  @media screen and (max-width: 360px) {
+    font-size: 20px;
+  }
 `;
 
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.
