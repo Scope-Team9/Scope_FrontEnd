@@ -16,7 +16,8 @@ const Liked = props => {
     isMe,
     projectStatus,
     statusCheck,
-    mypage,
+    myPage,
+    toggleModal,
   } = props;
 
   React.useEffect(() => {
@@ -44,19 +45,22 @@ const Liked = props => {
   //팀원평가
   const userLiked = () => {
     console.log(likes);
+    console.log(myPage);
     const likeMember = likes.filter(user => user.active == true);
     const result = likeMember.map(a => a.userId);
     const likeUsers = {
       userIds: result,
     };
     console.log(likeUsers);
-    if (!mypage) {
+    if (!myPage) {
+      console.log("여기");
       dispatch(applyCreators.starterLikeAPI(postId, likeUsers));
       modalClose("종료");
       return;
     }
+    console.log("여기2");
     dispatch(applyCreators.starterLikeAPI(postId, likeUsers));
-    modalClose();
+    toggleModal();
     return;
   };
   console.log(likes);
@@ -93,7 +97,7 @@ const Liked = props => {
               textAlign="center"
             >
               <Grid height="10%" textAlign="center">
-                <Text size="30px" bold>
+                <Text size="30px" bold="bold">
                   프로젝트 마감
                 </Text>
               </Grid>
@@ -131,16 +135,22 @@ const Liked = props => {
                           <Grid height="100%" textAlign="center" width="50%">
                             <Grid
                               borderRadius="20px 0 0 20px"
-                              bg="#b29cf4"
+                              bg="#17334A"
                               height="50%"
                               margin="0 0 3px 0 "
+                              display="flex"
+                              alignItems="center"
+                              justifyContent="center"
                             >
                               <Text color="#fff">닉네임</Text>
                             </Grid>
                             <Grid
                               borderRadius="20px 0 0 20px"
-                              bg="#b29cf4"
+                              bg="#17334A"
                               height="50%"
+                              display="flex"
+                              alignItems="center"
+                              justifyContent="center"
                             >
                               <Text color="#fff">타입</Text>
                             </Grid>
@@ -156,6 +166,9 @@ const Liked = props => {
                               borderRadius="0 20px 20px 0"
                               bg="#eee"
                               margin="0 0 3px 0 "
+                              display="flex"
+                              alignItems="center"
+                              justifyContent="center"
                             >
                               {passdedMenber[idx].nickname}
                             </Grid>
@@ -163,12 +176,19 @@ const Liked = props => {
                               height="50%"
                               borderRadius="0 20px 20px 0"
                               bg="#eee"
+                              display="flex"
+                              alignItems="center"
+                              justifyContent="center"
                             >
                               {passdedMenber[idx].userPropensityType}
                             </Grid>
                           </Grid>
                         </Grid>
-                        <Grid margin="auto" height="50px" width="80%">
+                        <Grid
+                          margin="auto auto auto 10px"
+                          height="50px"
+                          width="80%"
+                        >
                           {passdedMenber[idx].userId !== isMe && (
                             <Button
                               common

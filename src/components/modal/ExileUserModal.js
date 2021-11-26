@@ -8,12 +8,12 @@ import { applyCreators } from "../../redux/modules/applyProject";
 
 import CloseIcon from "@mui/icons-material/Close";
 import { apis } from "../../lib/axios";
-const ApplyStatusModal = (props) => {
+const ExileUserModal = props => {
   const dispatch = useDispatch();
-  const applyUsers = useSelector((state) => state.apply.applyUsers);
+  const applyUsers = useSelector(state => state.apply.applyUsers);
   const [applyedUsers, setApplyUsers] = React.useState();
   const [acceptButton, setAcceptButton] = React.useState();
-  const { applyStatusModal, setApplyStatusModal, postId } = props;
+  const { applyStatusModal, setApplyStatusModal, postId, postUserId } = props;
 
   const modalClose = () => {
     setApplyStatusModal(false);
@@ -35,7 +35,7 @@ const ApplyStatusModal = (props) => {
     // dispatch(applyCreators.applyUserAPI(postId));
   }, [applyStatusModal, acceptButton]);
 
-  const exile = (userId) => {
+  const exile = userId => {
     console.log(userId);
     const fetchData = async () => {
       try {
@@ -168,16 +168,18 @@ const ApplyStatusModal = (props) => {
                         </Grid>
                         <Grid margin="auto" height="50px" width="80%">
                           <Grid margin="auto 40px">
-                            <Button
-                              common
-                              isValue={applyedUsers[idx].userId}
-                              _onClick={(e) => {
-                                window.confirm("추방하시겠습니까?");
-                                exile(e.target.value);
-                              }}
-                            >
-                              추방하기
-                            </Button>
+                            {applyedUsers[idx].userId !== postUserId && (
+                              <Button
+                                common
+                                isValue={applyedUsers[idx].userId}
+                                _onClick={e => {
+                                  window.confirm("추방하시겠습니까?");
+                                  exile(e.target.value);
+                                }}
+                              >
+                                추방하기
+                              </Button>
+                            )}
                           </Grid>
                         </Grid>
                         <Grid
@@ -231,4 +233,4 @@ const UserImg = styled.img`
   cursor: pointer;
 `;
 
-export default ApplyStatusModal;
+export default ExileUserModal;
