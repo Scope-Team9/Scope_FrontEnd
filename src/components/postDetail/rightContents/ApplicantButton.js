@@ -70,7 +70,7 @@ const ApplicantButton = (props) => {
           passdedMenber={props.passdedMenber}
           statusCheck={props.statusCheck}
         />
-        {props.passedData?.projectStatus === "종료" &&
+        {props.passedData?.projectStatus === "모집중" &&
           props.passedUserStatus === "member" && (
             <Grid>
               <Button
