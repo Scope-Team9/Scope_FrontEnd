@@ -5,7 +5,7 @@ import { applyCreators } from "../../redux/modules/applyProject";
 import styled from "styled-components";
 import CloseIcon from "@mui/icons-material/Close";
 
-const Apply = (props) => {
+const Apply = props => {
   const dispatch = useDispatch();
   const [comment, setComment] = React.useState();
   const { modalClose, postId } = props;
@@ -29,7 +29,7 @@ const Apply = (props) => {
           <CloseIcon fontSize="large" onClick={modalClose} />
         </Grid>
       </Grid>
-      <Grid margin="auto" height="90%" width="320px" alignItems="center">
+      <Contents>
         <Grid height="20%" textAlign="center">
           <Text size="30px" bold>
             지원신청
@@ -43,7 +43,7 @@ const Apply = (props) => {
             height="100%"
             backgroundColor="#fff"
             placeholder="간단한 본인의 기술스택 및  자기소개 작성란"
-            _onChange={(e) => {
+            _onChange={e => {
               console.log(e.target.value);
               setComment(e.target.value);
             }}
@@ -54,7 +54,7 @@ const Apply = (props) => {
             지원신청
           </Button>
         </Grid>
-      </Grid>
+      </Contents>
     </ModalWrap>
   );
 };
@@ -63,6 +63,23 @@ const ModalWrap = styled.div`
   width: 550px;
   height: 300px;
   position: relative;
+  @media (max-width: 620px) {
+    margin: auto;
+    margin-top: 30px;
+    width: 90%;
+  }
+`;
+const Contents = styled.div`
+  margin: auto;
+  height: 90%;
+  width: 320px;
+
+  text-align: center;
+  @media (max-width: 620px) {
+    margin: auto;
+    margin-top: 30px;
+    width: 90%;
+  }
 `;
 
 export default Apply;

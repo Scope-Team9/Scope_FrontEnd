@@ -24,7 +24,7 @@ import TotalMemberDetail from "../components/postDetail/rightContents/TotalMembe
 import { Link } from "react-router-dom";
 
 // PostDetail의 함수형 컴포넌트를 만든다
-const PostDetail = (props) => {
+const PostDetail = props => {
   const dispatch = useDispatch();
   const [checkPost, setCheckPost] = React.useState();
   const [bookmark, setBookmark] = React.useState(false);
@@ -44,12 +44,12 @@ const PostDetail = (props) => {
     setExileStatusModal(true);
   };
 
-  const applyUserModalOpen = (value) => {
+  const applyUserModalOpen = value => {
     setApplyValue(value);
     setApplyUserModal(true);
   };
 
-  const statusCheck = (value) => {
+  const statusCheck = value => {
     console.log(value);
     setProjectStatus(value);
   };
@@ -62,7 +62,7 @@ const PostDetail = (props) => {
     window.open(passedData?.frontUrl);
   };
   // 상태변경
-  const edit_status = (data) => {
+  const edit_status = data => {
     const editstatus = {
       projectStatus: data,
     };
@@ -79,7 +79,7 @@ const PostDetail = (props) => {
   };
 
   let post_id = props.match.params.id;
-  const userId = useSelector((state) => state.user.userId); //로그인 유저아이디
+  const userId = useSelector(state => state.user.userId); //로그인 유저아이디
   const postUserId = checkPost?.data.data.post.userId;
   const passedData = checkPost?.data["data"].post;
   const passedUserStatus = checkPost?.data["data"].userStatus;
@@ -165,73 +165,97 @@ const PostDetail = (props) => {
                       applyStatusModal={exileStatusModal}
                       setApplyStatusModal={setExileStatusModal}
                       postId={post_id}
+                      postUserId={postUserId}
                     ></ExileUserModal>
                   </Grid>
                 </Grid>
               )}
-
-              <FlexMedia display="flex">
-                <DateDetail passedData={passedData} />
-                <StackDetail passedData={passedData} />
-              </FlexMedia>
+              <Grid>
+                <FlexMedia display="flex">
+                  <DateDetail passedData={passedData} />
+                  <StackDetail passedData={passedData} />
+                </FlexMedia>
+              </Grid>
               <Grid>
                 <Grid display="flex">
-                  <TotalMemberDetail passedData={passedData} />
-                  {userId === postUserId &&
-                    passedData?.projectStatus === "모집중" && (
-                      <Grid display="flex" width="200px">
-                        <ButtonMedia>
-                          <Button
-                            postion="absolute"
-                            common
-                            _onClick={applyStatusModalOpen}
+                  <Grid>
+                    <TotalMemberDetail passedData={passedData} />
+                  </Grid>
+                  <Grid>
+                    <FlexMedia>
+                      {passedData?.projectStatus === "종료" &&
+                        passedData?.frontUrl !== "null" && (
+                          <Grid
+                            display="flex"
+                            width="200px"
+                            alignItems="center"
                           >
-                            신청 현황
-                          </Button>
-                          <Button
-                            postion="absolute"
-                            common
-                            _onClick={exileStatusModalOpen}
-                          >
-                            팀원 강퇴
-                          </Button>
-                        </ButtonMedia>
-                      </Grid>
-                    )}
-                  <FlexMedia>
-                    {passedData?.projectStatus === "종료" &&
-                      passedData?.frontUrl !== "null" && (
-                        <Grid display="flex" width="200px">
-                          <Text>Frontend</Text>
-                          <Grid>
-                            <UrlButton
-                              onClick={() => {
-                                goFrontPage();
-                              }}
-                            >
-                              프론트URL
-                            </UrlButton>
-                          </Grid>
-                        </Grid>
-                      )}
-                    {passedData?.projectStatus === "종료" &&
-                      passedData?.backUrl !== "null" && (
-                        <Grid display="flex" width="200px">
-                          <Text>Backend</Text>
-                          <Grid>
+                            <Grid>
+                              <Text>Frontend</Text>
+                            </Grid>
                             <Grid>
                               <UrlButton
                                 onClick={() => {
-                                  goBackPage();
+                                  goFrontPage();
                                 }}
                               >
-                                백엔드URL
+                                프론트URL
                               </UrlButton>
                             </Grid>
                           </Grid>
-                        </Grid>
-                      )}
-                  </FlexMedia>
+                        )}
+                      {passedData?.projectStatus === "종료" &&
+                        passedData?.backUrl !== "null" && (
+                          <Grid
+                            display="flex"
+                            width="200px"
+                            alignItems="center"
+                            margin="0 0 0 5px"
+                          >
+                            <Grid>
+                              <Text>Backend</Text>
+                            </Grid>
+                            <Grid>
+                              <Grid>
+                                <UrlButton
+                                  onClick={() => {
+                                    goBackPage();
+                                  }}
+                                >
+                                  백엔드URL
+                                </UrlButton>
+                              </Grid>
+                            </Grid>
+                          </Grid>
+                        )}
+                      {userId === postUserId &&
+                        passedData?.projectStatus === "모집중" && (
+                          <Grid
+                            display="flex"
+                            width="150px"
+                            margin="auto 0 auto auto"
+                            justifyContent="flex-end"
+                          >
+                            <ButtonMedia>
+                              <Button
+                                postion="absolute"
+                                common
+                                _onClick={applyStatusModalOpen}
+                              >
+                                신청 현황
+                              </Button>
+                              <Button
+                                postion="absolute"
+                                common
+                                _onClick={exileStatusModalOpen}
+                              >
+                                팀원 강퇴
+                              </Button>
+                            </ButtonMedia>
+                          </Grid>
+                        )}
+                    </FlexMedia>
+                  </Grid>
                 </Grid>
                 <StatusDetail passedData={passedData} />
 
@@ -295,9 +319,10 @@ const FlexMedia = styled.div`
 
 const UrlButton = styled.button`
   width: 100px;
-  height: 20px;
+  height: 23px;
   font-size: 15px;
   margin: auto 10px;
+  padding: 0 0 2px 0;
   border: 1px solid #554475;
   border-radius: 4px;
   color: white;
