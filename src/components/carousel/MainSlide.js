@@ -61,7 +61,7 @@ const MainSlide = () => {
   };
 
   return (
-    <>
+    <React.Fragment>
       <div className="Container">
         <Slider {...settings}>
           {images.map((img, idx) => (
@@ -74,7 +74,7 @@ const MainSlide = () => {
           ))}
         </Slider>
       </div>
-    </>
+    </React.Fragment>
   );
 };
 
