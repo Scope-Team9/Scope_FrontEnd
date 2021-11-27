@@ -195,7 +195,7 @@ const PropensityTest = props => {
         {page === 10 &&
           TestData.testresult.map(result => {
             if (result.type === userType) {
-              return <img key={result.type} width="50%" src={result.img} />;
+              return <img key={result.type} width="40%" src={result.img} />;
             }
           })}
       </StepImgBox>
@@ -283,7 +283,13 @@ const PropensityTest = props => {
           </Button>
         )}
         {page == 10 && (
-          <Button common width="90%" margin="5px" _onClick={exitResult}>
+          <Button
+            common
+            fontSize="11px"
+            width="80%"
+            margin="5px"
+            _onClick={exitResult}
+          >
             내 성향에 맞는 팀원을 찾으러 가볼까요?
           </Button>
         )}

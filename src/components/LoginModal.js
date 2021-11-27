@@ -118,6 +118,9 @@ const LoginModal = props => {
       ...styles,
       backgroundColor: "white",
       borderRadius: "20px",
+      fontSize: "12px",
+      textAlign: "left",
+      padding: "0 0 0 12px",
     }),
     multiValue: (styles, { data }) => ({
       ...styles,
@@ -183,13 +186,13 @@ const LoginModal = props => {
         open={showModal}
         // onClose={modalClose}
       >
-        <ModalWrap>
+        <SignupModalWrap>
           {/* 테스트가 필요한경우 */}
           {!test ? (
             <Grid>
               {/* 헤더 */}
               <Grid
-                height="15%"
+                height="7%"
                 bg="#17334A"
                 position="relative"
                 textAlign="center"
@@ -214,14 +217,14 @@ const LoginModal = props => {
                   alignItems="center"
                   height="40px"
                 >
-                  <Text size="20px" bold color="#fff">
+                  <Text size="15px" bold color="#fff">
                     회원가입
                   </Text>
                 </Grid>
               </Grid>
               {/* 타이틀 */}
-              <Grid textAlign="center" margin="40px 0 10px 0">
-                <Text bold size="33px">
+              <Grid height="3%" textAlign="center" margin="30px 0 10px 0">
+                <Text bold="bold" size="21px">
                   Welcome to Scope!
                 </Text>
               </Grid>
@@ -229,7 +232,7 @@ const LoginModal = props => {
               <Grid
                 display="flex"
                 justifyContent="center"
-                height="10%"
+                height="58%"
                 textAlign="center"
                 padding="10px 0"
                 margin="auto"
@@ -245,7 +248,7 @@ const LoginModal = props => {
                     height="280px"
                   >
                     <Grid
-                      height="29%"
+                      height="25%"
                       display="flex"
                       alignItems="center"
                       justifyContent="center"
@@ -266,11 +269,11 @@ const LoginModal = props => {
                     margin="15px auto"
                     height="280px"
                   >
-                    <Grid height="14%" margin="16px 0">
+                    <Grid height="13%" margin="16px 0">
                       <Input
                         borderRadius="25px"
                         border="1px solid #ddd"
-                        fontSize="16px"
+                        fontSize="12px"
                         padding="0 0 0 23px"
                         height="100%"
                         placeholder="닉네임을 입력해주세요"
@@ -313,21 +316,10 @@ const LoginModal = props => {
                     margin="10px auto"
                     height="280px"
                   >
-                    {/* <Grid height="20%" margin="0 0 22px 0">
-                      <Button
-                        height="52px"
-                        fontSize="12px"
-                        text="이메일 중복"
-                        _onClick={() => {
-                          emailCheck(email);
-                          setEmailDup(true);
-                        }}
-                      ></Button>
-                    </Grid> */}
                     <Grid height="85%">
                       <Button
-                        height="38px"
-                        fontSize="12px"
+                        height="35px"
+                        fontSize="10px"
                         text="닉네임 중복"
                         _onClick={() => {
                           nickCheck(nickName);
@@ -339,7 +331,7 @@ const LoginModal = props => {
                 </Grid>
               </Grid>
               {/* 버튼 */}
-              <Grid width="50%" margin="auto">
+              <Grid width="50%" margin="auto" height="10%">
                 <Button
                   text="성향테스트"
                   margin="30px 0"
@@ -352,16 +344,13 @@ const LoginModal = props => {
           ) : (
             <PropensityTest TestClose={TestClose} />
           )}
-          <Grid display="flex" justifyContent="center" margin="10px 0 30px 0">
-            <Grid width="20%" backgroundColor="#554475" height="3px"></Grid>
-          </Grid>
-        </ModalWrap>
+        </SignupModalWrap>
       </Dialog>
     );
   } else {
     return (
       <Dialog maxWidth={"md"} scroll="paper" open={showModal}>
-        <ModalWrap>
+        <LoginModalWrap>
           <Grid
             height="15%"
             bg="#17334A"
@@ -454,7 +443,7 @@ const LoginModal = props => {
           <Grid display="flex" justifyContent="center" margin="10px 0 30px 0">
             <Grid width="20%" backgroundColor="#17334A" height="3px"></Grid>
           </Grid>
-        </ModalWrap>
+        </LoginModalWrap>
       </Dialog>
     );
   }
@@ -465,7 +454,7 @@ const Title = styled.h1`
     font-size: 20px;
   }
 `;
-const ModalWrap = styled.div`
+const LoginModalWrap = styled.div`
   width: 550px;
   height: 100%;
   @media (max-width: 620px) {
@@ -474,6 +463,17 @@ const ModalWrap = styled.div`
   /* @media (max-width: 375px) {
     width: 250px;
   } */
+`;
+
+const SignupModalWrap = styled.div`
+  height: 100%;
+  width: 550px;
+
+  @media (max-width: 650px) {
+    width: 310px;
+    height: 550px;
+    font-size: 11px;
+  }
 `;
 
 const GithubBtn = styled.div`

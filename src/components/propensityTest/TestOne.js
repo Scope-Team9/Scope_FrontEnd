@@ -54,37 +54,35 @@ const TestOne = props => {
   return (
     <Grid height="100%">
       <Grid display="flex" flexDirection="column">
-        <Grid margin="20px 0" height="50%">
-          <Grid height="20%">
-            <Grid margin="5px 0">
-              <Text>
-                Q1. <b>팀 회의할 때 당신의 모습</b>에 더 가까운 것은?
-              </Text>
-            </Grid>
-            {nowClickU.map((btn, idx) => (
-              <Grid bg="#111" height="100%" key={btn.id} {...btn}>
-                <Button
-                  isId={btn.id}
-                  isValue={btn.value}
-                  isTest
-                  text={btn.text}
-                  isActive={btn.active}
-                  _onClick={e => {
-                    clickUser(e.target.id);
-                    handleUserCreate(e.target.value);
-                  }}
-                ></Button>
-              </Grid>
-            ))}
+        <Grid margin="0 0 10px 0" height="50%">
+          <Grid height="14%" margin="0 0 5px 0">
+            <Text>
+              Q1. <b>팀 회의할 때 당신의 모습</b>에 더 가까운 것은?
+            </Text>
           </Grid>
+          {nowClickU.map((btn, idx) => (
+            <Grid height="38%" key={btn.id} {...btn}>
+              <Button
+                isId={btn.id}
+                isValue={btn.value}
+                isTest
+                text={btn.text}
+                isActive={btn.active}
+                _onClick={e => {
+                  clickUser(e.target.id);
+                  handleUserCreate(e.target.value);
+                }}
+              ></Button>
+            </Grid>
+          ))}
         </Grid>
 
-        <Grid height="50%" bg="#111">
-          <Grid margin="5px 0" height="20%">
+        <Grid height="50%">
+          <Grid margin="5px 0" height="14%" margin="0 0 5px 0">
             Q1. <b>팀 회의할 때 선호하는 팀원의 모습</b>에 더 가까운 것은?
           </Grid>
           {nowClickMB.map((btn, idx) => (
-            <Grid height="20%" key={btn.id} {...btn}>
+            <Grid height="38%" key={btn.id} {...btn}>
               <Button
                 isId={btn.id}
                 isValue={btn.value}

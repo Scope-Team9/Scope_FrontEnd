@@ -62,6 +62,11 @@ const ArrowBubbleTwo = styled.div`
   -moz-border-radius: 35px; */
   border-radius: 10px;
   border: #17334a solid 3px;
+  @media screen and (max-width: 650px) {
+    bottom: -4px;
+    width: 30px;
+    height: 20px;
+  }
 
   ::after {
     content: "";
@@ -74,6 +79,10 @@ const ArrowBubbleTwo = styled.div`
     z-index: 1;
     bottom: -4px;
     left: 15px;
+    @media screen and (max-width: 650px) {
+      bottom: -4px;
+      left: 5px;
+    }
   }
 
   ::before {
@@ -87,6 +96,9 @@ const ArrowBubbleTwo = styled.div`
     z-index: 0;
     bottom: -8px;
     left: 18px;
+    @media screen and (max-width: 650px) {
+      left: 8px;
+    }
   }
 `;
 

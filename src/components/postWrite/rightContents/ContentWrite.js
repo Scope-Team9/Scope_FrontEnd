@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { Grid, Text } from "../../../elements/Index";
 
 // ContentWrite의 함수형 컴포넌트를 만든다.
-const ContentWrite = (props) => {
+const ContentWrite = props => {
   return (
     <React.Fragment>
       <ContentMedia>
@@ -16,7 +16,7 @@ const ContentWrite = (props) => {
 
           <TextArea
             placeholder="프로젝트 내용을 입력해주세요."
-            onChange={(e) => {
+            onChange={e => {
               props.setContents(e.target.value);
             }}
           ></TextArea>
@@ -35,6 +35,9 @@ const TextArea = styled.textarea`
   border: 1px solid #c4c4c4;
   border-radius: 10px;
   outline: none;
+  @media screen and (max-width: 600px) {
+    height: 300px;
+  }
 `;
 
 const ContentMedia = styled.div`

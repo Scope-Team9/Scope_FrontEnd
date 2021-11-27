@@ -213,8 +213,10 @@ const TestButton = styled.button`
     transition: 0.3s ease-out;
   }
   @media (max-width: 650px) {
-    width: 20px;
-    height: 20px;
+    width: 270px;
+    padding: 10px;
+    height: 80%;
+    font-size: 9px;
   }
 `;
 
@@ -232,6 +234,8 @@ const Common = styled.button`
   left: ${props => props.left};
   right: ${props => props.right};
   position: ${props => props.position};
+  font-size: ${props => props.fontSize};
+  padding: ${props => props.padding};
   &:hover {
     background-color: #17334a;
     color: #fff;
