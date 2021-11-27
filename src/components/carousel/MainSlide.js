@@ -2,9 +2,9 @@
 import React, { useState } from "react";
 import "./MainSlide.css";
 import { history } from "../../redux/configureStore";
-
+import styled from "styled-components";
 import Slider from "react-slick";
-import { Grid, Button, Text } from "../../elements/Index";
+import { Grid, Button, Text, Image } from "../../elements/Index";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import PropensityTest from "../propensityTest/PropensityTest";
@@ -22,6 +22,7 @@ const MainSlide = () => {
   const [emailShowModal, setEmailShowModal] = React.useState(false);
   const userInfo = useSelector((state) => state.user);
   const isToken = document.cookie;
+
   const history = useHistory();
 
   const NextArrow = ({ onClick }) => {
@@ -85,6 +86,7 @@ const MainSlide = () => {
   const TestClose = () => {
     setShowModal(false);
   };
+
   return (
     <React.Fragment>
       <div className="Container">
@@ -115,5 +117,7 @@ const MainSlide = () => {
     </React.Fragment>
   );
 };
+
+const Img = styled.img``;
 
 export default MainSlide;
