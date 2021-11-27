@@ -93,12 +93,10 @@ const ApplicantButton = (props) => {
 
 const ContentMedia = styled.div`
   @media screen and (max-width: 360px) {
-    display: flex;
     width: 325px;
     margin: 0px 0px 60px;
   }
   @media screen and (max-width: 500px) {
-    display: flex;
     width: 325px;
     margin: 0px 0px 100px;
   }
