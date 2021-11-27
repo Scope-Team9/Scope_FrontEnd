@@ -130,7 +130,7 @@ const ApplyStatusModal = (props) => {
                 {applyedUsers.map((user, idx) => (
                   <Grid
                     margin="10px auto"
-                    height="100px"
+                    height="auto"
                     display="flex"
                     alignItems="center"
                     justifyContent="space-around"
@@ -162,7 +162,7 @@ const ApplyStatusModal = (props) => {
                         <UserImg src="/img/토끼.png"></UserImg>
                       )}
                       {applyedUsers[idx].userPropensityType === "FVP" && (
-                        <UserImg src="/img/허스키.png"></UserImg>
+                        <UserImg src="/img/개.png"></UserImg>
                       )}
                       {applyedUsers[idx].userPropensityType === "FHG" && (
                         <UserImg src="/img/고양이.png"></UserImg>
@@ -172,7 +172,7 @@ const ApplyStatusModal = (props) => {
                       )}
                     </Grid>
                     <Grid height="100%" width="80%">
-                      <Grid display="flex" height="60%" margin="auto">
+                      <Wrap>
                         <Grid
                           margin="auto"
                           height="50px"
@@ -196,34 +196,36 @@ const ApplyStatusModal = (props) => {
                             </Grid>
                           </Grid>
                         </Grid>
-                        <Grid margin="auto" height="50px" width="80%">
-                          <Button
-                            common
-                            isValue={applyedUsers[idx].userId}
-                            _onClick={(e) => {
-                              console.log(e);
-                              acceptOffer(e.target.value);
-                            }}
+                        <Grid display="flex">
+                          <Grid margin="auto" height="auto" width="80%">
+                            <Button
+                              common
+                              isValue={applyedUsers[idx].userId}
+                              _onClick={(e) => {
+                                console.log(e);
+                                acceptOffer(e.target.value);
+                              }}
+                            >
+                              수락
+                            </Button>
+                          </Grid>
+                          <Grid
+                            margin="auto auto auto 3px"
+                            height="50px"
+                            width="80%"
                           >
-                            수락
-                          </Button>
+                            <Button
+                              common
+                              isValue={applyedUsers[idx].userId}
+                              _onClick={(e) => {
+                                cancelOffer(e.target.value);
+                              }}
+                            >
+                              취소
+                            </Button>
+                          </Grid>
                         </Grid>
-                        <Grid
-                          margin="auto auto auto 3px"
-                          height="50px"
-                          width="80%"
-                        >
-                          <Button
-                            common
-                            isValue={applyedUsers[idx].userId}
-                            _onClick={(e) => {
-                              cancelOffer(e.target.value);
-                            }}
-                          >
-                            취소
-                          </Button>
-                        </Grid>
-                      </Grid>
+                      </Wrap>
                       <CommentBubble>{applyedUsers[idx].comment}</CommentBubble>
                     </Grid>
                   </Grid>
@@ -240,11 +242,14 @@ const ApplyStatusModal = (props) => {
 const ModalWrap = styled.div`
   width: 550px;
   height: 500px;
+  @media screen and (max-width: 400px) {
+    width: 300px;
+  } ;
 `;
 const CommentBubble = styled.div`
   position: relative;
   background: #f1f9ff;
-  height: 40%;
+  height: auto;
   /* border: #b29cf4 solid 1px; */
   border-radius: 10px;
   padding: 0 12px;
@@ -264,10 +269,21 @@ const CommentBubble = styled.div`
 
 const UserImg = styled.img`
   object-fit: cover;
-  width: 100px;
+  width: 90%;
   border-radius: 12px;
   background-color: #ececec;
   cursor: pointer;
+`;
+
+const Wrap = styled.div`
+  display: flex;
+  height: 60%;
+  margin: auto;
+  @media screen and (max-width: 400px) {
+    display: flex;
+    flex-direction: column;
+    height: 40%;
+  } ;
 `;
 
 export default ApplyStatusModal;

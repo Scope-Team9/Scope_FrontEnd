@@ -35,6 +35,11 @@ const HeaderRight = (props) => {
     userInfo.userPropensityType,
   ]);
 
+  const goMypage = () => {
+    history.push(`/mypage/${userInfo.userId}`);
+    props.changeMypageStatus();
+  };
+
   if (isToken) {
     return (
       <>
@@ -63,7 +68,9 @@ const HeaderRight = (props) => {
                   alignItems="center"
                   margin="0 20px"
                   _onClick={() => {
-                    history.push(`/mypage/${userInfo.userId}`);
+                    goMypage();
+                    // history.push(`/mypage/${userInfo.userId}`);
+                    // location.href = `/mypage/${userInfo.userId}`;
                   }}
                 >
                   {userInfo.userPropensityType === "LVG" && (

@@ -96,7 +96,7 @@ const LoginModal = (props) => {
       alert("기술스택을 선택 해주세요.");
       return false;
     }
-    if (techStack.length >= 3) {
+    if (techStack.length > 4) {
       alert("기술선택을 4개 이하로 입력해주세요.");
       return false;
     }

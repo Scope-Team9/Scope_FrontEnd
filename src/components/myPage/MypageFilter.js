@@ -12,7 +12,7 @@ const MypageFilter = (props) => {
       active: true,
     },
     {
-      id: "진행중",
+      id: "진행",
       active: false,
     },
     {
