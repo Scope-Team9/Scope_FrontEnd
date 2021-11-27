@@ -96,7 +96,7 @@ const ModalWrap = styled.div`
   width: 500px;
   height: 300px;
   border-radius: 20px;
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 560px) {
     width: 300px;
     height: 280px;
   } ;
