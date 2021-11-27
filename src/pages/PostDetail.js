@@ -7,8 +7,9 @@ import { apis } from "../lib/axios";
 import { postActions } from "../redux/modules/post";
 import { Grid, Button, Text } from "../elements/Index";
 import Swal from "sweetalert2";
+
 import ApplyStatusModal from "../components/ApplyStatusModal";
-import LeftBanner from "../components/postDetail/leftBanner";
+import LeftBanner from "../components/postDetail/LeftBanner";
 import TitleDetail from "../components/postDetail/rightContents/TitleDetail";
 import ExileUserModal from "../components/modal/ExileUserModal";
 import ApplicantDetail from "../components/postDetail/rightContents/ApplicantDetail";

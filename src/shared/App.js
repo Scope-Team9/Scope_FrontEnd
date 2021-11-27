@@ -25,8 +25,8 @@ import Footer from "../components/Footer";
 import PropensityTest from "../components/propensityTest/PropensityTest";
 
 function App() {
-  const isLogin = useSelector(state => state.user.isLogin);
-  const userInfo = useSelector(state => state.user);
+  const isLogin = useSelector((state) => state.user.isLogin);
+  const userInfo = useSelector((state) => state.user);
   const isCookie = document.cookie.split("=")[1];
   const dispatch = useDispatch();
 
@@ -40,7 +40,6 @@ function App() {
     <React.Fragment>
       <div className="App">
         <Header />
-
         <ConnectedRouter history={history}>
           <Switch>
             <Route path="/" exact component={MainPage}></Route>

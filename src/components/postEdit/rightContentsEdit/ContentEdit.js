@@ -42,9 +42,7 @@ const TextArea = styled.textarea`
 const ContentMedia = styled.div`
   @media screen and (max-width: 360px) {
     display: flex;
-    width: 350px;
-    height: 10px;
-    margin-bottom: 80px;
+    width: 340px;
   }
 `;
 

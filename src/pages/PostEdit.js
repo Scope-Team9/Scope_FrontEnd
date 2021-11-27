@@ -120,48 +120,47 @@ const PostEdit = (props) => {
           <TitleMedia>
             <Title>게시글 수정하기</Title>
           </TitleMedia>
-          <ContainerMedia>
-            <Grid margin="40px auto">
-              <TitleEdit title={title} setTitle={setTitle} />
-              <StackEdit
-                setTectstack={setTectstack}
-                techstack={techstack}
-                setTest={setTest}
-                animatedComponents={animatedComponents}
-                styles={styles}
+          {/* <ContainerMedia> */}
+          <Grid margin="40px auto">
+            <TitleEdit title={title} setTitle={setTitle} />
+            <StackEdit
+              setTectstack={setTectstack}
+              techstack={techstack}
+              setTest={setTest}
+              animatedComponents={animatedComponents}
+              styles={styles}
+            />
+            <Grid>
+              <DateEdit
+                startDate={startDate}
+                endDate={endDate}
+                setStartdate={setStartdate}
+                setEnddate={setEnddate}
               />
-              <Grid>
-                <DateEdit
-                  startDate={startDate}
-                  endDate={endDate}
-                  setStartdate={setStartdate}
-                  setEnddate={setEnddate}
-                />
-              </Grid>
-              <TotalMemberEdit
-                styles={styles}
-                totalMember={totalMember}
-                setTotalmember={setTotalmember}
-              />
-              <StatusEdit
-                styles={styles}
-                projectStatus={projectStatus}
-                setProjectstatus={setProjectstatus}
-              />
-              <Grid>
-                <ContentEdit contents={contents} setContents={setContents} />
-                {/* <Grid display="flex" padding="16px">
-                  <Btn
-                    onClick={() => {
-                      editHandler();
-                    }}
-                  >
-                    포스트수정 완료
-                  </Btn>
-                </Grid> */}
-              </Grid>
             </Grid>
-          </ContainerMedia>
+            <TotalMemberEdit
+              styles={styles}
+              totalMember={totalMember}
+              setTotalmember={setTotalmember}
+            />
+            <StatusEdit
+              styles={styles}
+              projectStatus={projectStatus}
+              setProjectstatus={setProjectstatus}
+            />
+            <Grid>
+              <ContentEdit contents={contents} setContents={setContents} />
+
+              <Btn
+                onClick={() => {
+                  editHandler();
+                }}
+              >
+                포스트수정 완료
+              </Btn>
+            </Grid>
+          </Grid>
+          {/* </ContainerMedia> */}
         </Grid>
       </Grid>
     </React.Fragment>
@@ -185,7 +184,7 @@ const Btn = styled.button`
   border-radius: 50px;
   color: #bbb4d9;
   background: white;
-  margin: 10px auto 10px auto;
+  margin: auto;
   cursor: pointer;
   &:hover {
     color: white;
