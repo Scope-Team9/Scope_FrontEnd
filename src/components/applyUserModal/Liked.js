@@ -41,30 +41,30 @@ const Liked = (props) => {
       });
     });
   };
-  console.log(postId);
+  // console.log(postId);
 
   //팀원평가
   const userLiked = () => {
-    console.log(likes);
-    console.log(myPage);
+    // console.log(likes);
+    // console.log(myPage);
     const likeMember = likes.filter((user) => user.active == true);
     const result = likeMember.map((a) => a.userId);
     const likeUsers = {
       userIds: result,
     };
-    console.log(likeUsers);
+    // console.log(likeUsers);
     if (!myPage) {
-      console.log("여기");
+      // console.log("여기");
       dispatch(applyCreators.starterLikeAPI(postId, likeUsers));
       modalClose("종료");
       return;
     }
-    console.log("여기2");
+    // console.log("여기2");
     dispatch(applyCreators.starterLikeAPI(postId, likeUsers));
     toggleModal();
     return;
   };
-  console.log(likes);
+  // console.log(likes);
 
   return (
     <>

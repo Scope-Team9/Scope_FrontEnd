@@ -46,19 +46,6 @@ const ApplicantButton = (props) => {
                 지원취소
               </Button>
             )}
-
-            {props.isme === "member" && (
-              <Button
-                common
-                width="120px"
-                isValue="teamExit"
-                _onClick={(e) => {
-                  props.applyUserModalOpen(e.target.value);
-                }}
-              >
-                팀탈퇴
-              </Button>
-            )}
           </Grid>
         )}
         <ApplyUserModal
@@ -73,7 +60,7 @@ const ApplicantButton = (props) => {
         {props.passedData?.projectStatus === "모집중" &&
           props.passedUserStatus === "member" && (
             <Grid>
-              <Button
+              {/* <Button
                 common
                 width="120px"
                 isValue="memberLiked"
@@ -85,7 +72,19 @@ const ApplicantButton = (props) => {
                 borderRadius="50px"
               >
                 지원신청
-              </Button>
+              </Button> */}
+              {props.isme === "member" && (
+                <Button
+                  common
+                  width="120px"
+                  isValue="teamExit"
+                  _onClick={(e) => {
+                    props.applyUserModalOpen(e.target.value);
+                  }}
+                >
+                  팀탈퇴
+                </Button>
+              )}
             </Grid>
           )}
       </ContentMedia>
@@ -95,12 +94,10 @@ const ApplicantButton = (props) => {
 
 const ContentMedia = styled.div`
   @media screen and (max-width: 360px) {
-    display: flex;
     width: 325px;
     margin: 0px 0px 60px;
   }
   @media screen and (max-width: 500px) {
-    display: flex;
     width: 325px;
     margin: 0px 0px 100px;
   }

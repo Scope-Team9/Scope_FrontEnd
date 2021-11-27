@@ -24,28 +24,30 @@ const ProjectJoinUser = (props) => {
         display="flex"
         justifyContent="center"
       >
-        <Grid textAlign="center">
-          <Writer number={props.number}>게시자</Writer>
+        <JoinUserMedia>
+          <Grid textAlign="center">
+            <Writer number={props.number}>게시자</Writer>
 
-          <Grid
-            width="60px"
-            height="60px"
-            borderRadius="50%"
-            backgroundColor="#C4C4C4"
-            margin="6px 0px"
-          >
-            <ImgType
-              type={props.userPropensityType}
-              cursor="pointer"
-              _onClick={() => {
-                goToMypage(props.userId);
-              }}
-            ></ImgType>
+            <Grid
+              width="60px"
+              height="60px"
+              borderRadius="50%"
+              backgroundColor="#C4C4C4"
+              margin="6px 0px"
+            >
+              <ImgType
+                type={props.userPropensityType}
+                cursor="pointer"
+                _onClick={() => {
+                  goToMypage(props.userId);
+                }}
+              ></ImgType>
 
-            <Text size="16px">{props.nickname}</Text>
-            <Grid height="30%">({props.userPropensityType})</Grid>
+              <Text>{props.nickname}</Text>
+              <Grid height="30%">({props.userPropensityType})</Grid>
+            </Grid>
           </Grid>
-        </Grid>
+        </JoinUserMedia>
       </Grid>
     </React.Fragment>
   );
@@ -56,5 +58,12 @@ const Writer = styled.p`
   margin: auto auto auto 0;
   height: 10px;
 `;
+
+const JoinUserMedia = styled.div`
+  @media screen and (max-width: 600px) {
+    font-size: 10px;
+  }
+`;
+
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default ProjectJoinUser;

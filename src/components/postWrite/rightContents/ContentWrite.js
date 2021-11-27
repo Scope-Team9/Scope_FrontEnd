@@ -34,14 +34,20 @@ const TextArea = styled.textarea`
   margin: 4px auto;
   border: 1px solid #c4c4c4;
   border-radius: 10px;
-
   outline: none;
+  @media screen and (max-width: 600px) {
+    height: 200px;
+  }
 `;
 
 const ContentMedia = styled.div`
   @media screen and (max-width: 600px) {
     width: 350px;
-    margin: auto;
+    font-size: 10px;
+  }
+  @media screen and (max-width: 500px) {
+    width: 330px;
+    font-size: 10px;
   }
 `;
 

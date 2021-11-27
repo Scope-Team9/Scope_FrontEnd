@@ -17,6 +17,7 @@ import TotalMemberEdit from "../components/postEdit/rightContentsEdit/TotalMembe
 import StatusEdit from "../components/postEdit/rightContentsEdit/StatusEdit";
 import ContentEdit from "../components/postEdit/rightContentsEdit/ContentEdit";
 import DateEdit from "../components/postEdit/rightContentsEdit/DateEdit";
+import EditButton from "../components/postEdit/rightContentsEdit/EditButton";
 
 // PostEdit의 함수형 컴포넌트를 만든다.
 const PostEdit = (props) => {
@@ -58,8 +59,6 @@ const PostEdit = (props) => {
       window.alert("기술선택을 4개 이하로 입력해주세요.");
     }
   };
-
-  // console.log("총인원", totalMember);
 
   React.useEffect(() => {
     const CheckPost = async () => {
@@ -120,7 +119,7 @@ const PostEdit = (props) => {
           <TitleMedia>
             <Title>게시글 수정하기</Title>
           </TitleMedia>
-          {/* <ContainerMedia> */}
+
           <Grid margin="40px auto">
             <TitleEdit title={title} setTitle={setTitle} />
             <StackEdit
@@ -151,16 +150,9 @@ const PostEdit = (props) => {
             <Grid>
               <ContentEdit contents={contents} setContents={setContents} />
 
-              <Btn
-                onClick={() => {
-                  editHandler();
-                }}
-              >
-                포스트수정 완료
-              </Btn>
+              <EditButton editHandler={editHandler} />
             </Grid>
           </Grid>
-          {/* </ContainerMedia> */}
         </Grid>
       </Grid>
     </React.Fragment>

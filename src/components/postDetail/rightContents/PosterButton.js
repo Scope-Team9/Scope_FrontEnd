@@ -27,28 +27,29 @@ const PosterButton = (props) => {
   return (
     <React.Fragment>
       <Grid display="flex" justifyContent="center">
-        {props.passedData?.projectStatus === "진행중" && (
-          <Button
-            common
-            width="140px"
-            height="35px"
-            isValue="end"
-            _onClick={(e) => {
-              props.applyUserModalOpen(e.target.value);
-            }}
-          >
-            프로젝트 마감하기
-          </Button>
-        )}
-        <ApplyUserModal
-          applyUserModal={props.applyUserModal}
-          setApplyUserModal={props.setApplyUserModal}
-          applyValue={props.applyValue}
-          postId={props.post_id}
-          passdedMenber={props.passdedMenber}
-          statusCheck={props.statusCheck}
-        />
         <ContentMedia>
+          {props.passedData?.projectStatus === "진행중" && (
+            <Button
+              common
+              width="140px"
+              height="35px"
+              isValue="end"
+              _onClick={(e) => {
+                props.applyUserModalOpen(e.target.value);
+              }}
+            >
+              마감하기
+            </Button>
+          )}
+          <ApplyUserModal
+            applyUserModal={props.applyUserModal}
+            setApplyUserModal={props.setApplyUserModal}
+            applyValue={props.applyValue}
+            postId={props.post_id}
+            passdedMenber={props.passdedMenber}
+            statusCheck={props.statusCheck}
+          />
+
           {props.passedData?.projectStatus === "모집중" && (
             <Button
               common
@@ -118,6 +119,15 @@ const PosterButton = (props) => {
     </React.Fragment>
   );
 };
+
+const ButtonMedia = styled.button`
+  @media screen and (max-width: 600px) {
+    display: flex;
+    width: 200px;
+    height: 50px;
+    margin-bottom: 40px;
+  }
+`;
 
 const ContentMedia = styled.div`
   display: flex;
