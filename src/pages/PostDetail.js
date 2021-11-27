@@ -56,12 +56,17 @@ const PostDetail = (props) => {
   };
 
   const goFrontPage = () => {
-    window.open(passedData?.frontUrl);
+    {
+      passedData?.frontUrl !== null && window.open(passedData?.frontUrl);
+    }
   };
 
   const goBackPage = () => {
-    window.open(passedData?.frontUrl);
+    {
+      passedData?.frontUrl !== null && window.open(passedData?.backUrl);
+    }
   };
+
   // 상태변경
   const edit_status = (data) => {
     const editstatus = {
@@ -213,7 +218,7 @@ const PostDetail = (props) => {
                             alignItems="center"
                             margin="0 0 0 5px"
                           >
-                            <Grid>
+                            <Grid margin="0px 0px 10px">
                               <Text>Backend</Text>
                             </Grid>
                             <Grid>
