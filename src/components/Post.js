@@ -16,6 +16,7 @@ const Post = props => {
   const [applyUserModal, setApplyUserModal] = React.useState(false); //지원취소/팀탈퇴/프로젝트마감
   const [applyValue, setApplyValue] = React.useState();
   const [member, setMember] = React.useState();
+  const [loading, setLoading] = React.useState(false);
 
   let totalmember = props.totalMember;
   let recruitmentMember = props.recruitmentMember;
@@ -43,6 +44,7 @@ const Post = props => {
     let postId = props.postId;
     const getMembers = async () => {
       try {
+        setLoading(true);
         const result = await apis.getMember(postId);
         console.log("호출되나", result);
         setMember(result.data.data);
