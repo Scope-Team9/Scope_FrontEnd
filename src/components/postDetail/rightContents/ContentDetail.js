@@ -39,7 +39,7 @@ const Content = styled.p`
 `;
 
 const ContentMedia = styled.div`
-  @media screen and (max-width: 360px) {
+  @media screen and (max-width: 500px) {
     width: 310px;
   }
 `;

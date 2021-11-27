@@ -71,11 +71,11 @@ const ModalWrap = styled.div`
     width: 90%;
   }
 `;
+
 const Contents = styled.div`
   margin: auto;
   height: 90%;
   width: 320px;
-
   text-align: center;
   @media (max-width: 620px) {
     margin: auto;

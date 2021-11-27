@@ -12,7 +12,6 @@ const ApplicantButton = (props) => {
   return (
     <React.Fragment>
       <ContentMedia>
-        {" "}
         {props.passedData?.projectStatus === "모집중" && (
           <Grid>
             {props.isme === "user" && (
