@@ -10,25 +10,21 @@ import { Grid, Text } from "../../../elements/Index";
 const StackDetail = (props) => {
   return (
     <React.Fragment>
-      <StackMedia>
-        <Grid display="flex" margin="20px auto">
-          <TextMedia>
-            <Text size="18px" bold margin="auto 10px auto 0px">
-              기술스택
-            </Text>
-          </TextMedia>
+      <Grid display="flex" margin="20px auto">
+        <StackMedia>
+          <Text size="18px" bold margin="auto 10px auto 0px">
+            기술스택
+          </Text>
 
-          <StacksMedia>
-            {props.passedData?.techStack.map((item, index) => {
-              return (
-                <Text margin="auto 5px" key={index}>
-                  <StackBox>{item}</StackBox>
-                </Text>
-              );
-            })}
-          </StacksMedia>
-        </Grid>
-      </StackMedia>
+          {props.passedData?.techStack.map((item, index) => {
+            return (
+              <Text margin="auto 5px" key={index}>
+                <StackBox>{item}</StackBox>
+              </Text>
+            );
+          })}
+        </StackMedia>
+      </Grid>
     </React.Fragment>
   );
 };
@@ -43,26 +39,11 @@ const StackBox = styled.div`
   text-align: center;
 `;
 
-const TextMedia = styled.div`
-  font-size: 10px;
-  @media screen and (max-width: 400px) {
-    font-size: 10px;
-    width: 100px;
-  }
-`;
-
-const StacksMedia = styled.div`
-  display: flex;
-  @media screen and (max-width: 1000px) {
-    width: 50px;
-  }
-`;
-
 const StackMedia = styled.div`
   display: flex;
   @media screen and (max-width: 600px) {
     font-size: 12px;
-    width: 50px;
+    width: 100px;
   }
 `;
 
