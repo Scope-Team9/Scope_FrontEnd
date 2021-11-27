@@ -21,6 +21,7 @@ const ApplyUserModal = (props) => {
     statusCheck,
     myPage,
     toggleModal,
+    applyUserModalOpen,
   } = props;
   const isMe = useSelector((state) => state.user.userId);
   const [page, setPage] = React.useState(1);
@@ -28,8 +29,11 @@ const ApplyUserModal = (props) => {
   const modalClose = (status) => {
     if (status === "종료") {
       statusCheck(status);
+      applyUserModalOpen();
       return setApplyUserModal(false);
     }
+    applyUserModalOpen();
+
     setApplyUserModal(false);
     return;
   };

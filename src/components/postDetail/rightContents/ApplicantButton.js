@@ -62,6 +62,7 @@ const ApplicantButton = (props) => {
           </Grid>
         )}
         <ApplyUserModal
+          applyUserModalOpen={props.applyUserModalOpen}
           applyUserModal={props.applyUserModal}
           setApplyUserModal={props.setApplyUserModal}
           applyValue={props.applyValue}

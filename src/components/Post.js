@@ -47,7 +47,7 @@ const Post = (props) => {
     const getMembers = async () => {
       try {
         const result = await apis.getMember(postId);
-        // console.log("호출되나", result);
+        console.log("호출되나", result);
         setMember(result.data.data);
         setAssessment(result.data.data.find((e) => e.userId === myUserId));
       } catch (err) {

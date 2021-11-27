@@ -36,8 +36,10 @@ const HeaderRight = (props) => {
   ]);
 
   const goMypage = () => {
-    history.push(`/mypage/${userInfo.userId}`);
-    props.changeMypageStatus();
+    history.push(`/`);
+    setTimeout(() => {
+      history.push(`/mypage/${userInfo.userId}`);
+    }, 50);
   };
 
   if (isToken) {

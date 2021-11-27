@@ -14,7 +14,7 @@ const Header = (props) => {
           <HeaderLeft />
         </Grid>
         <Grid width="auto" height="auto" margin="0 20px 0 0 ">
-          <HeaderRight changeMypageStatus={props.changeMypageStatus} />
+          <HeaderRight />
         </Grid>
       </Wrap>
     </>
