@@ -17,8 +17,12 @@ import { Tune } from "@material-ui/icons";
 import { useHistory } from "react-router";
 import Sort from "../components/filter/Sort";
 import { apis } from "../lib/axios";
+import useScrollMove from "../components/useScrollMove";
 
 const MainPage = () => {
+  // const { scrollOnceMove } = useScrollMove();
+  // let refs = React.useRef();
+
   const dispatch = useDispatch();
   const history = useHistory();
   const stack = useSelector((state) => state.stack.stack);
@@ -108,7 +112,13 @@ const MainPage = () => {
 
   // }, []);
   // onScroll={scroll} ref={container}
+
+  // React.useEffect(() => {
+  //   scrollOnceMove();
+  // }, [scrollOnceMove]);
+
   return (
+    // <div ref={refs}>
     <div>
       <Grid
         maxWidth="1920px"

@@ -165,11 +165,14 @@ const PropensityTest = (props) => {
           width="20px"
           padding="10px"
         >
-          {/* <CloseIcon
+          <CloseIcon
             sx={{ color: "#fff", fontSize: 35 }}
-            onClick={props.TestClose}
+            onClick={() => {
+              props.TestClose();
+              window.location.reload();
+            }}
             cursor="pointer"
-          /> */}
+          />
         </Grid>
         <Grid
           display="flex"
