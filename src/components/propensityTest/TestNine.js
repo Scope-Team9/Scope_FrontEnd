@@ -13,7 +13,7 @@ const TestNine = (props) => {
   );
 
   const clickUser = (btnUserId) => {
-    console.log(btnUserId);
+    // console.log(btnUserId);
     setNowClickU((state) => {
       return state.map((stateItem) => {
         if (stateItem.id === btnUserId) {

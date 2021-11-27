@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const UserType = (props) => {
   const { myType } = props;
-  console.log(myType);
+  // console.log(myType);
   return (
     <>
       <Grid>

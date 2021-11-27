@@ -21,7 +21,7 @@ const ApplicantButton = (props) => {
                   width="120px"
                   isValue="apply"
                   _onClick={(e) => {
-                    console.log(e);
+                    // console.log(e);
                     props.applyUserModalOpen(e.target.value);
                   }}
                   margin="auto 10px"

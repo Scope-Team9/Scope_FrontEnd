@@ -100,7 +100,7 @@ const SubmitUrl = (props) => {
                 padding="0 0 0 10px"
                 placeholder="프론트엔드 깃허브 주소를 입력해주세요!"
                 _onChange={(e) => {
-                  console.log(e.target.value);
+                  // console.log(e.target.value);
                   setFront(e.target.value);
                 }}
               ></Input>
@@ -112,7 +112,7 @@ const SubmitUrl = (props) => {
                 padding="0 0 0 10px"
                 placeholder="백엔드 깃허브 주소를 입력해주세요!"
                 _onChange={(e) => {
-                  console.log(e.target.value);
+                  // console.log(e.target.value);
                   setBack(e.target.value);
                 }}
               ></Input>

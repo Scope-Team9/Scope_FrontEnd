@@ -22,7 +22,7 @@ import { history } from "../redux/configureStore";
 
 export default function Writer(props) {
   const dispatch = useDispatch();
-  console.log(props);
+  // console.log(props);
   // const editorRef = createRef();
   const editorRef = useRef();
 
@@ -83,7 +83,7 @@ export default function Writer(props) {
       const base64 = reader.result;
       // console.log(base64);
       setImgBase64(base64);
-      console.log("1차 관문", imgBase64);
+      // console.log("1차 관문", imgBase64);
 
       const upload = async () => {
         // console.log("2차 관문", base64);
@@ -137,7 +137,7 @@ export default function Writer(props) {
   }, []);
 
   const onChangeEditorTextHandler = () => {
-    console.log(editorRef.current.getInstance().getMarkdown());
+    // console.log(editorRef.current.getInstance().getMarkdown());
     setText(editorRef.current.getInstance().getMarkdown());
   };
 
@@ -159,7 +159,7 @@ export default function Writer(props) {
     writing();
   };
   const introduction = mydata?.user.introduction;
-  console.log(introduction);
+  // console.log(introduction);
   return (
     <>
       {introduction === null && (

@@ -6,7 +6,7 @@ import TestData from "./Testdata.json";
 
 const TestResult = (props) => {
   const myUserType = useSelector((state) => state.user.userPropensityType);
-  console.log(myUserType);
+  // console.log(myUserType);
   const resultType = TestData.usertype.filter(
     (type) => type?.userType === myUserType
   );

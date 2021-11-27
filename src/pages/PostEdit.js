@@ -59,7 +59,7 @@ const PostEdit = (props) => {
     }
   };
 
-  console.log("총인원", totalMember);
+  // console.log("총인원", totalMember);
 
   React.useEffect(() => {
     const CheckPost = async () => {

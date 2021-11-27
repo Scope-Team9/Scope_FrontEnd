@@ -30,11 +30,11 @@ function App() {
   const isCookie = document.cookie.split("=")[1];
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     if (isCookie) {
       dispatch(userCreators.myUserAPI());
     }
-  }, [isLogin, userInfo.userPropensityType]);
+  }, [isLogin, isCookie]);
 
   return (
     <React.Fragment>

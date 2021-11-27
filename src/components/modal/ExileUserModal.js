@@ -8,9 +8,9 @@ import { applyCreators } from "../../redux/modules/applyProject";
 
 import CloseIcon from "@mui/icons-material/Close";
 import { apis } from "../../lib/axios";
-const ExileUserModal = props => {
+const ExileUserModal = (props) => {
   const dispatch = useDispatch();
-  const applyUsers = useSelector(state => state.apply.applyUsers);
+  const applyUsers = useSelector((state) => state.apply.applyUsers);
   const [applyedUsers, setApplyUsers] = React.useState();
   const [acceptButton, setAcceptButton] = React.useState();
   const { applyStatusModal, setApplyStatusModal, postId, postUserId } = props;
@@ -20,7 +20,7 @@ const ExileUserModal = props => {
   };
 
   React.useEffect(() => {
-    console.log(applyedUsers);
+    // console.log(applyedUsers);
     const fetchData = async () => {
       try {
         const result = await apis.serachTeamUser(postId);
@@ -35,8 +35,8 @@ const ExileUserModal = props => {
     // dispatch(applyCreators.applyUserAPI(postId));
   }, [applyStatusModal, acceptButton]);
 
-  const exile = userId => {
-    console.log(userId);
+  const exile = (userId) => {
+    // console.log(userId);
     const fetchData = async () => {
       try {
         const result = await apis.exileUser(postId, userId);
@@ -172,7 +172,7 @@ const ExileUserModal = props => {
                               <Button
                                 common
                                 isValue={applyedUsers[idx].userId}
-                                _onClick={e => {
+                                _onClick={(e) => {
                                   window.confirm("추방하시겠습니까?");
                                   exile(e.target.value);
                                 }}

@@ -36,7 +36,7 @@ const PropensityTest = (props) => {
 
   //스텝별로 스테이트 변화값에 따라 텍스트가 바뀌는지 먼저 확인
   const [page, setpage] = useState(1);
-  console.log(page, TestData.teststep);
+  // console.log(page, TestData.teststep);
 
   // 최종 장소
   const [userPropensityType, setUserPropensityType] = useState([]);
@@ -48,11 +48,11 @@ const PropensityTest = (props) => {
   //자식요소의 밸류값을 가져와 임시에 저장
   const handleUserCreate = (answer) => {
     setPreUserPropensityType(answer);
-    console.log("나의항목 임시저장", answer);
+    // console.log("나의항목 임시저장", answer);
   };
   const handleMemberCreate = (answer) => {
     setPreMemberPropensityType(answer);
-    console.log("상대방의 항목 임시저장", answer);
+    // console.log("상대방의 항목 임시저장", answer);
   };
 
   //스테이트값에 변화를 버튼에 달아줌
@@ -61,7 +61,7 @@ const PropensityTest = (props) => {
     //나에대한 항목
     let preMy = userPropensityType;
     let preYou = memberPropensityType;
-    console.log(preUserPropensityType, preMemberPropensityType);
+    // console.log(preUserPropensityType, preMemberPropensityType);
 
     if (preUserPropensityType === "" || preMemberPropensityType === "") {
       return window.alert("문항을 선택해주세요!");
@@ -76,12 +76,12 @@ const PropensityTest = (props) => {
       setPreMemberPropensityType("");
       preMy.push(preUserPropensityType);
       setUserPropensityType(preMy);
-      console.log("내꺼 잘 들어감?", userPropensityType);
+      // console.log("내꺼 잘 들어감?", userPropensityType);
       //상대에 다한 항목
 
       preYou.push(preMemberPropensityType);
       setMemberPropensityType(preYou);
-      console.log("너꺼 잘 들어감?", memberPropensityType);
+      // console.log("너꺼 잘 들어감?", memberPropensityType);
     }
   };
 
@@ -93,12 +93,12 @@ const PropensityTest = (props) => {
     let toPopMy = userPropensityType;
     toPopMy.pop();
     setUserPropensityType(toPopMy);
-    console.log("마지막 항목이 사라짐?", userPropensityType);
+    // console.log("마지막 항목이 사라짐?", userPropensityType);
     //이전으로 가면 마지막 항목 제거 (상대방의 것)
     let topopYou = memberPropensityType;
     topopYou.pop();
     setMemberPropensityType(topopYou);
-    console.log("마지막 항목이 사라짐?", memberPropensityType);
+    // console.log("마지막 항목이 사라짐?", memberPropensityType);
   };
 
   //회원가입
@@ -109,13 +109,13 @@ const PropensityTest = (props) => {
     let preMy = userPropensityType;
     preMy.push(preUserPropensityType);
     setUserPropensityType(preMy);
-    console.log("내꺼 잘 들어감?", userPropensityType);
+    // console.log("내꺼 잘 들어감?", userPropensityType);
 
     //상대에 다한 항목
     let preYou = memberPropensityType;
     preYou.push(preMemberPropensityType);
     setMemberPropensityType(preYou);
-    console.log("너꺼 잘 들어감?", memberPropensityType);
+    // console.log("너꺼 잘 들어감?", memberPropensityType);
 
     let realSnsId = String(userInfo.snsId);
     let realUserId = userInfo.userId;

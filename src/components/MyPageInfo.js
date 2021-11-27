@@ -62,7 +62,7 @@ const MyPageInfo = (props) => {
     const fetchData = async () => {
       try {
         const result = await apis.getMypage(userId);
-        console.log("마이페이지 몇번?", result);
+        // console.log("마이페이지 몇번?", result);
         // setMydata(result.data.data);
         setNickName(result.data.data.user.nickname);
         setEmail(result.data.data.user.email);
@@ -74,7 +74,7 @@ const MyPageInfo = (props) => {
       }
     };
     fetchData();
-    console.log(mydata);
+    // console.log(mydata);
   }, [editMyProfile, testmodal]);
 
   React.useLayoutEffect(() => {
@@ -83,6 +83,7 @@ const MyPageInfo = (props) => {
         const result = await apis.getMypage(userId);
         console.log(result);
         setMydata(result.data.data);
+        dispatch(pageCheckAction.getPageCheck(`/mypage/${userId}`));
 
         setLoading(false);
       } catch (err) {
@@ -90,7 +91,7 @@ const MyPageInfo = (props) => {
       }
     };
     fetchData();
-    console.log(mydata);
+    // console.log(mydata);
   }, [filter]);
 
   const EmailConfirm = () => {

@@ -68,7 +68,7 @@ const MainSlide = () => {
   };
 
   const ClickEvent = (item) => {
-    if (!isToken) {
+    if (!isToken && item.division !== null) {
       setLoginShowModal(true);
     }
     if (item.division === "test" && isToken) {

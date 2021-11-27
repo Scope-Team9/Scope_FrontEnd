@@ -148,6 +148,34 @@ const LoginModal = (props) => {
     }
   }, [sigunupModalState]);
 
+  //개선해야됨
+  // const openWindow = () => {
+  //   let customWindow = window.open(
+  //     "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code",
+  //     "",
+  //     "_blank"
+  //   );
+
+  //   // setTimeout(() => {
+  //   //   customWindow.close();
+  //   // }, 5000);
+
+  //   //   //s3
+  //   //   // "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://kbumsoo.s3-website.ap-northeast-2.amazonaws.com/user/kakao/callback&response_type=code";
+
+  //   //   //local
+  //   //   // ("https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code");
+
+  //   //   // 최종 주소
+  //   //   // "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=https://scopewith.com/user/kakao/callback&response_type=code";
+  // };
+
+  const closeWindow = () => {
+    setTimeout(() => {
+      window.close();
+    }, 500);
+  };
+
   //회원이 아닐경우 회원가입, 회원일 경우 메인으로 이동
   if (sigunupModalState == true) {
     return (
@@ -386,6 +414,7 @@ const LoginModal = (props) => {
                   onClick={() => {
                     setShowModal(true);
                     window.location.href =
+                      // window.open("", "", "_blank")
                       //s3
                       // "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=http://kbumsoo.s3-website.ap-northeast-2.amazonaws.com/user/github/callback";
 
@@ -394,7 +423,7 @@ const LoginModal = (props) => {
 
                     // 최종 주소
 
-                    // "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=http://scopewith.com/user/github/callback";
+                    // "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=https://scopewith.com/user/github/callback";
                   }}
                 >
                   깃허브로그인
@@ -402,7 +431,13 @@ const LoginModal = (props) => {
                 <KakaoBtn
                   onClick={() => {
                     setShowModal(true);
+                    // openWindow();
                     window.location.href =
+                      // window.open(
+                      //   "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code",
+                      //   "",
+                      //   "_blank"
+                      // );
                       //s3
                       // "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://kbumsoo.s3-website.ap-northeast-2.amazonaws.com/user/kakao/callback&response_type=code";
 
@@ -410,7 +445,8 @@ const LoginModal = (props) => {
                       "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code";
 
                     // 최종 주소
-                    // "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://scopewith.com/user/kakao/callback&response_type=code";
+                    // "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=https://scopewith.com/user/kakao/callback&response_type=code";
+                    // closeWindow();
                   }}
                 >
                   카카오로그인

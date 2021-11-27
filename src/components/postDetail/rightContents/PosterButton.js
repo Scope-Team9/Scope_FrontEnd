@@ -11,14 +11,14 @@ import { apis } from "../../../lib/axios";
 
 // PosterButton의 함수형 컴포넌트를 만든다.
 const PosterButton = (props) => {
-  console.log(props);
+  // console.log(props);
   const history = useHistory();
 
   const DeletePost = async () => {
     try {
       const deletePost = await apis.deletePost(props.post_id);
       history.push("/");
-      console.log("삭제", deletePost);
+      // console.log("삭제", deletePost);
     } catch (err) {
       console.log(err);
     }

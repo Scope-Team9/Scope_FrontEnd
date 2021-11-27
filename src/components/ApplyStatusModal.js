@@ -46,7 +46,7 @@ const ApplyStatusModal = (props) => {
     const fetchData = async () => {
       try {
         const result = await apis.aceeptOffer(postId, acceptInfo);
-        // console.log(result);
+        console.log(result);
         setAcceptButton(result);
         // window.alert("신청을 수락하였습니다.");
       } catch (err) {

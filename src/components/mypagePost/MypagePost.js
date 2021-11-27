@@ -13,7 +13,7 @@ import { Grid, Image, Text } from "../../elements/Index";
 // Post의 함수형 컴포넌트를 만든다.
 const MypagePost = (props) => {
   const dispatch = useDispatch();
-  console.log(props);
+  // console.log(props);
 
   let totalmember = props.totalMember;
   let recruitmentMember = props.recruitmentMember;

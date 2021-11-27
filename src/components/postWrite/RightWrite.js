@@ -65,7 +65,6 @@ const RightWrite = (props) => {
       projectStatus: projectStatus,
       contents: contents,
     };
-    console.log("카드들", card);
     dispatch(postAddActions.addPostAPI(card));
   };
 

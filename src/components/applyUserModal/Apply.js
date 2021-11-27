@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from "react";
 import { Grid, Input, Text, Button } from "../../elements/Index";
 import { useDispatch } from "react-redux";
@@ -46,7 +45,7 @@ const Apply = (props) => {
               backgroundColor="#fff"
               placeholder="간단한 본인의 기술스택 및  자기소개 작성란"
               _onChange={(e) => {
-                console.log(e.target.value);
+                // console.log(e.target.value);
                 setComment(e.target.value);
               }}
             ></Input>

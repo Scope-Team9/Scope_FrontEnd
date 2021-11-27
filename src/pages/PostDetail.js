@@ -8,6 +8,7 @@ import { apis } from "../lib/axios";
 import { postActions } from "../redux/modules/post";
 import { Grid, Button, Text } from "../elements/Index";
 import Swal from "sweetalert2";
+import { pageCheckAction } from "../redux/modules/pageCheck";
 
 import ApplyStatusModal from "../components/ApplyStatusModal";
 import LeftBanner from "../components/postDetail/leftBanner";
@@ -50,7 +51,7 @@ const PostDetail = (props) => {
   };
 
   const statusCheck = (value) => {
-    console.log(value);
+    // console.log(value);
     setProjectStatus(value);
   };
 
@@ -105,6 +106,7 @@ const PostDetail = (props) => {
       }
     };
     CheckPost();
+    // dispatch(pageCheckAction.getPageCheck(`/postdetail/${post_id}`));
   }, [
     bookmark,
     applyStatusModal,

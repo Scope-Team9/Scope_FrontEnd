@@ -9,7 +9,7 @@ import {
   SubmitUrl,
   Liked,
 } from "./applyUserModal/ApplyIndex";
-const ApplyUserModal = props => {
+const ApplyUserModal = (props) => {
   const {
     applyUserModal,
     setApplyUserModal,
@@ -22,11 +22,10 @@ const ApplyUserModal = props => {
     myPage,
     toggleModal,
   } = props;
-  const isMe = useSelector(state => state.user.userId);
+  const isMe = useSelector((state) => state.user.userId);
   const [page, setPage] = React.useState(1);
 
-  const modalClose = status => {
-    console.log("야호", status);
+  const modalClose = (status) => {
     if (status === "종료") {
       statusCheck(status);
       return setApplyUserModal(false);
@@ -41,7 +40,7 @@ const ApplyUserModal = props => {
         maxWidth={"sm"}
         scroll="paper"
         open={applyUserModal}
-        onClose={e => {
+        onClose={(e) => {
           e.stopPropagation();
           modalClose();
         }}
