@@ -30,7 +30,7 @@ const Line = styled.hr`
 
 const TitleMedia = styled.p`
   @media screen and (max-width: 376px) {
-    font-size: 8px;
+    font-size: 10px;
   }
 `;
 
