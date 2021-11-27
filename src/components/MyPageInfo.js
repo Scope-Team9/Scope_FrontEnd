@@ -58,7 +58,7 @@ const MyPageInfo = (props) => {
     // console.log(pageCheck);
 
     dispatch(postActions.isMainPage(false));
-    dispatch(postActions.whatPage(`myPage${userId}`));
+    dispatch(postActions.whatPage("myPage"));
     const fetchData = async () => {
       try {
         const result = await apis.getMypage(userId);
