@@ -27,7 +27,7 @@ const ContentDetail = (props) => {
 // styled-components
 const Content = styled.p`
   width: 100%;
-  height: 340px;
+  height: 500px;
   padding: 10px;
   border: 1px solid #c4c4c4;
   border-radius: 5px;

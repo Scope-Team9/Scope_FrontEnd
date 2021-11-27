@@ -10,14 +10,15 @@ import { Grid, Text } from "../../../elements/Index";
 const DateDetail = (props) => {
   return (
     <React.Fragment>
-      <Grid display="flex" margin="10px 0 0 0px">
+      <Grid display="flex" margin="20px 0 0 0px">
         <DateMedia>
-          <Text margin="auto 10px auto 0px">프로젝트 기간</Text>
-          <Text>
+          <Grid display="flex">
+            <Text margin="auto 10px auto 0px">프로젝트 기간</Text>
+
             <DateBox>
               {props.passedData?.startDate} ~ {props.passedData?.endDate}
             </DateBox>
-          </Text>
+          </Grid>
         </DateMedia>
       </Grid>
     </React.Fragment>
