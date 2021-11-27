@@ -33,7 +33,7 @@ const Infinity = (props) => {
         handleScroll();
       });
     } else {
-      console.log("여기서 막힘?");
+      // console.log("여기서 막힘?");
       window.removeEventListener("scroll", handleScroll);
     }
     return () => window.removeEventListener("scroll", handleScroll);
