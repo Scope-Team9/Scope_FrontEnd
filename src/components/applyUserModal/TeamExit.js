@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 import { Grid, Input, Text, Button } from "../../elements/Index";
 import { useDispatch } from "react-redux";
@@ -5,7 +6,7 @@ import { applyCreators } from "../../redux/modules/applyProject";
 import styled from "styled-components";
 import CloseIcon from "@mui/icons-material/Close";
 
-const TeamExit = props => {
+const TeamExit = (props) => {
   const dispatch = useDispatch();
   const { modalClose, postId } = props;
   const exitTeam = () => {

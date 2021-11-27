@@ -18,20 +18,27 @@ const Post = (props) => {
   const [applyUserModal, setApplyUserModal] = React.useState(false); //지원취소/팀탈퇴/프로젝트마감
   const [applyValue, setApplyValue] = React.useState();
   const [member, setMember] = React.useState();
+  const [assessment, setAssessment] = React.useState();
 
   let totalmember = props.totalMember;
   let recruitmentMember = props.recruitmentMember;
 
   const modalOpen = (value, postId) => {
     setApplyValue(value);
-    setApplyUserModal(true);
+    setApplyUserModal(!applyUserModal);
+  };
+
+  const toggleModal = () => {
+    // console.log(applyUserModal);
+    setApplyUserModal(!applyUserModal);
+    // console.log(applyUserModal);
   };
 
   // React.useEffect(() => {
   //   let postId = props.postId;
   //   dispatch(applyCreators.getMemberAPI(postId));
   // }, [props.mypage]);
-
+  // console.log(applyUserModal);
   React.useLayoutEffect(() => {
     if (myPage !== "myPage") {
       return;
@@ -40,18 +47,17 @@ const Post = (props) => {
     const getMembers = async () => {
       try {
         const result = await apis.getMember(postId);
-        console.log("호출되나", result);
+        // console.log("호출되나", result);
         setMember(result.data.data);
+        setAssessment(result.data.data.find((e) => e.userId === myUserId));
       } catch (err) {
         console.log(err.response);
       }
     };
     getMembers();
-  }, []);
+  }, [applyUserModal]);
 
-  // console.log(member);
   let as = member?.find((e) => e.userId === myUserId);
-  // console.log(as);
 
   return (
     <React.Fragment>
@@ -81,11 +87,11 @@ const Post = (props) => {
                 backgroundColor="#fff"
                 width="50%"
                 color="#111"
-                hoverBg="#b29cf4"
+                hoverBg="#2699FB"
                 hoverCl="#fff"
                 _onClick={(e) => {
                   e.stopPropagation();
-                  console.log(e.target.value, props.postId);
+                  // console.log(e.target.value, props.postId);
                   modalOpen(e.target.value, props.postId);
                 }}
               >
@@ -98,6 +104,7 @@ const Post = (props) => {
                 passdedMenber={member}
                 postId={props.postId}
                 myPage={props.mypage}
+                toggleModal={toggleModal}
               />
             </Grid>
           )}

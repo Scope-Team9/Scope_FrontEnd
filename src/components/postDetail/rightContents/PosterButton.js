@@ -10,7 +10,7 @@ import { useHistory } from "react-router";
 import { apis } from "../../../lib/axios";
 
 // PosterButton의 함수형 컴포넌트를 만든다.
-const PosterButton = (props) => {
+const PosterButton = props => {
   console.log(props);
   const history = useHistory();
 
@@ -33,7 +33,7 @@ const PosterButton = (props) => {
             width="140px"
             height="35px"
             isValue="end"
-            _onClick={(e) => {
+            _onClick={e => {
               props.applyUserModalOpen(e.target.value);
             }}
           >
@@ -67,7 +67,7 @@ const PosterButton = (props) => {
               width="140px"
               height="35px"
               isValue="submit"
-              _onClick={(e) => {
+              _onClick={e => {
                 props.applyUserModalOpen(e.target.value);
               }}
             >
@@ -120,6 +120,7 @@ const PosterButton = (props) => {
 };
 
 const ContentMedia = styled.div`
+  display: flex;
   @media screen and (max-width: 360px) {
     display: flex;
     width: 300px;

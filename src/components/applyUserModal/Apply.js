@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 import { Grid, Input, Text, Button } from "../../elements/Index";
 import { useDispatch } from "react-redux";
@@ -65,6 +66,23 @@ const ModalWrap = styled.div`
   width: 550px;
   height: 300px;
   position: relative;
+  @media (max-width: 620px) {
+    margin: auto;
+    margin-top: 30px;
+    width: 90%;
+  }
+`;
+
+const Contents = styled.div`
+  margin: auto;
+  height: 90%;
+  width: 320px;
+  text-align: center;
+  @media (max-width: 620px) {
+    margin: auto;
+    margin-top: 30px;
+    width: 90%;
+  }
 `;
 
 export default Apply;

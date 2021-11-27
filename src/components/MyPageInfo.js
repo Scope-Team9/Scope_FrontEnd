@@ -34,6 +34,8 @@ const MyPageInfo = (props) => {
   const [modal, setModal] = React.useState(false);
   const [testmodal, setTestModal] = React.useState(false);
 
+  const pageCheck = useSelector((state) => state.post.whatPage.now);
+
   //click
   const introduction = mydata?.user.introduction ? true : false;
 
@@ -53,13 +55,14 @@ const MyPageInfo = (props) => {
     // console.log(editMyProfile);
     // setEmail(null);
     // setNickName(null);
+    // console.log(pageCheck);
 
     dispatch(postActions.isMainPage(false));
-    dispatch(postActions.whatPage("myPage"));
+    dispatch(postActions.whatPage(`myPage${userId}`));
     const fetchData = async () => {
       try {
         const result = await apis.getMypage(userId);
-        console.log(result);
+        console.log("마이페이지 몇번?", result);
         // setMydata(result.data.data);
         setNickName(result.data.data.user.nickname);
         setEmail(result.data.data.user.email);
@@ -72,7 +75,7 @@ const MyPageInfo = (props) => {
     };
     fetchData();
     console.log(mydata);
-  }, [editMyProfile, testmodal, userId]);
+  }, [editMyProfile, testmodal]);
 
   React.useLayoutEffect(() => {
     const fetchData = async () => {

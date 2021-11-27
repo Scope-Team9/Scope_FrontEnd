@@ -16,7 +16,8 @@
 
 .slide {
   transition: transform 300ms;
-  opacity: 0.5;
+  opacity: 1;
+  cursor: pointer;
 }
 
 .activeSlide {

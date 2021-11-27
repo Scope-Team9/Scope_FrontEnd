@@ -6,7 +6,7 @@ import React from "react";
 const Spinner = () => {
   return (
     <React.Fragment>
-      <Grid width="30%" margin="auto">
+      <Grid width="100%" margin="auto">
         <IMG src="/img/호랭이.gif" alt="spinner"></IMG>
       </Grid>
     </React.Fragment>

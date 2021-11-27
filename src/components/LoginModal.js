@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from "react";
 import { Grid, Input, Text, Button, Image } from "../elements/Index";
 import { Dialog } from "@material-ui/core";
@@ -9,10 +10,12 @@ import Select from "react-select";
 import PropensityTest from "./propensityTest/PropensityTest";
 import CloseIcon from "@mui/icons-material/Close";
 
-const LoginModal = props => {
+const LoginModal = (props) => {
   const dispatch = useDispatch();
-  const userInfo = useSelector(state => state.user);
-  const sigunupModalState = useSelector(state => state.user.sigunupModalState);
+  const userInfo = useSelector((state) => state.user);
+  const sigunupModalState = useSelector(
+    (state) => state.user.sigunupModalState
+  );
 
   var regExpNick = /^[a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{2,5}$/;
   var regExpEmail =
@@ -54,13 +57,13 @@ const LoginModal = props => {
   const [nameDup, setNameDup] = useState(false);
   const [test, setTest] = useState(false);
 
-  console.log("닉네임", nickName);
-  console.log("이메일", email);
-  console.log("기술스택", techStack);
-  console.log("sns아이디", userInfo.snsId);
+  // console.log("닉네임", nickName);
+  // console.log("이메일", email);
+  // console.log("기술스택", techStack);
+  // console.log("sns아이디", userInfo.snsId);
 
   //닉네임 체크 미들웨어
-  const nickCheck = nickName => {
+  const nickCheck = (nickName) => {
     if (nickName === undefined) {
       alert("닉네임을 입력 해주세요.");
       return false;
@@ -74,7 +77,7 @@ const LoginModal = props => {
   };
 
   //이메일 체크 미들웨어
-  const emailCheck = email => {
+  const emailCheck = (email) => {
     if (nickName === "") {
       alert("이메일을 입력 해주세요.");
       return false;
@@ -107,13 +110,13 @@ const LoginModal = props => {
       nickName: nickName,
       techStack: techStack,
     };
-    console.log(registerInfo);
+    // console.log(registerInfo);
     dispatch(userCreators.testUserMiddleWare(registerInfo));
     setTest(true);
   };
 
   const customStyles = {
-    control: styles => ({
+    control: (styles) => ({
       ...styles,
       backgroundColor: "white",
       borderRadius: "20px",
@@ -245,7 +248,7 @@ const LoginModal = props => {
                         padding="0 0 0 23px"
                         height="100%"
                         placeholder="닉네임을 입력해주세요"
-                        _onChange={e => {
+                        _onChange={(e) => {
                           setNickName(e.target.value);
                         }}
                       >
@@ -261,7 +264,7 @@ const LoginModal = props => {
                         options={techStackOption}
                         className="basic-multi-select"
                         classNamePrefix="select"
-                        onChange={e => {
+                        onChange={(e) => {
                           let techStack = [];
                           let arr = e;
                           let idx = 0;

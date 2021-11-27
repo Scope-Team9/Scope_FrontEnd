@@ -123,7 +123,7 @@ const TypeResultTest = (props) => {
   ]);
 
   React.useEffect(() => {
-    console.log("테스트결과", props);
+    // console.log("테스트결과", props);
     arr.map((item) => {
       if (item.id === props.myType) {
         setMyData(item);

@@ -1,8 +1,9 @@
+/* eslint-disable */
 import React from "react";
 import { Grid, Input, Button } from "../../elements/Index";
 import styled from "styled-components";
 
-const UserType = props => {
+const UserType = (props) => {
   const { myType } = props;
   console.log(myType);
   return (

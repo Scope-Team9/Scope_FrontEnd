@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 import { Grid, Input, Text, Button } from "../../elements/Index";
 import { useDispatch } from "react-redux";
@@ -5,7 +6,7 @@ import { applyCreators } from "../../redux/modules/applyProject";
 import styled from "styled-components";
 import CloseIcon from "@mui/icons-material/Close";
 
-const Cancel = props => {
+const Cancel = (props) => {
   const dispatch = useDispatch();
   const { modalClose, postId } = props;
   const cancel = () => {
@@ -26,7 +27,7 @@ const Cancel = props => {
         </Grid>
       </Grid>
 
-      <Grid
+      <Contents
         margin="auto"
         height="90%"
         width="320px"
@@ -46,7 +47,7 @@ const Cancel = props => {
             지원취소
           </Button>
         </Grid>
-      </Grid>
+      </Contents>
     </ModalWrap>
   );
 };
@@ -55,6 +56,23 @@ const ModalWrap = styled.div`
   width: 550px;
   height: 300px;
   position: relative;
+  @media (max-width: 620px) {
+    margin: auto;
+    margin-top: 30px;
+    width: 90%;
+  }
+`;
+const Contents = styled.div`
+  margin: auto;
+  height: 90%;
+  width: 320px;
+
+  text-align: center;
+  @media (max-width: 620px) {
+    margin: auto;
+    margin-top: 30px;
+    width: 90%;
+  }
 `;
 
 export default Cancel;

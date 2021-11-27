@@ -1,9 +1,10 @@
+/* eslint-disable */
 import React from "react";
 import { useDispatch } from "react-redux";
 import { userCreators } from "../redux/modules/user";
 import Spinner from "./Spinner";
 
-const KakaoRedirect = props => {
+const KakaoRedirect = (props) => {
   const dispatch = useDispatch();
 
   // 인가코드

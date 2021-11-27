@@ -7,15 +7,22 @@ import Slider from "react-slick";
 import { Grid, Button, Text } from "../../elements/Index";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-
-import slideOne from "../../images/01.jpg";
-import slideTwo from "../../images/02.jpg";
-import slideThree from "../../images/03.jpg";
-
-const images = [slideOne, slideTwo, slideThree];
+import PropensityTest from "../propensityTest/PropensityTest";
+import LoginModal from "../LoginModal";
+import { Dialog } from "@material-ui/core";
+import Slide from "./SlideData.json";
+import EmailAuth from "../EmailAuth";
+import { useHistory } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
 
 const MainSlide = () => {
   const [imageIndex, setImageIndex] = useState(0);
+  const [showModal, setShowModal] = React.useState(false);
+  const [loginShowModal, setLoginShowModal] = React.useState(false);
+  const [emailShowModal, setEmailShowModal] = React.useState(false);
+  const userInfo = useSelector((state) => state.user);
+  const isToken = document.cookie;
+  const history = useHistory();
 
   const NextArrow = ({ onClick }) => {
     return (
@@ -36,7 +43,7 @@ const MainSlide = () => {
   const settings = {
     dots: false, //화면아래 컨텐츠 갯수 표시
     autoplay: true, // 자동 스크롤 사용 여부
-    autoplaySpeed: 20000, // 자동 스크롤 시 다음으로 넘어가는데 걸리는 시간 (ms)
+    autoplaySpeed: 5000, // 자동 스크롤 시 다음으로 넘어가는데 걸리는 시간 (ms)
     draggable: true, //드래그 가능 여부
     infinite: true, //무한반복옵션
     lazyLoad: true,
@@ -60,19 +67,50 @@ const MainSlide = () => {
     // ],
   };
 
+  const ClickEvent = (item) => {
+    if (!isToken) {
+      setLoginShowModal(true);
+    }
+    if (item.division === "test" && isToken) {
+      setShowModal(true);
+    }
+    if (item.division === "email" && isToken) {
+      setEmailShowModal(true);
+    }
+    if (item.division === "mypage" && isToken) {
+      history.push(`/mypage/${userInfo.userId}`);
+    }
+  };
+
+  const TestClose = () => {
+    setShowModal(false);
+  };
   return (
     <React.Fragment>
       <div className="Container">
         <Slider {...settings}>
-          {images.map((img, idx) => (
-            <div
-              key={idx}
-              className={idx === imageIndex ? "slide activeSlide" : "slide"}
-            >
-              <img src={img} alt={img} />
+          {Slide.slide.map((item) => (
+            <div key={item.id} className="slide">
+              <img
+                src={item.img}
+                alt={item.img}
+                onClick={() => {
+                  ClickEvent(item);
+                }}
+              />
             </div>
           ))}
         </Slider>
+        <Dialog maxWidth={"sm"} scroll="paper" open={showModal}>
+          <Grid width="550px" height="100%">
+            <PropensityTest TestClose={TestClose} />
+          </Grid>
+        </Dialog>
+        <LoginModal
+          showModal={loginShowModal}
+          setShowModal={setLoginShowModal}
+        />
+        <EmailAuth modal={emailShowModal} setModal={setEmailShowModal} />
       </div>
     </React.Fragment>
   );

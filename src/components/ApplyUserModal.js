@@ -9,7 +9,7 @@ import {
   SubmitUrl,
   Liked,
 } from "./applyUserModal/ApplyIndex";
-const ApplyUserModal = (props) => {
+const ApplyUserModal = props => {
   const {
     applyUserModal,
     setApplyUserModal,
@@ -19,18 +19,20 @@ const ApplyUserModal = (props) => {
     passedUserStatus,
     projectStatus,
     statusCheck,
-    mypage,
+    myPage,
+    toggleModal,
   } = props;
-  const isMe = useSelector((state) => state.user.userId);
+  const isMe = useSelector(state => state.user.userId);
   const [page, setPage] = React.useState(1);
 
-  const modalClose = (status) => {
+  const modalClose = status => {
     console.log("야호", status);
-    if (status) {
+    if (status === "종료") {
       statusCheck(status);
       return setApplyUserModal(false);
     }
-    return setApplyUserModal(false);
+    setApplyUserModal(false);
+    return;
   };
 
   return (
@@ -39,7 +41,7 @@ const ApplyUserModal = (props) => {
         maxWidth={"sm"}
         scroll="paper"
         open={applyUserModal}
-        onClose={(e) => {
+        onClose={e => {
           e.stopPropagation();
           modalClose();
         }}
@@ -65,9 +67,9 @@ const ApplyUserModal = (props) => {
             statusCheck={statusCheck}
           />
         )}
-        {applyValue === "end" && page === 2 && (
+        {/* {applyValue === "end" && page === 2 && (
           <SubmitUrl modalClose={modalClose} postId={postId} />
-        )}
+        )} */}
         {applyValue === "submit" && passdedMenber[0].userId === isMe && (
           <SubmitUrl modalClose={modalClose} postId={postId} />
         )}
@@ -79,6 +81,7 @@ const ApplyUserModal = (props) => {
             isMe={isMe}
             page={page}
             setPage={setPage}
+            myPage={myPage}
           />
         )}
         {applyValue === "memberLiked" && (
@@ -89,7 +92,8 @@ const ApplyUserModal = (props) => {
             isMe={isMe}
             page={page}
             setPage={setPage}
-            mypage={mypage}
+            myPage={myPage}
+            toggleModal={toggleModal}
           />
         )}
       </Dialog>

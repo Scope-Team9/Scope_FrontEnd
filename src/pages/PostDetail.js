@@ -1,4 +1,5 @@
 // PostDetail.js
+/* eslint-disable */
 // import를 한다.
 import React from "react";
 import styled from "styled-components";
@@ -9,7 +10,7 @@ import { Grid, Button, Text } from "../elements/Index";
 import Swal from "sweetalert2";
 
 import ApplyStatusModal from "../components/ApplyStatusModal";
-import LeftBanner from "../components/postDetail/LeftBanner";
+import LeftBanner from "../components/postDetail/leftBanner";
 import TitleDetail from "../components/postDetail/rightContents/TitleDetail";
 import ExileUserModal from "../components/modal/ExileUserModal";
 import ApplicantDetail from "../components/postDetail/rightContents/ApplicantDetail";
@@ -165,73 +166,97 @@ const PostDetail = (props) => {
                       applyStatusModal={exileStatusModal}
                       setApplyStatusModal={setExileStatusModal}
                       postId={post_id}
+                      postUserId={postUserId}
                     ></ExileUserModal>
                   </Grid>
                 </Grid>
               )}
-
-              <FlexMedia display="flex">
-                <DateDetail passedData={passedData} />
-                <StackDetail passedData={passedData} />
-              </FlexMedia>
+              <Grid>
+                <FlexMedia display="flex">
+                  <DateDetail passedData={passedData} />
+                  <StackDetail passedData={passedData} />
+                </FlexMedia>
+              </Grid>
               <Grid>
                 <Grid display="flex">
-                  <TotalMemberDetail passedData={passedData} />
-                  {userId === postUserId &&
-                    passedData?.projectStatus === "모집중" && (
-                      <Grid display="flex" width="200px">
-                        <ButtonMedia>
-                          <Button
-                            postion="absolute"
-                            common
-                            _onClick={applyStatusModalOpen}
+                  <Grid>
+                    <TotalMemberDetail passedData={passedData} />
+                  </Grid>
+                  <Grid>
+                    <FlexMedia>
+                      {passedData?.projectStatus === "종료" &&
+                        passedData?.frontUrl !== "null" && (
+                          <Grid
+                            display="flex"
+                            width="200px"
+                            alignItems="center"
                           >
-                            신청 현황
-                          </Button>
-                          <Button
-                            postion="absolute"
-                            common
-                            _onClick={exileStatusModalOpen}
-                          >
-                            팀원 강퇴
-                          </Button>
-                        </ButtonMedia>
-                      </Grid>
-                    )}
-                  <FlexMedia>
-                    {passedData?.projectStatus === "종료" &&
-                      passedData?.frontUrl !== "null" && (
-                        <Grid display="flex" width="200px">
-                          <Text>Frontend</Text>
-                          <Grid>
-                            <UrlButton
-                              onClick={() => {
-                                goFrontPage();
-                              }}
-                            >
-                              프론트URL
-                            </UrlButton>
-                          </Grid>
-                        </Grid>
-                      )}
-                    {passedData?.projectStatus === "종료" &&
-                      passedData?.backUrl !== "null" && (
-                        <Grid display="flex" width="200px">
-                          <Text>Backend</Text>
-                          <Grid>
+                            <Grid>
+                              <Text>Frontend</Text>
+                            </Grid>
                             <Grid>
                               <UrlButton
                                 onClick={() => {
-                                  goBackPage();
+                                  goFrontPage();
                                 }}
                               >
-                                백엔드URL
+                                프론트URL
                               </UrlButton>
                             </Grid>
                           </Grid>
-                        </Grid>
-                      )}
-                  </FlexMedia>
+                        )}
+                      {passedData?.projectStatus === "종료" &&
+                        passedData?.backUrl !== "null" && (
+                          <Grid
+                            display="flex"
+                            width="200px"
+                            alignItems="center"
+                            margin="0 0 0 5px"
+                          >
+                            <Grid>
+                              <Text>Backend</Text>
+                            </Grid>
+                            <Grid>
+                              <Grid>
+                                <UrlButton
+                                  onClick={() => {
+                                    goBackPage();
+                                  }}
+                                >
+                                  백엔드URL
+                                </UrlButton>
+                              </Grid>
+                            </Grid>
+                          </Grid>
+                        )}
+                      {userId === postUserId &&
+                        passedData?.projectStatus === "모집중" && (
+                          <Grid
+                            display="flex"
+                            width="150px"
+                            margin="auto 0 auto auto"
+                            justifyContent="flex-end"
+                          >
+                            <ButtonMedia>
+                              <Button
+                                postion="absolute"
+                                common
+                                _onClick={applyStatusModalOpen}
+                              >
+                                신청 현황
+                              </Button>
+                              <Button
+                                postion="absolute"
+                                common
+                                _onClick={exileStatusModalOpen}
+                              >
+                                팀원 강퇴
+                              </Button>
+                            </ButtonMedia>
+                          </Grid>
+                        )}
+                    </FlexMedia>
+                  </Grid>
                 </Grid>
                 <StatusDetail passedData={passedData} />
 
@@ -295,9 +320,10 @@ const FlexMedia = styled.div`
 
 const UrlButton = styled.button`
   width: 100px;
-  height: 20px;
+  height: 23px;
   font-size: 15px;
   margin: auto 10px;
+  padding: 0 0 2px 0;
   border: 1px solid #554475;
   border-radius: 4px;
   color: white;

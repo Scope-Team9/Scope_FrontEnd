@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { createBrowserHistory } from "history";
 import thunk from "redux-thunk";
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
@@ -34,12 +35,12 @@ const rootReducer = combineReducers({
 
 const middlewares = [thunk.withExtraArgument({ history: history })];
 
-const env = process.env.NODE_ENV;
+// const env = process.env.NODE_ENV;
 
-if (env === "development") {
-  const { logger } = require("redux-logger");
-  middlewares.push(logger);
-}
+// if (env === "development") {
+//   const { logger } = require("redux-logger");
+//   middlewares.push(logger);
+// }
 
 // 4. 리덕스 데브툴(redux devTools 설정)
 const composeEnhancers =
