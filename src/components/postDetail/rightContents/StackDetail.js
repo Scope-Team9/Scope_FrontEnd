@@ -11,16 +11,18 @@ const StackDetail = (props) => {
   return (
     <React.Fragment>
       <Grid display="flex" margin="20px auto">
-        <Text size="18px" bold margin="auto 10px auto 0px">
-          기술스택
-        </Text>
-        {props.passedData?.techStack.map((item, index) => {
-          return (
-            <Text margin="auto 5px" key={index}>
-              <StackBox>{item}</StackBox>
-            </Text>
-          );
-        })}
+        <StackMedia>
+          <Text size="18px" bold margin="auto 10px auto 0px">
+            기술스택
+          </Text>
+          {props.passedData?.techStack.map((item, index) => {
+            return (
+              <Text margin="auto 5px" key={index}>
+                <StackBox>{item}</StackBox>
+              </Text>
+            );
+          })}
+        </StackMedia>
       </Grid>
     </React.Fragment>
   );
@@ -37,8 +39,10 @@ const StackBox = styled.div`
 `;
 
 const StackMedia = styled.div`
-  @media screen and (max-width: 360px) {
-    flex-direction: column;
+  display: flex;
+  @media screen and (max-width: 600px) {
+    font-size: 12px;
+    width: 100px;
   }
 `;
 

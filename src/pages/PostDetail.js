@@ -22,7 +22,6 @@ import BookMark from "../components/postDetail/rightContents/BookMark";
 import ApplicantButton from "../components/postDetail/rightContents/ApplicantButton";
 import PosterButton from "../components/postDetail/rightContents/PosterButton";
 import TotalMemberDetail from "../components/postDetail/rightContents/TotalMemberDetail";
-import { Link } from "react-router-dom";
 
 // PostDetail의 함수형 컴포넌트를 만든다
 const PostDetail = (props) => {
