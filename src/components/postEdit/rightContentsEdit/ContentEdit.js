@@ -6,7 +6,7 @@ import React from "react";
 import styled from "styled-components";
 import { Grid, Text } from "../../../elements/Index";
 
-// ContentEdit의 함수형 컴포넌트를 만든다.
+// ContentEdit의 함수형 컴포넌트를 만든다..
 const ContentEdit = (props) => {
   return (
     <React.Fragment>
