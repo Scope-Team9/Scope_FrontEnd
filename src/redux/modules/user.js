@@ -79,14 +79,14 @@ const kakaologinMiddleware = code => {
           //     "info"
           //   );
           // }
-          window.history.back();
+          history.push("/");
         }
       })
       .catch(err => {
         console.log("소셜로그인 에러", err);
         // alert("로그인에 실패하였습니다.");
         // history.replace("/"); // 로그인 실패하면 로그인화면으로 돌려보냄
-        window.history.back();
+        history.push("/");
         Swal.fire("로그인에 실패하였습니다!", "", "warning");
       });
   };
@@ -110,7 +110,7 @@ const githubLoginMiddleware = code => {
             })
           );
 
-          window.history.back();
+          history.push("/");
           return;
         }
         if (res.data.msg == "로그인이 완료되었습니다") {
@@ -124,13 +124,13 @@ const githubLoginMiddleware = code => {
               userPropensityType: res.data.data.userPropensityType,
             })
           );
-          window.history.back();
+          history.push("/");
         }
       })
       .catch(err => {
         console.log("소셜로그인 에러", err);
         // alert("로그인에 실패하였습니다.");
-        window.history.back();
+        history.push("/");
         Swal.fire("로그인에 실패하였습니다.", "", "warning");
       });
   };

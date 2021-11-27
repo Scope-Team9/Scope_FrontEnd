@@ -148,10 +148,10 @@ const PropensityTest = props => {
   };
 
   return (
-    <TestWrap>
+    <Grid>
       {/* 상단헤더 */}
       <Grid
-        height="10%"
+        height="7%"
         bg="#17334A"
         position="relative"
         textAlign="center"
@@ -182,10 +182,11 @@ const PropensityTest = props => {
         </Grid>
       </Grid>
       {/* 프로그래스바 */}
-      <Grid width="70%" margin="20px auto">
+      <Grid width="70%" margin="15px auto" height="10%">
         <Progress page={page} />
       </Grid>
-      <Grid display="flex" justifyContent="center" margin="10px 0">
+      {/* 이미지결과 */}
+      <Grid display="flex" justifyContent="center" margin="10px 0" height="25%">
         {TestData.teststep.map(step => {
           if (step.step === page) {
             return <img width="40%" src={step.img} />;
@@ -200,7 +201,7 @@ const PropensityTest = props => {
       </Grid>
 
       {/* 컨텐츠자리 */}
-      <Grid height="15%" width="90%" margin="auto">
+      <Grid height="15%" width="90%" margin="auto" height="50%">
         {page === 1 && (
           <TestOne
             handleUserCreate={handleUserCreate}
@@ -257,12 +258,12 @@ const PropensityTest = props => {
         )}
         {page === 10 && <TestResult userType={userType} />}
       </Grid>
-
+      {/* 버튼 */}
       <Grid
         display="flex"
         width="90%"
         justifyContent="center"
-        height="100%"
+        height="8%"
         margin="30px auto"
       >
         {/* 5.다음결과값이 없을때 페이지처리 */}
@@ -287,14 +288,16 @@ const PropensityTest = props => {
           </Button>
         )}
       </Grid>
-    </TestWrap>
+    </Grid>
   );
 };
 
 const TestWrap = styled.div`
   width: 100%;
-  @media (width: 550px) {
+  height: 100%;
+  @media (max-width: 550px) {
     width: 90vw;
+    height: 100%;
   }
 `;
 export default PropensityTest;

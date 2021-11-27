@@ -384,10 +384,10 @@ const LoginModal = props => {
                     setShowModal(true);
                     window.location.href =
                       //s3
-                      // "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=http://kbumsoo.s3-website.ap-northeast-2.amazonaws.com/user/github/callback";
+                      "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=http://kbumsoo.s3-website.ap-northeast-2.amazonaws.com/user/github/callback";
 
-                      //local
-                      "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=http://localhost:3000/user/github/callback";
+                    //local
+                    // ("https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=http://localhost:3000/user/github/callback");
 
                     // 최종 주소
 
@@ -428,8 +428,11 @@ const ModalWrap = styled.div`
   width: 550px;
   height: 100%;
   @media (max-width: 570px) {
-    width: 82vw;
+    width: 270px;
   }
+  /* @media (max-width: 375px) {
+    width: 250px;
+  } */
 `;
 
 const GithubBtn = styled.div`

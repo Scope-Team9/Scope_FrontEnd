@@ -9,7 +9,7 @@ import { map, stubFalse } from "lodash";
 import { Grid4x4 } from "@mui/icons-material";
 import EmailAuth from "../EmailAuth";
 
-const TypeResultTest = (props) => {
+const TypeResultTest = props => {
   const [myData, setMyData] = React.useState();
   const [arr, setArr] = React.useState([
     {
@@ -124,7 +124,7 @@ const TypeResultTest = (props) => {
 
   React.useEffect(() => {
     console.log("테스트결과", props);
-    arr.map((item) => {
+    arr.map(item => {
       if (item.id === props.myType) {
         setMyData(item);
       }
@@ -200,9 +200,9 @@ const TypeResultTest = (props) => {
                 </Grid>
               )}
             <Dialog maxWidth={"sm"} scroll="paper" open={props.testmodal}>
-              <Grid width="550px" height="100%">
+              <TestWrap>
                 <PropensityTest TestClose={props.TestClose} />
-              </Grid>
+              </TestWrap>
             </Dialog>
           </Grid>
         </Grid>
@@ -304,5 +304,15 @@ const WhiteP = styled.p`
   font-weight: bold;
   width: 300px;
   margin-left: 13px;
+`;
+
+const TestWrap = styled.div`
+  height: 100%;
+  width: 550px;
+
+  @media (max-width: 650px) {
+    width: 330px;
+    height: 550px;
+  }
 `;
 export default TypeResultTest;
