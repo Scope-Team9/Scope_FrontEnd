@@ -30,36 +30,6 @@ const Apply = props => {
             <CloseIcon fontSize="large" onClick={modalClose} />
           </Grid>
         </Grid>
-<<<<<<< HEAD
-      </Grid>
-      <Contents>
-        <Grid height="20%" textAlign="center">
-          <Text size="30px" bold>
-            지원신청
-          </Text>
-        </Grid>
-        <Grid height="22%" margin="10px 0" textAlign="center">
-          <Input
-            padding="0 0 0 30px"
-            borderRadius="25px"
-            border="1px solid #eee"
-            height="100%"
-            backgroundColor="#fff"
-            placeholder="간단한 본인의 기술스택 및  자기소개 작성란"
-            _onChange={e => {
-              console.log(e.target.value);
-              setComment(e.target.value);
-            }}
-          ></Input>
-        </Grid>
-        <Grid height="10%">
-          <Button borderRadius="25px" _onClick={apply}>
-            지원신청
-          </Button>
-        </Grid>
-      </Contents>
-    </ModalWrap>
-=======
         <Grid margin="auto" height="90%" width="320px" alignItems="center">
           <Grid height="20%" textAlign="center">
             <Text size="30px" bold>
@@ -74,7 +44,7 @@ const Apply = props => {
               height="100%"
               backgroundColor="#fff"
               placeholder="간단한 본인의 기술스택 및  자기소개 작성란"
-              _onChange={(e) => {
+              _onChange={e => {
                 console.log(e.target.value);
                 setComment(e.target.value);
               }}
@@ -88,7 +58,6 @@ const Apply = props => {
         </Grid>
       </ModalWrap>
     </React.Fragment>
->>>>>>> 7309a4b19653bbf5fcf28fe1ee52f7ca0417c7e7
   );
 };
 
