@@ -86,7 +86,7 @@ const MainSlide = () => {
     setShowModal(false);
   };
   return (
-    <>
+    <React.Fragment>
       <div className="Container">
         <Slider {...settings}>
           {Slide.slide.map((item) => (
@@ -112,7 +112,7 @@ const MainSlide = () => {
         />
         <EmailAuth modal={emailShowModal} setModal={setEmailShowModal} />
       </div>
-    </>
+    </React.Fragment>
   );
 };
 
