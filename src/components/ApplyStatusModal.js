@@ -130,7 +130,7 @@ const ApplyStatusModal = (props) => {
                 {applyedUsers.map((user, idx) => (
                   <Grid
                     margin="10px auto"
-                    height="100px"
+                    height="auto"
                     display="flex"
                     alignItems="center"
                     justifyContent="space-around"
@@ -240,11 +240,14 @@ const ApplyStatusModal = (props) => {
 const ModalWrap = styled.div`
   width: 550px;
   height: 500px;
+  /* @media screen and (min-width: 400px) {
+    width: 550px;
+  } ; */
 `;
 const CommentBubble = styled.div`
   position: relative;
   background: #f1f9ff;
-  height: 40%;
+  height: auto;
   /* border: #b29cf4 solid 1px; */
   border-radius: 10px;
   padding: 0 12px;
