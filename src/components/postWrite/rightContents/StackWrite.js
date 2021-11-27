@@ -61,7 +61,7 @@ const StackWrite = (props) => {
     <React.Fragment>
       <Grid margin="10px auto">
         <StackMedia>
-          <Text size="18px" bold>
+          <Text>
             기술스택 선택
             <SubDescription> (최대 4개)</SubDescription>
           </Text>
@@ -87,9 +87,10 @@ const SubDescription = styled.span`
 `;
 
 const StackMedia = styled.div`
-  @media screen and (max-width: 360px) {
+  @media screen and (max-width: 600px) {
     width: 350px;
     margin: auto;
+    font-size: 10px;
   }
 `;
 

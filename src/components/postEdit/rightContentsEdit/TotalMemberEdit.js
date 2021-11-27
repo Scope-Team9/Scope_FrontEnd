@@ -21,9 +21,7 @@ const totalMemberEdit = (props) => {
     <React.Fragment>
       <TotalMemberMedia>
         <Grid margin="20px auto">
-          <Text size="18px" bold>
-            프로젝트 총 인원
-          </Text>
+          <Text>프로젝트 총 인원</Text>
           <Select
             options={projectMembers}
             styles={props.styles}
@@ -43,11 +41,12 @@ const totalMemberEdit = (props) => {
 };
 
 const TotalMemberMedia = styled.div`
-  @media screen and (max-width: 360px) {
+  @media screen and (max-width: 600px) {
     display: flex;
     width: 350px;
     height: 10px;
-    margin-bottom: 80px;
+    font-size: 10px;
+    margin-bottom: 55px;
   }
 `;
 

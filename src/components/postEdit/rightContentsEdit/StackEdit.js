@@ -81,10 +81,7 @@ const StackEdit = (props) => {
     <React.Fragment>
       <StackMedia>
         <Grid margin="20px auto">
-          <Text size="18px" bold>
-            기술스택 선택
-          </Text>
-          {/* 1차방안 */}
+          <Text>기술스택 선택</Text>
           <Select
             isMulti
             components={props.animatedComponents}
@@ -102,11 +99,12 @@ const StackEdit = (props) => {
 };
 
 const StackMedia = styled.div`
-  @media screen and (max-width: 360px) {
+  @media screen and (max-width: 600px) {
     display: flex;
     width: 350px;
     height: 10px;
-    margin-bottom: 80px;
+    margin-bottom: 40px;
+    font-size: 10px;
   }
 `;
 

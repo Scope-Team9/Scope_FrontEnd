@@ -10,15 +10,15 @@ import { Grid, Text } from "../../../elements/Index";
 const DateDetail = (props) => {
   return (
     <React.Fragment>
-      <Grid display="flex" margin="20px auto auto">
-        <Text size="18px" bold margin="auto 10px auto 0px">
-          프로젝트 기간
-        </Text>
-        <Text>
-          <DateBox>
-            {props.passedData?.startDate} ~ {props.passedData?.endDate}
-          </DateBox>
-        </Text>
+      <Grid display="flex" margin="10px 0 0 0px">
+        <DateMedia>
+          <Text margin="auto 10px auto 0px">프로젝트 기간</Text>
+          <Text>
+            <DateBox>
+              {props.passedData?.startDate} ~ {props.passedData?.endDate}
+            </DateBox>
+          </Text>
+        </DateMedia>
       </Grid>
     </React.Fragment>
   );
@@ -32,10 +32,11 @@ const DateBox = styled.div`
   text-align: center;
 `;
 
-const ButtonMedia = styled.p`
-  @media screen and (max-width: 1500px) {
-    width: 100px;
-    margin: auto;
+const DateMedia = styled.div`
+  @media screen and (max-width: 600px) {
+    display: flex;
+    width: 300px;
+    font-size: 10px;
   }
 `;
 

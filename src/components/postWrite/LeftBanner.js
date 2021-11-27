@@ -18,8 +18,8 @@ const LeftBanner = (props) => {
 // styled-components
 const SideBarImg = styled.img`
   max-width: 100%;
-  height: 1242px;
-  @media screen and (max-width: 1400px) {
+  height: 1190px;
+  @media screen and (max-width: 600px) {
     display: none;
   }
 `;

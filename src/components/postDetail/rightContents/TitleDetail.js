@@ -29,8 +29,8 @@ const Line = styled.hr`
 `;
 
 const TitleMedia = styled.p`
-  @media screen and (max-width: 360px) {
-    font-size: 20px;
+  @media screen and (max-width: 376px) {
+    font-size: 8px;
   }
 `;
 

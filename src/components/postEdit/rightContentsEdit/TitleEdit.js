@@ -12,9 +12,7 @@ const TitleEdit = (props) => {
     <React.Fragment>
       <TitleMedia>
         <Grid>
-          <Text size="18px" bold>
-            제목
-          </Text>
+          <Text>제목</Text>
           <Input
             width="100%"
             maxLength="35"
@@ -25,7 +23,6 @@ const TitleEdit = (props) => {
             borderRadius="10px"
             placeholder="제목을 입력해주세요."
             inputFocusOutline="none"
-            fontSize="16px"
             type="text"
             editValue={props.title}
             _onChange={(e) => {
@@ -39,11 +36,12 @@ const TitleEdit = (props) => {
 };
 
 const TitleMedia = styled.div`
-  @media screen and (max-width: 360px) {
+  @media screen and (max-width: 600px) {
     display: flex;
     width: 350px;
     height: 10px;
-    margin-bottom: 80px;
+    margin-bottom: 40px;
+    font-size: 10px;
   }
 `;
 
