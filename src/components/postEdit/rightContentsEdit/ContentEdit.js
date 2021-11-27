@@ -11,7 +11,7 @@ const ContentEdit = (props) => {
   return (
     <React.Fragment>
       <ContentMedia>
-        <Grid margin="20px auto">
+        <Grid margin="4px auto">
           <Text size="18px" bold>
             프로젝트 내용적기
           </Text>
@@ -43,6 +43,10 @@ const ContentMedia = styled.div`
   @media screen and (max-width: 360px) {
     display: flex;
     width: 340px;
+  }
+  @media screen and (max-width: 500px) {
+    display: flex;
+    width: 335px;
   }
 `;
 

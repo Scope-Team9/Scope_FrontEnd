@@ -98,6 +98,11 @@ const ContentMedia = styled.div`
     width: 325px;
     margin: 0px 0px 60px;
   }
+  @media screen and (max-width: 500px) {
+    display: flex;
+    width: 325px;
+    margin: 0px 0px 100px;
+  }
 `;
 
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.
