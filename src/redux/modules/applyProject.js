@@ -72,7 +72,7 @@ const applyProjectAPI = (postId, comment) => {
         if (err.response.data.msg === "이미 지원한 프로젝트입니다.") {
           return window.alert("이미 지원한 프로젝트 입니다.");
         } else {
-          window.alert("해당 지원 정보를 찾을 수 없습니다.");
+          window.alert(err.response.data.msg);
           return;
         }
       });

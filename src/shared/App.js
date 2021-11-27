@@ -29,22 +29,32 @@ function App() {
   const userInfo = useSelector((state) => state.user);
   const isCookie = document.cookie.split("=")[1];
   const dispatch = useDispatch();
+  const [goMypage, setGoMypage] = React.useState(false);
+
+  const changeMypageStatus = () => {
+    setGoMypage(!goMypage);
+  };
 
   React.useLayoutEffect(() => {
     if (isCookie) {
       dispatch(userCreators.myUserAPI());
     }
-  }, [isLogin, isCookie]);
+  }, [isLogin, isCookie, goMypage]);
 
   return (
     <React.Fragment>
       <div className="App">
-        <Header />
+        <Header changeMypageStatus={changeMypageStatus} />
         <ConnectedRouter history={history}>
           <Switch>
             <Route path="/" exact component={MainPage}></Route>
             <Route path="/message" exact component={Message}></Route>
-            <Route path="/mypage/:id" exact component={MyPageInfo}></Route>
+            <Route
+              path="/mypage/:id"
+              exact
+              component={MyPageInfo}
+              goMypage={goMypage}
+            ></Route>
             <Route path="/postadd" exact component={PostWrite}></Route>
             <Route path="/postedit/:id" exact component={PostEdit}></Route>
             <Route path="/addmarkdown" exact component={Markdown}></Route>
