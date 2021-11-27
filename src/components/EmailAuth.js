@@ -65,20 +65,20 @@ const EmailAuth = (props) => {
             <Input
               padding="10px"
               placeholder="이메일을 입력해 주세요."
-              margin="10px 0 0 18%"
+              margin="10px 0 0 16%"
               fontSize="15px"
               border="1px solid #C9C9C9"
               borderRadius="8px"
-              width="320px"
+              width="70%"
               _onChange={(e) => {
                 EmailInput(e.target.value);
               }}
             ></Input>
 
             <Button
-              width="320px"
+              width="70%"
               height="50px"
-              margin="-90px 0 0 18%"
+              margin="-90px 0 0 16%"
               _onClick={() => {
                 EmailSend();
               }}
@@ -96,6 +96,10 @@ const ModalWrap = styled.div`
   width: 500px;
   height: 300px;
   border-radius: 20px;
+  @media screen and (max-width: 560px) {
+    width: 300px;
+    height: 280px;
+  } ;
 `;
 const Dec = styled.p`
   color: #08061d;

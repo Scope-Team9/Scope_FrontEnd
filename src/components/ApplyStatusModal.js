@@ -130,7 +130,7 @@ const ApplyStatusModal = (props) => {
                 {applyedUsers.map((user, idx) => (
                   <Grid
                     margin="10px auto"
-                    height="100px"
+                    height="auto"
                     display="flex"
                     alignItems="center"
                     justifyContent="space-around"
@@ -196,7 +196,7 @@ const ApplyStatusModal = (props) => {
                             </Grid>
                           </Grid>
                         </Grid>
-                        <Grid margin="auto" height="50px" width="80%">
+                        <Grid margin="auto" height="auto" width="80%">
                           <Button
                             common
                             isValue={applyedUsers[idx].userId}
@@ -240,11 +240,14 @@ const ApplyStatusModal = (props) => {
 const ModalWrap = styled.div`
   width: 550px;
   height: 500px;
+  @media screen and (max-width: 400px) {
+    width: 300px;
+  } ;
 `;
 const CommentBubble = styled.div`
   position: relative;
   background: #f1f9ff;
-  height: 40%;
+  height: auto;
   /* border: #b29cf4 solid 1px; */
   border-radius: 10px;
   padding: 0 12px;
@@ -264,7 +267,7 @@ const CommentBubble = styled.div`
 
 const UserImg = styled.img`
   object-fit: cover;
-  width: 100px;
+  width: 90%;
   border-radius: 12px;
   background-color: #ececec;
   cursor: pointer;
