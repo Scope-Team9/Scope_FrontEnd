@@ -90,7 +90,7 @@ const DateMedia = styled.div`
   @media screen and (max-width: 500px) {
     display: flex;
     width: 340px;
-    height: 10px;
+    height: 30px;
     margin-bottom: 90px;
   }
 `;
