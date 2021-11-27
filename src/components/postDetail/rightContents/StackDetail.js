@@ -11,9 +11,8 @@ const StackDetail = (props) => {
   return (
     <React.Fragment>
       <Grid display="flex" margin="20px auto">
+        <Text margin="auto 10px auto 0px">기술스택</Text>
         <StackMedia>
-          <Text margin="auto 10px auto 0px">기술스택</Text>
-
           {props.passedData?.techStack.map((item, index) => {
             return (
               <Text margin="auto 5px" key={index}>
