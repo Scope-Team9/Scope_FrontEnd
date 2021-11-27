@@ -35,6 +35,9 @@ const Content = styled.p`
   line-height: 30px;
   white-space: pre-line;
   overflow: scroll;
+  @media screen and (max-width: 600px) {
+    height: 300px;
+  }
 `;
 
 const ContentMedia = styled.div`

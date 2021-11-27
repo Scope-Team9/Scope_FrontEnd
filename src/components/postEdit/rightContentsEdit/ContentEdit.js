@@ -28,13 +28,16 @@ const ContentEdit = (props) => {
 // styled-components
 const TextArea = styled.textarea`
   width: 97%;
-  height: 300px;
+  height: 400px;
   padding: 10px;
   margin: 4px auto;
   border: 1px solid #c4c4c4;
   border-radius: 10px;
   font-size: 16px;
   outline: none;
+  @media screen and (max-width: 600px) {
+    height: 200px;
+  }
 `;
 
 const ContentMedia = styled.div`

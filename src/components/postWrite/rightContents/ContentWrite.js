@@ -35,6 +35,9 @@ const TextArea = styled.textarea`
   border: 1px solid #c4c4c4;
   border-radius: 10px;
   outline: none;
+  @media screen and (max-width: 600px) {
+    height: 200px;
+  }
 `;
 
 const ContentMedia = styled.div`
