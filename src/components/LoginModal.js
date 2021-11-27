@@ -467,8 +467,11 @@ const ModalWrap = styled.div`
   width: 550px;
   height: 100%;
   @media (max-width: 570px) {
-    width: 82vw;
+    width: 270px;
   }
+  /* @media (max-width: 375px) {
+    width: 250px;
+  } */
 `;
 
 const GithubBtn = styled.div`

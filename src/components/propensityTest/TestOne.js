@@ -52,15 +52,17 @@ const TestOne = (props) => {
   };
 
   return (
-    <Grid>
+    <Grid height="100%">
       <Grid display="flex" flexDirection="column">
-        <Grid margin="20px 0">
-          <Grid>
+        <Grid margin="20px 0" height="50%" bg="#111">
+          <Grid height="20%">
             <Grid margin="5px 0">
-              Q1. <b>팀 회의할 때 당신의 모습</b>에 더 가까운 것은?
+              <Text>
+                Q1. <b>팀 회의할 때 당신의 모습</b>에 더 가까운 것은?
+              </Text>
             </Grid>
             {nowClickU.map((btn, idx) => (
-              <Grid key={btn.id} {...btn}>
+              <Grid height="10%" key={btn.id} {...btn}>
                 <Button
                   isId={btn.id}
                   isValue={btn.value}
@@ -76,12 +78,13 @@ const TestOne = (props) => {
             ))}
           </Grid>
         </Grid>
-        <Grid>
-          <Grid margin="5px 0">
+
+        <Grid height="50%">
+          <Grid margin="5px 0" height="20%">
             Q1. <b>팀 회의할 때 선호하는 팀원의 모습</b>에 더 가까운 것은?
           </Grid>
           {nowClickMB.map((btn, idx) => (
-            <Grid key={btn.id} {...btn}>
+            <Grid height="20%" key={btn.id} {...btn}>
               <Button
                 isId={btn.id}
                 isValue={btn.value}

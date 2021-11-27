@@ -200,9 +200,9 @@ const TypeResultTest = (props) => {
                 </Grid>
               )}
             <Dialog maxWidth={"sm"} scroll="paper" open={props.testmodal}>
-              <Grid width="550px" height="100%">
+              <TestWrap>
                 <PropensityTest TestClose={props.TestClose} />
-              </Grid>
+              </TestWrap>
             </Dialog>
           </Grid>
         </Grid>
@@ -304,5 +304,15 @@ const WhiteP = styled.p`
   font-weight: bold;
   width: 300px;
   margin-left: 13px;
+`;
+
+const TestWrap = styled.div`
+  height: 100%;
+  width: 550px;
+
+  @media (max-width: 650px) {
+    width: 330px;
+    height: 550px;
+  }
 `;
 export default TypeResultTest;
