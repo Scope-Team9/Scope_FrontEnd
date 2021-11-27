@@ -29,33 +29,33 @@ const DateWrite = (props) => {
 
   return (
     <React.Fragment>
-      <Text size="18px" bold>
-        기간설정
-      </Text>
-      <Grid display="flex" textAlign="center" margin="20px auto">
-        {/* 시작 일*/}
-        <Grid>
-          <Text>프로젝트 시작일</Text>
-          <SDatePicker
-            dateFormat="yyyy - MM - dd"
-            selected={props.startDate}
-            onChange={startDate}
-            locale={ko}
-            minDate={new Date()}
-          />
+      <DateMedia>
+        <Text>기간설정</Text>
+        <Grid display="flex" textAlign="center" margin="20px auto">
+          {/* 시작 일*/}
+          <Grid>
+            <Text>프로젝트 시작일</Text>
+            <SDatePicker
+              dateFormat="yyyy - MM - dd"
+              selected={props.startDate}
+              onChange={startDate}
+              locale={ko}
+              minDate={new Date()}
+            />
+          </Grid>
+          {/* 종료 일*/}
+          <Grid>
+            <Text>프로젝트 종료일</Text>
+            <SDatePicker
+              dateFormat="yyyy - MM - dd"
+              selected={props.endDate}
+              onChange={endDate}
+              locale={ko}
+              minDate={new Date()}
+            />
+          </Grid>
         </Grid>
-        {/* 종료 일*/}
-        <Grid>
-          <Text>프로젝트 종료일</Text>
-          <SDatePicker
-            dateFormat="yyyy - MM - dd"
-            selected={props.endDate}
-            onChange={endDate}
-            locale={ko}
-            minDate={new Date()}
-          />
-        </Grid>
-      </Grid>
+      </DateMedia>
     </React.Fragment>
   );
 };
@@ -71,8 +71,14 @@ const SDatePicker = styled(DatePicker)`
   font-size: 16px;
   text-align: center;
   margin-top: 0.6rem;
-  margin-left: 10px;
   outline: none;
+`;
+
+const DateMedia = styled.div`
+  @media screen and (max-width: 600px) {
+    width: 350px;
+    font-size: 10px;
+  }
 `;
 
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.

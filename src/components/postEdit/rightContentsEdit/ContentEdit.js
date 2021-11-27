@@ -11,10 +11,8 @@ const ContentEdit = (props) => {
   return (
     <React.Fragment>
       <ContentMedia>
-        <Grid margin="20px auto">
-          <Text size="18px" bold>
-            프로젝트 내용적기
-          </Text>
+        <Grid margin="10px auto">
+          <Text>프로젝트 내용적기</Text>
           <TextArea
             value={props.contents}
             onChange={(e) => {
@@ -40,13 +38,15 @@ const TextArea = styled.textarea`
 `;
 
 const ContentMedia = styled.div`
-  @media screen and (max-width: 360px) {
+  @media screen and (max-width: 600px) {
     display: flex;
     width: 340px;
+    font-size: 10px;
   }
   @media screen and (max-width: 500px) {
     display: flex;
     width: 335px;
+    font-size: 10px;
   }
 `;
 

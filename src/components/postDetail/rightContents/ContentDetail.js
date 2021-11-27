@@ -12,10 +12,9 @@ const ContentDetail = (props) => {
   return (
     <React.Fragment>
       <Grid margin="20px auto auto">
-        <Text size="18px" bold margin="0px 10px 0px 0px">
-          프로젝트 설명
-        </Text>
         <ContentMedia>
+          <Text>프로젝트 설명</Text>
+
           <Linkify>
             <Content>{props.passedData?.contents}</Content>
           </Linkify>
@@ -39,8 +38,9 @@ const Content = styled.p`
 `;
 
 const ContentMedia = styled.div`
-  @media screen and (max-width: 500px) {
-    width: 310px;
+  @media screen and (max-width: 600px) {
+    font-size: 10px;
+    width: 320px;
   }
 `;
 

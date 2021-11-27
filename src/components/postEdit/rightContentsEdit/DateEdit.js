@@ -25,9 +25,7 @@ const DateEdit = (props) => {
     <React.Fragment>
       <DateMedia>
         <Grid>
-          <Text size="18px" bold>
-            기간설정
-          </Text>
+          <Text>기간설정</Text>
           <Grid display="flex" textAlign="center" margin="20px auto">
             {/* 시작 일*/}
             <Grid>
@@ -76,22 +74,23 @@ const SDatePicker = styled(DatePicker)`
   font-size: 16px;
   text-align: center;
   margin-top: 0.6rem;
-  margin-left: 10px;
+  margin-left: 8px;
   outline: none;
 `;
 
 const DateMedia = styled.div`
-  @media screen and (max-width: 360px) {
+  @media screen and (max-width: 600px) {
     display: flex;
     width: 350px;
     height: 10px;
-    margin-bottom: 80px;
+    margin-bottom: 40px;
+    font-size: 10px;
   }
   @media screen and (max-width: 500px) {
     display: flex;
     width: 340px;
-    height: 10px;
-    margin-bottom: 90px;
+    height: 30px;
+    margin-bottom: 55px;
   }
 `;
 
