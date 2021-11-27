@@ -12,9 +12,7 @@ const StackDetail = (props) => {
     <React.Fragment>
       <Grid display="flex" margin="20px auto">
         <StackMedia>
-          <Text size="18px" bold margin="auto 10px auto 0px">
-            기술스택
-          </Text>
+          <Text margin="auto 10px auto 0px">기술스택</Text>
 
           {props.passedData?.techStack.map((item, index) => {
             return (
@@ -42,8 +40,8 @@ const StackBox = styled.div`
 const StackMedia = styled.div`
   display: flex;
   @media screen and (max-width: 600px) {
-    font-size: 12px;
-    width: 100px;
+    font-size: 2px;
+    width: 120px;
   }
 `;
 

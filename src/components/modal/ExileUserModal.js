@@ -203,6 +203,9 @@ const ExileUserModal = (props) => {
 const ModalWrap = styled.div`
   width: 550px;
   height: 500px;
+  @media (max-width: 375px) {
+    width: 300px;
+  }
 `;
 const CommentBubble = styled.div`
   position: relative;
@@ -227,7 +230,7 @@ const CommentBubble = styled.div`
 
 const UserImg = styled.img`
   object-fit: cover;
-  width: 100px;
+  width: 90%;
   border-radius: 12px;
   background-color: #ececec;
   cursor: pointer;

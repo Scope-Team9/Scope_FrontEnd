@@ -12,7 +12,7 @@ const TitleWrite = (props) => {
     <React.Fragment>
       <Grid>
         <TitleMedia>
-          <Text size="18px">제목</Text>
+          <Text>제목</Text>
           <Input
             width="100%"
             height="40px"
@@ -23,39 +23,22 @@ const TitleWrite = (props) => {
             placeholder="제목을 입력해주세요."
             maxLength="35"
             inputFocusOutline="none"
-            fontSize="16px"
+            fontSize="10px"
             _onChange={(e) => {
               props.setTitle(e.target.value);
             }}
           ></Input>
         </TitleMedia>
-        {/* <TitleMedia>
-          <Text size="18px">카카오톡 URL</Text>
-          <Input
-            width="100%"
-            height="40px"
-            padding="10px"
-            margin="4px auto"
-            border="1px solid #C4C4C4"
-            borderRadius="10px"
-            placeholder="오픈채팅방 주소를 입력해주세요."
-            maxLength="35"
-            inputFocusOutline="none"
-            fontSize="16px"
-            _onChange={(e) => {
-              props.setTitle(e.target.value);
-            }}
-          ></Input>
-        </TitleMedia> */}
       </Grid>
     </React.Fragment>
   );
 };
 
-const TitleMedia = styled.p`
-  @media screen and (max-width: 360px) {
+const TitleMedia = styled.div`
+  @media screen and (max-width: 600px) {
     width: 350px;
     margin: auto;
+    font-size: 10px;
   }
 `;
 

@@ -7,7 +7,7 @@ import styled from "styled-components";
 import bannerImg from "../../images/PostDetail.png";
 
 // LeftBanner의 함수형 컴포넌트를 만든다.
-const LeftBanner = props => {
+const LeftBanner = (props) => {
   return (
     <React.Fragment>
       <SideBarImg src={bannerImg} />
@@ -18,7 +18,7 @@ const LeftBanner = props => {
 // styled-components
 const SideBarImg = styled.img`
   max-width: 100%;
-  height: 1000px;
+  height: 100%;
   @media screen and (max-width: 1600px) {
     max-width: 80%;
   }

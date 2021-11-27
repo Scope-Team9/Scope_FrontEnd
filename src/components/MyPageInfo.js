@@ -16,14 +16,15 @@ import Banners from "./myPage/Banners";
 import MypageCard from "./myPage/MypageCard";
 import TypeResultTest from "./myPage/TypeResultTest";
 import MypageFilter from "./myPage/MypageFilter";
+import { pageCheckAction } from "../redux/modules/pageCheck";
 
 // MyPageInfo의 함수형 컴포넌트를 만든다.
 const MyPageInfo = (props) => {
   const dispatch = useDispatch();
-
   const userId = props.match.params.id;
-  const myUserId = useSelector((state) => state.user.userId);
 
+  const myUserId = useSelector((state) => state.user.userId);
+  const [myUrl, setMyUrl] = React.useState();
   const [filter, setFilter] = React.useState("소개");
   const [mydata, setMydata] = React.useState();
   const [editMyProfile, setEditMyProfile] = React.useState(false); // 내려줘야함
@@ -34,7 +35,7 @@ const MyPageInfo = (props) => {
   const [modal, setModal] = React.useState(false);
   const [testmodal, setTestModal] = React.useState(false);
 
-  const pageCheck = useSelector((state) => state.post.whatPage.now);
+  const pageCheck = useSelector((state) => state.pagecheck.pageGo);
 
   //click
   const introduction = mydata?.user.introduction ? true : false;
@@ -84,7 +85,7 @@ const MyPageInfo = (props) => {
         console.log(result);
         setMydata(result.data.data);
         dispatch(pageCheckAction.getPageCheck(`/mypage/${userId}`));
-
+        console.log(props.goMypage);
         setLoading(false);
       } catch (err) {
         console.log(err);
@@ -113,6 +114,8 @@ const MyPageInfo = (props) => {
   const editProfileCancle = () => {
     setEditMyProfile(false);
   };
+
+  React.useLayoutEffect(() => {}, [props.goMypage]);
 
   return (
     <Grid margin="0 0 250px 0">
@@ -186,11 +189,11 @@ const MyPageInfo = (props) => {
                   )}
                 </Grid>
 
-                {filter === "진행중" && (
+                {filter === "진행" && (
                   <MypagePostList {...inProgressProject}></MypagePostList>
                 )}
                 <Grid margin="0 0 0 25%" width="49%">
-                  {filter === "진행중" && inProgressProject.length === 0 && (
+                  {filter === "진행" && inProgressProject.length === 0 && (
                     <>
                       <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
                       <NoIntroductionText>
@@ -266,6 +269,9 @@ const MyPageInfo = (props) => {
                       <NoIntroductionText>
                         작성된 소개가 없네요.
                       </NoIntroductionText>
+                      <NoIntroductionText2>
+                        소개글 작성은 PC환경에서 가능합니다.
+                      </NoIntroductionText2>
                       {mydata?.isMyMypage === true && (
                         <>
                           <IntroduceBtn>
@@ -348,6 +354,17 @@ const NoIntroductionText = styled.p`
   align-items: center;
   display: flex;
   justify-content: center;
+`;
+const NoIntroductionText2 = styled.p`
+  display: none;
+  @media screen and (max-width: 375px) {
+    color: #737373;
+    font-size: 12px;
+    width: auto;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  } ;
 `;
 
 const IntroduceBtn = styled.div`

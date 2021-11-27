@@ -235,33 +235,33 @@ const PostDetail = props => {
                             </Grid>
                           </Grid>
                         )}
-                      {userId === postUserId &&
-                        passedData?.projectStatus === "모집중" && (
-                          <Grid
-                            display="flex"
-                            width="150px"
-                            margin="auto 0 auto auto"
-                            justifyContent="flex-end"
-                          >
-                            <ButtonMedia>
-                              <Button
-                                postion="absolute"
-                                common
-                                _onClick={applyStatusModalOpen}
-                              >
-                                신청 현황
-                              </Button>
-                              <Button
-                                postion="absolute"
-                                common
-                                _onClick={exileStatusModalOpen}
-                              >
-                                팀원 강퇴
-                              </Button>
-                            </ButtonMedia>
-                          </Grid>
-                        )}
                     </FlexMedia>
+                    {userId === postUserId &&
+                      passedData?.projectStatus === "모집중" && (
+                        <Grid
+                          display="flex"
+                          width="150px"
+                          margin="auto 0 auto auto"
+                          justifyContent="flex-end"
+                        >
+                          <ButtonMedia>
+                            <Button
+                              postion="absolute"
+                              common
+                              _onClick={applyStatusModalOpen}
+                            >
+                              신청 현황
+                            </Button>
+                            <Button
+                              postion="absolute"
+                              common
+                              _onClick={exileStatusModalOpen}
+                            >
+                              팀원 강퇴
+                            </Button>
+                          </ButtonMedia>
+                        </Grid>
+                      )}
                   </Grid>
                 </Grid>
                 <StatusDetail passedData={passedData} />
@@ -319,8 +319,17 @@ const ButtonMedia = styled.p`
 
 const FlexMedia = styled.div`
   display: flex;
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 600px) {
     flex-direction: column;
+    font-size: 2px;
+  }
+`;
+
+const UrlMedia = styled.div`
+  display: flex;
+  @media screen and (max-width: 600px) {
+    font-size: 2px;
+    width: 120px;
   }
 `;
 

@@ -19,9 +19,7 @@ const StatusEdit = (props) => {
     <React.Fragment>
       <StatusMedia>
         <Grid margin="20px auto">
-          <Text size="18px" bold>
-            프로젝트 상태체크
-          </Text>
+          <Text>프로젝트 상태체크</Text>
           <Select
             options={projectStatused}
             styles={props.styles}
@@ -40,11 +38,12 @@ const StatusEdit = (props) => {
 };
 
 const StatusMedia = styled.div`
-  @media screen and (max-width: 360px) {
+  @media screen and (max-width: 600px) {
     display: flex;
     width: 350px;
     height: 10px;
-    margin-bottom: 80px;
+    font-size: 10px;
+    margin-bottom: 60px;
   }
 `;
 

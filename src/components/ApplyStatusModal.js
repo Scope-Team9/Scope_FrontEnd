@@ -162,7 +162,7 @@ const ApplyStatusModal = props => {
                         <UserImg src="/img/토끼.png"></UserImg>
                       )}
                       {applyedUsers[idx].userPropensityType === "FVP" && (
-                        <UserImg src="/img/허스키.png"></UserImg>
+                        <UserImg src="/img/개.png"></UserImg>
                       )}
                       {applyedUsers[idx].userPropensityType === "FHG" && (
                         <UserImg src="/img/고양이.png"></UserImg>

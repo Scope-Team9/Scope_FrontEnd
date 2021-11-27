@@ -35,12 +35,18 @@ const HeaderRight = props => {
     userInfo.userPropensityType,
   ]);
 
+  const goMypage = () => {
+    history.push(`/mypage/${userInfo.userId}`);
+    props.changeMypageStatus();
+  };
+
   if (isToken) {
     return (
       <>
         {userInfo && (
-          <HeaderWrapper>
-            {/* <Message
+          <Grid>
+            <HeaderWrapper>
+              {/* <Message
             onClick={() => {
               history.push(`/message`);
             }}
@@ -50,19 +56,56 @@ const HeaderRight = props => {
           <Bell>
             <i class="far fa-bell"></i>
           </Bell> */}
-            <IconWrap>
-              <Grid
-                _onClick={() => {
-                  history.push(`/mypage/${userInfo.userId}`);
-                }}
-              >
-                <ImgType type={userInfo.userPropensityType} />
-              </Grid>
-            </IconWrap>
-            <ButtonWrap>
-              <Btn onClick={logOut}>로그아웃</Btn>
-            </ButtonWrap>
-          </HeaderWrapper>
+              <IconWrap>
+                <Grid
+                  display="flex"
+                  alignItems="center"
+                  margin="0 20px"
+                  _onClick={() => {
+                    goMypage();
+                    // history.push(`/mypage/${userInfo.userId}`);
+                    // location.href = `/mypage/${userInfo.userId}`;
+                  }}
+                >
+                  {userInfo.userPropensityType === "LVG" && (
+                    <UserImg size="50" src="/img/호랑이.png"></UserImg>
+                  )}
+                  {userInfo.userPropensityType === "LVP" && (
+                    <UserImg src="/img/늑대.png"></UserImg>
+                  )}
+                  {userInfo.userPropensityType === "LHG" && (
+                    <UserImg src="/img/여우.png"></UserImg>
+                  )}
+                  {userInfo.userPropensityType === "LHP" && (
+                    <UserImg src="/img/판다.png"></UserImg>
+                  )}
+                  {userInfo.userPropensityType === "FVG" && (
+                    <UserImg src="/img/토끼.png"></UserImg>
+                  )}
+                  {userInfo.userPropensityType === "FVP" && (
+                    <UserImg src="/img/개.png"></UserImg>
+                  )}
+                  {userInfo.userPropensityType === "FHG" && (
+                    <UserImg src="/img/고양이.png"></UserImg>
+                  )}
+                  {userInfo.userPropensityType === "FHP" && (
+                    <UserImg src="/img/물개.png"></UserImg>
+                  )}
+                  {userInfo.userPropensityType === "RHP" && (
+                    <UserImg src="/img/너구리.png"></UserImg>
+                  )}
+                </Grid>
+              </IconWrap>
+              <ButtonWrap>
+                <Button
+                  common
+                  width="100px"
+                  text="로그아웃"
+                  _onClick={logOut}
+                ></Button>
+              </ButtonWrap>
+            </HeaderWrapper>
+          </Grid>
         )}
       </>
     );

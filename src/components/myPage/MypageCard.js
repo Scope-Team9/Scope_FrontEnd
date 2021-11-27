@@ -39,7 +39,7 @@ const MypageCard = (props) => {
 
     const fetchData = async () => {
       try {
-        console.log(userData);
+        // console.log(userData);
         const result = await apis.editUserInfo(props.userId, userData);
         // console.log(result);
         setEditMyProfile(false);
