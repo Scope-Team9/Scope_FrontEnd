@@ -80,7 +80,7 @@ const kakaologinMiddleware = (code) => {
           //     "info"
           //   );
           // }
-          window.history.back();
+          history.push("/");
         }
       })
       .catch((err) => {
@@ -125,7 +125,7 @@ const githubLoginMiddleware = (code) => {
               userPropensityType: res.data.data.userPropensityType,
             })
           );
-          window.history.back();
+          history.push("/");
         }
       })
       .catch((err) => {
