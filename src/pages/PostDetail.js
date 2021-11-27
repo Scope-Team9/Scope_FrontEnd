@@ -8,6 +8,7 @@ import { apis } from "../lib/axios";
 import { postActions } from "../redux/modules/post";
 import { Grid, Button, Text } from "../elements/Index";
 import Swal from "sweetalert2";
+import { pageCheckAction } from "../redux/modules/pageCheck";
 
 import ApplyStatusModal from "../components/ApplyStatusModal";
 import LeftBanner from "../components/postDetail/leftBanner";
@@ -22,6 +23,7 @@ import BookMark from "../components/postDetail/rightContents/BookMark";
 import ApplicantButton from "../components/postDetail/rightContents/ApplicantButton";
 import PosterButton from "../components/postDetail/rightContents/PosterButton";
 import TotalMemberDetail from "../components/postDetail/rightContents/TotalMemberDetail";
+
 import { Link } from "react-router-dom";
 
 // PostDetail의 함수형 컴포넌트를 만든다
@@ -101,6 +103,7 @@ const PostDetail = (props) => {
       }
     };
     CheckPost();
+    dispatch(pageCheckAction.getPageCheck(`/postdetail/${post_id}`));
   }, [
     bookmark,
     applyStatusModal,

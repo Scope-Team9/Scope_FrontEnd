@@ -39,9 +39,12 @@ const initialState = {
   isEmail: false,
 };
 //카카오 로그인
-const kakaologinMiddleware = (code) => {
+const kakaologinMiddleware = (code, pageGo) => {
   return function (dispatch, getState, { history }) {
+    let goPage = pageGo;
+    // console.log(goPage);
     console.log("카카오에서 받아온 코드", code);
+
     apis
       .kakaoLogin(code)
       .then((res) => {
@@ -55,6 +58,7 @@ const kakaologinMiddleware = (code) => {
               snsId: res.data.data.id,
             })
           );
+          // history.push(goPage);
           history.push("/");
           return;
         }
@@ -80,7 +84,9 @@ const kakaologinMiddleware = (code) => {
           //     "info"
           //   );
           // }
-          window.history.back();
+          // window.history.back();
+          // history.push(goPage);
+          history.push("/");
         }
       })
       .catch((err) => {
@@ -125,7 +131,8 @@ const githubLoginMiddleware = (code) => {
               userPropensityType: res.data.data.userPropensityType,
             })
           );
-          window.history.back();
+          // window.history.back();
+          history.push("/");
         }
       })
       .catch((err) => {
@@ -274,7 +281,6 @@ export default handleActions(
       }),
     [LOG_OUT]: (state, action) =>
       produce(state, (draft) => {
-        draft.isLogin = false;
         draft.isLogin = false;
       }),
     [MODAL]: (state, action) =>

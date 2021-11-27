@@ -83,6 +83,7 @@ const MyPageInfo = (props) => {
         const result = await apis.getMypage(userId);
         console.log(result);
         setMydata(result.data.data);
+        dispatch(pageCheckAction.getPageCheck(`/mypage/${userId}`));
 
         setLoading(false);
       } catch (err) {

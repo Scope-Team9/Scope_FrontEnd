@@ -27,14 +27,14 @@ import PropensityTest from "../components/propensityTest/PropensityTest";
 function App() {
   const isLogin = useSelector((state) => state.user.isLogin);
   const userInfo = useSelector((state) => state.user);
-  const isCookie = document.cookie.split("=")[1];
+  const isCookie = document.cookie;
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     if (isCookie) {
       dispatch(userCreators.myUserAPI());
     }
-  }, [isLogin, userInfo.userPropensityType]);
+  }, [isLogin, isCookie]);
 
   return (
     <React.Fragment>
