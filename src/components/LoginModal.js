@@ -10,12 +10,10 @@ import Select from "react-select";
 import PropensityTest from "./propensityTest/PropensityTest";
 import CloseIcon from "@mui/icons-material/Close";
 
-const LoginModal = (props) => {
+const LoginModal = props => {
   const dispatch = useDispatch();
-  const userInfo = useSelector((state) => state.user);
-  const sigunupModalState = useSelector(
-    (state) => state.user.sigunupModalState
-  );
+  const userInfo = useSelector(state => state.user);
+  const sigunupModalState = useSelector(state => state.user.sigunupModalState);
 
   var regExpNick = /^[a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{2,5}$/;
   var regExpEmail =
@@ -63,7 +61,7 @@ const LoginModal = (props) => {
   // console.log("sns아이디", userInfo.snsId);
 
   //닉네임 체크 미들웨어
-  const nickCheck = (nickName) => {
+  const nickCheck = nickName => {
     if (nickName === undefined) {
       alert("닉네임을 입력 해주세요.");
       return false;
@@ -77,7 +75,7 @@ const LoginModal = (props) => {
   };
 
   //이메일 체크 미들웨어
-  const emailCheck = (email) => {
+  const emailCheck = email => {
     if (nickName === "") {
       alert("이메일을 입력 해주세요.");
       return false;
@@ -96,7 +94,7 @@ const LoginModal = (props) => {
       alert("기술스택을 선택 해주세요.");
       return false;
     }
-    if (techStack.length >= 3) {
+    if (techStack.length > 4) {
       alert("기술선택을 4개 이하로 입력해주세요.");
       return false;
     }
@@ -116,7 +114,7 @@ const LoginModal = (props) => {
   };
 
   const customStyles = {
-    control: (styles) => ({
+    control: styles => ({
       ...styles,
       backgroundColor: "white",
       borderRadius: "20px",
@@ -276,7 +274,7 @@ const LoginModal = (props) => {
                         padding="0 0 0 23px"
                         height="100%"
                         placeholder="닉네임을 입력해주세요"
-                        _onChange={(e) => {
+                        _onChange={e => {
                           setNickName(e.target.value);
                         }}
                       >
@@ -292,7 +290,7 @@ const LoginModal = (props) => {
                         options={techStackOption}
                         className="basic-multi-select"
                         classNamePrefix="select"
-                        onChange={(e) => {
+                        onChange={e => {
                           let techStack = [];
                           let arr = e;
                           let idx = 0;
@@ -370,11 +368,12 @@ const LoginModal = (props) => {
             width
             position="relative"
             padding="10px 0 10px 0"
+            boxShadow="0 5px 25px rgb(0 0 0 / 15%)"
           >
             <Grid
               position="absolute"
               top="0px"
-              right="4%"
+              right="6%"
               width="3%"
               padding="10px"
             >
@@ -403,12 +402,10 @@ const LoginModal = (props) => {
               position="relative"
               justifyContent="center"
             >
-              <Grid margin="20px" display="flex" justifyContent="center">
+              <Grid margin="20px 0" display="flex" justifyContent="center">
                 <img width="40%" src="/img/호랑이.png" />
               </Grid>
-              <Text size="30px" bold="800" margin="0 0 30px 0">
-                Welcome to Scope!
-              </Text>
+              <Title>Welcome to Scope!</Title>
               <Grid display="flex" flexDirection="column">
                 <GithubBtn
                   onClick={() => {
@@ -463,11 +460,16 @@ const LoginModal = (props) => {
   }
 };
 
+const Title = styled.h1`
+  @media (max-width: 620px) {
+    font-size: 20px;
+  }
+`;
 const ModalWrap = styled.div`
   width: 550px;
   height: 100%;
-  @media (max-width: 570px) {
-    width: 270px;
+  @media (max-width: 620px) {
+    width: 310px;
   }
   /* @media (max-width: 375px) {
     width: 250px;
@@ -475,34 +477,42 @@ const ModalWrap = styled.div`
 `;
 
 const GithubBtn = styled.div`
-  display: inline-block;
+  display: flex;
   width: 282px;
   height: 50px;
   margin: 5px auto;
-  padding-top: 12px;
-  border: 0.5px solid #707070;
-  box-sizing: border-box;
   border-radius: 25px;
   font-size: 14px;
-  text-align: center;
-  color: #555555;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background-color: #272e33;
+  box-shadow: 0 5px 25px rgb(0 0 0 / 15%);
   cursor: pointer;
+  @media (max-width: 620px) {
+    width: 170px;
+    font-size: 12px;
+  }
 `;
 
 const KakaoBtn = styled.div`
-  display: inline-block;
+  display: flex;
   width: 282px;
   height: 50px;
   margin: 5px auto;
-  padding-top: 12px;
-  border: 0.5px solid #707070;
-  box-sizing: border-box;
   border-radius: 25px;
   font-size: 14px;
-  text-align: center;
+  justify-content: center;
+  align-items: center;
   color: #606060;
   cursor: pointer;
-  background-color: #f9e000;
+  background-color: #fae100;
+  box-shadow: 0 5px 25px rgb(0 0 0 / 15%);
+
+  @media (max-width: 620px) {
+    width: 170px;
+    font-size: 12px;
+  }
 `;
 
 export default LoginModal;

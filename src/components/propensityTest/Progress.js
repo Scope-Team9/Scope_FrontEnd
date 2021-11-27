@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { Grid, Text } from "../../elements/Index";
 
-const Progress = (props) => {
+const Progress = props => {
   let count = 10;
   let currentStep = props.page;
 
@@ -48,7 +48,7 @@ const HighLight = styled.div`
   border: none;
   background: #17334a;
   transition: 1s;
-  width: ${(props) => props.width};
+  width: ${props => props.width};
   height: 15px;
 `;
 

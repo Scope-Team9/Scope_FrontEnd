@@ -13,7 +13,7 @@ const Header = () => {
         <Grid width="auto" height="auto" margin="0 0 0 20px">
           <HeaderLeft />
         </Grid>
-        <Grid width="auto" height="auto" margin="0 20px 0 0 ">
+        <Grid width="auto" height="auto" margin="0 5px 0 0 ">
           <HeaderRight />
         </Grid>
       </Wrap>
@@ -34,7 +34,7 @@ const Wrap = styled.div`
   position: relative;
 
   @media screen and (max-width: 750px) {
-    width: 90vw;
+    width: 100vw;
     height: 20px;
     margin: auto;
   } ;
