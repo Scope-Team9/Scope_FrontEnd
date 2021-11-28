@@ -419,11 +419,11 @@ const LoginModal = (props) => {
                       // "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=http://kbumsoo.s3-website.ap-northeast-2.amazonaws.com/user/github/callback";
 
                       //local
-                      "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=http://localhost:3000/user/github/callback";
+                      // "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=http://localhost:3000/user/github/callback";
 
-                    // 최종 주소
+                      // 최종 주소
 
-                    // "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=https://scopewith.com/user/github/callback";
+                      "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=https://scopewith.com/user/github/callback";
                   }}
                 >
                   깃허브로그인
@@ -442,11 +442,11 @@ const LoginModal = (props) => {
                       // "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://kbumsoo.s3-website.ap-northeast-2.amazonaws.com/user/kakao/callback&response_type=code";
 
                       //local
-                      "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code";
+                      // "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code";
 
-                    // 최종 주소
-                    // "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=https://scopewith.com/user/kakao/callback&response_type=code";
-                    // closeWindow();
+                      // 최종 주소
+                      "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=https://scopewith.com/user/kakao/callback&response_type=code";
+                    closeWindow();
                   }}
                 >
                   카카오로그인
