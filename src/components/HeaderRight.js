@@ -7,21 +7,21 @@ import { Grid, Button } from "../elements/Index";
 import LoginModal from "./LoginModal";
 import { userCreators } from "../redux/modules/user";
 import { deleteCookie } from "../shared/Cookie";
+import ImgType from "../shared/ImgType";
 
-const HeaderRight = (props) => {
+const HeaderRight = props => {
   const dispatch = useDispatch();
   const isToken = document.cookie;
-  const userInfo = useSelector((state) => state.user);
+  const userInfo = useSelector(state => state.user);
   // console.log(userInfo);
   const [showModal, setShowModal] = React.useState(false);
   const [doLogout, setDoLogOut] = React.useState(false);
 
-  const sigunupModalState = useSelector(
-    (state) => state.user.sigunupModalState
-  );
+  const sigunupModalState = useSelector(state => state.user.sigunupModalState);
   const modalOpen = () => {
     setShowModal(true);
   };
+  console.log(userInfo.userPropensityType);
 
   const logOut = () => {
     deleteCookie("ScopeUser");
@@ -36,21 +36,17 @@ const HeaderRight = (props) => {
   ]);
 
   const goMypage = () => {
-    history.push(`/mypage/${userInfo.userId}`);
-    props.changeMypageStatus();
+    history.push(`/`);
+    setTimeout(() => {
+      history.push(`/mypage/${userInfo.userId}`);
+    }, 50);
   };
 
   if (isToken) {
     return (
       <>
         {userInfo && (
-          <Grid
-            display="flex"
-            justifyContent="space-around"
-            alignItems="center"
-            height="auto"
-            width="auto"
-          >
+          <Grid>
             <HeaderWrapper>
               {/* <Message
             onClick={() => {
@@ -117,22 +113,13 @@ const HeaderRight = (props) => {
     );
   } else {
     return (
-      <Grid
-        display="flex"
-        justifyContent="space-around"
-        alignItems="center"
-        height="auto"
-      >
-        <HeaderWrapper>
-          <Button
-            common
-            width="120px"
-            text="로그인"
-            _onClick={modalOpen}
-          ></Button>
-          <LoginModal showModal={showModal} setShowModal={setShowModal} />
-        </HeaderWrapper>
-      </Grid>
+      <HeaderWrapper>
+        <ButtonWrap>
+          <Btn onClick={modalOpen}>로그인</Btn>
+        </ButtonWrap>
+
+        <LoginModal showModal={showModal} setShowModal={setShowModal} />
+      </HeaderWrapper>
     );
   }
 };
@@ -141,7 +128,7 @@ const HeaderWrapper = styled.div`
   display: flex;
   width: 100%;
   padding-right: 0px;
-  justify-content: space-evenly;
+  justify-content: space-between;
   @media screen and (max-width: 595px) {
     width: 100px;
   } ;
@@ -161,14 +148,17 @@ const Bell = styled.div`
 
 const ButtonWrap = styled.div`
   @media screen and (max-width: 595px) {
-    /* display: none; */
+    margin: auto 2px auto auto;
   } ;
 `;
 
 const IconWrap = styled.div`
-  @media screen and (max-width: 595px) {
+  display: flex;
+  align-items: center;
+  margin: auto 10px auto auto;
+  cursor: pointer;
+  @media screen and (max-width: 767px) {
     display: none;
-    width: 90%;
   } ;
 `;
 
@@ -178,6 +168,28 @@ const UserImg = styled.img`
   border-radius: 50px;
   box-shadow: 0 0 3px #ddd;
   cursor: pointer;
+`;
+
+const Btn = styled.button`
+  background-color: #fff;
+  color: #17334a;
+  border-radius: 25px;
+  border: 1px solid #17334a;
+  cursor: pointer;
+  height: 50px;
+  width: 120px;
+  &:hover {
+    background-color: #17334a;
+    color: #fff;
+    transform: translate();
+    transition: 0.3s ease-out;
+  }
+  font-family: "GmarketSans";
+  @media screen and (max-width: 425px) {
+    height: 35px;
+    width: 80px;
+    font-size: 12px;
+  }
 `;
 
 export default HeaderRight;

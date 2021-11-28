@@ -39,6 +39,7 @@ const PostDetail = (props) => {
 
   const applyStatusModalOpen = () => {
     setApplyStatusModal(true);
+    // setApplyStatusModal(!applyStatusModal);
   };
 
   const exileStatusModalOpen = () => {
@@ -47,7 +48,8 @@ const PostDetail = (props) => {
 
   const applyUserModalOpen = (value) => {
     setApplyValue(value);
-    setApplyUserModal(true);
+    // setApplyUserModal(true);
+    setApplyUserModal(!applyUserModal);
   };
 
   const statusCheck = (value) => {

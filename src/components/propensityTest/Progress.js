@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { Grid, Text } from "../../elements/Index";
 
-const Progress = (props) => {
+const Progress = props => {
   let count = 10;
   let currentStep = props.page;
 
@@ -48,7 +48,7 @@ const HighLight = styled.div`
   border: none;
   background: #17334a;
   transition: 1s;
-  width: ${(props) => props.width};
+  width: ${props => props.width};
   height: 15px;
 `;
 
@@ -62,6 +62,11 @@ const ArrowBubbleTwo = styled.div`
   -moz-border-radius: 35px; */
   border-radius: 10px;
   border: #17334a solid 3px;
+  @media screen and (max-width: 650px) {
+    bottom: -4px;
+    width: 30px;
+    height: 20px;
+  }
 
   ::after {
     content: "";
@@ -74,6 +79,10 @@ const ArrowBubbleTwo = styled.div`
     z-index: 1;
     bottom: -4px;
     left: 15px;
+    @media screen and (max-width: 650px) {
+      bottom: -4px;
+      left: 5px;
+    }
   }
 
   ::before {
@@ -87,6 +96,9 @@ const ArrowBubbleTwo = styled.div`
     z-index: 0;
     bottom: -8px;
     left: 18px;
+    @media screen and (max-width: 650px) {
+      left: 8px;
+    }
   }
 `;
 
