@@ -35,6 +35,9 @@ const MyPageInfo = (props) => {
   const [modal, setModal] = React.useState(false);
   const [testmodal, setTestModal] = React.useState(false);
 
+  const [memberId, setMemberId] = React.useState(); //멤버아이디
+  const [writerEquals, setWriterEquals] = React.useState(); //포스트의 작성자확인
+
   const pageCheck = useSelector((state) => state.pagecheck.pageGo);
 
   //click
@@ -69,6 +72,7 @@ const MyPageInfo = (props) => {
         setEmail(result.data.data.user.email);
         setTeckstack(result.data.data.user.techStackList);
         setLoading(false);
+
         // console.log(result);
       } catch (err) {
         console.log(err);
@@ -287,9 +291,9 @@ const MyPageInfo = (props) => {
                               소개글 작성하기
                             </Button>
                           </IntroduceBtn>
-                          <NoticeText>
+                          {/* <NoticeText>
                             소개 작성은 PC환경에서 작성 가능합니다.
-                          </NoticeText>
+                          </NoticeText> */}
                         </>
                       )}
                     </>

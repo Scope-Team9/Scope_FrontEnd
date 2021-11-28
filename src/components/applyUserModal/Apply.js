@@ -30,7 +30,7 @@ const Apply = (props) => {
             <CloseIcon fontSize="large" onClick={modalClose} />
           </Grid>
         </Grid>
-        <Grid margin="auto" height="90%" width="320px" alignItems="center">
+        <Grid margin="auto" height="90%" width="80%" alignItems="center">
           <Grid height="20%" textAlign="center">
             <Text size="30px" bold>
               지원신청
@@ -38,12 +38,12 @@ const Apply = (props) => {
           </Grid>
           <Grid height="22%" margin="10px 0" textAlign="center">
             <Input
-              padding="0 0 0 30px"
+              padding="0 0 0 20px"
               borderRadius="25px"
               border="1px solid #eee"
               height="100%"
               backgroundColor="#fff"
-              placeholder="간단한 본인의 기술스택 및  자기소개 작성란"
+              placeholder="간단한 본인의 기술스택 및 자기소개"
               _onChange={(e) => {
                 // console.log(e.target.value);
                 setComment(e.target.value);
@@ -65,23 +65,26 @@ const ModalWrap = styled.div`
   width: 550px;
   height: 300px;
   position: relative;
-  @media (max-width: 620px) {
+  /* @media (max-width: 620px) {
     margin: auto;
     margin-top: 30px;
     width: 90%;
+  } */
+  @media (max-width: 375px) {
+    width: 300px;
   }
 `;
 
-const Contents = styled.div`
-  margin: auto;
-  height: 90%;
-  width: 320px;
-  text-align: center;
-  @media (max-width: 620px) {
-    margin: auto;
-    margin-top: 30px;
-    width: 90%;
-  }
-`;
+// const Contents = styled.div`
+//   margin: auto;
+//   height: 90%;
+//   width: 320px;
+//   text-align: center;
+//   @media (max-width: 620px) {
+//     margin: auto;
+//     margin-top: 30px;
+//     width: 90%;
+//   }
+// `;
 
 export default Apply;

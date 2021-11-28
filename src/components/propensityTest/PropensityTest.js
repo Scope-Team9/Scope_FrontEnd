@@ -22,15 +22,15 @@ import { history } from "../../redux/configureStore";
 import ImgType from "../../shared/ImgType";
 import CloseIcon from "@mui/icons-material/Close";
 
-const PropensityTest = (props) => {
+const PropensityTest = props => {
   const isToken = document.cookie.split("=")[1];
   const dispatch = useDispatch();
-  const userInfo = useSelector((state) => state.user);
-  const userType = useSelector((state) => state.user.userPropensityType);
-  const memberType = useSelector((state) => state.user.memberPropensityType);
+  const userInfo = useSelector(state => state.user);
+  const userType = useSelector(state => state.user.userPropensityType);
+  const memberType = useSelector(state => state.user.memberPropensityType);
   // const [active, setActive] = React.useState(preUserPropensityType);
   const [isChecked, setIsChecked] = React.useState("#fff");
-  const ToggleButton = (answer) => {
+  const ToggleButton = answer => {
     isChecked === "#fff" ? setIsChecked("#170184") : setIsChecked("#fff");
   };
 
@@ -46,11 +46,11 @@ const PropensityTest = (props) => {
   const [preMemberPropensityType, setPreMemberPropensityType] = useState("");
 
   //자식요소의 밸류값을 가져와 임시에 저장
-  const handleUserCreate = (answer) => {
+  const handleUserCreate = answer => {
     setPreUserPropensityType(answer);
     // console.log("나의항목 임시저장", answer);
   };
-  const handleMemberCreate = (answer) => {
+  const handleMemberCreate = answer => {
     setPreMemberPropensityType(answer);
     // console.log("상대방의 항목 임시저장", answer);
   };
@@ -71,7 +71,7 @@ const PropensityTest = (props) => {
       //   'info'
       // )
     } else {
-      setpage((page) => page + 1);
+      setpage(page => page + 1);
       setPreUserPropensityType("");
       setPreMemberPropensityType("");
       preMy.push(preUserPropensityType);
@@ -87,7 +87,7 @@ const PropensityTest = (props) => {
 
   //이전버튼 누를시에 마지막으로 저장된값을 스테이트에 삭제함
   const preStep = () => {
-    setpage((page) => page - 1);
+    setpage(page => page - 1);
 
     // 이전으로가면 마지막항목 제거 (나의것)
     let toPopMy = userPropensityType;
@@ -135,10 +135,10 @@ const PropensityTest = (props) => {
 
     if (isToken) {
       dispatch(userCreators.editTestMiddleware(realUserId, testUpdateInfo));
-      return setpage((page) => page + 1);
+      return setpage(page => page + 1);
     } else {
       dispatch(userCreators.signupMiddleware(registerInfo));
-      setpage((page) => page + 1);
+      setpage(page => page + 1);
     }
   };
 
@@ -151,61 +151,57 @@ const PropensityTest = (props) => {
   return (
     <Grid>
       {/* 상단헤더 */}
-      <Grid
-        height="7%"
-        bg="#17334A"
-        position="relative"
-        textAlign="center"
-        padding="10px 0 10px 0"
-      >
-        <Grid
+      <Header>
+        <CloseBox
           position="absolute"
-          top="0px"
+          top="5px"
           right="10px"
           width="20px"
           padding="10px"
+          height="100%"
+          bg="111"
         >
           <CloseIcon
-            sx={{ color: "#fff", fontSize: 35 }}
+            sx={{ color: "#fff", fontSize: 30 }}
             onClick={() => {
               props.TestClose();
               window.location.reload();
             }}
             cursor="pointer"
           />
-        </Grid>
+        </CloseBox>
         <Grid
           display="flex"
           justifyContent="center"
           alignItems="center"
-          height="40px"
+          height="100%"
         >
           <Text size="20px" bold color="#fff">
             협업테스트
           </Text>
         </Grid>
-      </Grid>
+      </Header>
       {/* 프로그래스바 */}
       <Grid width="70%" margin="15px auto" height="10%">
         <Progress page={page} />
       </Grid>
       {/* 이미지결과 */}
-      <Grid display="flex" justifyContent="center" margin="10px 0" height="25%">
-        {TestData.teststep.map((step) => {
+      <StepImgBox>
+        {TestData.teststep.map(step => {
           if (step.step === page) {
-            return <img width="40%" src={step.img} />;
+            return <TestImg key={step.step} src={step.img} />;
           }
         })}
         {page === 10 &&
-          TestData.testresult.map((result) => {
+          TestData.testresult.map(result => {
             if (result.type === userType) {
-              return <img width="50%" src={result.img} />;
+              return <img key={result.type} width="40%" src={result.img} />;
             }
           })}
-      </Grid>
+      </StepImgBox>
 
       {/* 컨텐츠자리 */}
-      <Grid height="15%" width="90%" margin="auto" height="50%">
+      <Grid width="90%" margin="auto" height="42%">
         {page === 1 && (
           <TestOne
             handleUserCreate={handleUserCreate}
@@ -287,7 +283,13 @@ const PropensityTest = (props) => {
           </Button>
         )}
         {page == 10 && (
-          <Button common width="90%" margin="5px" _onClick={exitResult}>
+          <Button
+            common
+            fontSize="11px"
+            width="80%"
+            margin="5px"
+            _onClick={exitResult}
+          >
             내 성향에 맞는 팀원을 찾으러 가볼까요?
           </Button>
         )}
@@ -296,12 +298,45 @@ const PropensityTest = (props) => {
   );
 };
 
-const TestWrap = styled.div`
-  width: 100%;
-  height: 100%;
-  @media (max-width: 550px) {
-    width: 90vw;
+const StepImgBox = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+  height: 25%;
+  @media (max-width: 650px) {
+    height: 15%;
+  }
+`;
+
+const TestImg = styled.img`
+  width: 40%;
+  height: 40%;
+  @media (max-width: 650px) {
+    width: 30%;
     height: 100%;
   }
 `;
+const Header = styled.div`
+  height: 50px;
+  background-color: #17334a;
+  position: relative;
+  text-align: center;
+  padding: 10px 0 10px 0;
+  @media (max-width: 650px) {
+    height: 25px;
+  }
+`;
+
+const CloseBox = styled.div`
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  width: 20px;
+  padding: 10px;
+  height: 100%;
+  @media (max-width: 650px) {
+    top: -4px;
+  }
+`;
+
 export default PropensityTest;
