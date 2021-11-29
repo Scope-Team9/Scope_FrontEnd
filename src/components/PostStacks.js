@@ -119,7 +119,7 @@ const PostStacks = (props) => {
 };
 
 const IMGS = styled.img`
-  width: 80%;
+  width: 70%;
   margin: auto;
   padding: 5px;
   align-items: center;
