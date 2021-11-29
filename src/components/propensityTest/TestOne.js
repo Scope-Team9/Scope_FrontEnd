@@ -56,9 +56,9 @@ const TestOne = (props) => {
       <Grid display="flex" flexDirection="column">
         <Grid margin="0 0 10px 0" height="50%">
           <Grid height="14%" margin="0 0 5px 0">
-            <Q1>
+            <Grid margin="5px 0" height="14%" margin="0 0 10px 0">
               Q1. <b>팀 회의할 때 당신의 모습</b>에 더 가까운 것은?
-            </Q1>
+            </Grid>
           </Grid>
           {nowClickU.map((btn, idx) => (
             <Grid height="38%" key={btn.id} {...btn}>
@@ -78,9 +78,9 @@ const TestOne = (props) => {
         </Grid>
 
         <Grid height="50%">
-          <Q1>
+          <Grid margin="5px 0" height="14%" margin="0 0 10px 0">
             Q1. <b>팀 회의할 때 선호하는 팀원의 모습</b>에 더 가까운 것은?
-          </Q1>
+          </Grid>
           {nowClickMB.map((btn, idx) => (
             <Grid height="38%" key={btn.id} {...btn}>
               <Button

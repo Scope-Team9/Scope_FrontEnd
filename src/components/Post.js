@@ -209,18 +209,17 @@ const Title = styled.span`
   font-size: 20px;
   width: 100%;
   font-weight: 500;
-  /* white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: #606060; */
-  white-space: normal;
-  line-height: 1.2;
-  height: 2.4em;
-  text-align: left;
-  word-wrap: break-word;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
+
+  @media (max-width: 375px) {
+    white-space: normal;
+    line-height: 1.2;
+    height: 3.6em;
+    text-align: left;
+    word-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
 `;
 
 const Date = styled.div`
