@@ -126,7 +126,7 @@ const starterLikeAPI = (postId, userIds) => {
       .strterLike(postId, userIds)
       .then((res) => {
         // console.log(res);
-        window.alert("팀원 평가 정보가 성공적으로 저장되었습니다.");
+        // window.alert("팀원 평가 정보가 성공적으로 저장되었습니다.");
       })
       .catch((err) => {
         // console.log(err.response);

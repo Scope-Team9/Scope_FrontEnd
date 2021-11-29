@@ -12,6 +12,7 @@ import { useParams } from "react-router-dom";
 // Post의 함수형 컴포넌트를 만든다.
 const Post = (props) => {
   // console.log(props);
+  // console.log(props);
   const dispatch = useDispatch();
   const myPage = useSelector((state) => state.post.whatPage.now);
   // const myUserId = useSelector((state) => state.user.userId);
@@ -52,7 +53,7 @@ const Post = (props) => {
       }
     };
     getMembers();
-  }, [assessment]);
+  }, [assessment, props.assessment]);
 
   React.useLayoutEffect(() => {}, [assessment]);
   // let as = member?.find((e) => e.userId === myUserId);
@@ -64,6 +65,12 @@ const Post = (props) => {
 
   // console.log(as);
   // console.log(myPage, myUserId);
+
+  const didAssessment = (e) => {
+    e.stopPropagation();
+    // console.log(e.target.value, props.postId);
+    modalOpen(e.target.value, props.postId);
+  };
 
   return (
     <React.Fragment>
@@ -96,9 +103,7 @@ const Post = (props) => {
                 hoverBg="#2699FB"
                 hoverCl="#fff"
                 _onClick={(e) => {
-                  e.stopPropagation();
-                  // console.log(e.target.value, props.postId);
-                  modalOpen(e.target.value, props.postId);
+                  didAssessment(e);
                 }}
               >
                 팀원평가하기
@@ -112,6 +117,7 @@ const Post = (props) => {
                   postId={props.postId}
                   myPage={props.mypage}
                   toggleModal={toggleModal}
+                  doSetAssessment={props.doSetAssessment}
                 />
               </Grid>
             </Grid>

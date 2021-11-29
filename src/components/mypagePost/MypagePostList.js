@@ -7,12 +7,13 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 const MypagePostList = (props) => {
+  // console.log(props);
   const userId = useParams();
-  const myUserId = useSelector((state) => state.user.userId);
+
   // console.log(props);
   const mypage = true;
 
-  const myCards = props;
+  const myCards = props.post;
   const newMyCards = Object.values(myCards);
   // console.log(myCards);
   // console.log(newMyCards);
@@ -29,7 +30,9 @@ const MypagePostList = (props) => {
                   key={p.postId}
                   {...p}
                   userId={userId}
-                  myUserId={myUserId}
+                  myUserId={props.myUserId}
+                  assessment={props.assessment}
+                  doSetAssessment={props.doSetAssessment}
                 ></Post>
               );
             })}

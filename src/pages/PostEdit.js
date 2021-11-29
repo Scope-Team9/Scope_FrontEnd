@@ -170,7 +170,7 @@ const PostEdit = (props) => {
 };
 
 // styled-components를 사용한다.
-const Title = styled.h1`
+const Title = styled.div`
   color: black;
   font-size: 32px;
   font-weight: 800;
@@ -196,7 +196,7 @@ const Btn = styled.button`
   }
 `;
 
-const TitleMedia = styled.p`
+const TitleMedia = styled.div`
   @media screen and (max-width: 1000px) {
     width: 350px;
     margin: auto;
