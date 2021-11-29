@@ -40,7 +40,7 @@ const ApplyUserModal = (props) => {
       return setApplyUserModal(false);
     }
     // applyUserModalOpen();
-    statusCheck(status);
+
     setApplyUserModal(false);
     return;
   };

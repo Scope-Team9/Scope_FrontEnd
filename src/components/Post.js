@@ -10,9 +10,12 @@ import { Grid, Image, Text, Button } from "../elements/Index";
 
 // Post의 함수형 컴포넌트를 만든다.
 const Post = (props) => {
+  // console.log(props);
   const dispatch = useDispatch();
   const myPage = useSelector((state) => state.post.whatPage.now);
-  const myUserId = useSelector((state) => state.user.userId);
+  // const myUserId = useSelector((state) => state.user.userId);
+  const userId = Number(props.userId.id);
+  const myUserId = Number(props.myUserId);
   const [applyUserModal, setApplyUserModal] = React.useState(false); //지원취소/팀탈퇴/프로젝트마감
   const [applyValue, setApplyValue] = React.useState();
   const [member, setMember] = React.useState();
@@ -71,6 +74,7 @@ const Post = (props) => {
         }}
       >
         {props.mypage &&
+          userId === myUserId &&
           props.projectStatus === "종료" &&
           !isWriter &&
           !assessment && (
