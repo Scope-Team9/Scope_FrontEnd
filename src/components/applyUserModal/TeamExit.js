@@ -14,6 +14,7 @@ const TeamExit = (props) => {
       postId: postId,
     };
     dispatch(applyCreators.exitTeamAPI(isPostId));
+    modalClose();
   };
   return (
     <ModalWrap>
