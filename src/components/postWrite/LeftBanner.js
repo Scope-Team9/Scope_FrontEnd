@@ -6,7 +6,7 @@ import React from "react";
 import styled from "styled-components";
 import Img from "../../images/PostAdd.jpg";
 
-// LeftBanner의 함수형 컴포넌트를 만든다.
+// LeftBanner의 함수형 컴포넌트를 만든다..
 const LeftBanner = (props) => {
   return (
     <React.Fragment>

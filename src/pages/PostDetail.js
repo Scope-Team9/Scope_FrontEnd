@@ -18,6 +18,7 @@ import ApplicantDetail from "../components/postDetail/rightContents/ApplicantDet
 import StackDetail from "../components/postDetail/rightContents/StackDetail";
 import DateDetail from "../components/postDetail/rightContents/DateDetail";
 import StatusDetail from "../components/postDetail/rightContents/StatusDetail";
+import UrlDetail from "../components/postDetail/rightContents/UrlDetail";
 import ContentDetail from "../components/postDetail/rightContents/ContentDetail";
 import BookMark from "../components/postDetail/rightContents/BookMark";
 import ApplicantButton from "../components/postDetail/rightContents/ApplicantButton";
@@ -271,7 +272,7 @@ const PostDetail = (props) => {
                     </Grid>
                   </Grid>
                   <StatusDetail passedData={passedData} />
-
+                  <UrlDetail passedData={passedData} />
                   <ContentDetail passedData={passedData} />
                 </Grid>
 
