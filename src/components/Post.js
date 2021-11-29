@@ -27,16 +27,16 @@ const Post = (props) => {
   };
 
   const toggleModal = () => {
-    console.log(applyUserModal);
+    // console.log(applyUserModal);
     setApplyUserModal(!applyUserModal);
-    console.log(applyUserModal);
+    // console.log(applyUserModal);
   };
 
   // React.useEffect(() => {
   //   let postId = props.postId;
   //   dispatch(applyCreators.getMemberAPI(postId));
   // }, [props.mypage]);
-  console.log(applyUserModal);
+  // console.log(applyUserModal);
   React.useLayoutEffect(() => {
     if (myPage !== "myPage") {
       return;
@@ -46,7 +46,7 @@ const Post = (props) => {
       try {
         setLoading(true);
         const result = await apis.getMember(postId);
-        console.log("호출되나", result);
+        // console.log("호출되나", result);
         setMember(result.data.data);
       } catch (err) {
         console.log(err.response);
@@ -56,9 +56,9 @@ const Post = (props) => {
   }, []);
 
   let as = member?.find((e) => e.userId === myUserId);
-  console.log(member);
-  console.log(as);
-  console.log(myPage, myUserId);
+  // console.log(member);
+  // console.log(as);
+  // console.log(myPage, myUserId);
 
   return (
     <React.Fragment>
@@ -84,6 +84,7 @@ const Post = (props) => {
               display="flex"
             >
               <Button
+                margin="auto"
                 isValue="memberLiked"
                 backgroundColor="#fff"
                 width="50%"
@@ -92,21 +93,23 @@ const Post = (props) => {
                 hoverCl="#fff"
                 _onClick={(e) => {
                   e.stopPropagation();
-                  console.log(e.target.value, props.postId);
+                  // console.log(e.target.value, props.postId);
                   modalOpen(e.target.value, props.postId);
                 }}
               >
                 팀원평가하기
               </Button>
-              <ApplyUserModal
-                applyUserModal={applyUserModal}
-                setApplyUserModal={setApplyUserModal}
-                applyValue={applyValue}
-                passdedMenber={member}
-                postId={props.postId}
-                myPage={props.mypage}
-                toggleModal={toggleModal}
-              />
+              <Grid width="0px" height="0px">
+                <ApplyUserModal
+                  applyUserModal={applyUserModal}
+                  setApplyUserModal={setApplyUserModal}
+                  applyValue={applyValue}
+                  passdedMenber={member}
+                  postId={props.postId}
+                  myPage={props.mypage}
+                  toggleModal={toggleModal}
+                />
+              </Grid>
             </Grid>
           )}
         {/* 전체크기 */}
@@ -209,15 +212,19 @@ const Title = styled.span`
   font-size: 20px;
   width: 100%;
   font-weight: 500;
-
   @media (max-width: 375px) {
+    margin-top: 8%;
+    margin-bottom: 14%;
+    font-size: 17px;
+    width: 100%;
+    font-weight: 500;
     white-space: normal;
     line-height: 1.2;
-    height: 3.6em;
+    height: 2.7em;
     text-align: left;
     word-wrap: break-word;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
   }
 `;
@@ -258,6 +265,7 @@ const ProjectState = styled.div`
 `;
 
 const ProductImgWrap = styled.div`
+  cursor: pointer;
   z-index: 1;
   position: relative;
   background-color: white;
@@ -265,7 +273,7 @@ const ProductImgWrap = styled.div`
   height: 330px;
   max-width: 350px;
   margin: 30px auto;
-  border-radius: 20px;
+  border-radius: 21px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.24);
 
   @media (max-width: 450px) {

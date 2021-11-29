@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React from "react";
 import { Dialog } from "@material-ui/core";
+import { Grid, Input, Text, Button } from "../elements/Index";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Apply,
@@ -39,7 +40,7 @@ const ApplyUserModal = (props) => {
   };
 
   return (
-    <>
+    <Grid _onClick={(e) => e.stopPropagation()}>
       <Dialog
         maxWidth={"sm"}
         scroll="paper"
@@ -100,7 +101,7 @@ const ApplyUserModal = (props) => {
           />
         )}
       </Dialog>
-    </>
+    </Grid>
   );
 };
 
