@@ -14,7 +14,7 @@ const UserType = (props) => {
         {myType === "LHG" && <CardImg src="/img/여우.png"></CardImg>}
         {myType === "LHP" && <CardImg src="/img/판다.png"></CardImg>}
         {myType === "FVG" && <CardImg src="/img/토끼.png"></CardImg>}
-        {myType === "FVP" && <CardImg src="/img/허스키.png"></CardImg>}
+        {myType === "FVP" && <CardImg src="/img/개.png"></CardImg>}
         {myType === "FHG" && <CardImg src="/img/고양이.png"></CardImg>}
         {myType === "FHP" && <CardImg src="/img/물개.png"></CardImg>}
       </Grid>

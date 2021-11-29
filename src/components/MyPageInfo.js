@@ -92,7 +92,7 @@ const MyPageInfo = (props) => {
 
         setLoading(false);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     fetchData();

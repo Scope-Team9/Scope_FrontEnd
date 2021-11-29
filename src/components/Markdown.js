@@ -127,10 +127,10 @@ export default function Writer(props) {
     const fetchData = async () => {
       try {
         const result = await apis.getMypage(userId);
-        console.log(result);
+        // console.log(result);
         setMydata(result.data.data);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     fetchData();

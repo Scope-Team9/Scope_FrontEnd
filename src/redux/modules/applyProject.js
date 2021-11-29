@@ -29,13 +29,13 @@ const applyUserAPI = (postId) => {
     apis
       .applyUser(postId)
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         // window.alert("모집 지원 현황 조회 성공");
         dispatch(applyUsers(res.data.data));
       })
       .catch((err) => {
-        console.log(err.response);
-        window.alert("4444신청자를 못찾겠네용!");
+        // console.log(err.response);
+        window.alert("ERROR: 신청자를 불러오지 못했습니다.");
       });
   };
 };
@@ -45,13 +45,13 @@ const acceptOfferAPI = (postId, acceptInfo) => {
     apis
       .aceeptOffer(postId, acceptInfo)
       .then((res) => {
-        console.log(res.data.data);
-        console.log(res);
+        // console.log(res.data.data);
+        // console.log(res);
         dispatch(applyUsers(res.data.users));
       })
       .catch((err) => {
-        console.log(err.response);
-        window.alert("88888신청자를 못찾겠네용!");
+        // console.log(err.response);
+        window.alert("ERROR: 신청자를 불러올 수 없습니다.");
       });
   };
 };
@@ -61,11 +61,11 @@ const applyProjectAPI = (postId, comment) => {
     apis
       .applyProject(postId, comment)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         return window.alert("프로젝트에 지원되었습니다.");
       })
       .catch((err) => {
-        console.log(err.response);
+        // console.log(err.response);
         if (err.response.data.msg === "모집중인 프로젝트가 아닙니다.") {
           return window.alert("모집중인 프로젝트가 아닙니다.");
         }
@@ -84,11 +84,11 @@ const cancelProjectAPI = (postId) => {
     apis
       .cancelProject(postId)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         window.alert("프로젝트 지원이 취소되었습니다.!");
       })
       .catch((err) => {
-        console.log(err.response);
+        // console.log(err.response);
         window.alert("신청자 정보를 찾을 수 없습니다!");
       });
   };
@@ -97,15 +97,15 @@ const cancelProjectAPI = (postId) => {
 const exitTeamAPI = (postId) => {
   return function (dispatch, getState, { history }) {
     const PostId = postId.postId;
-    console.log(PostId);
+    // console.log(PostId);
     apis
       .exitTeam(PostId)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         window.alert("팀에서 탈출하였습니다!");
       })
       .catch((err) => {
-        console.log(err.response);
+        // console.log(err.response);
         if (err.response.data.msg === "입력 값이 잘못되었습니다.") {
           return window.alert("입력 값이 잘못되었습니다.");
         }
@@ -125,11 +125,11 @@ const starterLikeAPI = (postId, userIds) => {
     apis
       .strterLike(postId, userIds)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         window.alert("팀원 평가 정보가 성공적으로 저장되었습니다.");
       })
       .catch((err) => {
-        console.log(err.response);
+        // console.log(err.response);
         if (err.response.data.msg === "입력 값이 잘못되었습니다.") {
           return window.alert("팀원 평가가 이루어지지 않았습니다.");
         }

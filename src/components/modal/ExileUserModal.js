@@ -24,10 +24,10 @@ const ExileUserModal = (props) => {
     const fetchData = async () => {
       try {
         const result = await apis.serachTeamUser(postId);
-        console.log(result);
+        // console.log(result);
         setApplyUsers(result.data.data);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     fetchData();
@@ -40,10 +40,10 @@ const ExileUserModal = (props) => {
     const fetchData = async () => {
       try {
         const result = await apis.exileUser(postId, userId);
-        console.log(result);
+        // console.log(result);
         setAcceptButton(result);
       } catch (err) {
-        console.log(err.response);
+        // console.log(err.response);
       }
     };
     fetchData();
@@ -132,7 +132,7 @@ const ExileUserModal = (props) => {
                         <UserImg src="/img/토끼.png"></UserImg>
                       )}
                       {applyedUsers[idx].userPropensityType === "FVP" && (
-                        <UserImg src="/img/허스키.png"></UserImg>
+                        <UserImg src="/img/개.png"></UserImg>
                       )}
                       {applyedUsers[idx].userPropensityType === "FHG" && (
                         <UserImg src="/img/고양이.png"></UserImg>
