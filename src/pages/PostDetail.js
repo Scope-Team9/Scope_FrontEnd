@@ -37,7 +37,6 @@ const PostDetail = (props) => {
   const [projectStatus, setProjectStatus] = React.useState();
   const [applyValue, setApplyValue] = React.useState();
   const [isme, setIsme] = React.useState(null);
-
   const applyStatusModalOpen = () => {
     setApplyStatusModal(true);
     // setApplyStatusModal(!applyStatusModal);

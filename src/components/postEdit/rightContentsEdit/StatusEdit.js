@@ -43,7 +43,7 @@ const StatusMedia = styled.div`
     width: 350px;
     height: 10px;
     font-size: 10px;
-    margin-bottom: 60px;
+    margin-bottom: 70px;
   }
 `;
 
