@@ -11,16 +11,25 @@ import { ko } from "date-fns/esm/locale";
 // DateEdit의 함수형 컴포넌트를 만든다.
 const DateEdit = (props) => {
   const startDate = (date) => {
-    if (date <= props.endDate) {
-      props.setStartdate(date);
+    props.setStartdate(date);
+    // if (date <= props.endDate) {
+    //   props.setStartdate(date);
+    // } else {
+    //   window.alert("시작일을 잘못 설정했습니다.");
+    // }
+  };
+
+  const endDate = (date) => {
+    if (date > props.startDate) {
+      props.setEnddate(date);
     } else {
-      window.alert("시작일을 잘못 설정했습니다.");
+      window.alert("종료일을 잘못 설정했습니다.");
     }
   };
 
-  const endDate = (data) => {
-    props.setEnddate(data);
-  };
+  // const endDate = (data) => {
+  //   props.setEnddate(data);
+  // };
   return (
     <React.Fragment>
       <DateMedia>
