@@ -86,6 +86,9 @@ const MainSlide = () => {
   const TestClose = () => {
     setShowModal(false);
   };
+  const EmailClose = () => {
+    setEmailShowModal(false);
+  };
 
   return (
     <React.Fragment>
@@ -112,7 +115,11 @@ const MainSlide = () => {
           showModal={loginShowModal}
           setShowModal={setLoginShowModal}
         />
-        <EmailAuth modal={emailShowModal} setModal={setEmailShowModal} />
+        <EmailAuth
+          modal={emailShowModal}
+          setModal={setEmailShowModal}
+          EmailClose={EmailClose}
+        />
       </div>
     </React.Fragment>
   );

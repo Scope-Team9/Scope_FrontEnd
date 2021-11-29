@@ -9,9 +9,9 @@ import ImgType from "../shared/ImgType";
 import styled from "styled-components";
 
 // ProjectJoinUser의 함수형 컴포넌트를 만든다.
-const ProjectJoinUser = (props) => {
+const ProjectJoinUser = props => {
   const history = useHistory();
-  const goToMypage = (userId) => {
+  const goToMypage = userId => {
     history.push(`/mypage/${userId}`);
   };
   return (
@@ -43,7 +43,7 @@ const ProjectJoinUser = (props) => {
                 }}
               ></ImgType>
 
-              <Text>{props.nickname}</Text>
+              <Text size="10px">{props.nickname}</Text>
               <Grid height="30%">({props.userPropensityType})</Grid>
             </Grid>
           </Grid>
@@ -53,7 +53,7 @@ const ProjectJoinUser = (props) => {
   );
 };
 const Writer = styled.p`
-  opacity: ${(props) => (props.number === 0 ? 1 : 0)};
+  opacity: ${props => (props.number === 0 ? 1 : 0)};
   width: 60px;
   margin: auto auto auto 0;
   height: 10px;

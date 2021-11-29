@@ -50,7 +50,6 @@ function App() {
             <Route path="/postedit/:id" exact component={PostEdit}></Route>
             <Route path="/addmarkdown" exact component={Markdown}></Route>
             <Route path="/postdetail/:id" exact component={PostDetail}></Route>
-
             <Route
               path="/user/kakao/callback"
               exact

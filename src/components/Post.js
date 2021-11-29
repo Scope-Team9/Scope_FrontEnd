@@ -261,6 +261,7 @@ const ProjectState = styled.div`
 `;
 
 const ProductImgWrap = styled.div`
+  cursor: pointer;
   z-index: 1;
   position: relative;
   background-color: white;
@@ -270,6 +271,10 @@ const ProductImgWrap = styled.div`
   margin: 30px auto;
   border-radius: 20px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.24);
+  transition: all 0.2s linear;
+  :hover {
+    transform: scale(1.03);
+  }
 
   @media (max-width: 450px) {
     margin: auto;

@@ -27,7 +27,7 @@ const EmailAuth = props => {
         // window.alert(result.data.msg);
         Swal.fire(`${result.data.msg}`, "", "success");
       } catch (err) {
-        console.log(err.response);
+        // console.log(err.response);
       }
     };
     fetchData();
@@ -72,7 +72,7 @@ const EmailAuth = props => {
               border="1px solid #C9C9C9"
               borderRadius="8px"
               width="70%"
-              height="44px"
+              height="40px"
               _onChange={e => {
                 EmailInput(e.target.value);
               }}
