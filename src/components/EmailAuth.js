@@ -11,7 +11,7 @@ const EmailAuth = (props) => {
   const [email, setEmail] = React.useState();
   const { modal, setModal } = props;
   const modalClose = () => {
-    props.EmailClose();
+    setModal(false);
   };
 
   const EmailInput = (data) => {
@@ -31,7 +31,7 @@ const EmailAuth = (props) => {
     fetchData();
   };
   return (
-    <Dialog maxWidth={"sm"} scroll="paper" open={modal}>
+    <Dialog maxWidth={"sm"} scroll="paper" open={modal} onClose={modalClose}>
       <ModalWrap>
         <Grid>
           {/* 헤더 */}
@@ -70,6 +70,7 @@ const EmailAuth = (props) => {
               border="1px solid #C9C9C9"
               borderRadius="8px"
               width="70%"
+              height="40px"
               _onChange={(e) => {
                 EmailInput(e.target.value);
               }}
