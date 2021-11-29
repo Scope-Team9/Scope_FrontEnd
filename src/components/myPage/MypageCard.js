@@ -178,6 +178,7 @@ const MypageCard = (props) => {
             <Grid width="167px">
               <Select
                 isMulti
+                value={props.techStack}
                 name="techStack"
                 options={techStackOption}
                 styles={styles}
