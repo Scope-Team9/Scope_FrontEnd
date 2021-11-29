@@ -92,7 +92,7 @@ const Post = (props) => {
                 hoverCl="#fff"
                 _onClick={(e) => {
                   e.stopPropagation();
-                  console.log(e.target.value, props.postId);
+                  // console.log(e.target.value, props.postId);
                   modalOpen(e.target.value, props.postId);
                 }}
               >
