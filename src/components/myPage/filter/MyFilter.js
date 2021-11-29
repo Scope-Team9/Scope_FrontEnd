@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { Grid, Image, Text, Button } from "../../../elements/Index";
 
-const MyFilter = (props) => {
+const MyFilter = props => {
   // console.log(props);
   return (
     <>
@@ -29,13 +29,12 @@ const MyFilter = (props) => {
 
 const FilterDiv = styled.div`
   align-items: center;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin: 50px auto;
   width: 80%;
   height: 35px;
 
-  /* background-color: ${(props) => (props.active ? "black" : " yellow")}; */
-  border-bottom: ${(props) => (props.active ? "1mm ridge #554475" : null)};
+  /* background-color: ${props => (props.active ? "black" : " yellow")}; */
+  border-bottom: ${props => (props.active ? "1mm ridge #554475" : null)};
 `;
 
 const Filter = styled.p`
