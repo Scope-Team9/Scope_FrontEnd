@@ -70,6 +70,7 @@ const StackEdit = (props) => {
     for (index = 0; index < props.techstack.length; index++) {
       tamarray.push(props.techstack[index]["label"]);
     }
+
     props.setTest(tamarray);
   };
 
