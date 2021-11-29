@@ -15,6 +15,7 @@ import TitleEdit from "../components/postEdit/rightContentsEdit/TitleEdit";
 import StackEdit from "../components/postEdit/rightContentsEdit/StackEdit";
 import TotalMemberEdit from "../components/postEdit/rightContentsEdit/TotalMemberEdit";
 import StatusEdit from "../components/postEdit/rightContentsEdit/StatusEdit";
+import UrlEdit from "../components/postEdit/rightContentsEdit/UrlEdit";
 import ContentEdit from "../components/postEdit/rightContentsEdit/ContentEdit";
 import DateEdit from "../components/postEdit/rightContentsEdit/DateEdit";
 import EditButton from "../components/postEdit/rightContentsEdit/EditButton";
@@ -36,6 +37,7 @@ const PostEdit = (props) => {
   const [contents, setContents] = React.useState("");
   const [techStackList, setTest] = React.useState();
   const [loaded, setLoaded] = React.useState(false);
+  const [chatUrl, setChatUrl] = React.useState();
 
   // 수정
   let post_id = props.match.params.id;
@@ -54,6 +56,7 @@ const PostEdit = (props) => {
       projectStatus: projectStatus,
       startDate: startDate,
       endDate: endDate,
+      chatUrl: chatUrl,
     };
     dispatch(postDetailActions.editPostAPI(post_id, editcard));
   };
@@ -86,6 +89,7 @@ const PostEdit = (props) => {
         setEnddate(setValue.endDate);
         setTotalmember(setValue.totalMember);
         setProjectstatus(setValue.projectStatus);
+        setChatUrl(setValue.chatUrl);
         setLoaded(true);
       } catch (err) {
         console.log(err.response);
@@ -115,56 +119,58 @@ const PostEdit = (props) => {
 
   return (
     <React.Fragment>
-      <Grid
-        display="flex"
-        justifyContent="center"
-        maxWidth="1920px"
-        height="100%"
-        margin="auto"
-        border="1px solid #C4C4C4"
-        alignItems="center"
-      >
-        <LeftBanner />
-        <Grid margin="46px 106px 0px" position="relative">
-          <TitleMedia>
-            <Title>게시글 수정하기</Title>
-          </TitleMedia>
+      {chatUrl && (
+        <Grid
+          display="flex"
+          justifyContent="center"
+          maxWidth="1920px"
+          height="100%"
+          margin="auto"
+          border="1px solid #C4C4C4"
+          alignItems="center"
+        >
+          <LeftBanner />
+          <Grid margin="46px 106px 0px" position="relative">
+            <TitleMedia>
+              <Title>게시글 수정하기</Title>
+            </TitleMedia>
 
-          <Grid margin="40px auto">
-            <TitleEdit title={title} setTitle={setTitle} />
-            <StackEdit
-              setTectstack={setTectstack}
-              techstack={techstack}
-              setTest={setTest}
-              animatedComponents={animatedComponents}
-              styles={styles}
-            />
-            <Grid>
-              <DateEdit
-                startDate={startDate}
-                endDate={endDate}
-                setStartdate={setStartdate}
-                setEnddate={setEnddate}
+            <Grid margin="40px auto">
+              <TitleEdit title={title} setTitle={setTitle} />
+              <StackEdit
+                setTectstack={setTectstack}
+                techstack={techstack}
+                setTest={setTest}
+                animatedComponents={animatedComponents}
+                styles={styles}
               />
-            </Grid>
-            <TotalMemberEdit
-              styles={styles}
-              totalMember={totalMember}
-              setTotalmember={setTotalmember}
-            />
-            <StatusEdit
-              styles={styles}
-              projectStatus={projectStatus}
-              setProjectstatus={setProjectstatus}
-            />
-            <Grid>
-              <ContentEdit contents={contents} setContents={setContents} />
-
-              <EditButton editHandler={editHandler} />
+              <Grid>
+                <DateEdit
+                  startDate={startDate}
+                  endDate={endDate}
+                  setStartdate={setStartdate}
+                  setEnddate={setEnddate}
+                />
+              </Grid>
+              <TotalMemberEdit
+                styles={styles}
+                totalMember={totalMember}
+                setTotalmember={setTotalmember}
+              />
+              <StatusEdit
+                styles={styles}
+                projectStatus={projectStatus}
+                setProjectstatus={setProjectstatus}
+              />
+              <Grid>
+                <UrlEdit chatUrl={chatUrl} setChatUrl={setChatUrl} />
+                <ContentEdit contents={contents} setContents={setContents} />
+                <EditButton editHandler={editHandler} />
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      )}
     </React.Fragment>
   );
 };

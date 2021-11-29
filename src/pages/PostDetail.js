@@ -11,7 +11,7 @@ import Swal from "sweetalert2";
 import { pageCheckAction } from "../redux/modules/pageCheck";
 
 import ApplyStatusModal from "../components/ApplyStatusModal";
-import LeftBanner from "../components/postDetail/leftBanner";
+import LeftBanner from "../components/postDetail/LeftBanner";
 import TitleDetail from "../components/postDetail/rightContents/TitleDetail";
 import ExileUserModal from "../components/modal/ExileUserModal";
 import ApplicantDetail from "../components/postDetail/rightContents/ApplicantDetail";
@@ -37,7 +37,6 @@ const PostDetail = (props) => {
   const [projectStatus, setProjectStatus] = React.useState();
   const [applyValue, setApplyValue] = React.useState();
   const [isme, setIsme] = React.useState(null);
-
   const applyStatusModalOpen = () => {
     setApplyStatusModal(true);
     // setApplyStatusModal(!applyStatusModal);
