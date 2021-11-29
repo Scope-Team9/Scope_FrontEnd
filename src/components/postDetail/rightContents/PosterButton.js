@@ -41,14 +41,16 @@ const PosterButton = (props) => {
               마감하기
             </Button>
           )}
-          <ApplyUserModal
-            applyUserModal={props.applyUserModal}
-            setApplyUserModal={props.setApplyUserModal}
-            applyValue={props.applyValue}
-            postId={props.post_id}
-            passdedMenber={props.passdedMenber}
-            statusCheck={props.statusCheck}
-          />
+          <Grid width="0px" height="0px">
+            <ApplyUserModal
+              applyUserModal={props.applyUserModal}
+              setApplyUserModal={props.setApplyUserModal}
+              applyValue={props.applyValue}
+              postId={props.post_id}
+              passdedMenber={props.passdedMenber}
+              statusCheck={props.statusCheck}
+            />
+          </Grid>
 
           {props.passedData?.projectStatus === "모집중" && (
             <Button
@@ -130,9 +132,7 @@ const ButtonMedia = styled.button`
 `;
 
 const ContentMedia = styled.div`
-  display: flex;
   @media screen and (max-width: 360px) {
-    display: flex;
     width: 300px;
     height: 50px;
     margin-bottom: 40px;
@@ -140,8 +140,8 @@ const ContentMedia = styled.div`
   @media screen and (max-width: 800px) {
     display: flex;
     width: 300px;
-    height: 50px;
-    margin-bottom: 40px;
+    font-size: 10px;
+    margin-bottom: 60px;
   }
 `;
 
