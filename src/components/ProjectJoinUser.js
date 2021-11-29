@@ -43,8 +43,10 @@ const ProjectJoinUser = props => {
                 }}
               ></ImgType>
 
-              <Text size="10px">{props.nickname}</Text>
-              <Grid height="30%">({props.userPropensityType})</Grid>
+              <Text size="12px">{props.nickname}</Text>
+              <Grid height="30%">
+                <Text size="12px">({props.userPropensityType})</Text>
+              </Grid>
             </Grid>
           </Grid>
         </JoinUserMedia>
