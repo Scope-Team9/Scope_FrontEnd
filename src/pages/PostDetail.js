@@ -100,7 +100,7 @@ const PostDetail = props => {
       try {
         const result = await apis.detailPost(post_id);
         setCheckPost(result);
-        console.log(result);
+        // console.log(result);
         setIsme(result.data.data.userStatus);
         setProjectStatus(result.data.data.post.projectStatus);
       } catch (err) {
@@ -245,7 +245,7 @@ const PostDetail = props => {
                         passedData?.projectStatus === "모집중" && (
                           <Grid
                             display="flex"
-                            width="150px"
+                            width="180px"
                             margin="auto 0 auto auto"
                             justifyContent="flex-end"
                           >
@@ -321,9 +321,10 @@ const ContainerMedia = styled.div`
 const ButtonMedia = styled.p`
   display: flex;
   margin: auto;
+  width: 90%;
   @media screen and (max-width: 1500px) {
     display: flex;
-    width: 100px;
+    width: 90%;
     margin: auto;
   }
 `;

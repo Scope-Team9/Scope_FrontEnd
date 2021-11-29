@@ -36,10 +36,10 @@ const Post = props => {
   };
 
   // let as = member?.find((e) => e.userId === myUserId);
-  console.log(assessment);
-  console.log(typeof myUserId);
-  console.log(isWriter);
-  console.log(props);
+  // console.log(assessment);
+  // console.log(typeof myUserId);
+  // console.log(isWriter);
+  // console.log(props);
 
   // console.log(as);
   // console.log(myPage, myUserId);
@@ -81,15 +81,17 @@ const Post = props => {
               >
                 팀원평가하기
               </Button>
-              <ApplyUserModal
-                applyUserModal={applyUserModal}
-                setApplyUserModal={setApplyUserModal}
-                applyValue={applyValue}
-                passdedMenber={member}
-                postId={props.postId}
-                myPage={props.mypage}
-                toggleModal={toggleModal}
-              />
+              <Grid width="0px" height="0px">
+                <ApplyUserModal
+                  applyUserModal={applyUserModal}
+                  setApplyUserModal={setApplyUserModal}
+                  applyValue={applyValue}
+                  passdedMenber={member}
+                  postId={props.postId}
+                  myPage={props.mypage}
+                  toggleModal={toggleModal}
+                />
+              </Grid>
             </Grid>
           )}
         {/* 전체크기 */}

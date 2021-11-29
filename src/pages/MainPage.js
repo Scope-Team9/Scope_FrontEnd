@@ -18,7 +18,7 @@ import { useHistory } from "react-router";
 import Sort from "../components/filter/Sort";
 import { apis } from "../lib/axios";
 import useScrollMove from "../components/useScrollMove";
-
+import Spinner from "../shared/Spinner";
 const MainPage = () => {
   // const { scrollOnceMove } = useScrollMove();
   // let refs = React.useRef();
@@ -161,6 +161,11 @@ const MainPage = () => {
                 </Grid>
               )}
             </>
+          )}
+          {!post && (
+            <Grid margin="-250px 0 0 0">
+              <Spinner />
+            </Grid>
           )}
           {isLoginUser && (
             <Btn

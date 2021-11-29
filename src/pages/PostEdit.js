@@ -18,7 +18,7 @@ import StatusEdit from "../components/postEdit/rightContentsEdit/StatusEdit";
 import ContentEdit from "../components/postEdit/rightContentsEdit/ContentEdit";
 import DateEdit from "../components/postEdit/rightContentsEdit/DateEdit";
 import EditButton from "../components/postEdit/rightContentsEdit/EditButton";
-
+import Swal from "sweetalert2";
 // PostEdit의 함수형 컴포넌트를 만든다.
 const PostEdit = (props) => {
   const dispatch = useDispatch();
@@ -40,6 +40,12 @@ const PostEdit = (props) => {
   // 수정
   let post_id = props.match.params.id;
   const scope_edit = () => {
+    let blank_pattern = /^\s+|\s+$/g;
+    if (title.replace(blank_pattern, "") == "") {
+      Swal.fire("제목을 다시 확인해 주세요!", "", "warning");
+      return false;
+    }
+
     const editcard = {
       title: title,
       contents: contents,
@@ -53,6 +59,10 @@ const PostEdit = (props) => {
   };
 
   const editHandler = () => {
+    if (techstack.length === 0) {
+      Swal.fire("기술스택을 선택해 주세요!", "", "warning");
+      return;
+    }
     if (techstack.length <= 3) {
       scope_edit();
     } else {
