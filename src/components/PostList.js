@@ -96,7 +96,7 @@ const PostWrap = styled.div`
     grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
   }
 `;
-const NoIntroduction = styled.div`
+const NoIntroduction = styled.img`
   width: 100px;
   height: 100px;
   display: flex;
