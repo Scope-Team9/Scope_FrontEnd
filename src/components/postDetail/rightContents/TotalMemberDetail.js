@@ -23,7 +23,7 @@ const TotalMemberDetail = (props) => {
 const TotalMedia = styled.div`
   @media screen and (max-width: 600px) {
     width: 100px;
-    font-size: 2px;
+    font-size: 10px;
   }
 `;
 
