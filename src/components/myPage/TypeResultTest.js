@@ -8,8 +8,9 @@ import styled from "styled-components";
 import { map, stubFalse } from "lodash";
 import { Grid4x4 } from "@mui/icons-material";
 import EmailAuth from "../EmailAuth";
+import { useParams } from "react-router";
 
-const TypeResultTest = props => {
+const TypeResultTest = (props) => {
   const [myData, setMyData] = React.useState();
   const [arr, setArr] = React.useState([
     {
@@ -121,10 +122,12 @@ const TypeResultTest = props => {
         "결과보다는 과정을 중요시하는 당신은 우리 스코프 사이드 프로젝트에 적합한 사람!",
     },
   ]);
+  const params = useParams();
+  // console.log(params.id, props.nickName);
 
   React.useEffect(() => {
     // console.log("테스트결과", props);
-    arr.map(item => {
+    arr.map((item) => {
       if (item.id === props.myType) {
         setMyData(item);
       }
@@ -203,7 +206,9 @@ const TypeResultTest = props => {
                   ></EmailAuth>
                 </Grid>
               )}
-
+            {params.id != props.myUserId && (
+              <YourName> Nikname | {props.nickName}</YourName>
+            )}
             <Dialog scroll="paper" open={props.testmodal}>
               <TestWrap>
                 <PropensityTest TestClose={props.TestClose} />
@@ -321,5 +326,23 @@ const TestWrap = styled.div`
     height: 550px;
     font-size: 11px;
   }
+`;
+const YourName = styled.div`
+  display: none;
+  @media screen and (max-width: 1200px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    margin: 10px 0;
+    height: 40px;
+    width: 200px;
+    color: #333;
+
+    background-color: #fff;
+    border-radius: 11px;
+    box-shadow: 0 5px 5px #aaa;
+    opacity: 0.8;
+  } ;
 `;
 export default TypeResultTest;

@@ -150,6 +150,7 @@ const MyPageInfo = (props) => {
                       EditTest={EditTest}
                       TestClose={TestClose}
                       setModal={setModal}
+                      nickName={nickName}
                       modal={modal}
                       onClick={() => {
                         EmailConfirm();
