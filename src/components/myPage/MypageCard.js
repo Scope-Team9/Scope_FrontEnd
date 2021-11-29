@@ -53,6 +53,9 @@ const MypageCard = (props) => {
   }
 
   const setEditProfile = () => {
+    if (nickName.length < 2 || nickName.length > 5) {
+      Swal.fire("닉네임은 2자~5자 까지 입력 가능합니다.", "", "warning");
+    }
     if (techStack.length > 8) {
       Swal.fire("기술은 7개 까지 선택 가능합니다.", "", "warning");
       return;
