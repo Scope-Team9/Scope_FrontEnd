@@ -172,25 +172,6 @@ const ElButton = styled.button`
   font-family: "GmarketSans";
 `;
 
-const FloatButton = styled.div`
-  width: 50px;
-  height: 50px;
-  background-color: #ffffff;
-  color: ${props => props.color};
-  box-sizing: border-box;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.24);
-  font-size: 36px;
-  font-weight: bold;
-  position: fixed;
-  bottom: 50px;
-  right: 16px;
-  text-align: center;
-  vertical-align: middle;
-  border: none;
-  border-radius: 50px;
-  display: ${props => props.display};
-`;
-
 const TestButton = styled.button`
   font-size: 12px;
   text-align: center;
