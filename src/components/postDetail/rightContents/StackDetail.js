@@ -39,7 +39,7 @@ const StackBox = styled.div`
 const StackMedia = styled.div`
   display: flex;
   @media screen and (max-width: 600px) {
-    font-size: 2px;
+    font-size: 10px;
     width: 120px;
   }
 `;
