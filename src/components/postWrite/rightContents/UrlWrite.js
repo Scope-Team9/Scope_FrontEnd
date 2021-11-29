@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { Grid, Input, Text } from "../../../elements/Index";
 
 // TitleWrite의 함수형 컴포넌트를 만든다.
-const UrlWrite = props => {
+const UrlWrite = (props) => {
   return (
     <React.Fragment>
       <Grid>
@@ -24,7 +24,7 @@ const UrlWrite = props => {
           placeholder="오픈채팅방 URL을 입력해주세요."
           maxLength="35"
           inputFocusOutline="none"
-          _onChange={e => {
+          _onChange={(e) => {
             props.setChatUrl(e.target.value);
           }}
         ></Input>

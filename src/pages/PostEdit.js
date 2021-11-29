@@ -15,6 +15,7 @@ import TitleEdit from "../components/postEdit/rightContentsEdit/TitleEdit";
 import StackEdit from "../components/postEdit/rightContentsEdit/StackEdit";
 import TotalMemberEdit from "../components/postEdit/rightContentsEdit/TotalMemberEdit";
 import StatusEdit from "../components/postEdit/rightContentsEdit/StatusEdit";
+import UrlEdit from "../components/postEdit/rightContentsEdit/UrlEdit";
 import ContentEdit from "../components/postEdit/rightContentsEdit/ContentEdit";
 import DateEdit from "../components/postEdit/rightContentsEdit/DateEdit";
 import EditButton from "../components/postEdit/rightContentsEdit/EditButton";
@@ -36,6 +37,7 @@ const PostEdit = (props) => {
   const [contents, setContents] = React.useState("");
   const [techStackList, setTest] = React.useState();
   const [loaded, setLoaded] = React.useState(false);
+  const [chatUrl, setChatUrl] = React.useState();
 
   // 수정
   let post_id = props.match.params.id;
@@ -158,6 +160,7 @@ const PostEdit = (props) => {
               setProjectstatus={setProjectstatus}
             />
             <Grid>
+              {/* <UrlEdit chatUrl={chatUrl} setChatUrl={setChatUrl} /> */}
               <ContentEdit contents={contents} setContents={setContents} />
 
               <EditButton editHandler={editHandler} />
