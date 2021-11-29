@@ -19,6 +19,7 @@ import Sort from "../components/filter/Sort";
 import { apis } from "../lib/axios";
 import useScrollMove from "../components/useScrollMove";
 import Spinner from "../shared/Spinner";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 const MainPage = () => {
   // const { scrollOnceMove } = useScrollMove();
   // let refs = React.useRef();
@@ -117,6 +118,10 @@ const MainPage = () => {
   //   scrollOnceMove();
   // }, [scrollOnceMove]);
 
+  const ScrollTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     // <div ref={refs}>
     <div>
@@ -167,6 +172,15 @@ const MainPage = () => {
               <Spinner />
             </SpinnerLocation>
           )}
+          <Scrollup
+            onClick={() => {
+              ScrollTop();
+            }}
+          >
+            <ArrowUpwardIcon
+              sx={{ fontSize: "60px", color: "#c4c4c4" }}
+            ></ArrowUpwardIcon>
+          </Scrollup>
           {isLoginUser && (
             <Btn
               onClick={() => {
@@ -279,7 +293,7 @@ const BtnFeedback = styled.img`
     height: 50px;
     text-align: center;
     left: 5px;
-    bottom: 80px;
+    bottom: 150px;
     margin: auto;
     cursor: pointer;
     z-index: 999;
@@ -292,4 +306,36 @@ const SpinnerLocation = styled.div`
     margin: 0px 0 0 0;
   } ;
 `;
+
+const Scrollup = styled.div`
+  background-color: transparent;
+  border-radius: 50px;
+
+  position: fixed;
+  bottom: 150px;
+  /* border: 1px solid #c4c4c4; */
+  /* border-radius: 50%; */
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  right: 50px;
+  margin: auto;
+  /* background: #c4c4c4; */
+  cursor: pointer;
+  z-index: 999;
+
+  @media screen and (max-width: 767px) {
+    position: fixed;
+
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    right: 25px;
+    bottom: 150px;
+    margin: auto;
+    cursor: pointer;
+    z-index: 999;
+  } ;
+`;
+
 export default MainPage;
