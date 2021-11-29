@@ -28,10 +28,11 @@ const MyFilter = (props) => {
 };
 
 const FilterDiv = styled.div`
+  align-items: center;
   margin-top: 50px;
   margin-bottom: 50px;
-  width: 100%;
-  height: 100%;
+  width: 80%;
+  height: 35px;
 
   /* background-color: ${(props) => (props.active ? "black" : " yellow")}; */
   border-bottom: ${(props) => (props.active ? "1mm ridge #554475" : null)};
