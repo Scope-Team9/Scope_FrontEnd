@@ -8,8 +8,8 @@ export const instance = axios.create({
   // baseURL: "http://localhost:8081",
   // baseURL: "http://localhost:4000",
   // baseURL: "http://3.35.219.232",
-  // baseURL: "https://scopewith.com",
-  baseURL: "http://15.165.159.211",
+  baseURL: "https://scopewith.com",
+  // baseURL: "http://15.165.159.211",
   headers: {
     "content-type": "application/json; charset=UTF-8",
     accept: "application/json",
@@ -23,12 +23,6 @@ instance.interceptors.request.use(
     if (cookie === "") {
       return config;
     }
-
-    // console.log(cookie);
-    // const cookieSplitUndefined = cookie.split('=')[1];
-    // console.log(cookieSplitUndefined);
-    // const cookieSplit = cookieSplitUndefined.split(';')[0];
-    // console.log(cookieSplit);
 
     const cookieSplit = cookie.split("=")[1];
 
@@ -74,11 +68,6 @@ export const apis = {
   getUserInfo: () => instance.get("/user/info"),
   getAllUserList: () => instance.get("/user/list"),
 
-  //포스트 관련 api
-  // getPost: (stack, sort, reBook) =>
-  //   instance.get(
-  //     `/api/post?filter=${stack.React};${stack.Spring};${stack.Swift};${stack.TypeScript};${stack.cpp};${stack.Django};${stack.Flask};${stack.Java};${stack.JavaScript};${stack.Kotlin};${stack.Node};${stack.php};${stack.Python};${stack.Vue};&sort=${sort}&bookmarkRecommend=${reBook}`
-  //   ),
   getPost: (stack, sort, reBook) =>
     instance.get(
       `/api/post?filter=;;;;;;;;;;;;;;&sort=${sort}&bookmarkRecommend=${reBook}`
@@ -105,16 +94,4 @@ export const apis = {
   serachTeamUser: (postId) => instance.get(`/api/team/${postId}`),
   exileUser: (postId, userId) =>
     instance.delete(`/api/team/resignation/${postId}?userId=${userId}`),
-
-  //data.json용
-  // getPost: () => instance.get(`/post`),
-
-  updatePost: (postId, postInfo) => instance.put(`/post/${postId}`, postInfo),
-
-  clickLike: (postId) => instance.post(`/post/${postId}/like`),
-  addComment: (commentInfo) => instance.post("/comment", commentInfo),
-  deleteComment: (commentId) => instance.delete(`/comment/${commentId}`),
-  editComment: (commentId, content) =>
-    instance.put(`/comment/${commentId}`, content),
-  addMyImage: (base64) => instance.post(`/api/image`, base64),
 };
