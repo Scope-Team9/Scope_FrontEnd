@@ -6,7 +6,7 @@ import { applyCreators } from "../../redux/modules/applyProject";
 import styled from "styled-components";
 import CloseIcon from "@mui/icons-material/Close";
 
-const SubmitUrl = (props) => {
+const SubmitUrl = props => {
   const dispatch = useDispatch();
   const [front, setFront] = React.useState();
   const [back, setBack] = React.useState();
@@ -21,7 +21,7 @@ const SubmitUrl = (props) => {
         backUrl: back,
       };
       dispatch(applyCreators.submitUrlAPI(postId, github));
-      modalClose();
+      modalClose("제출");
       return;
     }
 
@@ -99,7 +99,7 @@ const SubmitUrl = (props) => {
                 height="100%"
                 padding="0 0 0 10px"
                 placeholder="프론트엔드 깃허브 주소를 입력해주세요!"
-                _onChange={(e) => {
+                _onChange={e => {
                   // console.log(e.target.value);
                   setFront(e.target.value);
                 }}
@@ -111,7 +111,7 @@ const SubmitUrl = (props) => {
                 height="100%"
                 padding="0 0 0 10px"
                 placeholder="백엔드 깃허브 주소를 입력해주세요!"
-                _onChange={(e) => {
+                _onChange={e => {
                   // console.log(e.target.value);
                   setBack(e.target.value);
                 }}

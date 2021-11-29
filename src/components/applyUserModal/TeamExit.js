@@ -6,7 +6,7 @@ import { applyCreators } from "../../redux/modules/applyProject";
 import styled from "styled-components";
 import CloseIcon from "@mui/icons-material/Close";
 
-const TeamExit = (props) => {
+const TeamExit = props => {
   const dispatch = useDispatch();
   const { modalClose, postId } = props;
   const exitTeam = () => {
@@ -14,6 +14,7 @@ const TeamExit = (props) => {
       postId: postId,
     };
     dispatch(applyCreators.exitTeamAPI(isPostId));
+    modalClose("탈퇴");
   };
   return (
     <ModalWrap>
