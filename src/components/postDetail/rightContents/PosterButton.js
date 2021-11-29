@@ -9,7 +9,7 @@ import ApplyUserModal from "../../ApplyUserModal";
 import { useHistory } from "react-router";
 import { apis } from "../../../lib/axios";
 
-// PosterButton의 함수형 컴포넌트를 만든다.
+// PosterButton의 함수형 컴포넌트를 만든다..
 const PosterButton = (props) => {
   const history = useHistory();
 
