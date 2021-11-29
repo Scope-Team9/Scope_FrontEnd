@@ -46,7 +46,7 @@ const MypageCard = (props) => {
         props.onClick2();
         Swal.fire("수정 완료!", "", "success");
       } catch (err) {
-        console.log(err.response);
+        // console.log(err.response);
       }
     };
     fetchData();

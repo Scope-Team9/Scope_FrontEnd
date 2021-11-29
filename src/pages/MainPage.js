@@ -58,10 +58,10 @@ const MainPage = () => {
       try {
         const result = await apis.getPost(stack, sortC, reBookC);
         setPost(result.data.data);
-        console.log(result);
+        // console.log(result);
         // container.current.scrollTo(0, lastScroll);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     fetchData();
