@@ -17,7 +17,7 @@ import ContentWrite from "./rightContents/ContentWrite";
 import GenerateButton from "./rightContents/GenerateButton";
 
 // RightWrite의 함수형 컴포넌트를 만든다.
-const RightWrite = (props) => {
+const RightWrite = props => {
   React.useEffect(() => {
     dispatch(postActions.isMainPage(false));
     dispatch(postActions.whatPage("addPostPage"));
@@ -86,7 +86,7 @@ const RightWrite = (props) => {
 
   return (
     <React.Fragment>
-      <Grid margin="46px 85px 0px">
+      <Grid margin="46px 85px 0px" bg="#111">
         <TitleMedia>
           <Title>게시글 작성하기</Title>
         </TitleMedia>
