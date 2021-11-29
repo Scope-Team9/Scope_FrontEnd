@@ -42,27 +42,33 @@ function App() {
       <div className="App">
         <Header />
         <ConnectedRouter history={history}>
-          <Switch>
-            <Route path="/" exact component={MainPage}></Route>
-            <Route path="/message" exact component={Message}></Route>
-            <Route path="/mypage/:id" exact component={MyPageInfo}></Route>
-            <Route path="/postadd" exact component={PostWrite}></Route>
-            <Route path="/postedit/:id" exact component={PostEdit}></Route>
-            <Route path="/addmarkdown" exact component={Markdown}></Route>
-            <Route path="/postdetail/:id" exact component={PostDetail}></Route>
+          <>
+            <Switch>
+              <Route path="/" exact component={MainPage}></Route>
+              {/* <Route path="/message" exact component={Message}></Route> */}
+              <Route path="/mypage/:id" exact component={MyPageInfo}></Route>
+              <Route path="/postadd" exact component={PostWrite}></Route>
+              <Route path="/postedit/:id" exact component={PostEdit}></Route>
+              <Route path="/addmarkdown" exact component={Markdown}></Route>
+              <Route
+                path="/postdetail/:id"
+                exact
+                component={PostDetail}
+              ></Route>
 
-            <Route
-              path="/user/kakao/callback"
-              exact
-              component={KakaoRedirect}
-            ></Route>
-            <Route
-              path="/user/github/callback"
-              exact
-              component={GitHubRedirect}
-            ></Route>
-            <Route component={NotFound}></Route>
-          </Switch>
+              <Route
+                path="/user/kakao/callback"
+                exact
+                component={KakaoRedirect}
+              ></Route>
+              <Route
+                path="/user/github/callback"
+                exact
+                component={GitHubRedirect}
+              ></Route>
+              <Route component={NotFound}></Route>
+            </Switch>
+          </>
         </ConnectedRouter>
         <Footer userInfo={userInfo} />
       </div>

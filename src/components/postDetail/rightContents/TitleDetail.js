@@ -15,9 +15,9 @@ const TitleDetail = (props) => {
         <TitleMedia>
           <Text size="40px" bold>
             {props.passedData?.title}
-            <Line />
           </Text>
         </TitleMedia>
+        <Line />
       </Grid>
     </React.Fragment>
   );

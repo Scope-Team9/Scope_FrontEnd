@@ -42,7 +42,7 @@ const Footer = (props) => {
         {userType && isToken && (
           <FooterBtn onClick={goToMypage}>
             <div
-              _onClick={() => {
+              onClick={() => {
                 history.push(`/mypage/${userInfo.userId}`);
               }}
             >

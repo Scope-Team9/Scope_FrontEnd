@@ -11,7 +11,7 @@ const EmailAuth = (props) => {
   const [email, setEmail] = React.useState();
   const { modal, setModal } = props;
   const modalClose = () => {
-    setModal(false);
+    props.EmailClose();
   };
 
   const EmailInput = (data) => {
@@ -25,7 +25,7 @@ const EmailAuth = (props) => {
         // window.alert(result.data.msg);
         Swal.fire(`${result.data.msg}`, "", "success");
       } catch (err) {
-        console.log(err.response);
+        // console.log(err.response);
       }
     };
     fetchData();
