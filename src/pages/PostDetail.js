@@ -201,6 +201,7 @@ const PostDetail = (props) => {
                             <Grid
                               display="flex"
                               width="200px"
+                              margin="0px 0px 5px"
                               alignItems="center"
                             >
                               <Grid>
@@ -223,9 +224,8 @@ const PostDetail = (props) => {
                               display="flex"
                               width="200px"
                               alignItems="center"
-                              margin="0 0 0 5px"
                             >
-                              <Grid margin="0px 0px 10px">
+                              <Grid>
                                 <Text>Backend</Text>
                               </Grid>
                               <Grid>

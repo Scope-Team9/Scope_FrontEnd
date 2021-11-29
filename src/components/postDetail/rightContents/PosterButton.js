@@ -126,9 +126,6 @@ const ButtonMedia = styled.button`
 `;
 
 const ContentMedia = styled.div`
-  width: 300px;
-  height: 50px;
-  margin-bottom: 40px;
   @media screen and (max-width: 360px) {
     width: 300px;
     height: 50px;
