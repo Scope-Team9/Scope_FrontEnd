@@ -30,16 +30,33 @@ const Post = props => {
   };
 
   const toggleModal = () => {
-    console.log(applyUserModal);
     setApplyUserModal(!applyUserModal);
-    console.log(applyUserModal);
   };
 
+  React.useLayoutEffect(() => {
+    if (myPage !== "myPage") {
+      return;
+    }
+    let postId = props.postId;
+    const getMembers = async () => {
+      try {
+        const result = await apis.getMember(postId);
+        console.log("호출되나", result);
+        setMember(result.data.data);
+      } catch (err) {
+        console.log(err.response);
+      }
+    };
+    getMembers();
+  }, [assessment]);
+
+  React.useLayoutEffect(() => {}, [assessment]);
   // let as = member?.find((e) => e.userId === myUserId);
   // console.log(assessment);
   // console.log(typeof myUserId);
   // console.log(isWriter);
   // console.log(props);
+  // console.log(member);
 
   // console.log(as);
   // console.log(myPage, myUserId);
