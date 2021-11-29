@@ -53,8 +53,8 @@ const MypageCard = (props) => {
   }
 
   const setEditProfile = () => {
-    if (techStack.length > 4) {
-      Swal.fire("기술은 4개 까지 선택 가능합니다.", "", "warning");
+    if (techStack.length > 8) {
+      Swal.fire("기술은 7개 까지 선택 가능합니다.", "", "warning");
       return;
     }
     fn_submit(email);
@@ -71,7 +71,7 @@ const MypageCard = (props) => {
     { value: "Python", label: "Python" },
     { value: "Spring", label: "Spring" },
     { value: "Node", label: "Node" },
-    { value: "cpp", label: "C++" },
+    { value: "C++", label: "C++" },
     { value: "Flask", label: "Flask" },
     { value: "Django", label: "Django" },
     { value: "Vue", label: "Vue" },

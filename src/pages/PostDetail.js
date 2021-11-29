@@ -48,8 +48,8 @@ const PostDetail = (props) => {
 
   const applyUserModalOpen = (value) => {
     setApplyValue(value);
-    // setApplyUserModal(true);
-    setApplyUserModal(!applyUserModal);
+    setApplyUserModal(true);
+    // setApplyUserModal(!applyUserModal);
   };
 
   const statusCheck = (value) => {

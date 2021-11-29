@@ -29,10 +29,10 @@ const ApplyUserModal = (props) => {
   const modalClose = (status) => {
     if (status === "종료") {
       statusCheck(status);
-      applyUserModalOpen();
+      // applyUserModalOpen();
       return setApplyUserModal(false);
     }
-    applyUserModalOpen();
+    // applyUserModalOpen();
 
     setApplyUserModal(false);
     return;
