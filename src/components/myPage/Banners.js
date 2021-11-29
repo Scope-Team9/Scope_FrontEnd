@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { Grid, Image, Text, Button } from "../../elements/Index";
 import EmailAuth from "../EmailAuth";
-const Banners = props => {
+const Banners = (props) => {
   //   console.log(props);
   const [myData, setMyData] = React.useState();
   const [arr, setArr] = React.useState([
@@ -64,7 +64,7 @@ const Banners = props => {
   ]);
 
   React.useEffect(() => {
-    arr.map(item => {
+    arr.map((item) => {
       if (props.type === item.id) {
         setMyData(item);
       }
@@ -117,37 +117,8 @@ const BannerAnimals = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
 
-  background-color: ${props => (props.color ? props.color : "#white")};
+  background-color: ${(props) => (props.color ? props.color : "#white")};
   z-index: 0;
 `;
 
-const ConfirmEmail = styled.button`
-  width: 160px;
-  padding: 8px 20px;
-  border: 1px solid white;
-  background-color: transparent;
-  color: white;
-  border-radius: 10px;
-  z-index: 99999;
-  cursor: pointer;
-  &:hover {
-    color: black;
-    background-color: white;
-    opacity: 0.7;
-  }
-
-  @media screen and (max-width: 750px) {
-    color: black;
-  } ;
-`;
-
-const WhiteP = styled.p`
-  font-size: 30px;
-  color: white;
-  font-weight: bold;
-  width: 180px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
 export default Banners;

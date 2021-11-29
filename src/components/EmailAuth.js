@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 const EmailAuth = (props) => {
   const [email, setEmail] = React.useState();
   const { modal, setModal } = props;
+  // console.log(props);
   const modalClose = () => {
     setModal(false);
   };
@@ -17,6 +18,7 @@ const EmailAuth = (props) => {
   const EmailInput = (data) => {
     setEmail(data);
   };
+
   const EmailSend = () => {
     const fetchData = async () => {
       const result = await apis.authEmail(email);
@@ -25,13 +27,13 @@ const EmailAuth = (props) => {
         // window.alert(result.data.msg);
         Swal.fire(`${result.data.msg}`, "", "success");
       } catch (err) {
-        console.log(err.response);
+        // console.log(err.response);
       }
     };
     fetchData();
   };
   return (
-    <Dialog maxWidth={"sm"} scroll="paper" open={modal}>
+    <Dialog maxWidth={"sm"} scroll="paper" open={modal} onClose={modalClose}>
       <ModalWrap>
         <Grid>
           {/* 헤더 */}
@@ -53,7 +55,7 @@ const EmailAuth = (props) => {
               <CloseIcon fontSize="large" onClick={modalClose} />
             </Grid>
             <Grid margin="20px 0 0 0">
-              <Text size="30px" bold color="#08061D">
+              <Text size="30px" bold="bold" color="#08061D">
                 이메일 인증
               </Text>
             </Grid>
@@ -70,6 +72,7 @@ const EmailAuth = (props) => {
               border="1px solid #C9C9C9"
               borderRadius="8px"
               width="70%"
+              height="40px"
               _onChange={(e) => {
                 EmailInput(e.target.value);
               }}

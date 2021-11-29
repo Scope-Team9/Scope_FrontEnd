@@ -10,7 +10,7 @@ import {
   SubmitUrl,
   Liked,
 } from "./applyUserModal/ApplyIndex";
-const ApplyUserModal = (props) => {
+const ApplyUserModal = props => {
   const {
     applyUserModal,
     setApplyUserModal,
@@ -24,11 +24,17 @@ const ApplyUserModal = (props) => {
     toggleModal,
     applyUserModalOpen,
   } = props;
-  const isMe = useSelector((state) => state.user.userId);
+  const isMe = useSelector(state => state.user.userId);
   const [page, setPage] = React.useState(1);
 
-  const modalClose = (status) => {
-    if (status === "종료") {
+  const modalClose = status => {
+    if (
+      status === "종료" ||
+      status === "신청" ||
+      status === "취소" ||
+      status === "탈퇴" ||
+      status === "제출"
+    ) {
       statusCheck(status);
       // applyUserModalOpen();
       return setApplyUserModal(false);
@@ -40,12 +46,12 @@ const ApplyUserModal = (props) => {
   };
 
   return (
-    <Grid _onClick={(e) => e.stopPropagation()}>
+    <Grid _onClick={e => e.stopPropagation()}>
       <Dialog
         maxWidth={"sm"}
         scroll="paper"
         open={applyUserModal}
-        onClose={(e) => {
+        onClose={e => {
           e.stopPropagation();
           modalClose();
         }}

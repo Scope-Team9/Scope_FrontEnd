@@ -8,7 +8,7 @@ import styled from "styled-components";
 import { Grid, Text } from "../../../elements/Index";
 
 // TitleDetail의 함수형 컴포넌트를 만든다.
-const TitleDetail = (props) => {
+const TitleDetail = props => {
   return (
     <React.Fragment>
       <Grid margin="60px auto auto">

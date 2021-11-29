@@ -7,19 +7,26 @@ import { useSelector, useDispatch } from "react-redux";
 import { apis } from "../lib/axios";
 import { history } from "../redux/configureStore";
 import { Grid, Image, Text, Button } from "../elements/Index";
+import { useParams } from "react-router-dom";
 
 // Post의 함수형 컴포넌트를 만든다.
 const Post = (props) => {
+  // console.log(props);
   const dispatch = useDispatch();
   const myPage = useSelector((state) => state.post.whatPage.now);
-  const myUserId = useSelector((state) => state.user.userId);
+  // const myUserId = useSelector((state) => state.user.userId);
+  const userId = Number(props.userId.id);
+  const myUserId = Number(props.myUserId);
   const [applyUserModal, setApplyUserModal] = React.useState(false); //지원취소/팀탈퇴/프로젝트마감
   const [applyValue, setApplyValue] = React.useState();
   const [member, setMember] = React.useState();
-  const [loading, setLoading] = React.useState(false);
+  const [assessment, setAssessment] = React.useState(
+    props.memberIdAndAssessment[myUserId]
+  );
 
   let totalmember = props.totalMember;
   let recruitmentMember = props.recruitmentMember;
+  let isWriter = props.writerEquals;
 
   const modalOpen = (value, postId) => {
     setApplyValue(value);
@@ -27,16 +34,9 @@ const Post = (props) => {
   };
 
   const toggleModal = () => {
-    // console.log(applyUserModal);
     setApplyUserModal(!applyUserModal);
-    // console.log(applyUserModal);
   };
 
-  // React.useEffect(() => {
-  //   let postId = props.postId;
-  //   dispatch(applyCreators.getMemberAPI(postId));
-  // }, [props.mypage]);
-  // console.log(applyUserModal);
   React.useLayoutEffect(() => {
     if (myPage !== "myPage") {
       return;
@@ -44,19 +44,24 @@ const Post = (props) => {
     let postId = props.postId;
     const getMembers = async () => {
       try {
-        setLoading(true);
         const result = await apis.getMember(postId);
         // console.log("호출되나", result);
         setMember(result.data.data);
       } catch (err) {
-        console.log(err.response);
+        // console.log(err.response);
       }
     };
     getMembers();
-  }, []);
+  }, [assessment]);
 
-  let as = member?.find((e) => e.userId === myUserId);
+  React.useLayoutEffect(() => {}, [assessment]);
+  // let as = member?.find((e) => e.userId === myUserId);
+  // console.log(assessment);
+  // console.log(typeof myUserId);
+  // console.log(isWriter);
+  // console.log(props);
   // console.log(member);
+
   // console.log(as);
   // console.log(myPage, myUserId);
 
@@ -69,11 +74,11 @@ const Post = (props) => {
           });
         }}
       >
-        {member &&
-          props.mypage &&
+        {props.mypage &&
+          userId === myUserId &&
           props.projectStatus === "종료" &&
-          member[0].assessment === true &&
-          as.assessment === false && (
+          !isWriter &&
+          !assessment && (
             <Grid
               bg="#111"
               width="100%"
@@ -84,7 +89,6 @@ const Post = (props) => {
               display="flex"
             >
               <Button
-                margin="auto"
                 isValue="memberLiked"
                 backgroundColor="#fff"
                 width="50%"
@@ -212,21 +216,18 @@ const Title = styled.span`
   font-size: 20px;
   width: 100%;
   font-weight: 500;
-  @media (max-width: 375px) {
-    margin-top: 8%;
-    margin-bottom: 14%;
-    font-size: 17px;
-    width: 100%;
-    font-weight: 500;
-    white-space: normal;
-    line-height: 1.2;
-    height: 2.7em;
-    text-align: left;
-    word-wrap: break-word;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-  }
+  /* white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #606060; */
+  white-space: normal;
+  line-height: 1.2;
+  height: 2.4em;
+  text-align: left;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 `;
 
 const Date = styled.div`
@@ -273,8 +274,12 @@ const ProductImgWrap = styled.div`
   height: 330px;
   max-width: 350px;
   margin: 30px auto;
-  border-radius: 21px;
+  border-radius: 20px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.24);
+  transition: all 0.2s linear;
+  :hover {
+    transform: scale(1.03);
+  }
 
   @media (max-width: 450px) {
     margin: auto;

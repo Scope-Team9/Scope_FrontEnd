@@ -55,6 +55,7 @@ const PostDetail = (props) => {
   const statusCheck = (value) => {
     // console.log(value);
     setProjectStatus(value);
+    // console.log(value);
   };
 
   const goFrontPage = () => {

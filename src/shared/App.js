@@ -26,8 +26,8 @@ import NotFound from "../shared/NotFound";
 import PropensityTest from "../components/propensityTest/PropensityTest";
 
 function App() {
-  const isLogin = useSelector((state) => state.user.isLogin);
-  const userInfo = useSelector((state) => state.user);
+  const isLogin = useSelector(state => state.user.isLogin);
+  const userInfo = useSelector(state => state.user);
   const isCookie = document.cookie.split("=")[1];
   const dispatch = useDispatch();
 
@@ -44,13 +44,12 @@ function App() {
         <ConnectedRouter history={history}>
           <Switch>
             <Route path="/" exact component={MainPage}></Route>
-            <Route path="/message" exact component={Message}></Route>
+            {/* <Route path="/message" exact component={Message}></Route> */}
             <Route path="/mypage/:id" exact component={MyPageInfo}></Route>
             <Route path="/postadd" exact component={PostWrite}></Route>
             <Route path="/postedit/:id" exact component={PostEdit}></Route>
             <Route path="/addmarkdown" exact component={Markdown}></Route>
             <Route path="/postdetail/:id" exact component={PostDetail}></Route>
-
             <Route
               path="/user/kakao/callback"
               exact

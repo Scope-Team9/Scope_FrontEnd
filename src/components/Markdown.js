@@ -127,10 +127,10 @@ export default function Writer(props) {
     const fetchData = async () => {
       try {
         const result = await apis.getMypage(userId);
-        console.log(result);
+        // console.log(result);
         setMydata(result.data.data);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     fetchData();
@@ -147,11 +147,11 @@ export default function Writer(props) {
         // console.log(props[0]);
         const userId = props.location.state.userId;
         const result = await apis.writeMyIntroduction(userId, text);
-        console.log(result);
+        // console.log(result);
         history.push(`/mypage/${userId}`);
       } catch (err) {
         const userId = props.location.state.userId;
-        console.log(err);
+        // console.log(err);
         // window.alert("작성 형식이 올바르지 않습니다.");
         Swal.fire("내용이 같거나 없습니다!", "", "question");
       }

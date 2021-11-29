@@ -2,8 +2,8 @@
     "slide":[
         {
       "id": "0",
-      "img": "/img/banner01.jpg",
-      "division": null
+      "img": "/img/banner03.jpg",
+      "division": "test"
     },
     {
         "id": "1",
@@ -12,8 +12,8 @@
       },
       {
         "id": "2",
-        "img": "/img/banner03.jpg",
-        "division": "test"
+        "img": "/img/banner01.jpg",
+      "division": null
       },
       {
         "id": "3",

@@ -33,7 +33,7 @@ const MypageCard = (props) => {
   function fn_submit(data) {
     let userData = {
       nickname: nickName,
-      email: email,
+      // email: email,
       userTechStack: techStack,
     };
 
@@ -46,7 +46,7 @@ const MypageCard = (props) => {
         props.onClick2();
         Swal.fire("수정 완료!", "", "success");
       } catch (err) {
-        console.log(err.response);
+        // console.log(err.response);
       }
     };
     fetchData();
@@ -132,7 +132,7 @@ const MypageCard = (props) => {
           </MyInfoText1>
 
           {/* 이메일 */}
-          <MyInfoText1>
+          {/* <MyInfoText1>
             <div
               style={{
                 width: "90px",
@@ -163,7 +163,7 @@ const MypageCard = (props) => {
                 }}
               ></input>
             </div>
-          </MyInfoText1>
+          </MyInfoText1> */}
           {/* 기술스택 */}
           <MyInfoText1>
             <div
@@ -171,11 +171,12 @@ const MypageCard = (props) => {
                 width: "90px",
                 marginLeft: "30px",
                 height: "80px",
+                marginTop: "20px",
               }}
             >
               <p style={{}}>TechStack </p>
             </div>
-            <Grid width="167px">
+            <Grid width="167px" margin="20px 0 0 0">
               <Select
                 isMulti
                 name="techStack"

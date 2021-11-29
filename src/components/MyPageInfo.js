@@ -75,7 +75,7 @@ const MyPageInfo = (props) => {
 
         // console.log(result);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     fetchData();
@@ -86,13 +86,13 @@ const MyPageInfo = (props) => {
     const fetchData = async () => {
       try {
         const result = await apis.getMypage(userId);
-        console.log(result);
+        // console.log(result);
         setMydata(result.data.data);
         dispatch(pageCheckAction.getPageCheck(`/mypage/${userId}`));
 
         setLoading(false);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     fetchData();
@@ -182,7 +182,7 @@ const MyPageInfo = (props) => {
                   <MypagePostList {...recruitmentProject}></MypagePostList>
                 )}
 
-                <Grid margin="0 0 0 25%" width="49%">
+                <IntroduceWrap>
                   {filter === "모집" && recruitmentProject.length === 0 && (
                     <>
                       <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
@@ -191,12 +191,12 @@ const MyPageInfo = (props) => {
                       </NoIntroductionText>
                     </>
                   )}
-                </Grid>
+                </IntroduceWrap>
 
                 {filter === "진행" && (
                   <MypagePostList {...inProgressProject}></MypagePostList>
                 )}
-                <Grid margin="0 0 0 25%" width="49%">
+                <IntroduceWrap>
                   {filter === "진행" && inProgressProject.length === 0 && (
                     <>
                       <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
@@ -205,11 +205,11 @@ const MyPageInfo = (props) => {
                       </NoIntroductionText>
                     </>
                   )}
-                </Grid>
+                </IntroduceWrap>
                 {filter === "관심" && (
                   <MypagePostList {...bookMarkProject}></MypagePostList>
                 )}
-                <Grid margin="0 0 0 25%" width="49%">
+                <IntroduceWrap>
                   {filter === "관심" && bookMarkProject.length === 0 && (
                     <>
                       <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
@@ -218,11 +218,11 @@ const MyPageInfo = (props) => {
                       </NoIntroductionText>
                     </>
                   )}
-                </Grid>
+                </IntroduceWrap>
                 {filter === "완료" && (
                   <MypagePostList {...endProject}></MypagePostList>
                 )}
-                <Grid margin="0 0 0 25%" width="49%">
+                <IntroduceWrap margin="0 0 0 25%" width="49%">
                   {filter === "완료" && endProject.length === 0 && (
                     <>
                       <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
@@ -231,7 +231,7 @@ const MyPageInfo = (props) => {
                       </NoIntroductionText>
                     </>
                   )}
-                </Grid>
+                </IntroduceWrap>
                 {filter === "소개" &&
                   mydata?.isMyMypage === true &&
                   introduction === true && (
@@ -266,7 +266,7 @@ const MyPageInfo = (props) => {
                     </Grid>
                   )}
                 </Grid>
-                <Grid margin="0 0 0 25%" width="49%">
+                <IntroduceWrap>
                   {filter === "소개" && introduction === false && (
                     <>
                       <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
@@ -298,7 +298,7 @@ const MyPageInfo = (props) => {
                       )}
                     </>
                   )}
-                </Grid>
+                </IntroduceWrap>
               </Grid>
               {/* 소개글 있거나 없거나 */}
             </Grid>
@@ -322,14 +322,31 @@ const Banner = styled.div`
 `;
 
 const FilterWrap = styled.div`
-  max-width: 1000px;
   display: flex;
   margin-left: 30%;
-  width: 39vw;
+  width: 60vw;
   z-index: 999;
 
   @media screen and (max-width: 1600px) {
-    margin-left: 34%;
+    margin-left: 35%;
+  }
+  @media screen and (max-width: 1200px) {
+    width: 90vw;
+    justify-content: center;
+    margin: auto;
+  }
+  @media screen and (max-width: 750px) {
+    width: 90vw;
+    justify-content: center;
+    margin: auto;
+  } ;
+`;
+const IntroduceWrap = styled.div`
+  margin: 0 0 0 30%;
+  width: 60vw;
+
+  @media screen and (max-width: 1600px) {
+    margin-left: 35%;
   }
   @media screen and (max-width: 1200px) {
     width: 90vw;
@@ -343,11 +360,11 @@ const FilterWrap = styled.div`
   } ;
 `;
 const NoIntroduction = styled.img`
-  width: 50%;
-  height: 50%;
+  width: 40%;
+  height: 40%;
   object-fit: cover;
   position: relative;
-  margin-left: 20%;
+  margin-left: 27%;
   display: flex;
   justify-content: center;
 `;
@@ -372,17 +389,10 @@ const NoIntroductionText2 = styled.p`
 `;
 
 const IntroduceBtn = styled.div`
-  margin: 0px 0 0 40%;
+  display: flex;
+  justify-content: center;
+  margin: auto;
   width: 150px;
-  @media screen and (max-width: 1600px) {
-    margin: 0px 0 0 38%;
-  }
-  @media screen and (max-width: 1300px) {
-    margin: 0px 0 0 38%;
-  }
-  @media screen and (max-width: 490px) {
-    display: none;
-  } ;
 `;
 
 const NoticeText = styled.div`

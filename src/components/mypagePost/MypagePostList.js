@@ -4,7 +4,11 @@ import React from "react";
 import Post from "../Post";
 import { Grid, Image } from "../../elements/Index";
 import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 const MypagePostList = (props) => {
+  const userId = useParams();
+  const myUserId = useSelector((state) => state.user.userId);
   // console.log(props);
   const mypage = true;
 
@@ -19,7 +23,15 @@ const MypagePostList = (props) => {
         <React.Fragment>
           <PostWrap>
             {newMyCards.map((p) => {
-              return <Post mypage={mypage} key={p.postId} {...p}></Post>;
+              return (
+                <Post
+                  mypage={mypage}
+                  key={p.postId}
+                  {...p}
+                  userId={userId}
+                  myUserId={myUserId}
+                ></Post>
+              );
             })}
           </PostWrap>
         </React.Fragment>

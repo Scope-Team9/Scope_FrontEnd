@@ -9,7 +9,7 @@ import { map, stubFalse } from "lodash";
 import { Grid4x4 } from "@mui/icons-material";
 import EmailAuth from "../EmailAuth";
 
-const TypeResultTest = (props) => {
+const TypeResultTest = props => {
   const [myData, setMyData] = React.useState();
   const [arr, setArr] = React.useState([
     {
@@ -124,7 +124,7 @@ const TypeResultTest = (props) => {
 
   React.useEffect(() => {
     // console.log("테스트결과", props);
-    arr.map((item) => {
+    arr.map(item => {
       if (item.id === props.myType) {
         setMyData(item);
       }
@@ -169,6 +169,7 @@ const TypeResultTest = (props) => {
             <Grid display="flex">
               <MyResultText2>{myData.text4}</MyResultText2>
             </Grid>
+
             {props.userId == props.myUserId &&
               props.mydata?.isMyMypage === true && (
                 <Grid
@@ -178,7 +179,7 @@ const TypeResultTest = (props) => {
                   height="100%"
                   position="relative"
                   margin="15px 0 0 0"
-                  width="100%"
+                  width="94%"
                   maxWidth="1150px"
                 >
                   <GotoTest
@@ -202,6 +203,7 @@ const TypeResultTest = (props) => {
                   ></EmailAuth>
                 </Grid>
               )}
+
             <Dialog scroll="paper" open={props.testmodal}>
               <TestWrap>
                 <PropensityTest TestClose={props.TestClose} />
@@ -218,8 +220,9 @@ const Wrap = styled.div`
   height: 100%;
   width: 60vw;
   margin-left: 30%;
+
   @media screen and (max-width: 1600px) {
-    margin-left: 34%;
+    margin-left: 35%;
   }
 
   @media screen and (max-width: 1200px) {

@@ -25,10 +25,10 @@ const ApplyStatusModal = props => {
     const fetchData = async () => {
       try {
         const result = await apis.applyUser(postId);
-        console.log(result);
+        // console.log(result);
         setApplyUsers(result.data.data);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     fetchData();
@@ -46,11 +46,11 @@ const ApplyStatusModal = props => {
     const fetchData = async () => {
       try {
         const result = await apis.aceeptOffer(postId, acceptInfo);
-        console.log(result);
+        // console.log(result);
         setAcceptButton(result);
         // window.alert("신청을 수락하였습니다.");
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     fetchData();
@@ -202,7 +202,7 @@ const ApplyStatusModal = props => {
                               common
                               isValue={applyedUsers[idx].userId}
                               _onClick={e => {
-                                console.log(e);
+                                // console.log(e);
                                 acceptOffer(e.target.value);
                               }}
                             >

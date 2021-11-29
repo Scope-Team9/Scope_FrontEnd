@@ -197,10 +197,10 @@ const Liked = (props) => {
                               isValue={passdedMenber[idx]?.userId}
                               _onClick={(e) => {
                                 e.stopPropagation();
-                                console.log(
-                                  likes[idx]?.userId,
-                                  likes[idx].active
-                                );
+                                // console.log(
+                                //   likes[idx]?.userId,
+                                //   likes[idx].active
+                                // );
                                 toggleLike(e.target.value);
                               }}
                             >
