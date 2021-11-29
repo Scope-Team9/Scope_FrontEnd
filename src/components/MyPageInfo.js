@@ -16,14 +16,15 @@ import Banners from "./myPage/Banners";
 import MypageCard from "./myPage/MypageCard";
 import TypeResultTest from "./myPage/TypeResultTest";
 import MypageFilter from "./myPage/MypageFilter";
+import { pageCheckAction } from "../redux/modules/pageCheck";
 
 // MyPageInfo의 함수형 컴포넌트를 만든다.
-const MyPageInfo = props => {
+const MyPageInfo = (props) => {
   const dispatch = useDispatch();
-
   const userId = props.match.params.id;
-  const myUserId = useSelector(state => state.user.userId);
 
+  const myUserId = useSelector((state) => state.user.userId);
+  const [myUrl, setMyUrl] = React.useState();
   const [filter, setFilter] = React.useState("소개");
   const [mydata, setMydata] = React.useState();
   const [editMyProfile, setEditMyProfile] = React.useState(false); // 내려줘야함
@@ -33,6 +34,11 @@ const MyPageInfo = props => {
   const myType = mydata?.user.userPropensityType;
   const [modal, setModal] = React.useState(false);
   const [testmodal, setTestModal] = React.useState(false);
+
+  const [memberId, setMemberId] = React.useState(); //멤버아이디
+  const [writerEquals, setWriterEquals] = React.useState(); //포스트의 작성자확인
+
+  const pageCheck = useSelector((state) => state.pagecheck.pageGo);
 
   //click
   const introduction = mydata?.user.introduction ? true : false;
@@ -44,7 +50,7 @@ const MyPageInfo = props => {
 
   const [loading, setLoading] = React.useState(true);
 
-  const SetFilter = data => {
+  const SetFilter = (data) => {
     setFilter(data);
   };
 
@@ -53,41 +59,44 @@ const MyPageInfo = props => {
     // console.log(editMyProfile);
     // setEmail(null);
     // setNickName(null);
+    // console.log(pageCheck);
 
     dispatch(postActions.isMainPage(false));
     dispatch(postActions.whatPage("myPage"));
     const fetchData = async () => {
       try {
         const result = await apis.getMypage(userId);
-        console.log(result);
+        // console.log("마이페이지 몇번?", result);
         // setMydata(result.data.data);
         setNickName(result.data.data.user.nickname);
         setEmail(result.data.data.user.email);
         setTeckstack(result.data.data.user.techStackList);
         setLoading(false);
+
         // console.log(result);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     fetchData();
-    console.log(mydata);
+    // console.log(mydata);
   }, [editMyProfile, testmodal]);
 
   React.useLayoutEffect(() => {
     const fetchData = async () => {
       try {
         const result = await apis.getMypage(userId);
-        console.log(result);
+        // console.log(result);
         setMydata(result.data.data);
+        dispatch(pageCheckAction.getPageCheck(`/mypage/${userId}`));
 
         setLoading(false);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     fetchData();
-    console.log(mydata);
+    // console.log(mydata);
   }, [filter]);
 
   const EmailConfirm = () => {
@@ -109,6 +118,8 @@ const MyPageInfo = props => {
   const editProfileCancle = () => {
     setEditMyProfile(false);
   };
+
+  React.useLayoutEffect(() => {}, [props.goMypage]);
 
   return (
     <Grid margin="0 0 250px 0">
@@ -139,6 +150,7 @@ const MyPageInfo = props => {
                       EditTest={EditTest}
                       TestClose={TestClose}
                       setModal={setModal}
+                      nickName={nickName}
                       modal={modal}
                       onClick={() => {
                         EmailConfirm();
@@ -171,7 +183,7 @@ const MyPageInfo = props => {
                   <MypagePostList {...recruitmentProject}></MypagePostList>
                 )}
 
-                <Grid margin="0 0 0 25%" width="49%">
+                <IntroduceWrap>
                   {filter === "모집" && recruitmentProject.length === 0 && (
                     <>
                       <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
@@ -180,13 +192,13 @@ const MyPageInfo = props => {
                       </NoIntroductionText>
                     </>
                   )}
-                </Grid>
+                </IntroduceWrap>
 
-                {filter === "진행중" && (
+                {filter === "진행" && (
                   <MypagePostList {...inProgressProject}></MypagePostList>
                 )}
-                <Grid margin="0 0 0 25%" width="49%">
-                  {filter === "진행중" && inProgressProject.length === 0 && (
+                <IntroduceWrap>
+                  {filter === "진행" && inProgressProject.length === 0 && (
                     <>
                       <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
                       <NoIntroductionText>
@@ -194,11 +206,11 @@ const MyPageInfo = props => {
                       </NoIntroductionText>
                     </>
                   )}
-                </Grid>
+                </IntroduceWrap>
                 {filter === "관심" && (
                   <MypagePostList {...bookMarkProject}></MypagePostList>
                 )}
-                <Grid margin="0 0 0 25%" width="49%">
+                <IntroduceWrap>
                   {filter === "관심" && bookMarkProject.length === 0 && (
                     <>
                       <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
@@ -207,11 +219,11 @@ const MyPageInfo = props => {
                       </NoIntroductionText>
                     </>
                   )}
-                </Grid>
+                </IntroduceWrap>
                 {filter === "완료" && (
                   <MypagePostList {...endProject}></MypagePostList>
                 )}
-                <Grid margin="0 0 0 25%" width="49%">
+                <IntroduceWrap margin="0 0 0 25%" width="49%">
                   {filter === "완료" && endProject.length === 0 && (
                     <>
                       <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
@@ -220,7 +232,7 @@ const MyPageInfo = props => {
                       </NoIntroductionText>
                     </>
                   )}
-                </Grid>
+                </IntroduceWrap>
                 {filter === "소개" &&
                   mydata?.isMyMypage === true &&
                   introduction === true && (
@@ -255,31 +267,39 @@ const MyPageInfo = props => {
                     </Grid>
                   )}
                 </Grid>
-                <Grid margin="0 0 0 25%" width="49%">
+                <IntroduceWrap>
                   {filter === "소개" && introduction === false && (
                     <>
                       <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
                       <NoIntroductionText>
                         작성된 소개가 없네요.
                       </NoIntroductionText>
+                      <NoIntroductionText2>
+                        소개글 작성은 PC환경에서 가능합니다.
+                      </NoIntroductionText2>
                       {mydata?.isMyMypage === true && (
-                        <IntroduceBtn>
-                          <Button
-                            _onClick={() => {
-                              history.push({
-                                pathname: "/addmarkdown",
-                                state: { userId: userId },
-                              });
-                            }}
-                          >
-                            {" "}
-                            소개글 작성하기
-                          </Button>
-                        </IntroduceBtn>
+                        <>
+                          <IntroduceBtn>
+                            <Button
+                              _onClick={() => {
+                                history.push({
+                                  pathname: "/addmarkdown",
+                                  state: { userId: userId },
+                                });
+                              }}
+                            >
+                              {" "}
+                              소개글 작성하기
+                            </Button>
+                          </IntroduceBtn>
+                          {/* <NoticeText>
+                            소개 작성은 PC환경에서 작성 가능합니다.
+                          </NoticeText> */}
+                        </>
                       )}
                     </>
                   )}
-                </Grid>
+                </IntroduceWrap>
               </Grid>
               {/* 소개글 있거나 없거나 */}
             </Grid>
@@ -303,14 +323,31 @@ const Banner = styled.div`
 `;
 
 const FilterWrap = styled.div`
-  max-width: 1000px;
   display: flex;
   margin-left: 30%;
-  width: 39vw;
+  width: 60vw;
   z-index: 999;
 
   @media screen and (max-width: 1600px) {
-    margin-left: 34%;
+    margin-left: 35%;
+  }
+  @media screen and (max-width: 1200px) {
+    width: 90vw;
+    justify-content: center;
+    margin: auto;
+  }
+  @media screen and (max-width: 750px) {
+    width: 90vw;
+    justify-content: center;
+    margin: auto;
+  } ;
+`;
+const IntroduceWrap = styled.div`
+  margin: 0 0 0 30%;
+  width: 60vw;
+
+  @media screen and (max-width: 1600px) {
+    margin-left: 35%;
   }
   @media screen and (max-width: 1200px) {
     width: 90vw;
@@ -324,11 +361,11 @@ const FilterWrap = styled.div`
   } ;
 `;
 const NoIntroduction = styled.img`
-  width: 50%;
-  height: 50%;
+  width: 40%;
+  height: 40%;
   object-fit: cover;
   position: relative;
-  margin-left: 20%;
+  margin-left: 27%;
   display: flex;
   justify-content: center;
 `;
@@ -340,18 +377,35 @@ const NoIntroductionText = styled.p`
   display: flex;
   justify-content: center;
 `;
+const NoIntroductionText2 = styled.p`
+  display: none;
+  @media screen and (max-width: 375px) {
+    color: #737373;
+    font-size: 12px;
+    width: auto;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  } ;
+`;
 
 const IntroduceBtn = styled.div`
-  margin: 0px 0 0 40%;
+  display: flex;
+  justify-content: center;
+  margin: auto;
   width: 150px;
-  @media screen and (max-width: 1600px) {
-    margin: 0px 0 0 38%;
+`;
+
+const NoticeText = styled.div`
+  color: #737373;
+  font-size: 12px;
+
+  @media screen and (min-width: 490px) {
+    color: #737373;
+    font-size: 12px;
   }
-  @media screen and (max-width: 1300px) {
-    margin: 0px 0 0 38%;
-  }
-  @media screen and (max-width: 750px) {
-    margin: auto;
+  @media screen and (min-width: 491px) {
+    display: none;
   } ;
 `;
 

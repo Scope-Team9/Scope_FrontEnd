@@ -10,19 +10,18 @@ import { Grid, Text } from "../../../elements/Index";
 const ContentWrite = (props) => {
   return (
     <React.Fragment>
-      <Grid margin="20px auto">
-        <ContentMedia>
-          <Text size="18px" bold>
-            프로젝트 내용적기
-          </Text>
+      <ContentMedia>
+        <Grid margin="10px auto">
+          <Text>프로젝트 내용적기</Text>
+
           <TextArea
             placeholder="프로젝트 내용을 입력해주세요."
             onChange={(e) => {
               props.setContents(e.target.value);
             }}
           ></TextArea>
-        </ContentMedia>
-      </Grid>
+        </Grid>
+      </ContentMedia>
     </React.Fragment>
   );
 };
@@ -30,19 +29,25 @@ const ContentWrite = (props) => {
 // styled-components
 const TextArea = styled.textarea`
   width: 98%;
-  height: 440px;
+  height: 500px;
   padding: 10px;
   margin: 4px auto;
   border: 1px solid #c4c4c4;
   border-radius: 10px;
-  font-size: 16px;
   outline: none;
+  @media screen and (max-width: 600px) {
+    height: 200px;
+  }
 `;
 
 const ContentMedia = styled.div`
-  @media screen and (max-width: 360px) {
+  @media screen and (max-width: 600px) {
     width: 350px;
-    margin: auto;
+    font-size: 10px;
+  }
+  @media screen and (max-width: 500px) {
+    width: 330px;
+    font-size: 10px;
   }
 `;
 

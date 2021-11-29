@@ -129,13 +129,13 @@ const Stack = (props) => {
       dispatch(stackAction.getStack2(item.id));
     }
 
-    console.log("dodo", stack2);
+    // console.log("dodo", stack2);
   };
 
   const arrStack = (item) => {
     const nowStack = props.stacks;
     const alreadyChecked = nowStack.find((p) => p === item.id);
-    console.log(alreadyChecked);
+    // console.log(alreadyChecked);
     if (!alreadyChecked) {
       props.setStacks(nowStack.concat(item.id));
     }
@@ -144,7 +144,7 @@ const Stack = (props) => {
       props.setStacks(deleteCheck);
     }
 
-    console.log(nowStack);
+    // console.log(nowStack);
   };
 
   return (

@@ -4,22 +4,34 @@ import React from "react";
 import Post from "../Post";
 import { Grid, Image } from "../../elements/Index";
 import styled from "styled-components";
-const MypagePostList = props => {
-  console.log(props);
+import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+const MypagePostList = (props) => {
+  const userId = useParams();
+  const myUserId = useSelector((state) => state.user.userId);
+  // console.log(props);
   const mypage = true;
 
   const myCards = props;
   const newMyCards = Object.values(myCards);
-  console.log(myCards);
-  console.log(newMyCards);
+  // console.log(myCards);
+  // console.log(newMyCards);
 
   return (
     <>
       {newMyCards && (
         <React.Fragment>
           <PostWrap>
-            {newMyCards.map(p => {
-              return <Post mypage={mypage} key={p.postId} {...p}></Post>;
+            {newMyCards.map((p) => {
+              return (
+                <Post
+                  mypage={mypage}
+                  key={p.postId}
+                  {...p}
+                  userId={userId}
+                  myUserId={myUserId}
+                ></Post>
+              );
             })}
           </PostWrap>
         </React.Fragment>

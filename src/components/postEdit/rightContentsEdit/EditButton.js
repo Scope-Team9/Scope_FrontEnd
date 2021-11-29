@@ -10,15 +10,17 @@ import { Grid } from "../../../elements/Index";
 const EditButton = (props) => {
   return (
     <React.Fragment>
-      <Grid display="flex" padding="16px">
-        <Btn
-          onClick={() => {
-            props.editHandler();
-          }}
-        >
-          포스트수정 완료
-        </Btn>
-      </Grid>
+      <EditMedia>
+        <Grid display="flex" padding="16px">
+          <Btn
+            onClick={() => {
+              props.editHandler();
+            }}
+          >
+            포스트수정 완료
+          </Btn>
+        </Grid>
+      </EditMedia>
     </React.Fragment>
   );
 };
@@ -30,18 +32,24 @@ const Btn = styled.button`
   align-items: center;
   width: 140px;
   height: 35px;
-  border: 1px solid #554475;
+  border: 1px solid #bbb4d9;
   border-radius: 50px;
   color: #fff;
   background: white;
-  color: #554475;
+  color: black;
   margin: 10px auto 10px auto;
   cursor: pointer;
   &:hover {
     color: white;
-    background-color: #554475;
+    background-color: #bbb4d9;
     border: 1px solid;
     transition-duration: 1s;
+  }
+`;
+
+const EditMedia = styled.div`
+  display: flex;
+  @media screen and (max-width: 600px) {
   }
 `;
 

@@ -36,7 +36,7 @@ const PropensityTest = props => {
 
   //스텝별로 스테이트 변화값에 따라 텍스트가 바뀌는지 먼저 확인
   const [page, setpage] = useState(1);
-  console.log(page, TestData.teststep);
+  // console.log(page, TestData.teststep);
 
   // 최종 장소
   const [userPropensityType, setUserPropensityType] = useState([]);
@@ -48,11 +48,11 @@ const PropensityTest = props => {
   //자식요소의 밸류값을 가져와 임시에 저장
   const handleUserCreate = answer => {
     setPreUserPropensityType(answer);
-    console.log("나의항목 임시저장", answer);
+    // console.log("나의항목 임시저장", answer);
   };
   const handleMemberCreate = answer => {
     setPreMemberPropensityType(answer);
-    console.log("상대방의 항목 임시저장", answer);
+    // console.log("상대방의 항목 임시저장", answer);
   };
 
   //스테이트값에 변화를 버튼에 달아줌
@@ -61,7 +61,7 @@ const PropensityTest = props => {
     //나에대한 항목
     let preMy = userPropensityType;
     let preYou = memberPropensityType;
-    console.log(preUserPropensityType, preMemberPropensityType);
+    // console.log(preUserPropensityType, preMemberPropensityType);
 
     if (preUserPropensityType === "" || preMemberPropensityType === "") {
       return window.alert("문항을 선택해주세요!");
@@ -76,12 +76,12 @@ const PropensityTest = props => {
       setPreMemberPropensityType("");
       preMy.push(preUserPropensityType);
       setUserPropensityType(preMy);
-      console.log("내꺼 잘 들어감?", userPropensityType);
+      // console.log("내꺼 잘 들어감?", userPropensityType);
       //상대에 다한 항목
 
       preYou.push(preMemberPropensityType);
       setMemberPropensityType(preYou);
-      console.log("너꺼 잘 들어감?", memberPropensityType);
+      // console.log("너꺼 잘 들어감?", memberPropensityType);
     }
   };
 
@@ -93,12 +93,12 @@ const PropensityTest = props => {
     let toPopMy = userPropensityType;
     toPopMy.pop();
     setUserPropensityType(toPopMy);
-    console.log("마지막 항목이 사라짐?", userPropensityType);
+    // console.log("마지막 항목이 사라짐?", userPropensityType);
     //이전으로 가면 마지막 항목 제거 (상대방의 것)
     let topopYou = memberPropensityType;
     topopYou.pop();
     setMemberPropensityType(topopYou);
-    console.log("마지막 항목이 사라짐?", memberPropensityType);
+    // console.log("마지막 항목이 사라짐?", memberPropensityType);
   };
 
   //회원가입
@@ -109,13 +109,13 @@ const PropensityTest = props => {
     let preMy = userPropensityType;
     preMy.push(preUserPropensityType);
     setUserPropensityType(preMy);
-    console.log("내꺼 잘 들어감?", userPropensityType);
+    // console.log("내꺼 잘 들어감?", userPropensityType);
 
     //상대에 다한 항목
     let preYou = memberPropensityType;
     preYou.push(preMemberPropensityType);
     setMemberPropensityType(preYou);
-    console.log("너꺼 잘 들어감?", memberPropensityType);
+    // console.log("너꺼 잘 들어감?", memberPropensityType);
 
     let realSnsId = String(userInfo.snsId);
     let realUserId = userInfo.userId;
@@ -132,13 +132,10 @@ const PropensityTest = props => {
       userPropensityType: userPropensityType,
       memberPropensityType: memberPropensityType,
     };
-    console.log(realSnsId, registerInfo);
-    console.log(realUserId, testUpdateInfo);
-    console.log(isToken);
+
     if (isToken) {
-      setpage(page => page + 1);
       dispatch(userCreators.editTestMiddleware(realUserId, testUpdateInfo));
-      return;
+      return setpage(page => page + 1);
     } else {
       dispatch(userCreators.signupMiddleware(registerInfo));
       setpage(page => page + 1);
@@ -148,62 +145,63 @@ const PropensityTest = props => {
   const exitResult = () => {
     dispatch(userCreators.modal());
     history.push("/");
+    props.TestClose();
   };
 
   return (
-    <TestWrap>
+    <Grid>
       {/* 상단헤더 */}
-      <Grid
-        height="10%"
-        bg="#17334A"
-        position="relative"
-        textAlign="center"
-        padding="10px 0 10px 0"
-      >
-        <Grid
+      <Header>
+        <CloseBox
           position="absolute"
-          top="0px"
+          top="5px"
           right="10px"
           width="20px"
           padding="10px"
+          height="100%"
+          bg="111"
         >
           <CloseIcon
-            sx={{ color: "#fff", fontSize: 35 }}
-            onClick={props.TestClose}
+            sx={{ color: "#fff", fontSize: 30 }}
+            onClick={() => {
+              props.TestClose();
+              window.location.reload();
+            }}
             cursor="pointer"
           />
-        </Grid>
+        </CloseBox>
         <Grid
           display="flex"
           justifyContent="center"
           alignItems="center"
-          height="40px"
+          height="100%"
         >
           <Text size="20px" bold color="#fff">
             협업테스트
           </Text>
         </Grid>
-      </Grid>
+      </Header>
       {/* 프로그래스바 */}
-      <Grid width="70%" margin="20px auto">
+      <Grid width="70%" margin="15px auto" height="10%">
         <Progress page={page} />
       </Grid>
-      <Grid display="flex" justifyContent="center" margin="10px 0">
+      {/* 이미지결과 */}
+      <StepImgBox>
         {TestData.teststep.map(step => {
           if (step.step === page) {
-            return <img width="40%" src={step.img} />;
+            return <TestImg key={step.step} src={step.img} />;
           }
         })}
         {page === 10 &&
           TestData.testresult.map(result => {
             if (result.type === userType) {
-              return <img width="50%" src={result.img} />;
+              return <img key={result.type} width="40%" src={result.img} />;
             }
           })}
-      </Grid>
+      </StepImgBox>
 
       {/* 컨텐츠자리 */}
-      <Grid height="15%" width="90%" margin="auto">
+      <Grid width="90%" margin="auto" height="42%">
         {page === 1 && (
           <TestOne
             handleUserCreate={handleUserCreate}
@@ -260,12 +258,12 @@ const PropensityTest = props => {
         )}
         {page === 10 && <TestResult userType={userType} />}
       </Grid>
-
+      {/* 버튼 */}
       <Grid
         display="flex"
         width="90%"
         justifyContent="center"
-        height="100%"
+        height="8%"
         margin="30px auto"
       >
         {/* 5.다음결과값이 없을때 페이지처리 */}
@@ -285,19 +283,60 @@ const PropensityTest = props => {
           </Button>
         )}
         {page == 10 && (
-          <Button common width="90%" margin="5px" _onClick={exitResult}>
+          <Button
+            common
+            fontSize="11px"
+            width="80%"
+            margin="5px"
+            _onClick={exitResult}
+          >
             내 성향에 맞는 팀원을 찾으러 가볼까요?
           </Button>
         )}
       </Grid>
-    </TestWrap>
+    </Grid>
   );
 };
 
-const TestWrap = styled.div`
-  width: 100%;
-  @media (width: 550px) {
-    width: 90vw;
+const StepImgBox = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+  height: 25%;
+  @media (max-width: 650px) {
+    height: 15%;
   }
 `;
+
+const TestImg = styled.img`
+  width: 40%;
+  height: 40%;
+  @media (max-width: 650px) {
+    width: 30%;
+    height: 100%;
+  }
+`;
+const Header = styled.div`
+  height: 50px;
+  background-color: #17334a;
+  position: relative;
+  text-align: center;
+  padding: 10px 0 10px 0;
+  @media (max-width: 650px) {
+    height: 25px;
+  }
+`;
+
+const CloseBox = styled.div`
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  width: 20px;
+  padding: 10px;
+  height: 100%;
+  @media (max-width: 650px) {
+    top: -4px;
+  }
+`;
+
 export default PropensityTest;

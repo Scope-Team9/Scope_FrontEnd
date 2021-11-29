@@ -22,7 +22,7 @@ import { history } from "../redux/configureStore";
 
 export default function Writer(props) {
   const dispatch = useDispatch();
-  console.log(props);
+  // console.log(props);
   // const editorRef = createRef();
   const editorRef = useRef();
 
@@ -83,7 +83,7 @@ export default function Writer(props) {
       const base64 = reader.result;
       // console.log(base64);
       setImgBase64(base64);
-      console.log("1차 관문", imgBase64);
+      // console.log("1차 관문", imgBase64);
 
       const upload = async () => {
         // console.log("2차 관문", base64);
@@ -127,17 +127,17 @@ export default function Writer(props) {
     const fetchData = async () => {
       try {
         const result = await apis.getMypage(userId);
-        console.log(result);
+        // console.log(result);
         setMydata(result.data.data);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     fetchData();
   }, []);
 
   const onChangeEditorTextHandler = () => {
-    console.log(editorRef.current.getInstance().getMarkdown());
+    // console.log(editorRef.current.getInstance().getMarkdown());
     setText(editorRef.current.getInstance().getMarkdown());
   };
 
@@ -147,11 +147,11 @@ export default function Writer(props) {
         // console.log(props[0]);
         const userId = props.location.state.userId;
         const result = await apis.writeMyIntroduction(userId, text);
-        console.log(result);
+        // console.log(result);
         history.push(`/mypage/${userId}`);
       } catch (err) {
         const userId = props.location.state.userId;
-        console.log(err);
+        // console.log(err);
         // window.alert("작성 형식이 올바르지 않습니다.");
         Swal.fire("내용이 같거나 없습니다!", "", "question");
       }
@@ -159,7 +159,7 @@ export default function Writer(props) {
     writing();
   };
   const introduction = mydata?.user.introduction;
-  console.log(introduction);
+  // console.log(introduction);
   return (
     <>
       {introduction === null && (
@@ -212,7 +212,7 @@ export default function Writer(props) {
           ></Editor>
           <Grid display="flex" margin="0 0 0 72% ">
             <Button
-              width="10%"
+              width="100px"
               height="50px"
               margin="20px"
               _onClick={() => {
@@ -222,7 +222,7 @@ export default function Writer(props) {
               뒤로가기
             </Button>
             <Button
-              width="10%"
+              width="100px"
               height="50px"
               margin="20px"
               _onClick={() => {
@@ -254,9 +254,9 @@ export default function Writer(props) {
               },
             }}
           ></Editor>
-          <Grid display="flex" margin="0 0 0 72% ">
+          <Grid display="flex" margin="0 0 0 2% ">
             <Button
-              width="10%"
+              width="100px"
               height="50px"
               margin="20px"
               _onClick={() => {
@@ -266,7 +266,7 @@ export default function Writer(props) {
               뒤로가기
             </Button>
             <Button
-              width="10%"
+              width="100px"
               height="50px"
               margin="20px"
               _onClick={() => {

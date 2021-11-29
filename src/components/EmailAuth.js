@@ -1,13 +1,16 @@
+/* eslint-disable */
 import React from "react";
 import { Grid, Button, Input, Text } from "../elements/Index";
 import styled from "styled-components";
 import { Dialog } from "@material-ui/core";
 import CloseIcon from "@mui/icons-material/Close";
 import { apis } from "../lib/axios";
+import Swal from "sweetalert2";
 
 const EmailAuth = (props) => {
   const [email, setEmail] = React.useState();
   const { modal, setModal } = props;
+  // console.log(props);
   const modalClose = () => {
     setModal(false);
   };
@@ -15,20 +18,22 @@ const EmailAuth = (props) => {
   const EmailInput = (data) => {
     setEmail(data);
   };
+
   const EmailSend = () => {
     const fetchData = async () => {
       const result = await apis.authEmail(email);
       try {
-        console.log(result);
-        window.alert(result.data.msg);
+        props.setModal();
+        // window.alert(result.data.msg);
+        Swal.fire(`${result.data.msg}`, "", "success");
       } catch (err) {
-        console.log(err.response);
+        // console.log(err.response);
       }
     };
     fetchData();
   };
   return (
-    <Dialog maxWidth={"sm"} scroll="paper" open={modal}>
+    <Dialog maxWidth={"sm"} scroll="paper" open={modal} onClose={modalClose}>
       <ModalWrap>
         <Grid>
           {/* 헤더 */}
@@ -50,7 +55,7 @@ const EmailAuth = (props) => {
               <CloseIcon fontSize="large" onClick={modalClose} />
             </Grid>
             <Grid margin="20px 0 0 0">
-              <Text size="30px" bold color="#08061D">
+              <Text size="30px" bold="bold" color="#08061D">
                 이메일 인증
               </Text>
             </Grid>
@@ -62,20 +67,21 @@ const EmailAuth = (props) => {
             <Input
               padding="10px"
               placeholder="이메일을 입력해 주세요."
-              margin="10px 0 0 18%"
+              margin="10px 0 0 16%"
               fontSize="15px"
               border="1px solid #C9C9C9"
               borderRadius="8px"
-              width="320px"
+              width="70%"
+              height="40px"
               _onChange={(e) => {
                 EmailInput(e.target.value);
               }}
             ></Input>
 
             <Button
-              width="320px"
+              width="70%"
               height="50px"
-              margin="-90px 0 0 18%"
+              margin="-90px 0 0 16%"
               _onClick={() => {
                 EmailSend();
               }}
@@ -93,6 +99,10 @@ const ModalWrap = styled.div`
   width: 500px;
   height: 300px;
   border-radius: 20px;
+  @media screen and (max-width: 560px) {
+    width: 300px;
+    height: 280px;
+  } ;
 `;
 const Dec = styled.p`
   color: #08061d;

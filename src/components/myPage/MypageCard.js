@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 import { apis } from "../../lib/axios";
 import CardUserInfo from "./card/CardUserInfo";
 
-const MypageCard = props => {
+const MypageCard = (props) => {
   const [editMyProfile, setEditMyProfile] = React.useState(false); //
   const [checkEmail, setCheckEmail] = React.useState();
   const [deleteModal, setDeleteModal] = React.useState(false);
@@ -33,28 +33,31 @@ const MypageCard = props => {
   function fn_submit(data) {
     let userData = {
       nickname: nickName,
-      email: email,
+      // email: email,
       userTechStack: techStack,
     };
 
     const fetchData = async () => {
       try {
-        console.log(userData);
+        // console.log(userData);
         const result = await apis.editUserInfo(props.userId, userData);
         // console.log(result);
         setEditMyProfile(false);
         props.onClick2();
         Swal.fire("수정 완료!", "", "success");
       } catch (err) {
-        console.log(err.response);
+        // console.log(err.response);
       }
     };
     fetchData();
   }
 
   const setEditProfile = () => {
-    if (techStack.length > 4) {
-      Swal.fire("기술은 4개 까지 선택 가능합니다.", "", "warning");
+    if (nickName.length < 2 || nickName.length > 5) {
+      Swal.fire("닉네임은 2자~5자 까지 입력 가능합니다.", "", "warning");
+    }
+    if (techStack.length > 8) {
+      Swal.fire("기술은 7개 까지 선택 가능합니다.", "", "warning");
       return;
     }
     fn_submit(email);
@@ -71,7 +74,7 @@ const MypageCard = props => {
     { value: "Python", label: "Python" },
     { value: "Spring", label: "Spring" },
     { value: "Node", label: "Node" },
-    { value: "cpp", label: "C++" },
+    { value: "C++", label: "C++" },
     { value: "Flask", label: "Flask" },
     { value: "Django", label: "Django" },
     { value: "Vue", label: "Vue" },
@@ -124,7 +127,7 @@ const MypageCard = props => {
                   padding: "7px",
                 }}
                 defaultValue={props.nickName}
-                onChange={e => {
+                onChange={(e) => {
                   setNickName(e.target.value);
                 }}
               ></input>
@@ -132,7 +135,7 @@ const MypageCard = props => {
           </MyInfoText1>
 
           {/* 이메일 */}
-          <MyInfoText1>
+          {/* <MyInfoText1>
             <div
               style={{
                 width: "90px",
@@ -158,12 +161,12 @@ const MypageCard = props => {
                   padding: "7px",
                 }}
                 defaultValue={props.email}
-                onChange={e => {
+                onChange={(e) => {
                   setEmail(e.target.value);
                 }}
               ></input>
             </div>
-          </MyInfoText1>
+          </MyInfoText1> */}
           {/* 기술스택 */}
           <MyInfoText1>
             <div
@@ -171,11 +174,12 @@ const MypageCard = props => {
                 width: "90px",
                 marginLeft: "30px",
                 height: "80px",
+                marginTop: "20px",
               }}
             >
               <p style={{}}>TechStack </p>
             </div>
-            <Grid width="167px">
+            <Grid width="167px" margin="20px 0 0 0">
               <Select
                 isMulti
                 name="techStack"
@@ -183,7 +187,7 @@ const MypageCard = props => {
                 styles={styles}
                 className="basic-multi-select"
                 classNamePrefix="select"
-                onChange={e => {
+                onChange={(e) => {
                   let techStack = [];
                   let arr = e;
                   let idx = 0;
@@ -217,14 +221,14 @@ const MypageCard = props => {
 
           <div style={{ display: "flex" }}>
             <Button
-              margin="15px auto 15px 10%"
+              margin="15px auto 15px 6%"
               height="40px"
               width="132px"
               text="프로필 저장하기"
               _onClick={setEditProfile}
             ></Button>
             <Button
-              margin="15px auto 15px -9%"
+              margin="15px auto 15px -4%"
               height="40px"
               width="132px"
               text="취소하기"
@@ -284,7 +288,7 @@ const Line = styled.hr`
   color: black;
 `;
 const Exit = styled.button`
-  margin: 0px auto 15px 30%;
+  margin: 0px auto 15px 28%;
   height: 40px;
   width: 132px;
   background-color: white;

@@ -20,6 +20,7 @@ import MarkdownRead from "../components/MarkdownRead";
 import Header from "../components/Header";
 import Message from "../components/headerFunction/Message";
 import Footer from "../components/Footer";
+import NotFound from "../shared/NotFound";
 
 //테스트용입니다.
 import PropensityTest from "../components/propensityTest/PropensityTest";
@@ -30,27 +31,25 @@ function App() {
   const isCookie = document.cookie.split("=")[1];
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     if (isCookie) {
       dispatch(userCreators.myUserAPI());
     }
-  }, [isLogin, userInfo.userPropensityType]);
+  }, [isLogin, isCookie]);
 
   return (
     <React.Fragment>
       <div className="App">
         <Header />
-
         <ConnectedRouter history={history}>
           <Switch>
             <Route path="/" exact component={MainPage}></Route>
-            <Route path="/message" exact component={Message}></Route>
+            {/* <Route path="/message" exact component={Message}></Route> */}
             <Route path="/mypage/:id" exact component={MyPageInfo}></Route>
             <Route path="/postadd" exact component={PostWrite}></Route>
             <Route path="/postedit/:id" exact component={PostEdit}></Route>
             <Route path="/addmarkdown" exact component={Markdown}></Route>
             <Route path="/postdetail/:id" exact component={PostDetail}></Route>
-
             <Route
               path="/user/kakao/callback"
               exact
@@ -61,6 +60,7 @@ function App() {
               exact
               component={GitHubRedirect}
             ></Route>
+            <Route component={NotFound}></Route>
           </Switch>
         </ConnectedRouter>
         <Footer userInfo={userInfo} />

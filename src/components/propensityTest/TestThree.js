@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 import TestData from "./Testdata.json";
 import { Grid, Button, Text } from "../../elements/Index";
@@ -12,7 +13,7 @@ const TestThree = props => {
   );
 
   const clickUser = btnUserId => {
-    console.log(btnUserId);
+    // console.log(btnUserId);
     setNowClickU(state => {
       return state.map(stateItem => {
         if (stateItem.id === btnUserId) {
@@ -51,36 +52,39 @@ const TestThree = props => {
   };
 
   return (
-    <Grid>
+    <Grid height="100%">
       <Grid display="flex" flexDirection="column">
-        <Grid margin="20px 0">
-          <Grid>
-            Q3. <b>나는 큰 보상과 무거운 책임</b>보다는{" "}
-            <b>평범한 보상과 책임</b>이 더 좋다.
-            {nowClickU.map((btn, idx) => (
-              <Grid key={btn.id} {...btn}>
-                <Button
-                  isId={btn.id}
-                  isValue={btn.value}
-                  isTest
-                  text={btn.text}
-                  isActive={btn.active}
-                  _onClick={e => {
-                    clickUser(e.target.id);
-                    handleUserCreate(e.target.value);
-                  }}
-                ></Button>
-              </Grid>
-            ))}
+        <Grid margin="0 0 10px 0" height="50%">
+          <Grid height="14%" margin="0 0 10px 0">
+            <Text>
+              Q3. <b>나는 큰 보상과 무거운 책임</b>보다는{" "}
+              <b>평범한 보상과 책임</b>이 더 좋다.
+            </Text>
           </Grid>
+          {nowClickU.map((btn, idx) => (
+            <Grid height="38%" key={btn.id} {...btn}>
+              <Button
+                isId={btn.id}
+                isValue={btn.value}
+                isTest
+                text={btn.text}
+                isActive={btn.active}
+                _onClick={e => {
+                  clickUser(e.target.id);
+                  handleUserCreate(e.target.value);
+                }}
+              ></Button>
+            </Grid>
+          ))}
         </Grid>
-        <Grid>
-          <Grid>
+
+        <Grid height="50%">
+          <Grid margin="5px 0" height="14%" margin="0 0 10px 0">
             Q3. <b>내 팀원은 큰 보상과 무거운 책임</b>보다는{" "}
             <b>평범한 보상과 책임을 더 좋아했으면</b> 좋겠다.
           </Grid>
           {nowClickMB.map((btn, idx) => (
-            <Grid key={btn.id} {...btn}>
+            <Grid height="38%" key={btn.id} {...btn}>
               <Button
                 isId={btn.id}
                 isValue={btn.value}

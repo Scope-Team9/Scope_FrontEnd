@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../../lib/axios";
@@ -29,11 +30,11 @@ export const addPostAPI = (card) => {
     apis
       .addPost(card)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         history.goBack();
       })
       .catch((err) => {
-        console.log(err.response);
+        // console.log(err.response);
       });
     dispatch(addPosts(card));
   };

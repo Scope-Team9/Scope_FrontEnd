@@ -17,13 +17,17 @@ import { Tune } from "@material-ui/icons";
 import { useHistory } from "react-router";
 import Sort from "../components/filter/Sort";
 import { apis } from "../lib/axios";
-
+import useScrollMove from "../components/useScrollMove";
+import Spinner from "../shared/Spinner";
 const MainPage = () => {
+  // const { scrollOnceMove } = useScrollMove();
+  // let refs = React.useRef();
+
   const dispatch = useDispatch();
   const history = useHistory();
   const stack = useSelector((state) => state.stack.stack);
   const sortC = useSelector((state) => state.sort.sort);
-
+  const isToken = document.cookie;
   // const cards = useSelector((state) => state.post.posts);
   // console.log(cards);
   const reBookC = useSelector((state) => state.rebook.reBook);
@@ -45,23 +49,23 @@ const MainPage = () => {
   const isLoginUser = useSelector((state) => state.user.userId);
   const isLogin = useSelector((state) => state.user.isLogin);
 
+  // let container = React.useRef();
   React.useLayoutEffect(() => {
     setPost();
     dispatch(postActions.whatPage("mainPage"));
-    // dispatch(postActions.getPostAPI());
-    // console.log(cards);
-    console.log("이러다 다 죽어");
+
     const fetchData = async () => {
       try {
         const result = await apis.getPost(stack, sortC, reBookC);
         setPost(result.data.data);
-        console.log(result);
+        // console.log(result);
+        // container.current.scrollTo(0, lastScroll);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     fetchData();
-  }, [sortC, reBookC, Render, isLogin, Render]);
+  }, [sortC, reBookC, Render, isToken, Render]);
 
   // React.useLayoutEffect(() => {
   //   dispatch(postActions.whatPage("mainPage"));
@@ -71,7 +75,6 @@ const MainPage = () => {
   //   // console.log(post);
   // }, [sortC, stack, reBookC, Render, isLogin]);
   // stack, sortC, reBookC, Render, isLogin
-  // 요청에 대한 속도가 다를때. 다른것이 띄워질 수 있는 버그성.
 
   React.useEffect(() => {
     if (inView === true) {
@@ -93,25 +96,30 @@ const MainPage = () => {
     );
   };
 
-  const lastScroll = useSelector((state) => state.infinity.current_scroll);
-  let timer;
-  const scroll = (e) => {
-    console.log(e);
-    if (timer) {
-      clearTimeout(timer);
-    }
-    timer = setTimeout(function () {
-      dispatch(pageAction.getScroll(e.target.scrollTop));
-    }, 500);
-  };
+  // const lastScroll = useSelector((state) => state.infinity.current_scroll);
+  // let timer;
+  // const scroll = (e) => {
+  //   console.log(e);
+  //   if (timer) {
+  //     clearTimeout(timer);
+  //   }
+  //   timer = setTimeout(function () {
+  //     dispatch(pageAction.getScroll(e.target.scrollTop));
+  //   }, 500);
+  // };
 
-  const container = React.useRef(null);
-  React.useEffect(() => {
-    container.current.scrollTo(0, lastScroll);
-  }, []);
+  // React.useEffect(() => {
+
+  // }, []);
+  // onScroll={scroll} ref={container}
+
+  // React.useEffect(() => {
+  //   scrollOnceMove();
+  // }, [scrollOnceMove]);
 
   return (
-    <div onScroll={scroll} ref={container}>
+    // <div ref={refs}>
+    <div>
       <Grid
         maxWidth="1920px"
         height="100%"
@@ -154,6 +162,11 @@ const MainPage = () => {
               )}
             </>
           )}
+          {!post && (
+            <SpinnerLocation>
+              <Spinner />
+            </SpinnerLocation>
+          )}
           {isLoginUser && (
             <Btn
               onClick={() => {
@@ -170,6 +183,7 @@ const MainPage = () => {
               ></i>
             </Btn>
           )}
+
           <BtnFeedback
             src="/img/FeedbackBox.png"
             onClick={() => {
@@ -177,6 +191,7 @@ const MainPage = () => {
             }}
           ></BtnFeedback>
         </Inside>
+        <Grid height="600px"></Grid>
       </Grid>
     </div>
   );
@@ -185,7 +200,6 @@ const MainPage = () => {
 const Inside = styled.div`
   margin: auto;
   @media screen and (max-width: 750px) {
-    /* margin-left: -100px; */
   } ;
 `;
 
@@ -272,4 +286,10 @@ const BtnFeedback = styled.img`
   } ;
 `;
 
+const SpinnerLocation = styled.div`
+  margin: -250px 0 0 0;
+  @media screen and (max-width: 767px) {
+    margin: 0px 0 0 0;
+  } ;
+`;
 export default MainPage;

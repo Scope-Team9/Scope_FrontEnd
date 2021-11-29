@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 import TestData from "./Testdata.json";
 import { Grid, Button, Text } from "../../elements/Index";
@@ -12,7 +13,7 @@ const TestSix = props => {
   );
 
   const clickUser = btnUserId => {
-    console.log(btnUserId);
+    // console.log(btnUserId);
     setNowClickU(state => {
       return state.map(stateItem => {
         if (stateItem.id === btnUserId) {
@@ -51,14 +52,14 @@ const TestSix = props => {
   };
 
   return (
-    <Grid>
+    <Grid height="100%">
       <Grid display="flex" flexDirection="column">
-        <Grid margin="20px 0">
-          <Grid>
+        <Grid margin="0 0 10px 0" height="50%">
+          <Grid margin="0 0 10px 0" height="14%">
             Q6.당신이 생각할 때 더 <b>좋은 성과를 만들 수 있을 것 같은 팀</b>은?
           </Grid>
           {nowClickU.map((btn, idx) => (
-            <Grid key={btn.id} {...btn}>
+            <Grid height="38%" key={btn.id} {...btn}>
               <Button
                 isId={btn.id}
                 isValue={btn.value}
@@ -73,12 +74,12 @@ const TestSix = props => {
             </Grid>
           ))}
         </Grid>
-        <Grid>
-          <Grid>
+        <Grid height="50%">
+          <Grid margin="5px 0" height="14%" margin="0 0 10px 0">
             Q6.<b>당신의 팀원이 선호했으면 하는 팀</b>은?
           </Grid>
           {nowClickMB.map((btn, idx) => (
-            <Grid key={btn.id} {...btn}>
+            <Grid height="35%" key={btn.id} {...btn}>
               <Button
                 isId={btn.id}
                 isValue={btn.value}

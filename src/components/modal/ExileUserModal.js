@@ -8,26 +8,26 @@ import { applyCreators } from "../../redux/modules/applyProject";
 
 import CloseIcon from "@mui/icons-material/Close";
 import { apis } from "../../lib/axios";
-const ApplyStatusModal = (props) => {
+const ExileUserModal = (props) => {
   const dispatch = useDispatch();
   const applyUsers = useSelector((state) => state.apply.applyUsers);
   const [applyedUsers, setApplyUsers] = React.useState();
   const [acceptButton, setAcceptButton] = React.useState();
-  const { applyStatusModal, setApplyStatusModal, postId } = props;
+  const { applyStatusModal, setApplyStatusModal, postId, postUserId } = props;
 
   const modalClose = () => {
     setApplyStatusModal(false);
   };
 
   React.useEffect(() => {
-    console.log(applyedUsers);
+    // console.log(applyedUsers);
     const fetchData = async () => {
       try {
         const result = await apis.serachTeamUser(postId);
-        console.log(result);
+        // console.log(result);
         setApplyUsers(result.data.data);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     fetchData();
@@ -36,14 +36,14 @@ const ApplyStatusModal = (props) => {
   }, [applyStatusModal, acceptButton]);
 
   const exile = (userId) => {
-    console.log(userId);
+    // console.log(userId);
     const fetchData = async () => {
       try {
         const result = await apis.exileUser(postId, userId);
-        console.log(result);
+        // console.log(result);
         setAcceptButton(result);
       } catch (err) {
-        console.log(err.response);
+        // console.log(err.response);
       }
     };
     fetchData();
@@ -132,7 +132,7 @@ const ApplyStatusModal = (props) => {
                         <UserImg src="/img/토끼.png"></UserImg>
                       )}
                       {applyedUsers[idx].userPropensityType === "FVP" && (
-                        <UserImg src="/img/허스키.png"></UserImg>
+                        <UserImg src="/img/개.png"></UserImg>
                       )}
                       {applyedUsers[idx].userPropensityType === "FHG" && (
                         <UserImg src="/img/고양이.png"></UserImg>
@@ -168,16 +168,18 @@ const ApplyStatusModal = (props) => {
                         </Grid>
                         <Grid margin="auto" height="50px" width="80%">
                           <Grid margin="auto 40px">
-                            <Button
-                              common
-                              isValue={applyedUsers[idx].userId}
-                              _onClick={(e) => {
-                                window.confirm("추방하시겠습니까?");
-                                exile(e.target.value);
-                              }}
-                            >
-                              추방하기
-                            </Button>
+                            {applyedUsers[idx].userId !== postUserId && (
+                              <Button
+                                common
+                                isValue={applyedUsers[idx].userId}
+                                _onClick={(e) => {
+                                  window.confirm("추방하시겠습니까?");
+                                  exile(e.target.value);
+                                }}
+                              >
+                                추방하기
+                              </Button>
+                            )}
                           </Grid>
                         </Grid>
                         <Grid
@@ -201,6 +203,9 @@ const ApplyStatusModal = (props) => {
 const ModalWrap = styled.div`
   width: 550px;
   height: 500px;
+  @media (max-width: 375px) {
+    width: 300px;
+  }
 `;
 const CommentBubble = styled.div`
   position: relative;
@@ -225,10 +230,10 @@ const CommentBubble = styled.div`
 
 const UserImg = styled.img`
   object-fit: cover;
-  width: 100px;
+  width: 90%;
   border-radius: 12px;
   background-color: #ececec;
   cursor: pointer;
 `;
 
-export default ApplyStatusModal;
+export default ExileUserModal;

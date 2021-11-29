@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 import styled from "styled-components";
 const LogoButton = (props) => {
@@ -24,6 +25,10 @@ const IMGS = styled.img`
   width: 68px;
   margin: 10px 15px;
   opacity: ${(props) => (props.active ? 1 : 0.4)};
+  transition: all 0.1s linear;
+  :hover {
+    transform: scale(1.1);
+  }
 
   @media screen and (max-width: 750px) {
     width: 30px;

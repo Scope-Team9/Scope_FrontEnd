@@ -8,8 +8,9 @@ import styled from "styled-components";
 import { map, stubFalse } from "lodash";
 import { Grid4x4 } from "@mui/icons-material";
 import EmailAuth from "../EmailAuth";
+import { useParams } from "react-router";
 
-const TypeResultTest = props => {
+const TypeResultTest = (props) => {
   const [myData, setMyData] = React.useState();
   const [arr, setArr] = React.useState([
     {
@@ -121,10 +122,12 @@ const TypeResultTest = props => {
         "결과보다는 과정을 중요시하는 당신은 우리 스코프 사이드 프로젝트에 적합한 사람!",
     },
   ]);
+  const params = useParams();
+  // console.log(params.id, props.nickName);
 
   React.useEffect(() => {
-    console.log("테스트결과", props);
-    arr.map(item => {
+    // console.log("테스트결과", props);
+    arr.map((item) => {
       if (item.id === props.myType) {
         setMyData(item);
       }
@@ -169,6 +172,7 @@ const TypeResultTest = props => {
             <Grid display="flex">
               <MyResultText2>{myData.text4}</MyResultText2>
             </Grid>
+
             {props.userId == props.myUserId &&
               props.mydata?.isMyMypage === true && (
                 <Grid
@@ -178,7 +182,7 @@ const TypeResultTest = props => {
                   height="100%"
                   position="relative"
                   margin="15px 0 0 0"
-                  width="100%"
+                  width="94%"
                   maxWidth="1150px"
                 >
                   <GotoTest
@@ -196,13 +200,19 @@ const TypeResultTest = props => {
                   >
                     이메일 인증하기
                   </ConfirmEmail>
-                  <EmailAuth modal={props.modal} setModal={props.setModal} />
+                  <EmailAuth
+                    modal={props.modal}
+                    setModal={props.setModal}
+                  ></EmailAuth>
                 </Grid>
               )}
-            <Dialog maxWidth={"sm"} scroll="paper" open={props.testmodal}>
-              <Grid width="550px" height="100%">
+            {params.id != props.myUserId && (
+              <YourName> Nikname | {props.nickName}</YourName>
+            )}
+            <Dialog scroll="paper" open={props.testmodal}>
+              <TestWrap>
                 <PropensityTest TestClose={props.TestClose} />
-              </Grid>
+              </TestWrap>
             </Dialog>
           </Grid>
         </Grid>
@@ -215,8 +225,9 @@ const Wrap = styled.div`
   height: 100%;
   width: 60vw;
   margin-left: 30%;
+
   @media screen and (max-width: 1600px) {
-    margin-left: 34%;
+    margin-left: 35%;
   }
 
   @media screen and (max-width: 1200px) {
@@ -256,12 +267,18 @@ const GotoTest = styled.p`
   margin-top: 30px;
   position: relative;
   z-index: 999;
+  @media screen and (max-width: 370px) {
+    font-size: 12px;
+  } ;
 `;
 const MyResultText2 = styled.p`
   color: white;
   font-size: 17px;
   height: 17px;
   width: auto;
+  @media screen and (max-width: 670px) {
+    display: none;
+  } ;
 `;
 const MyResultTextBold = styled.p`
   color: white;
@@ -298,5 +315,34 @@ const WhiteP = styled.p`
   font-weight: bold;
   width: 300px;
   margin-left: 13px;
+`;
+
+const TestWrap = styled.div`
+  height: 100%;
+  width: 550px;
+
+  @media (max-width: 650px) {
+    width: 310px;
+    height: 550px;
+    font-size: 11px;
+  }
+`;
+const YourName = styled.div`
+  display: none;
+  @media screen and (max-width: 1200px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    margin: 10px 0;
+    height: 40px;
+    width: 200px;
+    color: #333;
+
+    background-color: #fff;
+    border-radius: 11px;
+    box-shadow: 0 5px 5px #aaa;
+    opacity: 0.8;
+  } ;
 `;
 export default TypeResultTest;

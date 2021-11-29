@@ -8,11 +8,15 @@ import HomeIcon from "@mui/icons-material/Home";
 import AddIcon from "@mui/icons-material/Add";
 import { history } from "../redux/configureStore";
 
-const Footer = props => {
+const Footer = (props) => {
   const userType = props.userInfo.userPropensityType;
   const userId = props.userInfo.userId;
+  const isToken = document.cookie;
   const goToMypage = () => {
-    history.push(`/mypage/${userId}`);
+    history.push(`/`);
+    setTimeout(() => {
+      history.push(`/mypage/${userId}`);
+    }, 50);
   };
   const goToAddPost = () => {
     history.push("/postadd");
@@ -27,12 +31,22 @@ const Footer = props => {
         <FooterBtn onClick={goToHome}>
           <HomeIcon sx={{ color: "#17334A", fontSize: 40 }} />
         </FooterBtn>
-        <FooterBtn onClick={goToAddPost}>
+        <FooterBtn
+          onClick={() => {
+            if (!isToken) {
+              window.alert("로그인 후 작성 가능합니다.");
+            } else {
+              goToAddPost();
+            }
+          }}
+        >
           <AddIcon sx={{ color: "#17334A", fontSize: 40 }} />
         </FooterBtn>
-        <FooterBtn onClick={goToMypage}>
-          <ImgType type={userType} />
-        </FooterBtn>
+        {userType && isToken && (
+          <FooterBtn onClick={goToMypage}>
+            <ImgType type={userType} />
+          </FooterBtn>
+        )}
       </Grid>
     </Wrap>
   );
@@ -42,7 +56,7 @@ const Wrap = styled.div`
   @media screen and (max-width: 767px) {
     width: 100vw;
     margin: auto;
-    height: 6%;
+    height: 8%;
     display: flex;
     justify-content: center;
     align-items: center;

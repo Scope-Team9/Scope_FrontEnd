@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 
@@ -82,13 +83,13 @@ export default handleActions(
       }),
     [GET_STACK2]: (state, action) =>
       produce(state, (draft) => {
-        console.log("dodoget", action);
+        // console.log("dodoget", action);
 
         draft.stacks.push(action.payload.data);
       }),
     [SET_STACK2]: (state, action) =>
       produce(state, (draft) => {
-        console.log("dodoset", state.stacks);
+        // console.log("dodoset", state.stacks);
         const result = state.stacks.filter((p) => p !== action.payload.data);
         draft.stacks = result;
       }),

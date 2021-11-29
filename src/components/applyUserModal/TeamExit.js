@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 import { Grid, Input, Text, Button } from "../../elements/Index";
 import { useDispatch } from "react-redux";
@@ -13,6 +14,7 @@ const TeamExit = props => {
       postId: postId,
     };
     dispatch(applyCreators.exitTeamAPI(isPostId));
+    modalClose("탈퇴");
   };
   return (
     <ModalWrap>

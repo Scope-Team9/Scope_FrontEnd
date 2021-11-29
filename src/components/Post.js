@@ -4,33 +4,38 @@ import styled from "styled-components";
 import PostStacks from "./PostStacks";
 import ApplyUserModal from "./ApplyUserModal";
 import { useSelector, useDispatch } from "react-redux";
-import { applyCreators } from "../redux/modules/applyProject";
 import { apis } from "../lib/axios";
 import { history } from "../redux/configureStore";
 import { Grid, Image, Text, Button } from "../elements/Index";
+import { useParams } from "react-router-dom";
 
 // Post의 함수형 컴포넌트를 만든다.
 const Post = (props) => {
+  // console.log(props);
   const dispatch = useDispatch();
   const myPage = useSelector((state) => state.post.whatPage.now);
-  const myUserId = useSelector((state) => state.user.userId);
-  const [stacks, setStacks] = React.useState();
+  // const myUserId = useSelector((state) => state.user.userId);
+  const userId = Number(props.userId.id);
+  const myUserId = Number(props.myUserId);
   const [applyUserModal, setApplyUserModal] = React.useState(false); //지원취소/팀탈퇴/프로젝트마감
   const [applyValue, setApplyValue] = React.useState();
   const [member, setMember] = React.useState();
+  const [assessment, setAssessment] = React.useState(
+    props.memberIdAndAssessment[myUserId]
+  );
 
   let totalmember = props.totalMember;
   let recruitmentMember = props.recruitmentMember;
+  let isWriter = props.writerEquals;
 
   const modalOpen = (value, postId) => {
     setApplyValue(value);
-    setApplyUserModal(true);
+    setApplyUserModal(!applyUserModal);
   };
 
-  // React.useEffect(() => {
-  //   let postId = props.postId;
-  //   dispatch(applyCreators.getMemberAPI(postId));
-  // }, [props.mypage]);
+  const toggleModal = () => {
+    setApplyUserModal(!applyUserModal);
+  };
 
   React.useLayoutEffect(() => {
     if (myPage !== "myPage") {
@@ -40,18 +45,25 @@ const Post = (props) => {
     const getMembers = async () => {
       try {
         const result = await apis.getMember(postId);
-        console.log("호출되나", result);
+        // console.log("호출되나", result);
         setMember(result.data.data);
       } catch (err) {
-        console.log(err.response);
+        // console.log(err.response);
       }
     };
     getMembers();
-  }, []);
+  }, [assessment]);
 
+  React.useLayoutEffect(() => {}, [assessment]);
+  // let as = member?.find((e) => e.userId === myUserId);
+  // console.log(assessment);
+  // console.log(typeof myUserId);
+  // console.log(isWriter);
+  // console.log(props);
   // console.log(member);
-  let as = member?.find((e) => e.userId === myUserId);
+
   // console.log(as);
+  // console.log(myPage, myUserId);
 
   return (
     <React.Fragment>
@@ -62,11 +74,11 @@ const Post = (props) => {
           });
         }}
       >
-        {member &&
-          props.mypage &&
+        {props.mypage &&
+          userId === myUserId &&
           props.projectStatus === "종료" &&
-          member[0].assessment === true &&
-          as.assessment === false && (
+          !isWriter &&
+          !assessment && (
             <Grid
               bg="#111"
               width="100%"
@@ -81,24 +93,27 @@ const Post = (props) => {
                 backgroundColor="#fff"
                 width="50%"
                 color="#111"
-                hoverBg="#b29cf4"
+                hoverBg="#2699FB"
                 hoverCl="#fff"
                 _onClick={(e) => {
                   e.stopPropagation();
-                  console.log(e.target.value, props.postId);
+                  // console.log(e.target.value, props.postId);
                   modalOpen(e.target.value, props.postId);
                 }}
               >
                 팀원평가하기
               </Button>
-              <ApplyUserModal
-                applyUserModal={applyUserModal}
-                setApplyUserModal={setApplyUserModal}
-                applyValue={applyValue}
-                passdedMenber={member}
-                postId={props.postId}
-                myPage={props.mypage}
-              />
+              <Grid width="0px" height="0px">
+                <ApplyUserModal
+                  applyUserModal={applyUserModal}
+                  setApplyUserModal={setApplyUserModal}
+                  applyValue={applyValue}
+                  passdedMenber={member}
+                  postId={props.postId}
+                  myPage={props.mypage}
+                  toggleModal={toggleModal}
+                />
+              </Grid>
             </Grid>
           )}
         {/* 전체크기 */}
@@ -251,6 +266,7 @@ const ProjectState = styled.div`
 `;
 
 const ProductImgWrap = styled.div`
+  cursor: pointer;
   z-index: 1;
   position: relative;
   background-color: white;
@@ -260,6 +276,10 @@ const ProductImgWrap = styled.div`
   margin: 30px auto;
   border-radius: 20px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.24);
+  transition: all 0.2s linear;
+  :hover {
+    transform: scale(1.03);
+  }
 
   @media (max-width: 450px) {
     margin: auto;

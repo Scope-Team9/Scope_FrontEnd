@@ -1,12 +1,14 @@
+/* eslint-disable */
 import axios from "axios";
 import { setCookie } from "../shared/Cookie";
 import { history } from "../redux/configureStore";
 
 export const instance = axios.create({
   // baseURL: "http://localhost:3000",
+  // baseURL: "http://localhost:8081",
   // baseURL: "http://localhost:4000",
   // baseURL: "http://3.35.219.232",
-
+  // baseURL: "https://scopewith.com",
   baseURL: "http://15.165.159.211",
   headers: {
     "content-type": "application/json; charset=UTF-8",
@@ -44,8 +46,8 @@ instance.interceptors.request.use(
 
 export const apis = {
   //회원가입 및 로그인 관련 api
-  kakaoLogin: (code) => instance.get(`/api/login/kakao?code=${code}`, code),
-  githubLogin: (code) => instance.get(`/api/login/github?code=${code}`, code),
+  kakaoLogin: (code) => instance.get(`/api/login/kakao?code=${code}`),
+  githubLogin: (code) => instance.get(`/api/login/github?code=${code}`),
   register: (registerInfo) => instance.post("/api/signup", registerInfo),
   checkEmail: (email) => instance.get(`/api/login/email?email=${email}`, email),
   checkNick: (nickName) =>

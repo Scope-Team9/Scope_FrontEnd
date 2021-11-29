@@ -10,7 +10,7 @@ const ApplicantDetail = (props) => {
   return (
     <React.Fragment>
       <Grid margin="4px 0px 0px 0px">
-        <Grid width="100%" display="flex">
+        {/* <Grid width="100%" display="flex">
           <Grid width="80px" textAlign="center">
             <Text size="18px" bold>
               게시자
@@ -22,11 +22,16 @@ const ApplicantDetail = (props) => {
               참여자
             </Text>
           </Grid>
-        </Grid>
+        </Grid> */}
 
-        <Grid display="flex" margin="6px 0px 0px 0px">
-          {props.passdedMenber?.map((item) => (
-            <ProjectJoinUser key={item.userId} {...item} />
+        <Grid
+          display="flex"
+          margin="6px 0px 0px 0px"
+          overflowX="auto"
+          overflowY="none"
+        >
+          {props.passdedMenber?.map((item, number) => (
+            <ProjectJoinUser key={item.userId} {...item} number={number} />
           ))}
         </Grid>
       </Grid>

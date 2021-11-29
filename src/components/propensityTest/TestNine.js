@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 import TestData from "./Testdata.json";
 import { Grid, Button, Text } from "../../elements/Index";
@@ -12,7 +13,7 @@ const TestNine = props => {
   );
 
   const clickUser = btnUserId => {
-    console.log(btnUserId);
+    // console.log(btnUserId);
     setNowClickU(state => {
       return state.map(stateItem => {
         if (stateItem.id === btnUserId) {
@@ -51,15 +52,15 @@ const TestNine = props => {
   };
 
   return (
-    <Grid>
+    <Grid height="100%">
       <Grid display="flex" flexDirection="column">
-        <Grid margin="20px 0">
-          <Grid>
+        <Grid margin="0 0 10px 0" height="50%">
+          <Grid margin="0 0 10px 0" height="14%">
             Q9. 당신이 지금까지 진행했던{" "}
             <b>프로젝트를 떠올렸을 때 가장 먼저 생각나는 부분</b>은?
           </Grid>
           {nowClickU.map((btn, idx) => (
-            <Grid key={btn.id} {...btn}>
+            <Grid height="38%" key={btn.id} {...btn}>
               <Button
                 isId={btn.id}
                 isValue={btn.value}
@@ -74,14 +75,14 @@ const TestNine = props => {
             </Grid>
           ))}
         </Grid>
-        <Grid>
-          <Grid>
+        <Grid height="50%">
+          <Grid margin="5px 0" height="14%" margin="0 0 10px 0">
             Q9.당신의{" "}
             <b>팀원이 프로젝트를 떠올렸을 때 가장 먼저 생각났으면 하는 부분</b>
             은?
           </Grid>
           {nowClickMB.map((btn, idx) => (
-            <Grid key={btn.id} {...btn}>
+            <Grid height="35%" key={btn.id} {...btn}>
               <Button
                 isId={btn.id}
                 isValue={btn.value}

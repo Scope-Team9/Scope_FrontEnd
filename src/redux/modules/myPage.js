@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../../lib/axios";
@@ -26,7 +27,7 @@ export default handleActions(
   {
     [GET_MYPAGE]: (state, action) =>
       produce(state, (draft) => {
-        console.log("여기가 마이페이지인가", action.payload);
+        // console.log("여기가 마이페이지인가", action.payload);
       }),
   },
   initialState

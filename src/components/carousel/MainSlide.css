@@ -16,7 +16,8 @@
 
 .slide {
   transition: transform 300ms;
-  opacity: 0.5;
+  opacity: 1;
+  cursor: pointer;
 }
 
 .activeSlide {
@@ -53,7 +54,7 @@
   color: #eee;
 }
 .next {
-  right: 80px;
+  right: 120px;
   top: 45%;
 }
 .prev {

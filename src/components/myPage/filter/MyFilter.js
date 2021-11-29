@@ -29,8 +29,7 @@ const MyFilter = (props) => {
 
 const FilterDiv = styled.div`
   align-items: center;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin: 50px auto;
   width: 80%;
   height: 35px;
 

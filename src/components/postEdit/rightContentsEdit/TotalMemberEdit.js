@@ -3,6 +3,7 @@
 
 // import를 한다.
 import React from "react";
+import styled from "styled-components";
 import { Grid, Text } from "../../../elements/Index";
 import Select from "react-select";
 
@@ -18,26 +19,36 @@ const totalMemberEdit = (props) => {
 
   return (
     <React.Fragment>
-      <Grid margin="20px auto">
-        <Text size="18px" bold>
-          프로젝트 총 인원
-        </Text>
-        <Select
-          options={projectMembers}
-          styles={props.styles}
-          value={projectMembers.filter(
-            ({ value }) => value === props.totalMember
-          )}
-          defaultValue={{ value: 6, label: 6 }}
-          onChange={(data) => {
-            props.setTotalmember(data.label);
-          }}
-          placeholder={<div>총인원을 선택해주세요.</div>}
-        ></Select>
-      </Grid>
+      <TotalMemberMedia>
+        <Grid margin="20px auto">
+          <Text>프로젝트 총 인원</Text>
+          <Select
+            options={projectMembers}
+            styles={props.styles}
+            value={projectMembers.filter(
+              ({ value }) => value === props.totalMember
+            )}
+            defaultValue={{ value: 6, label: 6 }}
+            onChange={(data) => {
+              props.setTotalmember(data.label);
+            }}
+            placeholder={<div>총인원을 선택해주세요.</div>}
+          ></Select>
+        </Grid>
+      </TotalMemberMedia>
     </React.Fragment>
   );
 };
+
+const TotalMemberMedia = styled.div`
+  @media screen and (max-width: 600px) {
+    display: flex;
+    width: 350px;
+    height: 10px;
+    font-size: 10px;
+    margin-bottom: 55px;
+  }
+`;
 
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default totalMemberEdit;

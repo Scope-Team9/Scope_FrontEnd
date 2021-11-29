@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React from "react";
 import { Dialog } from "@material-ui/core";
+import { Grid, Input, Text, Button } from "../elements/Index";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Apply,
@@ -19,22 +20,33 @@ const ApplyUserModal = props => {
     passedUserStatus,
     projectStatus,
     statusCheck,
-    mypage,
+    myPage,
+    toggleModal,
+    applyUserModalOpen,
   } = props;
   const isMe = useSelector(state => state.user.userId);
   const [page, setPage] = React.useState(1);
 
   const modalClose = status => {
-    console.log(status);
-    if (status) {
+    if (
+      status === "종료" ||
+      status === "신청" ||
+      status === "취소" ||
+      status === "탈퇴" ||
+      status === "제출"
+    ) {
       statusCheck(status);
+      // applyUserModalOpen();
       return setApplyUserModal(false);
     }
-    return setApplyUserModal(false);
+    // applyUserModalOpen();
+
+    setApplyUserModal(false);
+    return;
   };
 
   return (
-    <>
+    <Grid _onClick={e => e.stopPropagation()}>
       <Dialog
         maxWidth={"sm"}
         scroll="paper"
@@ -65,9 +77,9 @@ const ApplyUserModal = props => {
             statusCheck={statusCheck}
           />
         )}
-        {applyValue === "end" && page === 2 && (
+        {/* {applyValue === "end" && page === 2 && (
           <SubmitUrl modalClose={modalClose} postId={postId} />
-        )}
+        )} */}
         {applyValue === "submit" && passdedMenber[0].userId === isMe && (
           <SubmitUrl modalClose={modalClose} postId={postId} />
         )}
@@ -79,6 +91,7 @@ const ApplyUserModal = props => {
             isMe={isMe}
             page={page}
             setPage={setPage}
+            myPage={myPage}
           />
         )}
         {applyValue === "memberLiked" && (
@@ -89,11 +102,12 @@ const ApplyUserModal = props => {
             isMe={isMe}
             page={page}
             setPage={setPage}
-            mypage={mypage}
+            myPage={myPage}
+            toggleModal={toggleModal}
           />
         )}
       </Dialog>
-    </>
+    </Grid>
   );
 };
 

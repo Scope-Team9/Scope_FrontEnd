@@ -13,11 +13,12 @@ import Swal from "sweetalert2";
 const Sort = (props) => {
   const dispatch = useDispatch();
   const isLoginUser = useSelector((state) => state.user.userId);
+  const [clickCheck, setClickCheck] = React.useState();
   const [arr, setArr] = React.useState([
     {
       id: "최신",
       status: "createdAt",
-      active: false,
+      active: true,
     },
     {
       id: "마감순",
@@ -37,7 +38,7 @@ const Sort = (props) => {
   ]);
 
   const onclickSort = (data) => {
-    console.log("최신 마감순", data);
+    // console.log("최신 마감순", data);
     dispatch(postActions.isMainPage(true));
     dispatch(sortAction.getSort(data));
     dispatch(bookRecommendAction.getRb(""));
@@ -45,7 +46,7 @@ const Sort = (props) => {
   };
   //bookmark,recommend
   const onclickRb = (data) => {
-    console.log("북마크 추천", data);
+    // console.log("북마크 추천", data);
     dispatch(postActions.isMainPage(true));
     dispatch(bookRecommendAction.getRb(data));
     dispatch(sortAction.getSort(""));
@@ -56,8 +57,14 @@ const Sort = (props) => {
   };
 
   const Filter = (getItem) => {
+    if (!isLoginUser && (getItem.id === "북마크" || getItem.id === "추천")) {
+      return;
+    }
+    if (clickCheck === getItem.id) {
+      return;
+    }
     const checked = arr.find((e) => e.active === true);
-    console.log("ddddd", checked);
+    // console.log("ddddd", checked);
     setArr((state) => {
       return state.map((stateItem) => {
         if (stateItem.id === getItem.id) {
@@ -102,13 +109,14 @@ const Sort = (props) => {
                     !isLoginUser &&
                     (item.id === "북마크" || item.id === "추천")
                   ) {
-                    console.log("나는 유저", isLoginUser);
+                    // console.log("나는 유저", isLoginUser);
                     Swal.fire(
                       "로그인 후 이용하실 수 있습니다!",
                       "로그인하고 프로젝트를 추천받아 보세요!",
                       "warning"
                     );
                   }
+                  setClickCheck(item.id);
                 }}
               ></SortText>
             );
@@ -131,7 +139,7 @@ const FilterBox = styled.div`
   }
   @media screen and (max-width: 750px) {
     justify-content: center;
-    font-size: 12px;
+    font-size: 18px;
   }
 `;
 export default Sort;

@@ -17,7 +17,8 @@ import TotalMemberEdit from "../components/postEdit/rightContentsEdit/TotalMembe
 import StatusEdit from "../components/postEdit/rightContentsEdit/StatusEdit";
 import ContentEdit from "../components/postEdit/rightContentsEdit/ContentEdit";
 import DateEdit from "../components/postEdit/rightContentsEdit/DateEdit";
-
+import EditButton from "../components/postEdit/rightContentsEdit/EditButton";
+import Swal from "sweetalert2";
 // PostEdit의 함수형 컴포넌트를 만든다.
 const PostEdit = (props) => {
   const dispatch = useDispatch();
@@ -39,6 +40,12 @@ const PostEdit = (props) => {
   // 수정
   let post_id = props.match.params.id;
   const scope_edit = () => {
+    let blank_pattern = /^\s+|\s+$/g;
+    if (title.replace(blank_pattern, "") == "") {
+      Swal.fire("제목을 다시 확인해 주세요!", "", "warning");
+      return false;
+    }
+
     const editcard = {
       title: title,
       contents: contents,
@@ -52,14 +59,16 @@ const PostEdit = (props) => {
   };
 
   const editHandler = () => {
+    if (techstack.length === 0) {
+      Swal.fire("기술스택을 선택해 주세요!", "", "warning");
+      return;
+    }
     if (techstack.length <= 3) {
       scope_edit();
     } else {
       window.alert("기술선택을 4개 이하로 입력해주세요.");
     }
   };
-
-  console.log("총인원", totalMember);
 
   React.useEffect(() => {
     const CheckPost = async () => {
@@ -120,48 +129,40 @@ const PostEdit = (props) => {
           <TitleMedia>
             <Title>게시글 수정하기</Title>
           </TitleMedia>
-          <ContainerMedia>
-            <Grid margin="40px auto">
-              <TitleEdit title={title} setTitle={setTitle} />
-              <StackEdit
-                setTectstack={setTectstack}
-                techstack={techstack}
-                setTest={setTest}
-                animatedComponents={animatedComponents}
-                styles={styles}
+
+          <Grid margin="40px auto">
+            <TitleEdit title={title} setTitle={setTitle} />
+            <StackEdit
+              setTectstack={setTectstack}
+              techstack={techstack}
+              setTest={setTest}
+              animatedComponents={animatedComponents}
+              styles={styles}
+            />
+            <Grid>
+              <DateEdit
+                startDate={startDate}
+                endDate={endDate}
+                setStartdate={setStartdate}
+                setEnddate={setEnddate}
               />
-              <Grid>
-                <DateEdit
-                  startDate={startDate}
-                  endDate={endDate}
-                  setStartdate={setStartdate}
-                  setEnddate={setEnddate}
-                />
-              </Grid>
-              <TotalMemberEdit
-                styles={styles}
-                totalMember={totalMember}
-                setTotalmember={setTotalmember}
-              />
-              <StatusEdit
-                styles={styles}
-                projectStatus={projectStatus}
-                setProjectstatus={setProjectstatus}
-              />
-              <Grid>
-                <ContentEdit contents={contents} setContents={setContents} />
-                <Grid display="flex" padding="16px">
-                  <Btn
-                    onClick={() => {
-                      editHandler();
-                    }}
-                  >
-                    포스트수정 완료
-                  </Btn>
-                </Grid>
-              </Grid>
             </Grid>
-          </ContainerMedia>
+            <TotalMemberEdit
+              styles={styles}
+              totalMember={totalMember}
+              setTotalmember={setTotalmember}
+            />
+            <StatusEdit
+              styles={styles}
+              projectStatus={projectStatus}
+              setProjectstatus={setProjectstatus}
+            />
+            <Grid>
+              <ContentEdit contents={contents} setContents={setContents} />
+
+              <EditButton editHandler={editHandler} />
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </React.Fragment>
@@ -181,16 +182,15 @@ const Btn = styled.button`
   align-items: center;
   width: 140px;
   height: 35px;
-  border: 1px solid #b29cf4;
+  border: 1px solid #bbb4d9;
   border-radius: 50px;
-  color: #fff;
+  color: #bbb4d9;
   background: white;
-  color: #b29cf4;
-  margin: 10px auto 10px auto;
+  margin: auto;
   cursor: pointer;
   &:hover {
     color: white;
-    background-color: #b29cf4;
+    background-color: #bbb4d9;
     border: 1px solid;
     transition-duration: 1s;
   }

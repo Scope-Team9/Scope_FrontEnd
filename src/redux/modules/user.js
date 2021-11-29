@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis, instance } from "../../lib/axios";
@@ -38,24 +39,27 @@ const initialState = {
   isEmail: false,
 };
 //카카오 로그인
-const kakaologinMiddleware = (code) => {
+const kakaologinMiddleware = (code, pageGo) => {
   return function (dispatch, getState, { history }) {
-    console.log("카카오에서 받아온 코드", code);
+    let goPage = pageGo;
+    // console.log(goPage);
+    // console.log("카카오에서 받아온 코드", code);
+
     apis
       .kakaoLogin(code)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.data.msg == "추가 정보 작성이 필요한 사용자입니다.") {
           // window.alert("추가정보 작성이 필요합니다.");
-          Swal.fire("추가정보 작성이 필요합니다.", "info");
+
           dispatch(
             firstUser({
               email: res.data.data.email,
               snsId: res.data.data.id,
             })
           );
-          window.history.back();
-
+          // history.push(goPage);
+          history.push("/");
           return;
         }
         if (res.data.msg == "로그인이 완료되었습니다") {
@@ -80,14 +84,16 @@ const kakaologinMiddleware = (code) => {
           //     "info"
           //   );
           // }
-          window.history.back();
+          // window.history.back();
+          // history.push(goPage);
+          history.push("/");
         }
       })
       .catch((err) => {
-        console.log("소셜로그인 에러", err);
+        // console.log("소셜로그인 에러", err);
         // alert("로그인에 실패하였습니다.");
         // history.replace("/"); // 로그인 실패하면 로그인화면으로 돌려보냄
-        window.history.back();
+        history.push("/");
         Swal.fire("로그인에 실패하였습니다!", "", "warning");
       });
   };
@@ -96,14 +102,14 @@ const kakaologinMiddleware = (code) => {
 //깃허브 로그인
 const githubLoginMiddleware = (code) => {
   return function (dispatch, getState, { history }) {
-    console.log("깃허브에서 받아온 코드", code);
+    // console.log("깃허브에서 받아온 코드", code);
     apis
       .githubLogin(code)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.data.msg == "추가 정보 작성이 필요한 사용자입니다.") {
           // window.alert("추가정보 작성이 필요합니다.");
-          Swal.fire("추가정보 작성이 필요합니다.", "", "info");
+
           dispatch(
             firstUser({
               email: res.data.data.email,
@@ -111,7 +117,7 @@ const githubLoginMiddleware = (code) => {
             })
           );
 
-          window.history.back();
+          history.push("/");
           return;
         }
         if (res.data.msg == "로그인이 완료되었습니다") {
@@ -125,13 +131,14 @@ const githubLoginMiddleware = (code) => {
               userPropensityType: res.data.data.userPropensityType,
             })
           );
-          window.history.back();
+          // window.history.back();
+          history.push("/");
         }
       })
       .catch((err) => {
-        console.log("소셜로그인 에러", err);
+        // console.log("소셜로그인 에러", err);
         // alert("로그인에 실패하였습니다.");
-        window.history.back();
+        history.push("/");
         Swal.fire("로그인에 실패하였습니다.", "", "warning");
       });
   };
@@ -142,13 +149,13 @@ const emailCheckMiddleWare = (email) => {
     apis
       .checkEmail(email)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.data.msg == "사용 가능한 메일입니다.") {
           return window.alert("사용 가능한 메일입니다.");
         }
       })
       .catch((err) => {
-        console.log(err.response);
+        // console.log(err.response);
         if (err.response.data.msg == "이미 사용중인 이메일입니다.") {
           return window.alert("이미 사용중인 이메일입니다.");
         }
@@ -162,13 +169,13 @@ const nickCheckMiddleWare = (nickName) => {
     apis
       .checkNick(nickName)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data.msg == "사용가능한 닉네임입니다.") {
           return window.alert("사용가능한 닉네임입니다.");
         }
       })
       .catch((err) => {
-        console.log(err.response);
+        // console.log(err.response);
         if (err.response.data.msg == "이미 사용중인 닉네임입니다.") {
           return window.alert("중복된 닉네임이 존재합니다.");
         }
@@ -179,7 +186,7 @@ const nickCheckMiddleWare = (nickName) => {
 //테스트유저 미들웨어
 const testUserMiddleWare = (signupInfo) => {
   return function (dispatch, getState, { history }) {
-    console.log(signupInfo);
+    // console.log(signupInfo);
     dispatch(firstUser(signupInfo));
   };
 };
@@ -190,7 +197,7 @@ const myUserAPI = () => {
     apis
       .myUser()
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         dispatch(
           setUser({
             email: res.data.data.mail,
@@ -202,7 +209,7 @@ const myUserAPI = () => {
         // history.replace("/");
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 };
@@ -213,7 +220,7 @@ const signupMiddleware = (signupInfo) => {
     apis
       .signup(signupInfo)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         // const ACCESS_TOKEN = res.data.token;
         // localStorage.setItem("token", ACCESS_TOKEN);
         dispatch(
@@ -224,7 +231,7 @@ const signupMiddleware = (signupInfo) => {
         );
       })
       .catch((err) => {
-        console.log(err.response);
+        // console.log(err.response);
       });
   };
 };
@@ -234,7 +241,7 @@ const editTestMiddleware = (userId, testInfo) => {
     apis
       .editTest(userId, testInfo)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         dispatch(
           setUser({
             userPropensityType: res.data.data.userPropensityType,
@@ -245,7 +252,7 @@ const editTestMiddleware = (userId, testInfo) => {
         // Swal.fire("성향 캐릭터가 정해졌습니다!", "", "success");
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 };
@@ -274,7 +281,6 @@ export default handleActions(
       }),
     [LOG_OUT]: (state, action) =>
       produce(state, (draft) => {
-        draft.isLogin = false;
         draft.isLogin = false;
       }),
     [MODAL]: (state, action) =>

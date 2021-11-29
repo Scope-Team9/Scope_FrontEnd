@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../../lib/axios";
@@ -71,7 +72,7 @@ const bookMarkAPI = (postId) => {
       .bookMarkChecked(postId)
       .then((res) => {
         console.log(res);
-        console.log(res.data.data.isBookmarkChecked);
+        // console.log(res.data.data.isBookmarkChecked);
         if (res.data.msg == "북마크 추가 성공") {
           return Swal.fire("관심 프로젝트에 추가되었습니다!", "", "success");
         }

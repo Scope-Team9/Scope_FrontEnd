@@ -8,6 +8,7 @@ import { Grid, Image, Progress } from "../elements/Index";
 import Img from "../images/flutter.png";
 
 const PostStacks = (props) => {
+  // console.log(props);
   const whatPage = useSelector((state) => state.post.whatPage);
   const reduxstack = useSelector((state) => state.stack.stack);
   const [stacks, setStacks] = React.useState(9);
@@ -119,7 +120,7 @@ const PostStacks = (props) => {
 };
 
 const IMGS = styled.img`
-  width: 80%;
+  width: 70%;
   margin: auto;
   padding: 5px;
   align-items: center;

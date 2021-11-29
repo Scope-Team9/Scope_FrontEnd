@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 import styled from "styled-components";
 
@@ -171,25 +172,6 @@ const ElButton = styled.button`
   font-family: "GmarketSans";
 `;
 
-const FloatButton = styled.div`
-  width: 50px;
-  height: 50px;
-  background-color: #ffffff;
-  color: ${props => props.color};
-  box-sizing: border-box;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.24);
-  font-size: 36px;
-  font-weight: bold;
-  position: fixed;
-  bottom: 50px;
-  right: 16px;
-  text-align: center;
-  vertical-align: middle;
-  border: none;
-  border-radius: 50px;
-  display: ${props => props.display};
-`;
-
 const TestButton = styled.button`
   font-size: 12px;
   text-align: center;
@@ -211,14 +193,12 @@ const TestButton = styled.button`
     transform: translate();
     transition: 0.3s ease-out;
   }
-  /* &::active {
-    box-shadow: 0px 1px 2px #111;
-    transform: translateY(10px);
+  @media (max-width: 650px) {
+    width: 270px;
+    padding: 10px;
+    height: 80%;
+    font-size: 9px;
   }
-  &::disabled {
-    cursor: default;
-    opacity: 0.7;
-  } */
 `;
 
 const Common = styled.button`
@@ -235,6 +215,8 @@ const Common = styled.button`
   left: ${props => props.left};
   right: ${props => props.right};
   position: ${props => props.position};
+  font-size: ${props => props.fontSize};
+  padding: ${props => props.padding};
   &:hover {
     background-color: #17334a;
     color: #fff;

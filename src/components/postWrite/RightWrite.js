@@ -65,7 +65,6 @@ const RightWrite = (props) => {
       projectStatus: projectStatus,
       contents: contents,
     };
-    console.log("카드들", card);
     dispatch(postAddActions.addPostAPI(card));
   };
 
@@ -108,7 +107,9 @@ const RightWrite = (props) => {
             endDate={endDate}
           />
           <TotalMember setTotalmember={setTotalmember} styles={styles} />
+
           <ContentWrite setContents={setContents} />
+
           <GenerateButton submitHandler={submitHandler} />
         </Grid>
       </Grid>
@@ -117,13 +118,14 @@ const RightWrite = (props) => {
 };
 
 // styled-components
-const Title = styled.p`
+const Title = styled.div`
   color: black;
   font-size: 32px;
   font-weight: 800;
+  margin-top: 30px;
 `;
 
-const TitleMedia = styled.p`
+const TitleMedia = styled.div`
   @media screen and (max-width: 1000px) {
     width: 350px;
     margin: auto;

@@ -6,21 +6,21 @@ import React from "react";
 import styled from "styled-components";
 import { Grid, Text } from "../../../elements/Index";
 
-// StackDetail의 함수형 컴포넌트를 만든다.
+// StackDetail의 함수형 컴포넌트를 만든다..
 const StackDetail = (props) => {
   return (
     <React.Fragment>
       <Grid display="flex" margin="20px auto">
-        <Text size="18px" bold margin="auto 10px auto 0px">
-          기술스택
-        </Text>
-        {props.passedData?.techStack.map((item, index) => {
-          return (
-            <Text margin="auto 5px" key={index}>
-              <StackBox>{item}</StackBox>
-            </Text>
-          );
-        })}
+        <Text margin="auto 10px auto 0px">기술스택</Text>
+        <StackMedia>
+          {props.passedData?.techStack.map((item, index) => {
+            return (
+              <Text margin="auto 5px" key={index}>
+                <StackBox>{item}</StackBox>
+              </Text>
+            );
+          })}
+        </StackMedia>
       </Grid>
     </React.Fragment>
   );
@@ -37,8 +37,10 @@ const StackBox = styled.div`
 `;
 
 const StackMedia = styled.div`
-  @media screen and (max-width: 360px) {
-    flex-direction: column;
+  display: flex;
+  @media screen and (max-width: 600px) {
+    font-size: 10px;
+    width: 120px;
   }
 `;
 

@@ -12,7 +12,7 @@ const MypageFilter = (props) => {
       active: true,
     },
     {
-      id: "진행중",
+      id: "진행",
       active: false,
     },
     {
@@ -50,7 +50,7 @@ const MypageFilter = (props) => {
   return (
     <>
       {arr && (
-        <Grid display="flex" width="70%">
+        <Wrap>
           {arr.map((item) => {
             return (
               <MyFilter
@@ -65,10 +65,16 @@ const MypageFilter = (props) => {
               ></MyFilter>
             );
           })}
-        </Grid>
+        </Wrap>
       )}
     </>
   );
 };
+
+const Wrap = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+`;
 
 export default MypageFilter;

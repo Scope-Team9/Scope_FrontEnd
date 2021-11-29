@@ -4,6 +4,7 @@
 // import를 한다.
 import React from "react";
 import styled from "styled-components";
+import Linkify from "react-linkify";
 import { Grid, Text } from "../../../elements/Index";
 
 // ContentDetail의 함수형 컴포넌트를 만든다.
@@ -12,11 +13,11 @@ const ContentDetail = (props) => {
     <React.Fragment>
       <Grid margin="20px auto auto">
         <ContentMedia>
-          <Text size="18px" bold margin="0px 10px 0px 0px">
-            프로젝트 설명
-          </Text>
+          <Text>프로젝트 설명</Text>
 
-          <Content>{props.passedData?.contents}</Content>
+          <Linkify>
+            <Content>{props.passedData?.contents}</Content>
+          </Linkify>
         </ContentMedia>
       </Grid>
     </React.Fragment>
@@ -26,7 +27,7 @@ const ContentDetail = (props) => {
 // styled-components
 const Content = styled.p`
   width: 100%;
-  height: 340px;
+  height: 500px;
   padding: 10px;
   border: 1px solid #c4c4c4;
   border-radius: 5px;
@@ -34,13 +35,15 @@ const Content = styled.p`
   line-height: 30px;
   white-space: pre-line;
   overflow: scroll;
+  @media screen and (max-width: 600px) {
+    height: 300px;
+  }
 `;
 
 const ContentMedia = styled.div`
-  @media screen and (max-width: 360px) {
-    width: 200px;
-    height: 10px;
-    margin: auto;
+  @media screen and (max-width: 600px) {
+    font-size: 10px;
+    width: 320px;
   }
 `;
 
