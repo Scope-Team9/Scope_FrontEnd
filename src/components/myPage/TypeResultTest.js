@@ -10,7 +10,7 @@ import { Grid4x4 } from "@mui/icons-material";
 import EmailAuth from "../EmailAuth";
 import { useParams } from "react-router";
 
-const TypeResultTest = props => {
+const TypeResultTest = (props) => {
   const [myData, setMyData] = React.useState();
   const [arr, setArr] = React.useState([
     {
@@ -123,11 +123,11 @@ const TypeResultTest = props => {
     },
   ]);
   const params = useParams();
-  console.log(params.id, props.nickName);
+  // console.log(params.id, props.nickName);
 
   React.useEffect(() => {
     // console.log("테스트결과", props);
-    arr.map(item => {
+    arr.map((item) => {
       if (item.id === props.myType) {
         setMyData(item);
       }
