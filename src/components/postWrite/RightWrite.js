@@ -15,6 +15,7 @@ import DateWrite from "./rightContents/DateWrite";
 import TotalMember from "./rightContents/TotalMember";
 import ContentWrite from "./rightContents/ContentWrite";
 import GenerateButton from "./rightContents/GenerateButton";
+import UrlWrite from "./rightContents/UrlWrite";
 
 // RightWrite의 함수형 컴포넌트를 만든다.
 const RightWrite = props => {
@@ -26,6 +27,7 @@ const RightWrite = props => {
   const dispatch = useDispatch();
   const animatedComponents = makeAnimated();
   const [title, setTitle] = React.useState("");
+  const [chatUrl, setChatUrl] = React.useState();
   const [techstack, setTectstack] = React.useState([]);
   const [techStackList, setTechStackList] = React.useState();
   const date = new Date();
@@ -39,9 +41,14 @@ const RightWrite = props => {
   const [projectStatus, setProjectstatus] = React.useState("모집중");
   const [contents, setContents] = React.useState("");
 
+  let regex =
+    /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+
   // 예외처리
   const submitHandler = () => {
-    if (
+    if (!regex.test(chatUrl)) {
+      return window.alert("올바른 URL 주소가 필요합니다.");
+    } else if (
       title.length > 0 &&
       techstack.length > 0 &&
       totalMember > 0 &&
@@ -63,8 +70,10 @@ const RightWrite = props => {
       endDate: endDate,
       totalMember: totalMember,
       projectStatus: projectStatus,
+      chatUrl: chatUrl,
       contents: contents,
     };
+    console.log(card);
     dispatch(postAddActions.addPostAPI(card));
   };
 
@@ -86,7 +95,7 @@ const RightWrite = props => {
 
   return (
     <React.Fragment>
-      <Grid margin="46px 85px 0px" bg="#111">
+      <Grid margin="auto 85px" height="90%">
         <TitleMedia>
           <Title>게시글 작성하기</Title>
         </TitleMedia>
@@ -107,6 +116,7 @@ const RightWrite = props => {
             endDate={endDate}
           />
           <TotalMember setTotalmember={setTotalmember} styles={styles} />
+          <UrlWrite setChatUrl={setChatUrl} />
 
           <ContentWrite setContents={setContents} />
 
