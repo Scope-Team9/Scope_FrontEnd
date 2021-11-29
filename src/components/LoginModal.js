@@ -10,10 +10,12 @@ import Select from "react-select";
 import PropensityTest from "./propensityTest/PropensityTest";
 import CloseIcon from "@mui/icons-material/Close";
 
-const LoginModal = props => {
+const LoginModal = (props) => {
   const dispatch = useDispatch();
-  const userInfo = useSelector(state => state.user);
-  const sigunupModalState = useSelector(state => state.user.sigunupModalState);
+  const userInfo = useSelector((state) => state.user);
+  const sigunupModalState = useSelector(
+    (state) => state.user.sigunupModalState
+  );
 
   var regExpNick = /^[a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{2,5}$/;
   var regExpEmail =
@@ -61,7 +63,7 @@ const LoginModal = props => {
   // console.log("sns아이디", userInfo.snsId);
 
   //닉네임 체크 미들웨어
-  const nickCheck = nickName => {
+  const nickCheck = (nickName) => {
     if (nickName === undefined) {
       alert("닉네임을 입력 해주세요.");
       return false;
@@ -75,7 +77,7 @@ const LoginModal = props => {
   };
 
   //이메일 체크 미들웨어
-  const emailCheck = email => {
+  const emailCheck = (email) => {
     if (nickName === "") {
       alert("이메일을 입력 해주세요.");
       return false;
@@ -94,8 +96,8 @@ const LoginModal = props => {
       alert("기술스택을 선택 해주세요.");
       return false;
     }
-    if (techStack.length > 4) {
-      alert("기술선택을 4개 이하로 입력해주세요.");
+    if (techStack.length > 8) {
+      alert("기술선택을 7개 이하로 입력해주세요.");
       return false;
     }
     if (nameDup === false) {
@@ -114,7 +116,7 @@ const LoginModal = props => {
   };
 
   const customStyles = {
-    control: styles => ({
+    control: (styles) => ({
       ...styles,
       backgroundColor: "white",
       borderRadius: "20px",
@@ -277,7 +279,7 @@ const LoginModal = props => {
                         padding="0 0 0 23px"
                         height="100%"
                         placeholder="닉네임을 입력해주세요"
-                        _onChange={e => {
+                        _onChange={(e) => {
                           setNickName(e.target.value);
                         }}
                       >
@@ -293,7 +295,7 @@ const LoginModal = props => {
                         options={techStackOption}
                         className="basic-multi-select"
                         classNamePrefix="select"
-                        onChange={e => {
+                        onChange={(e) => {
                           let techStack = [];
                           let arr = e;
                           let idx = 0;

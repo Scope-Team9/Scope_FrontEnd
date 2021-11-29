@@ -20,7 +20,7 @@ const MainSlide = () => {
   const [showModal, setShowModal] = React.useState(false);
   const [loginShowModal, setLoginShowModal] = React.useState(false);
   const [emailShowModal, setEmailShowModal] = React.useState(false);
-  const userInfo = useSelector(state => state.user);
+  const userInfo = useSelector((state) => state.user);
   const isToken = document.cookie;
 
   const history = useHistory();
@@ -68,7 +68,7 @@ const MainSlide = () => {
     // ],
   };
 
-  const ClickEvent = item => {
+  const ClickEvent = (item) => {
     if (!isToken && item.division !== null) {
       setLoginShowModal(true);
     }
@@ -89,9 +89,9 @@ const MainSlide = () => {
 
   return (
     <React.Fragment>
-      <div className="Container">
+      <div className="Container" style={{ width: "97%" }}>
         <Slider {...settings}>
-          {Slide.slide.map(item => (
+          {Slide.slide.map((item) => (
             <div key={item.id} className="slide">
               <img
                 src={item.img}
