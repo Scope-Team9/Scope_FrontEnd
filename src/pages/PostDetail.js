@@ -11,7 +11,7 @@ import Swal from "sweetalert2";
 import { pageCheckAction } from "../redux/modules/pageCheck";
 
 import ApplyStatusModal from "../components/ApplyStatusModal";
-import LeftBanner from "../components/postDetail/LeftBanner";
+import LeftBanner from "../components/postDetail/leftBanner";
 import TitleDetail from "../components/postDetail/rightContents/TitleDetail";
 import ExileUserModal from "../components/modal/ExileUserModal";
 import ApplicantDetail from "../components/postDetail/rightContents/ApplicantDetail";
