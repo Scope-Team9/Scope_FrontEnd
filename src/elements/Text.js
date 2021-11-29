@@ -16,6 +16,7 @@ const Text = (props) => {
     family,
     border,
     borderRadius,
+    decoration,
     _onClick,
     cursor,
     hover,
@@ -29,6 +30,7 @@ const Text = (props) => {
     margin,
     padding,
     underline,
+    decoration,
     family,
     border,
     borderRadius,
@@ -49,6 +51,7 @@ Text.defaultProps = {
   bold: false,
   align: null,
   underline: null,
+  decoration: null,
   margin: false,
   padding: false,
   family: false, //폰트 타입
@@ -72,6 +75,7 @@ const ElText = styled.span`
   cursor: ${(props) => props.cursor};
   font-family: "GmarketSans";
   line-height: 1.2;
+  text-decoration: ${(props) => props.decoration};
   letter-spacing: -0.0375em;
 `;
 

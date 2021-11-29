@@ -16,7 +16,7 @@ const UrlDetail = (props) => {
           <Text>오픈채팅 URL</Text>
 
           <Linkify>
-            <Text> {props.passedData?.chatUrl}</Text>
+            <Text decoration="none"> {props.passedData?.chatUrl}</Text>
           </Linkify>
         </Grid>
       </UrlMedia>
