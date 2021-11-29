@@ -70,13 +70,10 @@ const PostList = (props) => {
                 })}
 
                 {post.length === 0 && (
-                  <Grid margin="auto" width="100%" height="100%" display="flex">
+                  <Grid margin="auto" width="100%" height="100%">
                     <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
                     <NoIntroductionText>
-                      아직 포스트가 없네요
-                      <br /> .
-                      <br /> .
-                      <br /> .
+                      아직 포스트가 없습니다
                     </NoIntroductionText>
                   </Grid>
                 )}
@@ -93,7 +90,6 @@ const PostWrap = styled.div`
   max-width: 100%;
   margin: auto;
   display: grid;
-
   grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
   /* grid-gap: 1px; */
   @media (max-width: 420px) {
@@ -101,13 +97,15 @@ const PostWrap = styled.div`
   }
 `;
 const NoIntroduction = styled.img`
-  width: 100%;
-  height: 100%;
-  /* object-fit: cover; */
-
-  margin: auto;
+  width: 100px;
+  height: 100px;
   display: flex;
   justify-content: center;
+  @media screen and (max-width: 600px) {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 40px;
+  }
 `;
 
 const NoIntroductionText = styled.p`
