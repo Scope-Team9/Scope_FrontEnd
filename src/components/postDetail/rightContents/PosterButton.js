@@ -26,19 +26,6 @@ const PosterButton = (props) => {
     <React.Fragment>
       <Grid display="flex" justifyContent="center">
         <ContentMedia>
-          {props.passedData?.projectStatus === "진행중" && (
-            <Button
-              common
-              width="140px"
-              height="35px"
-              isValue="end"
-              _onClick={(e) => {
-                props.applyUserModalOpen(e.target.value);
-              }}
-            >
-              마감하기
-            </Button>
-          )}
           <Grid width="0px" height="0px">
             <ApplyUserModal
               applyUserModal={props.applyUserModal}
@@ -75,7 +62,19 @@ const PosterButton = (props) => {
             </Button>
           )}
           {props.passedData?.projectStatus === "종료" && <div></div>}
-
+          {props.passedData?.projectStatus === "진행중" && (
+            <Button
+              common
+              width="140px"
+              height="35px"
+              isValue="end"
+              _onClick={(e) => {
+                props.applyUserModalOpen(e.target.value);
+              }}
+            >
+              마감하기
+            </Button>
+          )}
           {props.passedData?.projectStatus === "진행중" && (
             <Button
               common

@@ -68,16 +68,15 @@ const PostList = (props) => {
                 {post.map((item) => {
                   return <Post key={item.postId} {...item} />;
                 })}
-
-                {post.length === 0 && (
-                  <Grid margin="auto" width="100%" height="100%">
-                    <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
-                    <NoIntroductionText>
-                      아직 포스트가 없습니다
-                    </NoIntroductionText>
-                  </Grid>
-                )}
               </PostWrap>
+              {post.length === 0 && (
+                <Grid justifyContent="center" margin="10px auto" width="100%">
+                  <NoIntroduction src="/img/너구리.png"></NoIntroduction>
+                  <NoIntroductionText>
+                    아직 포스트가 없습니다.
+                  </NoIntroductionText>
+                </Grid>
+              )}
             </>
           )}
         </>
@@ -91,14 +90,13 @@ const PostWrap = styled.div`
   margin: auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
-  /* grid-gap: 1px; */
   @media (max-width: 420px) {
     grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
   }
 `;
 const NoIntroduction = styled.img`
-  width: 100px;
-  height: 100px;
+  width: 500px;
+  margin: auto;
   display: flex;
   justify-content: center;
   @media screen and (max-width: 600px) {
@@ -111,11 +109,7 @@ const NoIntroduction = styled.img`
 const NoIntroductionText = styled.p`
   color: #737373;
   font-size: 25px;
-  width: auto;
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  margin-left: auto;
+  text-align: center;
 `;
 
 export default PostList;
