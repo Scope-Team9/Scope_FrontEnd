@@ -48,19 +48,6 @@ const PosterButton = (props) => {
               모집완료
             </Button>
           )}
-          {props.passedData?.projectStatus === "종료" && (
-            <Button
-              common
-              width="140px"
-              height="35px"
-              isValue="submit"
-              _onClick={(e) => {
-                props.applyUserModalOpen(e.target.value);
-              }}
-            >
-              깃허브제출
-            </Button>
-          )}
           {props.passedData?.projectStatus === "종료" && <div></div>}
           {props.passedData?.projectStatus === "진행중" && (
             <Button
@@ -97,6 +84,19 @@ const PosterButton = (props) => {
               }}
             >
               포스트수정
+            </Button>
+          )}
+          {props.passedData?.projectStatus === "종료" && (
+            <Button
+              common
+              width="140px"
+              height="35px"
+              isValue="submit"
+              _onClick={(e) => {
+                props.applyUserModalOpen(e.target.value);
+              }}
+            >
+              깃허브제출
             </Button>
           )}
           <Button

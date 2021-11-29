@@ -28,7 +28,7 @@ const DateDetail = (props) => {
 const DateBox = styled.div`
   color: black;
   padding: 4px 10px;
-  border: 1px solid #e6ddf2;
+  border: 1px solid #554475;
   border-radius: 10px;
   text-align: center;
 `;

@@ -13,7 +13,7 @@ const TotalMemberDetail = (props) => {
       <TotalMedia>
         <Grid display="flex">
           <Text margin="0px 10px 20px 0px">프로젝트 총인원</Text>
-          <Text color="#9D81F0">{props.passedData?.totalMember}명</Text>
+          <Text color="#554475">{props.passedData?.totalMember}명</Text>
         </Grid>
       </TotalMedia>
     </React.Fragment>

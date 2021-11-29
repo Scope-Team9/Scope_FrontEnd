@@ -49,26 +49,37 @@ const MypageFilter = (props) => {
 
   return (
     <>
-      {arr && (
-        <Grid display="flex" width="70%">
-          {arr.map((item) => {
-            return (
-              <MyFilter
-                onClick={() => {
-                  if (item.id !== props.filter) {
-                    filters(item);
-                  }
-                }}
-                key={item.id}
-                {...item}
-                setStatus={props.onClicks}
-              ></MyFilter>
-            );
-          })}
-        </Grid>
-      )}
+      <Grid display="flex" margin="auto">
+        {arr && (
+          <Grid display="flex" width="100%" margin="auto">
+            {arr.map((item) => {
+              return (
+                <MyFilter
+                  onClick={() => {
+                    if (item.id !== props.filter) {
+                      filters(item);
+                    }
+                  }}
+                  key={item.id}
+                  {...item}
+                  setStatus={props.onClicks}
+                ></MyFilter>
+              );
+            })}
+          </Grid>
+        )}
+      </Grid>
     </>
   );
 };
+
+const FilterMedia = styled.div`
+  @media screen and (max-width: 600px) {
+    width: 100%;
+    height: 100px;
+    margin: auto;
+    margin-bottom: 40px;
+  }
+`;
 
 export default MypageFilter;

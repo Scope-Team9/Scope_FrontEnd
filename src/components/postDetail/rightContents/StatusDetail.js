@@ -13,7 +13,39 @@ const StatusDetail = (props) => {
       <Grid display="flex">
         <StatusMedia>
           <Text margin="0px 10px auto 0px">프로젝트 상태</Text>
-          <Text color="#9D81F0">{props.passedData?.projectStatus}</Text>
+          {props.passedData?.projectStatus === "모집중" && (
+            <Text
+              bg="#2699FB"
+              color="white"
+              border="1px solid #2699FB"
+              borderRadius="50px"
+              padding="4px"
+            >
+              {props.passedData?.projectStatus}
+            </Text>
+          )}
+          {props.passedData?.projectStatus === "진행중" && (
+            <Text
+              bg="#15B915"
+              color="white"
+              border="1px solid #15B915"
+              borderRadius="50px"
+              padding="4px"
+            >
+              {props.passedData?.projectStatus}
+            </Text>
+          )}
+          {props.passedData?.projectStatus === "종료" && (
+            <Text
+              bg="#f9a8a8"
+              color="white"
+              border="1px solid #f9a8a8"
+              borderRadius="50px"
+              padding="4px"
+            >
+              {props.passedData?.projectStatus}
+            </Text>
+          )}
         </StatusMedia>
       </Grid>
     </React.Fragment>
