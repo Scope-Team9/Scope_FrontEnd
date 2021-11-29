@@ -163,9 +163,9 @@ const MainPage = () => {
             </>
           )}
           {!post && (
-            <Grid margin="-250px 0 0 0">
+            <SpinnerLocation>
               <Spinner />
-            </Grid>
+            </SpinnerLocation>
           )}
           {isLoginUser && (
             <Btn
@@ -286,4 +286,10 @@ const BtnFeedback = styled.img`
   } ;
 `;
 
+const SpinnerLocation = styled.div`
+  margin: -250px 0 0 0;
+  @media screen and (max-width: 767px) {
+    margin: 0px 0 0 0;
+  } ;
+`;
 export default MainPage;

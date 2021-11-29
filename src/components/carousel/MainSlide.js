@@ -25,21 +25,21 @@ const MainSlide = () => {
 
   const history = useHistory();
 
-  const NextArrow = ({ onClick }) => {
-    return (
-      <div className="arrow next" onClick={onClick}>
-        <KeyboardArrowRightIcon fontSize="small" />
-      </div>
-    );
-  };
+  // const NextArrow = ({ onClick }) => {
+  //   return (
+  //     <div className="arrow next" onClick={onClick}>
+  //       <KeyboardArrowRightIcon fontSize="small" />
+  //     </div>
+  //   );
+  // };
 
-  const PrevArrow = ({ onClick }) => {
-    return (
-      <div className="arrow prev" onClick={onClick}>
-        <KeyboardArrowLeftIcon fontSize="small" />
-      </div>
-    );
-  };
+  // const PrevArrow = ({ onClick }) => {
+  //   return (
+  //     <div className="arrow prev" onClick={onClick}>
+  //       <KeyboardArrowLeftIcon fontSize="small" />
+  //     </div>
+  //   );
+  // };
 
   const settings = {
     dots: true, //화면아래 컨텐츠 갯수 표시

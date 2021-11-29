@@ -8,12 +8,15 @@ import HomeIcon from "@mui/icons-material/Home";
 import AddIcon from "@mui/icons-material/Add";
 import { history } from "../redux/configureStore";
 
-const Footer = props => {
+const Footer = (props) => {
   const userType = props.userInfo.userPropensityType;
   const userId = props.userInfo.userId;
   const isToken = document.cookie;
   const goToMypage = () => {
-    history.push(`/mypage/${userId}`);
+    history.push(`/`);
+    setTimeout(() => {
+      history.push(`/mypage/${userId}`);
+    }, 50);
   };
   const goToAddPost = () => {
     history.push("/postadd");
@@ -41,13 +44,7 @@ const Footer = props => {
         </FooterBtn>
         {userType && isToken && (
           <FooterBtn onClick={goToMypage}>
-            <div
-              onClick={() => {
-                history.push(`/mypage/${userId}`);
-              }}
-            >
-              <ImgType type={userType} />
-            </div>
+            <ImgType type={userType} />
           </FooterBtn>
         )}
       </Grid>
@@ -59,7 +56,7 @@ const Wrap = styled.div`
   @media screen and (max-width: 767px) {
     width: 100vw;
     margin: auto;
-    height: 6%;
+    height: 8%;
     display: flex;
     justify-content: center;
     align-items: center;
