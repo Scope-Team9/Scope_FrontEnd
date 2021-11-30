@@ -83,6 +83,7 @@ export const apis = {
   projectAssessmentPost: (postId) => instance.get(`/api/assessment/${postId}`),
   authEmail: (email) => instance.get(`/api/user/email?email=${email}`),
   deleteUser: (userId) => instance.delete(`/api/user/${userId}`),
+  addMyImage: (base64) => instance.post(`/api/image`, base64),
 
   // 상세페이지
   addPost: (postInfo) => instance.post(`/api/post`, postInfo),

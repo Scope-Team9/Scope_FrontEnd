@@ -85,7 +85,26 @@ const MyPageInfo = (props) => {
     };
     fetchData();
     // console.log(mydata);
-  }, [assessment, editMyProfile, testmodal, userPropensityType]);
+  }, [assessment, testmodal, userPropensityType]);
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await apis.getMypage(userId);
+        // console.log(result);
+        setNickName(result.data.data.user.nickname);
+        setEmail(result.data.data.user.email);
+        setTeckstack(result.data.data.user.techStackList);
+        setUserPropensityType(result.data.data.user.userPropensityType);
+
+        // setLoading(false);
+      } catch (err) {
+        // console.log(err);
+      }
+    };
+    fetchData();
+    // console.log(mydata);
+  }, [editMyProfile]);
 
   React.useLayoutEffect(() => {
     const fetchData = async () => {
