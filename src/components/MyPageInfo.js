@@ -19,11 +19,11 @@ import MypageFilter from "./myPage/MypageFilter";
 import { pageCheckAction } from "../redux/modules/pageCheck";
 
 // MyPageInfo의 함수형 컴포넌트를 만든다.
-const MyPageInfo = props => {
+const MyPageInfo = (props) => {
   const dispatch = useDispatch();
   const userId = props.match.params.id;
 
-  const myUserId = useSelector(state => state.user.userId);
+  const myUserId = useSelector((state) => state.user.userId);
   const [myUrl, setMyUrl] = React.useState();
   const [filter, setFilter] = React.useState("소개");
   const [mydata, setMydata] = React.useState();
@@ -40,7 +40,7 @@ const MyPageInfo = props => {
   const [memberId, setMemberId] = React.useState(); //멤버아이디
   const [writerEquals, setWriterEquals] = React.useState(); //포스트의 작성자확인
 
-  const pageCheck = useSelector(state => state.pagecheck.pageGo);
+  const pageCheck = useSelector((state) => state.pagecheck.pageGo);
 
   //click
   const introduction = mydata?.user.introduction ? true : false;
@@ -49,7 +49,7 @@ const MyPageInfo = props => {
   const inProgressProject = mydata?.inProgress;
   const bookMarkProject = mydata?.bookmark;
   const endProject = mydata?.end;
-  console.log(mydata);
+  // console.log(mydata);
 
   const [loading, setLoading] = React.useState(true);
 
@@ -58,7 +58,7 @@ const MyPageInfo = props => {
     setAssessment(!assessment);
   };
 
-  const SetFilter = data => {
+  const SetFilter = (data) => {
     setFilter(data);
   };
 
@@ -69,7 +69,7 @@ const MyPageInfo = props => {
     const fetchData = async () => {
       try {
         const result = await apis.getMypage(userId);
-        console.log(result);
+        // console.log(result);
         setNickName(result.data.data.user.nickname);
         setEmail(result.data.data.user.email);
         setTeckstack(result.data.data.user.techStackList);
@@ -339,7 +339,7 @@ const FilterWrap = styled.div`
   display: flex;
   margin-left: 35%;
   width: 870px;
-  max-width: 1400px
+  max-width: 1400px;
   z-index: 999;
 
   @media screen and (max-width: 1200px) {
