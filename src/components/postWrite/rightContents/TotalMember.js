@@ -19,9 +19,9 @@ const TotalMember = (props) => {
 
   return (
     <React.Fragment>
-      <Grid margin="20px auto">
+      <Grid margin="10px auto">
         <TotalMemberMedia>
-          <Text>프로젝트 총 인원</Text>
+          <Text color="#4e442d">프로젝트 총 인원</Text>
           <Select
             options={projectMembers}
             styles={props.styles}

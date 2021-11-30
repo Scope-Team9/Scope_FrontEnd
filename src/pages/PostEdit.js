@@ -22,7 +22,7 @@ import EditButton from "../components/postEdit/rightContentsEdit/EditButton";
 import Swal from "sweetalert2";
 import Spinner from "../shared/Spinner";
 // PostEdit의 함수형 컴포넌트를 만든다.
-const PostEdit = props => {
+const PostEdit = (props) => {
   const dispatch = useDispatch();
   const animatedComponents = makeAnimated();
   const [checkPost, setCheckPost] = React.useState();
@@ -85,7 +85,7 @@ const PostEdit = props => {
         setSummary(setValue.summary);
         setContents(setValue.contents);
         setTectstack(
-          setValue.techStack.map(value => ({ label: value, value }))
+          setValue.techStack.map((value) => ({ label: value, value }))
         );
         setStartdate(setValue?.startDate);
         setEnddate(setValue.endDate);
@@ -109,10 +109,12 @@ const PostEdit = props => {
     control: (base, state) => ({
       ...base,
       boxShadow: state.isFocused ? 0 : 0,
-      borderWidth: 2,
+      borderWidth: 1,
       borderRadius: 10,
+      fontSize: 14,
       marginTop: 4,
-      minHeight: 40,
+      minHeight: 20,
+      boxShadow: "0px 0px 10px #ddd",
       borderColor: state.isFocused ? "#C4C4C4" : base.borderColor,
       "&:hover": {
         borderColor: state.isFocused ? "#C4C4C4" : base.borderColor,
@@ -130,19 +132,18 @@ const PostEdit = props => {
             <Grid
               display="flex"
               justifyContent="center"
-              maxWidth="1920px"
-              height="100%"
-              margin="auto"
-              border="1px solid #C4C4C4"
-              alignItems="center"
+              border="3px solid #C4C4C4"
+              borderRadius="30px"
+              maxWidth="1400px"
+              margin="40px auto 0px"
             >
               <LeftBanner />
-              <Grid margin="46px 106px 0px" position="relative">
+              <Grid margin="18px 80px 0px">
                 <TitleMedia>
                   <Title>게시글 수정하기</Title>
                 </TitleMedia>
 
-                <Grid margin="40px auto">
+                <Grid margin="40px auto 0px">
                   <TitleEdit title={title} setTitle={setTitle} />
                   <StackEdit
                     setTectstack={setTectstack}
@@ -189,9 +190,12 @@ const PostEdit = props => {
 
 // styled-components를 사용한다.
 const Title = styled.div`
-  color: black;
+  color: #4c4759;
   font-size: 32px;
   font-weight: 800;
+  margin: 40px auto;
+  text-decoration: solid underline #8777b685 4px;
+  text-underline-position: under;
 `;
 
 const Btn = styled.button`

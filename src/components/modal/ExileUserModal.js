@@ -61,7 +61,7 @@ const ExileUserModal = (props) => {
           <ModalWrap>
             <Grid
               height="10%"
-              bg="#17334A"
+              bg="#554475"
               position="relative"
               textAlign="center"
               padding="10px 0 10px 0"

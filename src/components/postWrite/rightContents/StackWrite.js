@@ -61,9 +61,9 @@ const StackWrite = (props) => {
     <React.Fragment>
       <Grid margin="10px auto">
         <StackMedia>
-          <Text>
+          <Text color="#4e442d">
             기술스택 선택
-            <SubDescription> (최대 4개)</SubDescription>
+            <SubDescription> *(최대 4개)</SubDescription>
           </Text>
           <Select
             isMulti
@@ -82,7 +82,7 @@ const StackWrite = (props) => {
 
 // styled-components
 const SubDescription = styled.span`
-  color: rgb(186, 187, 192);
+  color: red;
   font-size: 12px;
 `;
 

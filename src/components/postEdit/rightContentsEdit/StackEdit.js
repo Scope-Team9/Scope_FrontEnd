@@ -14,7 +14,7 @@ const StackEdit = (props) => {
     { value: "Java", label: "Java" },
     { value: "JavaScript", label: "JavaScript" },
     { value: "Python", label: "Python" },
-    { value: "Node", label: "Node" },
+    { value: "Nodejs", label: "Nodejs" },
     { value: "Flask", label: "Flask" },
     { value: "C++", label: "C++" },
     { value: "Django", label: "Django" },
@@ -23,7 +23,7 @@ const StackEdit = (props) => {
     { value: "Spring", label: "Spring" },
     { value: "Swift", label: "Swift" },
     { value: "Kotlin", label: "Kotlin" },
-    { value: "TypeScript", label: "TypeScript" },
+    { value: "Typescript", label: "Typescript" },
   ];
 
   const orderByLabel = useCallback(
@@ -81,8 +81,10 @@ const StackEdit = (props) => {
   return (
     <React.Fragment>
       <StackMedia>
-        <Grid margin="20px auto">
-          <Text>기술스택 선택</Text>
+        <Grid margin="10px auto">
+          <Text color="#4c4759">
+            기술스택 선택<SubDescription> *(최대 4개)</SubDescription>
+          </Text>
           <Select
             isMulti
             components={props.animatedComponents}
@@ -107,6 +109,11 @@ const StackMedia = styled.div`
     margin-bottom: 40px;
     font-size: 10px;
   }
+`;
+
+const SubDescription = styled.span`
+  color: red;
+  font-size: 12px;
 `;
 
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.

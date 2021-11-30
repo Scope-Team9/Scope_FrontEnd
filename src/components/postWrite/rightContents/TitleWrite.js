@@ -12,7 +12,7 @@ const TitleWrite = (props) => {
     <React.Fragment>
       <Grid>
         <TitleMedia>
-          <Text>제목</Text>
+          <Text color="#4e442d">제목</Text>
         </TitleMedia>
         <Input
           width="100%"
@@ -22,6 +22,8 @@ const TitleWrite = (props) => {
           border="1px solid #C4C4C4"
           borderRadius="10px"
           placeholder="제목을 입력해주세요."
+          boxShadow="0px 0px 10px #ddd"
+          type="text"
           maxLength="35"
           inputFocusOutline="none"
           _onChange={(e) => {

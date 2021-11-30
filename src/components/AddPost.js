@@ -14,9 +14,11 @@ const WritePost = (props) => {
       <Grid
         display="flex"
         justifyContent="center"
-        border="1px solid #C4C4C4"
-        maxWidth="1920px"
-        margin="auto"
+        border="3px solid #C4C4C4"
+        borderRadius="30px"
+        maxWidth="1400px"
+        margin="40px auto"
+        boxShadow="0px 0px 10px #C4C4C4"
       >
         <LeftBanner />
         <RightWrite />

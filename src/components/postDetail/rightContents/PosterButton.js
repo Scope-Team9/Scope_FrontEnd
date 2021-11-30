@@ -130,13 +130,13 @@ const ContentMedia = styled.div`
   @media screen and (max-width: 360px) {
     width: 300px;
     height: 50px;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
   }
   @media screen and (max-width: 800px) {
     display: flex;
     width: 300px;
     font-size: 10px;
-    margin-bottom: 60px;
+    margin-bottom: 10px;
   }
 `;
 

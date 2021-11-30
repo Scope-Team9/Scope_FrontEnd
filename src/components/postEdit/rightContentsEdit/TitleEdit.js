@@ -12,7 +12,7 @@ const TitleEdit = (props) => {
     <React.Fragment>
       <TitleMedia>
         <Grid>
-          <Text>제목</Text>
+          <Text color="#4c4759">제목</Text>
           <Input
             width="100%"
             maxLength="35"
@@ -21,6 +21,7 @@ const TitleEdit = (props) => {
             margin="4px auto"
             border="1px solid #C4C4C4"
             borderRadius="10px"
+            boxShadow="0px 0px 10px #ddd"
             placeholder="제목을 입력해주세요."
             inputFocusOutline="none"
             type="text"
