@@ -41,14 +41,9 @@ const RightWrite = props => {
   const [projectStatus, setProjectstatus] = React.useState("모집중");
   const [contents, setContents] = React.useState("");
 
-  let regex =
-    /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-
   // 예외처리
   const submitHandler = () => {
-    if (!regex.test(chatUrl)) {
-      return window.alert("올바른 URL 주소가 필요합니다.");
-    } else if (
+    if (
       title.length > 0 &&
       techstack.length > 0 &&
       totalMember > 0 &&

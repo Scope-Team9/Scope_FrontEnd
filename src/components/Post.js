@@ -10,10 +10,11 @@ import { Grid, Image, Text, Button } from "../elements/Index";
 import { useParams } from "react-router-dom";
 
 // Post의 함수형 컴포넌트를 만든다.
-const Post = (props) => {
+const Post = props => {
+  // console.log(props);
   // console.log(props);
   const dispatch = useDispatch();
-  const myPage = useSelector((state) => state.post.whatPage.now);
+  const myPage = useSelector(state => state.post.whatPage.now);
   // const myUserId = useSelector((state) => state.user.userId);
   const userId = Number(props.userId.id);
   const myUserId = Number(props.myUserId);
@@ -52,7 +53,7 @@ const Post = (props) => {
       }
     };
     getMembers();
-  }, [assessment]);
+  }, [assessment, props.assessment]);
 
   React.useLayoutEffect(() => {}, [assessment]);
   // let as = member?.find((e) => e.userId === myUserId);
@@ -64,6 +65,12 @@ const Post = (props) => {
 
   // console.log(as);
   // console.log(myPage, myUserId);
+
+  const didAssessment = e => {
+    e.stopPropagation();
+    // console.log(e.target.value, props.postId);
+    modalOpen(e.target.value, props.postId);
+  };
 
   return (
     <React.Fragment>
@@ -95,10 +102,8 @@ const Post = (props) => {
                 color="#111"
                 hoverBg="#2699FB"
                 hoverCl="#fff"
-                _onClick={(e) => {
-                  e.stopPropagation();
-                  // console.log(e.target.value, props.postId);
-                  modalOpen(e.target.value, props.postId);
+                _onClick={e => {
+                  didAssessment(e);
                 }}
               >
                 팀원평가하기
@@ -112,6 +117,7 @@ const Post = (props) => {
                   postId={props.postId}
                   myPage={props.mypage}
                   toggleModal={toggleModal}
+                  doSetAssessment={props.doSetAssessment}
                 />
               </Grid>
             </Grid>
@@ -201,11 +207,9 @@ const CardHeader = styled.div`
   height: 55px;
   border-radius: 21px 21px 0px 0px;
   background-color: #ecc0f1;
-  ${(props) =>
-    props.projectStatus === "모집중" && `background-color: #17334A;`};
-  ${(props) =>
-    props.projectStatus === "진행중" && `background-color: #17334A;`};
-  ${(props) => props.projectStatus === "종료" && `background-color: #878787;`};
+  ${props => props.projectStatus === "모집중" && `background-color: #17334A;`};
+  ${props => props.projectStatus === "진행중" && `background-color: #17334A;`};
+  ${props => props.projectStatus === "종료" && `background-color: #878787;`};
 `;
 
 //헤더 까지
@@ -258,11 +262,9 @@ const ProjectState = styled.div`
   margin: 4% 0;
   padding: 1% 0 0 0;
   font-size: 13px;
-  ${(props) =>
-    props.projectStatus === "모집중" && `background-color: #2699FB;`};
-  ${(props) =>
-    props.projectStatus === "진행중" && `background-color: #15B915;`};
-  ${(props) => props.projectStatus === "종료" && `background-color: #878787;`};
+  ${props => props.projectStatus === "모집중" && `background-color: #2699FB;`};
+  ${props => props.projectStatus === "진행중" && `background-color: #15B915;`};
+  ${props => props.projectStatus === "종료" && `background-color: #878787;`};
 `;
 
 const ProductImgWrap = styled.div`
@@ -296,21 +298,17 @@ const ProgressBar = styled.div`
   width: 55%;
   height: 15px;
   border: none;
-  ${(props) =>
-    props.projectStatus === "모집중" && `background-color: #BCE0FD;`};
-  ${(props) =>
-    props.projectStatus === "진행중" && `background-color: #DFDFDF;`};
-  ${(props) => props.projectStatus === "종료" && `background-color: #DFDFDF;`};
+  ${props => props.projectStatus === "모집중" && `background-color: #BCE0FD;`};
+  ${props => props.projectStatus === "진행중" && `background-color: #DFDFDF;`};
+  ${props => props.projectStatus === "종료" && `background-color: #DFDFDF;`};
 `;
 
 const HighLight = styled.div`
   transition: 1s;
-  width: ${(props) => props.width};
-  ${(props) =>
-    props.projectStatus === "모집중" && `background-color: #2699FB;`};
-  ${(props) =>
-    props.projectStatus === "진행중" && `background-color: #878787 ;`};
-  ${(props) => props.projectStatus === "종료" && `background-color: #878787;`};
+  width: ${props => props.width};
+  ${props => props.projectStatus === "모집중" && `background-color: #2699FB;`};
+  ${props => props.projectStatus === "진행중" && `background-color: #878787 ;`};
+  ${props => props.projectStatus === "종료" && `background-color: #878787;`};
   height: 15px;
 `;
 

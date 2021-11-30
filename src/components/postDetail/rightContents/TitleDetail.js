@@ -8,14 +8,14 @@ import styled from "styled-components";
 import { Grid, Text } from "../../../elements/Index";
 
 // TitleDetail의 함수형 컴포넌트를 만든다.
-const TitleDetail = props => {
+const TitleDetail = (props) => {
   return (
     <React.Fragment>
       <Grid margin="60px auto auto">
         <TitleMedia>
-          <Text size="40px" bold>
+          <TitleText size="40px" bold>
             {props.passedData?.title}
-          </Text>
+          </TitleText>
         </TitleMedia>
         <Line />
       </Grid>
@@ -31,6 +31,14 @@ const Line = styled.hr`
 const TitleMedia = styled.p`
   @media screen and (max-width: 376px) {
     font-size: 10px;
+  }
+`;
+
+const TitleText = styled.p`
+  font-size: 40px;
+  font-weight: 500;
+  @media screen and (max-width: 376px) {
+    font-size: 20px;
   }
 `;
 
