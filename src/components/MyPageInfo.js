@@ -71,7 +71,7 @@ const MyPageInfo = (props) => {
     setFilter(data);
   };
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     // console.log("뭐고");
     setEndProject(null);
     dispatch(postActions.isMainPage(false));
@@ -164,7 +164,7 @@ const MyPageInfo = (props) => {
         <Spinner />
       ) : (
         <>
-          {mydata && myType && (
+          {mydata && myType && endProject && (
             <Grid className="전체페이지" maxWidth="1400px" margin="auto">
               <Grid height="30%" position="relative">
                 <Banner>
