@@ -72,10 +72,11 @@ const MypageFilter = props => {
 };
 
 const Wrap = styled.div`
+  width: 60vw;
   display: flex;
   width: 100%;
   justify-content: space-around;
-  max-width: 1050px;
+  max-width: 850px;
 `;
 
 export default MypageFilter;

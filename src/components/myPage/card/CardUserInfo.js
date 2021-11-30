@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { Grid, Image, Text, Button } from "../../../elements/Index";
 
-const CardUserInfo = (props) => {
+const CardUserInfo = props => {
   const [techStack, setTeckstack] = React.useState([]);
   const [nickName, setNickName] = React.useState();
   const [email, setEmail] = React.useState();
@@ -112,6 +112,7 @@ const MyInfoText2 = styled.div`
   font-size: 14px;
   display: flex;
   color: #737373;
+  width: 90%;
 `;
 
 const Line = styled.hr`

@@ -183,7 +183,7 @@ const TypeResultTest = props => {
                   position="relative"
                   margin="15px 0 0 0"
                   width="94%"
-                  maxWidth="1150px"
+                  maxWidth="750px"
                 >
                   <GotoTest
                     onClick={() => {
@@ -209,7 +209,11 @@ const TypeResultTest = props => {
             {params.id != props.myUserId && (
               <YourName> Nikname | {props.nickName}</YourName>
             )}
-            <Dialog scroll="paper" open={props.testmodal}>
+            <Dialog
+              scroll="paper"
+              open={props.testmodal}
+              onClose={props.TestClose}
+            >
               <TestWrap>
                 <PropensityTest
                   mypage={props.mypage}
@@ -228,11 +232,7 @@ const Wrap = styled.div`
   max-width: 1400px;
   height: 100%;
   width: 60vw;
-  margin-left: 30%;
-
-  @media screen and (max-width: 1600px) {
-    margin-left: 35%;
-  }
+  margin-left: 35%;
 
   @media screen and (max-width: 1200px) {
     width: 90vw;

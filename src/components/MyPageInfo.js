@@ -337,43 +337,30 @@ const Banner = styled.div`
 
 const FilterWrap = styled.div`
   display: flex;
-  margin-left: 30%;
-  width: 60vw;
+  margin-left: 35%;
+  width: 870px;
+  max-width: 1400px
   z-index: 999;
 
-  @media screen and (max-width: 1600px) {
-    margin-left: 35%;
-  }
   @media screen and (max-width: 1200px) {
     width: 90vw;
     justify-content: center;
     margin: auto;
   }
-  @media screen and (max-width: 750px) {
-    width: 90vw;
-    justify-content: center;
-    margin: auto;
-  } ;
 `;
-const IntroduceWrap = styled.div`
-  margin: 0 0 0 30%;
-  width: 60vw;
-  max-width: 1050px;
 
-  @media screen and (max-width: 1600px) {
-    margin-left: 35%;
-  }
+const IntroduceWrap = styled.div`
+  margin-left: 37%;
+  width: 60vw;
+  max-width: 780px;
+
   @media screen and (max-width: 1200px) {
     width: 90vw;
     justify-content: center;
     margin: auto;
   }
-  @media screen and (max-width: 750px) {
-    width: 90vw;
-    justify-content: center;
-    margin: auto;
-  } ;
 `;
+
 const NoIntroduction = styled.img`
   width: 40%;
   height: 40%;
@@ -408,19 +395,6 @@ const IntroduceBtn = styled.div`
   justify-content: center;
   margin: auto;
   width: 150px;
-`;
-
-const NoticeText = styled.div`
-  color: #737373;
-  font-size: 12px;
-
-  @media screen and (min-width: 490px) {
-    color: #737373;
-    font-size: 12px;
-  }
-  @media screen and (min-width: 491px) {
-    display: none;
-  } ;
 `;
 
 export default MyPageInfo;

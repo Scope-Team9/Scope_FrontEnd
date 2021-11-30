@@ -184,7 +184,7 @@ const LoginModal = props => {
         maxWidth={"sm"}
         scroll="paper"
         open={showModal}
-        // onClose={modalClose}
+        onClose={modalClose}
       >
         <SignupModalWrap>
           {/* 테스트가 필요한경우 */}

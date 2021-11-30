@@ -5,7 +5,7 @@ import styled from "styled-components";
 import HeaderLeft from "../components/HeaderLeft";
 import HeaderRight from "./HeaderRight";
 
-const Header = (props) => {
+const Header = props => {
   //로고를 망원경 하나로 바꾸고 , 닉네임 없애고, 로그아웃을 삼단선으로
   return (
     <>
@@ -23,10 +23,7 @@ const Header = (props) => {
 
 const Wrap = styled.div`
   max-width: 1400px;
-<<<<<<< HEAD
-=======
   width: 100vw;
->>>>>>> c41bccbb6a8c0a3c38a82200a8f12567b7394eaf
   margin: auto;
   height: 5%;
   display: flex;

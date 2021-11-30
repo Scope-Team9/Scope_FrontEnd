@@ -170,7 +170,6 @@ const PropensityTest = props => {
             sx={{ color: "#fff", fontSize: 30 }}
             onClick={() => {
               props.TestClose();
-              window.location.reload();
             }}
             cursor="pointer"
           />
