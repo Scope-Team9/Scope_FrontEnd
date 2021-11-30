@@ -125,18 +125,19 @@ const Liked = props => {
                     key={user.userId}
                     {...user}
                   >
-                    <Grid margin="auto" width="10%">
+                    <Grid margin="auto" width="20%">
                       <ImgType type={passdedMenber[idx].userPropensityType} />
                     </Grid>
-                    <Grid height="100%" width=" 70%" margin="auto">
+                    <Grid height="100%" width=" 80%" margin="auto">
                       <Grid display="flex" height="60%" margin="auto">
                         <Grid
                           margin="auto"
                           height="50px"
                           display="flex"
                           justifyContent="space-between"
+                          margin="auto 20px"
                         >
-                          <Grid height="100%" textAlign="center" width="50%">
+                          <Grid height="100%" textAlign="center" width="60%">
                             <Grid
                               borderRadius="20px 0 0 20px"
                               bg="#17334A"
@@ -146,7 +147,9 @@ const Liked = props => {
                               alignItems="center"
                               justifyContent="center"
                             >
-                              <Text color="#fff">닉네임</Text>
+                              <Text size="12px" color="#fff">
+                                닉네임
+                              </Text>
                             </Grid>
                             <Grid
                               borderRadius="20px 0 0 20px"
@@ -156,7 +159,9 @@ const Liked = props => {
                               alignItems="center"
                               justifyContent="center"
                             >
-                              <Text color="#fff">타입</Text>
+                              <Text size="12px" color="#fff">
+                                타입
+                              </Text>
                             </Grid>
                           </Grid>
                           <Grid
@@ -174,7 +179,9 @@ const Liked = props => {
                               alignItems="center"
                               justifyContent="center"
                             >
-                              {passdedMenber[idx].nickname}
+                              <Text size="12px">
+                                {passdedMenber[idx].nickname}{" "}
+                              </Text>
                             </Grid>
                             <Grid
                               height="50%"
@@ -184,7 +191,9 @@ const Liked = props => {
                               alignItems="center"
                               justifyContent="center"
                             >
-                              {passdedMenber[idx].userPropensityType}
+                              <Text size="12px">
+                                {passdedMenber[idx].userPropensityType}
+                              </Text>
                             </Grid>
                           </Grid>
                         </Grid>
@@ -237,9 +246,13 @@ const Liked = props => {
 };
 
 const ModalWrap = styled.div`
+  margin: 30px auto;
   width: 550px;
-  height: 700px;
+  height: 100%;
   position: relative;
+  @media (max-width: 620px) {
+    width: 90%;
+  }
 `;
 
 const UserImg = styled.img`
