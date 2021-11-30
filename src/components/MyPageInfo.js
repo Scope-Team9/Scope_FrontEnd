@@ -133,7 +133,7 @@ const MyPageInfo = props => {
       ) : (
         <>
           {mydata && myType && (
-            <Grid className="전체페이지" maxWidth="1900px" margin="auto">
+            <Grid className="전체페이지" maxWidth="1400px" margin="auto">
               <Grid height="30%" position="relative">
                 <Banner>
                   <Banners

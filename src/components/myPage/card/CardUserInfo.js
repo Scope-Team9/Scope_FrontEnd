@@ -31,7 +31,7 @@ const CardUserInfo = (props) => {
               <p>E-mail </p>
             </div>
             <div style={{ width: "90px" }}>
-              <p>{props.email}</p>
+              <p style={{ fontWeight: "bold" }}>{props.email}</p>
             </div>
           </MyInfoText1>
         </>

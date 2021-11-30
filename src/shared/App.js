@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { Grid } from "../elements/Index";
 import React from "react";
 import "./App.css";
 import { ConnectedRouter } from "connected-react-router";
@@ -26,8 +27,8 @@ import NotFound from "../shared/NotFound";
 import PropensityTest from "../components/propensityTest/PropensityTest";
 
 function App() {
-  const isLogin = useSelector(state => state.user.isLogin);
-  const userInfo = useSelector(state => state.user);
+  const isLogin = useSelector((state) => state.user.isLogin);
+  const userInfo = useSelector((state) => state.user);
   const isCookie = document.cookie.split("=")[1];
   const dispatch = useDispatch();
 

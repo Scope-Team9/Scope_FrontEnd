@@ -77,31 +77,6 @@ const Banners = (props) => {
       {myData && (
         <BannerAnimals color={myData.color}>
           <BannerImg src={myData.img}></BannerImg>
-          {/* <Grid
-            margin="-600px 0 0 33.5%"
-            display="flex"
-            height="200px"
-            width="100%"
-            justifyContent="space-between"
-            
-          >
-            <WhiteP>
-              {myData.id} / {myData.name}
-            </WhiteP> */}
-
-          {/* {props.myPage === true && (
-              <Grid alignItems="center" display="flex" justifyContent="center">
-                <ConfirmEmail
-                  onClick={() => {
-                    props.onClick();
-                  }}
-                >
-                  이메일 인증하기
-                </ConfirmEmail>
-                <EmailAuth modal={props.modal} setModal={props.setModal} />
-              </Grid>
-            )} */}
-          {/* </Grid> */}
         </BannerAnimals>
       )}
     </React.Fragment>
