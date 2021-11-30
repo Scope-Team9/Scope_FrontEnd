@@ -147,6 +147,7 @@ const PropensityTest = props => {
       console.log("여기1");
       dispatch(userCreators.modal());
       history.push("/");
+      return props.TestClose();
     }
     console.log("여기2");
     dispatch(userCreators.modal());

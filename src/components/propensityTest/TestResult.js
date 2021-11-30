@@ -62,15 +62,13 @@ const TestResult = props => {
 };
 
 const ElText = styled.span`
-  font-size: 13px;
+  font-size: 11px;
   text-align: center;
   font-family: "GmarketSans";
   line-height: 1.2;
-  text-decoration
   letter-spacing: -0.0375em;
   @media (max-width: 650px) {
     font-size: 10px;
-    
   }
 `;
 
