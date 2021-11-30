@@ -173,16 +173,6 @@ const ApplyStatusModal = (props) => {
                       {applyedUsers[idx].userPropensityType === "FHP" && (
                         <UserImg src="/img/물개.png"></UserImg>
                       )}
-                      <ModalMedia>
-                        <Grid width="100%" textAlign="center">
-                          <Grid bg="#55447561" width="100%" height="50%">
-                            {applyedUsers[idx].nickname}
-                          </Grid>
-                          <Grid bg="#f5f5f5" height="50%">
-                            {applyedUsers[idx].userPropensityType}
-                          </Grid>
-                        </Grid>
-                      </ModalMedia>
                     </Grid>
                     <Grid height="100%" width="80%">
                       <Wrap>
@@ -200,6 +190,16 @@ const ApplyStatusModal = (props) => {
                               성향
                             </Grid>
                           </Grid> */}
+                          <ModalMedia>
+                            <Grid height="100%" textAlign="center">
+                              <Grid bg="#55447561" width="200px" height="50%">
+                                {applyedUsers[idx].nickname}
+                              </Grid>
+                              <Grid bg="#f5f5f5" height="50%">
+                                {applyedUsers[idx].userPropensityType}
+                              </Grid>
+                            </Grid>
+                          </ModalMedia>
                         </Grid>
                         <ButtonMedia>
                           <Grid display="flex">
@@ -227,7 +227,9 @@ const ApplyStatusModal = (props) => {
                                 _onClick={(e) => {
                                   cancelOffer(e.target.value);
                                 }}
-                              ></Button>
+                              >
+                                취소
+                              </Button>
                             </Grid>
                           </Grid>
                         </ButtonMedia>
@@ -268,16 +270,15 @@ const ModalWrap = styled.div`
     width: 300px;
   } ;
 `;
-
 const CommentBubble = styled.div`
   color: white;
   position: relative;
   background: #554475;
-  height: auto;
+  height: 12px;
   /* border: #b29cf4 solid 1px; */
   border-radius: 10px;
   padding: 5px 12px;
-  /* ::after {
+  ::after {
     content: "";
     position: absolute;
     border-style: solid;
@@ -288,7 +289,7 @@ const CommentBubble = styled.div`
     z-index: 1;
     top: 10px;
     left: -15px;
-  } */
+  }
 `;
 
 const UserImg = styled.img`

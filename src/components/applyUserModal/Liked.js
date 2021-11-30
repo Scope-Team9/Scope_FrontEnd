@@ -139,7 +139,7 @@ const Liked = (props) => {
                           <Grid height="100%" textAlign="center" width="50%">
                             <Grid
                               borderRadius="20px 0 0 20px"
-                              bg="#554475"
+                              bg="#17334A"
                               height="50%"
                               margin="0 0 3px 0 "
                               display="flex"
@@ -150,13 +150,13 @@ const Liked = (props) => {
                             </Grid>
                             <Grid
                               borderRadius="20px 0 0 20px"
-                              bg="#554475"
+                              bg="#17334A"
                               height="50%"
                               display="flex"
                               alignItems="center"
                               justifyContent="center"
                             >
-                              <Text color="#fff">성향</Text>
+                              <Text color="#fff">타입</Text>
                             </Grid>
                           </Grid>
                           <Grid
