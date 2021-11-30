@@ -9,7 +9,8 @@ import Swal from "sweetalert2";
 import { apis } from "../../lib/axios";
 import CardUserInfo from "./card/CardUserInfo";
 
-const MypageCard = props => {
+const MypageCard = (props) => {
+  // console.log(props);
   const [editMyProfile, setEditMyProfile] = React.useState(false); //
   const [checkEmail, setCheckEmail] = React.useState();
   const [deleteModal, setDeleteModal] = React.useState(false);
@@ -89,20 +90,18 @@ const MypageCard = props => {
       <CardImgs myType={props.myType} />
 
       {props.editMyProfile === false && (
-        <>
-          <CardUserInfo
-            editMyProfile={props.editMyProfile}
-            setEditMyProfile={props.setEditMyProfile}
-            mydata={props.mydata}
-            myType={props.myType}
-            myUserId={props.myUserId}
-            userId={props.userId}
-            nickName={props.nickName}
-            email={props.email}
-            techStack={props.techStack}
-            onClick={props.onClick}
-          />
-        </>
+        <CardUserInfo
+          editMyProfile={props.editMyProfile}
+          setEditMyProfile={props.setEditMyProfile}
+          mydata={props.mydata}
+          myType={props.myType}
+          myUserId={props.myUserId}
+          userId={props.userId}
+          nickName={props.nickName}
+          email={props.email}
+          techStack={props.techStack}
+          onClick={props.onClick}
+        />
       )}
       {props.editMyProfile === true && (
         <>
@@ -127,47 +126,13 @@ const MypageCard = props => {
                   padding: "7px",
                 }}
                 defaultValue={props.nickName}
-                onChange={e => {
+                onChange={(e) => {
                   setNickName(e.target.value);
                 }}
               ></input>
             </div>
           </MyInfoText1>
 
-          {/* 이메일 */}
-          {/* <MyInfoText1>
-            <div
-              style={{
-                width: "90px",
-                marginLeft: "30px",
-                height: "60px",
-              }}
-            >
-              <p style={{ marginTop: "20px" }}>E-mail </p>
-            </div>
-            <div style={{ width: "90px" }}>
-              <input
-                style={{
-                  borderRadius: "5px",
-                  borderColor: "#707070",
-                  WebkitAppearance: "none",
-                  MozAppearance: "none",
-                  appearance: "none",
-                  color: "#707070",
-                  border: "1px solid #707070",
-                  outlineStyle: "none",
-                  margin: "15px 0 0 0",
-                  width: "150px",
-                  padding: "7px",
-                }}
-                defaultValue={props.email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-              ></input>
-            </div>
-          </MyInfoText1> */}
-          {/* 기술스택 */}
           <MyInfoText1>
             <div
               style={{
@@ -187,7 +152,7 @@ const MypageCard = props => {
                 styles={styles}
                 className="basic-multi-select"
                 classNamePrefix="select"
-                onChange={e => {
+                onChange={(e) => {
                   let techStack = [];
                   let arr = e;
                   let idx = 0;

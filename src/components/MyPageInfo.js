@@ -16,13 +16,13 @@ import Banners from "./myPage/Banners";
 import MypageCard from "./myPage/MypageCard";
 import TypeResultTest from "./myPage/TypeResultTest";
 import MypageFilter from "./myPage/MypageFilter";
+import { userCreators } from "../redux/modules/user";
 import { pageCheckAction } from "../redux/modules/pageCheck";
 
 // MyPageInfo의 함수형 컴포넌트를 만든다.
 const MyPageInfo = (props) => {
   const dispatch = useDispatch();
   const userId = props.match.params.id;
-
   const myUserId = useSelector((state) => state.user.userId);
   const [myUrl, setMyUrl] = React.useState();
   const [filter, setFilter] = React.useState("소개");
@@ -31,24 +31,33 @@ const MyPageInfo = (props) => {
   const [techStack, setTeckstack] = React.useState([]); //
   const [nickName, setNickName] = React.useState(); //
   const [email, setEmail] = React.useState(); //
-  const myType = mydata?.user.userPropensityType;
+  const [myType, setMyType] = React.useState(); ////////////
+  // const myType = mydata?.user.userPropensityType;
   const [modal, setModal] = React.useState(false);
   const [testmodal, setTestModal] = React.useState(false);
   const [assessment, setAssessment] = React.useState(false);
-  const [userPropensityType, setUserPropensityType] = React.useState();
 
   const [memberId, setMemberId] = React.useState(); //멤버아이디
   const [writerEquals, setWriterEquals] = React.useState(); //포스트의 작성자확인
 
   const pageCheck = useSelector((state) => state.pagecheck.pageGo);
 
-  //click
-  const introduction = mydata?.user.introduction ? true : false;
+  ////
+  const [introduction, setIntroduction] = React.useState(); //포스트의 작성자확인
 
-  const recruitmentProject = mydata?.recruitment;
-  const inProgressProject = mydata?.inProgress;
-  const bookMarkProject = mydata?.bookmark;
-  const endProject = mydata?.end;
+  const [recruitmentProject, setRecruitmentProject] = React.useState(); //멤버아이디
+  const [inProgressProject, setInProgressProject] = React.useState(); //포스트의 작성자확인
+  const [bookMarkProject, setBookMarkProject] = React.useState(); //멤버아이디
+  const [endProject, setEndProject] = React.useState(); //포스트의 작성자확인
+  ////
+
+  //click
+  // const introduction = mydata?.user.introduction ? true : false;
+
+  // const recruitmentProject = mydata?.recruitment;
+  // const inProgressProject = mydata?.inProgress;
+  // const bookMarkProject = mydata?.bookmark;
+  // const endProject = mydata?.end;
   // console.log(mydata);
 
   const [loading, setLoading] = React.useState(true);
@@ -62,22 +71,21 @@ const MyPageInfo = (props) => {
     setFilter(data);
   };
 
-  React.useEffect(() => {
-    setMydata(null);
+  React.useLayoutEffect(() => {
+    // console.log("뭐고");
+    setEndProject(null);
     dispatch(postActions.isMainPage(false));
     dispatch(postActions.whatPage("myPage"));
     const fetchData = async () => {
       try {
         const result = await apis.getMypage(userId);
-        // console.log(result);
-        setNickName(result.data.data.user.nickname);
-        setEmail(result.data.data.user.email);
-        setTeckstack(result.data.data.user.techStackList);
-        setUserPropensityType(result.data.data.user.userPropensityType);
+        console.log(result);
+
+        setEndProject(result.data.data.end);
 
         setMydata(result.data.data);
         dispatch(pageCheckAction.getPageCheck(`/mypage/${userId}`));
-
+        dispatch(userCreators.setUser(result.data.data.user));
         setLoading(false);
       } catch (err) {
         // console.log(err);
@@ -85,9 +93,9 @@ const MyPageInfo = (props) => {
     };
     fetchData();
     // console.log(mydata);
-  }, [assessment, testmodal, userPropensityType]);
+  }, [assessment, testmodal]);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     const fetchData = async () => {
       try {
         const result = await apis.getMypage(userId);
@@ -95,7 +103,6 @@ const MyPageInfo = (props) => {
         setNickName(result.data.data.user.nickname);
         setEmail(result.data.data.user.email);
         setTeckstack(result.data.data.user.techStackList);
-        setUserPropensityType(result.data.data.user.userPropensityType);
 
         // setLoading(false);
       } catch (err) {
@@ -110,6 +117,12 @@ const MyPageInfo = (props) => {
     const fetchData = async () => {
       try {
         const result = await apis.getMypage(userId);
+        setRecruitmentProject(result.data.data.recruitment);
+        setInProgressProject(result.data.data.inProgress);
+        setBookMarkProject(result.data.data.bookmark);
+        setEndProject(result.data.data.end);
+        setIntroduction(result.data.data.user.introduction);
+        setMyType(result.data.data.user.userPropensityType);
 
         setMydata(result.data.data);
         dispatch(pageCheckAction.getPageCheck(`/mypage/${userId}`));
@@ -300,7 +313,7 @@ const MyPageInfo = (props) => {
                   )}
                 </IntroduceWrap>
                 <IntroduceWrap>
-                  {filter === "소개" && introduction === false && (
+                  {filter === "소개" && introduction === "" && (
                     <>
                       <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
                       <NoIntroductionText>

@@ -17,7 +17,7 @@ const MODAL = "MODAL";
 //액션생성
 const firstUser = createAction(FIRST_USER, user => ({ user }));
 const testUser = createAction(TEST_USER, user => ({ user }));
-const setUser = createAction(SET_USER, user => ({ user }));
+export const setUser = createAction(SET_USER, user => ({ user }));
 const logOut = createAction(LOG_OUT, user => ({ user }));
 
 export const email = createAction(EMAIL, user => ({ user }));
@@ -307,6 +307,7 @@ const userCreators = {
   logOut,
   modal,
   email,
+  setUser,
 };
 
 export { userCreators };
