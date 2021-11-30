@@ -8,9 +8,9 @@ import { applyCreators } from "../redux/modules/applyProject";
 import CloseIcon from "@mui/icons-material/Close";
 import { apis } from "../lib/axios";
 import { useHistory } from "react-router";
-const ApplyStatusModal = props => {
+const ApplyStatusModal = (props) => {
   const dispatch = useDispatch();
-  const applyUsers = useSelector(state => state.apply.applyUsers);
+  const applyUsers = useSelector((state) => state.apply.applyUsers);
   const [applyedUsers, setApplyUsers] = React.useState();
   const [acceptButton, setAcceptButton] = React.useState();
   const { applyStatusModal, setApplyStatusModal, postId } = props;
@@ -36,7 +36,7 @@ const ApplyStatusModal = props => {
     // dispatch(applyCreators.applyUserAPI(postId));
   }, [applyStatusModal, acceptButton]);
 
-  const acceptOffer = acceptUser => {
+  const acceptOffer = (acceptUser) => {
     const acceptInfo = {
       userId: acceptUser,
       accept: true,
@@ -57,7 +57,7 @@ const ApplyStatusModal = props => {
     // dispatch(applyCreators.acceptOfferAPI(postId, acceptInfo));
   };
 
-  const cancelOffer = cancelUser => {
+  const cancelOffer = (cancelUser) => {
     const acceptInfo = {
       userId: cancelUser,
       accept: false,
@@ -79,10 +79,11 @@ const ApplyStatusModal = props => {
           <ModalWrap>
             <Grid
               height="12%"
-              bg="#17334A"
+              bg="#554475"
               position="relative"
               textAlign="center"
               padding="10px 0 0 0"
+              boxShadow="0px 0px 10px #554475"
             >
               <Grid
                 position="absolute"
@@ -137,6 +138,8 @@ const ApplyStatusModal = props => {
                     padding="10px"
                     width="90%"
                     key={user.userId}
+                    borderRadius="10px"
+                    boxShadow="0px 0px 10px #554475"
                     {...user}
                   >
                     <Grid
@@ -179,54 +182,61 @@ const ApplyStatusModal = props => {
                           display="flex"
                           justifyContent="space-between"
                         >
-                          <Grid height="100%" textAlign="center">
+                          {/* <Grid height="100%" textAlign="center">
                             <Grid bg="#eee" height="50%">
                               닉네임
                             </Grid>
                             <Grid bg="#aaa" height="50%">
-                              타입
+                              성향
                             </Grid>
-                          </Grid>
-                          <Grid margin="auto" height="100%" textAlign="center">
-                            <Grid height="50%">
-                              {applyedUsers[idx].nickname}
+                          </Grid> */}
+                          <ModalMedia>
+                            <Grid height="100%" textAlign="center">
+                              <Grid bg="#55447561" width="200px" height="50%">
+                                {applyedUsers[idx].nickname}
+                              </Grid>
+                              <Grid bg="#f5f5f5" height="50%">
+                                {applyedUsers[idx].userPropensityType}
+                              </Grid>
                             </Grid>
-                            <Grid height="50%">
-                              {applyedUsers[idx].userPropensityType}
-                            </Grid>
-                          </Grid>
+                          </ModalMedia>
                         </Grid>
-                        <Grid display="flex">
-                          <Grid margin="auto" height="auto" width="80%">
-                            <Button
-                              common
-                              isValue={applyedUsers[idx].userId}
-                              _onClick={e => {
-                                // console.log(e);
-                                acceptOffer(e.target.value);
-                              }}
+                        <ButtonMedia>
+                          <Grid display="flex">
+                            <Grid margin="auto" height="auto" width="50px">
+                              <Button
+                                common
+                                isValue={applyedUsers[idx].userId}
+                                _onClick={(e) => {
+                                  acceptOffer(e.target.value);
+                                }}
+                              >
+                                수락
+                              </Button>
+                            </Grid>
+                            <Grid
+                              margin="auto auto auto 3px"
+                              height="50px"
+                              width="50px"
                             >
-                              수락
-                            </Button>
+                              <Button
+                                common
+                                isValue={applyedUsers[idx].userId}
+                                _onClick={(e) => {
+                                  cancelOffer(e.target.value);
+                                }}
+                              >
+                                취소
+                              </Button>
+                            </Grid>
                           </Grid>
-                          <Grid
-                            margin="auto auto auto 3px"
-                            height="50px"
-                            width="80%"
-                          >
-                            <Button
-                              common
-                              isValue={applyedUsers[idx].userId}
-                              _onClick={e => {
-                                cancelOffer(e.target.value);
-                              }}
-                            >
-                              취소
-                            </Button>
-                          </Grid>
-                        </Grid>
+                        </ButtonMedia>
                       </Wrap>
-                      <CommentBubble>{applyedUsers[idx].comment}</CommentBubble>
+                      <Grid margin="10px 0px 0px">
+                        <CommentBubble>
+                          {applyedUsers[idx].comment}
+                        </CommentBubble>
+                      </Grid>
                     </Grid>
                   </Grid>
                 ))}
@@ -239,6 +249,18 @@ const ApplyStatusModal = props => {
   );
 };
 
+const ModalMedia = styled.div`
+  @media screen and (max-width: 600px) {
+  } ;
+`;
+
+const ButtonMedia = styled.div`
+  @media screen and (max-width: 600px) {
+    width: 150px;
+    height: 20px;
+  } ;
+`;
+
 const ModalWrap = styled.div`
   width: 550px;
   height: 500px;
@@ -247,18 +269,19 @@ const ModalWrap = styled.div`
   } ;
 `;
 const CommentBubble = styled.div`
+  color: white;
   position: relative;
-  background: #f1f9ff;
-  height: auto;
+  background: #554475;
+  height: 12px;
   /* border: #b29cf4 solid 1px; */
   border-radius: 10px;
-  padding: 0 12px;
+  padding: 5px 12px;
   ::after {
     content: "";
     position: absolute;
     border-style: solid;
-    border-width: 10px 15px 0;
-    border-color: #f1f9ff transparent;
+    border-width: 10px 20px 0;
+    border-color: #554475 transparent;
     display: block;
     width: 0;
     z-index: 1;
@@ -269,8 +292,8 @@ const CommentBubble = styled.div`
 
 const UserImg = styled.img`
   object-fit: cover;
-  width: 90%;
-  border-radius: 12px;
+  width: 80%;
+  border-radius: 20px;
   background-color: #ececec;
   cursor: pointer;
 `;

@@ -22,6 +22,7 @@ const StatusDetail = (props) => {
               border="1px solid #2699FB"
               borderRadius="50px"
               padding="4px"
+              size="12px"
             >
               {props.passedData?.projectStatus}
             </Text>
@@ -33,6 +34,7 @@ const StatusDetail = (props) => {
               border="1px solid #15B915"
               borderRadius="50px"
               padding="4px"
+              size="12px"
             >
               {props.passedData?.projectStatus}
             </Text>
@@ -44,6 +46,7 @@ const StatusDetail = (props) => {
               border="1px solid #f9a8a8"
               borderRadius="50px"
               padding="4px"
+              size="12px"
             >
               {props.passedData?.projectStatus}
             </Text>

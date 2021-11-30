@@ -136,6 +136,7 @@ const PostEdit = (props) => {
               borderRadius="30px"
               maxWidth="1400px"
               margin="40px auto 0px"
+              boxShadow="0px 0px 10px #554475"
             >
               <LeftBanner />
               <Grid margin="18px 80px 0px">

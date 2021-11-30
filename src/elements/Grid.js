@@ -12,6 +12,7 @@ const Grid = (props) => {
     width,
     height,
     bg,
+    color,
     display,
     justifyContent,
     alignItems,
@@ -54,6 +55,7 @@ const Grid = (props) => {
     padding,
     width,
     height,
+    color,
     bg,
     display,
     justifyContent,
@@ -105,6 +107,7 @@ Grid.defaultProps = {
   width: "100%",
   height: "100%",
   bg: null,
+  color: null,
   display: null,
   justifyContent: null,
   alignItems: false,
@@ -142,6 +145,7 @@ const GridBox = styled.div`
   height: ${(props) => props.height};
   background: ${(props) => props.bg};
   display: ${(props) => props.display};
+  color: ${(props) => props.color};
   ${(props) =>
     props.flexDirection ? `flex-direction:${props.flexDirection}` : ""};
   flex-wrap: ${(props) => props.flexWrap};
