@@ -10,6 +10,8 @@ import LoginModal from "../LoginModal";
 import { Dialog } from "@material-ui/core";
 import Slide from "./SlideData.json";
 import EmailAuth from "../EmailAuth";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -23,6 +25,22 @@ const MainSlide = () => {
 
   const history = useHistory();
 
+  const NextArrow = ({ onClick }) => {
+    return (
+      <div className="arrow next" onClick={onClick}>
+        <KeyboardArrowRightIcon sx={{ color: "transparent", fontSize: 10 }} />
+      </div>
+    );
+  };
+
+  const PrevArrow = ({ onClick }) => {
+    return (
+      <div className="arrow prev" onClick={onClick}>
+        <KeyboardArrowLeftIcon sx={{ color: "transparent", fontSize: 10 }} />
+      </div>
+    );
+  };
+
   const settings = {
     dots: true, //화면아래 컨텐츠 갯수 표시
     autoplay: true, // 자동 스크롤 사용 여부
@@ -34,8 +52,8 @@ const MainSlide = () => {
     slidesToShow: 1, //화면에 보여질 개수
     centerMode: true, //활성화 된 슬라이드 가운데 배치
     centerPadding: 0, //center 슬라이드 패딩값
-    // nextArrow: <NextArrow />, //다음 화살표 모양 설정
-    // prevArrow: <PrevArrow />, //다음 화살표 모양 설정
+    nextArrow: <NextArrow />, //다음 화살표 모양 설정
+    prevArrow: <PrevArrow />, //다음 화살표 모양 설정
     // beforeChange: (current, next) => setImageIndex(next), // beforeChange(slick, currentSlide)	슬라이드 전 호출
     // responsive: [
     //   //반응형웹구현 옵션
@@ -74,7 +92,7 @@ const MainSlide = () => {
 
   return (
     <React.Fragment>
-      <div className="Container" style={{ width: "97%" }}>
+      <div className="Container" style={{ width: "100%" }}>
         <Slider {...settings}>
           {Slide.slide.map(item => (
             <div key={item.id} className="slide">

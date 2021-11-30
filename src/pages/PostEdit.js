@@ -21,7 +21,7 @@ import DateEdit from "../components/postEdit/rightContentsEdit/DateEdit";
 import EditButton from "../components/postEdit/rightContentsEdit/EditButton";
 import Swal from "sweetalert2";
 // PostEdit의 함수형 컴포넌트를 만든다.
-const PostEdit = (props) => {
+const PostEdit = props => {
   const dispatch = useDispatch();
   const animatedComponents = makeAnimated();
   const [checkPost, setCheckPost] = React.useState();
@@ -83,7 +83,7 @@ const PostEdit = (props) => {
         setSummary(setValue.summary);
         setContents(setValue.contents);
         setTectstack(
-          setValue.techStack.map((value) => ({ label: value, value }))
+          setValue.techStack.map(value => ({ label: value, value }))
         );
         setStartdate(setValue?.startDate);
         setEnddate(setValue.endDate);
@@ -119,7 +119,7 @@ const PostEdit = (props) => {
 
   return (
     <React.Fragment>
-      {chatUrl && (
+      {checkPost && (
         <Grid
           display="flex"
           justifyContent="center"
