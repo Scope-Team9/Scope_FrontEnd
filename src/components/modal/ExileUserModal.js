@@ -154,7 +154,7 @@ const ExileUserModal = (props) => {
                               닉네임
                             </Texts>
                             <Texts bg="#aaa" height="50%">
-                              타입
+                              성향
                             </Texts>
                           </Grid>
                           <Grid margin="auto" height="100%" textAlign="center">

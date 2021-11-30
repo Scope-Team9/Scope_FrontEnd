@@ -30,7 +30,7 @@ const DateBox = styled.div`
   color: black;
   font-size: 11px;
   padding: 4px 10px;
-  border: 1px solid #4c4759;
+  border: 1px solid #554475;
   border-radius: 50px;
   text-align: center;
 `;
