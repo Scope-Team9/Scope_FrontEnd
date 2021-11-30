@@ -143,8 +143,13 @@ const PropensityTest = props => {
   };
 
   const exitResult = () => {
+    if (!props.mypage) {
+      console.log("여기1");
+      dispatch(userCreators.modal());
+      history.push("/");
+    }
+    console.log("여기2");
     dispatch(userCreators.modal());
-    history.push("/");
     props.TestClose();
   };
 
@@ -165,7 +170,6 @@ const PropensityTest = props => {
             sx={{ color: "#fff", fontSize: 30 }}
             onClick={() => {
               props.TestClose();
-              window.location.reload();
             }}
             cursor="pointer"
           />

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import HeaderLeft from "../components/HeaderLeft";
 import HeaderRight from "./HeaderRight";
 
-const Header = (props) => {
+const Header = props => {
   //로고를 망원경 하나로 바꾸고 , 닉네임 없애고, 로그아웃을 삼단선으로
   return (
     <>

@@ -20,7 +20,7 @@ const MainSlide = () => {
   const [showModal, setShowModal] = React.useState(false);
   const [loginShowModal, setLoginShowModal] = React.useState(false);
   const [emailShowModal, setEmailShowModal] = React.useState(false);
-  const userInfo = useSelector((state) => state.user);
+  const userInfo = useSelector(state => state.user);
   const isToken = document.cookie;
 
   const history = useHistory();
@@ -68,7 +68,7 @@ const MainSlide = () => {
     // ],
   };
 
-  const ClickEvent = (item) => {
+  const ClickEvent = item => {
     if (!isToken && item.division !== null) {
       setLoginShowModal(true);
     }
@@ -94,7 +94,7 @@ const MainSlide = () => {
     <React.Fragment>
       <div className="Container" style={{ width: "100%" }}>
         <Slider {...settings}>
-          {Slide.slide.map((item) => (
+          {Slide.slide.map(item => (
             <div key={item.id} className="slide">
               <img
                 src={item.img}
@@ -106,8 +106,13 @@ const MainSlide = () => {
             </div>
           ))}
         </Slider>
-        <Dialog maxWidth={"sm"} scroll="paper" open={showModal}>
-          <SignupModalWrap width="550px" height="100%">
+        <Dialog
+          maxWidth={"sm"}
+          scroll="paper"
+          open={showModal}
+          onClose={TestClose}
+        >
+          <SignupModalWrap>
             <PropensityTest TestClose={TestClose} />
           </SignupModalWrap>
         </Dialog>
@@ -128,10 +133,8 @@ const MainSlide = () => {
 const SignupModalWrap = styled.div`
   height: 100%;
   width: 550px;
-  margin-top: 100px;
   @media (max-width: 650px) {
     width: 310px;
-    height: 550px;
     font-size: 11px;
   }
 `;
