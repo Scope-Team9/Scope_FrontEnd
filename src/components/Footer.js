@@ -12,6 +12,8 @@ const Footer = (props) => {
   const userType = props.userInfo.userPropensityType;
   const userId = props.userInfo.userId;
   const isToken = document.cookie;
+  const nowPage = useSelector((state) => state.post.whatPage.now);
+
   const goToMypage = () => {
     history.push(`/`);
     setTimeout(() => {
@@ -22,6 +24,13 @@ const Footer = (props) => {
     history.push("/postadd");
   };
   const goToHome = () => {
+    if (nowPage === "mainPage") {
+      window.scrollTo({
+        behavior: "smooth",
+        left: 0,
+        top: 0,
+      });
+    }
     history.push("/");
   };
 

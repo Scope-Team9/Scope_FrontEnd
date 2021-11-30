@@ -68,15 +68,6 @@ const MainPage = () => {
     fetchData();
   }, [sortC, reBookC, Render, isToken, Render, isLogin]);
 
-  // React.useLayoutEffect(() => {
-  //   dispatch(postActions.whatPage("mainPage"));
-  //   // dispatch(postActions.getPostAPI());
-  //   // console.log(cards);
-
-  //   // console.log(post);
-  // }, [sortC, stack, reBookC, Render, isLogin]);
-  // stack, sortC, reBookC, Render, isLogin
-
   React.useEffect(() => {
     if (inView === true) {
       // setPaging(paging + 12);
@@ -97,27 +88,6 @@ const MainPage = () => {
     );
   };
 
-  // const lastScroll = useSelector((state) => state.infinity.current_scroll);
-  // let timer;
-  // const scroll = (e) => {
-  //   console.log(e);
-  //   if (timer) {
-  //     clearTimeout(timer);
-  //   }
-  //   timer = setTimeout(function () {
-  //     dispatch(pageAction.getScroll(e.target.scrollTop));
-  //   }, 500);
-  // };
-
-  // React.useEffect(() => {
-
-  // }, []);
-  // onScroll={scroll} ref={container}
-
-  // React.useEffect(() => {
-  //   scrollOnceMove();
-  // }, [scrollOnceMove]);
-
   const ScrollTop = () => {
     window.scrollTo({
       behavior: "smooth",
@@ -127,15 +97,14 @@ const MainPage = () => {
   };
 
   return (
-    // <div ref={refs}>
-    <div>
-      <Grid
-        maxWidth="1920px"
+    <OutWrap>
+      {/* <Grid
+        maxWidth="1400px"
         height="100%"
         bg="#ffff"
         padding="0px 0px 10px 0"
-      ></Grid>
-      <Grid margin="-10px 0 0 0 ">
+      ></Grid> */}
+      <Grid margin="0px 0 0 0 ">
         <Inside>
           <MainSlide />
           <Stacks>
@@ -211,12 +180,16 @@ const MainPage = () => {
         </Inside>
         <Grid height="600px"></Grid>
       </Grid>
-    </div>
+    </OutWrap>
   );
 };
+const OutWrap = styled.div`
+  max-width: 1400px;
+  width: 100%;
+  margin: auto;
+`;
 
 const Inside = styled.div`
-  margin: auto;
   @media screen and (max-width: 750px) {
   } ;
 `;
@@ -329,7 +302,7 @@ const Scrollup = styled.div`
   z-index: 999;
 
   @media screen and (max-width: 767px) {
-    position: fixed;
+    /* position: fixed;
 
     width: 50px;
     height: 50px;
@@ -338,7 +311,8 @@ const Scrollup = styled.div`
     bottom: 120px;
     margin: auto;
     cursor: pointer;
-    z-index: 999;
+    z-index: 999; */
+    display: none;
   } ;
 `;
 

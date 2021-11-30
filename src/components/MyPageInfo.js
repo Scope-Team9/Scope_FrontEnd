@@ -130,7 +130,7 @@ const MyPageInfo = (props) => {
       ) : (
         <>
           {mydata && myType && (
-            <Grid className="전체페이지" maxWidth="1900px" margin="auto">
+            <Grid className="전체페이지" maxWidth="1400px" margin="auto">
               <Grid height="30%" position="relative">
                 <Banner>
                   <Banners
@@ -265,7 +265,7 @@ const MyPageInfo = (props) => {
                       />
                     </button>
                   )}
-                <Grid margin="0 0 0 34%" width="49%">
+                <IntroduceWrap>
                   {filter === "소개" && introduction === true && (
                     <Grid margin="50px 0 0 0" border="1px solid #707070 ">
                       <MarkdownRead
@@ -273,7 +273,7 @@ const MyPageInfo = (props) => {
                       ></MarkdownRead>
                     </Grid>
                   )}
-                </Grid>
+                </IntroduceWrap>
                 <IntroduceWrap>
                   {filter === "소개" && introduction === false && (
                     <>
