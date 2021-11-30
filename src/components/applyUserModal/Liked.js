@@ -8,6 +8,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import ImgType from "../../shared/ImgType";
 
 const Liked = props => {
+  // console.log(props);
   const dispatch = useDispatch();
   const [likes, setLikes] = React.useState();
   const {
@@ -60,8 +61,10 @@ const Liked = props => {
       return;
     }
     // console.log("여기2");
+
     dispatch(applyCreators.starterLikeAPI(postId, likeUsers));
     toggleModal();
+    props.doSetAssessment();
     return;
   };
   // console.log(likes);

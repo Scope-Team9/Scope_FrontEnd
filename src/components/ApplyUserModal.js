@@ -42,6 +42,7 @@ const ApplyUserModal = props => {
     // applyUserModalOpen();
 
     setApplyUserModal(false);
+
     return;
   };
 
@@ -75,7 +76,7 @@ const ApplyUserModal = props => {
             page={page}
             setPage={setPage}
             statusCheck={statusCheck}
-            toggleModal={toggleModal}
+            doSetAssessment={props.doSetAssessment}
           />
         )}
         {/* {applyValue === "end" && page === 2 && (
@@ -93,7 +94,7 @@ const ApplyUserModal = props => {
             page={page}
             setPage={setPage}
             myPage={myPage}
-            toggleModal={toggleModal}
+            doSetAssessment={props.doSetAssessment}
           />
         )}
         {applyValue === "memberLiked" && (
@@ -106,6 +107,7 @@ const ApplyUserModal = props => {
             setPage={setPage}
             myPage={myPage}
             toggleModal={toggleModal}
+            doSetAssessment={props.doSetAssessment}
           />
         )}
       </Dialog>

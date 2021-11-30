@@ -19,11 +19,11 @@ import MypageFilter from "./myPage/MypageFilter";
 import { pageCheckAction } from "../redux/modules/pageCheck";
 
 // MyPageInfo의 함수형 컴포넌트를 만든다.
-const MyPageInfo = props => {
+const MyPageInfo = (props) => {
   const dispatch = useDispatch();
   const userId = props.match.params.id;
 
-  const myUserId = useSelector(state => state.user.userId);
+  const myUserId = useSelector((state) => state.user.userId);
   const [myUrl, setMyUrl] = React.useState();
   const [filter, setFilter] = React.useState("소개");
   const [mydata, setMydata] = React.useState();
@@ -34,11 +34,12 @@ const MyPageInfo = props => {
   const myType = mydata?.user.userPropensityType;
   const [modal, setModal] = React.useState(false);
   const [testmodal, setTestModal] = React.useState(false);
+  const [assessment, setAssessment] = React.useState(false);
 
   const [memberId, setMemberId] = React.useState(); //멤버아이디
   const [writerEquals, setWriterEquals] = React.useState(); //포스트의 작성자확인
 
-  const pageCheck = useSelector(state => state.pagecheck.pageGo);
+  const pageCheck = useSelector((state) => state.pagecheck.pageGo);
 
   //click
   const introduction = mydata?.user.introduction ? true : false;
@@ -50,43 +51,44 @@ const MyPageInfo = props => {
 
   const [loading, setLoading] = React.useState(true);
 
-  const SetFilter = data => {
+  const doSetAssessment = () => {
+    // console.log("실행됨");
+    setAssessment(!assessment);
+  };
+
+  const SetFilter = (data) => {
     setFilter(data);
   };
 
-  React.useLayoutEffect(() => {
-    // dispatch(myPageActions.getMypageAPI(userId));
-    // console.log(editMyProfile);
-    // setEmail(null);
-    // setNickName(null);
-    // console.log(pageCheck);
-
+  React.useEffect(() => {
+    setMydata(null);
     dispatch(postActions.isMainPage(false));
     dispatch(postActions.whatPage("myPage"));
     const fetchData = async () => {
       try {
         const result = await apis.getMypage(userId);
-        // console.log("마이페이지 몇번?", result);
-        // setMydata(result.data.data);
+        // console.log(result);
         setNickName(result.data.data.user.nickname);
         setEmail(result.data.data.user.email);
         setTeckstack(result.data.data.user.techStackList);
-        setLoading(false);
 
-        // console.log(result);
+        setMydata(result.data.data);
+        dispatch(pageCheckAction.getPageCheck(`/mypage/${userId}`));
+
+        setLoading(false);
       } catch (err) {
         // console.log(err);
       }
     };
     fetchData();
     // console.log(mydata);
-  }, [editMyProfile, testmodal]);
+  }, [assessment, editMyProfile, testmodal]);
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     const fetchData = async () => {
       try {
         const result = await apis.getMypage(userId);
-        // console.log(result);
+
         setMydata(result.data.data);
         dispatch(pageCheckAction.getPageCheck(`/mypage/${userId}`));
 
@@ -180,7 +182,7 @@ const MyPageInfo = props => {
                 </FilterWrap>
 
                 {filter === "모집" && (
-                  <MypagePostList {...recruitmentProject}></MypagePostList>
+                  <MypagePostList post={recruitmentProject}></MypagePostList>
                 )}
 
                 <IntroduceWrap>
@@ -195,7 +197,7 @@ const MyPageInfo = props => {
                 </IntroduceWrap>
 
                 {filter === "진행" && (
-                  <MypagePostList {...inProgressProject}></MypagePostList>
+                  <MypagePostList post={inProgressProject}></MypagePostList>
                 )}
                 <IntroduceWrap>
                   {filter === "진행" && inProgressProject.length === 0 && (
@@ -208,7 +210,7 @@ const MyPageInfo = props => {
                   )}
                 </IntroduceWrap>
                 {filter === "관심" && (
-                  <MypagePostList {...bookMarkProject}></MypagePostList>
+                  <MypagePostList post={bookMarkProject}></MypagePostList>
                 )}
                 <IntroduceWrap>
                   {filter === "관심" && bookMarkProject.length === 0 && (
@@ -221,7 +223,12 @@ const MyPageInfo = props => {
                   )}
                 </IntroduceWrap>
                 {filter === "완료" && (
-                  <MypagePostList {...endProject}></MypagePostList>
+                  <MypagePostList
+                    post={endProject}
+                    myUserId={myUserId}
+                    assessment={assessment}
+                    doSetAssessment={doSetAssessment}
+                  ></MypagePostList>
                 )}
                 <IntroduceWrap margin="0 0 0 25%" width="49%">
                   {filter === "완료" && endProject.length === 0 && (

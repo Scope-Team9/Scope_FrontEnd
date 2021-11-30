@@ -150,24 +150,24 @@ const ExileUserModal = (props) => {
                           justifyContent="space-between"
                         >
                           <Grid height="100%" textAlign="center">
-                            <Grid bg="#eee" height="50%">
+                            <Texts bg="#eee" height="50%">
                               닉네임
-                            </Grid>
-                            <Grid bg="#aaa" height="50%">
+                            </Texts>
+                            <Texts bg="#aaa" height="50%">
                               타입
-                            </Grid>
+                            </Texts>
                           </Grid>
                           <Grid margin="auto" height="100%" textAlign="center">
-                            <Grid height="50%">
+                            <Texts height="50%">
                               {applyedUsers[idx].nickname}
-                            </Grid>
-                            <Grid height="50%">
+                            </Texts>
+                            <Texts height="50%">
                               {applyedUsers[idx].userPropensityType}
-                            </Grid>
+                            </Texts>
                           </Grid>
                         </Grid>
                         <Grid margin="auto" height="50px" width="80%">
-                          <Grid margin="auto 40px">
+                          <Grid margin="auto 50%" width="50px">
                             {applyedUsers[idx].userId !== postUserId && (
                               <Button
                                 common
@@ -177,7 +177,7 @@ const ExileUserModal = (props) => {
                                   exile(e.target.value);
                                 }}
                               >
-                                추방하기
+                                추방
                               </Button>
                             )}
                           </Grid>
@@ -205,6 +205,13 @@ const ModalWrap = styled.div`
   height: 500px;
   @media (max-width: 375px) {
     width: 300px;
+  }
+`;
+const Texts = styled.p`
+  height: 50%;
+  width: 50px;
+  @media screen and (max-width: 600px) {
+    font-size: 9px;
   }
 `;
 const CommentBubble = styled.div`

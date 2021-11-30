@@ -66,7 +66,7 @@ const MainPage = () => {
       }
     };
     fetchData();
-  }, [sortC, reBookC, Render, isToken, Render]);
+  }, [sortC, reBookC, Render, isToken, Render, isLogin]);
 
   // React.useLayoutEffect(() => {
   //   dispatch(postActions.whatPage("mainPage"));
@@ -119,7 +119,11 @@ const MainPage = () => {
   // }, [scrollOnceMove]);
 
   const ScrollTop = () => {
-    window.scrollTo(0, 0);
+    window.scrollTo({
+      behavior: "smooth",
+      left: 0,
+      top: 0,
+    });
   };
 
   return (
@@ -293,7 +297,7 @@ const BtnFeedback = styled.img`
     height: 50px;
     text-align: center;
     left: 5px;
-    bottom: 150px;
+    bottom: 120px;
     margin: auto;
     cursor: pointer;
     z-index: 999;
@@ -331,7 +335,7 @@ const Scrollup = styled.div`
     height: 50px;
     text-align: center;
     right: 25px;
-    bottom: 150px;
+    bottom: 120px;
     margin: auto;
     cursor: pointer;
     z-index: 999;
