@@ -14,7 +14,7 @@ const StackEdit = (props) => {
     { value: "Java", label: "Java" },
     { value: "JavaScript", label: "JavaScript" },
     { value: "Python", label: "Python" },
-    { value: "Nodejs", label: "Nodejs" },
+    { value: "Node", label: "Node" },
     { value: "Flask", label: "Flask" },
     { value: "C++", label: "C++" },
     { value: "Django", label: "Django" },
@@ -23,7 +23,7 @@ const StackEdit = (props) => {
     { value: "Spring", label: "Spring" },
     { value: "Swift", label: "Swift" },
     { value: "Kotlin", label: "Kotlin" },
-    { value: "Typescript", label: "Typescript" },
+    { value: "TypeScript", label: "TypeScript" },
   ];
 
   const orderByLabel = useCallback(
