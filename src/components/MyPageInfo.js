@@ -19,11 +19,11 @@ import MypageFilter from "./myPage/MypageFilter";
 import { pageCheckAction } from "../redux/modules/pageCheck";
 
 // MyPageInfo의 함수형 컴포넌트를 만든다.
-const MyPageInfo = (props) => {
+const MyPageInfo = props => {
   const dispatch = useDispatch();
   const userId = props.match.params.id;
 
-  const myUserId = useSelector((state) => state.user.userId);
+  const myUserId = useSelector(state => state.user.userId);
   const [myUrl, setMyUrl] = React.useState();
   const [filter, setFilter] = React.useState("소개");
   const [mydata, setMydata] = React.useState();
@@ -39,7 +39,7 @@ const MyPageInfo = (props) => {
   const [memberId, setMemberId] = React.useState(); //멤버아이디
   const [writerEquals, setWriterEquals] = React.useState(); //포스트의 작성자확인
 
-  const pageCheck = useSelector((state) => state.pagecheck.pageGo);
+  const pageCheck = useSelector(state => state.pagecheck.pageGo);
 
   //click
   const introduction = mydata?.user.introduction ? true : false;
@@ -56,7 +56,7 @@ const MyPageInfo = (props) => {
     setAssessment(!assessment);
   };
 
-  const SetFilter = (data) => {
+  const SetFilter = data => {
     setFilter(data);
   };
 
@@ -240,32 +240,34 @@ const MyPageInfo = (props) => {
                     </>
                   )}
                 </IntroduceWrap>
-                {filter === "소개" &&
-                  mydata?.isMyMypage === true &&
-                  introduction === true && (
-                    <button
-                      style={{
-                        float: "right",
-                        margin: "55px 18% 0 0",
-                        border: "none",
-                        borderRadius: "15px",
-                        cursor: "pointer",
-                        backgroundColor: " transparent ",
-                      }}
-                      onClick={() => {
-                        history.push({
-                          pathname: "/addmarkdown",
-                          state: { userId: userId },
-                        });
-                      }}
-                    >
-                      <img
-                        src="/img/소개글.png"
-                        style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
-                      />
-                    </button>
-                  )}
-                <Grid margin="0 0 0 34%" width="49%">
+
+                <IntroduceWrap>
+                  {filter === "소개" &&
+                    mydata?.isMyMypage === true &&
+                    introduction === true && (
+                      <button
+                        style={{
+                          float: "right",
+                          margin: "1% 1% 0 0",
+                          border: "none",
+                          borderRadius: "15px",
+                          cursor: "pointer",
+                          backgroundColor: " #111 ",
+                          position: "relative",
+                        }}
+                        onClick={() => {
+                          history.push({
+                            pathname: "/addmarkdown",
+                            state: { userId: userId },
+                          });
+                        }}
+                      >
+                        <img
+                          src="/img/소개글.png"
+                          style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
+                        />
+                      </button>
+                    )}
                   {filter === "소개" && introduction === true && (
                     <Grid margin="50px 0 0 0" border="1px solid #707070 ">
                       <MarkdownRead
@@ -273,7 +275,7 @@ const MyPageInfo = (props) => {
                       ></MarkdownRead>
                     </Grid>
                   )}
-                </Grid>
+                </IntroduceWrap>
                 <IntroduceWrap>
                   {filter === "소개" && introduction === false && (
                     <>
