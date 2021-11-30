@@ -354,7 +354,6 @@ const LoginModal = props => {
           <Grid
             height="15%"
             bg="#17334A"
-            width
             position="relative"
             padding="10px 0 10px 0"
             boxShadow="0 5px 25px rgb(0 0 0 / 15%)"
@@ -383,6 +382,7 @@ const LoginModal = props => {
               </Text>
             </Grid>
           </Grid>
+
           <Grid height="80%" padding="20px 0">
             <Grid
               display="flex"
@@ -440,6 +440,7 @@ const LoginModal = props => {
               </Grid>
             </Grid>
           </Grid>
+
           <Grid display="flex" justifyContent="center" margin="10px 0 30px 0">
             <Grid width="20%" backgroundColor="#17334A" height="3px"></Grid>
           </Grid>
