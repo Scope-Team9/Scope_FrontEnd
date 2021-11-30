@@ -11,13 +11,13 @@ import { Grid, Text } from "../../../elements/Index";
 const TitleDetail = (props) => {
   return (
     <React.Fragment>
-      <Grid margin="60px auto auto">
+      <Grid margin="20px auto 0px">
         <TitleMedia>
-          <TitleText size="40px" bold>
+          <TitleText>
             {props.passedData?.title}
+            <Line />
           </TitleText>
         </TitleMedia>
-        <Line />
       </Grid>
     </React.Fragment>
   );
@@ -26,11 +26,14 @@ const TitleDetail = (props) => {
 // styled-components
 const Line = styled.hr`
   width: 100%;
+  margin-bottom: 8px;
+  background-color: #554475;
+  height: 3px;
 `;
 
 const TitleMedia = styled.p`
   @media screen and (max-width: 376px) {
-    font-size: 10px;
+    font-size: 12px;
   }
 `;
 

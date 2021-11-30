@@ -30,11 +30,11 @@ const DateWrite = (props) => {
   return (
     <React.Fragment>
       <DateMedia>
-        <Text>기간설정</Text>
-        <Grid display="flex" textAlign="center" margin="20px auto">
+        <Text color="#4e442d">기간설정</Text>
+        <Grid display="flex" textAlign="center" margin="10px auto">
           {/* 시작 일*/}
           <Grid>
-            <Text>프로젝트 시작일</Text>
+            <Text color="#4e442d">프로젝트 시작일</Text>
             <SDatePicker
               dateFormat="yyyy - MM - dd"
               selected={props.startDate}
@@ -45,7 +45,7 @@ const DateWrite = (props) => {
           </Grid>
           {/* 종료 일*/}
           <Grid>
-            <Text>프로젝트 종료일</Text>
+            <Text color="#4e442d">프로젝트 종료일</Text>
             <SDatePicker
               dateFormat="yyyy - MM - dd"
               selected={props.endDate}
@@ -63,7 +63,7 @@ const DateWrite = (props) => {
 // styled-components
 const SDatePicker = styled(DatePicker)`
   box-sizing: border-box;
-  width: 96%;
+  width: 98%;
   height: 40px;
   border-radius: 10px;
   border: 1px solid #c4c4c4;
@@ -72,6 +72,7 @@ const SDatePicker = styled(DatePicker)`
   text-align: center;
   margin-top: 0.6rem;
   outline: none;
+  box-shadow: 0px 0px 10px #ddd;
 `;
 
 const DateMedia = styled.div`

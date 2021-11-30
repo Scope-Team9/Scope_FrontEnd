@@ -12,7 +12,9 @@ const StatusDetail = (props) => {
     <React.Fragment>
       <Grid display="flex">
         <StatusMedia>
-          <Text margin="0px 10px auto 0px">프로젝트 상태</Text>
+          <Text margin="0px 10px 0px 0px" color="#4c4759">
+            프로젝트 상태
+          </Text>
           {props.passedData?.projectStatus === "모집중" && (
             <Text
               bg="#2699FB"
@@ -54,7 +56,7 @@ const StatusDetail = (props) => {
 
 const StatusMedia = styled.div`
   @media screen and (max-width: 600px) {
-    font-size: 10px;
+    font-size: 12px;
     width: 360px;
   }
 `;

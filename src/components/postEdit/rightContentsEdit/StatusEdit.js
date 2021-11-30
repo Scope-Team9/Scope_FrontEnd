@@ -18,8 +18,8 @@ const StatusEdit = (props) => {
   return (
     <React.Fragment>
       <StatusMedia>
-        <Grid margin="20px auto">
-          <Text>프로젝트 상태체크</Text>
+        <Grid margin="10px auto">
+          <Text color="#4c4759">프로젝트 상태체크</Text>
           <Select
             options={projectStatused}
             styles={props.styles}

@@ -13,8 +13,8 @@ const UrlDetail = (props) => {
   return (
     <React.Fragment>
       <UrlMedia>
-        <Grid margin="20px auto auto">
-          <Text>오픈채팅 URL</Text>
+        <Grid margin="10px auto auto">
+          <Text color="#4c4759">오픈채팅 URL</Text>
 
           <Text
             _onClick={() => {

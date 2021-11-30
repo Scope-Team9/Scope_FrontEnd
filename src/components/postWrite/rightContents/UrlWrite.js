@@ -12,7 +12,10 @@ const UrlWrite = (props) => {
     <React.Fragment>
       <Grid>
         <TitleMedia>
-          <Text>오픈채팅 URL</Text>
+          <Text color="#4e442d">
+            오픈채팅 URL
+            <SubDescription> *(URL을 정확히 입력해주세요.)</SubDescription>
+          </Text>
         </TitleMedia>
         <Input
           width="100%"
@@ -23,6 +26,7 @@ const UrlWrite = (props) => {
           borderRadius="10px"
           placeholder="오픈채팅방 URL을 입력해주세요."
           maxLength="35"
+          boxShadow="0px 0px 10px #ddd"
           inputFocusOutline="none"
           _onChange={(e) => {
             props.setChatUrl(e.target.value);
@@ -39,6 +43,11 @@ const TitleMedia = styled.div`
     margin: auto;
     font-size: 10px;
   }
+`;
+
+const SubDescription = styled.span`
+  color: red;
+  font-size: 12px;
 `;
 
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.

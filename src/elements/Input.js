@@ -24,6 +24,7 @@ const Input = (props) => {
     borderbottom,
     maxLength,
     borderRadius,
+    boxShadow,
     bg,
     backgroundImage,
     backgroundColor,
@@ -40,6 +41,7 @@ const Input = (props) => {
     border,
     borderbottom,
     borderRadius,
+    boxShadow,
     bg,
     maxLength,
     backgroundImage,
@@ -129,6 +131,7 @@ Input.defaultProps = {
   defaulValue: "",
   margin: 0,
   padding: false,
+  boxShadow: false,
   width: "100%",
   height: false,
   border: false,
@@ -150,6 +153,7 @@ const ElTextarea = styled.textarea`
   border-radius: ${(props) => props.borderRadius};
   background: ${(props) => props.bg};
   padding: ${(props) => props.padding};
+  box-shadow: ${(props) => props.boxShadow};
   background-image: ${(props) => props.backgroundImage};
   box-sizing: border-box;
   background-color: ${(props) => props.backgroundColor};
@@ -164,6 +168,7 @@ const ElInput = styled.input`
   text-align: ${(props) => props.textAlign};
   border-radius: ${(props) => props.borderRadius};
   border-bottom: ${(props) => props.borderBottom};
+  box-shadow: ${(props) => props.boxShadow};
   background: ${(props) => props.bg};
   padding: ${(props) => props.padding};
   background-image: ${(props) => props.backgroundImage};

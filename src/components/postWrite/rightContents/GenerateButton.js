@@ -30,15 +30,16 @@ const Btn = styled.button`
   align-items: center;
   width: 140px;
   height: 35px;
-  border: 1px solid #554475;
+  border: 1px solid #4e442d;
   border-radius: 50px;
-  color: #554475;
-  margin: 10px auto 80px auto;
+  box-shadow: 0px 0px 10px #ddd;
+  color: #4e442d;
+  margin: 10px auto 10px auto;
   cursor: pointer;
   background-color: white;
   &:hover {
     color: white;
-    background-color: #554475;
+    background-color: #4e442d;
     transform: translate();
     transition: 0.3s ease-out;
   }

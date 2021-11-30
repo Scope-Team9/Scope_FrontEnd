@@ -12,7 +12,7 @@ const ContentEdit = (props) => {
     <React.Fragment>
       <ContentMedia>
         <Grid margin="10px auto">
-          <Text>프로젝트 내용적기</Text>
+          <Text color="#4c4759">프로젝트 내용적기</Text>
           <TextArea
             value={props.contents}
             onChange={(e) => {
@@ -28,27 +28,29 @@ const ContentEdit = (props) => {
 // styled-components
 const TextArea = styled.textarea`
   width: 97%;
-  height: 400px;
+  height: 286px;
   padding: 10px;
   margin: 4px auto;
   border: 1px solid #c4c4c4;
   border-radius: 10px;
+  box-shadow: 0px 0px 10px #ddd;
   font-size: 16px;
   outline: none;
   @media screen and (max-width: 600px) {
     height: 200px;
+    width: 99%;
   }
 `;
 
 const ContentMedia = styled.div`
   @media screen and (max-width: 600px) {
     display: flex;
-    width: 340px;
+    width: 350px;
     font-size: 10px;
   }
   @media screen and (max-width: 500px) {
     display: flex;
-    width: 335px;
+    width: 330px;
     font-size: 10px;
   }
 `;

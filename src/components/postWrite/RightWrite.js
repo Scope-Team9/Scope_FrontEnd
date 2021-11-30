@@ -18,7 +18,7 @@ import GenerateButton from "./rightContents/GenerateButton";
 import UrlWrite from "./rightContents/UrlWrite";
 
 // RightWrite의 함수형 컴포넌트를 만든다.
-const RightWrite = props => {
+const RightWrite = (props) => {
   React.useEffect(() => {
     dispatch(postActions.isMainPage(false));
     dispatch(postActions.whatPage("addPostPage"));
@@ -79,8 +79,10 @@ const RightWrite = props => {
       boxShadow: state.isFocused ? 0 : 0,
       borderWidth: 1,
       borderRadius: 10,
+      fontSize: 14,
       marginTop: 4,
       minHeight: 40,
+      boxShadow: "0px 0px 10px #ddd",
       borderColor: state.isFocused ? "#C4C4C4" : base.borderColor,
       "&:hover": {
         borderColor: state.isFocused ? "#C4C4C4" : base.borderColor,
@@ -90,7 +92,7 @@ const RightWrite = props => {
 
   return (
     <React.Fragment>
-      <Grid margin="auto 85px" height="90%">
+      <Grid margin="18px 80px">
         <TitleMedia>
           <Title>게시글 작성하기</Title>
         </TitleMedia>
@@ -124,10 +126,12 @@ const RightWrite = props => {
 
 // styled-components
 const Title = styled.div`
-  color: black;
+  color: #4e442d;
   font-size: 32px;
   font-weight: 800;
-  margin-top: 30px;
+  margin-top: 50px;
+  text-decoration: solid underline #544c398a 4px;
+  text-underline-position: under;
 `;
 
 const TitleMedia = styled.div`

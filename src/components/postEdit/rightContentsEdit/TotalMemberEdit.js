@@ -20,8 +20,8 @@ const totalMemberEdit = (props) => {
   return (
     <React.Fragment>
       <TotalMemberMedia>
-        <Grid margin="20px auto">
-          <Text>프로젝트 총 인원</Text>
+        <Grid margin="10px auto">
+          <Text color="#4c4759">프로젝트 총 인원</Text>
           <Select
             options={projectMembers}
             styles={props.styles}
@@ -32,7 +32,7 @@ const totalMemberEdit = (props) => {
             onChange={(data) => {
               props.setTotalmember(data.label);
             }}
-            placeholder={<div>총인원을 선택해주세요.</div>}
+            placeholder={<div>총 인원을 선택해주세요.</div>}
           ></Select>
         </Grid>
       </TotalMemberMedia>

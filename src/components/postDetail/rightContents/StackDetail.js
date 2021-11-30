@@ -10,8 +10,10 @@ import { Grid, Text } from "../../../elements/Index";
 const StackDetail = (props) => {
   return (
     <React.Fragment>
-      <Grid display="flex" margin="20px auto">
-        <Text margin="auto 10px auto 0px">기술스택</Text>
+      <Grid display="flex" margin="6px auto">
+        <Text margin="auto 10px auto 0px" color="#4c4759">
+          Stack
+        </Text>
         <StackMedia>
           {props.passedData?.techStack.map((item, index) => {
             return (
@@ -31,15 +33,16 @@ const StackBox = styled.div`
   color: white;
   background-color: #554475;
   border: 1px solid #554475;
-  border-radius: 10px;
+  border-radius: 50px;
   padding: 4px 10px;
+  font-size: 10px;
   text-align: center;
 `;
 
 const StackMedia = styled.div`
   display: flex;
   @media screen and (max-width: 600px) {
-    font-size: 10px;
+    font-size: 12px;
     width: 120px;
   }
 `;

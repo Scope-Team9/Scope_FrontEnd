@@ -145,14 +145,16 @@ const PostDetail = (props) => {
         <Grid
           display="flex"
           justifyContent="center"
-          maxWidth="1920px"
+          maxWidth="1400px"
           height="100%"
-          border="1px solid #C4C4C4"
-          margin="auto"
+          border="5px solid #C4C4C4"
+          margin="40px auto"
+          boxShadow="0px 0px 10px #554475"
+          borderRadius="30px"
         >
           <LeftBanner />
 
-          <Grid margin="46px 106px 0px" position="relative">
+          <Grid margin="46px 85px 0px" position="relative">
             <ContainerMedia>
               <BookMark
                 userId={userId}
@@ -161,11 +163,11 @@ const PostDetail = (props) => {
                 passedData={passedData}
               />
               <TitleDetail passedData={passedData} />
-              <Grid margin="20px auto">
+              <Grid margin="10px auto">
                 <Grid display="flex">
                   <ApplicantDetail passdedMenber={passdedMenber} />
                 </Grid>
-                <Grid margin="10px auto ">
+                <Grid margin="10px auto">
                   {userId === postUserId &&
                     passedData?.projectStatus === "모집중" && (
                       <Grid position="relative" width="100%">
@@ -190,7 +192,7 @@ const PostDetail = (props) => {
                       </Grid>
                     )}
                   <Grid>
-                    <FlexMedia display="flex">
+                    <FlexMedia>
                       <DateDetail passedData={passedData} />
                       <StackDetail passedData={passedData} />
                     </FlexMedia>
@@ -257,20 +259,12 @@ const PostDetail = (props) => {
                               justifyContent="flex-end"
                             >
                               <ButtonMedia>
-                                <Button
-                                  postion="absolute"
-                                  common
-                                  _onClick={applyStatusModalOpen}
-                                >
+                                <Btn common onClick={applyStatusModalOpen}>
                                   신청 현황
-                                </Button>
-                                <Button
-                                  postion="absolute"
-                                  common
-                                  _onClick={exileStatusModalOpen}
-                                >
+                                </Btn>
+                                <Btn common onClick={exileStatusModalOpen}>
                                   팀원 강퇴
-                                </Button>
+                                </Btn>
                               </ButtonMedia>
                             </Grid>
                           )}
@@ -326,6 +320,23 @@ const ContainerMedia = styled.div`
   }
 `;
 
+const Btn = styled.button`
+  width: 100px;
+  height: 30px;
+  border: 1px solid #554475;
+  border-radius: 50px;
+  cursor: pointer;
+  color: #554475;
+  background-color: #fff;
+  margin-left: 2px;
+  &:hover {
+    color: white;
+    background-color: #554475;
+    transform: translate();
+    transition: 0.3s ease-out;
+  }
+`;
+
 const ButtonMedia = styled.p`
   display: flex;
   margin: auto;
@@ -360,7 +371,9 @@ const UrlButton = styled.button`
   margin: auto 10px;
   padding: 0 0 2px 0;
   border: 1px solid #554475;
-  border-radius: 4px;
+  border-radius: 50px;
+  align-items: center;
+  text-align: center;
   color: white;
   background-color: #554475;
   cursor: pointer;
