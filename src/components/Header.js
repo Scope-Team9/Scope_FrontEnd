@@ -22,7 +22,7 @@ const Header = props => {
 };
 
 const Wrap = styled.div`
-  max-width: 1900px;
+  max-width: 1400px;
   margin: auto;
   height: 10%;
   display: flex;

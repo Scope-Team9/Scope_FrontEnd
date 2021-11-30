@@ -35,6 +35,7 @@ const MyPageInfo = props => {
   const [modal, setModal] = React.useState(false);
   const [testmodal, setTestModal] = React.useState(false);
   const [assessment, setAssessment] = React.useState(false);
+  const [userPropensityType, setUserPropensityType] = React.useState();
 
   const [memberId, setMemberId] = React.useState(); //멤버아이디
   const [writerEquals, setWriterEquals] = React.useState(); //포스트의 작성자확인
@@ -48,6 +49,7 @@ const MyPageInfo = props => {
   const inProgressProject = mydata?.inProgress;
   const bookMarkProject = mydata?.bookmark;
   const endProject = mydata?.end;
+  console.log(mydata);
 
   const [loading, setLoading] = React.useState(true);
 
@@ -67,10 +69,11 @@ const MyPageInfo = props => {
     const fetchData = async () => {
       try {
         const result = await apis.getMypage(userId);
-        // console.log(result);
+        console.log(result);
         setNickName(result.data.data.user.nickname);
         setEmail(result.data.data.user.email);
         setTeckstack(result.data.data.user.techStackList);
+        setUserPropensityType(result.data.data.user.userPropensityType);
 
         setMydata(result.data.data);
         dispatch(pageCheckAction.getPageCheck(`/mypage/${userId}`));
@@ -82,7 +85,7 @@ const MyPageInfo = props => {
     };
     fetchData();
     // console.log(mydata);
-  }, [assessment, editMyProfile, testmodal]);
+  }, [assessment, editMyProfile, testmodal, userPropensityType]);
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -154,6 +157,7 @@ const MyPageInfo = props => {
                       setModal={setModal}
                       nickName={nickName}
                       modal={modal}
+                      mypage={mydata.isMyMypage}
                       onClick={() => {
                         EmailConfirm();
                       }}
@@ -252,7 +256,7 @@ const MyPageInfo = props => {
                           border: "none",
                           borderRadius: "15px",
                           cursor: "pointer",
-                          backgroundColor: " #111 ",
+                          backgroundColor: " #fff ",
                           position: "relative",
                         }}
                         onClick={() => {

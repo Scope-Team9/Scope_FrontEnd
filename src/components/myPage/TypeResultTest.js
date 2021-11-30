@@ -10,7 +10,7 @@ import { Grid4x4 } from "@mui/icons-material";
 import EmailAuth from "../EmailAuth";
 import { useParams } from "react-router";
 
-const TypeResultTest = (props) => {
+const TypeResultTest = props => {
   const [myData, setMyData] = React.useState();
   const [arr, setArr] = React.useState([
     {
@@ -127,7 +127,7 @@ const TypeResultTest = (props) => {
 
   React.useEffect(() => {
     // console.log("테스트결과", props);
-    arr.map((item) => {
+    arr.map(item => {
       if (item.id === props.myType) {
         setMyData(item);
       }
@@ -211,7 +211,10 @@ const TypeResultTest = (props) => {
             )}
             <Dialog scroll="paper" open={props.testmodal}>
               <TestWrap>
-                <PropensityTest TestClose={props.TestClose} />
+                <PropensityTest
+                  mypage={props.mypage}
+                  TestClose={props.TestClose}
+                />
               </TestWrap>
             </Dialog>
           </Grid>
@@ -222,6 +225,7 @@ const TypeResultTest = (props) => {
 };
 
 const Wrap = styled.div`
+  max-width: 1400px;
   height: 100%;
   width: 60vw;
   margin-left: 30%;

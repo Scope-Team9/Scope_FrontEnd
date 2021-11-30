@@ -104,7 +104,7 @@ const LoginModal = props => {
     }
     const registerInfo = {
       snsId: userInfo.snsId,
-      email: userInfo.email,
+      // email: userInfo.email,
       nickName: nickName,
       techStack: techStack,
     };

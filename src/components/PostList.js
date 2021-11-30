@@ -90,9 +90,13 @@ const PostWrap = styled.div`
   margin: auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  row-gap: 5px;
+  column-gap: 5px;
   /* grid-gap: 1px; */
   @media (max-width: 420px) {
     grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    row-gap: 5px;
+    column-gap: 5px;
   }
 `;
 const NoIntroduction = styled.img`
