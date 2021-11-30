@@ -14,12 +14,6 @@ const Stack = (props) => {
   //필터 클릭
   const [arr, setArr] = React.useState([
     {
-      id: "React",
-      img: "/img/react.png",
-      active: false,
-      title: "React",
-    },
-    {
       id: "Java",
       img: "/img/java.png",
       active: false,
@@ -42,6 +36,12 @@ const Stack = (props) => {
       img: "/img/node.js.png",
       active: false,
       title: "Node.js",
+    },
+    {
+      id: "React",
+      img: "/img/react.png",
+      active: false,
+      title: "React",
     },
     {
       id: "C++",
@@ -165,6 +165,7 @@ const Stack = (props) => {
     <Grid
       display="flex"
       width="75%"
+      height="75%"
       margin="25px auto 20px auto"
       boxShadow="0px 0px 10px #ddd"
       padding="5px 10px"

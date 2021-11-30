@@ -18,7 +18,7 @@ import GenerateButton from "./rightContents/GenerateButton";
 import UrlWrite from "./rightContents/UrlWrite";
 
 // RightWrite의 함수형 컴포넌트를 만든다.
-const RightWrite = props => {
+const RightWrite = (props) => {
   React.useEffect(() => {
     dispatch(postActions.isMainPage(false));
     dispatch(postActions.whatPage("addPostPage"));
@@ -68,7 +68,7 @@ const RightWrite = props => {
       chatUrl: chatUrl,
       contents: contents,
     };
-    console.log(card);
+    // console.log(card);
     dispatch(postAddActions.addPostAPI(card));
   };
 

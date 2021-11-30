@@ -25,7 +25,7 @@ const IMGS = styled.img`
   cursor: pointer;
   width: 68px;
   margin: 10px 15px;
-  opacity: ${(props) => (props.active ? 1 : 0.28)};
+  opacity: ${(props) => (props.active ? 1 : 0.2)};
   transition: all 0.1s linear;
   :hover {
     transform: scale(1.1);

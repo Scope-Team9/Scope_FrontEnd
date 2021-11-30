@@ -84,7 +84,7 @@ const MyPageInfo = (props) => {
     // console.log(mydata);
   }, [assessment, editMyProfile, testmodal]);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     const fetchData = async () => {
       try {
         const result = await apis.getMypage(userId);
