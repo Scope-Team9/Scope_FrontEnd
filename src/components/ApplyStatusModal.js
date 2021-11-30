@@ -203,8 +203,9 @@ const ApplyStatusModal = (props) => {
                         </Grid>
                         <ButtonMedia>
                           <Grid display="flex">
-                            <Grid margin="auto" height="auto" width="50px">
+                            <Grid margin="auto" height="auto" width="80px">
                               <Button
+                                height="10px"
                                 common
                                 isValue={applyedUsers[idx].userId}
                                 _onClick={(e) => {
@@ -216,10 +217,11 @@ const ApplyStatusModal = (props) => {
                             </Grid>
                             <Grid
                               margin="auto auto auto 3px"
-                              height="50px"
-                              width="50px"
+                              height="auto"
+                              width="80px"
                             >
                               <Button
+                                height="10px"
                                 common
                                 isValue={applyedUsers[idx].userId}
                                 _onClick={(e) => {
