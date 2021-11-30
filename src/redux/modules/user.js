@@ -220,8 +220,10 @@ const signupMiddleware = signupInfo => {
     apis
       .signup(signupInfo)
       .then(res => {
-        // console.log(res);
-        // const ACCESS_TOKEN = res.data.token;
+        console.log(res);
+        let userCookie = res.data.data.token;
+        setCookie("ScopeUser", userCookie, 30);
+
         // localStorage.setItem("token", ACCESS_TOKEN);
         dispatch(
           setUser({

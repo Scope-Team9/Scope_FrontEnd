@@ -7,10 +7,10 @@ import { postActions } from "../redux/modules/post";
 import { stackAction } from "../redux/modules/stack";
 import LogoButton from "../elements/LogoButton";
 
-const Stack = (props) => {
+const Stack = props => {
   const dispatch = useDispatch();
-  const stack = useSelector((state) => state.stack.stack);
-  const stack2 = useSelector((state) => state.stack.stacks);
+  const stack = useSelector(state => state.stack.stack);
+  const stack2 = useSelector(state => state.stack.stacks);
   //필터 클릭
   const [arr, setArr] = React.useState([
     {
@@ -101,7 +101,7 @@ const Stack = (props) => {
   React.useEffect(() => {
     const stacks = Object.entries(stack);
     // console.log(stacks);
-    setArr((state) => {
+    setArr(state => {
       return state.map((stateItem, idx) => {
         if (stateItem.id === stacks[idx][1]) {
           return { ...stateItem, active: !stateItem.active };
@@ -117,9 +117,9 @@ const Stack = (props) => {
     // });
   }, []);
 
-  const Filter = (item) => {
-    setArr((state) => {
-      return state.map((stateItem) => {
+  const Filter = item => {
+    setArr(state => {
+      return state.map(stateItem => {
         if (stateItem.id === item.id) {
           return { ...stateItem, active: !stateItem.active };
         }
@@ -127,7 +127,7 @@ const Stack = (props) => {
       });
     });
 
-    const result = Object.values(stack).find((r) => r === item.id);
+    const result = Object.values(stack).find(r => r === item.id);
     // console.log("이 값이 있으면 지워줘야함", result);
     if (result) {
       dispatch(postActions.isMainPage(true));
@@ -136,7 +136,7 @@ const Stack = (props) => {
       dispatch(postActions.isMainPage(true));
       dispatch(stackAction.getStack(item.id));
     }
-    const result2 = stack2.find((r) => r === item.id);
+    const result2 = stack2.find(r => r === item.id);
     if (result2) {
       dispatch(stackAction.setStack2(item.id));
     } else {
@@ -146,15 +146,15 @@ const Stack = (props) => {
     // console.log("dodo", stack2);
   };
 
-  const arrStack = (item) => {
+  const arrStack = item => {
     const nowStack = props.stacks;
-    const alreadyChecked = nowStack.find((p) => p === item.id);
+    const alreadyChecked = nowStack.find(p => p === item.id);
     // console.log(alreadyChecked);
     if (!alreadyChecked) {
       props.setStacks(nowStack.concat(item.id));
     }
     if (alreadyChecked) {
-      const deleteCheck = nowStack.filter((p) => p !== alreadyChecked);
+      const deleteCheck = nowStack.filter(p => p !== alreadyChecked);
       props.setStacks(deleteCheck);
     }
 
@@ -174,7 +174,7 @@ const Stack = (props) => {
       alignItems="center"
       maxWidth="1900px"
     >
-      {arr.map((item) => {
+      {arr.map(item => {
         return (
           <LogoButton
             item={item}
