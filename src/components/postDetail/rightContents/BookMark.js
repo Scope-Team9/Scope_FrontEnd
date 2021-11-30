@@ -14,21 +14,15 @@ const Bookmark = props => {
     <React.Fragment>
       <BookMarkMedia>
         {props.userId !== props.postUserId && (
-          <Grid
-            width="10px"
-            position="absolute"
-            top="0px"
-            right="50px"
-            height="10px"
-          >
-            <Grid _onClick={props.ToggleBookMark} cursor="pointer">
+          <BookMark>
+            <BookMark onClick={props.ToggleBookMark}>
               {!props.passedData?.bookmarkChecked ? (
-                <BookmarkBorderIcon sx={{ color: "#17334A", fontSize: 50 }} />
+                <BookmarkBorderIcon sx={{ color: "#17334A", fontSize: 45 }} />
               ) : (
-                <BookmarkIcon sx={{ color: "#17334A", fontSize: 50 }} />
+                <BookmarkIcon sx={{ color: "#17334A", fontSize: 45 }} />
               )}
-            </Grid>
-          </Grid>
+            </BookMark>
+          </BookMark>
         )}
       </BookMarkMedia>
     </React.Fragment>
@@ -40,6 +34,18 @@ const BookMarkMedia = styled.div`
     width: 10px;
     height: 10px;
     font-size: 10px;
+  }
+`;
+const BookMark = styled.div`
+  width: 50px;
+  position: absolute;
+  top: 0px;
+  right: 20px;
+  height: 50px;
+  cursor: pointer;
+  @media screen and (max-width: 600px) {
+    width: 30px;
+    height: 30px;
   }
 `;
 
