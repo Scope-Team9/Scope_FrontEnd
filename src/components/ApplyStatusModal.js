@@ -173,6 +173,16 @@ const ApplyStatusModal = (props) => {
                       {applyedUsers[idx].userPropensityType === "FHP" && (
                         <UserImg src="/img/물개.png"></UserImg>
                       )}
+                      <ModalMedia>
+                        <Grid width="100%" textAlign="center">
+                          <Grid bg="#55447561" width="100%" height="50%">
+                            {applyedUsers[idx].nickname}
+                          </Grid>
+                          <Grid bg="#f5f5f5" height="50%">
+                            {applyedUsers[idx].userPropensityType}
+                          </Grid>
+                        </Grid>
+                      </ModalMedia>
                     </Grid>
                     <Grid height="100%" width="80%">
                       <Wrap>
@@ -190,21 +200,12 @@ const ApplyStatusModal = (props) => {
                               성향
                             </Grid>
                           </Grid> */}
-                          <ModalMedia>
-                            <Grid height="100%" textAlign="center">
-                              <Grid bg="#55447561" width="200px" height="50%">
-                                {applyedUsers[idx].nickname}
-                              </Grid>
-                              <Grid bg="#f5f5f5" height="50%">
-                                {applyedUsers[idx].userPropensityType}
-                              </Grid>
-                            </Grid>
-                          </ModalMedia>
                         </Grid>
                         <ButtonMedia>
                           <Grid display="flex">
-                            <Grid margin="auto" height="auto" width="50px">
+                            <Grid margin="auto" height="auto" width="80px">
                               <Button
+                                height="10px"
                                 common
                                 isValue={applyedUsers[idx].userId}
                                 _onClick={(e) => {
@@ -216,18 +217,17 @@ const ApplyStatusModal = (props) => {
                             </Grid>
                             <Grid
                               margin="auto auto auto 3px"
-                              height="50px"
-                              width="50px"
+                              height="auto"
+                              width="80px"
                             >
                               <Button
+                                height="10px"
                                 common
                                 isValue={applyedUsers[idx].userId}
                                 _onClick={(e) => {
                                   cancelOffer(e.target.value);
                                 }}
-                              >
-                                취소
-                              </Button>
+                              ></Button>
                             </Grid>
                           </Grid>
                         </ButtonMedia>
@@ -268,15 +268,16 @@ const ModalWrap = styled.div`
     width: 300px;
   } ;
 `;
+
 const CommentBubble = styled.div`
   color: white;
   position: relative;
   background: #554475;
-  height: 12px;
+  height: auto;
   /* border: #b29cf4 solid 1px; */
   border-radius: 10px;
   padding: 5px 12px;
-  ::after {
+  /* ::after {
     content: "";
     position: absolute;
     border-style: solid;
@@ -287,7 +288,7 @@ const CommentBubble = styled.div`
     z-index: 1;
     top: 10px;
     left: -15px;
-  }
+  } */
 `;
 
 const UserImg = styled.img`
