@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { Grid, Image, Text, Button } from "../../../elements/Index";
 
 const MyFilter = (props) => {
-  // console.log(props);
   return (
     <>
       {props && (
@@ -51,6 +50,7 @@ const Filter = styled.p`
   text-align: center;
   cursor: pointer;
   width: auto;
+  font-weight: 500;
 
   &:hover {
     transform: scale(1.05);

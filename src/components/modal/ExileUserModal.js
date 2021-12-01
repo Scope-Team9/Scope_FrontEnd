@@ -116,7 +116,7 @@ const ExileUserModal = (props) => {
                     padding="10px"
                     width="90%"
                     borderRadius="10px"
-                    boxShadow="0px 0px 10px #554475"
+                    boxShadow="0px 0px 10px #17334a"
                     key={user.userId}
                     {...user}
                   >

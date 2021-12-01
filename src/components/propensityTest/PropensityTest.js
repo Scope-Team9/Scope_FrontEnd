@@ -176,10 +176,12 @@ const PropensityTest = props => {
           </Text>
         </Grid>
       </Header>
+
       {/* 프로그래스바 */}
       <Grid width="70%" margin="15px auto" height="10%">
         <Progress page={page} />
       </Grid>
+
       {/* 이미지결과 */}
       <StepImgBox>
         {TestData.teststep.map(step => {
@@ -206,6 +208,7 @@ const PropensityTest = props => {
         )}
         {page === 10 && <TestResult userType={userType} />}
       </Grid>
+
       {/* 버튼 */}
       <Grid
         display="flex"
@@ -266,7 +269,7 @@ const TestImg = styled.img`
 `;
 const Header = styled.div`
   height: 50px;
-  background-color: #554475;
+  background-color: #17334a;
   position: relative;
   text-align: center;
   padding: 10px 0 10px 0;
