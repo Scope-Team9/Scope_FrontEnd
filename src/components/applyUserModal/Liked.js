@@ -200,7 +200,7 @@ const Liked = (props) => {
                         <Grid
                           margin="auto auto auto 10px"
                           height="50px"
-                          width="80%"
+                          width="70%"
                         >
                           {passdedMenber[idx].userId !== isMe && (
                             <Button
