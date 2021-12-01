@@ -36,7 +36,7 @@ const TitleMedia = styled.p`
 `;
 
 const TitleText = styled.p`
-  font-size: 40px;
+  font-size: 30px;
   font-weight: 500;
   @media screen and (max-width: 376px) {
     font-size: 20px;
