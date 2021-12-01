@@ -26,15 +26,14 @@ const MainPage = () => {
 
   const dispatch = useDispatch();
   const history = useHistory();
-  const stack = useSelector((state) => state.stack.stack);
-  const sortC = useSelector((state) => state.sort.sort);
+  const stack = useSelector(state => state.stack.stack);
+  const sortC = useSelector(state => state.sort.sort);
   const isToken = document.cookie;
   // const cards = useSelector((state) => state.post.posts);
-  // console.log(cards);
-  const reBookC = useSelector((state) => state.rebook.reBook);
-  const pageCheck = useSelector((state) => state.post.pageCheck);
-  const infinity = useSelector((state) => state.infinity.paging);
-  const Render = useSelector((state) => state.post.render);
+  const reBookC = useSelector(state => state.rebook.reBook);
+  const pageCheck = useSelector(state => state.post.pageCheck);
+  const infinity = useSelector(state => state.infinity.paging);
+  const Render = useSelector(state => state.post.render);
   const [ref, inView] = useInView();
   const [paging, setPaging] = React.useState(infinity.next);
   const [pPaging, setPPaging] = React.useState(12);
@@ -46,9 +45,9 @@ const MainPage = () => {
   const [sorts, setSrots] = React.useState();
   const [reBooks, setReBookss] = React.useState();
 
-  const postList = useSelector((state) => state.post.posts);
-  const isLoginUser = useSelector((state) => state.user.userId);
-  const isLogin = useSelector((state) => state.user.isLogin);
+  const postList = useSelector(state => state.post.posts);
+  const isLoginUser = useSelector(state => state.user.userId);
+  const isLogin = useSelector(state => state.user.isLogin);
 
   // let container = React.useRef();
   React.useLayoutEffect(() => {
@@ -80,6 +79,23 @@ const MainPage = () => {
     } // 옵저버를 좀 더 위로
     // console.log(pPaging);
   }, [inView]);
+
+  React.useLayoutEffect(() => {
+    setPost();
+    dispatch(postActions.whatPage("mainPage"));
+
+    const fetchData = async () => {
+      try {
+        const result = await apis.getPost(stack, sortC, reBookC);
+        setPost(result.data.data);
+        // console.log(result);
+        // container.current.scrollTo(0, lastScroll);
+      } catch (err) {
+        // console.log(err);
+      }
+    };
+    fetchData();
+  }, [sortC, reBookC, Render, isToken, Render, isLogin]);
 
   const goPage = () => {
     window.open(

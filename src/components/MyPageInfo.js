@@ -85,7 +85,7 @@ const MyPageInfo = (props) => {
 
         setMydata(result.data.data);
         dispatch(pageCheckAction.getPageCheck(`/mypage/${userId}`));
-        dispatch(userCreators.setUser(result.data.data.user));
+
         setLoading(false);
       } catch (err) {
         // console.log(err);

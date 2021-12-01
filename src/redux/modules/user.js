@@ -220,8 +220,10 @@ const signupMiddleware = signupInfo => {
     apis
       .signup(signupInfo)
       .then(res => {
-        // console.log(res);
-        // const ACCESS_TOKEN = res.data.token;
+        console.log(res);
+        let userCookie = res.data.data.token;
+        setCookie("ScopeUser", userCookie, 30);
+
         // localStorage.setItem("token", ACCESS_TOKEN);
         dispatch(
           setUser({
@@ -242,8 +244,12 @@ const editTestMiddleware = (userId, testInfo) => {
       .editTest(userId, testInfo)
       .then(res => {
         // console.log(res);
+        let currentUserId = getState().user.userId;
+        let currentNickname = getState().user.nickname;
         dispatch(
           setUser({
+            userId: currentUserId,
+            nickname: currentNickname,
             userPropensityType: res.data.data.userPropensityType,
             memberPropensityType: res.data.data.memberPropensityType,
           })
