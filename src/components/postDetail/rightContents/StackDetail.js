@@ -18,7 +18,7 @@ const StackDetail = (props) => {
         <StackMedia>
           {props.passedData?.techStack.map((item, index) => {
             return (
-              <Text margin="auto 5px" key={item.id}>
+              <Text margin="auto 5px" key={item}>
                 <StackBox>{item}</StackBox>
               </Text>
             );
