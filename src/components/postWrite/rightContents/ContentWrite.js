@@ -26,7 +26,7 @@ const ContentWrite = (props) => {
   );
 };
 
-// styled-components
+// styled-components.
 const TextArea = styled.textarea`
   width: 97%;
   height: 300px;

@@ -70,7 +70,7 @@ const ModalWrap = styled.div`
     margin-top: 30px;
     width: 90%;
   } */
-  @media (max-width: 375px) {
+  @media (max-width: 400px) {
     width: 300px;
   }
 `;

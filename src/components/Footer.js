@@ -60,7 +60,7 @@ const Footer = props => {
 
         {!isToken && (
           <FooterHomeBtn onClick={goToHome}>
-            <HomeIcon sx={{ color: "white", fontSize: 40 }} />
+            <HomeIcon sx={{ color: "white", fontSize: 40, borderRadius: 40 }} />
           </FooterHomeBtn>
         )}
 
@@ -93,8 +93,8 @@ const Wrap = styled.div`
 `;
 
 const FooterHomeBtn = styled.div`
-  width: 50px;
-  height: 50px;
+  width: 55px;
+  height: 55px;
   margin: auto;
   display: flex;
   justify-content: center;

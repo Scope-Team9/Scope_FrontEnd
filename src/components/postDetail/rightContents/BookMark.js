@@ -9,7 +9,7 @@ import BookmarkIcon from "@mui/icons-material/Bookmark";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 
 // Bookmark의 함수형 컴포넌트를 만든다.
-const Bookmark = props => {
+const Bookmark = (props) => {
   return (
     <React.Fragment>
       <BookMarkMedia>
@@ -39,13 +39,14 @@ const BookMarkMedia = styled.div`
 const BookMark = styled.div`
   width: 50px;
   position: absolute;
-  top: 0px;
-  right: 20px;
+  top: -10px;
+  right: -30px;
   height: 50px;
   cursor: pointer;
   @media screen and (max-width: 600px) {
     width: 30px;
     height: 30px;
+    right: 15px;
   }
 `;
 

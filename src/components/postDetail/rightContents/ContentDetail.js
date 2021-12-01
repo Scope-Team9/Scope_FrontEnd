@@ -33,9 +33,11 @@ const Content = styled.p`
   font-weight: 60;
   line-height: 30px;
   white-space: pre-line;
-  overflow: auto;
+  overflow-y: scroll;
+  overflow-x: hidden;
   @media screen and (max-width: 600px) {
-    height: 300px;
+    width: 100%;
+    height: 400px;
   }
 `;
 

@@ -19,7 +19,7 @@ const LeftBanner = (props) => {
 const SideBarImg = styled.img`
   width: 650px;
   max-width: 100%;
-  height: 1002px;
+  height: 1008px;
   border-radius: 26px 0px 0px 26px;
   margin-top: 1.5px;
   margin-left: 1px;
