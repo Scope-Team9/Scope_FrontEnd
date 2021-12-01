@@ -428,6 +428,9 @@ const IntroduceBtn = styled.div`
   justify-content: center;
   margin: auto;
   width: 150px;
+  @media screen and (max-width: 400px) {
+    display: none;
+  } ;
 `;
 
 export default MyPageInfo;
