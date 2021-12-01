@@ -20,10 +20,12 @@ import { userCreators } from "../redux/modules/user";
 import { pageCheckAction } from "../redux/modules/pageCheck";
 
 // MyPageInfo의 함수형 컴포넌트를 만든다.
-const MyPageInfo = (props) => {
+const MyPageInfo = props => {
   const dispatch = useDispatch();
   const userId = props.match.params.id;
-  const myUserId = useSelector((state) => state.user.userId);
+  const myUserId = useSelector(state => state.user.userId);
+  const checkApply = useSelector(state => state.apply);
+  console.log(checkApply);
   const [myUrl, setMyUrl] = React.useState();
   const [filter, setFilter] = React.useState("소개");
   const [mydata, setMydata] = React.useState();
@@ -40,7 +42,7 @@ const MyPageInfo = (props) => {
   const [memberId, setMemberId] = React.useState(); //멤버아이디
   const [writerEquals, setWriterEquals] = React.useState(); //포스트의 작성자확인
 
-  const pageCheck = useSelector((state) => state.pagecheck.pageGo);
+  const pageCheck = useSelector(state => state.pagecheck.pageGo);
 
   ////
   const [introduction, setIntroduction] = React.useState(); //포스트의 작성자확인
@@ -67,7 +69,7 @@ const MyPageInfo = (props) => {
     setAssessment(!assessment);
   };
 
-  const SetFilter = (data) => {
+  const SetFilter = data => {
     setFilter(data);
   };
 
@@ -81,7 +83,7 @@ const MyPageInfo = (props) => {
     const fetchData = async () => {
       try {
         const result = await apis.getMypage(userId);
-        // console.log(result);
+        console.log(result);
 
         setEndProject(result.data.data.end);
         setMyType(result.data.data.user.userPropensityType);
@@ -95,7 +97,7 @@ const MyPageInfo = (props) => {
     };
     fetchData();
     // console.log(mydata);
-  }, [assessment, testmodal]);
+  }, [assessment, testmodal, checkApply]);
 
   React.useLayoutEffect(() => {
     const fetchData = async () => {
