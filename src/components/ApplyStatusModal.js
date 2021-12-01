@@ -8,9 +8,9 @@ import { applyCreators } from "../redux/modules/applyProject";
 import CloseIcon from "@mui/icons-material/Close";
 import { apis } from "../lib/axios";
 import { useHistory } from "react-router";
-const ApplyStatusModal = props => {
+const ApplyStatusModal = (props) => {
   const dispatch = useDispatch();
-  const applyUsers = useSelector(state => state.apply.applyUsers);
+  const applyUsers = useSelector((state) => state.apply.applyUsers);
   const [applyedUsers, setApplyUsers] = React.useState();
   const [acceptButton, setAcceptButton] = React.useState();
   const { applyStatusModal, setApplyStatusModal, postId } = props;
@@ -36,7 +36,7 @@ const ApplyStatusModal = props => {
     // dispatch(applyCreators.applyUserAPI(postId));
   }, [applyStatusModal, acceptButton]);
 
-  const acceptOffer = acceptUser => {
+  const acceptOffer = (acceptUser) => {
     const acceptInfo = {
       userId: acceptUser,
       accept: true,
@@ -57,7 +57,7 @@ const ApplyStatusModal = props => {
     // dispatch(applyCreators.acceptOfferAPI(postId, acceptInfo));
   };
 
-  const cancelOffer = cancelUser => {
+  const cancelOffer = (cancelUser) => {
     const acceptInfo = {
       userId: cancelUser,
       accept: false,
@@ -169,6 +169,9 @@ const ApplyStatusModal = props => {
                       {applyedUsers[idx].userPropensityType === "FHP" && (
                         <UserImg src="/img/물개.png"></UserImg>
                       )}
+                      {applyedUsers[idx].userPropensityType === "RHP" && (
+                        <UserImg src="/img/너구리.png"></UserImg>
+                      )}
                     </Grid>
                     <Grid height="100%" width="70%">
                       <Wrap>
@@ -222,7 +225,7 @@ const ApplyStatusModal = props => {
                                 height="40px"
                                 common
                                 isValue={applyedUsers[idx].userId}
-                                _onClick={e => {
+                                _onClick={(e) => {
                                   acceptOffer(e.target.value);
                                 }}
                               >
@@ -238,7 +241,7 @@ const ApplyStatusModal = props => {
                                 height="40px"
                                 common
                                 isValue={applyedUsers[idx].userId}
-                                _onClick={e => {
+                                _onClick={(e) => {
                                   cancelOffer(e.target.value);
                                 }}
                               >
