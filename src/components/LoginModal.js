@@ -10,10 +10,12 @@ import Select from "react-select";
 import PropensityTest from "./propensityTest/PropensityTest";
 import CloseIcon from "@mui/icons-material/Close";
 
-const LoginModal = props => {
+const LoginModal = (props) => {
   const dispatch = useDispatch();
-  const userInfo = useSelector(state => state.user);
-  const sigunupModalState = useSelector(state => state.user.sigunupModalState);
+  const userInfo = useSelector((state) => state.user);
+  const sigunupModalState = useSelector(
+    (state) => state.user.sigunupModalState
+  );
 
   var regExpNick = /^[a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{2,5}$/;
   var regExpEmail =
@@ -61,7 +63,7 @@ const LoginModal = props => {
   // console.log("sns아이디", userInfo.snsId);
 
   //닉네임 체크 미들웨어
-  const nickCheck = nickName => {
+  const nickCheck = (nickName) => {
     if (nickName === undefined) {
       alert("닉네임을 입력 해주세요.");
       return false;
@@ -75,7 +77,7 @@ const LoginModal = props => {
   };
 
   //이메일 체크 미들웨어
-  const emailCheck = email => {
+  const emailCheck = (email) => {
     if (nickName === "") {
       alert("이메일을 입력 해주세요.");
       return false;
@@ -114,7 +116,7 @@ const LoginModal = props => {
   };
 
   const customStyles = {
-    control: styles => ({
+    control: (styles) => ({
       ...styles,
       backgroundColor: "white",
       borderRadius: "20px",
@@ -277,7 +279,7 @@ const LoginModal = props => {
                         padding="0 0 0 23px"
                         height="100%"
                         placeholder="닉네임을 입력해주세요"
-                        _onChange={e => {
+                        _onChange={(e) => {
                           setNickName(e.target.value);
                         }}
                       >
@@ -301,7 +303,7 @@ const LoginModal = props => {
                         options={techStackOption}
                         className="basic-multi-select"
                         classNamePrefix="select"
-                        onChange={e => {
+                        onChange={(e) => {
                           let techStack = [];
                           let arr = e;
                           let idx = 0;
@@ -437,10 +439,10 @@ const LoginModal = props => {
                       // "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://kbumsoo.s3-website.ap-northeast-2.amazonaws.com/user/kakao/callback&response_type=code";
 
                       //local
-                      "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code";
+                      // "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code";
 
-                    // 최종 주소
-                    // "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=https://scopewith.com/user/kakao/callback&response_type=code";
+                      // 최종 주소
+                      "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=https://scopewith.com/user/kakao/callback&response_type=code";
                     closeWindow();
                   }}
                 >
