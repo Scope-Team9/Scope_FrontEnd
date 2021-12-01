@@ -33,6 +33,7 @@ const MypagePostList = (props) => {
                   myUserId={props.myUserId}
                   assessment={props.assessment}
                   doSetAssessment={props.doSetAssessment}
+                  checkMydata={props.checkMydata}
                 ></Post>
               );
             })}

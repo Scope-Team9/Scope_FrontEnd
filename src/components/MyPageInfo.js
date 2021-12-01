@@ -71,18 +71,23 @@ const MyPageInfo = (props) => {
     setFilter(data);
   };
 
+  const checkMydata = () => {
+    setMydata(null);
+  };
+
   React.useEffect(() => {
     // console.log("뭐고");
     setMydata(null);
     setEndProject(null);
     setMyType(null);
+
     dispatch(postActions.isMainPage(false));
     dispatch(postActions.whatPage("myPage"));
     const fetchData = async () => {
       try {
         const result = await apis.getMypage(userId);
         // console.log(result);
-
+        setMydata(null);
         setEndProject(result.data.data.end);
         setMyType(result.data.data.user.userPropensityType);
         setMydata(result.data.data);
@@ -265,6 +270,7 @@ const MyPageInfo = (props) => {
                     myUserId={myUserId}
                     assessment={assessment}
                     doSetAssessment={doSetAssessment}
+                    checkMydata={checkMydata}
                   ></MypagePostList>
                 )}
                 <IntroduceWrap margin="0 0 0 25%" width="49%">

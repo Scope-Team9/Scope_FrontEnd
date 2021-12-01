@@ -86,7 +86,9 @@ const Liked = (props) => {
                   fontSize="large"
                   onClick={(e) => {
                     e.stopPropagation();
+
                     modalClose();
+                    props.checkMydata();
                   }}
                 />
               </Grid>

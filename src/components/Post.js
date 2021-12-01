@@ -69,6 +69,7 @@ const Post = (props) => {
   const didAssessment = (e) => {
     e.stopPropagation();
     // console.log(e.target.value, props.postId);
+
     modalOpen(e.target.value, props.postId);
   };
 
@@ -118,6 +119,7 @@ const Post = (props) => {
                   myPage={props.mypage}
                   toggleModal={toggleModal}
                   doSetAssessment={props.doSetAssessment}
+                  checkMydata={props.checkMydata}
                 />
               </Grid>
             </Grid>
