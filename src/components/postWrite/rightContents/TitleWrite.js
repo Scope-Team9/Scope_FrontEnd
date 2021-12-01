@@ -24,7 +24,7 @@ const TitleWrite = (props) => {
           placeholder="제목을 입력해주세요."
           boxShadow="0px 0px 10px #ddd"
           type="text"
-          maxLength="35"
+          maxLength="34"
           inputFocusOutline="none"
           _onChange={(e) => {
             props.setTitle(e.target.value);
