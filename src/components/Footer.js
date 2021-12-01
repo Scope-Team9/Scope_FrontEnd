@@ -36,21 +36,34 @@ const Footer = (props) => {
 
   return (
     <Wrap>
-      <Grid display="flex" bg="#fff" boxShadow="0 0 3px #aaa">
-        <FooterBtn onClick={goToHome}>
-          <HomeIcon sx={{ color: "#17334A", fontSize: 40 }} />
-        </FooterBtn>
-        <FooterBtn
-          onClick={() => {
-            if (!isToken) {
-              window.alert("로그인 후 작성 가능합니다.");
-            } else {
-              goToAddPost();
-            }
-          }}
-        >
-          <AddIcon sx={{ color: "#17334A", fontSize: 40 }} />
-        </FooterBtn>
+      <Grid display="flex" boxShadow="0 0 3px #aaa">
+        {userType && isToken && (
+          <FooterBtn onClick={goToHome}>
+            <HomeIcon sx={{ color: "#17334a", fontSize: 40 }} />
+          </FooterBtn>
+        )}
+
+        {userType && isToken && (
+          <FooterBtn
+            onClick={() => {
+              if (!isToken) {
+                window.alert("로그인 후 작성 가능합니다.");
+              } else {
+                goToAddPost();
+              }
+            }}
+          >
+            <AddIcon sx={{ color: "#17334a", fontSize: 40 }} />
+          </FooterBtn>
+        )}
+
+        {!userType ||
+          (!isToken && (
+            <FooterHomeBtn onClick={goToHome}>
+              <HomeIcon sx={{ color: "white", fontSize: 40 }} />
+            </FooterHomeBtn>
+          ))}
+
         {userType && isToken && (
           <FooterBtn onClick={goToMypage}>
             <ImgType type={userType} />
@@ -62,18 +75,34 @@ const Footer = (props) => {
 };
 const Wrap = styled.div`
   display: none;
+  background-color: white;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0px 0px 10px #ddd;
   @media screen and (max-width: 767px) {
     width: 100vw;
     margin: auto;
-    height: 8%;
+    height: 7%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0);
+    /* background-color: rgba(255, 255, 255, 0); */
     z-index: 10;
     position: fixed;
     bottom: 0;
   }
+`;
+
+const FooterHomeBtn = styled.div`
+  width: 12.5%;
+  height: 80%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: #17334a;
+  border-radius: 50px;
+  box-shadow: 0px 0px 10px #17334a;
 `;
 
 const FooterBtn = styled.div`

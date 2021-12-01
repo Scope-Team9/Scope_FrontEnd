@@ -79,7 +79,7 @@ const MyPageInfo = (props) => {
     const fetchData = async () => {
       try {
         const result = await apis.getMypage(userId);
-        console.log(result);
+        // console.log(result);
 
         setEndProject(result.data.data.end);
 
@@ -280,7 +280,7 @@ const MyPageInfo = (props) => {
                 <IntroduceWrap>
                   {filter === "소개" &&
                     mydata?.isMyMypage === true &&
-                    introduction === true && (
+                    introduction !== "" && (
                       <button
                         style={{
                           float: "right",
@@ -304,7 +304,7 @@ const MyPageInfo = (props) => {
                         />
                       </button>
                     )}
-                  {filter === "소개" && introduction === true && (
+                  {filter === "소개" && introduction !== "" && (
                     <Grid margin="50px 0 0 0" border="1px solid #707070 ">
                       <MarkdownRead
                         introduction={mydata?.user.introduction}

@@ -12,12 +12,10 @@ const TitleDetail = (props) => {
   return (
     <React.Fragment>
       <Grid margin="20px auto 0px">
-        <TitleMedia>
-          <TitleText>
-            {props.passedData?.title}
-            <Line />
-          </TitleText>
-        </TitleMedia>
+        {/* <TitleMedia> */}
+        <TitleText>{props.passedData?.title}</TitleText>
+        {/* </TitleMedia> */}
+        <Line />
       </Grid>
     </React.Fragment>
   );
