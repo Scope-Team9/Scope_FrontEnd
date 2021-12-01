@@ -14,7 +14,7 @@ const DateDetail = (props) => {
         <DateMedia>
           <Grid display="flex">
             <Text margin="auto 12px auto 0px" color="#4c4759">
-              프로젝트 기간
+              진행기간
             </Text>
             <DateBox>
               {props.passedData?.startDate} ~ {props.passedData?.endDate}
