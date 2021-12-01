@@ -192,6 +192,7 @@ const PostEdit = (props) => {
 };
 
 const EditMedia = styled.div`
+  margin-bottom: 60px;
   @media screen and (max-width: 500px) {
     width: 98%;
   }
