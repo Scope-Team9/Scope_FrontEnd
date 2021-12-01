@@ -1,18 +1,8 @@
 /* eslint-disable */
 import React, { useState } from "react";
 import styled from "styled-components";
-import {
-  TestOne,
-  TestTwo,
-  TestThree,
-  TestFour,
-  TestFive,
-  TestSix,
-  TestSeven,
-  TestEight,
-  TestNine,
-  TestResult,
-} from "./TestIndex";
+import TestResult from "./TestResult";
+import Test from "./Test";
 import TestData from "./Testdata.json";
 import Progress from "./Progress";
 import { useSelector, useDispatch } from "react-redux";
@@ -207,56 +197,9 @@ const PropensityTest = props => {
 
       {/* 컨텐츠자리 */}
       <Grid width="90%" margin="auto" height="42%">
-        {page === 1 && (
-          <TestOne
-            handleUserCreate={handleUserCreate}
-            handleMemberCreate={handleMemberCreate}
-          />
-        )}
-        {page === 2 && (
-          <TestTwo
-            handleUserCreate={handleUserCreate}
-            handleMemberCreate={handleMemberCreate}
-          />
-        )}
-        {page === 3 && (
-          <TestThree
-            handleUserCreate={handleUserCreate}
-            handleMemberCreate={handleMemberCreate}
-          />
-        )}
-        {page === 4 && (
-          <TestFour
-            handleUserCreate={handleUserCreate}
-            handleMemberCreate={handleMemberCreate}
-          />
-        )}
-        {page === 5 && (
-          <TestFive
-            handleUserCreate={handleUserCreate}
-            handleMemberCreate={handleMemberCreate}
-          />
-        )}
-        {page === 6 && (
-          <TestSix
-            handleUserCreate={handleUserCreate}
-            handleMemberCreate={handleMemberCreate}
-          />
-        )}
-        {page === 7 && (
-          <TestSeven
-            handleUserCreate={handleUserCreate}
-            handleMemberCreate={handleMemberCreate}
-          />
-        )}
-        {page === 8 && (
-          <TestEight
-            handleUserCreate={handleUserCreate}
-            handleMemberCreate={handleMemberCreate}
-          />
-        )}
-        {page === 9 && (
-          <TestNine
+        {page <= 9 && (
+          <Test
+            page={page}
             handleUserCreate={handleUserCreate}
             handleMemberCreate={handleMemberCreate}
           />
@@ -323,7 +266,7 @@ const TestImg = styled.img`
 `;
 const Header = styled.div`
   height: 50px;
-  background-color: #17334a;
+  background-color: #554475;
   position: relative;
   text-align: center;
   padding: 10px 0 10px 0;

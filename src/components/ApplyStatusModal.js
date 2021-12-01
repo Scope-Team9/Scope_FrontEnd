@@ -79,7 +79,7 @@ const ApplyStatusModal = props => {
           <ModalWrap>
             <Grid
               height="12%"
-              bg="#17334A"
+              bg="#554475"
               position="relative"
               textAlign="center"
               padding="10px 0 0 0"

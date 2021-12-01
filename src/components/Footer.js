@@ -39,7 +39,7 @@ const Footer = props => {
     <Wrap>
       <Grid display="flex" bg="#fff" boxShadow="0 0 3px #aaa">
         <FooterBtn onClick={goToHome}>
-          <HomeIcon sx={{ color: "#17334A", fontSize: 40 }} />
+          <HomeIcon sx={{ color: "#554475", fontSize: 40 }} />
         </FooterBtn>
         <FooterBtn
           onClick={() => {
@@ -50,7 +50,7 @@ const Footer = props => {
             }
           }}
         >
-          <AddIcon sx={{ color: "#17334A", fontSize: 40 }} />
+          <AddIcon sx={{ color: "#554475", fontSize: 40 }} />
         </FooterBtn>
         {userType && isToken && (
           <FooterBtn onClick={goToMypage}>

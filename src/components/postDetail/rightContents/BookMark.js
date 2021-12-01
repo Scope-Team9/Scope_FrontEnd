@@ -17,9 +17,9 @@ const Bookmark = props => {
           <BookMark>
             <BookMark onClick={props.ToggleBookMark}>
               {!props.passedData?.bookmarkChecked ? (
-                <BookmarkBorderIcon sx={{ color: "#17334A", fontSize: 45 }} />
+                <BookmarkBorderIcon sx={{ color: "#554475", fontSize: 45 }} />
               ) : (
-                <BookmarkIcon sx={{ color: "#17334A", fontSize: 45 }} />
+                <BookmarkIcon sx={{ color: "#554475", fontSize: 45 }} />
               )}
             </BookMark>
           </BookMark>
