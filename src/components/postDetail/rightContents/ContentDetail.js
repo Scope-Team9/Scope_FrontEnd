@@ -35,9 +35,9 @@ const Content = styled.p`
   white-space: pre-line;
   overflow-y: scroll;
   overflow-x: hidden;
-  @media screen and (max-width: 600px) {
-    width: 280px;
-    height: 300px;
+  @media screen and (max-width: 1800px) {
+    width: 100%;
+    height: 400px;
   }
 `;
 
