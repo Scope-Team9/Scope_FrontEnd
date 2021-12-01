@@ -4,6 +4,7 @@ import { Grid, Input, Text, Button, Image } from "../../elements/Index";
 import { Dialog } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { useHistory } from "react-router";
 import { applyCreators } from "../../redux/modules/applyProject";
 
 import CloseIcon from "@mui/icons-material/Close";
@@ -14,6 +15,7 @@ const ExileUserModal = (props) => {
   const [applyedUsers, setApplyUsers] = React.useState();
   const [acceptButton, setAcceptButton] = React.useState();
   const { applyStatusModal, setApplyStatusModal, postId, postUserId } = props;
+  const history = useHistory();
 
   const modalClose = () => {
     setApplyStatusModal(false);
@@ -65,6 +67,7 @@ const ExileUserModal = (props) => {
               position="relative"
               textAlign="center"
               padding="10px 0 10px 0"
+              boxShadow="0px 0px 10px #554475"
             >
               <Grid
                 position="absolute"
@@ -93,7 +96,7 @@ const ExileUserModal = (props) => {
                   textAlign="center"
                   margin="auto"
                 >
-                  <Grid height="50%">
+                  <Grid height="50%" margin="40px auto">
                     <img width="100%" src="/img/step9.png" />
                   </Grid>
                   <Grid margin="250px 0">지원자가 아직 없습니다!</Grid>
@@ -112,10 +115,21 @@ const ExileUserModal = (props) => {
                     justifyContent="space-around"
                     padding="10px"
                     width="90%"
+                    borderRadius="10px"
+                    boxShadow="0px 0px 10px #554475"
                     key={user.userId}
                     {...user}
                   >
-                    <Grid margin="auto" width="30%">
+                    <Grid
+                      display="flex"
+                      justifyContent="center"
+                      alignItems="center"
+                      margin="auto"
+                      width="27%"
+                      _onClick={() => {
+                        history.push(`/mypage/${user.userId}`);
+                      }}
+                    >
                       {applyedUsers[idx].userPropensityType === "LVG" && (
                         <UserImg src="/img/호랑이.png"></UserImg>
                       )}
@@ -149,27 +163,36 @@ const ExileUserModal = (props) => {
                           display="flex"
                           justifyContent="space-between"
                         >
-                          <Grid height="100%" textAlign="center">
+                          {/* <Grid height="100%" textAlign="center">
                             <Texts bg="#eee" height="50%">
                               닉네임
                             </Texts>
                             <Texts bg="#aaa" height="50%">
                               성향
                             </Texts>
-                          </Grid>
-                          <Grid margin="auto" height="100%" textAlign="center">
-                            <Texts height="50%">
-                              {applyedUsers[idx].nickname}
-                            </Texts>
-                            <Texts height="50%">
-                              {applyedUsers[idx].userPropensityType}
-                            </Texts>
-                          </Grid>
+                          </Grid> */}
+                          <ModalMedia>
+                            <Grid
+                              margin="50% auto"
+                              height="20px"
+                              textAlign="center"
+                              bg="#55447561"
+                            >
+                              <Texts height="50%">
+                                {applyedUsers[idx].nickname}
+                              </Texts>
+                              <Texts height="50%">
+                                {applyedUsers[idx].userPropensityType}
+                              </Texts>
+                            </Grid>
+                          </ModalMedia>
                         </Grid>
-                        <Grid margin="auto" height="50px" width="80%">
-                          <Grid margin="auto 50%" width="50px">
+                        <Grid margin="auto" height="auto" width="80px">
+                          <Grid margin="50% 60%" width="50px">
                             {applyedUsers[idx].userId !== postUserId && (
                               <Button
+                                width="80px"
+                                height="50px"
                                 common
                                 isValue={applyedUsers[idx].userId}
                                 _onClick={(e) => {
@@ -200,20 +223,27 @@ const ExileUserModal = (props) => {
   );
 };
 
+const ModalMedia = styled.div`
+  @media screen and (max-width: 600px) {
+  } ;
+`;
+
 const ModalWrap = styled.div`
   width: 550px;
   height: 500px;
-  @media (max-width: 375px) {
-    width: 300px;
+  @media (max-width: 600px) {
+    width: 100%;
   }
 `;
+
 const Texts = styled.p`
   height: 50%;
   width: 50px;
   @media screen and (max-width: 600px) {
-    font-size: 9px;
+    font-size: 12px;
   }
 `;
+
 const CommentBubble = styled.div`
   position: relative;
   background: #f1f9ff;
@@ -241,6 +271,17 @@ const UserImg = styled.img`
   border-radius: 12px;
   background-color: #ececec;
   cursor: pointer;
+`;
+
+const Wrap = styled.div`
+  display: flex;
+  height: 60%;
+  margin: auto;
+  @media screen and (max-width: 600px) {
+    display: flex;
+    flex-direction: column;
+    height: 40%;
+  } ;
 `;
 
 export default ExileUserModal;

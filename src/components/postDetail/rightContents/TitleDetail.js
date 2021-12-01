@@ -26,12 +26,12 @@ const Line = styled.hr`
   width: 100%;
   margin-bottom: 8px;
   background-color: #554475;
-  height: 3px;
+  height: 1px;
 `;
 
 const TitleMedia = styled.p`
   @media screen and (max-width: 376px) {
-    font-size: 12px;
+    font-size: 10px;
   }
 `;
 
