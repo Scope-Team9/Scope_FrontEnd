@@ -9,9 +9,9 @@ import { applyCreators } from "../../redux/modules/applyProject";
 
 import CloseIcon from "@mui/icons-material/Close";
 import { apis } from "../../lib/axios";
-const ExileUserModal = props => {
+const ExileUserModal = (props) => {
   const dispatch = useDispatch();
-  const applyUsers = useSelector(state => state.apply.applyUsers);
+  const applyUsers = useSelector((state) => state.apply.applyUsers);
   const [applyedUsers, setApplyUsers] = React.useState();
   const [acceptButton, setAcceptButton] = React.useState();
   const { applyStatusModal, setApplyStatusModal, postId, postUserId } = props;
@@ -37,7 +37,7 @@ const ExileUserModal = props => {
     // dispatch(applyCreators.applyUserAPI(postId));
   }, [applyStatusModal, acceptButton]);
 
-  const exile = userId => {
+  const exile = (userId) => {
     // console.log(userId);
     const fetchData = async () => {
       try {
@@ -63,11 +63,11 @@ const ExileUserModal = props => {
           <ModalWrap>
             <Grid
               height="10%"
-              bg="#554475"
+              bg="#172D40"
               position="relative"
               textAlign="center"
               padding="10px 0 10px 0"
-              boxShadow="0px 0px 10px #554475"
+              boxShadow="0px 0px 10px #172D40"
             >
               <Grid
                 position="absolute"
@@ -175,7 +175,7 @@ const ExileUserModal = props => {
                         <ModalMedia>
                           <Grid margin="auto">
                             <Grid
-                              bg="#55447561"
+                              bg="#172d408f"
                               width="110px"
                               height="50%"
                               display="flex"
@@ -214,7 +214,7 @@ const ExileUserModal = props => {
                                 height="70px"
                                 common
                                 isValue={applyedUsers[idx].userId}
-                                _onClick={e => {
+                                _onClick={(e) => {
                                   window.confirm("추방하시겠습니까?");
                                   exile(e.target.value);
                                 }}

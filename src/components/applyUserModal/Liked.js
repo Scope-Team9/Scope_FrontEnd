@@ -8,7 +8,6 @@ import CloseIcon from "@mui/icons-material/Close";
 import ImgType from "../../shared/ImgType";
 
 const Liked = (props) => {
-  // console.log(props);
   const dispatch = useDispatch();
   const [likes, setLikes] = React.useState();
   const {
@@ -55,12 +54,11 @@ const Liked = (props) => {
     };
     // console.log(likeUsers);
     if (!myPage) {
-      // console.log("여기");
       dispatch(applyCreators.starterLikeAPI(postId, likeUsers));
       modalClose("종료");
       return;
     }
-    // console.log("여기2");
+    console.log("여기4");
 
     dispatch(applyCreators.starterLikeAPI(postId, likeUsers));
     toggleModal();
@@ -141,7 +139,7 @@ const Liked = (props) => {
                           <Grid height="100%" textAlign="center" width="60%">
                             <Grid
                               borderRadius="20px 0 0 20px"
-                              bg="#554475"
+                              bg="#172d408f"
                               height="50%"
                               margin="0 0 3px 0 "
                               display="flex"
@@ -154,7 +152,7 @@ const Liked = (props) => {
                             </Grid>
                             <Grid
                               borderRadius="20px 0 0 20px"
-                              bg="#554475"
+                              bg="#172d408f"
                               height="50%"
                               display="flex"
                               alignItems="center"

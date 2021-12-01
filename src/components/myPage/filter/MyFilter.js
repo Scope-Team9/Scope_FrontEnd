@@ -34,7 +34,17 @@ const FilterDiv = styled.div`
   height: 35px;
 
   /* background-color: ${(props) => (props.active ? "black" : " yellow")}; */
-  border-bottom: ${(props) => (props.active ? "1mm ridge #554475" : null)};
+  border-bottom: ${(props) =>
+    props.active ? "1mm ridge rgb(170, 50, 220, .6)" : null};
+  &:hover {
+    transform: scale(1.05);
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    -o-transform: scale(1.05);
+    /* text-decoration: underline; */
+    color: #dacceb;
+  }
 `;
 
 const Filter = styled.p`

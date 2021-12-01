@@ -13,7 +13,7 @@ const DateDetail = (props) => {
       <Grid display="flex" margin="6px 0 0 0px">
         <DateMedia>
           <Grid display="flex">
-            <Text margin="auto 12px auto 0px" color="#4c4759">
+            <Text margin="auto 12px auto 0px" color="#172d40ab">
               진행기간
             </Text>
             <DateBox>
@@ -30,7 +30,7 @@ const DateBox = styled.div`
   color: black;
   font-size: 11px;
   padding: 4px 10px;
-  border: 1px solid #554475;
+  border: 1px solid #172d40;
   border-radius: 50px;
   text-align: center;
 `;
