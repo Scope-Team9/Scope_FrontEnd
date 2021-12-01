@@ -14,74 +14,88 @@ const Stack = (props) => {
   //필터 클릭
   const [arr, setArr] = React.useState([
     {
-      id: "React",
-      img: "/img/react.png",
-      active: false,
-    },
-    {
       id: "Java",
       img: "/img/java.png",
       active: false,
+      title: "Java",
     },
     {
       id: "JavaScript",
       img: "/img/javascript.png",
       active: false,
+      title: "JavaScript",
     },
     {
       id: "Python",
       img: "/img/python.png",
       active: false,
+      title: "Python",
     },
     {
       id: "Node",
       img: "/img/node.js.png",
       active: false,
+      title: "Node.js",
+    },
+    {
+      id: "React",
+      img: "/img/react.png",
+      active: false,
+      title: "React",
     },
     {
       id: "C++",
       img: "/img/c__.png",
       active: false,
+      title: "C++",
     },
     {
       id: "Flask",
       img: "/img/flask.png",
       active: false,
+      title: "Flask",
     },
     {
       id: "Django",
       img: "/img/django.png",
       active: false,
+      title: "Django",
     },
     {
       id: "Vue",
       img: "/img/vue.png",
       active: false,
+      title: "Vue",
     },
     {
       id: "Spring",
       img: "/img/spring.png",
       active: false,
+      title: "Spring",
     },
     {
       id: "php",
       img: "/img/php.png",
       active: false,
+      title: "php",
     },
     {
       id: "Swift",
       img: "/img/swift.png",
       active: false,
+      title: "Swift",
     },
     {
       id: "Kotlin",
       img: "/img/kotlin.png",
       active: false,
+      title: "Kotlin",
     },
     {
       id: "TypeScript",
       img: "/img/typescript.png",
       active: false,
+      title: "TypeScript",
     },
   ]);
   React.useEffect(() => {
@@ -150,14 +164,15 @@ const Stack = (props) => {
   return (
     <Grid
       display="flex"
-      width="75%"
+      width="100%"
+      height="75%"
       margin="25px auto 20px auto"
       boxShadow="0px 0px 10px #ddd"
       padding="5px 10px"
       borderRadius="20px"
       overflow="auto"
       alignItems="center"
-      maxWidth="1900px"
+      maxWidth="1400px"
     >
       {arr.map((item) => {
         return (

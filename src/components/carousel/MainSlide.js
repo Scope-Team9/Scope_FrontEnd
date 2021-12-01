@@ -106,8 +106,13 @@ const MainSlide = () => {
             </div>
           ))}
         </Slider>
-        <Dialog maxWidth={"sm"} scroll="paper" open={showModal}>
-          <SignupModalWrap width="550px" height="100%">
+        <Dialog
+          maxWidth={"sm"}
+          scroll="paper"
+          open={showModal}
+          onClose={TestClose}
+        >
+          <SignupModalWrap>
             <PropensityTest TestClose={TestClose} />
           </SignupModalWrap>
         </Dialog>
@@ -128,10 +133,8 @@ const MainSlide = () => {
 const SignupModalWrap = styled.div`
   height: 100%;
   width: 550px;
-
   @media (max-width: 650px) {
     width: 310px;
-    height: 550px;
     font-size: 11px;
   }
 `;

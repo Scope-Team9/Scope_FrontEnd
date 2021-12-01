@@ -22,22 +22,20 @@ const Header = props => {
 };
 
 const Wrap = styled.div`
-  max-width: 1900px;
+  max-width: 1400px;
+  width: 100vw;
   margin: auto;
-  height: 10%;
+  height: 5%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: rgba(255, 255, 255, 0);
+  /* background-color: white; */
   padding: 20px 0;
   z-index: 10;
   position: relative;
-
-  @media screen and (max-width: 750px) {
-    width: 100vw;
-    height: 20px;
-    margin: auto;
-  } ;
+  /* left: 50%;
+  transform: translate(-50%, 0); */
 `;
 
 export default Header;

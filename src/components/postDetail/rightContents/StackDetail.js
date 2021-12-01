@@ -8,6 +8,7 @@ import { Grid, Text } from "../../../elements/Index";
 
 // StackDetail의 함수형 컴포넌트를 만든다..
 const StackDetail = (props) => {
+  // console.log(props);
   return (
     <React.Fragment>
       <Grid display="flex" margin="6px auto">
@@ -17,7 +18,7 @@ const StackDetail = (props) => {
         <StackMedia>
           {props.passedData?.techStack.map((item, index) => {
             return (
-              <Text margin="auto 5px" key={index}>
+              <Text margin="auto 5px" key={item.id}>
                 <StackBox>{item}</StackBox>
               </Text>
             );

@@ -10,12 +10,10 @@ import Select from "react-select";
 import PropensityTest from "./propensityTest/PropensityTest";
 import CloseIcon from "@mui/icons-material/Close";
 
-const LoginModal = (props) => {
+const LoginModal = props => {
   const dispatch = useDispatch();
-  const userInfo = useSelector((state) => state.user);
-  const sigunupModalState = useSelector(
-    (state) => state.user.sigunupModalState
-  );
+  const userInfo = useSelector(state => state.user);
+  const sigunupModalState = useSelector(state => state.user.sigunupModalState);
 
   var regExpNick = /^[a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{2,5}$/;
   var regExpEmail =
@@ -63,7 +61,7 @@ const LoginModal = (props) => {
   // console.log("sns아이디", userInfo.snsId);
 
   //닉네임 체크 미들웨어
-  const nickCheck = (nickName) => {
+  const nickCheck = nickName => {
     if (nickName === undefined) {
       alert("닉네임을 입력 해주세요.");
       return false;
@@ -77,7 +75,7 @@ const LoginModal = (props) => {
   };
 
   //이메일 체크 미들웨어
-  const emailCheck = (email) => {
+  const emailCheck = email => {
     if (nickName === "") {
       alert("이메일을 입력 해주세요.");
       return false;
@@ -106,7 +104,7 @@ const LoginModal = (props) => {
     }
     const registerInfo = {
       snsId: userInfo.snsId,
-      email: userInfo.email,
+      // email: userInfo.email,
       nickName: nickName,
       techStack: techStack,
     };
@@ -116,7 +114,7 @@ const LoginModal = (props) => {
   };
 
   const customStyles = {
-    control: (styles) => ({
+    control: styles => ({
       ...styles,
       backgroundColor: "white",
       borderRadius: "20px",
@@ -127,7 +125,7 @@ const LoginModal = (props) => {
     multiValue: (styles, { data }) => ({
       ...styles,
       color: data.color,
-      backgroundColor: "#17334A",
+      backgroundColor: "#554475",
       color: "white",
       borderRadius: "20px",
     }),
@@ -186,7 +184,7 @@ const LoginModal = (props) => {
         maxWidth={"sm"}
         scroll="paper"
         open={showModal}
-        // onClose={modalClose}
+        onClose={modalClose}
       >
         <SignupModalWrap>
           {/* 테스트가 필요한경우 */}
@@ -195,7 +193,7 @@ const LoginModal = (props) => {
               {/* 헤더 */}
               <Grid
                 height="7%"
-                bg="#17334A"
+                bg="#554475"
                 position="relative"
                 textAlign="center"
                 padding="10px 0 10px 0"
@@ -254,7 +252,7 @@ const LoginModal = (props) => {
                       display="flex"
                       alignItems="center"
                       justifyContent="center"
-                      margin="20px 0 10px 0"
+                      margin="23px 0 15px 0"
                     >
                       <Text color="#111">닉네임</Text>
                     </Grid>
@@ -271,7 +269,7 @@ const LoginModal = (props) => {
                     margin="15px auto"
                     height="280px"
                   >
-                    <Grid height="13%" margin="16px 0">
+                    <Grid height="13%" margin="16px 0 20px">
                       <Input
                         borderRadius="25px"
                         border="1px solid #ddd"
@@ -279,14 +277,22 @@ const LoginModal = (props) => {
                         padding="0 0 0 23px"
                         height="100%"
                         placeholder="닉네임을 입력해주세요"
-                        _onChange={(e) => {
+                        _onChange={e => {
                           setNickName(e.target.value);
                         }}
                       >
                         닉네임
                       </Input>
+                      {!regExpNick.test(nickName) && (
+                        <Grid width="170px">
+                          <Text size="9px" color="red">
+                            ※ 2~5자 한글,영문,숫자 조합
+                          </Text>
+                        </Grid>
+                      )}
                     </Grid>
-                    <Grid height="40%" padding="0 0 10px 0">
+
+                    <Grid height="45%" padding="0 0 10px 0">
                       <Select
                         styles={customStyles}
                         placeholder="보유중인 기술을 선택해주세요!"
@@ -295,7 +301,7 @@ const LoginModal = (props) => {
                         options={techStackOption}
                         className="basic-multi-select"
                         classNamePrefix="select"
-                        onChange={(e) => {
+                        onChange={e => {
                           let techStack = [];
                           let arr = e;
                           let idx = 0;
@@ -355,7 +361,7 @@ const LoginModal = (props) => {
         <LoginModalWrap>
           <Grid
             height="15%"
-            bg="#17334A"
+            bg="#554475"
             position="relative"
             padding="10px 0 10px 0"
             boxShadow="0 5px 25px rgb(0 0 0 / 15%)"
@@ -407,11 +413,11 @@ const LoginModal = (props) => {
                       // "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=http://kbumsoo.s3-website.ap-northeast-2.amazonaws.com/user/github/callback";
 
                       //local
-                      "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=http://localhost:3000/user/github/callback";
+                      // "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=http://localhost:3000/user/github/callback";
 
-                    // 최종 주소
+                      // 최종 주소
 
-                    // "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=https://scopewith.com/user/github/callback";
+                      "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=https://scopewith.com/user/github/callback";
                   }}
                 >
                   깃허브로그인
@@ -445,7 +451,7 @@ const LoginModal = (props) => {
           </Grid>
 
           <Grid display="flex" justifyContent="center" margin="10px 0 30px 0">
-            <Grid width="20%" backgroundColor="#17334A" height="3px"></Grid>
+            <Grid width="20%" backgroundColor="#554475" height="3px"></Grid>
           </Grid>
         </LoginModalWrap>
       </Dialog>

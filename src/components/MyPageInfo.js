@@ -16,13 +16,13 @@ import Banners from "./myPage/Banners";
 import MypageCard from "./myPage/MypageCard";
 import TypeResultTest from "./myPage/TypeResultTest";
 import MypageFilter from "./myPage/MypageFilter";
+import { userCreators } from "../redux/modules/user";
 import { pageCheckAction } from "../redux/modules/pageCheck";
 
 // MyPageInfo의 함수형 컴포넌트를 만든다.
 const MyPageInfo = (props) => {
   const dispatch = useDispatch();
   const userId = props.match.params.id;
-
   const myUserId = useSelector((state) => state.user.userId);
   const [myUrl, setMyUrl] = React.useState();
   const [filter, setFilter] = React.useState("소개");
@@ -31,7 +31,8 @@ const MyPageInfo = (props) => {
   const [techStack, setTeckstack] = React.useState([]); //
   const [nickName, setNickName] = React.useState(); //
   const [email, setEmail] = React.useState(); //
-  const myType = mydata?.user.userPropensityType;
+  const [myType, setMyType] = React.useState(); ////////////
+  // const myType = mydata?.user.userPropensityType;
   const [modal, setModal] = React.useState(false);
   const [testmodal, setTestModal] = React.useState(false);
   const [assessment, setAssessment] = React.useState(false);
@@ -41,13 +42,23 @@ const MyPageInfo = (props) => {
 
   const pageCheck = useSelector((state) => state.pagecheck.pageGo);
 
-  //click
-  const introduction = mydata?.user.introduction ? true : false;
+  ////
+  const [introduction, setIntroduction] = React.useState(); //포스트의 작성자확인
 
-  const recruitmentProject = mydata?.recruitment;
-  const inProgressProject = mydata?.inProgress;
-  const bookMarkProject = mydata?.bookmark;
-  const endProject = mydata?.end;
+  const [recruitmentProject, setRecruitmentProject] = React.useState(); //멤버아이디
+  const [inProgressProject, setInProgressProject] = React.useState(); //포스트의 작성자확인
+  const [bookMarkProject, setBookMarkProject] = React.useState(); //멤버아이디
+  const [endProject, setEndProject] = React.useState(); //포스트의 작성자확인
+  ////
+
+  //click
+  // const introduction = mydata?.user.introduction ? true : false;
+
+  // const recruitmentProject = mydata?.recruitment;
+  // const inProgressProject = mydata?.inProgress;
+  // const bookMarkProject = mydata?.bookmark;
+  // const endProject = mydata?.end;
+  // console.log(mydata);
 
   const [loading, setLoading] = React.useState(true);
 
@@ -61,17 +72,19 @@ const MyPageInfo = (props) => {
   };
 
   React.useEffect(() => {
+    // console.log("뭐고");
     setMydata(null);
+    setEndProject(null);
+    setMyType(null);
     dispatch(postActions.isMainPage(false));
     dispatch(postActions.whatPage("myPage"));
     const fetchData = async () => {
       try {
         const result = await apis.getMypage(userId);
         // console.log(result);
-        setNickName(result.data.data.user.nickname);
-        setEmail(result.data.data.user.email);
-        setTeckstack(result.data.data.user.techStackList);
 
+        setEndProject(result.data.data.end);
+        setMyType(result.data.data.user.userPropensityType);
         setMydata(result.data.data);
         dispatch(pageCheckAction.getPageCheck(`/mypage/${userId}`));
 
@@ -82,12 +95,35 @@ const MyPageInfo = (props) => {
     };
     fetchData();
     // console.log(mydata);
-  }, [assessment, editMyProfile, testmodal]);
+  }, [assessment, testmodal]);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     const fetchData = async () => {
       try {
         const result = await apis.getMypage(userId);
+
+        setNickName(result.data.data.user.nickname);
+        setEmail(result.data.data.user.email);
+        setTeckstack(result.data.data.user.techStackList);
+
+        // setLoading(false);
+      } catch (err) {
+        // console.log(err);
+      }
+    };
+    fetchData();
+  }, [editMyProfile]);
+
+  React.useLayoutEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await apis.getMypage(userId);
+        setRecruitmentProject(result.data.data.recruitment);
+        setInProgressProject(result.data.data.inProgress);
+        setBookMarkProject(result.data.data.bookmark);
+        setEndProject(result.data.data.end);
+        setIntroduction(result.data.data.user.introduction);
+        setMyType(result.data.data.user.userPropensityType);
 
         setMydata(result.data.data);
         dispatch(pageCheckAction.getPageCheck(`/mypage/${userId}`));
@@ -129,8 +165,8 @@ const MyPageInfo = (props) => {
         <Spinner />
       ) : (
         <>
-          {mydata && myType && (
-            <Grid className="전체페이지" maxWidth="1900px" margin="auto">
+          {mydata && myType && endProject && (
+            <Grid className="전체페이지" maxWidth="1400px" margin="auto">
               <Grid height="30%" position="relative">
                 <Banner>
                   <Banners
@@ -154,6 +190,7 @@ const MyPageInfo = (props) => {
                       setModal={setModal}
                       nickName={nickName}
                       modal={modal}
+                      mypage={mydata.isMyMypage}
                       onClick={() => {
                         EmailConfirm();
                       }}
@@ -240,42 +277,44 @@ const MyPageInfo = (props) => {
                     </>
                   )}
                 </IntroduceWrap>
-                {filter === "소개" &&
-                  mydata?.isMyMypage === true &&
-                  introduction === true && (
-                    <button
-                      style={{
-                        float: "right",
-                        margin: "55px 18% 0 0",
-                        border: "none",
-                        borderRadius: "15px",
-                        cursor: "pointer",
-                        backgroundColor: " transparent ",
-                      }}
-                      onClick={() => {
-                        history.push({
-                          pathname: "/addmarkdown",
-                          state: { userId: userId },
-                        });
-                      }}
-                    >
-                      <img
-                        src="/img/소개글.png"
-                        style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
-                      />
-                    </button>
-                  )}
-                <Grid margin="0 0 0 34%" width="49%">
-                  {filter === "소개" && introduction === true && (
+
+                <IntroduceWrap>
+                  {filter === "소개" &&
+                    mydata?.isMyMypage === true &&
+                    introduction !== "" && (
+                      <button
+                        style={{
+                          float: "right",
+                          margin: "1% 1% 0 0",
+                          border: "none",
+                          borderRadius: "15px",
+                          cursor: "pointer",
+                          backgroundColor: " #fff ",
+                          position: "relative",
+                        }}
+                        onClick={() => {
+                          history.push({
+                            pathname: "/addmarkdown",
+                            state: { userId: userId },
+                          });
+                        }}
+                      >
+                        <img
+                          src="/img/소개글.png"
+                          style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
+                        />
+                      </button>
+                    )}
+                  {filter === "소개" && introduction !== "" && (
                     <Grid margin="50px 0 0 0" border="1px solid #707070 ">
                       <MarkdownRead
                         introduction={mydata?.user.introduction}
                       ></MarkdownRead>
                     </Grid>
                   )}
-                </Grid>
+                </IntroduceWrap>
                 <IntroduceWrap>
-                  {filter === "소개" && introduction === false && (
+                  {filter === "소개" && introduction === "" && (
                     <>
                       <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
                       <NoIntroductionText>
@@ -331,43 +370,30 @@ const Banner = styled.div`
 
 const FilterWrap = styled.div`
   display: flex;
-  margin-left: 30%;
-  width: 60vw;
+  margin-left: 35%;
+  width: 870px;
+  max-width: 1400px;
   z-index: 999;
 
-  @media screen and (max-width: 1600px) {
-    margin-left: 35%;
-  }
   @media screen and (max-width: 1200px) {
     width: 90vw;
     justify-content: center;
     margin: auto;
   }
-  @media screen and (max-width: 750px) {
-    width: 90vw;
-    justify-content: center;
-    margin: auto;
-  } ;
 `;
-const IntroduceWrap = styled.div`
-  margin: 0 0 0 30%;
-  width: 60vw;
-  max-width: 1050px;
 
-  @media screen and (max-width: 1600px) {
-    margin-left: 35%;
-  }
+const IntroduceWrap = styled.div`
+  margin-left: 37%;
+  width: 60vw;
+  max-width: 780px;
+
   @media screen and (max-width: 1200px) {
     width: 90vw;
     justify-content: center;
     margin: auto;
   }
-  @media screen and (max-width: 750px) {
-    width: 90vw;
-    justify-content: center;
-    margin: auto;
-  } ;
 `;
+
 const NoIntroduction = styled.img`
   width: 40%;
   height: 40%;
@@ -402,19 +428,6 @@ const IntroduceBtn = styled.div`
   justify-content: center;
   margin: auto;
   width: 150px;
-`;
-
-const NoticeText = styled.div`
-  color: #737373;
-  font-size: 12px;
-
-  @media screen and (min-width: 490px) {
-    color: #737373;
-    font-size: 12px;
-  }
-  @media screen and (min-width: 491px) {
-    display: none;
-  } ;
 `;
 
 export default MyPageInfo;

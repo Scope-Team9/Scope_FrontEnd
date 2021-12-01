@@ -9,17 +9,15 @@ import { userCreators } from "../redux/modules/user";
 import { deleteCookie } from "../shared/Cookie";
 import ImgType from "../shared/ImgType";
 
-const HeaderRight = (props) => {
+const HeaderRight = props => {
   const dispatch = useDispatch();
   const isToken = document.cookie;
-  const userInfo = useSelector((state) => state.user);
+  const userInfo = useSelector(state => state.user);
   // console.log(userInfo);
   const [showModal, setShowModal] = React.useState(false);
   const [doLogout, setDoLogOut] = React.useState(false);
 
-  const sigunupModalState = useSelector(
-    (state) => state.user.sigunupModalState
-  );
+  const sigunupModalState = useSelector(state => state.user.sigunupModalState);
   const modalOpen = () => {
     setShowModal(true);
   };
@@ -174,14 +172,14 @@ const UserImg = styled.img`
 
 const Btn = styled.button`
   background-color: #fff;
-  color: #17334a;
+  color: #554475;
   border-radius: 25px;
-  border: 1px solid #17334a;
+  border: 1px solid #554475;
   cursor: pointer;
   height: 50px;
   width: 120px;
   &:hover {
-    background-color: #17334a;
+    background-color: #554475;
     color: #fff;
     transform: translate();
     transition: 0.3s ease-out;

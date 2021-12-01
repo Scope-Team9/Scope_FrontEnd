@@ -68,7 +68,7 @@ const RightWrite = (props) => {
       chatUrl: chatUrl,
       contents: contents,
     };
-    console.log(card);
+    // console.log(card);
     dispatch(postAddActions.addPostAPI(card));
   };
 

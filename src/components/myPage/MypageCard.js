@@ -10,6 +10,7 @@ import { apis } from "../../lib/axios";
 import CardUserInfo from "./card/CardUserInfo";
 
 const MypageCard = (props) => {
+  // console.log(props);
   const [editMyProfile, setEditMyProfile] = React.useState(false); //
   const [checkEmail, setCheckEmail] = React.useState();
   const [deleteModal, setDeleteModal] = React.useState(false);
@@ -89,20 +90,18 @@ const MypageCard = (props) => {
       <CardImgs myType={props.myType} />
 
       {props.editMyProfile === false && (
-        <>
-          <CardUserInfo
-            editMyProfile={props.editMyProfile}
-            setEditMyProfile={props.setEditMyProfile}
-            mydata={props.mydata}
-            myType={props.myType}
-            myUserId={props.myUserId}
-            userId={props.userId}
-            nickName={props.nickName}
-            email={props.email}
-            techStack={props.techStack}
-            onClick={props.onClick}
-          />
-        </>
+        <CardUserInfo
+          editMyProfile={props.editMyProfile}
+          setEditMyProfile={props.setEditMyProfile}
+          mydata={props.mydata}
+          myType={props.myType}
+          myUserId={props.myUserId}
+          userId={props.userId}
+          nickName={props.nickName}
+          email={props.email}
+          techStack={props.techStack}
+          onClick={props.onClick}
+        />
       )}
       {props.editMyProfile === true && (
         <>
@@ -134,40 +133,6 @@ const MypageCard = (props) => {
             </div>
           </MyInfoText1>
 
-          {/* 이메일 */}
-          {/* <MyInfoText1>
-            <div
-              style={{
-                width: "90px",
-                marginLeft: "30px",
-                height: "60px",
-              }}
-            >
-              <p style={{ marginTop: "20px" }}>E-mail </p>
-            </div>
-            <div style={{ width: "90px" }}>
-              <input
-                style={{
-                  borderRadius: "5px",
-                  borderColor: "#707070",
-                  WebkitAppearance: "none",
-                  MozAppearance: "none",
-                  appearance: "none",
-                  color: "#707070",
-                  border: "1px solid #707070",
-                  outlineStyle: "none",
-                  margin: "15px 0 0 0",
-                  width: "150px",
-                  padding: "7px",
-                }}
-                defaultValue={props.email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-              ></input>
-            </div>
-          </MyInfoText1> */}
-          {/* 기술스택 */}
           <MyInfoText1>
             <div
               style={{
@@ -254,7 +219,7 @@ const Cards = styled.div`
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
     rgba(0, 0, 0, 0.22) 0px 15px 12px;
 
-  width: 100%;
+  width: 90%;
   height: 900px;
   /* background-color: rgba(255, 255, 255, 0); */
   background-color: white;
@@ -262,13 +227,9 @@ const Cards = styled.div`
   overflow: hidden;
 
   position: absolute;
-  right: -35%;
+  right: -15%;
   top: -600%;
-  @media screen and (max-width: 1600px) {
-    width: 90%;
-    position: absolute;
-    right: -15%;
-  }
+
   @media screen and (max-width: 1200px) {
     display: none;
   }

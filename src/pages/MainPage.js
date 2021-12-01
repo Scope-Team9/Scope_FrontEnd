@@ -26,15 +26,14 @@ const MainPage = () => {
 
   const dispatch = useDispatch();
   const history = useHistory();
-  const stack = useSelector((state) => state.stack.stack);
-  const sortC = useSelector((state) => state.sort.sort);
+  const stack = useSelector(state => state.stack.stack);
+  const sortC = useSelector(state => state.sort.sort);
   const isToken = document.cookie;
   // const cards = useSelector((state) => state.post.posts);
-  // console.log(cards);
-  const reBookC = useSelector((state) => state.rebook.reBook);
-  const pageCheck = useSelector((state) => state.post.pageCheck);
-  const infinity = useSelector((state) => state.infinity.paging);
-  const Render = useSelector((state) => state.post.render);
+  const reBookC = useSelector(state => state.rebook.reBook);
+  const pageCheck = useSelector(state => state.post.pageCheck);
+  const infinity = useSelector(state => state.infinity.paging);
+  const Render = useSelector(state => state.post.render);
   const [ref, inView] = useInView();
   const [paging, setPaging] = React.useState(infinity.next);
   const [pPaging, setPPaging] = React.useState(12);
@@ -46,9 +45,9 @@ const MainPage = () => {
   const [sorts, setSrots] = React.useState();
   const [reBooks, setReBookss] = React.useState();
 
-  const postList = useSelector((state) => state.post.posts);
-  const isLoginUser = useSelector((state) => state.user.userId);
-  const isLogin = useSelector((state) => state.user.isLogin);
+  const postList = useSelector(state => state.post.posts);
+  const isLoginUser = useSelector(state => state.user.userId);
+  const isLogin = useSelector(state => state.user.isLogin);
 
   // let container = React.useRef();
   React.useLayoutEffect(() => {
@@ -68,15 +67,6 @@ const MainPage = () => {
     fetchData();
   }, [sortC, reBookC, Render, isToken, Render, isLogin]);
 
-  // React.useLayoutEffect(() => {
-  //   dispatch(postActions.whatPage("mainPage"));
-  //   // dispatch(postActions.getPostAPI());
-  //   // console.log(cards);
-
-  //   // console.log(post);
-  // }, [sortC, stack, reBookC, Render, isLogin]);
-  // stack, sortC, reBookC, Render, isLogin
-
   React.useEffect(() => {
     if (inView === true) {
       // setPaging(paging + 12);
@@ -90,33 +80,29 @@ const MainPage = () => {
     // console.log(pPaging);
   }, [inView]);
 
+  React.useLayoutEffect(() => {
+    setPost();
+    dispatch(postActions.whatPage("mainPage"));
+
+    const fetchData = async () => {
+      try {
+        const result = await apis.getPost(stack, sortC, reBookC);
+        setPost(result.data.data);
+        // console.log(result);
+        // container.current.scrollTo(0, lastScroll);
+      } catch (err) {
+        // console.log(err);
+      }
+    };
+    fetchData();
+  }, [sortC, reBookC, Render, isToken, Render, isLogin]);
+
   const goPage = () => {
     window.open(
       "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfl6t0O_P5mXR6wo1cqIZ7TWkYduTkZiNlx0r5HynoArgS9Tg/formResponse",
       "_blank"
     );
   };
-
-  // const lastScroll = useSelector((state) => state.infinity.current_scroll);
-  // let timer;
-  // const scroll = (e) => {
-  //   console.log(e);
-  //   if (timer) {
-  //     clearTimeout(timer);
-  //   }
-  //   timer = setTimeout(function () {
-  //     dispatch(pageAction.getScroll(e.target.scrollTop));
-  //   }, 500);
-  // };
-
-  // React.useEffect(() => {
-
-  // }, []);
-  // onScroll={scroll} ref={container}
-
-  // React.useEffect(() => {
-  //   scrollOnceMove();
-  // }, [scrollOnceMove]);
 
   const ScrollTop = () => {
     window.scrollTo({
@@ -127,15 +113,14 @@ const MainPage = () => {
   };
 
   return (
-    // <div ref={refs}>
-    <div>
-      <Grid
-        maxWidth="1920px"
+    <OutWrap>
+      {/* <Grid
+        maxWidth="1400px"
         height="100%"
         bg="#ffff"
         padding="0px 0px 10px 0"
-      ></Grid>
-      <Grid margin="-10px 0 0 0 ">
+      ></Grid> */}
+      <Grid margin="0px 0 0 0 ">
         <Inside>
           <MainSlide />
           <Stacks>
@@ -211,12 +196,16 @@ const MainPage = () => {
         </Inside>
         <Grid height="600px"></Grid>
       </Grid>
-    </div>
+    </OutWrap>
   );
 };
+const OutWrap = styled.div`
+  max-width: 1400px;
+  width: 100%;
+  margin: auto;
+`;
 
 const Inside = styled.div`
-  margin: auto;
   @media screen and (max-width: 750px) {
   } ;
 `;
@@ -250,7 +239,7 @@ const Btn = styled.button`
   cursor: pointer;
   z-index: 999;
   &:hover {
-    background: #17334a;
+    background: #554475;
     transform: translate();
     transition: 0.1s ease-out;
   }
@@ -329,7 +318,7 @@ const Scrollup = styled.div`
   z-index: 999;
 
   @media screen and (max-width: 767px) {
-    position: fixed;
+    /* position: fixed;
 
     width: 50px;
     height: 50px;
@@ -338,7 +327,8 @@ const Scrollup = styled.div`
     bottom: 120px;
     margin: auto;
     cursor: pointer;
-    z-index: 999;
+    z-index: 999; */
+    display: none;
   } ;
 `;
 

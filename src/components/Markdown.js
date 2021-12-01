@@ -161,7 +161,7 @@ export default function Writer(props) {
   const introduction = mydata?.user.introduction;
   // console.log(introduction);
   return (
-    <>
+    <Grid maxWidth="1400px" margin="auto">
       {introduction === null && (
         <>
           <button
@@ -278,6 +278,6 @@ export default function Writer(props) {
           </Grid>
         </>
       )}
-    </>
+    </Grid>
   );
 }
