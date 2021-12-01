@@ -286,9 +286,24 @@ const LoginModal = (props) => {
                         닉네임
                       </Input>
                       {!regExpNick.test(nickName) && (
-                        <Grid width="170px">
+                        <Grid
+                          width="170px"
+                          margin="0 0 0 20px"
+                          textAlign="left"
+                        >
                           <Text size="9px" color="red">
                             ※ 2~5자 한글,영문,숫자 조합
+                          </Text>
+                        </Grid>
+                      )}
+                      {regExpNick.test(nickName) && (
+                        <Grid
+                          width="170px"
+                          margin="0 0 0 20px"
+                          textAlign="left"
+                        >
+                          <Text size="9px" color="green">
+                            ※ 올바른 닉네임입니다!
                           </Text>
                         </Grid>
                       )}
@@ -315,6 +330,28 @@ const LoginModal = (props) => {
                       >
                         기술스택
                       </Select>
+                      {techStack.length <= 7 && (
+                        <Grid
+                          width="180px"
+                          margin="0 0 0 20px"
+                          textAlign="left"
+                        >
+                          <Text size="9px" color="green">
+                            ※ 기술스택은 7개까지 가능
+                          </Text>
+                        </Grid>
+                      )}
+                      {techStack.length > 7 && (
+                        <Grid
+                          width="180px"
+                          margin="0 0 0 20px"
+                          textAlign="left"
+                        >
+                          <Text size="9px" color="red">
+                            ※ 기술스택이 초과되었습니다.
+                          </Text>
+                        </Grid>
+                      )}
                     </Grid>
                   </Grid>
                   {/* 중복체크 */}
@@ -415,11 +452,11 @@ const LoginModal = (props) => {
                       // "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=http://kbumsoo.s3-website.ap-northeast-2.amazonaws.com/user/github/callback";
 
                       //local
-                      // "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=http://localhost:3000/user/github/callback";
+                      "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=http://localhost:3000/user/github/callback";
 
-                      // 최종 주소
+                    // 최종 주소
 
-                      "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=https://scopewith.com/user/github/callback";
+                    // "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=https://scopewith.com/user/github/callback";
                   }}
                 >
                   깃허브로그인

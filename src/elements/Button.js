@@ -207,7 +207,10 @@ const Common = styled.button`
   width: ${props => props.width};
   color: ${props => (props.isActive == true ? "#fff" : "#554475")};
   margin-right: 3px;
-  border-radius: 25px;
+  ${props =>
+    props.borderRadius
+      ? `border-radius:${props.borderRadius}`
+      : "border-radius: 25px"};
   border: 1px solid #554475;
   cursor: pointer;
   top: ${props => props.top};
