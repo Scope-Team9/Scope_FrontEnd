@@ -22,13 +22,11 @@ import Header from "../components/Header";
 import Message from "../components/headerFunction/Message";
 import Footer from "../components/Footer";
 import NotFound from "../shared/NotFound";
-
-//테스트용입니다.
-import PropensityTest from "../components/propensityTest/PropensityTest";
+import { ContactSupportOutlined } from "@material-ui/icons";
 
 function App() {
-  const isLogin = useSelector((state) => state.user.isLogin);
-  const userInfo = useSelector((state) => state.user);
+  const isLogin = useSelector(state => state.user.isLogin);
+  const userInfo = useSelector(state => state.user);
   const isCookie = document.cookie.split("=")[1];
   const dispatch = useDispatch();
 

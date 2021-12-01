@@ -244,8 +244,12 @@ const editTestMiddleware = (userId, testInfo) => {
       .editTest(userId, testInfo)
       .then(res => {
         // console.log(res);
+        let currentUserId = getState().user.userId;
+        let currentNickname = getState().user.nickname;
         dispatch(
           setUser({
+            userId: currentUserId,
+            nickname: currentNickname,
             userPropensityType: res.data.data.userPropensityType,
             memberPropensityType: res.data.data.memberPropensityType,
           })
