@@ -252,7 +252,7 @@ const LoginModal = props => {
                       display="flex"
                       alignItems="center"
                       justifyContent="center"
-                      margin="20px 0 10px 0"
+                      margin="23px 0 15px 0"
                     >
                       <Text color="#111">닉네임</Text>
                     </Grid>
@@ -269,7 +269,7 @@ const LoginModal = props => {
                     margin="15px auto"
                     height="280px"
                   >
-                    <Grid height="13%" margin="16px 0">
+                    <Grid height="13%" margin="16px 0 20px">
                       <Input
                         borderRadius="25px"
                         border="1px solid #ddd"
@@ -283,8 +283,16 @@ const LoginModal = props => {
                       >
                         닉네임
                       </Input>
+                      {!regExpNick.test(nickName) && (
+                        <Grid width="170px">
+                          <Text size="9px" color="red">
+                            ※ 2~5자 한글,영문,숫자 조합
+                          </Text>
+                        </Grid>
+                      )}
                     </Grid>
-                    <Grid height="40%" padding="0 0 10px 0">
+
+                    <Grid height="45%" padding="0 0 10px 0">
                       <Select
                         styles={customStyles}
                         placeholder="보유중인 기술을 선택해주세요!"
