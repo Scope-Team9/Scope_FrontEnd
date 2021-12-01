@@ -58,12 +58,11 @@ const Footer = (props) => {
           </FooterBtn>
         )}
 
-        {!userType ||
-          (!isToken && (
-            <FooterHomeBtn onClick={goToHome}>
-              <HomeIcon sx={{ color: "white", fontSize: 40 }} />
-            </FooterHomeBtn>
-          ))}
+        {!isToken && (
+          <FooterHomeBtn onClick={goToHome}>
+            <HomeIcon sx={{ color: "white", fontSize: 40, borderRadius: 40 }} />
+          </FooterHomeBtn>
+        )}
 
         {userType && isToken && (
           <FooterBtn onClick={goToMypage}>
@@ -94,8 +93,8 @@ const Wrap = styled.div`
 `;
 
 const FooterHomeBtn = styled.div`
-  width: 12.5%;
-  height: 80%;
+  width: 55px;
+  height: 55px;
   margin: auto;
   display: flex;
   justify-content: center;
