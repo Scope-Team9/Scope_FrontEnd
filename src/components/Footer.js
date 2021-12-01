@@ -8,11 +8,11 @@ import HomeIcon from "@mui/icons-material/Home";
 import AddIcon from "@mui/icons-material/Add";
 import { history } from "../redux/configureStore";
 
-const Footer = (props) => {
+const Footer = props => {
   const userType = props.userInfo.userPropensityType;
   const userId = props.userInfo.userId;
   const isToken = document.cookie;
-  const nowPage = useSelector((state) => state.post.whatPage.now);
+  const nowPage = useSelector(state => state.post.whatPage.now);
 
   const goToMypage = () => {
     history.push(`/`);
@@ -58,12 +58,11 @@ const Footer = (props) => {
           </FooterBtn>
         )}
 
-        {!userType ||
-          (!isToken && (
-            <FooterHomeBtn onClick={goToHome}>
-              <HomeIcon sx={{ color: "white", fontSize: 40 }} />
-            </FooterHomeBtn>
-          ))}
+        {!isToken && (
+          <FooterHomeBtn onClick={goToHome}>
+            <HomeIcon sx={{ color: "white", fontSize: 40 }} />
+          </FooterHomeBtn>
+        )}
 
         {userType && isToken && (
           <FooterBtn onClick={goToMypage}>
@@ -94,8 +93,8 @@ const Wrap = styled.div`
 `;
 
 const FooterHomeBtn = styled.div`
-  width: 12.5%;
-  height: 80%;
+  width: 50px;
+  height: 50px;
   margin: auto;
   display: flex;
   justify-content: center;
@@ -103,7 +102,7 @@ const FooterHomeBtn = styled.div`
   cursor: pointer;
   background-color: #17334a;
   border-radius: 50px;
-  box-shadow: 0px 0px 10px #17334a;
+  box-shadow: 0px 0px 1px #17334a;
 `;
 
 const FooterBtn = styled.div`
