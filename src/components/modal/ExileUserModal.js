@@ -63,11 +63,11 @@ const ExileUserModal = props => {
           <ModalWrap>
             <Grid
               height="10%"
-              bg="#554475"
+              bg="#17334a"
               position="relative"
               textAlign="center"
               padding="10px 0 10px 0"
-              boxShadow="0px 0px 10px #554475"
+              boxShadow="0px 0px 10px #17334a"
             >
               <Grid
                 position="absolute"
@@ -116,7 +116,7 @@ const ExileUserModal = props => {
                     padding="10px"
                     width="90%"
                     borderRadius="10px"
-                    boxShadow="0px 0px 10px #554475"
+                    boxShadow="0px 0px 10px #17334a"
                     key={user.userId}
                     {...user}
                   >
@@ -175,7 +175,7 @@ const ExileUserModal = props => {
                         <ModalMedia>
                           <Grid margin="auto">
                             <Grid
-                              bg="#55447561"
+                              bg="#17334a"
                               width="110px"
                               height="50%"
                               display="flex"

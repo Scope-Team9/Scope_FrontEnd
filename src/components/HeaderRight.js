@@ -172,14 +172,14 @@ const UserImg = styled.img`
 
 const Btn = styled.button`
   background-color: #fff;
-  color: #554475;
+  color: #17334a;
   border-radius: 25px;
-  border: 1px solid #554475;
+  border: 1px solid #17334a;
   cursor: pointer;
   height: 50px;
   width: 120px;
   &:hover {
-    background-color: #554475;
+    background-color: #17334a;
     color: #fff;
     transform: translate();
     transition: 0.3s ease-out;

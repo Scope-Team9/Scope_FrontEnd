@@ -6,7 +6,7 @@ import { Grid, Image } from "../../elements/Index";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-const MypagePostList = (props) => {
+const MypagePostList = props => {
   // console.log(props);
   const userId = useParams();
 
@@ -23,7 +23,7 @@ const MypagePostList = (props) => {
       {newMyCards && (
         <React.Fragment>
           <PostWrap>
-            {newMyCards.map((p) => {
+            {newMyCards.map(p => {
               return (
                 <Post
                   mypage={mypage}
@@ -44,17 +44,22 @@ const MypagePostList = (props) => {
 };
 
 const PostWrap = styled.div`
-  width: 50%;
-  margin: 0 0 0 33%;
+  width: 750px;
+  margin: 0 0 0 38.5%;
   display: grid;
 
   justify-content: center;
   align-items: center;
 
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-  /* grid-gap: 1px; */
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  grid-gap: 1px;
   @media (max-width: 1200px) {
-    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+    grid-gap: 10px;
+    margin: auto;
+  }
+  @media (max-width: 768px) {
+    width: 90vw;
+    grid-gap: 10px;
     margin: auto;
   }
   @media (max-width: 420px) {

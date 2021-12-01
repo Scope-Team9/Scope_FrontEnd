@@ -143,7 +143,7 @@ const ElButton = styled.button`
   ${props =>
     props.backgroundColor
       ? `background-color:${props.backgroundColor}`
-      : "background-color: #554475"};
+      : "background-color: #17334a"};
   box-sizing: border-box;
   border-radius: 5px;
   font-weight: bold;
@@ -175,18 +175,18 @@ const ElButton = styled.button`
 const TestButton = styled.button`
   font-size: 12px;
   text-align: center;
-  border: 1px solid #554475;
+  border: 1px solid #17334a;
   border-radius: 25px;
   padding: 20px;
   margin: 5px;
   box-shadow: 0px 2px 2px #ddd;
   font-family: "GmarketSans";
   font-weight: 400;
-  background-color: ${props => (props.isActive == true ? "#554475" : "#fff")};
-  color: ${props => (props.isActive == true ? "#fff" : "#554475")};
+  background-color: ${props => (props.isActive == true ? "#17334a" : "#fff")};
+  color: ${props => (props.isActive == true ? "#fff" : "#17334a")};
 
   &:hover {
-    background-color: #554475;
+    background-color: #17334a;
     cursor: pointer;
     color: #fff;
     box-shadow: 0px 3px 2px #ddd;
@@ -202,16 +202,16 @@ const TestButton = styled.button`
 `;
 
 const Common = styled.button`
-  background-color: ${props => (props.isActive == true ? "#554475" : "#fff")};
+  background-color: ${props => (props.isActive == true ? "#17334a" : "#fff")};
   height: ${props => props.height};
   width: ${props => props.width};
-  color: ${props => (props.isActive == true ? "#fff" : "#554475")};
+  color: ${props => (props.isActive == true ? "#fff" : "#17334a")};
   margin-right: 3px;
   ${props =>
     props.borderRadius
       ? `border-radius:${props.borderRadius}`
       : "border-radius: 25px"};
-  border: 1px solid #554475;
+  border: 1px solid #17334a;
   cursor: pointer;
   top: ${props => props.top};
   bottom: ${props => props.bottom};
@@ -221,7 +221,7 @@ const Common = styled.button`
   font-size: ${props => props.fontSize};
   padding: ${props => props.padding};
   &:hover {
-    background-color: #554475;
+    background-color: #17334a;
     color: #fff;
     transform: translate();
     transition: 0.3s ease-out;

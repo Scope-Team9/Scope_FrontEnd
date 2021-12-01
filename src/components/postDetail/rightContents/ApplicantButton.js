@@ -8,7 +8,7 @@ import { Grid, Button } from "../../../elements/Index";
 import ApplyUserModal from "../../ApplyUserModal";
 
 // ApplicantButton의 함수형 컴포넌트를 만든다.
-const ApplicantButton = (props) => {
+const ApplicantButton = props => {
   return (
     <React.Fragment>
       <ContentMedia>
@@ -20,11 +20,11 @@ const ApplicantButton = (props) => {
                   common
                   width="120px"
                   isValue="apply"
-                  _onClick={(e) => {
+                  _onClick={e => {
                     props.applyUserModalOpen(e.target.value);
                   }}
                   margin="auto 10px"
-                  border="1px solid #554475"
+                  border="1px solid #17334a"
                   borderRadius="50px"
                 >
                   지원신청
@@ -37,7 +37,7 @@ const ApplicantButton = (props) => {
                 common
                 width="120px"
                 isValue="cancel"
-                _onClick={(e) => {
+                _onClick={e => {
                   props.applyUserModalOpen(e.target.value);
                 }}
                 width="120px"
@@ -77,7 +77,7 @@ const ApplicantButton = (props) => {
                   common
                   width="120px"
                   isValue="teamExit"
-                  _onClick={(e) => {
+                  _onClick={e => {
                     props.applyUserModalOpen(e.target.value);
                   }}
                 >
