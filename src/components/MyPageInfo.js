@@ -24,6 +24,8 @@ const MyPageInfo = (props) => {
   const dispatch = useDispatch();
   const userId = props.match.params.id;
   const myUserId = useSelector((state) => state.user.userId);
+  const checkApply = useSelector((state) => state.apply);
+  console.log(checkApply);
   const [myUrl, setMyUrl] = React.useState();
   const [filter, setFilter] = React.useState("소개");
   const [mydata, setMydata] = React.useState();
@@ -87,7 +89,7 @@ const MyPageInfo = (props) => {
       try {
         const result = await apis.getMypage(userId);
         // console.log(result);
-        setMydata(null);
+
         setEndProject(result.data.data.end);
         setMyType(result.data.data.user.userPropensityType);
         setMydata(result.data.data);
@@ -100,7 +102,7 @@ const MyPageInfo = (props) => {
     };
     fetchData();
     // console.log(mydata);
-  }, [assessment, testmodal]);
+  }, [assessment, testmodal, checkApply]);
 
   React.useLayoutEffect(() => {
     const fetchData = async () => {
