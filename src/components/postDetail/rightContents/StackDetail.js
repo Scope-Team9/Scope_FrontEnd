@@ -13,7 +13,7 @@ const StackDetail = (props) => {
     <React.Fragment>
       <Grid display="flex" margin="6px auto">
         <Text margin="auto 10px auto 0px" color="#4c4759">
-          스택
+          Stack
         </Text>
         <StackMedia>
           {props.passedData?.techStack.map((item, index) => {
