@@ -25,7 +25,7 @@ const ContentDetail = (props) => {
 
 // styled-components
 const Content = styled.p`
-  width: 550px;
+  width: 100%;
   height: 400px;
   padding: 10px;
   border: 1px solid #c4c4c4;
@@ -35,7 +35,7 @@ const Content = styled.p`
   white-space: pre-line;
   overflow-y: scroll;
   overflow-x: hidden;
-  @media screen and (max-width: 1800px) {
+  @media screen and (max-width: 600px) {
     width: 100%;
     height: 400px;
   }
