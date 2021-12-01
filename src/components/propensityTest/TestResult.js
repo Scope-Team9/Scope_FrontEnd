@@ -29,7 +29,7 @@ const TestResult = props => {
               <Grid bg="#fff" key={type.userType} {...type}>
                 <Grid
                   height="7%"
-                  bg="#17334A"
+                  bg="#554475"
                   borderRadius="20px"
                   padding="12px 0"
                   margin="12px 0"
@@ -41,7 +41,7 @@ const TestResult = props => {
                 <Grid
                   margin="12px 0"
                   borderRadius="20px"
-                  border="1px solid #17334A"
+                  border="1px solid #554475"
                   padding="40px 0"
                   height="30%"
                 >

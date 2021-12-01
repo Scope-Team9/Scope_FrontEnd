@@ -8,11 +8,11 @@ import HomeIcon from "@mui/icons-material/Home";
 import AddIcon from "@mui/icons-material/Add";
 import { history } from "../redux/configureStore";
 
-const Footer = props => {
+const Footer = (props) => {
   const userType = props.userInfo.userPropensityType;
   const userId = props.userInfo.userId;
   const isToken = document.cookie;
-  const nowPage = useSelector(state => state.post.whatPage.now);
+  const nowPage = useSelector((state) => state.post.whatPage.now);
 
   const goToMypage = () => {
     history.push(`/`);

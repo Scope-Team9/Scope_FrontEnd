@@ -239,7 +239,7 @@ const Btn = styled.button`
   cursor: pointer;
   z-index: 999;
   &:hover {
-    background: #17334a;
+    background: #554475;
     transform: translate();
     transition: 0.1s ease-out;
   }

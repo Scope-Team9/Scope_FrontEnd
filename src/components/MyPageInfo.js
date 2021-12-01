@@ -75,6 +75,7 @@ const MyPageInfo = (props) => {
     // console.log("뭐고");
     setMydata(null);
     setEndProject(null);
+    setMyType(null);
     dispatch(postActions.isMainPage(false));
     dispatch(postActions.whatPage("myPage"));
     const fetchData = async () => {
@@ -83,7 +84,7 @@ const MyPageInfo = (props) => {
         // console.log(result);
 
         setEndProject(result.data.data.end);
-
+        setMyType(result.data.data.user.userPropensityType);
         setMydata(result.data.data);
         dispatch(pageCheckAction.getPageCheck(`/mypage/${userId}`));
 
