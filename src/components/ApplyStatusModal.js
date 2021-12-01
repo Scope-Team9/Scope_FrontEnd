@@ -33,7 +33,7 @@ const ApplyStatusModal = (props) => {
     };
     fetchData();
 
-    // dispatch(applyCreators.applyUserAPI(postId));
+    // dispatch(applyCreators.applyUserAPI(postId));;
   }, [applyStatusModal, acceptButton]);
 
   const acceptOffer = (acceptUser) => {
