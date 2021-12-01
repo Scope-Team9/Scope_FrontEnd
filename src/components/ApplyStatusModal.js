@@ -98,16 +98,10 @@ const ApplyStatusModal = (props) => {
                   cursor="pointer"
                 />
               </Grid>
-              <Grid
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                height="40px"
-              >
-                <Text size="40px" bold color="#fff">
-                  신청현황
-                </Text>
-              </Grid>
+
+              <Text size="40px" bold color="#fff">
+                신청현황
+              </Text>
             </Grid>
             {applyedUsers == "" && (
               <Grid height="0%" justifyContent="center">
@@ -192,7 +186,7 @@ const ApplyStatusModal = (props) => {
                           </Grid> */}
                           <ModalMedia>
                             <Grid height="100%" textAlign="center">
-                              <Grid bg="#55447561" width="200px" height="50%">
+                              <Grid bg="#55447561" width="150px" height="50%">
                                 {applyedUsers[idx].nickname}
                               </Grid>
                               <Grid bg="#f5f5f5" height="50%">
@@ -205,7 +199,7 @@ const ApplyStatusModal = (props) => {
                           <Grid display="flex">
                             <Grid margin="auto" height="auto" width="80px">
                               <Button
-                                height="10px"
+                                height="50px"
                                 common
                                 isValue={applyedUsers[idx].userId}
                                 _onClick={(e) => {
@@ -221,7 +215,7 @@ const ApplyStatusModal = (props) => {
                               width="80px"
                             >
                               <Button
-                                height="10px"
+                                height="50px"
                                 common
                                 isValue={applyedUsers[idx].userId}
                                 _onClick={(e) => {
@@ -259,14 +253,16 @@ const ModalMedia = styled.div`
 const ButtonMedia = styled.div`
   @media screen and (max-width: 600px) {
     width: 150px;
-    height: 20px;
+    height: 45px;
+    background-color: white;
+    border: none;
   } ;
 `;
 
 const ModalWrap = styled.div`
   width: 550px;
   height: 500px;
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: 600px) {
     width: 300px;
   } ;
 `;
@@ -274,22 +270,26 @@ const CommentBubble = styled.div`
   color: white;
   position: relative;
   background: #554475;
-  height: 12px;
+  height: 80px;
+  overflow: auto;
   /* border: #b29cf4 solid 1px; */
   border-radius: 10px;
   padding: 5px 12px;
-  ::after {
+  /* ::after {
     content: "";
     position: absolute;
     border-style: solid;
-    border-width: 10px 20px 0;
+    border-width: 10px 10px 0;
     border-color: #554475 transparent;
     display: block;
     width: 0;
     z-index: 1;
     top: 10px;
     left: -15px;
-  }
+  } */
+  @media screen and (max-width: 600px) {
+    width: 130px;
+  } ;
 `;
 
 const UserImg = styled.img`
@@ -304,7 +304,7 @@ const Wrap = styled.div`
   display: flex;
   height: 60%;
   margin: auto;
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: 600px) {
     display: flex;
     flex-direction: column;
     height: 40%;

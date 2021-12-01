@@ -124,70 +124,78 @@ const PostEdit = (props) => {
 
   return (
     <React.Fragment>
-      {loading ? (
-        <Spinner />
-      ) : (
-        <>
-          {checkPost && (
-            <Grid
-              display="flex"
-              justifyContent="center"
-              border="3px solid #C4C4C4"
-              borderRadius="30px"
-              maxWidth="1400px"
-              margin="40px auto 0px"
-              boxShadow="0px 0px 10px #554475"
-            >
-              <LeftBanner />
-              <Grid margin="18px 80px 0px">
-                <TitleMedia>
-                  <Title>게시글 수정하기</Title>
-                </TitleMedia>
+      <EditMedia>
+        {loading ? (
+          <Spinner />
+        ) : (
+          <>
+            {checkPost && (
+              <Grid
+                display="flex"
+                justifyContent="center"
+                border="3px solid #C4C4C4"
+                borderRadius="30px"
+                maxWidth="1400px"
+                margin="40px auto 0px"
+                boxShadow="0px 0px 10px #554475"
+              >
+                <LeftBanner />
+                <Grid margin="18px 80px 0px">
+                  <TitleMedia>
+                    <Title>게시글 수정하기</Title>
+                  </TitleMedia>
 
-                <Grid margin="40px auto 0px">
-                  <TitleEdit title={title} setTitle={setTitle} />
-                  <StackEdit
-                    setTectstack={setTectstack}
-                    techstack={techstack}
-                    setTest={setTest}
-                    animatedComponents={animatedComponents}
-                    styles={styles}
-                  />
-                  <Grid>
-                    <DateEdit
-                      startDate={startDate}
-                      endDate={endDate}
-                      setStartdate={setStartdate}
-                      setEnddate={setEnddate}
+                  <Grid margin="40px auto 0px">
+                    <TitleEdit title={title} setTitle={setTitle} />
+                    <StackEdit
+                      setTectstack={setTectstack}
+                      techstack={techstack}
+                      setTest={setTest}
+                      animatedComponents={animatedComponents}
+                      styles={styles}
                     />
-                  </Grid>
-                  <TotalMemberEdit
-                    styles={styles}
-                    totalMember={totalMember}
-                    setTotalmember={setTotalmember}
-                  />
-                  <StatusEdit
-                    styles={styles}
-                    projectStatus={projectStatus}
-                    setProjectstatus={setProjectstatus}
-                  />
-                  <Grid>
-                    <UrlEdit chatUrl={chatUrl} setChatUrl={setChatUrl} />
-                    <ContentEdit
-                      contents={contents}
-                      setContents={setContents}
+                    <Grid>
+                      <DateEdit
+                        startDate={startDate}
+                        endDate={endDate}
+                        setStartdate={setStartdate}
+                        setEnddate={setEnddate}
+                      />
+                    </Grid>
+                    <TotalMemberEdit
+                      styles={styles}
+                      totalMember={totalMember}
+                      setTotalmember={setTotalmember}
                     />
-                    <EditButton editHandler={editHandler} />
+                    <StatusEdit
+                      styles={styles}
+                      projectStatus={projectStatus}
+                      setProjectstatus={setProjectstatus}
+                    />
+                    <Grid>
+                      <UrlEdit chatUrl={chatUrl} setChatUrl={setChatUrl} />
+                      <ContentEdit
+                        contents={contents}
+                        setContents={setContents}
+                      />
+                      <EditButton editHandler={editHandler} />
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>
-            </Grid>
-          )}
-        </>
-      )}
+            )}
+          </>
+        )}
+      </EditMedia>
     </React.Fragment>
   );
 };
+
+const EditMedia = styled.div`
+  @media screen and (max-width: 500px) {
+    width: 98%;
+  }
+`;
 
 // styled-components를 사용한다.
 const Title = styled.div`
