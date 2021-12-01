@@ -128,7 +128,7 @@ const Liked = props => {
                     <Grid margin="auto" width="20%">
                       <ImgType type={passdedMenber[idx].userPropensityType} />
                     </Grid>
-                    <Grid height="100%" width=" 80%" margin="auto">
+                    <Grid height="100%" width=" 70%" margin="auto">
                       <Grid display="flex" height="60%" margin="auto">
                         <Grid
                           margin="auto"
@@ -198,7 +198,7 @@ const Liked = props => {
                           </Grid>
                         </Grid>
                         <Grid
-                          margin="auto auto auto 10px"
+                          margin="auto auto auto 1px"
                           height="50px"
                           width="80%"
                         >
