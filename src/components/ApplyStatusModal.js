@@ -8,9 +8,9 @@ import { applyCreators } from "../redux/modules/applyProject";
 import CloseIcon from "@mui/icons-material/Close";
 import { apis } from "../lib/axios";
 import { useHistory } from "react-router";
-const ApplyStatusModal = (props) => {
+const ApplyStatusModal = props => {
   const dispatch = useDispatch();
-  const applyUsers = useSelector((state) => state.apply.applyUsers);
+  const applyUsers = useSelector(state => state.apply.applyUsers);
   const [applyedUsers, setApplyUsers] = React.useState();
   const [acceptButton, setAcceptButton] = React.useState();
   const { applyStatusModal, setApplyStatusModal, postId } = props;
@@ -36,7 +36,7 @@ const ApplyStatusModal = (props) => {
     // dispatch(applyCreators.applyUserAPI(postId));
   }, [applyStatusModal, acceptButton]);
 
-  const acceptOffer = (acceptUser) => {
+  const acceptOffer = acceptUser => {
     const acceptInfo = {
       userId: acceptUser,
       accept: true,
@@ -57,7 +57,7 @@ const ApplyStatusModal = (props) => {
     // dispatch(applyCreators.acceptOfferAPI(postId, acceptInfo));
   };
 
-  const cancelOffer = (cancelUser) => {
+  const cancelOffer = cancelUser => {
     const acceptInfo = {
       userId: cancelUser,
       accept: false,
@@ -137,8 +137,10 @@ const ApplyStatusModal = (props) => {
                     {...user}
                   >
                     <Grid
+                      display="flex"
+                      justifyContent="center"
                       margin="auto"
-                      width="30%"
+                      width="100px"
                       _onClick={() => {
                         history.push(`/mypage/${user.userId}`);
                       }}
@@ -168,7 +170,7 @@ const ApplyStatusModal = (props) => {
                         <UserImg src="/img/물개.png"></UserImg>
                       )}
                     </Grid>
-                    <Grid height="100%" width="80%">
+                    <Grid height="100%" width="70%">
                       <Wrap>
                         <Grid
                           margin="auto"
@@ -185,11 +187,29 @@ const ApplyStatusModal = (props) => {
                             </Grid>
                           </Grid> */}
                           <ModalMedia>
-                            <Grid height="100%" textAlign="center">
-                              <Grid bg="#55447561" width="150px" height="50%">
-                                {applyedUsers[idx].nickname}
+                            <Grid height="100%">
+                              <Grid
+                                bg="#55447561"
+                                width="150px"
+                                height="50%"
+                                display="flex"
+                                justifyContent="center"
+                                alignItems="center"
+                                color="#fff"
+                                borderRadius="20px"
+                                borderRadius="10px 10px 0 0"
+                              >
+                                닉네임 | {applyedUsers[idx].nickname}
                               </Grid>
-                              <Grid bg="#f5f5f5" height="50%">
+                              <Grid
+                                bg="#f5f5f5"
+                                height="50%"
+                                display="flex"
+                                justifyContent="center"
+                                alignItems="center"
+                                borderRadius="0 0 10px 10px"
+                              >
+                                성향타입 |{" "}
                                 {applyedUsers[idx].userPropensityType}
                               </Grid>
                             </Grid>
@@ -197,12 +217,12 @@ const ApplyStatusModal = (props) => {
                         </Grid>
                         <ButtonMedia>
                           <Grid display="flex">
-                            <Grid margin="auto" height="auto" width="80px">
+                            <Grid margin="auto" height="auto" width="70px">
                               <Button
-                                height="50px"
+                                height="40px"
                                 common
                                 isValue={applyedUsers[idx].userId}
-                                _onClick={(e) => {
+                                _onClick={e => {
                                   acceptOffer(e.target.value);
                                 }}
                               >
@@ -212,13 +232,13 @@ const ApplyStatusModal = (props) => {
                             <Grid
                               margin="auto auto auto 3px"
                               height="auto"
-                              width="80px"
+                              width="70px"
                             >
                               <Button
-                                height="50px"
+                                height="40px"
                                 common
                                 isValue={applyedUsers[idx].userId}
-                                _onClick={(e) => {
+                                _onClick={e => {
                                   cancelOffer(e.target.value);
                                 }}
                               >

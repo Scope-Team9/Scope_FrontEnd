@@ -9,9 +9,9 @@ import { applyCreators } from "../../redux/modules/applyProject";
 
 import CloseIcon from "@mui/icons-material/Close";
 import { apis } from "../../lib/axios";
-const ExileUserModal = (props) => {
+const ExileUserModal = props => {
   const dispatch = useDispatch();
-  const applyUsers = useSelector((state) => state.apply.applyUsers);
+  const applyUsers = useSelector(state => state.apply.applyUsers);
   const [applyedUsers, setApplyUsers] = React.useState();
   const [acceptButton, setAcceptButton] = React.useState();
   const { applyStatusModal, setApplyStatusModal, postId, postUserId } = props;
@@ -37,7 +37,7 @@ const ExileUserModal = (props) => {
     // dispatch(applyCreators.applyUserAPI(postId));
   }, [applyStatusModal, acceptButton]);
 
-  const exile = (userId) => {
+  const exile = userId => {
     // console.log(userId);
     const fetchData = async () => {
       try {
@@ -125,7 +125,7 @@ const ExileUserModal = (props) => {
                       justifyContent="center"
                       alignItems="center"
                       margin="auto"
-                      width="27%"
+                      width="100px"
                       _onClick={() => {
                         history.push(`/mypage/${user.userId}`);
                       }}
@@ -155,15 +155,15 @@ const ExileUserModal = (props) => {
                         <UserImg src="/img/물개.png"></UserImg>
                       )}
                     </Grid>
-                    <Grid height="100%" width="80%">
-                      <Grid display="flex" height="60%" margin="auto">
-                        <Grid
-                          margin="auto"
-                          height="50px"
-                          display="flex"
-                          justifyContent="space-between"
-                        >
-                          {/* <Grid height="100%" textAlign="center">
+                    <Grid width="70%" margin="auto">
+                      <Grid
+                        display="flex"
+                        margin="auto"
+                        display="flex"
+                        justifyContent="space-between"
+                        alignItems="center"
+                      >
+                        {/* <Grid height="100%" textAlign="center">
                             <Texts bg="#eee" height="50%">
                               닉네임
                             </Texts>
@@ -171,31 +171,50 @@ const ExileUserModal = (props) => {
                               성향
                             </Texts>
                           </Grid> */}
-                          <ModalMedia>
+
+                        <ModalMedia>
+                          <Grid margin="auto">
                             <Grid
-                              margin="50% auto"
-                              height="20px"
-                              textAlign="center"
                               bg="#55447561"
+                              width="110px"
+                              height="50%"
+                              display="flex"
+                              justifyContent="center"
+                              alignItems="center"
+                              color="#fff"
+                              borderRadius="20px"
+                              borderRadius="10px 10px 0 0"
                             >
-                              <Texts height="50%">
-                                {applyedUsers[idx].nickname}
-                              </Texts>
-                              <Texts height="50%">
-                                {applyedUsers[idx].userPropensityType}
-                              </Texts>
+                              <Text size="12px">
+                                닉네임 | {applyedUsers[idx].nickname}
+                              </Text>
                             </Grid>
-                          </ModalMedia>
-                        </Grid>
-                        <Grid margin="auto" height="auto" width="80px">
-                          <Grid margin="50% 60%" width="50px">
+                            <Grid
+                              bg="#f5f5f5"
+                              height="50%"
+                              display="flex"
+                              justifyContent="center"
+                              alignItems="center"
+                              borderRadius="0 0 10px 10px"
+                            >
+                              <Text size="12px">
+                                성향타입 |{" "}
+                                {applyedUsers[idx].userPropensityType}
+                              </Text>
+                            </Grid>
+                          </Grid>
+                        </ModalMedia>
+
+                        <BtnWrap>
+                          <Grid width="100%" position="relative" right="0">
                             {applyedUsers[idx].userId !== postUserId && (
                               <Button
-                                width="80px"
-                                height="50px"
+                                borderRadius="50%"
+                                width="70px"
+                                height="70px"
                                 common
                                 isValue={applyedUsers[idx].userId}
-                                _onClick={(e) => {
+                                _onClick={e => {
                                   window.confirm("추방하시겠습니까?");
                                   exile(e.target.value);
                                 }}
@@ -204,12 +223,7 @@ const ExileUserModal = (props) => {
                               </Button>
                             )}
                           </Grid>
-                        </Grid>
-                        <Grid
-                          margin="auto auto auto 3px"
-                          height="50px"
-                          width="80%"
-                        ></Grid>
+                        </BtnWrap>
                       </Grid>
                     </Grid>
                   </Grid>
@@ -222,8 +236,9 @@ const ExileUserModal = (props) => {
     </>
   );
 };
-
 const ModalMedia = styled.div`
+  height: 80%;
+  margin: auto auto auto 0;
   @media screen and (max-width: 600px) {
   } ;
 `;
@@ -234,6 +249,16 @@ const ModalWrap = styled.div`
   @media (max-width: 600px) {
     width: 100%;
   }
+`;
+
+const BtnWrap = styled.div`
+  margin: 0 auto 0 40%;
+  height: auto;
+  width: 80px;
+  @media screen and (max-width: 600px) {
+    width: 80px;
+    margin: auto auto auto 2px;
+  } ;
 `;
 
 const Texts = styled.p`
