@@ -73,6 +73,7 @@ const MyPageInfo = (props) => {
 
   React.useEffect(() => {
     // console.log("뭐고");
+    setMydata(null);
     setEndProject(null);
     dispatch(postActions.isMainPage(false));
     dispatch(postActions.whatPage("myPage"));
@@ -99,7 +100,7 @@ const MyPageInfo = (props) => {
     const fetchData = async () => {
       try {
         const result = await apis.getMypage(userId);
-        // console.log(result);
+
         setNickName(result.data.data.user.nickname);
         setEmail(result.data.data.user.email);
         setTeckstack(result.data.data.user.techStackList);
@@ -110,7 +111,6 @@ const MyPageInfo = (props) => {
       }
     };
     fetchData();
-    // console.log(mydata);
   }, [editMyProfile]);
 
   React.useLayoutEffect(() => {
