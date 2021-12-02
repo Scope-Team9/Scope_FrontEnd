@@ -9,6 +9,7 @@ export const instance = axios.create({
   // baseURL: "https://scopewith.com",
   // baseURL: "http://15.165.159.211",
   baseURL: config.REACT_APP_BASEURL_LOCAL,
+  //
   // baseURL: process.env.REACT_APP_BASEURL_LOCAL,
   headers: {
     "content-type": "application/json; charset=UTF-8",
