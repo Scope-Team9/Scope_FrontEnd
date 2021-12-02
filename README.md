@@ -79,7 +79,8 @@
 ## 🎫 서비스 주소 
 서비스 주소 : [https://scopewith.com/](https://scopewith.com/)
 
-## 📆 개발 기간 : 2021년 10월 23일 ~ 2021년 12월 03일
+## 📆 개발 기간 
+2021년 10월 23일 ~ 2021년 12월 03일
 
 ## 📌 팀원소개
 팀원 소개 👉 [Team-Scope](https://scopewith.notion.site/4113e65749054b14a623c098c569d819)
