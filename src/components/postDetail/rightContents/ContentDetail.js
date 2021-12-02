@@ -13,7 +13,7 @@ const ContentDetail = (props) => {
     <React.Fragment>
       <Grid margin="10px auto auto">
         <ContentMedia>
-          <Text color="#4c4759">프로젝트 설명</Text>
+          <Text color="#172d40ab">프로젝트 설명</Text>
           <Linkify>
             <Content>{props.passedData?.contents}</Content>
           </Linkify>
@@ -28,7 +28,7 @@ const Content = styled.p`
   width: 100%;
   height: 400px;
   padding: 10px;
-  border: 1px solid #c4c4c4;
+  border: 1px solid #172d40ab;
   border-radius: 5px;
   font-weight: 60;
   line-height: 30px;

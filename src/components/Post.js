@@ -267,6 +267,9 @@ const ProjectState = styled.div`
   ${props => props.projectStatus === "모집중" && `background-color: #2699FB;`};
   ${props => props.projectStatus === "진행중" && `background-color: #15B915;`};
   ${props => props.projectStatus === "종료" && `background-color: #878787;`};
+  @media (max-width: 450px) {
+    margin: 0 0 10% 0;
+  }
 `;
 
 const ProductImgWrap = styled.div`

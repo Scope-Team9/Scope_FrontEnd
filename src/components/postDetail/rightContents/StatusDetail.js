@@ -12,7 +12,7 @@ const StatusDetail = (props) => {
     <React.Fragment>
       <Grid display="flex">
         <StatusMedia>
-          <Text margin="0px 10px 0px 0px" color="#4c4759">
+          <Text margin="0px 10px 0px 0px" color="#172d40ab">
             프로젝트 상태
           </Text>
           {props.passedData?.projectStatus === "모집중" && (

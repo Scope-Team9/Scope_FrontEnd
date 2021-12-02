@@ -6,7 +6,7 @@ import { applyCreators } from "../../redux/modules/applyProject";
 import styled from "styled-components";
 import CloseIcon from "@mui/icons-material/Close";
 
-const Cancel = (props) => {
+const Cancel = props => {
   const dispatch = useDispatch();
   const { modalClose, postId } = props;
   const cancel = () => {
@@ -58,7 +58,7 @@ const ModalWrap = styled.div`
   position: relative;
   @media (max-width: 620px) {
     margin: auto;
-    margin-top: 30px;
+    margin-top: 20px;
     width: 90%;
   }
 `;

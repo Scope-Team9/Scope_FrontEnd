@@ -14,13 +14,13 @@ const UrlDetail = (props) => {
     <React.Fragment>
       <UrlMedia>
         <Grid margin="10px auto auto">
-          <Text color="#4c4759">오픈채팅 URL</Text>
+          <Text color="#172d40ab">오픈채팅 URL</Text>
 
           <Text
             _onClick={() => {
               window.open(`${props.passedData?.chatUrl}`, "_blank");
             }}
-            color="#554475"
+            color="#172D40"
             cursor="pointer"
             decoration="none"
           >

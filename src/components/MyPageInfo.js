@@ -87,6 +87,7 @@ const MyPageInfo = (props) => {
     const fetchData = async () => {
       try {
         const result = await apis.getMypage(userId);
+        // console.log(result);
 
         setEndProject(result.data.data.end);
         setMyType(result.data.data.user.userPropensityType);

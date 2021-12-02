@@ -54,7 +54,7 @@ const ApplyStatusModal = (props) => {
       }
     };
     fetchData();
-    // dispatch(applyCreators.acceptOfferAPI(postId, acceptInfo));
+    // dispatch(applyCreators.acceptOfferAPI(postId, acceptInfo));;
   };
 
   const cancelOffer = (cancelUser) => {
@@ -79,11 +79,11 @@ const ApplyStatusModal = (props) => {
           <ModalWrap>
             <Grid
               height="12%"
-              bg="#554475"
+              bg="#172D40"
               position="relative"
               textAlign="center"
               padding="10px 0 0 0"
-              boxShadow="0px 0px 10px #554475"
+              boxShadow="0px 0px 10px #172D40"
             >
               <Grid
                 position="absolute"
@@ -133,7 +133,7 @@ const ApplyStatusModal = (props) => {
                     width="90%"
                     key={user.userId}
                     borderRadius="10px"
-                    boxShadow="0px 0px 10px #554475"
+                    boxShadow="0px 0px 10px #172D40"
                     {...user}
                   >
                     <Grid
@@ -192,7 +192,7 @@ const ApplyStatusModal = (props) => {
                           <ModalMedia>
                             <Grid height="100%">
                               <Grid
-                                bg="#55447561"
+                                bg="#172d408f"
                                 width="150px"
                                 height="50%"
                                 display="flex"
@@ -292,7 +292,7 @@ const ModalWrap = styled.div`
 const CommentBubble = styled.div`
   color: white;
   position: relative;
-  background: #554475;
+  background: #172d408f;
   height: 80px;
   overflow: auto;
   /* border: #b29cf4 solid 1px; */

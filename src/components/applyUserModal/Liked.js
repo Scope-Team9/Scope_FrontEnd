@@ -113,6 +113,7 @@ const Liked = (props) => {
                 </Text>
               </Grid>
               {/* 유저평가부분 */}
+
               <Grid height="50%" width="90%" margin="auto" overflow="auto">
                 {passdedMenber?.map((user, idx) => (
                   <Grid
@@ -140,7 +141,7 @@ const Liked = (props) => {
                           <Grid height="100%" textAlign="center" width="60%">
                             <Grid
                               borderRadius="20px 0 0 20px"
-                              bg="#554475"
+                              bg="#172d408f"
                               height="50%"
                               margin="0 0 3px 0 "
                               display="flex"
@@ -153,7 +154,7 @@ const Liked = (props) => {
                             </Grid>
                             <Grid
                               borderRadius="20px 0 0 20px"
-                              bg="#554475"
+                              bg="#172d408f"
                               height="50%"
                               display="flex"
                               alignItems="center"
@@ -200,7 +201,7 @@ const Liked = (props) => {
                         <Grid
                           margin="auto auto auto 1px"
                           height="50px"
-                          width="80%"
+                          width="70%"
                         >
                           {passdedMenber[idx].userId !== isMe && (
                             <Button

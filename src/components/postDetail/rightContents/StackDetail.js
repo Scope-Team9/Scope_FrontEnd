@@ -12,7 +12,7 @@ const StackDetail = (props) => {
   return (
     <React.Fragment>
       <Grid display="flex" margin="6px auto">
-        <Text margin="auto 10px auto 0px" color="#4c4759">
+        <Text margin="auto 10px auto 0px" color="#172d40ab">
           Stack
         </Text>
         <StackMedia>
@@ -32,8 +32,8 @@ const StackDetail = (props) => {
 // styled-components
 const StackBox = styled.div`
   color: white;
-  background-color: #554475;
-  border: 1px solid #554475;
+  background-color: #172d40;
+  border: 1px solid #172d40;
   border-radius: 50px;
   padding: 4px 10px;
   font-size: 10px;

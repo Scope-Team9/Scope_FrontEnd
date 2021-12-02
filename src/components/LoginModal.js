@@ -127,7 +127,7 @@ const LoginModal = (props) => {
     multiValue: (styles, { data }) => ({
       ...styles,
       color: data.color,
-      backgroundColor: "#554475",
+      backgroundColor: "#17334a",
       color: "white",
       borderRadius: "20px",
     }),
@@ -195,7 +195,7 @@ const LoginModal = (props) => {
               {/* 헤더 */}
               <Grid
                 height="7%"
-                bg="#554475"
+                bg="#17334a"
                 position="relative"
                 textAlign="center"
                 padding="10px 0 10px 0"
@@ -400,7 +400,7 @@ const LoginModal = (props) => {
         <LoginModalWrap>
           <Grid
             height="15%"
-            bg="#554475"
+            bg="#17334a"
             position="relative"
             padding="10px 0 10px 0"
             boxShadow="0 5px 25px rgb(0 0 0 / 15%)"
@@ -490,7 +490,7 @@ const LoginModal = (props) => {
           </Grid>
 
           <Grid display="flex" justifyContent="center" margin="10px 0 30px 0">
-            <Grid width="20%" backgroundColor="#554475" height="3px"></Grid>
+            <Grid width="20%" backgroundColor="#17334a" height="3px"></Grid>
           </Grid>
         </LoginModalWrap>
       </Dialog>

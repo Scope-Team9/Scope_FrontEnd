@@ -26,14 +26,14 @@ const MainPage = () => {
 
   const dispatch = useDispatch();
   const history = useHistory();
-  const stack = useSelector(state => state.stack.stack);
-  const sortC = useSelector(state => state.sort.sort);
+  const stack = useSelector((state) => state.stack.stack);
+  const sortC = useSelector((state) => state.sort.sort);
   const isToken = document.cookie;
   // const cards = useSelector((state) => state.post.posts);
-  const reBookC = useSelector(state => state.rebook.reBook);
-  const pageCheck = useSelector(state => state.post.pageCheck);
-  const infinity = useSelector(state => state.infinity.paging);
-  const Render = useSelector(state => state.post.render);
+  const reBookC = useSelector((state) => state.rebook.reBook);
+  const pageCheck = useSelector((state) => state.post.pageCheck);
+  const infinity = useSelector((state) => state.infinity.paging);
+  const Render = useSelector((state) => state.post.render);
   const [ref, inView] = useInView();
   const [paging, setPaging] = React.useState(infinity.next);
   const [pPaging, setPPaging] = React.useState(12);
@@ -45,9 +45,9 @@ const MainPage = () => {
   const [sorts, setSrots] = React.useState();
   const [reBooks, setReBookss] = React.useState();
 
-  const postList = useSelector(state => state.post.posts);
-  const isLoginUser = useSelector(state => state.user.userId);
-  const isLogin = useSelector(state => state.user.isLogin);
+  const postList = useSelector((state) => state.post.posts);
+  const isLoginUser = useSelector((state) => state.user.userId);
+  const isLogin = useSelector((state) => state.user.isLogin);
 
   // let container = React.useRef();
   React.useLayoutEffect(() => {
@@ -239,9 +239,9 @@ const Btn = styled.button`
   cursor: pointer;
   z-index: 999;
   &:hover {
-    background: #554475;
+    background: #172d40;
     transform: translate();
-    transition: 0.1s ease-out;
+    transition: 0.3s ease-out;
   }
 
   @media screen and (max-width: 750px) {
