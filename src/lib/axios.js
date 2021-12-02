@@ -1,7 +1,6 @@
 /* eslint-disable */
 import axios from "axios";
-import { setCookie } from "../shared/Cookie";
-import { history } from "../redux/configureStore";
+import * as config from "../config";
 
 export const instance = axios.create({
   // baseURL: "http://localhost:3000",
@@ -9,7 +8,9 @@ export const instance = axios.create({
   // baseURL: "http://localhost:4000",
   // baseURL: "http://3.35.219.232",
   // baseURL: "https://scopewith.com",
-  baseURL: "http://15.165.159.211",
+  // baseURL: "http://15.165.159.211",
+  baseURL: config.REACT_APP_BASEURL_LOCAL,
+  // baseURL: process.env.REACT_APP_BASEURL_LOCAL,
   headers: {
     "content-type": "application/json; charset=UTF-8",
     accept: "application/json",
