@@ -6,8 +6,7 @@ import ApplyUserModal from "./ApplyUserModal";
 import { useSelector, useDispatch } from "react-redux";
 import { apis } from "../lib/axios";
 import { history } from "../redux/configureStore";
-import { Grid, Image, Text, Button } from "../elements/Index";
-import { useParams } from "react-router-dom";
+import { Grid, Text, Button } from "../elements/Index";
 
 // Post의 함수형 컴포넌트를 만든다.
 const Post = (props) => {

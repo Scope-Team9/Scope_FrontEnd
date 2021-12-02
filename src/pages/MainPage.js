@@ -1,22 +1,16 @@
 /* eslint-disable */
 import React from "react";
 import styled from "styled-components";
-import Header from "../components/Header";
-import { Grid, Button } from "../elements/Index";
+import { Grid } from "../elements/Index";
 import Stack from "../components/Stack";
 import PostList from "../components/PostList";
 import { postActions } from "../redux/modules/post";
-import { sortAction } from "../redux/modules/sort";
-import { bookRecommendAction } from "../redux/modules/bookRecommend";
-import { pageAction } from "../redux/modules/infinity";
 import { useSelector, useDispatch } from "react-redux";
 import MainSlide from "../components/carousel/MainSlide";
 import { useInView } from "react-intersection-observer";
-import { Tune } from "@material-ui/icons";
 import { useHistory } from "react-router";
 import Sort from "../components/filter/Sort";
 import { apis } from "../lib/axios";
-import useScrollMove from "../components/useScrollMove";
 import Spinner from "../shared/Spinner";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 const MainPage = () => {
@@ -47,6 +41,7 @@ const MainPage = () => {
 
   // let container = React.useRef();
   React.useLayoutEffect(() => {
+    console.log(process.env.REACT_APP_BASEURL_LOCAL);
     setPost();
     dispatch(postActions.whatPage("mainPage"));
 
@@ -99,12 +94,6 @@ const MainPage = () => {
 
   return (
     <OutWrap>
-      {/* <Grid
-        maxWidth="1400px"
-        height="100%"
-        bg="#ffff"
-        padding="0px 0px 10px 0"
-      ></Grid> */}
       <Grid margin="0px 0 0 0 ">
         <Inside>
           <MainSlide />
