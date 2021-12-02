@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from "react";
 import styled from "styled-components";
-import { Grid, Image, Text, Button } from "../../../elements/Index";
+import { Grid } from "../../../elements/Index";
 
 const MyFilter = (props) => {
   return (
@@ -40,7 +40,8 @@ const FilterDiv = styled.div`
     -moz-transform: scale(1.05);
     -ms-transform: scale(1.05);
     -o-transform: scale(1.05);
-    color: #dacceb;
+    /* text-decoration: underline; */
+    color: #737373;
   }
 `;
 

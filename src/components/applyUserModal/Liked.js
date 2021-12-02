@@ -56,7 +56,7 @@ const Liked = (props) => {
       modalClose("종료");
       return;
     }
-    console.log("여기4");
+    // console.log("여기4");
 
     dispatch(applyCreators.starterLikeAPI(postId, likeUsers));
     toggleModal();
@@ -81,7 +81,9 @@ const Liked = (props) => {
                   fontSize="large"
                   onClick={(e) => {
                     e.stopPropagation();
+
                     modalClose();
+                    props.checkMydata();
                   }}
                 />
               </Grid>

@@ -3,7 +3,7 @@
 // 나의 마이페이지에서 뜨는 버튼들과 다른사람 마이페이지에서 뜨는 버튼들
 // import를 한다.
 import React from "react";
-import { Grid, Image, Text, Button } from "../elements/Index";
+import { Grid, Button } from "../elements/Index";
 import { postActions } from "../redux/modules/post";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
@@ -16,7 +16,6 @@ import Banners from "./myPage/Banners";
 import MypageCard from "./myPage/MypageCard";
 import TypeResultTest from "./myPage/TypeResultTest";
 import MypageFilter from "./myPage/MypageFilter";
-import { userCreators } from "../redux/modules/user";
 import { pageCheckAction } from "../redux/modules/pageCheck";
 
 // MyPageInfo의 함수형 컴포넌트를 만든다.
@@ -25,7 +24,6 @@ const MyPageInfo = (props) => {
   const userId = props.match.params.id;
   const myUserId = useSelector((state) => state.user.userId);
   const checkApply = useSelector((state) => state.apply);
-  const [myUrl, setMyUrl] = React.useState();
   const [filter, setFilter] = React.useState("소개");
   const [mydata, setMydata] = React.useState();
   const [editMyProfile, setEditMyProfile] = React.useState(false); // 내려줘야함
@@ -37,23 +35,12 @@ const MyPageInfo = (props) => {
   const [modal, setModal] = React.useState(false);
   const [testmodal, setTestModal] = React.useState(false);
   const [assessment, setAssessment] = React.useState(false);
-  const [memberId, setMemberId] = React.useState(); //멤버아이디
-  const [writerEquals, setWriterEquals] = React.useState(); //포스트의 작성자확인
-  const pageCheck = useSelector((state) => state.pagecheck.pageGo);
-  const [introduction, setIntroduction] = React.useState(); //포스트의 작성자확인
-  const [recruitmentProject, setRecruitmentProject] = React.useState(); //멤버아이디
-  const [inProgressProject, setInProgressProject] = React.useState(); //포스트의 작성자확인
-  const [bookMarkProject, setBookMarkProject] = React.useState(); //멤버아이디
-  const [endProject, setEndProject] = React.useState(); //포스트의 작성자확인
 
-  //click
-  // const introduction = mydata?.user.introduction ? true : false;
-
-  // const recruitmentProject = mydata?.recruitment;
-  // const inProgressProject = mydata?.inProgress;
-  // const bookMarkProject = mydata?.bookmark;
-  // const endProject = mydata?.end;
-  // console.log(mydata);
+  const [introduction, setIntroduction] = React.useState();
+  const [recruitmentProject, setRecruitmentProject] = React.useState();
+  const [inProgressProject, setInProgressProject] = React.useState();
+  const [bookMarkProject, setBookMarkProject] = React.useState();
+  const [endProject, setEndProject] = React.useState();
 
   const [loading, setLoading] = React.useState(true);
 
@@ -66,11 +53,16 @@ const MyPageInfo = (props) => {
     setFilter(data);
   };
 
+  const checkMydata = () => {
+    setMydata(null);
+  };
+
   React.useEffect(() => {
     // console.log("뭐고");
     setMydata(null);
     setEndProject(null);
     setMyType(null);
+
     dispatch(postActions.isMainPage(false));
     dispatch(postActions.whatPage("myPage"));
     const fetchData = async () => {
@@ -157,15 +149,7 @@ const MyPageInfo = (props) => {
             <Grid className="전체페이지" maxWidth="1400px" margin="auto">
               <Grid height="30%" position="relative">
                 <Banner>
-                  <Banners
-                    type={myType}
-                    myPage={mydata?.isMyMypage}
-                    // setModal={setModal}
-                    // modal={modal}
-                    // onClick={() => {
-                    //   EmailConfirm();
-                    // }}
-                  ></Banners>
+                  <Banners type={myType} myPage={mydata?.isMyMypage}></Banners>
                   <Grid position="absolute" top="120px" height="75%">
                     <TypeResultTest
                       myType={myType}
@@ -253,6 +237,7 @@ const MyPageInfo = (props) => {
                     myUserId={myUserId}
                     assessment={assessment}
                     doSetAssessment={doSetAssessment}
+                    checkMydata={checkMydata}
                   ></MypagePostList>
                 )}
                 <IntroduceWrap margin="0 0 0 25%" width="49%">

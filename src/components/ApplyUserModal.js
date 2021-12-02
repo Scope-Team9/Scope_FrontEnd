@@ -76,6 +76,7 @@ const ApplyUserModal = (props) => {
             setPage={setPage}
             statusCheck={statusCheck}
             doSetAssessment={props.doSetAssessment}
+            checkMydata={props.checkMydata}
           />
         )}
         {/* {applyValue === "end" && page === 2 && (

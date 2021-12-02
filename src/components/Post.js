@@ -106,6 +106,7 @@ const Post = (props) => {
                   myPage={props.mypage}
                   toggleModal={toggleModal}
                   doSetAssessment={props.doSetAssessment}
+                  checkMydata={props.checkMydata}
                 />
               </Grid>
             </Grid>
