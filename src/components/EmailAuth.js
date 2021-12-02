@@ -10,7 +10,6 @@ import Swal from "sweetalert2";
 const EmailAuth = (props) => {
   const [email, setEmail] = React.useState();
   const { modal, setModal } = props;
-  // console.log(props);
   const modalClose = () => {
     setModal(false);
   };

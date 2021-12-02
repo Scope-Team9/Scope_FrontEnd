@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { Dialog } from "@material-ui/core";
 import CloseIcon from "@mui/icons-material/Close";
 import { apis } from "../lib/axios";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import { userCreators } from "../redux/modules/user";
 import { deleteCookie } from "../shared/Cookie";

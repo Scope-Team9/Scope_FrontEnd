@@ -43,11 +43,5 @@ const TitleMedia = styled.div`
   }
 `;
 
-const InputMedia = styled.input`
-  @media screen and (max-width: 600px) {
-    font-size: 10px;
-  }
-`;
-
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default TitleWrite;

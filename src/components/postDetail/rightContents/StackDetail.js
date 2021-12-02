@@ -7,8 +7,7 @@ import styled from "styled-components";
 import { Grid, Text } from "../../../elements/Index";
 
 // StackDetail의 함수형 컴포넌트를 만든다..
-const StackDetail = props => {
-  // console.log(props);
+const StackDetail = (props) => {
   return (
     <React.Fragment>
       <Grid display="flex" margin="6px auto">

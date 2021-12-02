@@ -291,14 +291,6 @@ const CommentBubble = styled.div`
   } ;
 `;
 
-const UserImg = styled.img`
-  object-fit: cover;
-  width: 80%;
-  border-radius: 20px;
-  background-color: #ececec;
-  cursor: pointer;
-`;
-
 const Wrap = styled.div`
   display: flex;
   height: 60%;
