@@ -25,8 +25,8 @@ import NotFound from "../shared/NotFound";
 import { ContactSupportOutlined } from "@material-ui/icons";
 
 function App() {
-  const isLogin = useSelector(state => state.user.isLogin);
-  const userInfo = useSelector(state => state.user);
+  const isLogin = useSelector((state) => state.user.isLogin);
+  const userInfo = useSelector((state) => state.user);
   const isCookie = document.cookie.split("=")[1];
   const dispatch = useDispatch();
 
