@@ -14,7 +14,6 @@ export default handleActions(
   {
     [GET_RB]: (state, action) =>
       produce(state, (draft) => {
-        // console.log(action);
         draft.reBook = action.payload.data;
       }),
   },

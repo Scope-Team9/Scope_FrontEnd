@@ -112,7 +112,6 @@ const PostDetail = (props) => {
       }
     };
     CheckPost();
-    // dispatch(pageCheckAction.getPageCheck(`/postdetail/${post_id}`));
   }, [
     bookmark,
     applyStatusModal,

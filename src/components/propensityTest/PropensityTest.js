@@ -12,21 +12,19 @@ import { history } from "../../redux/configureStore";
 import ImgType from "../../shared/ImgType";
 import CloseIcon from "@mui/icons-material/Close";
 
-const PropensityTest = props => {
+const PropensityTest = (props) => {
   const isToken = document.cookie.split("=")[1];
   const dispatch = useDispatch();
-  const userInfo = useSelector(state => state.user);
-  const userType = useSelector(state => state.user.userPropensityType);
-  const memberType = useSelector(state => state.user.memberPropensityType);
-  // const [active, setActive] = React.useState(preUserPropensityType);
+  const userInfo = useSelector((state) => state.user);
+  const userType = useSelector((state) => state.user.userPropensityType);
+  const memberType = useSelector((state) => state.user.memberPropensityType);
   const [isChecked, setIsChecked] = React.useState("#fff");
-  const ToggleButton = answer => {
+  const ToggleButton = (answer) => {
     isChecked === "#fff" ? setIsChecked("#170184") : setIsChecked("#fff");
   };
 
   //스텝별로 스테이트 변화값에 따라 텍스트가 바뀌는지 먼저 확인
   const [page, setpage] = useState(1);
-  // console.log(page, TestData.teststep);
 
   // 최종 장소
   const [userPropensityType, setUserPropensityType] = useState([]);
@@ -36,13 +34,11 @@ const PropensityTest = props => {
   const [preMemberPropensityType, setPreMemberPropensityType] = useState("");
 
   //자식요소의 밸류값을 가져와 임시에 저장
-  const handleUserCreate = answer => {
+  const handleUserCreate = (answer) => {
     setPreUserPropensityType(answer);
-    // console.log("나의항목 임시저장", answer);
   };
-  const handleMemberCreate = answer => {
+  const handleMemberCreate = (answer) => {
     setPreMemberPropensityType(answer);
-    // console.log("상대방의 항목 임시저장", answer);
   };
 
   //스테이트값에 변화를 버튼에 달아줌
@@ -51,33 +47,25 @@ const PropensityTest = props => {
     //나에대한 항목
     let preMy = userPropensityType;
     let preYou = memberPropensityType;
-    // console.log(preUserPropensityType, preMemberPropensityType);
 
     if (preUserPropensityType === "" || preMemberPropensityType === "") {
       return window.alert("문항을 선택해주세요!");
-      // Swal.fire(
-      //   '문항을 선택해주세요!',
-      //   '',
-      //   'info'
-      // )
     } else {
-      setpage(page => page + 1);
+      setpage((page) => page + 1);
       setPreUserPropensityType("");
       setPreMemberPropensityType("");
       preMy.push(preUserPropensityType);
       setUserPropensityType(preMy);
-      // console.log("내꺼 잘 들어감?", userPropensityType);
       //상대에 다한 항목
 
       preYou.push(preMemberPropensityType);
       setMemberPropensityType(preYou);
-      // console.log("너꺼 잘 들어감?", memberPropensityType);
     }
   };
 
   //이전버튼 누를시에 마지막으로 저장된값을 스테이트에 삭제함
   const preStep = () => {
-    setpage(page => page - 1);
+    setpage((page) => page - 1);
 
     // 이전으로가면 마지막항목 제거 (나의것)
     let toPopMy = userPropensityType;
@@ -88,7 +76,6 @@ const PropensityTest = props => {
     let topopYou = memberPropensityType;
     topopYou.pop();
     setMemberPropensityType(topopYou);
-    // console.log("마지막 항목이 사라짐?", memberPropensityType);
   };
 
   //회원가입
@@ -99,13 +86,11 @@ const PropensityTest = props => {
     let preMy = userPropensityType;
     preMy.push(preUserPropensityType);
     setUserPropensityType(preMy);
-    // console.log("내꺼 잘 들어감?", userPropensityType);
 
     //상대에 다한 항목
     let preYou = memberPropensityType;
     preYou.push(preMemberPropensityType);
     setMemberPropensityType(preYou);
-    // console.log("너꺼 잘 들어감?", memberPropensityType);
 
     let realSnsId = String(userInfo.snsId);
     let realUserId = userInfo.userId;
@@ -125,21 +110,19 @@ const PropensityTest = props => {
 
     if (isToken) {
       dispatch(userCreators.editTestMiddleware(realUserId, testUpdateInfo));
-      return setpage(page => page + 1);
+      return setpage((page) => page + 1);
     } else {
       dispatch(userCreators.signupMiddleware(registerInfo));
-      setpage(page => page + 1);
+      setpage((page) => page + 1);
     }
   };
 
   const exitResult = () => {
     if (!props.mypage) {
-      // console.log("여기1");
       dispatch(userCreators.modal());
       history.push("/");
       return props.TestClose();
     }
-    // console.log("여기2");
     dispatch(userCreators.modal());
     props.TestClose();
   };
@@ -184,13 +167,13 @@ const PropensityTest = props => {
 
       {/* 이미지결과 */}
       <StepImgBox>
-        {TestData.teststep.map(step => {
+        {TestData.teststep.map((step) => {
           if (step.step === page) {
             return <TestImg key={step.step} src={step.img} />;
           }
         })}
         {page === 10 &&
-          TestData.testresult.map(result => {
+          TestData.testresult.map((result) => {
             if (result.type === userType) {
               return <img key={result.type} width="40%" src={result.img} />;
             }

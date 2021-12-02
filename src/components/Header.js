@@ -30,12 +30,9 @@ const Wrap = styled.div`
   justify-content: space-between;
   align-items: center;
   background-color: rgba(255, 255, 255, 0);
-  /* background-color: white; */
   padding: 20px 0;
   z-index: 10;
   position: relative;
-  /* left: 50%;
-  transform: translate(-50%, 0); */
 `;
 
 export default Header;

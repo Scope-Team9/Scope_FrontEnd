@@ -3,12 +3,9 @@ import React from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 
-import { history } from "../redux/configureStore";
-import { Grid, Image, Progress } from "../elements/Index";
-import Img from "../images/flutter.png";
+import { Grid } from "../elements/Index";
 
 const PostStacks = (props) => {
-  // console.log(props);
   const whatPage = useSelector((state) => state.post.whatPage);
   const reduxstack = useSelector((state) => state.stack.stack);
   const [stacks, setStacks] = React.useState(9);
@@ -84,13 +81,10 @@ const PostStacks = (props) => {
       active: false,
     },
   ]);
+
   let stack = props.stack;
-  // console.log(stack);
-  // console.log("-----");
 
   React.useEffect(() => {
-    // let stack = props.stack;
-    // setStacks(stack);
     Stack.map((item) => {
       if (item.id === props.stack) {
         setStacks(item.img);

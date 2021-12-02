@@ -32,7 +32,6 @@ const FilterDiv = styled.div`
   width: 80%;
   height: 35px;
 
-  /* background-color: ${(props) => (props.active ? "black" : " yellow")}; */
   border-bottom: ${(props) =>
     props.active ? "1mm ridge rgb(170, 50, 220, .6)" : null};
   &:hover {
@@ -41,7 +40,6 @@ const FilterDiv = styled.div`
     -moz-transform: scale(1.05);
     -ms-transform: scale(1.05);
     -o-transform: scale(1.05);
-    /* text-decoration: underline; */
     color: #dacceb;
   }
 `;

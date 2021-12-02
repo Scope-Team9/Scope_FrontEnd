@@ -27,16 +27,13 @@ const DateEdit = (props) => {
     }
   };
 
-  // const endDate = (data) => {
-  //   props.setEnddate(data);
-  // };
   return (
     <React.Fragment>
       <DateMedia>
         <Grid>
           <Text color="#4c4759">기간설정</Text>
           <Grid display="flex" textAlign="center" margin="10px auto">
-            {/* 시작 일*/}
+            {/* 시작일*/}
             <Grid>
               <Text color="#4c4759">프로젝트 시작일</Text>
               <SDatePicker
@@ -50,7 +47,7 @@ const DateEdit = (props) => {
                 placeholderText="프로젝트 시작일 입력"
               />
             </Grid>
-            {/* 종료 일*/}
+            {/* 종료일*/}
             <Grid>
               <Text color="#4c4759">프로젝트 종료일</Text>
               <SDatePicker

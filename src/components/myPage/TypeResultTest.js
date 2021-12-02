@@ -10,7 +10,7 @@ import { Grid4x4 } from "@mui/icons-material";
 import EmailAuth from "../EmailAuth";
 import { useParams } from "react-router";
 
-const TypeResultTest = props => {
+const TypeResultTest = (props) => {
   const [myData, setMyData] = React.useState();
   const [arr, setArr] = React.useState([
     {
@@ -123,11 +123,9 @@ const TypeResultTest = props => {
     },
   ]);
   const params = useParams();
-  // console.log(params.id, props.nickName);
 
   React.useEffect(() => {
-    // console.log("테스트결과", props);
-    arr.map(item => {
+    arr.map((item) => {
       if (item.id === props.myType) {
         setMyData(item);
       }
@@ -145,12 +143,7 @@ const TypeResultTest = props => {
           alignItems="center"
           margin="auto"
         >
-          <Grid
-            display="flex"
-            // border="1px solid #333"
-            borderRadius="15px"
-            height="1%"
-          >
+          <Grid display="flex" borderRadius="15px" height="1%">
             <MyResultDiv>
               <MyResultText>#{myData.type}</MyResultText>
               <MyResultText>#{myData.type2}</MyResultText>
@@ -266,7 +259,7 @@ const GotoTest = styled.p`
   font-size: 15px;
   font-weight: bold;
   cursor: pointer;
-  /* float: right; */
+
   margin-right: 10px;
   margin-top: 30px;
   position: relative;

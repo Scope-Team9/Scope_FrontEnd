@@ -6,7 +6,7 @@ import { applyCreators } from "../../redux/modules/applyProject";
 import styled from "styled-components";
 import CloseIcon from "@mui/icons-material/Close";
 
-const SubmitUrl = props => {
+const SubmitUrl = (props) => {
   const dispatch = useDispatch();
   const [front, setFront] = React.useState();
   const [back, setBack] = React.useState();
@@ -44,7 +44,6 @@ const SubmitUrl = props => {
       <Grid
         margin="auto"
         height="90%"
-        // justifyContent="center"
         width="90%"
         alignItems="center"
         textAlign="center"
@@ -99,8 +98,7 @@ const SubmitUrl = props => {
                 height="100%"
                 padding="0 0 0 10px"
                 placeholder="프론트엔드 깃허브 주소를 입력해주세요!"
-                _onChange={e => {
-                  // console.log(e.target.value);
+                _onChange={(e) => {
                   setFront(e.target.value);
                 }}
               ></Input>
@@ -111,8 +109,7 @@ const SubmitUrl = props => {
                 height="100%"
                 padding="0 0 0 10px"
                 placeholder="백엔드 깃허브 주소를 입력해주세요!"
-                _onChange={e => {
-                  // console.log(e.target.value);
+                _onChange={(e) => {
                   setBack(e.target.value);
                 }}
               ></Input>

@@ -54,6 +54,7 @@ const ProjectJoinUser = (props) => {
     </React.Fragment>
   );
 };
+
 const Writer = styled.p`
   opacity: ${(props) => (props.number === 0 ? 1 : 0)};
   width: 60px;

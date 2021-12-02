@@ -45,14 +45,12 @@ const Liked = (props) => {
 
   //팀원평가
   const userLiked = () => {
-    // console.log(likes);
-    // console.log(myPage);
     const likeMember = likes.filter((user) => user.active == true);
     const result = likeMember.map((a) => a.userId);
     const likeUsers = {
       userIds: result,
     };
-    // console.log(likeUsers);
+
     if (!myPage) {
       dispatch(applyCreators.starterLikeAPI(postId, likeUsers));
       modalClose("종료");
@@ -65,7 +63,6 @@ const Liked = (props) => {
     props.doSetAssessment();
     return;
   };
-  // console.log(likes);
 
   return (
     <>
@@ -93,7 +90,6 @@ const Liked = (props) => {
             <Grid
               margin="auto"
               height="90%"
-              // justifyContent="center"
               width="90%"
               alignItems="center"
               textAlign="center"
@@ -208,10 +204,6 @@ const Liked = (props) => {
                               isValue={passdedMenber[idx]?.userId}
                               _onClick={(e) => {
                                 e.stopPropagation();
-                                // console.log(
-                                //   likes[idx]?.userId,
-                                //   likes[idx].active
-                                // );
                                 toggleLike(e.target.value);
                               }}
                             >

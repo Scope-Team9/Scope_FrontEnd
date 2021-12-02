@@ -5,11 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Grid, Button, Image, Text } from "../../elements/Index";
 import TestData from "./Testdata.json";
 
-const TestResult = props => {
-  const myUserType = useSelector(state => state.user.userPropensityType);
-  // console.log(myUserType);
+const TestResult = (props) => {
+  const myUserType = useSelector((state) => state.user.userPropensityType);
   const resultType = TestData.usertype.filter(
-    type => type?.userType === myUserType
+    (type) => type?.userType === myUserType
   );
 
   React.useLayoutEffect(() => {}, [myUserType]);
@@ -25,7 +24,7 @@ const TestResult = props => {
           </Grid>
 
           <Grid display="flex" justifyContent="center" height="94%">
-            {resultType?.map(type => (
+            {resultType?.map((type) => (
               <Grid bg="#fff" key={type.userType} {...type}>
                 <Grid
                   height="7%"

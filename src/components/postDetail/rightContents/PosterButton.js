@@ -117,15 +117,6 @@ const PosterButton = (props) => {
   );
 };
 
-const ButtonMedia = styled.button`
-  @media screen and (max-width: 600px) {
-    display: flex;
-    width: 200px;
-    height: 50px;
-    margin-bottom: 40px;
-  }
-`;
-
 const ContentMedia = styled.div`
   @media screen and (max-width: 360px) {
     width: 300px;

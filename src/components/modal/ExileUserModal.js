@@ -22,31 +22,21 @@ const ExileUserModal = (props) => {
   };
 
   React.useEffect(() => {
-    // console.log(applyedUsers);
     const fetchData = async () => {
       try {
         const result = await apis.serachTeamUser(postId);
-        // console.log(result);
         setApplyUsers(result.data.data);
-      } catch (err) {
-        // console.log(err);
-      }
+      } catch (err) {}
     };
     fetchData();
-
-    // dispatch(applyCreators.applyUserAPI(postId));
   }, [applyStatusModal, acceptButton]);
 
   const exile = (userId) => {
-    // console.log(userId);
     const fetchData = async () => {
       try {
         const result = await apis.exileUser(postId, userId);
-        // console.log(result);
         setAcceptButton(result);
-      } catch (err) {
-        // console.log(err.response);
-      }
+      } catch (err) {}
     };
     fetchData();
   };
@@ -163,15 +153,6 @@ const ExileUserModal = (props) => {
                         justifyContent="space-between"
                         alignItems="center"
                       >
-                        {/* <Grid height="100%" textAlign="center">
-                            <Texts bg="#eee" height="50%">
-                              닉네임
-                            </Texts>
-                            <Texts bg="#aaa" height="50%">
-                              성향
-                            </Texts>
-                          </Grid> */}
-
                         <ModalMedia>
                           <Grid margin="auto">
                             <Grid

@@ -21,19 +21,14 @@ const ApplyStatusModal = (props) => {
   };
 
   React.useEffect(() => {
-    // console.log(applyedUsers);
     const fetchData = async () => {
       try {
         const result = await apis.applyUser(postId);
-        // console.log(result);
+
         setApplyUsers(result.data.data);
-      } catch (err) {
-        // console.log(err);
-      }
+      } catch (err) {}
     };
     fetchData();
-
-    // dispatch(applyCreators.applyUserAPI(postId));
   }, [applyStatusModal, acceptButton]);
 
   const acceptOffer = (acceptUser) => {
@@ -41,20 +36,15 @@ const ApplyStatusModal = (props) => {
       userId: acceptUser,
       accept: true,
     };
-    // console.log(acceptInfo);
 
     const fetchData = async () => {
       try {
         const result = await apis.aceeptOffer(postId, acceptInfo);
-        // console.log(result);
+
         setAcceptButton(result);
-        // window.alert("신청을 수락하였습니다.");
-      } catch (err) {
-        // console.log(err);
-      }
+      } catch (err) {}
     };
     fetchData();
-    // dispatch(applyCreators.acceptOfferAPI(postId, acceptInfo));;
   };
 
   const cancelOffer = (cancelUser) => {
@@ -62,9 +52,8 @@ const ApplyStatusModal = (props) => {
       userId: cancelUser,
       accept: false,
     };
-    // console.log(acceptInfo);
+
     dispatch(applyCreators.acceptOfferAPI(postId, acceptInfo));
-    // window.alert("신청을 취소하였습니다.");
   };
 
   return (
@@ -292,7 +281,6 @@ const CommentBubble = styled.div`
   background: #172d408f;
   height: 80px;
   overflow: auto;
-  /* border: #b29cf4 solid 1px; */
   border-radius: 10px;
   padding: 5px 12px;
   /* ::after {
