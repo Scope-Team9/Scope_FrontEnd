@@ -170,10 +170,6 @@ export default handleActions(
   {
     [APPLY_PROJEFCT]: (state, action) =>
       produce(state, draft => {
-        // console.log("신청자정보", action);
-        // console.log("신청자정보", draft);
-        // console.log("신청자정보", state);
-        // draft.assessment = action.payload.applyusers.assessment;
         draft.assessment = true;
       }),
   },
