@@ -8,8 +8,8 @@ export const instance = axios.create({
   // baseURL: "http://localhost:8081",
   // baseURL: "http://localhost:4000",
   // baseURL: "http://3.35.219.232",
-  baseURL: "https://scopewith.com",
-  // baseURL: "http://15.165.159.211",
+  // baseURL: "https://scopewith.com",
+  baseURL: "http://15.165.159.211",
   headers: {
     "content-type": "application/json; charset=UTF-8",
     accept: "application/json",
