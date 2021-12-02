@@ -4,9 +4,7 @@
 // import를 한다.
 import React from "react";
 import styled from "styled-components";
-import Linkify from "react-linkify";
 import { Grid, Text } from "../../../elements/Index";
-import { lightBlue } from "@material-ui/core/colors";
 
 // ContentDetail의 함수형 컴포넌트를 만든다.
 const UrlDetail = (props) => {

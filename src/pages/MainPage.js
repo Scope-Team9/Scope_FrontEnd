@@ -2,7 +2,6 @@
 import React from "react";
 import styled from "styled-components";
 import Header from "../components/Header";
-import TopBanner from "../components/carousel/TopBanner";
 import { Grid, Button } from "../elements/Index";
 import Stack from "../components/Stack";
 import PostList from "../components/PostList";
@@ -21,15 +20,12 @@ import useScrollMove from "../components/useScrollMove";
 import Spinner from "../shared/Spinner";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 const MainPage = () => {
-  // const { scrollOnceMove } = useScrollMove();
-  // let refs = React.useRef();
-
   const dispatch = useDispatch();
   const history = useHistory();
   const stack = useSelector((state) => state.stack.stack);
   const sortC = useSelector((state) => state.sort.sort);
   const isToken = document.cookie;
-  // const cards = useSelector((state) => state.post.posts);
+
   const reBookC = useSelector((state) => state.rebook.reBook);
   const pageCheck = useSelector((state) => state.post.pageCheck);
   const infinity = useSelector((state) => state.infinity.paging);
@@ -58,26 +54,19 @@ const MainPage = () => {
       try {
         const result = await apis.getPost(stack, sortC, reBookC);
         setPost(result.data.data);
-        // console.log(result);
-        // container.current.scrollTo(0, lastScroll);
-      } catch (err) {
-        // console.log(err);
-      }
+      } catch (err) {}
     };
     fetchData();
   }, [sortC, reBookC, Render, isToken, Render, isLogin]);
 
   React.useEffect(() => {
     if (inView === true) {
-      // setPaging(paging + 12);
       setPPaging(pPaging + 12);
-      // console.log("내가 페이지", infinity);
-      // dispatch(pageAction.getPage(paging));
+
       if (postList.length === 0 && pageCheck === false) {
         dispatch(postActions.pageCheck(true));
       }
     } // 옵저버를 좀 더 위로
-    // console.log(pPaging);
   }, [inView]);
 
   React.useLayoutEffect(() => {
@@ -88,11 +77,7 @@ const MainPage = () => {
       try {
         const result = await apis.getPost(stack, sortC, reBookC);
         setPost(result.data.data);
-        // console.log(result);
-        // container.current.scrollTo(0, lastScroll);
-      } catch (err) {
-        // console.log(err);
-      }
+      } catch (err) {}
     };
     fetchData();
   }, [sortC, reBookC, Render, isToken, Render, isLogin]);
@@ -264,14 +249,13 @@ const Btn = styled.button`
 const BtnFeedback = styled.img`
   position: fixed;
   bottom: 70px;
-  /* border: 1px solid #c4c4c4; */
-  /* border-radius: 50%; */
+
   width: 60px;
   height: 60px;
   text-align: center;
   left: 50px;
   margin: auto;
-  /* background: #c4c4c4; */
+
   cursor: pointer;
   z-index: 999;
   transition: all ease 0.3s;
@@ -306,14 +290,13 @@ const Scrollup = styled.div`
 
   position: fixed;
   bottom: 150px;
-  /* border: 1px solid #c4c4c4; */
-  /* border-radius: 50%; */
+
   width: 60px;
   height: 60px;
   text-align: center;
   right: 50px;
   margin: auto;
-  /* background: #c4c4c4; */
+
   cursor: pointer;
   z-index: 999;
 

@@ -24,11 +24,8 @@ const EmailAuth = (props) => {
       const result = await apis.authEmail(email);
       try {
         props.setModal();
-        // window.alert(result.data.msg);
         Swal.fire(`${result.data.msg}`, "", "success");
-      } catch (err) {
-        // console.log(err.response);
-      }
+      } catch (err) {}
     };
     fetchData();
   };
@@ -40,7 +37,6 @@ const EmailAuth = (props) => {
           <Grid
             width="100%"
             height="13%"
-            // bg="#B29CF4"
             position="relative"
             textAlign="center"
             padding="10px 0 10px 0"

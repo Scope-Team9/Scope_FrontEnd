@@ -27,22 +27,20 @@ const MyPageInfo = (props) => {
   const [filter, setFilter] = React.useState("소개");
   const [mydata, setMydata] = React.useState();
   const [editMyProfile, setEditMyProfile] = React.useState(false); // 내려줘야함
-  const [techStack, setTeckstack] = React.useState([]); //
-  const [nickName, setNickName] = React.useState(); //
-  const [email, setEmail] = React.useState(); //
-  const [myType, setMyType] = React.useState(); ////////////
-
+  const [techStack, setTeckstack] = React.useState([]);
+  const [nickName, setNickName] = React.useState();
+  const [email, setEmail] = React.useState();
+  const [myType, setMyType] = React.useState();
+  // const myType = mydata?.user.userPropensityType;
   const [modal, setModal] = React.useState(false);
   const [testmodal, setTestModal] = React.useState(false);
   const [assessment, setAssessment] = React.useState(false);
 
-  const [introduction, setIntroduction] = React.useState(); //포스트의 작성자확인
-
-  const [recruitmentProject, setRecruitmentProject] = React.useState(); //멤버아이디
-  const [inProgressProject, setInProgressProject] = React.useState(); //포스트의 작성자확인
-  const [bookMarkProject, setBookMarkProject] = React.useState(); //멤버아이디
-  const [endProject, setEndProject] = React.useState(); //포스트의 작성자확인
-  ////
+  const [introduction, setIntroduction] = React.useState();
+  const [recruitmentProject, setRecruitmentProject] = React.useState();
+  const [inProgressProject, setInProgressProject] = React.useState();
+  const [bookMarkProject, setBookMarkProject] = React.useState();
+  const [endProject, setEndProject] = React.useState();
 
   const [loading, setLoading] = React.useState(true);
 
@@ -70,7 +68,6 @@ const MyPageInfo = (props) => {
     const fetchData = async () => {
       try {
         const result = await apis.getMypage(userId);
-        // console.log(result);
 
         setEndProject(result.data.data.end);
         setMyType(result.data.data.user.userPropensityType);
@@ -78,12 +75,9 @@ const MyPageInfo = (props) => {
         dispatch(pageCheckAction.getPageCheck(`/mypage/${userId}`));
 
         setLoading(false);
-      } catch (err) {
-        // console.log(err);
-      }
+      } catch (err) {}
     };
     fetchData();
-    // console.log(mydata);
   }, [assessment, testmodal, checkApply]);
 
   React.useLayoutEffect(() => {

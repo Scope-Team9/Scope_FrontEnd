@@ -6,24 +6,19 @@ import { Grid, Image } from "../../elements/Index";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-const MypagePostList = props => {
-  // console.log(props);
+const MypagePostList = (props) => {
   const userId = useParams();
-
-  // console.log(props);
   const mypage = true;
 
   const myCards = props.post;
   const newMyCards = Object.values(myCards);
-  // console.log(myCards);
-  // console.log(newMyCards);
 
   return (
     <>
       {newMyCards && (
         <React.Fragment>
           <PostWrap>
-            {newMyCards.map(p => {
+            {newMyCards.map((p) => {
               return (
                 <Post
                   mypage={mypage}

@@ -3,7 +3,6 @@ import React from "react";
 import styled from "styled-components";
 
 const SortText = (props) => {
-  //   console.log("소트", props);
   return (
     <Filtering
       id={props.item.id}

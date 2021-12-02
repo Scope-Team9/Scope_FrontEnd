@@ -8,6 +8,7 @@ import styled from "styled-components";
 import { Grid, Text, Button } from "../elements/Index";
 
 import { apis } from "../lib/axios";
+import ImgType from "../shared/ImgType";
 import { applyCreators } from "../redux/modules/applyProject";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -20,6 +21,10 @@ const ApplyStatusModal = (props) => {
 
   const modalClose = () => {
     setApplyStatusModal(false);
+  };
+
+  const goToMypage = (userId) => {
+    history.push(`/mypage/${userId}`);
   };
 
   React.useEffect(() => {
@@ -37,20 +42,15 @@ const ApplyStatusModal = (props) => {
       userId: acceptUser,
       accept: true,
     };
-    // console.log(acceptInfo);
 
     const fetchData = async () => {
       try {
         const result = await apis.aceeptOffer(postId, acceptInfo);
-        // console.log(result);
+
         setAcceptButton(result);
-        // window.alert("신청을 수락하였습니다.");
-      } catch (err) {
-        // console.log(err);
-      }
+      } catch (err) {}
     };
     fetchData();
-    // dispatch(applyCreators.acceptOfferAPI(postId, acceptInfo));;
   };
 
   const cancelOffer = (cancelUser) => {
@@ -58,9 +58,8 @@ const ApplyStatusModal = (props) => {
       userId: cancelUser,
       accept: false,
     };
-    // console.log(acceptInfo);
+
     dispatch(applyCreators.acceptOfferAPI(postId, acceptInfo));
-    // window.alert("신청을 취소하였습니다.");
   };
 
   return (
@@ -77,7 +76,9 @@ const ApplyStatusModal = (props) => {
               height="12%"
               bg="#172D40"
               position="relative"
-              textAlign="center"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
               padding="10px 0 0 0"
               boxShadow="0px 0px 10px #172D40"
             >
@@ -95,7 +96,7 @@ const ApplyStatusModal = (props) => {
                 />
               </Grid>
 
-              <Text size="40px" bold color="#fff">
+              <Text size="25px" bold color="#fff">
                 신청현황
               </Text>
             </Grid>
@@ -117,7 +118,7 @@ const ApplyStatusModal = (props) => {
             )}
 
             <Grid display="flex" height="85%" justifyContent="center">
-              <Grid width="90%" margin="10px 0">
+              <Grid width="90%" height="90%" margin="10px 0">
                 {applyedUsers.map((user, idx) => (
                   <Grid
                     margin="10px auto"
@@ -129,46 +130,24 @@ const ApplyStatusModal = (props) => {
                     width="90%"
                     key={user.userId}
                     borderRadius="10px"
-                    boxShadow="0px 0px 10px #172D40"
+                    boxShadow="0 5px 15px rgb(0 0 0 / 40%)"
                     {...user}
                   >
-                    <Grid
-                      display="flex"
-                      justifyContent="center"
-                      margin="auto"
-                      width="100px"
-                      _onClick={() => {
+                    <ImageWrap
+                      onClick={() => {
                         history.push(`/mypage/${user.userId}`);
                       }}
                     >
-                      {applyedUsers[idx].userPropensityType === "LVG" && (
-                        <UserImg src="/img/호랑이.png"></UserImg>
-                      )}
-                      {applyedUsers[idx].userPropensityType === "LVP" && (
-                        <UserImg src="/img/늑대.png"></UserImg>
-                      )}
-                      {applyedUsers[idx].userPropensityType === "LHG" && (
-                        <UserImg src="/img/여우.png"></UserImg>
-                      )}
-                      {applyedUsers[idx].userPropensityType === "LHP" && (
-                        <UserImg src="/img/판다.png"></UserImg>
-                      )}
-                      {applyedUsers[idx].userPropensityType === "FVG" && (
-                        <UserImg src="/img/토끼.png"></UserImg>
-                      )}
-                      {applyedUsers[idx].userPropensityType === "FVP" && (
-                        <UserImg src="/img/개.png"></UserImg>
-                      )}
-                      {applyedUsers[idx].userPropensityType === "FHG" && (
-                        <UserImg src="/img/고양이.png"></UserImg>
-                      )}
-                      {applyedUsers[idx].userPropensityType === "FHP" && (
-                        <UserImg src="/img/물개.png"></UserImg>
-                      )}
-                      {applyedUsers[idx].userPropensityType === "RHP" && (
-                        <UserImg src="/img/너구리.png"></UserImg>
-                      )}
-                    </Grid>
+                      <ImgType
+                        width="100%"
+                        height="100%"
+                        type={user.userPropensityType}
+                        cursor="pointer"
+                        _onClick={() => {
+                          goToMypage(user.userId);
+                        }}
+                      ></ImgType>
+                    </ImageWrap>
                     <Grid height="100%" width="70%">
                       <Wrap>
                         <Grid
@@ -190,26 +169,35 @@ const ApplyStatusModal = (props) => {
                               <Grid
                                 bg="#172d408f"
                                 width="150px"
-                                height="50%"
+                                height="25px"
                                 display="flex"
+                                padding="2px 0 0 0"
                                 justifyContent="center"
                                 alignItems="center"
                                 color="#fff"
                                 borderRadius="20px"
                                 borderRadius="10px 10px 0 0"
                               >
-                                닉네임 | {applyedUsers[idx].nickname}
+                                <Text size="13px">
+                                  닉네임 | {applyedUsers[idx].nickname}
+                                </Text>
                               </Grid>
                               <Grid
                                 bg="#f5f5f5"
-                                height="50%"
+                                width="150px"
+                                height="25px"
                                 display="flex"
+                                padding="2px 0 0 0"
                                 justifyContent="center"
                                 alignItems="center"
+                                color="#17334a"
+                                borderRadius="20px"
                                 borderRadius="0 0 10px 10px"
                               >
-                                성향타입 |{" "}
-                                {applyedUsers[idx].userPropensityType}
+                                <Text size="13px">
+                                  성향타입 |{" "}
+                                  {applyedUsers[idx].userPropensityType}
+                                </Text>
                               </Grid>
                             </Grid>
                           </ModalMedia>
@@ -286,28 +274,29 @@ const ModalWrap = styled.div`
   } ;
 `;
 const CommentBubble = styled.div`
-  color: white;
+  color: #17334a;
   position: relative;
   background: #172d408f;
   height: 80px;
   overflow: auto;
-  /* border: #b29cf4 solid 1px; */
   border-radius: 10px;
   padding: 5px 12px;
-  /* ::after {
+  box-shadow: 0 2px 5px rgb(0 0 0 / 15%);
+  ::before {
     content: "";
     position: absolute;
     border-style: solid;
-    border-width: 10px 10px 0;
-    border-color: #554475 transparent;
+    border-width: 30px 30px 0;
+    border-color: #e4f3ff transparent;
     display: block;
     width: 0;
     z-index: 1;
-    top: 10px;
-    left: -15px;
-  } */
+    top: 5px;
+    left: -13px;
+  }
   @media screen and (max-width: 600px) {
-    width: 130px;
+    width: 120px;
+    margin: 0 auto 0 5px;
   } ;
 `;
 
@@ -327,6 +316,18 @@ const Wrap = styled.div`
     display: flex;
     flex-direction: column;
     height: 40%;
+  } ;
+`;
+
+const ImageWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  width: 100px;
+  height: 100px;
+  @media screen and (max-width: 600px) {
+    width: 60px;
+    height: 60px;
   } ;
 `;
 

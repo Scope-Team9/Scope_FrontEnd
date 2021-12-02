@@ -36,10 +36,9 @@ const ApplyUserModal = (props) => {
       status === "제출"
     ) {
       statusCheck(status);
-      // applyUserModalOpen();
+
       return setApplyUserModal(false);
     }
-    // applyUserModalOpen();
 
     setApplyUserModal(false);
 

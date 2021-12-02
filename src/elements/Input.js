@@ -111,9 +111,7 @@ const Input = (props) => {
         onChange={_onChange}
         ref={innerRef}
         onKeyPress={(e) => {
-          // console.log(e.key);
           if (e.key === "Enter") {
-            // console.log("pass");
             onSubmit(e);
           }
         }}

@@ -13,13 +13,9 @@ import { Grid, Image, Text } from "../../elements/Index";
 // Post의 함수형 컴포넌트를 만든다.
 const MypagePost = (props) => {
   const dispatch = useDispatch();
-  // console.log(props);
-
   let totalmember = props.totalMember;
   let recruitmentMember = props.recruitmentMember;
 
-  // console.log("게시자", props.recruitmentMember);
-  // console.log("메인포스트아이디", props);
   return (
     <React.Fragment>
       <ProductImgWrap

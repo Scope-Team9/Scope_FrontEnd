@@ -57,11 +57,6 @@ const LoginModal = (props) => {
   const [nameDup, setNameDup] = useState(false);
   const [test, setTest] = useState(false);
 
-  // console.log("닉네임", nickName);
-  // console.log("이메일", email);
-  // console.log("기술스택", techStack);
-  // console.log("sns아이디", userInfo.snsId);
-
   //닉네임 체크 미들웨어
   const nickCheck = (nickName) => {
     if (nickName === undefined) {
@@ -110,7 +105,6 @@ const LoginModal = (props) => {
       nickName: nickName,
       techStack: techStack,
     };
-    // console.log(registerInfo);
     dispatch(userCreators.testUserMiddleWare(registerInfo));
     setTest(true);
   };
@@ -479,7 +473,7 @@ const LoginModal = (props) => {
                       "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code";
 
                     // 최종 주소
-                    // "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=https://scopewith.com/user/kakao/callback&response_type=code";
+                    // ("https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=https://scopewith.com/user/kakao/callback&response_type=code");
                     closeWindow();
                   }}
                 >

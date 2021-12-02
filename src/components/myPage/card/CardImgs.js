@@ -2,7 +2,7 @@
 import React from "react";
 import ImgType from "../../../shared/ImgType";
 
-const CardImgs = props => {
+const CardImgs = (props) => {
   return (
     <div>
       <ImgType
@@ -11,8 +11,6 @@ const CardImgs = props => {
         height="100%"
         object_fit="cover"
         position="relative"
-
-        // right="60px"
       />
     </div>
   );
