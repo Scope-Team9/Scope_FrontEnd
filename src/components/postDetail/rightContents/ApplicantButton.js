@@ -59,19 +59,6 @@ const ApplicantButton = (props) => {
         {props.passedData?.projectStatus === "모집중" &&
           props.passedUserStatus === "member" && (
             <Grid>
-              {/* <Button
-                common
-                width="120px"
-                isValue="memberLiked"
-                _onClick={(e) => {
-                  props.applyUserModalOpen(e.target.value);
-                }}
-                margin="auto 10px"
-                border="1px solid #554475"
-                borderRadius="50px"
-              >
-                지원신청
-              </Button> */}
               {props.isme === "member" && (
                 <Button
                   common
