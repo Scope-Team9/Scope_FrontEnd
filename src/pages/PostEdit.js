@@ -21,6 +21,7 @@ import DateEdit from "../components/postEdit/rightContentsEdit/DateEdit";
 import EditButton from "../components/postEdit/rightContentsEdit/EditButton";
 import Swal from "sweetalert2";
 import Spinner from "../shared/Spinner";
+
 // PostEdit의 함수형 컴포넌트를 만든다.
 const PostEdit = (props) => {
   const dispatch = useDispatch();
@@ -208,38 +209,11 @@ const Title = styled.div`
   text-underline-position: under;
 `;
 
-const Btn = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 140px;
-  height: 35px;
-  border: 1px solid #bbb4d9;
-  border-radius: 50px;
-  color: #bbb4d9;
-  background: white;
-  margin: auto;
-  cursor: pointer;
-  &:hover {
-    color: white;
-    background-color: #bbb4d9;
-    border: 1px solid;
-    transition-duration: 1s;
-  }
-`;
-
 const TitleMedia = styled.div`
   @media screen and (max-width: 1000px) {
     width: 350px;
     margin: auto;
     text-align: center;
-  }
-`;
-
-const ContainerMedia = styled.div`
-  @media screen and (max-width: 1000px) {
-    width: 600px;
-    margin: auto;
   }
 `;
 
