@@ -48,6 +48,7 @@ const ContentMedia = styled.div`
     width: 350px;
     font-size: 10px;
   }
+
   @media screen and (max-width: 500px) {
     width: 330px;
     font-size: 10px;
