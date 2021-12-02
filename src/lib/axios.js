@@ -1,6 +1,6 @@
 /* eslint-disable */
 import axios from "axios";
-import * as config from "../config";
+import * as config from "../myConfig/config";
 export const instance = axios.create({
   // baseURL: "http://localhost:3000",
   // baseURL: "http://localhost:8081",
