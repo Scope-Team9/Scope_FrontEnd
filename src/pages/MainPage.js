@@ -41,6 +41,7 @@ const MainPage = () => {
 
   // let container = React.useRef();
   React.useLayoutEffect(() => {
+    console.log(process.env.REACT_APP_BASEURL_LOCAL);
     setPost();
     dispatch(postActions.whatPage("mainPage"));
 
