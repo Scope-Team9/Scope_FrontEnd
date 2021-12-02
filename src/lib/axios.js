@@ -1,16 +1,9 @@
 /* eslint-disable */
 import axios from "axios";
-import * as config from "../myConfig/config";
+
 export const instance = axios.create({
-  // baseURL: "http://localhost:3000",
-  // baseURL: "http://localhost:8081",
-  // baseURL: "http://localhost:4000",
-  // baseURL: "http://3.35.219.232",
-  // baseURL: "https://scopewith.com",
-  // baseURL: "http://15.165.159.211",
-  baseURL: config.REACT_APP_BASEURL_LOCAL,
-  //
-  // baseURL: process.env.REACT_APP_BASEURL_LOCAL,
+  // baseURL: process.env.REACT_APP_BASEURL_SCOPE,
+  baseURL: process.env.REACT_APP_BASEURL_LOCAL,
   headers: {
     "content-type": "application/json; charset=UTF-8",
     accept: "application/json",
