@@ -145,7 +145,7 @@ const LoginModal = (props) => {
     }
   }, [sigunupModalState]);
 
-  //개선해야됨
+  // 개선해야됨
   // const openWindow = () => {
   //   let customWindow = window.open(
   //     "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code",
@@ -153,18 +153,18 @@ const LoginModal = (props) => {
   //     "_blank"
   //   );
 
-  //   // setTimeout(() => {
-  //   //   customWindow.close();
-  //   // }, 5000);
+  //   setTimeout(() => {
+  //     customWindow.close();
+  //   }, 5000);
 
-  //   //   //s3
-  //   //   // "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://kbumsoo.s3-website.ap-northeast-2.amazonaws.com/user/kakao/callback&response_type=code";
+  //     //s3
+  //                     // process.env.REACT_APP_REDIRECTION_S3_KAKAO;
 
-  //   //   //local
-  //   //   // ("https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code");
+  //                     //local
+  //                     // process.env.REACT_APP_REDIRECTION_LOCAL_KAKAO;
 
-  //   //   // 최종 주소
-  //   //   // "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=https://scopewith.com/user/kakao/callback&response_type=code";
+  //                   // 최종 주소
+  //                   // process.env.REACT_APP_REDIRECTION_SCOPE_KAKAO;
   // };
 
   const closeWindow = () => {
@@ -460,12 +460,6 @@ const LoginModal = (props) => {
                     setShowModal(true);
                     // openWindow();
                     window.location.href =
-                      // window.open(
-                      //   "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code",
-                      //   "",
-                      //   "_blank"
-                      // );
-
                       //s3
                       // process.env.REACT_APP_REDIRECTION_S3_KAKAO;
 
