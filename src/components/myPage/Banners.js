@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { Grid, Image, Text, Button } from "../../elements/Index";
 import EmailAuth from "../EmailAuth";
-const Banners = (props) => {
+const Banners = props => {
   const [myData, setMyData] = React.useState();
   const [arr, setArr] = React.useState([
     {
@@ -63,7 +63,7 @@ const Banners = (props) => {
   ]);
 
   React.useEffect(() => {
-    arr.map((item) => {
+    arr.map(item => {
       if (props.type === item.id) {
         setMyData(item);
       }
@@ -89,8 +89,7 @@ const BannerAnimals = styled.div`
   width: 100%;
   background-repeat: no-repeat;
   background-size: cover;
-
-  background-color: ${(props) => (props.color ? props.color : "#white")};
+  background-color: ${props => (props.color ? props.color : "#white")};
   z-index: 0;
 `;
 

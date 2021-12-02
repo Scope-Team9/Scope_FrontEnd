@@ -1,17 +1,18 @@
 /* eslint-disable */
 import React from "react";
-import { Grid, Input, Text, Button, Image } from "../../elements/Index";
-import { Dialog } from "@material-ui/core";
-import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
 import { useHistory } from "react-router";
-import { applyCreators } from "../../redux/modules/applyProject";
+import { useDispatch, useSelector } from "react-redux";
+import { Dialog } from "@material-ui/core";
+import styled from "styled-components";
 
+import { Grid, Input, Text, Button, Image } from "../../elements/Index";
+
+import ImgType from "../../shared/ImgType";
 import CloseIcon from "@mui/icons-material/Close";
 import { apis } from "../../lib/axios";
-const ExileUserModal = (props) => {
+const ExileUserModal = props => {
   const dispatch = useDispatch();
-  const applyUsers = useSelector((state) => state.apply.applyUsers);
+  const applyUsers = useSelector(state => state.apply.applyUsers);
   const [applyedUsers, setApplyUsers] = React.useState();
   const [acceptButton, setAcceptButton] = React.useState();
   const { applyStatusModal, setApplyStatusModal, postId, postUserId } = props;
@@ -31,7 +32,7 @@ const ExileUserModal = (props) => {
     fetchData();
   }, [applyStatusModal, acceptButton]);
 
-  const exile = (userId) => {
+  const exile = userId => {
     const fetchData = async () => {
       try {
         const result = await apis.exileUser(postId, userId);
@@ -52,12 +53,14 @@ const ExileUserModal = (props) => {
         >
           <ModalWrap>
             <Grid
-              height="10%"
-              bg="#172D40"
+              height="12%"
+              bg="#17334a"
               position="relative"
-              textAlign="center"
-              padding="10px 0 10px 0"
-              boxShadow="0px 0px 10px #172D40"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              padding="10px 0 0 0"
+              boxShadow="0 5px 25px rgb(0 0 0 / 15%)"
             >
               <Grid
                 position="absolute"
@@ -73,7 +76,7 @@ const ExileUserModal = (props) => {
                   onClick={modalClose}
                 />
               </Grid>
-              <Text size="40px" bold color="#fff">
+              <Text size="25px" bold color="#fff">
                 팀원강퇴
               </Text>
             </Grid>
@@ -95,7 +98,7 @@ const ExileUserModal = (props) => {
             )}
 
             <Grid display="flex" height="85%" justifyContent="center">
-              <Grid width="90%" margin="10px 0">
+              <Grid width="90%" height="90%" margin="10px 0">
                 {applyedUsers.map((user, idx) => (
                   <Grid
                     margin="10px auto"
@@ -106,7 +109,7 @@ const ExileUserModal = (props) => {
                     padding="10px"
                     width="90%"
                     borderRadius="10px"
-                    boxShadow="0px 0px 10px #17334a"
+                    boxShadow="0 5px 15px rgb(0 0 0 / 40%)"
                     key={user.userId}
                     {...user}
                   >
@@ -120,30 +123,15 @@ const ExileUserModal = (props) => {
                         history.push(`/mypage/${user.userId}`);
                       }}
                     >
-                      {applyedUsers[idx].userPropensityType === "LVG" && (
-                        <UserImg src="/img/호랑이.png"></UserImg>
-                      )}
-                      {applyedUsers[idx].userPropensityType === "LVP" && (
-                        <UserImg src="/img/늑대.png"></UserImg>
-                      )}
-                      {applyedUsers[idx].userPropensityType === "LHG" && (
-                        <UserImg src="/img/여우.png"></UserImg>
-                      )}
-                      {applyedUsers[idx].userPropensityType === "LHP" && (
-                        <UserImg src="/img/판다.png"></UserImg>
-                      )}
-                      {applyedUsers[idx].userPropensityType === "FVG" && (
-                        <UserImg src="/img/토끼.png"></UserImg>
-                      )}
-                      {applyedUsers[idx].userPropensityType === "FVP" && (
-                        <UserImg src="/img/개.png"></UserImg>
-                      )}
-                      {applyedUsers[idx].userPropensityType === "FHG" && (
-                        <UserImg src="/img/고양이.png"></UserImg>
-                      )}
-                      {applyedUsers[idx].userPropensityType === "FHP" && (
-                        <UserImg src="/img/물개.png"></UserImg>
-                      )}
+                      <ImgType
+                        width="100%"
+                        height="100%"
+                        type={user.userPropensityType}
+                        cursor="pointer"
+                        _onClick={() => {
+                          goToMypage(user.userId);
+                        }}
+                      ></ImgType>
                     </Grid>
                     <Grid width="70%" margin="auto">
                       <Grid
@@ -195,7 +183,7 @@ const ExileUserModal = (props) => {
                                 height="70px"
                                 common
                                 isValue={applyedUsers[idx].userId}
-                                _onClick={(e) => {
+                                _onClick={e => {
                                   window.confirm("추방하시겠습니까?");
                                   exile(e.target.value);
                                 }}

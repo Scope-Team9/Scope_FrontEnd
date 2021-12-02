@@ -2,7 +2,6 @@
 import React from "react";
 import styled from "styled-components";
 import Header from "../components/Header";
-import TopBanner from "../components/carousel/TopBanner";
 import { Grid, Button } from "../elements/Index";
 import Stack from "../components/Stack";
 import PostList from "../components/PostList";

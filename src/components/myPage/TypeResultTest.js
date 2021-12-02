@@ -10,7 +10,7 @@ import { Grid4x4 } from "@mui/icons-material";
 import EmailAuth from "../EmailAuth";
 import { useParams } from "react-router";
 
-const TypeResultTest = (props) => {
+const TypeResultTest = props => {
   const [myData, setMyData] = React.useState();
   const [arr, setArr] = React.useState([
     {
@@ -125,7 +125,7 @@ const TypeResultTest = (props) => {
   const params = useParams();
 
   React.useEffect(() => {
-    arr.map((item) => {
+    arr.map(item => {
       if (item.id === props.myType) {
         setMyData(item);
       }
@@ -256,16 +256,28 @@ const MyResultText = styled.div`
 `;
 
 const GotoTest = styled.p`
-  font-size: 15px;
-  font-weight: bold;
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
-
+  width: 160px;
   margin-right: 10px;
-  margin-top: 30px;
+  margin-top: 14px;
   position: relative;
   z-index: 999;
-  @media screen and (max-width: 370px) {
+  border: 1px solid #111;
+  padding: 9px 15px;
+  border-radius: 10px;
+  text-align: center;
+  &:hover {
+    color: white;
+    background-color: black;
+    opacity: 0.7;
+  }
+
+  @media screen and (max-width: 750px) {
+    color: #111;
     font-size: 12px;
+    padding: 9px 10px;
   } ;
 `;
 const MyResultText2 = styled.p`
@@ -284,16 +296,20 @@ const MyResultTextBold = styled.p`
   font-weight: bold;
 `;
 
-const ConfirmEmail = styled.button`
-  width: 160px;
-  height: 35px;
-  padding: 8px 20px;
-  border: 1px solid white;
-  background-color: transparent;
-  color: white;
-  border-radius: 10px;
-  z-index: 1;
+const ConfirmEmail = styled.p`
+  font-size: 15px;
+  font-weight: 500;
   cursor: pointer;
+  width: 160px;
+  margin-right: 10px;
+  margin-top: 14px;
+  position: relative;
+  z-index: 999;
+  color: #fff;
+  border: 1px solid #fff;
+  padding: 9px 15px;
+  border-radius: 10px;
+  text-align: center;
 
   &:hover {
     color: black;
@@ -302,7 +318,10 @@ const ConfirmEmail = styled.button`
   }
 
   @media screen and (max-width: 750px) {
-    color: black;
+    color: #fff;
+    font-size: 12px;
+    padding: 9px 10px;
+    text-align: center;
   } ;
 `;
 

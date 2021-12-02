@@ -9,18 +9,18 @@ import ImgType from "../shared/ImgType";
 import styled from "styled-components";
 
 // ProjectJoinUser의 함수형 컴포넌트를 만든다.
-const ProjectJoinUser = (props) => {
+const ProjectJoinUser = props => {
   const history = useHistory();
-  const goToMypage = (userId) => {
+  const goToMypage = userId => {
     history.push(`/mypage/${userId}`);
   };
   return (
     <React.Fragment>
       <Grid
         textAlign="center"
-        height="120px"
+        height="125px"
         width="80px"
-        margin="0 11px 0 0"
+        margin="0 5px 0 0"
         display="flex"
         justifyContent="center"
       >
@@ -56,10 +56,11 @@ const ProjectJoinUser = (props) => {
 };
 
 const Writer = styled.p`
-  opacity: ${(props) => (props.number === 0 ? 1 : 0)};
+  opacity: ${props => (props.number === 0 ? 1 : 0)};
   width: 60px;
-  margin: auto auto auto 0;
+  margin: 0 auto 12px 0;
   height: 10px;
+  font-weight: 500;
   color: #4c4759;
 `;
 

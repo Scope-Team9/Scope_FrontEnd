@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { Grid, Text } from "../../../elements/Index";
 
 // StackDetail의 함수형 컴포넌트를 만든다..
-const StackDetail = (props) => {
+const StackDetail = props => {
   // console.log(props);
   return (
     <React.Fragment>
@@ -36,8 +36,11 @@ const StackBox = styled.div`
   border: 1px solid #172d40;
   border-radius: 50px;
   padding: 4px 10px;
-  font-size: 10px;
+  font-size: 14px;
   text-align: center;
+  @media screen and (max-width: 600px) {
+    font-size: 11px;
+  }
 `;
 
 const StackMedia = styled.div`
