@@ -1,15 +1,15 @@
 /* eslint-disable */
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-import { Grid, Button, Image, Text } from "../../elements/Index";
+
+import { Grid, Text } from "../../elements/Index";
 import TestData from "./Testdata.json";
 
-const TestResult = props => {
+const TestResult = () => {
   const myUserType = useSelector(state => state.user.userPropensityType);
-  // console.log(myUserType);
   const resultType = TestData.usertype.filter(
-    type => type?.userType === myUserType
+    type => type.userType === myUserType
   );
 
   React.useLayoutEffect(() => {}, [myUserType]);

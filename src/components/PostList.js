@@ -2,7 +2,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Post from "./Post";
-import PostTest from "./PostTest";
 import { postActions } from "../redux/modules/post";
 import styled from "styled-components";
 // import { useInView } from "react-intersection-observer";
