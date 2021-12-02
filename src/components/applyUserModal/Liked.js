@@ -7,7 +7,7 @@ import styled from "styled-components";
 import CloseIcon from "@mui/icons-material/Close";
 import ImgType from "../../shared/ImgType";
 
-const Liked = props => {
+const Liked = (props) => {
   const dispatch = useDispatch();
   const [likes, setLikes] = React.useState();
   const {
@@ -23,7 +23,7 @@ const Liked = props => {
 
   React.useEffect(() => {
     setLikes(
-      passdedMenber?.map(stateItem => {
+      passdedMenber?.map((stateItem) => {
         let newStateItem = { ...stateItem, active: false };
         return newStateItem;
       })
@@ -31,9 +31,9 @@ const Liked = props => {
   }, [passdedMenber, projectStatus]);
 
   //색상 기능 눌렀는지 안눌렀는지 (버튼색상)
-  const toggleLike = a => {
-    setLikes(state => {
-      return state.map(val => {
+  const toggleLike = (a) => {
+    setLikes((state) => {
+      return state.map((val) => {
         if (val.userId === Number(a)) {
           return { ...val, active: !val.active };
         }
@@ -45,14 +45,12 @@ const Liked = props => {
 
   //팀원평가
   const userLiked = () => {
-    // console.log(likes);
-    // console.log(myPage);
-    const likeMember = likes.filter(user => user.active == true);
-    const result = likeMember.map(a => a.userId);
+    const likeMember = likes.filter((user) => user.active == true);
+    const result = likeMember.map((a) => a.userId);
     const likeUsers = {
       userIds: result,
     };
-    // console.log(likeUsers);
+
     if (!myPage) {
       dispatch(applyCreators.starterLikeAPI(postId, likeUsers));
       modalClose("종료");
@@ -65,12 +63,11 @@ const Liked = props => {
     props.doSetAssessment();
     return;
   };
-  // console.log(likes);
 
   return (
     <>
       {likes && (
-        <Grid _onClick={e => e.stopPropagation()}>
+        <Grid _onClick={(e) => e.stopPropagation()}>
           <ModalWrap>
             <Grid height="10%" position="relative">
               <Grid
@@ -82,7 +79,7 @@ const Liked = props => {
               >
                 <CloseIcon
                   fontSize="large"
-                  onClick={e => {
+                  onClick={(e) => {
                     e.stopPropagation();
                     modalClose();
                   }}
@@ -93,7 +90,6 @@ const Liked = props => {
             <Grid
               margin="auto"
               height="90%"
-              // justifyContent="center"
               width="90%"
               alignItems="center"
               textAlign="center"
@@ -111,6 +107,7 @@ const Liked = props => {
                 </Text>
               </Grid>
               {/* 유저평가부분 */}
+
               <Grid height="50%" width="90%" margin="auto" overflow="auto">
                 {passdedMenber?.map((user, idx) => (
                   <Grid
@@ -138,7 +135,7 @@ const Liked = props => {
                           <Grid height="100%" textAlign="center" width="60%">
                             <Grid
                               borderRadius="20px 0 0 20px"
-                              bg="#17334a"
+                              bg="#172d408f"
                               height="50%"
                               margin="0 0 3px 0 "
                               display="flex"
@@ -151,7 +148,7 @@ const Liked = props => {
                             </Grid>
                             <Grid
                               borderRadius="20px 0 0 20px"
-                              bg="#17334a"
+                              bg="#172d408f"
                               height="50%"
                               display="flex"
                               alignItems="center"
@@ -198,19 +195,15 @@ const Liked = props => {
                         <Grid
                           margin="auto auto auto 1px"
                           height="50px"
-                          width="80%"
+                          width="70%"
                         >
                           {passdedMenber[idx].userId !== isMe && (
                             <Button
                               common
                               isActive={likes[idx]?.active}
                               isValue={passdedMenber[idx]?.userId}
-                              _onClick={e => {
+                              _onClick={(e) => {
                                 e.stopPropagation();
-                                // console.log(
-                                //   likes[idx]?.userId,
-                                //   likes[idx].active
-                                // );
                                 toggleLike(e.target.value);
                               }}
                             >
@@ -227,7 +220,7 @@ const Liked = props => {
               <Grid height="10%">
                 <Button
                   borderRadius="25px"
-                  _onClick={e => {
+                  _onClick={(e) => {
                     e.stopPropagation();
                     userLiked();
                   }}

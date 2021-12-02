@@ -4,9 +4,7 @@
 // import를 한다.
 import React from "react";
 import styled from "styled-components";
-import Linkify from "react-linkify";
 import { Grid, Text } from "../../../elements/Index";
-import { lightBlue } from "@material-ui/core/colors";
 
 // ContentDetail의 함수형 컴포넌트를 만든다.
 const UrlDetail = (props) => {
@@ -14,13 +12,13 @@ const UrlDetail = (props) => {
     <React.Fragment>
       <UrlMedia>
         <Grid margin="10px auto auto">
-          <Text color="#4c4759">오픈채팅 URL</Text>
+          <Text color="#172d40ab">오픈채팅 URL</Text>
 
           <Text
             _onClick={() => {
               window.open(`${props.passedData?.chatUrl}`, "_blank");
             }}
-            color="#554475"
+            color="#172D40"
             cursor="pointer"
             decoration="none"
           >

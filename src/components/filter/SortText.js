@@ -2,8 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Grid, Button } from "../../elements/Index";
-const SortText = props => {
-  //   console.log("소트", props);
+const SortText = (props) => {
   return (
     <Filtering
       id={props.item.id}
@@ -21,7 +20,8 @@ const Filtering = styled.p`
   margin: 25px 10px 25px 10px;
   cursor: pointer;
   font-weight: bold;
-  border-bottom: ${props => (props.active ? "1mm ridge #17334a" : null)};
+  border-bottom: ${(props) =>
+    props.active ? "1mm ridge rgb(170, 50, 220, .6)" : null};
   &:hover {
     transform: scale(1.05);
     -webkit-transform: scale(1.05);

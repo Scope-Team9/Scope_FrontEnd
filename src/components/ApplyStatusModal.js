@@ -42,20 +42,15 @@ const ApplyStatusModal = props => {
       userId: acceptUser,
       accept: true,
     };
-    // console.log(acceptInfo);
 
     const fetchData = async () => {
       try {
         const result = await apis.aceeptOffer(postId, acceptInfo);
-        // console.log(result);
+
         setAcceptButton(result);
-        // window.alert("신청을 수락하였습니다.");
-      } catch (err) {
-        // console.log(err);
-      }
+      } catch (err) {}
     };
     fetchData();
-    // dispatch(applyCreators.acceptOfferAPI(postId, acceptInfo));
   };
 
   const cancelOffer = cancelUser => {
@@ -63,9 +58,8 @@ const ApplyStatusModal = props => {
       userId: cancelUser,
       accept: false,
     };
-    // console.log(acceptInfo);
+
     dispatch(applyCreators.acceptOfferAPI(postId, acceptInfo));
-    // window.alert("신청을 취소하였습니다.");
   };
 
   return (
@@ -80,13 +74,13 @@ const ApplyStatusModal = props => {
           <ModalWrap>
             <Grid
               height="12%"
-              bg="#17334a"
+              bg="#172D40"
               position="relative"
               display="flex"
               justifyContent="center"
               alignItems="center"
               padding="10px 0 0 0"
-              boxShadow="0px 0px 10px #17334a"
+              boxShadow="0px 0px 10px #172D40"
             >
               <Grid
                 position="absolute"
@@ -173,7 +167,7 @@ const ApplyStatusModal = props => {
                           <ModalMedia>
                             <Grid height="100%">
                               <Grid
-                                bg="#17334a"
+                                bg="#172d408f"
                                 width="150px"
                                 height="25px"
                                 display="flex"
@@ -282,10 +276,9 @@ const ModalWrap = styled.div`
 const CommentBubble = styled.div`
   color: #17334a;
   position: relative;
-  background: #e4f3ff;
-  height: 70px;
-  overflow: visible;
-  /* border: #b29cf4 solid 1px; */
+  background: #172d408f;
+  height: 80px;
+  overflow: auto;
   border-radius: 10px;
   padding: 5px 12px;
   box-shadow: 0 2px 5px rgb(0 0 0 / 15%);

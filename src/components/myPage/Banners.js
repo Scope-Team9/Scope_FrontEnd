@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { Grid, Image, Text, Button } from "../../elements/Index";
 import EmailAuth from "../EmailAuth";
 const Banners = props => {
-  //   console.log(props);
   const [myData, setMyData] = React.useState();
   const [arr, setArr] = React.useState([
     {
@@ -69,7 +68,6 @@ const Banners = props => {
         setMyData(item);
       }
     });
-    // console.log(myData);
   }, []);
 
   return (

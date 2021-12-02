@@ -20,19 +20,16 @@ import useScrollMove from "../components/useScrollMove";
 import Spinner from "../shared/Spinner";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 const MainPage = () => {
-  // const { scrollOnceMove } = useScrollMove();
-  // let refs = React.useRef();
-
   const dispatch = useDispatch();
   const history = useHistory();
-  const stack = useSelector(state => state.stack.stack);
-  const sortC = useSelector(state => state.sort.sort);
+  const stack = useSelector((state) => state.stack.stack);
+  const sortC = useSelector((state) => state.sort.sort);
   const isToken = document.cookie;
-  // const cards = useSelector((state) => state.post.posts);
-  const reBookC = useSelector(state => state.rebook.reBook);
-  const pageCheck = useSelector(state => state.post.pageCheck);
-  const infinity = useSelector(state => state.infinity.paging);
-  const Render = useSelector(state => state.post.render);
+
+  const reBookC = useSelector((state) => state.rebook.reBook);
+  const pageCheck = useSelector((state) => state.post.pageCheck);
+  const infinity = useSelector((state) => state.infinity.paging);
+  const Render = useSelector((state) => state.post.render);
   const [ref, inView] = useInView();
   const [paging, setPaging] = React.useState(infinity.next);
   const [pPaging, setPPaging] = React.useState(12);
@@ -44,9 +41,9 @@ const MainPage = () => {
   const [sorts, setSrots] = React.useState();
   const [reBooks, setReBookss] = React.useState();
 
-  const postList = useSelector(state => state.post.posts);
-  const isLoginUser = useSelector(state => state.user.userId);
-  const isLogin = useSelector(state => state.user.isLogin);
+  const postList = useSelector((state) => state.post.posts);
+  const isLoginUser = useSelector((state) => state.user.userId);
+  const isLogin = useSelector((state) => state.user.isLogin);
 
   // let container = React.useRef();
   React.useLayoutEffect(() => {
@@ -57,26 +54,19 @@ const MainPage = () => {
       try {
         const result = await apis.getPost(stack, sortC, reBookC);
         setPost(result.data.data);
-        // console.log(result);
-        // container.current.scrollTo(0, lastScroll);
-      } catch (err) {
-        // console.log(err);
-      }
+      } catch (err) {}
     };
     fetchData();
   }, [sortC, reBookC, Render, isToken, Render, isLogin]);
 
   React.useEffect(() => {
     if (inView === true) {
-      // setPaging(paging + 12);
       setPPaging(pPaging + 12);
-      // console.log("내가 페이지", infinity);
-      // dispatch(pageAction.getPage(paging));
+
       if (postList.length === 0 && pageCheck === false) {
         dispatch(postActions.pageCheck(true));
       }
     } // 옵저버를 좀 더 위로
-    // console.log(pPaging);
   }, [inView]);
 
   React.useLayoutEffect(() => {
@@ -87,11 +77,7 @@ const MainPage = () => {
       try {
         const result = await apis.getPost(stack, sortC, reBookC);
         setPost(result.data.data);
-        // console.log(result);
-        // container.current.scrollTo(0, lastScroll);
-      } catch (err) {
-        // console.log(err);
-      }
+      } catch (err) {}
     };
     fetchData();
   }, [sortC, reBookC, Render, isToken, Render, isLogin]);
@@ -238,9 +224,9 @@ const Btn = styled.button`
   cursor: pointer;
   z-index: 999;
   &:hover {
-    background: #17334a;
+    background: #172d40;
     transform: translate();
-    transition: 0.1s ease-out;
+    transition: 0.3s ease-out;
   }
 
   @media screen and (max-width: 750px) {
@@ -263,14 +249,13 @@ const Btn = styled.button`
 const BtnFeedback = styled.img`
   position: fixed;
   bottom: 70px;
-  /* border: 1px solid #c4c4c4; */
-  /* border-radius: 50%; */
+
   width: 60px;
   height: 60px;
   text-align: center;
   left: 50px;
   margin: auto;
-  /* background: #c4c4c4; */
+
   cursor: pointer;
   z-index: 999;
   transition: all ease 0.3s;
@@ -305,14 +290,13 @@ const Scrollup = styled.div`
 
   position: fixed;
   bottom: 150px;
-  /* border: 1px solid #c4c4c4; */
-  /* border-radius: 50%; */
+
   width: 60px;
   height: 60px;
   text-align: center;
   right: 50px;
   margin: auto;
-  /* background: #c4c4c4; */
+
   cursor: pointer;
   z-index: 999;
 

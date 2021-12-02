@@ -20,37 +20,31 @@ import { userCreators } from "../redux/modules/user";
 import { pageCheckAction } from "../redux/modules/pageCheck";
 
 // MyPageInfo의 함수형 컴포넌트를 만든다.
-const MyPageInfo = props => {
+const MyPageInfo = (props) => {
   const dispatch = useDispatch();
   const userId = props.match.params.id;
-  const myUserId = useSelector(state => state.user.userId);
-  const checkApply = useSelector(state => state.apply);
+  const myUserId = useSelector((state) => state.user.userId);
+  const checkApply = useSelector((state) => state.apply);
   const [myUrl, setMyUrl] = React.useState();
   const [filter, setFilter] = React.useState("소개");
   const [mydata, setMydata] = React.useState();
   const [editMyProfile, setEditMyProfile] = React.useState(false); // 내려줘야함
-  const [techStack, setTeckstack] = React.useState([]); //
-  const [nickName, setNickName] = React.useState(); //
-  const [email, setEmail] = React.useState(); //
-  const [myType, setMyType] = React.useState(); ////////////
+  const [techStack, setTeckstack] = React.useState([]);
+  const [nickName, setNickName] = React.useState();
+  const [email, setEmail] = React.useState();
+  const [myType, setMyType] = React.useState();
   // const myType = mydata?.user.userPropensityType;
   const [modal, setModal] = React.useState(false);
   const [testmodal, setTestModal] = React.useState(false);
   const [assessment, setAssessment] = React.useState(false);
-
   const [memberId, setMemberId] = React.useState(); //멤버아이디
   const [writerEquals, setWriterEquals] = React.useState(); //포스트의 작성자확인
-
-  const pageCheck = useSelector(state => state.pagecheck.pageGo);
-
-  ////
+  const pageCheck = useSelector((state) => state.pagecheck.pageGo);
   const [introduction, setIntroduction] = React.useState(); //포스트의 작성자확인
-
   const [recruitmentProject, setRecruitmentProject] = React.useState(); //멤버아이디
   const [inProgressProject, setInProgressProject] = React.useState(); //포스트의 작성자확인
   const [bookMarkProject, setBookMarkProject] = React.useState(); //멤버아이디
   const [endProject, setEndProject] = React.useState(); //포스트의 작성자확인
-  ////
 
   //click
   // const introduction = mydata?.user.introduction ? true : false;
@@ -68,7 +62,7 @@ const MyPageInfo = props => {
     setAssessment(!assessment);
   };
 
-  const SetFilter = data => {
+  const SetFilter = (data) => {
     setFilter(data);
   };
 
@@ -89,12 +83,9 @@ const MyPageInfo = props => {
         dispatch(pageCheckAction.getPageCheck(`/mypage/${userId}`));
 
         setLoading(false);
-      } catch (err) {
-        // console.log(err);
-      }
+      } catch (err) {}
     };
     fetchData();
-    // console.log(mydata);
   }, [assessment, testmodal, checkApply]);
 
   React.useLayoutEffect(() => {
@@ -129,12 +120,9 @@ const MyPageInfo = props => {
         dispatch(pageCheckAction.getPageCheck(`/mypage/${userId}`));
 
         setLoading(false);
-      } catch (err) {
-        // console.log(err);
-      }
+      } catch (err) {}
     };
     fetchData();
-    // console.log(mydata);
   }, [filter]);
 
   const EmailConfirm = () => {

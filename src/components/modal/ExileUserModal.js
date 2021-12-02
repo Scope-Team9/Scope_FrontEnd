@@ -10,7 +10,6 @@ import { Grid, Input, Text, Button, Image } from "../../elements/Index";
 import ImgType from "../../shared/ImgType";
 import CloseIcon from "@mui/icons-material/Close";
 import { apis } from "../../lib/axios";
-
 const ExileUserModal = props => {
   const dispatch = useDispatch();
   const applyUsers = useSelector(state => state.apply.applyUsers);
@@ -24,31 +23,21 @@ const ExileUserModal = props => {
   };
 
   React.useEffect(() => {
-    // console.log(applyedUsers);
     const fetchData = async () => {
       try {
         const result = await apis.serachTeamUser(postId);
-        // console.log(result);
         setApplyUsers(result.data.data);
-      } catch (err) {
-        // console.log(err);
-      }
+      } catch (err) {}
     };
     fetchData();
-
-    // dispatch(applyCreators.applyUserAPI(postId));
   }, [applyStatusModal, acceptButton]);
 
   const exile = userId => {
-    // console.log(userId);
     const fetchData = async () => {
       try {
         const result = await apis.exileUser(postId, userId);
-        // console.log(result);
         setAcceptButton(result);
-      } catch (err) {
-        // console.log(err.response);
-      }
+      } catch (err) {}
     };
     fetchData();
   };
@@ -152,19 +141,10 @@ const ExileUserModal = props => {
                         justifyContent="space-between"
                         alignItems="center"
                       >
-                        {/* <Grid height="100%" textAlign="center">
-                            <Texts bg="#eee" height="50%">
-                              닉네임
-                            </Texts>
-                            <Texts bg="#aaa" height="50%">
-                              성향
-                            </Texts>
-                          </Grid> */}
-
                         <ModalMedia>
                           <Grid margin="auto">
                             <Grid
-                              bg="#17334a"
+                              bg="#172d408f"
                               width="110px"
                               height="50%"
                               display="flex"

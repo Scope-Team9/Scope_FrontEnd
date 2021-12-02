@@ -100,7 +100,6 @@ const Stack = (props) => {
   ]);
   React.useEffect(() => {
     const stacks = Object.entries(stack);
-    // console.log(stacks);
     setArr((state) => {
       return state.map((stateItem, idx) => {
         if (stateItem.id === stacks[idx][1]) {
@@ -109,12 +108,6 @@ const Stack = (props) => {
         return stateItem;
       });
     });
-
-    // arr.map((arrItem, idx) => {
-    //   if (arrItem.id === stacks[idx][1]) {
-    //     setArr({ ...arrItem, active: !arrItem.active });
-    //   }
-    // });
   }, []);
 
   const Filter = (item) => {
@@ -128,7 +121,7 @@ const Stack = (props) => {
     });
 
     const result = Object.values(stack).find((r) => r === item.id);
-    // console.log("이 값이 있으면 지워줘야함", result);
+
     if (result) {
       dispatch(postActions.isMainPage(true));
       dispatch(stackAction.setStack(item.id));
@@ -142,14 +135,12 @@ const Stack = (props) => {
     } else {
       dispatch(stackAction.getStack2(item.id));
     }
-
-    // console.log("dodo", stack2);
   };
 
   const arrStack = (item) => {
     const nowStack = props.stacks;
     const alreadyChecked = nowStack.find((p) => p === item.id);
-    // console.log(alreadyChecked);
+
     if (!alreadyChecked) {
       props.setStacks(nowStack.concat(item.id));
     }
@@ -157,8 +148,6 @@ const Stack = (props) => {
       const deleteCheck = nowStack.filter((p) => p !== alreadyChecked);
       props.setStacks(deleteCheck);
     }
-
-    // console.log(nowStack);
   };
 
   return (

@@ -38,7 +38,6 @@ const Sort = (props) => {
   ]);
 
   const onclickSort = (data) => {
-    // console.log("최신 마감순", data);
     dispatch(postActions.isMainPage(true));
     dispatch(sortAction.getSort(data));
     dispatch(bookRecommendAction.getRb(""));
@@ -46,13 +45,9 @@ const Sort = (props) => {
   };
   //bookmark,recommend
   const onclickRb = (data) => {
-    // console.log("북마크 추천", data);
     dispatch(postActions.isMainPage(true));
     dispatch(bookRecommendAction.getRb(data));
     dispatch(sortAction.getSort(""));
-    // if (paging > 0) {
-    //   setPaging(paging - 1);
-    // }
     props.setPaging(12);
   };
 
@@ -64,7 +59,6 @@ const Sort = (props) => {
       return;
     }
     const checked = arr.find((e) => e.active === true);
-    // console.log("ddddd", checked);
     setArr((state) => {
       return state.map((stateItem) => {
         if (stateItem.id === getItem.id) {
@@ -109,7 +103,6 @@ const Sort = (props) => {
                     !isLoginUser &&
                     (item.id === "북마크" || item.id === "추천")
                   ) {
-                    // console.log("나는 유저", isLoginUser);
                     Swal.fire(
                       "로그인 후 이용하실 수 있습니다!",
                       "로그인하고 프로젝트를 추천받아 보세요!",

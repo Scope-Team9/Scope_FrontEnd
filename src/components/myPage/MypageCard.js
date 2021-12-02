@@ -10,7 +10,6 @@ import { apis } from "../../lib/axios";
 import CardUserInfo from "./card/CardUserInfo";
 
 const MypageCard = (props) => {
-  // console.log(props);
   const [editMyProfile, setEditMyProfile] = React.useState(false); //
   const [checkEmail, setCheckEmail] = React.useState();
   const [deleteModal, setDeleteModal] = React.useState(false);
@@ -34,21 +33,16 @@ const MypageCard = (props) => {
   function fn_submit(data) {
     let userData = {
       nickname: nickName,
-      // email: email,
       userTechStack: techStack,
     };
 
     const fetchData = async () => {
       try {
-        // console.log(userData);
         const result = await apis.editUserInfo(props.userId, userData);
-        // console.log(result);
         setEditMyProfile(false);
         props.onClick2();
         Swal.fire("수정 완료!", "", "success");
-      } catch (err) {
-        // console.log(err.response);
-      }
+      } catch (err) {}
     };
     fetchData();
   }
@@ -160,7 +154,6 @@ const MypageCard = (props) => {
                     techStack.push(arr[idx]["value"]);
                   }
                   setTeckstack(techStack);
-                  // console.log(techStack);
                 }}
               >
                 기술스택
@@ -221,7 +214,6 @@ const Cards = styled.div`
 
   width: 90%;
   height: 900px;
-  /* background-color: rgba(255, 255, 255, 0); */
   background-color: white;
   border-radius: 20px;
   overflow: hidden;

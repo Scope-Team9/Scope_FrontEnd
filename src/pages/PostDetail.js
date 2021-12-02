@@ -112,7 +112,6 @@ const PostDetail = props => {
       }
     };
     CheckPost();
-    // dispatch(pageCheckAction.getPageCheck(`/postdetail/${post_id}`));
   }, [
     bookmark,
     applyStatusModal,
@@ -150,7 +149,7 @@ const PostDetail = props => {
             height="100%"
             border="5px solid #C4C4C4"
             margin="40px auto"
-            boxShadow="0px 0px 10px #554475"
+            boxShadow="0px 0px 10px #172D40"
             borderRadius="30px"
           >
             <LeftBanner />
@@ -331,15 +330,15 @@ const ContainerMedia = styled.div`
 const Btn = styled.button`
   width: 100px;
   height: 30px;
-  border: 1px solid #17334a;
+  border: 1px solid #172d40;
   border-radius: 50px;
   cursor: pointer;
-  color: #17334a;
+  color: #172d40;
   background-color: #fff;
   margin-left: 2px;
   &:hover {
     color: white;
-    background-color: #17334a;
+    background-color: #172d40;
     transform: translate();
     transition: 0.3s ease-out;
   }
@@ -378,12 +377,12 @@ const UrlButton = styled.button`
   font-size: 15px;
   margin: auto 10px;
   padding: 0 0 2px 0;
-  border: 1px solid #554475;
+  border: 1px solid #172d40;
   border-radius: 50px;
   align-items: center;
   text-align: center;
   color: white;
-  background-color: #554475;
+  background-color: #172d40;
   cursor: pointer;
 `;
 

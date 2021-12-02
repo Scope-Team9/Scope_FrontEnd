@@ -25,10 +25,7 @@ export const getMypageAPI = (postId) => {
 
 export default handleActions(
   {
-    [GET_MYPAGE]: (state, action) =>
-      produce(state, (draft) => {
-        // console.log("여기가 마이페이지인가", action.payload);
-      }),
+    [GET_MYPAGE]: (state, action) => produce(state, (draft) => {}),
   },
   initialState
 );
