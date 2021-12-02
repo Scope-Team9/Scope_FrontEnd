@@ -7,13 +7,13 @@ import styled from "styled-components";
 import { Grid, Text } from "../../../elements/Index";
 
 // DateDetail의 함수형 컴포넌트를 만든다.
-const DateDetail = (props) => {
+const DateDetail = props => {
   return (
     <React.Fragment>
       <Grid display="flex" margin="6px 0 0 0px">
         <DateMedia>
           <Grid display="flex">
-            <Text margin="auto 12px auto 0px" color="#4c4759">
+            <Text margin="auto 12px 0 0px" color="#4c4759">
               진행기간
             </Text>
             <DateBox>

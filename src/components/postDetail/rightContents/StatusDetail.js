@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { Grid, Text } from "../../../elements/Index";
 
 // StatusDetail의 함수형 컴포넌트를 만든다.
-const StatusDetail = (props) => {
+const StatusDetail = props => {
   return (
     <React.Fragment>
       <Grid display="flex">
@@ -21,8 +21,8 @@ const StatusDetail = (props) => {
               color="white"
               border="1px solid #2699FB"
               borderRadius="50px"
-              padding="4px"
-              size="12px"
+              padding="4px 15px"
+              size="13px"
             >
               {props.passedData?.projectStatus}
             </Text>
@@ -33,8 +33,8 @@ const StatusDetail = (props) => {
               color="white"
               border="1px solid #15B915"
               borderRadius="50px"
-              padding="4px"
-              size="12px"
+              padding="4px 15px"
+              size="13px"
             >
               {props.passedData?.projectStatus}
             </Text>
@@ -45,8 +45,8 @@ const StatusDetail = (props) => {
               color="white"
               border="1px solid #f9a8a8"
               borderRadius="50px"
-              padding="4px"
-              size="12px"
+              padding="4px 15px"
+              size="13px"
             >
               {props.passedData?.projectStatus}
             </Text>

@@ -1,16 +1,18 @@
 /* eslint-disable */
 import React from "react";
-import { Grid, Input, Text, Button, Image } from "../elements/Index";
-import { Dialog } from "@material-ui/core";
+import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
+import { Dialog } from "@material-ui/core";
 import styled from "styled-components";
+
+import { Grid, Input, Text, Button, Image } from "../elements/Index";
+
+import { apis } from "../lib/axios";
 import { applyCreators } from "../redux/modules/applyProject";
 import CloseIcon from "@mui/icons-material/Close";
-import { apis } from "../lib/axios";
-import { useHistory } from "react-router";
+
 const ApplyStatusModal = props => {
   const dispatch = useDispatch();
-  const applyUsers = useSelector(state => state.apply.applyUsers);
   const [applyedUsers, setApplyUsers] = React.useState();
   const [acceptButton, setAcceptButton] = React.useState();
   const { applyStatusModal, setApplyStatusModal, postId } = props;
@@ -21,19 +23,13 @@ const ApplyStatusModal = props => {
   };
 
   React.useEffect(() => {
-    // console.log(applyedUsers);
     const fetchData = async () => {
       try {
         const result = await apis.applyUser(postId);
-        // console.log(result);
         setApplyUsers(result.data.data);
-      } catch (err) {
-        // console.log(err);
-      }
+      } catch (err) {}
     };
     fetchData();
-
-    // dispatch(applyCreators.applyUserAPI(postId));
   }, [applyStatusModal, acceptButton]);
 
   const acceptOffer = acceptUser => {
@@ -168,6 +164,9 @@ const ApplyStatusModal = props => {
                       )}
                       {applyedUsers[idx].userPropensityType === "FHP" && (
                         <UserImg src="/img/물개.png"></UserImg>
+                      )}
+                      {applyedUsers[idx].userPropensityType === "FHP" && (
+                        <UserImg src="/img/너구리.png"></UserImg>
                       )}
                     </Grid>
                     <Grid height="100%" width="70%">

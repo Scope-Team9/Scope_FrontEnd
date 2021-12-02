@@ -331,15 +331,15 @@ const ContainerMedia = styled.div`
 const Btn = styled.button`
   width: 100px;
   height: 30px;
-  border: 1px solid #554475;
+  border: 1px solid #17334a;
   border-radius: 50px;
   cursor: pointer;
-  color: #554475;
+  color: #17334a;
   background-color: #fff;
   margin-left: 2px;
   &:hover {
     color: white;
-    background-color: #554475;
+    background-color: #17334a;
     transform: translate();
     transition: 0.3s ease-out;
   }

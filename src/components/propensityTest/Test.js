@@ -1,8 +1,9 @@
 /* eslint-disable */
 import React from "react";
+import styled from "styled-components";
 import TestData from "./Testdata.json";
 import { Grid, Button, Text } from "../../elements/Index";
-import styled from "styled-components";
+
 const Test = props => {
   const { handleUserCreate, handleMemberCreate, page } = props;
   const [nowClickU, setNowClickU] = React.useState(
@@ -55,6 +56,7 @@ const Test = props => {
       });
     });
   };
+
   React.useLayoutEffect(() => {
     setNowClickU(TestData.userbtn.filter(btn => Number(btn.question) === page));
     setNowClickMB(
@@ -64,13 +66,14 @@ const Test = props => {
   return (
     <Grid height="100%">
       <Grid display="flex" flexDirection="column">
+        {/* 나에 대한 질문 답변 */}
         <Grid margin="0 0 10px 0" height="50%">
           <Grid height="14%" margin="0 0 5px 0">
             <Grid margin="5px 0" height="14%" margin="0 0 10px 0">
               <Text bold="600">{userQuestion[0].text}</Text>
             </Grid>
           </Grid>
-          {nowClickU.map((btn, idx) => (
+          {nowClickU.map(btn => (
             <Grid height="38%" key={btn.id} {...btn}>
               <Button
                 isId={btn.id}
@@ -86,12 +89,12 @@ const Test = props => {
             </Grid>
           ))}
         </Grid>
-
+        {/* 상대방에 대한 질문 답변 */}
         <Grid height="50%">
           <Grid margin="5px 0" height="14%" margin="0 0 10px 0">
             <Text bold="600">{memberQuestion[0].text}</Text>
           </Grid>
-          {nowClickMB.map((btn, idx) => (
+          {nowClickMB.map(btn => (
             <Grid height="38%" key={btn.id} {...btn}>
               <Button
                 isId={btn.id}
@@ -112,11 +115,4 @@ const Test = props => {
   );
 };
 
-const Q1 = styled.p`
-  margin: 0 0 5px 0;
-  height: 14%;
-  @media screen and (max-width: 375px) {
-    font-size: 10px;
-  }
-`;
 export default Test;
