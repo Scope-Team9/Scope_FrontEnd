@@ -9,7 +9,7 @@ import ApplyUserModal from "../../ApplyUserModal";
 import { useHistory } from "react-router";
 import { apis } from "../../../lib/axios";
 
-// PosterButton의 함수형 컴포넌트를 만든다.
+// PosterButton의 함수형 컴포넌트를 만든다..
 const PosterButton = (props) => {
   const history = useHistory();
 
@@ -48,19 +48,7 @@ const PosterButton = (props) => {
               모집완료
             </Button>
           )}
-          {props.passedData?.projectStatus === "종료" && (
-            <Button
-              common
-              width="140px"
-              height="35px"
-              isValue="submit"
-              _onClick={(e) => {
-                props.applyUserModalOpen(e.target.value);
-              }}
-            >
-              깃허브제출
-            </Button>
-          )}
+
           {props.passedData?.projectStatus === "종료" && <div></div>}
           {props.passedData?.projectStatus === "진행중" && (
             <Button
@@ -99,6 +87,19 @@ const PosterButton = (props) => {
               포스트수정
             </Button>
           )}
+          {props.passedData?.projectStatus === "종료" && (
+            <Button
+              common
+              width="140px"
+              height="35px"
+              isValue="submit"
+              _onClick={(e) => {
+                props.applyUserModalOpen(e.target.value);
+              }}
+            >
+              깃허브제출
+            </Button>
+          )}
           <Button
             common
             width="140px"
@@ -116,26 +117,17 @@ const PosterButton = (props) => {
   );
 };
 
-const ButtonMedia = styled.button`
-  @media screen and (max-width: 600px) {
-    display: flex;
-    width: 200px;
-    height: 50px;
-    margin-bottom: 40px;
-  }
-`;
-
 const ContentMedia = styled.div`
   @media screen and (max-width: 360px) {
     width: 300px;
     height: 50px;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
   }
   @media screen and (max-width: 800px) {
     display: flex;
     width: 300px;
     font-size: 10px;
-    margin-bottom: 60px;
+    margin-bottom: 10px;
   }
 `;
 

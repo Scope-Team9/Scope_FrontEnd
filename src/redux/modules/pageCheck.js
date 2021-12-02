@@ -14,7 +14,6 @@ export default handleActions(
   {
     [GET_PAGECHECK]: (state, action) =>
       produce(state, (draft) => {
-        // console.log("페이지 위치 저장", action.payload.data);
         draft.pageGo = action.payload.data;
       }),
   },

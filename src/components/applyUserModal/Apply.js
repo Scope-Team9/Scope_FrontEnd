@@ -45,7 +45,6 @@ const Apply = (props) => {
               backgroundColor="#fff"
               placeholder="간단한 본인의 기술스택 및 자기소개"
               _onChange={(e) => {
-                // console.log(e.target.value);
                 setComment(e.target.value);
               }}
             ></Input>
@@ -70,7 +69,7 @@ const ModalWrap = styled.div`
     margin-top: 30px;
     width: 90%;
   } */
-  @media (max-width: 375px) {
+  @media (max-width: 400px) {
     width: 300px;
   }
 `;

@@ -7,12 +7,15 @@ import styled from "styled-components";
 import { Grid, Input, Text } from "../../../elements/Index";
 
 // TitleWrite의 함수형 컴포넌트를 만든다.
-const TitleWrite = (props) => {
+const UrlWrite = (props) => {
   return (
     <React.Fragment>
       <Grid>
         <TitleMedia>
-          <Text color="#4e442d">제목</Text>
+          <Text color="#4e442d">
+            오픈채팅 URL
+            <SubDescription> *(URL을 정확히 입력해주세요.)</SubDescription>
+          </Text>
         </TitleMedia>
         <Input
           width="100%"
@@ -21,13 +24,12 @@ const TitleWrite = (props) => {
           margin="4px auto"
           border="1px solid #C4C4C4"
           borderRadius="10px"
-          placeholder="제목을 입력해주세요."
+          placeholder="오픈채팅방 URL을 입력해주세요."
+          maxLength="35"
           boxShadow="0px 0px 10px #ddd"
-          type="text"
-          maxLength="34"
           inputFocusOutline="none"
           _onChange={(e) => {
-            props.setTitle(e.target.value);
+            props.setChatUrl(e.target.value);
           }}
         ></Input>
       </Grid>
@@ -43,11 +45,10 @@ const TitleMedia = styled.div`
   }
 `;
 
-const InputMedia = styled.input`
-  @media screen and (max-width: 600px) {
-    font-size: 10px;
-  }
+const SubDescription = styled.span`
+  color: red;
+  font-size: 12px;
 `;
 
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.
-export default TitleWrite;
+export default UrlWrite;

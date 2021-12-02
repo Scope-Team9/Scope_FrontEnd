@@ -18,9 +18,9 @@ const ProjectJoinUser = props => {
     <React.Fragment>
       <Grid
         textAlign="center"
-        height="120px"
+        height="125px"
         width="80px"
-        margin="0 11px 0 0"
+        margin="0 5px 0 0"
         display="flex"
         justifyContent="center"
       >
@@ -32,8 +32,9 @@ const ProjectJoinUser = props => {
               width="60px"
               height="60px"
               borderRadius="50%"
-              backgroundColor="#C4C4C4"
+              backgroundColor="#efefef"
               margin="6px 0px"
+              boxShadow="0px 0px 10px #C4C4C4"
             >
               <ImgType
                 type={props.userPropensityType}
@@ -42,7 +43,6 @@ const ProjectJoinUser = props => {
                   goToMypage(props.userId);
                 }}
               ></ImgType>
-
               <Text size="12px">{props.nickname}</Text>
               <Grid height="30%">
                 <Text size="12px">({props.userPropensityType})</Text>
@@ -54,16 +54,20 @@ const ProjectJoinUser = props => {
     </React.Fragment>
   );
 };
+
 const Writer = styled.p`
   opacity: ${props => (props.number === 0 ? 1 : 0)};
   width: 60px;
-  margin: auto auto auto 0;
+  margin: 0 auto 12px 0;
   height: 10px;
+  font-weight: 500;
+  color: #4c4759;
 `;
 
 const JoinUserMedia = styled.div`
   @media screen and (max-width: 600px) {
-    font-size: 10px;
+    font-size: 12px;
+    color: #4c4759;
   }
 `;
 

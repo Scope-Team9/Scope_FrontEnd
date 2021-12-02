@@ -1,10 +1,9 @@
 /* eslint-disable */
 import React from "react";
 import styled from "styled-components";
-import { Grid, Image, Text, Button } from "../../../elements/Index";
+import { Grid } from "../../../elements/Index";
 
 const MyFilter = (props) => {
-  // console.log(props);
   return (
     <>
       {props && (
@@ -33,14 +32,24 @@ const FilterDiv = styled.div`
   width: 80%;
   height: 35px;
 
-  /* background-color: ${(props) => (props.active ? "black" : " yellow")}; */
-  border-bottom: ${(props) => (props.active ? "1mm ridge #554475" : null)};
+  border-bottom: ${(props) =>
+    props.active ? "1mm ridge rgb(170, 50, 220, .6)" : null};
+  &:hover {
+    transform: scale(1.05);
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    -o-transform: scale(1.05);
+    /* text-decoration: underline; */
+    color: #737373;
+  }
 `;
 
 const Filter = styled.p`
   text-align: center;
   cursor: pointer;
   width: auto;
+  font-weight: 500;
 
   &:hover {
     transform: scale(1.05);

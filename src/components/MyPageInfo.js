@@ -3,7 +3,7 @@
 // 나의 마이페이지에서 뜨는 버튼들과 다른사람 마이페이지에서 뜨는 버튼들
 // import를 한다.
 import React from "react";
-import { Grid, Image, Text, Button } from "../elements/Index";
+import { Grid, Button } from "../elements/Index";
 import { postActions } from "../redux/modules/post";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
@@ -22,81 +22,99 @@ import { pageCheckAction } from "../redux/modules/pageCheck";
 const MyPageInfo = (props) => {
   const dispatch = useDispatch();
   const userId = props.match.params.id;
-
   const myUserId = useSelector((state) => state.user.userId);
-  const [myUrl, setMyUrl] = React.useState();
+  const checkApply = useSelector((state) => state.apply);
   const [filter, setFilter] = React.useState("소개");
   const [mydata, setMydata] = React.useState();
   const [editMyProfile, setEditMyProfile] = React.useState(false); // 내려줘야함
-  const [techStack, setTeckstack] = React.useState([]); //
-  const [nickName, setNickName] = React.useState(); //
-  const [email, setEmail] = React.useState(); //
-  const myType = mydata?.user.userPropensityType;
+  const [techStack, setTeckstack] = React.useState([]);
+  const [nickName, setNickName] = React.useState();
+  const [email, setEmail] = React.useState();
+  const [myType, setMyType] = React.useState();
+  // const myType = mydata?.user.userPropensityType;
   const [modal, setModal] = React.useState(false);
   const [testmodal, setTestModal] = React.useState(false);
+  const [assessment, setAssessment] = React.useState(false);
 
-  const [memberId, setMemberId] = React.useState(); //멤버아이디
-  const [writerEquals, setWriterEquals] = React.useState(); //포스트의 작성자확인
-
-  const pageCheck = useSelector((state) => state.pagecheck.pageGo);
-
-  //click
-  const introduction = mydata?.user.introduction ? true : false;
-
-  const recruitmentProject = mydata?.recruitment;
-  const inProgressProject = mydata?.inProgress;
-  const bookMarkProject = mydata?.bookmark;
-  const endProject = mydata?.end;
+  const [introduction, setIntroduction] = React.useState();
+  const [recruitmentProject, setRecruitmentProject] = React.useState();
+  const [inProgressProject, setInProgressProject] = React.useState();
+  const [bookMarkProject, setBookMarkProject] = React.useState();
+  const [endProject, setEndProject] = React.useState();
 
   const [loading, setLoading] = React.useState(true);
+
+  const doSetAssessment = () => {
+    // console.log("실행됨");
+    setAssessment(!assessment);
+  };
 
   const SetFilter = (data) => {
     setFilter(data);
   };
 
-  React.useLayoutEffect(() => {
-    // dispatch(myPageActions.getMypageAPI(userId));
-    // console.log(editMyProfile);
-    // setEmail(null);
-    // setNickName(null);
-    // console.log(pageCheck);
+  const checkMydata = () => {
+    setMydata(null);
+  };
+
+  React.useEffect(() => {
+    // console.log("뭐고");
+    setMydata(null);
+    setEndProject(null);
+    setMyType(null);
 
     dispatch(postActions.isMainPage(false));
     dispatch(postActions.whatPage("myPage"));
     const fetchData = async () => {
       try {
         const result = await apis.getMypage(userId);
-        // console.log("마이페이지 몇번?", result);
-        // setMydata(result.data.data);
-        setNickName(result.data.data.user.nickname);
-        setEmail(result.data.data.user.email);
-        setTeckstack(result.data.data.user.techStackList);
-        setLoading(false);
 
-        // console.log(result);
-      } catch (err) {
-        // console.log(err);
-      }
+        setEndProject(result.data.data.end);
+        setMyType(result.data.data.user.userPropensityType);
+        setMydata(result.data.data);
+        dispatch(pageCheckAction.getPageCheck(`/mypage/${userId}`));
+
+        setLoading(false);
+      } catch (err) {}
     };
     fetchData();
-    // console.log(mydata);
-  }, [editMyProfile, testmodal]);
+  }, [assessment, testmodal, checkApply]);
 
   React.useLayoutEffect(() => {
     const fetchData = async () => {
       try {
         const result = await apis.getMypage(userId);
-        // console.log(result);
-        setMydata(result.data.data);
-        dispatch(pageCheckAction.getPageCheck(`/mypage/${userId}`));
 
-        setLoading(false);
+        setNickName(result.data.data.user.nickname);
+        setEmail(result.data.data.user.email);
+        setTeckstack(result.data.data.user.techStackList);
+
+        // setLoading(false);
       } catch (err) {
         // console.log(err);
       }
     };
     fetchData();
-    // console.log(mydata);
+  }, [editMyProfile]);
+
+  React.useLayoutEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await apis.getMypage(userId);
+        setRecruitmentProject(result.data.data.recruitment);
+        setInProgressProject(result.data.data.inProgress);
+        setBookMarkProject(result.data.data.bookmark);
+        setEndProject(result.data.data.end);
+        setIntroduction(result.data.data.user.introduction);
+        setMyType(result.data.data.user.userPropensityType);
+
+        setMydata(result.data.data);
+        dispatch(pageCheckAction.getPageCheck(`/mypage/${userId}`));
+
+        setLoading(false);
+      } catch (err) {}
+    };
+    fetchData();
   }, [filter]);
 
   const EmailConfirm = () => {
@@ -127,19 +145,11 @@ const MyPageInfo = (props) => {
         <Spinner />
       ) : (
         <>
-          {mydata && myType && (
-            <Grid className="전체페이지" maxWidth="1900px" margin="auto">
+          {mydata && myType && endProject && (
+            <Grid className="전체페이지" maxWidth="1400px" margin="auto">
               <Grid height="30%" position="relative">
                 <Banner>
-                  <Banners
-                    type={myType}
-                    myPage={mydata?.isMyMypage}
-                    // setModal={setModal}
-                    // modal={modal}
-                    // onClick={() => {
-                    //   EmailConfirm();
-                    // }}
-                  ></Banners>
+                  <Banners type={myType} myPage={mydata?.isMyMypage}></Banners>
                   <Grid position="absolute" top="120px" height="75%">
                     <TypeResultTest
                       myType={myType}
@@ -152,6 +162,7 @@ const MyPageInfo = (props) => {
                       setModal={setModal}
                       nickName={nickName}
                       modal={modal}
+                      mypage={mydata.isMyMypage}
                       onClick={() => {
                         EmailConfirm();
                       }}
@@ -180,7 +191,7 @@ const MyPageInfo = (props) => {
                 </FilterWrap>
 
                 {filter === "모집" && (
-                  <MypagePostList {...recruitmentProject}></MypagePostList>
+                  <MypagePostList post={recruitmentProject}></MypagePostList>
                 )}
 
                 <IntroduceWrap>
@@ -195,7 +206,7 @@ const MyPageInfo = (props) => {
                 </IntroduceWrap>
 
                 {filter === "진행" && (
-                  <MypagePostList {...inProgressProject}></MypagePostList>
+                  <MypagePostList post={inProgressProject}></MypagePostList>
                 )}
                 <IntroduceWrap>
                   {filter === "진행" && inProgressProject.length === 0 && (
@@ -208,7 +219,7 @@ const MyPageInfo = (props) => {
                   )}
                 </IntroduceWrap>
                 {filter === "관심" && (
-                  <MypagePostList {...bookMarkProject}></MypagePostList>
+                  <MypagePostList post={bookMarkProject}></MypagePostList>
                 )}
                 <IntroduceWrap>
                   {filter === "관심" && bookMarkProject.length === 0 && (
@@ -221,7 +232,13 @@ const MyPageInfo = (props) => {
                   )}
                 </IntroduceWrap>
                 {filter === "완료" && (
-                  <MypagePostList {...endProject}></MypagePostList>
+                  <MypagePostList
+                    post={endProject}
+                    myUserId={myUserId}
+                    assessment={assessment}
+                    doSetAssessment={doSetAssessment}
+                    checkMydata={checkMydata}
+                  ></MypagePostList>
                 )}
                 <IntroduceWrap margin="0 0 0 25%" width="49%">
                   {filter === "완료" && endProject.length === 0 && (
@@ -233,42 +250,44 @@ const MyPageInfo = (props) => {
                     </>
                   )}
                 </IntroduceWrap>
-                {filter === "소개" &&
-                  mydata?.isMyMypage === true &&
-                  introduction === true && (
-                    <button
-                      style={{
-                        float: "right",
-                        margin: "55px 18% 0 0",
-                        border: "none",
-                        borderRadius: "15px",
-                        cursor: "pointer",
-                        backgroundColor: " transparent ",
-                      }}
-                      onClick={() => {
-                        history.push({
-                          pathname: "/addmarkdown",
-                          state: { userId: userId },
-                        });
-                      }}
-                    >
-                      <img
-                        src="/img/소개글.png"
-                        style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
-                      />
-                    </button>
-                  )}
-                <Grid margin="0 0 0 34%" width="49%">
-                  {filter === "소개" && introduction === true && (
+
+                <IntroduceWrap>
+                  {filter === "소개" &&
+                    mydata?.isMyMypage === true &&
+                    introduction !== "" && (
+                      <button
+                        style={{
+                          float: "right",
+                          margin: "1% 1% 0 0",
+                          border: "none",
+                          borderRadius: "15px",
+                          cursor: "pointer",
+                          backgroundColor: " #fff ",
+                          position: "relative",
+                        }}
+                        onClick={() => {
+                          history.push({
+                            pathname: "/addmarkdown",
+                            state: { userId: userId },
+                          });
+                        }}
+                      >
+                        <img
+                          src="/img/소개글.png"
+                          style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
+                        />
+                      </button>
+                    )}
+                  {filter === "소개" && introduction !== "" && (
                     <Grid margin="50px 0 0 0" border="1px solid #707070 ">
                       <MarkdownRead
                         introduction={mydata?.user.introduction}
                       ></MarkdownRead>
                     </Grid>
                   )}
-                </Grid>
+                </IntroduceWrap>
                 <IntroduceWrap>
-                  {filter === "소개" && introduction === false && (
+                  {filter === "소개" && introduction === "" && (
                     <>
                       <NoIntroduction src="/img/소개글너구리.png"></NoIntroduction>
                       <NoIntroductionText>
@@ -324,42 +343,30 @@ const Banner = styled.div`
 
 const FilterWrap = styled.div`
   display: flex;
-  margin-left: 30%;
-  width: 60vw;
+  margin-left: 35%;
+  width: 870px;
+  max-width: 1400px;
   z-index: 999;
 
-  @media screen and (max-width: 1600px) {
-    margin-left: 35%;
-  }
   @media screen and (max-width: 1200px) {
     width: 90vw;
     justify-content: center;
     margin: auto;
   }
-  @media screen and (max-width: 750px) {
-    width: 90vw;
-    justify-content: center;
-    margin: auto;
-  } ;
 `;
-const IntroduceWrap = styled.div`
-  margin: 0 0 0 30%;
-  width: 60vw;
 
-  @media screen and (max-width: 1600px) {
-    margin-left: 35%;
-  }
+const IntroduceWrap = styled.div`
+  margin-left: 37%;
+  width: 60vw;
+  max-width: 780px;
+
   @media screen and (max-width: 1200px) {
     width: 90vw;
     justify-content: center;
     margin: auto;
   }
-  @media screen and (max-width: 750px) {
-    width: 90vw;
-    justify-content: center;
-    margin: auto;
-  } ;
 `;
+
 const NoIntroduction = styled.img`
   width: 40%;
   height: 40%;
@@ -394,17 +401,7 @@ const IntroduceBtn = styled.div`
   justify-content: center;
   margin: auto;
   width: 150px;
-`;
-
-const NoticeText = styled.div`
-  color: #737373;
-  font-size: 12px;
-
-  @media screen and (min-width: 490px) {
-    color: #737373;
-    font-size: 12px;
-  }
-  @media screen and (min-width: 491px) {
+  @media screen and (max-width: 400px) {
     display: none;
   } ;
 `;

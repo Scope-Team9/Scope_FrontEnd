@@ -57,11 +57,6 @@ const LoginModal = (props) => {
   const [nameDup, setNameDup] = useState(false);
   const [test, setTest] = useState(false);
 
-  // console.log("닉네임", nickName);
-  // console.log("이메일", email);
-  // console.log("기술스택", techStack);
-  // console.log("sns아이디", userInfo.snsId);
-
   //닉네임 체크 미들웨어
   const nickCheck = (nickName) => {
     if (nickName === undefined) {
@@ -106,11 +101,10 @@ const LoginModal = (props) => {
     }
     const registerInfo = {
       snsId: userInfo.snsId,
-      email: userInfo.email,
+      // email: userInfo.email,
       nickName: nickName,
       techStack: techStack,
     };
-    // console.log(registerInfo);
     dispatch(userCreators.testUserMiddleWare(registerInfo));
     setTest(true);
   };
@@ -127,7 +121,7 @@ const LoginModal = (props) => {
     multiValue: (styles, { data }) => ({
       ...styles,
       color: data.color,
-      backgroundColor: "#17334A",
+      backgroundColor: "#17334a",
       color: "white",
       borderRadius: "20px",
     }),
@@ -145,32 +139,32 @@ const LoginModal = (props) => {
     }),
   };
   //회원가입이 필요한 유저일경우 모달창 활성화
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     if (sigunupModalState) {
       setShowModal(true);
     }
   }, [sigunupModalState]);
 
-  //개선해야됨
+  // 개선해야됨
   // const openWindow = () => {
   //   let customWindow = window.open(
-  //     "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code",
+  //     `${process.env.REACT_APP_REDIRECTION_LOCAL_KAKAO}`,
   //     "",
   //     "_blank"
   //   );
 
-  //   // setTimeout(() => {
-  //   //   customWindow.close();
-  //   // }, 5000);
+  //   setTimeout(() => {
+  //     customWindow.close();
+  //   }, 5000);
 
-  //   //   //s3
-  //   //   // "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://kbumsoo.s3-website.ap-northeast-2.amazonaws.com/user/kakao/callback&response_type=code";
+  //     //s3
+  //                     // process.env.REACT_APP_REDIRECTION_S3_KAKAO;
 
-  //   //   //local
-  //   //   // ("https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code");
+  //                     //local
+  //                     // process.env.REACT_APP_REDIRECTION_LOCAL_KAKAO;
 
-  //   //   // 최종 주소
-  //   //   // "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=https://scopewith.com/user/kakao/callback&response_type=code";
+  //                   // 최종 주소
+  //                   // process.env.REACT_APP_REDIRECTION_SCOPE_KAKAO;
   // };
 
   const closeWindow = () => {
@@ -186,7 +180,7 @@ const LoginModal = (props) => {
         maxWidth={"sm"}
         scroll="paper"
         open={showModal}
-        // onClose={modalClose}
+        onClose={modalClose}
       >
         <SignupModalWrap>
           {/* 테스트가 필요한경우 */}
@@ -195,7 +189,7 @@ const LoginModal = (props) => {
               {/* 헤더 */}
               <Grid
                 height="7%"
-                bg="#17334A"
+                bg="#17334a"
                 position="relative"
                 textAlign="center"
                 padding="10px 0 10px 0"
@@ -254,7 +248,7 @@ const LoginModal = (props) => {
                       display="flex"
                       alignItems="center"
                       justifyContent="center"
-                      margin="20px 0 10px 0"
+                      margin="23px 0 15px 0"
                     >
                       <Text color="#111">닉네임</Text>
                     </Grid>
@@ -271,7 +265,7 @@ const LoginModal = (props) => {
                     margin="15px auto"
                     height="280px"
                   >
-                    <Grid height="13%" margin="16px 0">
+                    <Grid height="13%" margin="16px 0 20px">
                       <Input
                         borderRadius="25px"
                         border="1px solid #ddd"
@@ -285,8 +279,31 @@ const LoginModal = (props) => {
                       >
                         닉네임
                       </Input>
+                      {!regExpNick.test(nickName) && (
+                        <Grid
+                          width="170px"
+                          margin="0 0 0 20px"
+                          textAlign="left"
+                        >
+                          <Text size="9px" color="red">
+                            ※ 2~5자 한글,영문,숫자 조합
+                          </Text>
+                        </Grid>
+                      )}
+                      {regExpNick.test(nickName) && (
+                        <Grid
+                          width="170px"
+                          margin="0 0 0 20px"
+                          textAlign="left"
+                        >
+                          <Text size="9px" color="green">
+                            ※ 올바른 닉네임입니다!
+                          </Text>
+                        </Grid>
+                      )}
                     </Grid>
-                    <Grid height="40%" padding="0 0 10px 0">
+
+                    <Grid height="45%" padding="0 0 10px 0">
                       <Select
                         styles={customStyles}
                         placeholder="보유중인 기술을 선택해주세요!"
@@ -307,6 +324,28 @@ const LoginModal = (props) => {
                       >
                         기술스택
                       </Select>
+                      {techStack.length <= 7 && (
+                        <Grid
+                          width="180px"
+                          margin="0 0 0 20px"
+                          textAlign="left"
+                        >
+                          <Text size="9px" color="green">
+                            ※ 기술스택은 7개까지 가능
+                          </Text>
+                        </Grid>
+                      )}
+                      {techStack.length > 7 && (
+                        <Grid
+                          width="180px"
+                          margin="0 0 0 20px"
+                          textAlign="left"
+                        >
+                          <Text size="9px" color="red">
+                            ※ 기술스택이 초과되었습니다.
+                          </Text>
+                        </Grid>
+                      )}
                     </Grid>
                   </Grid>
                   {/* 중복체크 */}
@@ -355,8 +394,7 @@ const LoginModal = (props) => {
         <LoginModalWrap>
           <Grid
             height="15%"
-            bg="#17334A"
-            width
+            bg="#17334a"
             position="relative"
             padding="10px 0 10px 0"
             boxShadow="0 5px 25px rgb(0 0 0 / 15%)"
@@ -385,6 +423,7 @@ const LoginModal = (props) => {
               </Text>
             </Grid>
           </Grid>
+
           <Grid height="80%" padding="20px 0">
             <Grid
               display="flex"
@@ -404,14 +443,14 @@ const LoginModal = (props) => {
                     window.location.href =
                       // window.open("", "", "_blank")
                       //s3
-                      // "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=http://kbumsoo.s3-website.ap-northeast-2.amazonaws.com/user/github/callback";
+                      // process.env.REACT_APP_REDIRECTION_S3_GIT;
 
                       //local
-                      // "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=http://localhost:3000/user/github/callback";
+                      // process.env.REACT_APP_REDIRECTION_LOCAL_GIT;
 
                       // 최종 주소
 
-                      "https://github.com/login/oauth/authorize?client_id=5bb2c0fab941fb5b8f9f&scope=repo:status read:repo_hook user:email&redirect_uri=https://scopewith.com/user/github/callback";
+                      process.env.REACT_APP_REDIRECTION_SCOPE_GIT;
                   }}
                 >
                   깃허브로그인
@@ -421,19 +460,14 @@ const LoginModal = (props) => {
                     setShowModal(true);
                     // openWindow();
                     window.location.href =
-                      // window.open(
-                      //   "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code",
-                      //   "",
-                      //   "_blank"
-                      // );
                       //s3
-                      // "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://kbumsoo.s3-website.ap-northeast-2.amazonaws.com/user/kakao/callback&response_type=code";
+                      // process.env.REACT_APP_REDIRECTION_S3_KAKAO;
 
                       //local
-                      "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=http://localhost:3000/user/kakao/callback&response_type=code";
+                      process.env.REACT_APP_REDIRECTION_LOCAL_KAKAO;
 
                     // 최종 주소
-                    // "https://kauth.kakao.com/oauth/authorize?client_id=2f892c61e0552c3f50223077e2fc5c6c&redirect_uri=https://scopewith.com/user/kakao/callback&response_type=code";
+                    // process.env.REACT_APP_REDIRECTION_SCOPE_KAKAO;
                     closeWindow();
                   }}
                 >
@@ -442,8 +476,9 @@ const LoginModal = (props) => {
               </Grid>
             </Grid>
           </Grid>
+
           <Grid display="flex" justifyContent="center" margin="10px 0 30px 0">
-            <Grid width="20%" backgroundColor="#17334A" height="3px"></Grid>
+            <Grid width="20%" backgroundColor="#17334a" height="3px"></Grid>
           </Grid>
         </LoginModalWrap>
       </Dialog>

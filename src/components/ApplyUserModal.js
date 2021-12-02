@@ -10,7 +10,7 @@ import {
   SubmitUrl,
   Liked,
 } from "./applyUserModal/ApplyIndex";
-const ApplyUserModal = props => {
+const ApplyUserModal = (props) => {
   const {
     applyUserModal,
     setApplyUserModal,
@@ -24,10 +24,10 @@ const ApplyUserModal = props => {
     toggleModal,
     applyUserModalOpen,
   } = props;
-  const isMe = useSelector(state => state.user.userId);
+  const isMe = useSelector((state) => state.user.userId);
   const [page, setPage] = React.useState(1);
 
-  const modalClose = status => {
+  const modalClose = (status) => {
     if (
       status === "종료" ||
       status === "신청" ||
@@ -36,22 +36,22 @@ const ApplyUserModal = props => {
       status === "제출"
     ) {
       statusCheck(status);
-      // applyUserModalOpen();
+
       return setApplyUserModal(false);
     }
-    // applyUserModalOpen();
 
     setApplyUserModal(false);
+
     return;
   };
 
   return (
-    <Grid _onClick={e => e.stopPropagation()}>
+    <Grid _onClick={(e) => e.stopPropagation()}>
       <Dialog
         maxWidth={"sm"}
         scroll="paper"
         open={applyUserModal}
-        onClose={e => {
+        onClose={(e) => {
           e.stopPropagation();
           modalClose();
         }}
@@ -75,6 +75,8 @@ const ApplyUserModal = props => {
             page={page}
             setPage={setPage}
             statusCheck={statusCheck}
+            doSetAssessment={props.doSetAssessment}
+            checkMydata={props.checkMydata}
           />
         )}
         {/* {applyValue === "end" && page === 2 && (
@@ -92,6 +94,7 @@ const ApplyUserModal = props => {
             page={page}
             setPage={setPage}
             myPage={myPage}
+            doSetAssessment={props.doSetAssessment}
           />
         )}
         {applyValue === "memberLiked" && (
@@ -104,6 +107,7 @@ const ApplyUserModal = props => {
             setPage={setPage}
             myPage={myPage}
             toggleModal={toggleModal}
+            doSetAssessment={props.doSetAssessment}
           />
         )}
       </Dialog>

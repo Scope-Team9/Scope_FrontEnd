@@ -12,7 +12,7 @@ const ContentWrite = (props) => {
     <React.Fragment>
       <ContentMedia>
         <Grid margin="10px auto">
-          <Text>프로젝트 내용적기</Text>
+          <Text color="#4e442d">프로젝트 내용적기</Text>
 
           <TextArea
             placeholder="프로젝트 내용을 입력해주세요."
@@ -28,15 +28,18 @@ const ContentWrite = (props) => {
 
 // styled-components
 const TextArea = styled.textarea`
-  width: 98%;
-  height: 500px;
+  width: 97%;
+  height: 300px;
   padding: 10px;
+  font-size: 15px;
   margin: 4px auto;
   border: 1px solid #c4c4c4;
   border-radius: 10px;
+  box-shadow: 0px 0px 10px #ddd;
   outline: none;
   @media screen and (max-width: 600px) {
     height: 200px;
+    width: 99%;
   }
 `;
 

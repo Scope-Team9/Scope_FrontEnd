@@ -17,14 +17,11 @@ const EmailAuth = (props) => {
   const modalClose = () => {
     setModal(false);
   };
-  // console.log(props);
 
   const UserDelete = () => {
     const fetchData = async () => {
       const result = await apis.deleteUser(props.userId);
       try {
-        // console.log(result);
-        // window.alert(result.data.msg);
         Swal.fire(`${result.data.msg}`, "", "info");
         deleteCookie("ScopeUser");
         history.push("/");
@@ -45,7 +42,6 @@ const EmailAuth = (props) => {
           <Grid
             width="100%"
             height="13%"
-            // bg="#B29CF4"
             position="relative"
             textAlign="center"
             padding="10px 0 10px 0"
@@ -71,11 +67,8 @@ const EmailAuth = (props) => {
             <Dec>게시자가 회원 탈퇴시 작성된 포스트는 모두 제거됩니다.</Dec>
             <Dec>지원한 프로젝트는 모두 탈퇴됩니다.</Dec>
 
-            {/* <Grid margin="10px 0 0 18%" width="320px"></Grid> */}
-
             <Button
               width="320px"
-              // height="50px"
               margin="50px 0 0 21%"
               _onClick={() => {
                 UserDelete();
@@ -102,7 +95,6 @@ const Dec = styled.p`
   align-items: center;
   display: flex;
   justify-content: center;
-  /* margin-top: 80px; */
 `;
 
 export default EmailAuth;

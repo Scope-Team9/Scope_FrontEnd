@@ -11,7 +11,7 @@ const EditButton = (props) => {
   return (
     <React.Fragment>
       <EditMedia>
-        <Grid display="flex" padding="16px">
+        <Grid display="flex">
           <Btn
             onClick={() => {
               props.editHandler();
@@ -36,14 +36,14 @@ const Btn = styled.button`
   border-radius: 50px;
   color: #fff;
   background: white;
-  color: black;
+  color: #bbb4d9;
   margin: 10px auto 10px auto;
   cursor: pointer;
   &:hover {
     color: white;
     background-color: #bbb4d9;
     border: 1px solid;
-    transition-duration: 1s;
+    transition: 0.3s ease-out;
   }
 `;
 

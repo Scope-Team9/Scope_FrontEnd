@@ -12,8 +12,10 @@ const TotalMemberDetail = (props) => {
     <React.Fragment>
       <TotalMedia>
         <Grid display="flex">
-          <Text margin="0px 10px 20px 0px">프로젝트 총인원</Text>
-          <Text color="#554475">{props.passedData?.totalMember}명</Text>
+          <Text margin="0px 10px 10px 0px" color="#172d40ab">
+            프로젝트 인원
+          </Text>
+          <Text color="#172D40">{props.passedData?.totalMember}명</Text>
         </Grid>
       </TotalMedia>
     </React.Fragment>
@@ -23,7 +25,7 @@ const TotalMemberDetail = (props) => {
 const TotalMedia = styled.div`
   @media screen and (max-width: 600px) {
     width: 100px;
-    font-size: 10px;
+    font-size: 12px;
   }
 `;
 

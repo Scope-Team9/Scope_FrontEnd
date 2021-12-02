@@ -11,10 +11,9 @@ import { Grid, Text } from "../../../elements/Index";
 const ContentDetail = (props) => {
   return (
     <React.Fragment>
-      <Grid margin="20px auto auto">
+      <Grid margin="10px auto auto">
         <ContentMedia>
-          <Text>프로젝트 설명</Text>
-
+          <Text color="#172d40ab">프로젝트 설명</Text>
           <Linkify>
             <Content>{props.passedData?.contents}</Content>
           </Linkify>
@@ -27,16 +26,18 @@ const ContentDetail = (props) => {
 // styled-components
 const Content = styled.p`
   width: 100%;
-  height: 500px;
+  height: 400px;
   padding: 10px;
-  border: 1px solid #c4c4c4;
+  border: 1px solid #172d40ab;
   border-radius: 5px;
   font-weight: 60;
   line-height: 30px;
   white-space: pre-line;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
   @media screen and (max-width: 600px) {
-    height: 300px;
+    width: 100%;
+    height: 400px;
   }
 `;
 

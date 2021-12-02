@@ -5,7 +5,6 @@ import { Grid, Image, Text, Button } from "../../elements/Index";
 import MyFilter from "./filter/MyFilter";
 
 const MypageFilter = (props) => {
-  // console.log(props);
   const [arr, setArr] = React.useState([
     {
       id: "소개",
@@ -72,9 +71,11 @@ const MypageFilter = (props) => {
 };
 
 const Wrap = styled.div`
+  width: 60vw;
   display: flex;
   width: 100%;
   justify-content: space-around;
+  max-width: 850px;
 `;
 
 export default MypageFilter;

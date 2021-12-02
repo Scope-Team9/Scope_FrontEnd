@@ -27,18 +27,15 @@ const DateEdit = (props) => {
     }
   };
 
-  // const endDate = (data) => {
-  //   props.setEnddate(data);
-  // };
   return (
     <React.Fragment>
       <DateMedia>
         <Grid>
-          <Text>기간설정</Text>
-          <Grid display="flex" textAlign="center" margin="20px auto">
-            {/* 시작 일*/}
+          <Text color="#4c4759">기간설정</Text>
+          <Grid display="flex" textAlign="center" margin="10px auto">
+            {/* 시작일*/}
             <Grid>
-              <Text>프로젝트 시작일</Text>
+              <Text color="#4c4759">프로젝트 시작일</Text>
               <SDatePicker
                 dateFormat="yyyy - MM - dd"
                 selected={new Date(props.startDate)}
@@ -50,9 +47,9 @@ const DateEdit = (props) => {
                 placeholderText="프로젝트 시작일 입력"
               />
             </Grid>
-            {/* 종료 일*/}
+            {/* 종료일*/}
             <Grid>
-              <Text>프로젝트 종료일</Text>
+              <Text color="#4c4759">프로젝트 종료일</Text>
               <SDatePicker
                 dateFormat="yyyy - MM - dd"
                 selected={new Date(props.endDate)}
@@ -75,16 +72,16 @@ const DateEdit = (props) => {
 // styled-components
 const SDatePicker = styled(DatePicker)`
   box-sizing: border-box;
-  width: 96%;
-  height: 40px;
+  width: 98%;
+  height: 35px;
   border-radius: 10px;
   border: 1px solid #c4c4c4;
   color: black;
   font-size: 16px;
   text-align: center;
   margin-top: 0.6rem;
-  margin-left: 8px;
   outline: none;
+  box-shadow: 0px 0px 10px #ddd;
 `;
 
 const DateMedia = styled.div`

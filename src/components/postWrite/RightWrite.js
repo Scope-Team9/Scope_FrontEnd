@@ -15,6 +15,7 @@ import DateWrite from "./rightContents/DateWrite";
 import TotalMember from "./rightContents/TotalMember";
 import ContentWrite from "./rightContents/ContentWrite";
 import GenerateButton from "./rightContents/GenerateButton";
+import UrlWrite from "./rightContents/UrlWrite";
 
 // RightWrite의 함수형 컴포넌트를 만든다.
 const RightWrite = (props) => {
@@ -26,6 +27,7 @@ const RightWrite = (props) => {
   const dispatch = useDispatch();
   const animatedComponents = makeAnimated();
   const [title, setTitle] = React.useState("");
+  const [chatUrl, setChatUrl] = React.useState();
   const [techstack, setTectstack] = React.useState([]);
   const [techStackList, setTechStackList] = React.useState();
   const date = new Date();
@@ -63,8 +65,10 @@ const RightWrite = (props) => {
       endDate: endDate,
       totalMember: totalMember,
       projectStatus: projectStatus,
+      chatUrl: chatUrl,
       contents: contents,
     };
+    // console.log(card);
     dispatch(postAddActions.addPostAPI(card));
   };
 
@@ -75,8 +79,10 @@ const RightWrite = (props) => {
       boxShadow: state.isFocused ? 0 : 0,
       borderWidth: 1,
       borderRadius: 10,
+      fontSize: 14,
       marginTop: 4,
       minHeight: 40,
+      boxShadow: "0px 0px 10px #ddd",
       borderColor: state.isFocused ? "#C4C4C4" : base.borderColor,
       "&:hover": {
         borderColor: state.isFocused ? "#C4C4C4" : base.borderColor,
@@ -86,7 +92,7 @@ const RightWrite = (props) => {
 
   return (
     <React.Fragment>
-      <Grid margin="46px 85px 0px">
+      <Grid margin="18px 80px">
         <TitleMedia>
           <Title>게시글 작성하기</Title>
         </TitleMedia>
@@ -107,6 +113,7 @@ const RightWrite = (props) => {
             endDate={endDate}
           />
           <TotalMember setTotalmember={setTotalmember} styles={styles} />
+          <UrlWrite setChatUrl={setChatUrl} />
 
           <ContentWrite setContents={setContents} />
 
@@ -119,10 +126,12 @@ const RightWrite = (props) => {
 
 // styled-components
 const Title = styled.div`
-  color: black;
+  color: #4e442d;
   font-size: 32px;
   font-weight: 800;
-  margin-top: 30px;
+  margin-top: 50px;
+  text-decoration: solid underline #544c398a 4px;
+  text-underline-position: under;
 `;
 
 const TitleMedia = styled.div`

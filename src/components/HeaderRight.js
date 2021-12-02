@@ -13,7 +13,6 @@ const HeaderRight = (props) => {
   const dispatch = useDispatch();
   const isToken = document.cookie;
   const userInfo = useSelector((state) => state.user);
-  // console.log(userInfo);
   const [showModal, setShowModal] = React.useState(false);
   const [doLogout, setDoLogOut] = React.useState(false);
 
@@ -23,7 +22,6 @@ const HeaderRight = (props) => {
   const modalOpen = () => {
     setShowModal(true);
   };
-  // console.log(userInfo.userPropensityType);
 
   const logOut = () => {
     deleteCookie("ScopeUser");
@@ -67,8 +65,6 @@ const HeaderRight = (props) => {
                   margin="0 20px"
                   _onClick={() => {
                     goMypage();
-                    // history.push(`/mypage/${userInfo.userId}`);
-                    // location.href = `/mypage/${userInfo.userId}`;
                   }}
                 >
                   {userInfo.userPropensityType === "LVG" && (

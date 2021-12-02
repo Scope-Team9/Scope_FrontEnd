@@ -1,50 +1,43 @@
 /* eslint-disable */
 import React from "react";
-import { Grid, Input, Text, Button, Image } from "../../elements/Index";
-import { Dialog } from "@material-ui/core";
+import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
+import { Dialog } from "@material-ui/core";
 import styled from "styled-components";
-import { applyCreators } from "../../redux/modules/applyProject";
 
+import { Grid, Input, Text, Button, Image } from "../../elements/Index";
+
+import ImgType from "../../shared/ImgType";
 import CloseIcon from "@mui/icons-material/Close";
 import { apis } from "../../lib/axios";
-const ExileUserModal = (props) => {
+const ExileUserModal = props => {
   const dispatch = useDispatch();
-  const applyUsers = useSelector((state) => state.apply.applyUsers);
+  const applyUsers = useSelector(state => state.apply.applyUsers);
   const [applyedUsers, setApplyUsers] = React.useState();
   const [acceptButton, setAcceptButton] = React.useState();
   const { applyStatusModal, setApplyStatusModal, postId, postUserId } = props;
+  const history = useHistory();
 
   const modalClose = () => {
     setApplyStatusModal(false);
   };
 
   React.useEffect(() => {
-    // console.log(applyedUsers);
     const fetchData = async () => {
       try {
         const result = await apis.serachTeamUser(postId);
-        // console.log(result);
         setApplyUsers(result.data.data);
-      } catch (err) {
-        // console.log(err);
-      }
+      } catch (err) {}
     };
     fetchData();
-
-    // dispatch(applyCreators.applyUserAPI(postId));
   }, [applyStatusModal, acceptButton]);
 
-  const exile = (userId) => {
-    // console.log(userId);
+  const exile = userId => {
     const fetchData = async () => {
       try {
         const result = await apis.exileUser(postId, userId);
-        // console.log(result);
         setAcceptButton(result);
-      } catch (err) {
-        // console.log(err.response);
-      }
+      } catch (err) {}
     };
     fetchData();
   };
@@ -60,11 +53,14 @@ const ExileUserModal = (props) => {
         >
           <ModalWrap>
             <Grid
-              height="10%"
-              bg="#17334A"
+              height="12%"
+              bg="#17334a"
               position="relative"
-              textAlign="center"
-              padding="10px 0 10px 0"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              padding="10px 0 0 0"
+              boxShadow="0 5px 25px rgb(0 0 0 / 15%)"
             >
               <Grid
                 position="absolute"
@@ -80,7 +76,7 @@ const ExileUserModal = (props) => {
                   onClick={modalClose}
                 />
               </Grid>
-              <Text size="40px" bold color="#fff">
+              <Text size="25px" bold color="#fff">
                 팀원강퇴
               </Text>
             </Grid>
@@ -93,7 +89,7 @@ const ExileUserModal = (props) => {
                   textAlign="center"
                   margin="auto"
                 >
-                  <Grid height="50%">
+                  <Grid height="50%" margin="40px auto">
                     <img width="100%" src="/img/step9.png" />
                   </Grid>
                   <Grid margin="250px 0">지원자가 아직 없습니다!</Grid>
@@ -102,7 +98,7 @@ const ExileUserModal = (props) => {
             )}
 
             <Grid display="flex" height="85%" justifyContent="center">
-              <Grid width="90%" margin="10px 0">
+              <Grid width="90%" height="90%" margin="10px 0">
                 {applyedUsers.map((user, idx) => (
                   <Grid
                     margin="10px auto"
@@ -112,81 +108,91 @@ const ExileUserModal = (props) => {
                     justifyContent="space-around"
                     padding="10px"
                     width="90%"
+                    borderRadius="10px"
+                    boxShadow="0 5px 15px rgb(0 0 0 / 40%)"
                     key={user.userId}
                     {...user}
                   >
-                    <Grid margin="auto" width="30%">
-                      {applyedUsers[idx].userPropensityType === "LVG" && (
-                        <UserImg src="/img/호랑이.png"></UserImg>
-                      )}
-                      {applyedUsers[idx].userPropensityType === "LVP" && (
-                        <UserImg src="/img/늑대.png"></UserImg>
-                      )}
-                      {applyedUsers[idx].userPropensityType === "LHG" && (
-                        <UserImg src="/img/여우.png"></UserImg>
-                      )}
-                      {applyedUsers[idx].userPropensityType === "LHP" && (
-                        <UserImg src="/img/판다.png"></UserImg>
-                      )}
-                      {applyedUsers[idx].userPropensityType === "FVG" && (
-                        <UserImg src="/img/토끼.png"></UserImg>
-                      )}
-                      {applyedUsers[idx].userPropensityType === "FVP" && (
-                        <UserImg src="/img/개.png"></UserImg>
-                      )}
-                      {applyedUsers[idx].userPropensityType === "FHG" && (
-                        <UserImg src="/img/고양이.png"></UserImg>
-                      )}
-                      {applyedUsers[idx].userPropensityType === "FHP" && (
-                        <UserImg src="/img/물개.png"></UserImg>
-                      )}
+                    <Grid
+                      display="flex"
+                      justifyContent="center"
+                      alignItems="center"
+                      margin="auto"
+                      width="100px"
+                      _onClick={() => {
+                        history.push(`/mypage/${user.userId}`);
+                      }}
+                    >
+                      <ImgType
+                        width="100%"
+                        height="100%"
+                        type={user.userPropensityType}
+                        cursor="pointer"
+                        _onClick={() => {
+                          goToMypage(user.userId);
+                        }}
+                      ></ImgType>
                     </Grid>
-                    <Grid height="100%" width="80%">
-                      <Grid display="flex" height="60%" margin="auto">
-                        <Grid
-                          margin="auto"
-                          height="50px"
-                          display="flex"
-                          justifyContent="space-between"
-                        >
-                          <Grid height="100%" textAlign="center">
-                            <Grid bg="#eee" height="50%">
-                              닉네임
+                    <Grid width="70%" margin="auto">
+                      <Grid
+                        display="flex"
+                        margin="auto"
+                        display="flex"
+                        justifyContent="space-between"
+                        alignItems="center"
+                      >
+                        <ModalMedia>
+                          <Grid margin="auto">
+                            <Grid
+                              bg="#172d408f"
+                              width="110px"
+                              height="50%"
+                              display="flex"
+                              justifyContent="center"
+                              alignItems="center"
+                              color="#fff"
+                              borderRadius="20px"
+                              borderRadius="10px 10px 0 0"
+                            >
+                              <Text size="12px">
+                                닉네임 | {applyedUsers[idx].nickname}
+                              </Text>
                             </Grid>
-                            <Grid bg="#aaa" height="50%">
-                              타입
+                            <Grid
+                              bg="#f5f5f5"
+                              height="50%"
+                              display="flex"
+                              justifyContent="center"
+                              alignItems="center"
+                              borderRadius="0 0 10px 10px"
+                            >
+                              <Text size="12px">
+                                성향타입 |{" "}
+                                {applyedUsers[idx].userPropensityType}
+                              </Text>
                             </Grid>
                           </Grid>
-                          <Grid margin="auto" height="100%" textAlign="center">
-                            <Grid height="50%">
-                              {applyedUsers[idx].nickname}
-                            </Grid>
-                            <Grid height="50%">
-                              {applyedUsers[idx].userPropensityType}
-                            </Grid>
-                          </Grid>
-                        </Grid>
-                        <Grid margin="auto" height="50px" width="80%">
-                          <Grid margin="auto 40px">
+                        </ModalMedia>
+
+                        <BtnWrap>
+                          <Grid width="100%" position="relative" right="0">
                             {applyedUsers[idx].userId !== postUserId && (
                               <Button
+                                borderRadius="50%"
+                                width="70px"
+                                height="70px"
                                 common
                                 isValue={applyedUsers[idx].userId}
-                                _onClick={(e) => {
+                                _onClick={e => {
                                   window.confirm("추방하시겠습니까?");
                                   exile(e.target.value);
                                 }}
                               >
-                                추방하기
+                                추방
                               </Button>
                             )}
                           </Grid>
-                        </Grid>
-                        <Grid
-                          margin="auto auto auto 3px"
-                          height="50px"
-                          width="80%"
-                        ></Grid>
+                        </BtnWrap>
                       </Grid>
                     </Grid>
                   </Grid>
@@ -199,14 +205,39 @@ const ExileUserModal = (props) => {
     </>
   );
 };
+const ModalMedia = styled.div`
+  height: 80%;
+  margin: auto auto auto 0;
+  @media screen and (max-width: 600px) {
+  } ;
+`;
 
 const ModalWrap = styled.div`
   width: 550px;
   height: 500px;
-  @media (max-width: 375px) {
-    width: 300px;
+  @media (max-width: 600px) {
+    width: 100%;
   }
 `;
+
+const BtnWrap = styled.div`
+  margin: 0 auto 0 40%;
+  height: auto;
+  width: 80px;
+  @media screen and (max-width: 600px) {
+    width: 80px;
+    margin: auto auto auto 2px;
+  } ;
+`;
+
+const Texts = styled.p`
+  height: 50%;
+  width: 50px;
+  @media screen and (max-width: 600px) {
+    font-size: 12px;
+  }
+`;
+
 const CommentBubble = styled.div`
   position: relative;
   background: #f1f9ff;
@@ -234,6 +265,17 @@ const UserImg = styled.img`
   border-radius: 12px;
   background-color: #ececec;
   cursor: pointer;
+`;
+
+const Wrap = styled.div`
+  display: flex;
+  height: 60%;
+  margin: auto;
+  @media screen and (max-width: 600px) {
+    display: flex;
+    flex-direction: column;
+    height: 40%;
+  } ;
 `;
 
 export default ExileUserModal;

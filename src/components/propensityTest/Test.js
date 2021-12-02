@@ -1,19 +1,25 @@
 /* eslint-disable */
 import React from "react";
+import styled from "styled-components";
 import TestData from "./Testdata.json";
 import { Grid, Button, Text } from "../../elements/Index";
 
-const TestSix = props => {
-  const { handleUserCreate, handleMemberCreate } = props;
+const Test = props => {
+  const { handleUserCreate, handleMemberCreate, page } = props;
   const [nowClickU, setNowClickU] = React.useState(
-    TestData.userbtn.filter(btn => btn.question === "Q6")
+    TestData.userbtn.filter(btn => Number(btn.question) === page)
   );
   const [nowClickMB, setNowClickMB] = React.useState(
-    TestData.memberbtn.filter(btn => btn.question === "Q6")
+    TestData.memberbtn.filter(btn => Number(btn.question) === page)
+  );
+  const userQuestion = TestData.userquestion.filter(
+    user => Number(user.question) === page
+  );
+  const memberQuestion = TestData.memberquestion.filter(
+    member => Number(member.question) === page
   );
 
   const clickUser = btnUserId => {
-    // console.log(btnUserId);
     setNowClickU(state => {
       return state.map(stateItem => {
         if (stateItem.id === btnUserId) {
@@ -51,14 +57,23 @@ const TestSix = props => {
     });
   };
 
+  React.useLayoutEffect(() => {
+    setNowClickU(TestData.userbtn.filter(btn => Number(btn.question) === page));
+    setNowClickMB(
+      TestData.memberbtn.filter(btn => Number(btn.question) === page)
+    );
+  }, [page]);
   return (
     <Grid height="100%">
       <Grid display="flex" flexDirection="column">
+        {/* 나에 대한 질문 답변 */}
         <Grid margin="0 0 10px 0" height="50%">
-          <Grid margin="0 0 10px 0" height="14%">
-            Q6.당신이 생각할 때 더 <b>좋은 성과를 만들 수 있을 것 같은 팀</b>은?
+          <Grid height="14%" margin="0 0 5px 0">
+            <Grid margin="5px 0" height="14%" margin="0 0 10px 0">
+              <Text bold="600">{userQuestion[0].text}</Text>
+            </Grid>
           </Grid>
-          {nowClickU.map((btn, idx) => (
+          {nowClickU.map(btn => (
             <Grid height="38%" key={btn.id} {...btn}>
               <Button
                 isId={btn.id}
@@ -74,12 +89,13 @@ const TestSix = props => {
             </Grid>
           ))}
         </Grid>
+        {/* 상대방에 대한 질문 답변 */}
         <Grid height="50%">
           <Grid margin="5px 0" height="14%" margin="0 0 10px 0">
-            Q6.<b>당신의 팀원이 선호했으면 하는 팀</b>은?
+            <Text bold="600">{memberQuestion[0].text}</Text>
           </Grid>
-          {nowClickMB.map((btn, idx) => (
-            <Grid height="35%" key={btn.id} {...btn}>
+          {nowClickMB.map(btn => (
+            <Grid height="38%" key={btn.id} {...btn}>
               <Button
                 isId={btn.id}
                 isValue={btn.value}
@@ -99,4 +115,4 @@ const TestSix = props => {
   );
 };
 
-export default TestSix;
+export default Test;

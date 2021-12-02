@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { Grid, Image, Text, Button } from "../elements/Index";
+import { Grid } from "../elements/Index";
 import styled from "styled-components";
 import React from "react";
 

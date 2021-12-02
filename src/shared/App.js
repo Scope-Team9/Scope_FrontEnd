@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { Grid } from "../elements/Index";
 import React from "react";
 import "./App.css";
 import { ConnectedRouter } from "connected-react-router";
@@ -21,9 +22,7 @@ import Header from "../components/Header";
 import Message from "../components/headerFunction/Message";
 import Footer from "../components/Footer";
 import NotFound from "../shared/NotFound";
-
-//테스트용입니다.
-import PropensityTest from "../components/propensityTest/PropensityTest";
+import { ContactSupportOutlined } from "@material-ui/icons";
 
 function App() {
   const isLogin = useSelector(state => state.user.isLogin);

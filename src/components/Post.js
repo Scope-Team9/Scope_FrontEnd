@@ -6,11 +6,11 @@ import ApplyUserModal from "./ApplyUserModal";
 import { useSelector, useDispatch } from "react-redux";
 import { apis } from "../lib/axios";
 import { history } from "../redux/configureStore";
-import { Grid, Image, Text, Button } from "../elements/Index";
-import { useParams } from "react-router-dom";
+import { Grid, Text, Button } from "../elements/Index";
 
 // Post의 함수형 컴포넌트를 만든다.
 const Post = (props) => {
+  // console.log(props);
   // console.log(props);
   const dispatch = useDispatch();
   const myPage = useSelector((state) => state.post.whatPage.now);
@@ -45,25 +45,19 @@ const Post = (props) => {
     const getMembers = async () => {
       try {
         const result = await apis.getMember(postId);
-        // console.log("호출되나", result);
         setMember(result.data.data);
-      } catch (err) {
-        // console.log(err.response);
-      }
+      } catch (err) {}
     };
     getMembers();
-  }, [assessment]);
+  }, [assessment, props.assessment]);
 
   React.useLayoutEffect(() => {}, [assessment]);
   // let as = member?.find((e) => e.userId === myUserId);
-  // console.log(assessment);
-  // console.log(typeof myUserId);
-  // console.log(isWriter);
-  // console.log(props);
-  // console.log(member);
 
-  // console.log(as);
-  // console.log(myPage, myUserId);
+  const didAssessment = (e) => {
+    e.stopPropagation();
+    modalOpen(e.target.value, props.postId);
+  };
 
   return (
     <React.Fragment>
@@ -96,9 +90,7 @@ const Post = (props) => {
                 hoverBg="#2699FB"
                 hoverCl="#fff"
                 _onClick={(e) => {
-                  e.stopPropagation();
-                  // console.log(e.target.value, props.postId);
-                  modalOpen(e.target.value, props.postId);
+                  didAssessment(e);
                 }}
               >
                 팀원평가하기
@@ -112,6 +104,8 @@ const Post = (props) => {
                   postId={props.postId}
                   myPage={props.mypage}
                   toggleModal={toggleModal}
+                  doSetAssessment={props.doSetAssessment}
+                  checkMydata={props.checkMydata}
                 />
               </Grid>
             </Grid>
@@ -147,7 +141,6 @@ const Post = (props) => {
             </ProjectState>
 
             <Title>{props.title}</Title>
-            {/* <Summary>{props.summary}</Summary> */}
             <Date>
               {props.startDate} ~ {props.endDate}
             </Date>
@@ -208,18 +201,12 @@ const CardHeader = styled.div`
   ${(props) => props.projectStatus === "종료" && `background-color: #878787;`};
 `;
 
-//헤더 까지
-
 const Title = styled.span`
   margin-top: 8%;
   margin-bottom: 14%;
   font-size: 20px;
   width: 100%;
   font-weight: 500;
-  /* white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: #606060; */
   white-space: normal;
   line-height: 1.2;
   height: 2.4em;
@@ -263,6 +250,9 @@ const ProjectState = styled.div`
   ${(props) =>
     props.projectStatus === "진행중" && `background-color: #15B915;`};
   ${(props) => props.projectStatus === "종료" && `background-color: #878787;`};
+  @media (max-width: 450px) {
+    margin: 0 0 10% 0;
+  }
 `;
 
 const ProductImgWrap = styled.div`
@@ -315,5 +305,4 @@ const HighLight = styled.div`
 `;
 
 //프로그래스바 까지
-
 export default Post;

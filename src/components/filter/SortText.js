@@ -1,9 +1,8 @@
 /* eslint-disable */
 import React from "react";
 import styled from "styled-components";
-import { Grid, Button } from "../../elements/Index";
+
 const SortText = (props) => {
-  //   console.log("소트", props);
   return (
     <Filtering
       id={props.item.id}
@@ -30,7 +29,7 @@ const Filtering = styled.p`
     -ms-transform: scale(1.05);
     -o-transform: scale(1.05);
     /* text-decoration: underline; */
-    color: #dacceb;
+    color: #737373;
   }
 `;
 export default SortText;

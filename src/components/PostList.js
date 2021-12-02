@@ -2,7 +2,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Post from "./Post";
-import PostTest from "./PostTest";
 import { postActions } from "../redux/modules/post";
 import styled from "styled-components";
 // import { useInView } from "react-intersection-observer";
@@ -10,7 +9,7 @@ import styled from "styled-components";
 import { Grid, Image, Text, Button } from "../elements/Index";
 import Spinner from "../shared/Spinner";
 
-const PostList = props => {
+const PostList = (props) => {
   const dispatch = useDispatch();
   const [post, setPost] = React.useState();
   const [allPost, setAllPost] = React.useState();
@@ -18,17 +17,14 @@ const PostList = props => {
 
   // let paging = useSelector((state) => state?.infinity.paging.next);
   let paging = props.paging;
-  let reBook = useSelector(state => state.rebook.reBook);
-  let sort = useSelector(state => state.sort.sort);
-  let post_list = useSelector(state => state.post.posts);
-  let stacks = useSelector(state => state.stack.stacks);
+  let reBook = useSelector((state) => state.rebook.reBook);
+  let sort = useSelector((state) => state.sort.sort);
+  let post_list = useSelector((state) => state.post.posts);
+  let stacks = useSelector((state) => state.stack.stacks);
   let Render = props.Render;
   let isLogin = props.isLogin;
 
-  // let stacks = props.stacks;
-  // console.log(stackss);
-
-  const findStack = item => {
+  const findStack = (item) => {
     const itemStack = item.techStack;
     if (stacks) {
       for (let i = 0; i < stacks.length; i++) {
@@ -65,7 +61,7 @@ const PostList = props => {
           {post && (
             <>
               <PostWrap>
-                {post.map(item => {
+                {post.map((item) => {
                   return <Post key={item.postId} {...item} />;
                 })}
               </PostWrap>
@@ -90,9 +86,13 @@ const PostWrap = styled.div`
   margin: auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  row-gap: 5px;
+  column-gap: 5px;
   /* grid-gap: 1px; */
   @media (max-width: 420px) {
     grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    row-gap: 5px;
+    column-gap: 5px;
   }
 `;
 const NoIntroduction = styled.img`

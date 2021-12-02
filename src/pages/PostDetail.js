@@ -18,14 +18,16 @@ import ApplicantDetail from "../components/postDetail/rightContents/ApplicantDet
 import StackDetail from "../components/postDetail/rightContents/StackDetail";
 import DateDetail from "../components/postDetail/rightContents/DateDetail";
 import StatusDetail from "../components/postDetail/rightContents/StatusDetail";
+import UrlDetail from "../components/postDetail/rightContents/UrlDetail";
 import ContentDetail from "../components/postDetail/rightContents/ContentDetail";
 import BookMark from "../components/postDetail/rightContents/BookMark";
 import ApplicantButton from "../components/postDetail/rightContents/ApplicantButton";
 import PosterButton from "../components/postDetail/rightContents/PosterButton";
 import TotalMemberDetail from "../components/postDetail/rightContents/TotalMemberDetail";
+import Spinner from "../shared/Spinner";
 
 // PostDetail의 함수형 컴포넌트를 만든다
-const PostDetail = (props) => {
+const PostDetail = props => {
   const dispatch = useDispatch();
   const [checkPost, setCheckPost] = React.useState();
   const [bookmark, setBookmark] = React.useState(false);
@@ -36,7 +38,7 @@ const PostDetail = (props) => {
   const [projectStatus, setProjectStatus] = React.useState();
   const [applyValue, setApplyValue] = React.useState();
   const [isme, setIsme] = React.useState(null);
-
+  const [loading, setLoading] = React.useState(true);
   const applyStatusModalOpen = () => {
     setApplyStatusModal(true);
     // setApplyStatusModal(!applyStatusModal);
@@ -46,13 +48,13 @@ const PostDetail = (props) => {
     setExileStatusModal(true);
   };
 
-  const applyUserModalOpen = (value) => {
+  const applyUserModalOpen = value => {
     setApplyValue(value);
     setApplyUserModal(true);
     // setApplyUserModal(!applyUserModal);
   };
 
-  const statusCheck = (value) => {
+  const statusCheck = value => {
     // console.log(value);
     setProjectStatus(value);
     // console.log(value);
@@ -71,7 +73,7 @@ const PostDetail = (props) => {
   };
 
   // 상태변경
-  const edit_status = (data) => {
+  const edit_status = data => {
     const editstatus = {
       projectStatus: data,
     };
@@ -88,7 +90,7 @@ const PostDetail = (props) => {
   };
 
   let post_id = props.match.params.id;
-  const userId = useSelector((state) => state.user.userId); //로그인 유저아이디
+  const userId = useSelector(state => state.user.userId); //로그인 유저아이디
   const postUserId = checkPost?.data.data.post.userId;
   const passedData = checkPost?.data["data"].post;
   const passedUserStatus = checkPost?.data["data"].userStatus;
@@ -104,12 +106,12 @@ const PostDetail = (props) => {
         // console.log(result);
         setIsme(result.data.data.userStatus);
         setProjectStatus(result.data.data.post.projectStatus);
+        setLoading(false);
       } catch (err) {
         console.log(err);
       }
     };
     CheckPost();
-    // dispatch(pageCheckAction.getPageCheck(`/postdetail/${post_id}`));
   }, [
     bookmark,
     applyStatusModal,
@@ -136,186 +138,209 @@ const PostDetail = (props) => {
 
   return (
     <React.Fragment>
-      <Grid
-        display="flex"
-        justifyContent="center"
-        maxWidth="1920px"
-        height="100%"
-        border="1px solid #C4C4C4"
-        margin="auto"
-      >
-        <LeftBanner />
+      <DetailMedia>
+        {loading ? (
+          <Spinner />
+        ) : (
+          <Grid
+            display="flex"
+            justifyContent="center"
+            maxWidth="1400px"
+            height="100%"
+            border="5px solid #C4C4C4"
+            margin="40px auto"
+            boxShadow="0px 0px 10px #172D40"
+            borderRadius="30px"
+          >
+            <LeftBanner />
 
-        <Grid margin="46px 106px 0px" position="relative">
-          <ContainerMedia>
-            <BookMark
-              userId={userId}
-              postUserId={postUserId}
-              ToggleBookMark={ToggleBookMark}
-              passedData={passedData}
-            />
-            <TitleDetail passedData={passedData} />
-            <Grid margin="20px auto">
-              <Grid display="flex">
-                <ApplicantDetail passdedMenber={passdedMenber} />
-              </Grid>
-              <Grid margin="10px auto ">
-                {userId === postUserId &&
-                  passedData?.projectStatus === "모집중" && (
-                    <Grid position="relative" width="100%">
-                      <Grid
-                        position="absolute"
-                        right="20px"
-                        width="120px"
-                        padding="10px"
-                      >
-                        <ApplyStatusModal
-                          applyStatusModal={applyStatusModal}
-                          setApplyStatusModal={setApplyStatusModal}
-                          postId={post_id}
-                        />
-                        <ExileUserModal
-                          applyStatusModal={exileStatusModal}
-                          setApplyStatusModal={setExileStatusModal}
-                          postId={post_id}
-                          postUserId={postUserId}
-                        ></ExileUserModal>
-                      </Grid>
-                    </Grid>
-                  )}
-                <Grid>
-                  <FlexMedia display="flex">
-                    <DateDetail passedData={passedData} />
-                    <StackDetail passedData={passedData} />
-                  </FlexMedia>
-                </Grid>
-                <Grid>
+            <Grid margin="46px 85px 0px" position="relative">
+              <ContainerMedia>
+                <BookMark
+                  userId={userId}
+                  postUserId={postUserId}
+                  ToggleBookMark={ToggleBookMark}
+                  passedData={passedData}
+                />
+                <TitleDetail passedData={passedData} />
+                <Grid margin="10px auto">
                   <Grid display="flex">
-                    <Grid>
-                      <TotalMemberDetail passedData={passedData} />
-                    </Grid>
+                    <ApplicantDetail passdedMenber={passdedMenber} />
+                  </Grid>
+                  <Grid margin="10px auto">
+                    {userId === postUserId &&
+                      passedData?.projectStatus === "모집중" && (
+                        <Grid position="relative" width="100%">
+                          <Grid
+                            position="absolute"
+                            right="20px"
+                            width="120px"
+                            padding="10px"
+                          >
+                            <ApplyStatusModal
+                              applyStatusModal={applyStatusModal}
+                              setApplyStatusModal={setApplyStatusModal}
+                              postId={post_id}
+                            />
+                            <ExileUserModal
+                              applyStatusModal={exileStatusModal}
+                              setApplyStatusModal={setExileStatusModal}
+                              postId={post_id}
+                              postUserId={postUserId}
+                            ></ExileUserModal>
+                          </Grid>
+                        </Grid>
+                      )}
                     <Grid>
                       <FlexMedia>
-                        {passedData?.projectStatus === "종료" &&
-                          passedData?.frontUrl !== "null" && (
-                            <Grid
-                              display="flex"
-                              width="200px"
-                              margin="0px 0px 5px"
-                              alignItems="center"
-                            >
-                              <Grid>
-                                <Text>Frontend</Text>
-                              </Grid>
-                              <Grid>
-                                <UrlButton
-                                  onClick={() => {
-                                    goFrontPage();
-                                  }}
-                                >
-                                  프론트URL
-                                </UrlButton>
-                              </Grid>
-                            </Grid>
-                          )}
-                        {passedData?.projectStatus === "종료" &&
-                          passedData?.backUrl !== "null" && (
-                            <Grid
-                              display="flex"
-                              width="200px"
-                              alignItems="center"
-                            >
-                              <Grid>
-                                <Text>Backend</Text>
-                              </Grid>
-                              <Grid>
-                                <Grid>
-                                  <UrlButton
-                                    onClick={() => {
-                                      goBackPage();
-                                    }}
-                                  >
-                                    백엔드URL
-                                  </UrlButton>
-                                </Grid>
-                              </Grid>
-                            </Grid>
-                          )}
+                        <DateDetail passedData={passedData} />
+                        <StackDetail passedData={passedData} />
                       </FlexMedia>
-                      {userId === postUserId &&
-                        passedData?.projectStatus === "모집중" && (
-                          <Grid
-                            display="flex"
-                            width="180px"
-                            margin="auto 0 auto auto"
-                            justifyContent="flex-end"
-                          >
-                            <ButtonMedia>
-                              <Button
-                                postion="absolute"
-                                common
-                                _onClick={applyStatusModalOpen}
+                    </Grid>
+                    <Grid>
+                      <Grid display="flex">
+                        <Grid>
+                          <TotalMemberDetail passedData={passedData} />
+                        </Grid>
+                        <Grid>
+                          <FlexMedia>
+                            {passedData?.projectStatus === "종료" &&
+                              passedData?.frontUrl !== "null" && (
+                                <Grid
+                                  display="flex"
+                                  width="200px"
+                                  margin="0px 0px 5px"
+                                  alignItems="center"
+                                >
+                                  <Grid>
+                                    <Text>Frontend</Text>
+                                  </Grid>
+                                  <Grid>
+                                    <UrlButton
+                                      onClick={() => {
+                                        goFrontPage();
+                                      }}
+                                    >
+                                      프론트URL
+                                    </UrlButton>
+                                  </Grid>
+                                </Grid>
+                              )}
+                            {passedData?.projectStatus === "종료" &&
+                              passedData?.backUrl !== "null" && (
+                                <Grid
+                                  display="flex"
+                                  width="200px"
+                                  alignItems="center"
+                                >
+                                  <Grid>
+                                    <Text>Backend</Text>
+                                  </Grid>
+                                  <Grid>
+                                    <Grid>
+                                      <UrlButton
+                                        onClick={() => {
+                                          goBackPage();
+                                        }}
+                                      >
+                                        백엔드URL
+                                      </UrlButton>
+                                    </Grid>
+                                  </Grid>
+                                </Grid>
+                              )}
+                          </FlexMedia>
+                          {userId === postUserId &&
+                            passedData?.projectStatus === "모집중" && (
+                              <Grid
+                                display="flex"
+                                width="180px"
+                                margin="auto 0 auto auto"
+                                justifyContent="flex-end"
                               >
-                                신청 현황
-                              </Button>
-                              <Button
-                                postion="absolute"
-                                common
-                                _onClick={exileStatusModalOpen}
-                              >
-                                팀원 강퇴
-                              </Button>
-                            </ButtonMedia>
-                          </Grid>
-                        )}
+                                <ButtonMedia>
+                                  <Btn common onClick={applyStatusModalOpen}>
+                                    신청 현황
+                                  </Btn>
+                                  <Btn common onClick={exileStatusModalOpen}>
+                                    팀원 강퇴
+                                  </Btn>
+                                </ButtonMedia>
+                              </Grid>
+                            )}
+                        </Grid>
+                      </Grid>
+                      <StatusDetail passedData={passedData} />
+                      <UrlDetail passedData={passedData} />
+                      <ContentDetail passedData={passedData} />
+                    </Grid>
+
+                    <Grid>
+                      {userId === postUserId ? (
+                        <PosterButton
+                          passedData={passedData}
+                          applyUserModalOpen={applyUserModalOpen}
+                          applyUserModal={applyUserModal}
+                          setApplyUserModal={setApplyUserModal}
+                          applyValue={applyValue}
+                          post_id={post_id}
+                          passdedMenber={passdedMenber}
+                          edit_status={edit_status}
+                          statusCheck={statusCheck}
+                        />
+                      ) : (
+                        <Grid textAlign="center">
+                          <ApplicantButton
+                            passedData={passedData}
+                            isme={isme}
+                            applyUserModalOpen={applyUserModalOpen}
+                            applyUserModal={applyUserModal}
+                            setApplyUserModal={setApplyUserModal}
+                            applyValue={applyValue}
+                            post_id={post_id}
+                            passdedMenber={passdedMenber}
+                            passedUserStatus={passedUserStatus}
+                            statusCheck={statusCheck}
+                          />
+                        </Grid>
+                      )}
                     </Grid>
                   </Grid>
-                  <StatusDetail passedData={passedData} />
-
-                  <ContentDetail passedData={passedData} />
                 </Grid>
-
-                <Grid>
-                  {userId === postUserId ? (
-                    <PosterButton
-                      passedData={passedData}
-                      applyUserModalOpen={applyUserModalOpen}
-                      applyUserModal={applyUserModal}
-                      setApplyUserModal={setApplyUserModal}
-                      applyValue={applyValue}
-                      post_id={post_id}
-                      passdedMenber={passdedMenber}
-                      edit_status={edit_status}
-                      statusCheck={statusCheck}
-                    />
-                  ) : (
-                    <Grid textAlign="center">
-                      <ApplicantButton
-                        passedData={passedData}
-                        isme={isme}
-                        applyUserModalOpen={applyUserModalOpen}
-                        applyUserModal={applyUserModal}
-                        setApplyUserModal={setApplyUserModal}
-                        applyValue={applyValue}
-                        post_id={post_id}
-                        passdedMenber={passdedMenber}
-                        passedUserStatus={passedUserStatus}
-                        statusCheck={statusCheck}
-                      />
-                    </Grid>
-                  )}
-                </Grid>
-              </Grid>
+              </ContainerMedia>
             </Grid>
-          </ContainerMedia>
-        </Grid>
-      </Grid>
+          </Grid>
+        )}
+      </DetailMedia>
     </React.Fragment>
   );
 };
+const DetailMedia = styled.div`
+  @media screen and (max-width: 500px) {
+    width: 97%;
+  }
+`;
+
 const ContainerMedia = styled.div`
   @media screen and (max-width: 500px) {
     padding: 10px;
+  }
+`;
+
+const Btn = styled.button`
+  width: 100px;
+  height: 30px;
+  border: 1px solid #172d40;
+  border-radius: 50px;
+  cursor: pointer;
+  color: #172d40;
+  background-color: #fff;
+  margin-left: 2px;
+  &:hover {
+    color: white;
+    background-color: #172d40;
+    transform: translate();
+    transition: 0.3s ease-out;
   }
 `;
 
@@ -352,10 +377,12 @@ const UrlButton = styled.button`
   font-size: 15px;
   margin: auto 10px;
   padding: 0 0 2px 0;
-  border: 1px solid #554475;
-  border-radius: 4px;
+  border: 1px solid #172d40;
+  border-radius: 50px;
+  align-items: center;
+  text-align: center;
   color: white;
-  background-color: #554475;
+  background-color: #172d40;
   cursor: pointer;
 `;
 

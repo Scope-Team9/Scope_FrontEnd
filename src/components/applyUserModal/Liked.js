@@ -45,26 +45,24 @@ const Liked = (props) => {
 
   //팀원평가
   const userLiked = () => {
-    // console.log(likes);
-    // console.log(myPage);
     const likeMember = likes.filter((user) => user.active == true);
     const result = likeMember.map((a) => a.userId);
     const likeUsers = {
       userIds: result,
     };
-    // console.log(likeUsers);
+
     if (!myPage) {
-      // console.log("여기");
       dispatch(applyCreators.starterLikeAPI(postId, likeUsers));
       modalClose("종료");
       return;
     }
-    // console.log("여기2");
+    // console.log("여기4");
+
     dispatch(applyCreators.starterLikeAPI(postId, likeUsers));
     toggleModal();
+    props.doSetAssessment();
     return;
   };
-  // console.log(likes);
 
   return (
     <>
@@ -83,7 +81,9 @@ const Liked = (props) => {
                   fontSize="large"
                   onClick={(e) => {
                     e.stopPropagation();
+
                     modalClose();
+                    props.checkMydata();
                   }}
                 />
               </Grid>
@@ -92,7 +92,6 @@ const Liked = (props) => {
             <Grid
               margin="auto"
               height="90%"
-              // justifyContent="center"
               width="90%"
               alignItems="center"
               textAlign="center"
@@ -110,6 +109,7 @@ const Liked = (props) => {
                 </Text>
               </Grid>
               {/* 유저평가부분 */}
+
               <Grid height="50%" width="90%" margin="auto" overflow="auto">
                 {passdedMenber?.map((user, idx) => (
                   <Grid
@@ -122,7 +122,7 @@ const Liked = (props) => {
                     key={user.userId}
                     {...user}
                   >
-                    <Grid margin="auto" width="10%">
+                    <Grid margin="auto" width="20%">
                       <ImgType type={passdedMenber[idx].userPropensityType} />
                     </Grid>
                     <Grid height="100%" width=" 70%" margin="auto">
@@ -132,28 +132,33 @@ const Liked = (props) => {
                           height="50px"
                           display="flex"
                           justifyContent="space-between"
+                          margin="auto 20px"
                         >
-                          <Grid height="100%" textAlign="center" width="50%">
+                          <Grid height="100%" textAlign="center" width="60%">
                             <Grid
                               borderRadius="20px 0 0 20px"
-                              bg="#17334A"
+                              bg="#172d408f"
                               height="50%"
                               margin="0 0 3px 0 "
                               display="flex"
                               alignItems="center"
                               justifyContent="center"
                             >
-                              <Text color="#fff">닉네임</Text>
+                              <Text size="12px" color="#fff">
+                                닉네임
+                              </Text>
                             </Grid>
                             <Grid
                               borderRadius="20px 0 0 20px"
-                              bg="#17334A"
+                              bg="#172d408f"
                               height="50%"
                               display="flex"
                               alignItems="center"
                               justifyContent="center"
                             >
-                              <Text color="#fff">타입</Text>
+                              <Text size="12px" color="#fff">
+                                타입
+                              </Text>
                             </Grid>
                           </Grid>
                           <Grid
@@ -171,7 +176,9 @@ const Liked = (props) => {
                               alignItems="center"
                               justifyContent="center"
                             >
-                              {passdedMenber[idx].nickname}
+                              <Text size="12px">
+                                {passdedMenber[idx].nickname}{" "}
+                              </Text>
                             </Grid>
                             <Grid
                               height="50%"
@@ -181,14 +188,16 @@ const Liked = (props) => {
                               alignItems="center"
                               justifyContent="center"
                             >
-                              {passdedMenber[idx].userPropensityType}
+                              <Text size="12px">
+                                {passdedMenber[idx].userPropensityType}
+                              </Text>
                             </Grid>
                           </Grid>
                         </Grid>
                         <Grid
-                          margin="auto auto auto 10px"
+                          margin="auto auto auto 1px"
                           height="50px"
-                          width="80%"
+                          width="70%"
                         >
                           {passdedMenber[idx].userId !== isMe && (
                             <Button
@@ -197,10 +206,6 @@ const Liked = (props) => {
                               isValue={passdedMenber[idx]?.userId}
                               _onClick={(e) => {
                                 e.stopPropagation();
-                                // console.log(
-                                //   likes[idx]?.userId,
-                                //   likes[idx].active
-                                // );
                                 toggleLike(e.target.value);
                               }}
                             >
@@ -234,17 +239,13 @@ const Liked = (props) => {
 };
 
 const ModalWrap = styled.div`
+  margin: 30px auto;
   width: 550px;
-  height: 700px;
+  height: 100%;
   position: relative;
-`;
-
-const UserImg = styled.img`
-  object-fit: cover;
-  width: 60px;
-  border-radius: 12px;
-  background-color: #ececec;
-  cursor: pointer;
+  @media (max-width: 620px) {
+    width: 90%;
+  }
 `;
 
 export default Liked;

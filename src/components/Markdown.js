@@ -22,8 +22,6 @@ import { history } from "../redux/configureStore";
 
 export default function Writer(props) {
   const dispatch = useDispatch();
-  // console.log(props);
-  // const editorRef = createRef();
   const editorRef = useRef();
 
   const [progress, setProgress] = useState(0);
@@ -90,7 +88,7 @@ export default function Writer(props) {
         // 서버로부터 이미지 주소 받아옴
         const url = await apis.addMyImage(base64);
 
-        const resulturl = `http://15.165.159.211${url.data.data.imageUrl}`;
+        const resulturl = `https://scopewith.com${url.data.data.imageUrl}`;
         callback(resulturl, "alt text");
       };
       upload();
@@ -127,31 +125,27 @@ export default function Writer(props) {
     const fetchData = async () => {
       try {
         const result = await apis.getMypage(userId);
-        // console.log(result);
+
         setMydata(result.data.data);
-      } catch (err) {
-        // console.log(err);
-      }
+      } catch (err) {}
     };
     fetchData();
   }, []);
 
   const onChangeEditorTextHandler = () => {
-    // console.log(editorRef.current.getInstance().getMarkdown());
     setText(editorRef.current.getInstance().getMarkdown());
   };
 
   const write = () => {
     const writing = async () => {
       try {
-        // console.log(props[0]);
         const userId = props.location.state.userId;
         const result = await apis.writeMyIntroduction(userId, text);
-        // console.log(result);
+
         history.push(`/mypage/${userId}`);
       } catch (err) {
         const userId = props.location.state.userId;
-        // console.log(err);
+
         // window.alert("작성 형식이 올바르지 않습니다.");
         Swal.fire("내용이 같거나 없습니다!", "", "question");
       }
@@ -159,9 +153,8 @@ export default function Writer(props) {
     writing();
   };
   const introduction = mydata?.user.introduction;
-  // console.log(introduction);
   return (
-    <>
+    <Grid maxWidth="1400px" margin="auto">
       {introduction === null && (
         <>
           <button
@@ -278,6 +271,6 @@ export default function Writer(props) {
           </Grid>
         </>
       )}
-    </>
+    </Grid>
   );
 }
