@@ -90,6 +90,7 @@
 - 강지훈 : https://github.com/kzhxxn
 - 김범수 : https://github.com/kimbumsoo0820
 - 이승민 : https://github.com/seungmai
+- 프론트엔드 이슈 : https://www.notion.so/Frontend-6be2102a6e2d4ee4899cc884ca6db08c
 
 ### 백엔드
 
