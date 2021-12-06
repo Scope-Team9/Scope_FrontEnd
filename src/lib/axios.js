@@ -19,7 +19,6 @@ instance.interceptors.request.use(
     }
 
     const cookieSplit = cookie.split("=")[1];
-
     config.headers = {
       "content-type": "application/json;charset=UTF-8",
       accept: "application/json",

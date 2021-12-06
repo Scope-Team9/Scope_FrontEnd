@@ -97,7 +97,6 @@ const PostEdit = (props) => {
         setLoading(false);
       } catch (err) {
         console.log(err.response);
-
         setLoaded(false);
       }
     };

@@ -43,6 +43,7 @@ const Sort = (props) => {
     dispatch(bookRecommendAction.getRb(""));
     props.setPaging(12);
   };
+
   //bookmark,recommend
   const onclickRb = (data) => {
     dispatch(postActions.isMainPage(true));

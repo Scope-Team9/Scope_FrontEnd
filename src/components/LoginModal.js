@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { userCreators } from "../redux/modules/user";
 import Select from "react-select";
-
 import PropensityTest from "./propensityTest/PropensityTest";
 import CloseIcon from "@mui/icons-material/Close";
 
