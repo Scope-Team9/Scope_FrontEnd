@@ -7,6 +7,7 @@ const useScrollMove = (dom) => {
   const [scrollInfos, setScrollInfos] = useState(() =>
     localStorage.getItem("scroll_pos")
   );
+
   // 원본은 object지만 해당 코드는 object가 아니라서 number로 강제
   // "0" || 0이 line 15 조건문을 통과하지 못함
   // (||연산자에 의해 string "0"이 되기 때문)
