@@ -62,6 +62,9 @@ const ModalWrap = styled.div`
   width: 550px;
   height: 300px;
   position: relative;
+  @media (max-width: 400px) {
+    width: 300px;
+  }
 `;
 
 export default TeamExit;

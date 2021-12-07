@@ -5,7 +5,7 @@ import { applyCreators } from "../../redux/modules/applyProject";
 import styled from "styled-components";
 import CloseIcon from "@mui/icons-material/Close";
 
-const Apply = (props) => {
+const Apply = props => {
   const dispatch = useDispatch();
   const [comment, setComment] = React.useState();
   const { modalClose, postId } = props;
@@ -44,7 +44,7 @@ const Apply = (props) => {
               height="100%"
               backgroundColor="#fff"
               placeholder="간단한 본인의 기술스택 및 자기소개"
-              _onChange={(e) => {
+              _onChange={e => {
                 setComment(e.target.value);
               }}
             ></Input>
@@ -64,26 +64,9 @@ const ModalWrap = styled.div`
   width: 550px;
   height: 300px;
   position: relative;
-  /* @media (max-width: 620px) {
-    margin: auto;
-    margin-top: 30px;
-    width: 90%;
-  } */
   @media (max-width: 400px) {
     width: 300px;
   }
 `;
-
-// const Contents = styled.div`
-//   margin: auto;
-//   height: 90%;
-//   width: 320px;
-//   text-align: center;
-//   @media (max-width: 620px) {
-//     margin: auto;
-//     margin-top: 30px;
-//     width: 90%;
-//   }
-// `;
 
 export default Apply;
