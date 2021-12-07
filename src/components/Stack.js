@@ -9,7 +9,7 @@ import LogoButton from "../elements/LogoButton";
 
 const Stack = (props) => {
   const dispatch = useDispatch();
-  const stack = useSelector((state) => state.stack.stack);
+  // const stack = useSelector((state) => state.stack.stack);
   const stack2 = useSelector((state) => state.stack.stacks);
   //필터 클릭
   const [arr, setArr] = React.useState([
@@ -98,17 +98,6 @@ const Stack = (props) => {
       title: "TypeScript",
     },
   ]);
-  React.useEffect(() => {
-    const stacks = Object.entries(stack);
-    setArr((state) => {
-      return state.map((stateItem, idx) => {
-        if (stateItem.id === stacks[idx][1]) {
-          return { ...stateItem, active: !stateItem.active };
-        }
-        return stateItem;
-      });
-    });
-  }, []);
 
   const Filter = (item) => {
     setArr((state) => {
@@ -120,33 +109,12 @@ const Stack = (props) => {
       });
     });
 
-    const result = Object.values(stack).find((r) => r === item.id);
-
-    if (result) {
-      dispatch(postActions.isMainPage(true));
-      dispatch(stackAction.setStack(item.id));
-    } else {
-      dispatch(postActions.isMainPage(true));
-      dispatch(stackAction.getStack(item.id));
-    }
-    const result2 = stack2.find((r) => r === item.id);
-    if (result2) {
+    //리덕스에 있냐 없냐로 넣어주거나 뺌
+    const stackIsInRedux = stack2.find((r) => r === item.id);
+    if (stackIsInRedux) {
       dispatch(stackAction.setStack2(item.id));
     } else {
       dispatch(stackAction.getStack2(item.id));
-    }
-  };
-
-  const arrStack = (item) => {
-    const nowStack = props.stacks;
-    const alreadyChecked = nowStack.find((p) => p === item.id);
-
-    if (!alreadyChecked) {
-      props.setStacks(nowStack.concat(item.id));
-    }
-    if (alreadyChecked) {
-      const deleteCheck = nowStack.filter((p) => p !== alreadyChecked);
-      props.setStacks(deleteCheck);
     }
   };
 
@@ -171,7 +139,7 @@ const Stack = (props) => {
             onClick={() => {
               if (props.do === "StacksComponent") {
                 Filter(item);
-                arrStack(item);
+                // arrStack(item);
               }
             }}
           ></LogoButton>
