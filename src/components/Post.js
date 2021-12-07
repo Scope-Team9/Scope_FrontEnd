@@ -200,7 +200,7 @@ const CardHeader = styled.div`
     props.projectStatus === "진행중" && `background-color: #17334A;`};
   ${(props) => props.projectStatus === "종료" && `background-color: #878787;`};
 `;
-
+//
 const Title = styled.span`
   margin-top: 8%;
   margin-bottom: 14%;
