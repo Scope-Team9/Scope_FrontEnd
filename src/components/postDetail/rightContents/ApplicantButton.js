@@ -78,6 +78,7 @@ const ApplicantButton = (props) => {
   );
 };
 
+// styled-components
 const ContentMedia = styled.div`
   @media screen and (max-width: 360px) {
     width: 325px;

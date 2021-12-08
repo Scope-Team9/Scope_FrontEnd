@@ -27,7 +27,6 @@ const MypagePost = (props) => {
       >
         <DDescriptionBox>
           <CardHeader>
-            <Grid>{/* <TitleDate>D-2</TitleDate> */}</Grid>
             <Grid
               position="relative"
               zIndex="10"

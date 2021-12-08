@@ -28,6 +28,7 @@ const Bookmark = (props) => {
   );
 };
 
+// styled-components
 const BookMarkMedia = styled.div`
   @media screen and (max-width: 600px) {
     width: 10px;

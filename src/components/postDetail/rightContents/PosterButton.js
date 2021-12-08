@@ -12,7 +12,6 @@ import { apis } from "../../../lib/axios";
 // PosterButton의 함수형 컴포넌트를 만든다..
 const PosterButton = (props) => {
   const history = useHistory();
-
   const DeletePost = async () => {
     try {
       const deletePost = await apis.deletePost(props.post_id);
@@ -117,6 +116,7 @@ const PosterButton = (props) => {
   );
 };
 
+// styled-components
 const ContentMedia = styled.div`
   @media screen and (max-width: 360px) {
     width: 300px;
