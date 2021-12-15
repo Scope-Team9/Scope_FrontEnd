@@ -9,144 +9,157 @@ import LogoButton from "../elements/LogoButton";
 
 const Stack = (props) => {
   const dispatch = useDispatch();
-  const stack = useSelector((state) => state.stack.stack);
+  // const stack = useSelector((state) => state.stack.stack);
   const stack2 = useSelector((state) => state.stack.stacks);
   //필터 클릭
-  const [arr, setArr] = React.useState([
+  const [stackArr, setStackArr] = React.useState([
     {
       id: "Java",
       img: "/img/java.png",
-      active: false,
+      active: true,
       title: "Java",
     },
     {
       id: "JavaScript",
       img: "/img/javascript.png",
-      active: false,
+      active: true,
       title: "JavaScript",
     },
     {
       id: "Python",
       img: "/img/python.png",
-      active: false,
+      active: true,
       title: "Python",
     },
     {
       id: "Node",
       img: "/img/node.js.png",
-      active: false,
+      active: true,
       title: "Node.js",
     },
     {
       id: "React",
       img: "/img/react.png",
-      active: false,
+      active: true,
       title: "React",
     },
     {
       id: "C++",
       img: "/img/c__.png",
-      active: false,
+      active: true,
       title: "C++",
     },
     {
       id: "Flask",
       img: "/img/flask.png",
-      active: false,
+      active: true,
       title: "Flask",
     },
     {
       id: "Django",
       img: "/img/django.png",
-      active: false,
+      active: true,
       title: "Django",
     },
     {
       id: "Vue",
       img: "/img/vue.png",
-      active: false,
+      active: true,
       title: "Vue",
     },
     {
       id: "Spring",
       img: "/img/spring.png",
-      active: false,
+      active: true,
       title: "Spring",
     },
     {
       id: "php",
       img: "/img/php.png",
-      active: false,
+      active: true,
       title: "php",
     },
     {
       id: "Swift",
       img: "/img/swift.png",
-      active: false,
+      active: true,
       title: "Swift",
     },
     {
       id: "Kotlin",
       img: "/img/kotlin.png",
-      active: false,
+      active: true,
       title: "Kotlin",
     },
     {
       id: "TypeScript",
       img: "/img/typescript.png",
-      active: false,
+      active: true,
       title: "TypeScript",
     },
   ]);
-  React.useEffect(() => {
-    const stacks = Object.entries(stack);
-    setArr((state) => {
-      return state.map((stateItem, idx) => {
-        if (stateItem.id === stacks[idx][1]) {
-          return { ...stateItem, active: !stateItem.active };
-        }
-        return stateItem;
-      });
+
+  //모든 스택의 active가 false일 때, 모두 True로 바꿔줘야 한다.
+  React.useLayoutEffect(() => {
+    let stackActiveCountFalseFlag = 0;
+
+    // 모든 스택의 active가 true일 경우 stackActiveCountFalseFlag +1 해준다
+    stackArr.map((stack) => {
+      if (stack.active === false) {
+        stackActiveCountFalseFlag = stackActiveCountFalseFlag + 1;
+      }
     });
-  }, []);
+
+    // 모든 스택의 active가 false가 될 때, 모든 active를 true로 변경
+    if (stackActiveCountFalseFlag === stackArr.length) {
+      setStackArr((state) => {
+        return state.map((stateItem) => {
+          return { ...stateItem, active: !stateItem.active };
+        });
+      });
+    }
+  }, [stackArr]);
 
   const Filter = (item) => {
-    setArr((state) => {
-      return state.map((stateItem) => {
-        if (stateItem.id === item.id) {
-          return { ...stateItem, active: !stateItem.active };
-        }
-        return stateItem;
-      });
+    let stackActiveCountTrueFlag = 0;
+
+    // 모든 스택의 active가 true일 경우 stackActiveCountTrueFlag를 +1 해준다
+    stackArr.map((stack) => {
+      if (stack.active === true) {
+        stackActiveCountTrueFlag = stackActiveCountTrueFlag + 1;
+      }
     });
 
-    const result = Object.values(stack).find((r) => r === item.id);
-
-    if (result) {
-      dispatch(postActions.isMainPage(true));
-      dispatch(stackAction.setStack(item.id));
-    } else {
-      dispatch(postActions.isMainPage(true));
-      dispatch(stackAction.getStack(item.id));
+    //처음에 모든 스택 active 값이 true일 때, 하나 누르면 그 스택을 제외한 나머지를 false로 변경
+    if (stackActiveCountTrueFlag === stackArr.length) {
+      setStackArr((state) => {
+        return state.map((stateItem) => {
+          if (stateItem.id !== item.id) {
+            return { ...stateItem, active: !stateItem.active };
+          }
+          return stateItem;
+        });
+      });
     }
-    const result2 = stack2.find((r) => r === item.id);
-    if (result2) {
+
+    //내가 선택한 스택의 id의 active를 반전시킴
+    if (stackActiveCountTrueFlag !== stackArr.length) {
+      setStackArr((state) => {
+        return state.map((stateItem) => {
+          if (stateItem.id === item.id) {
+            return { ...stateItem, active: !stateItem.active };
+          }
+          return stateItem;
+        });
+      });
+    }
+
+    //리덕스에 있냐 없냐로 넣어주거나 뺌
+    const stackIsInRedux = stack2.find((r) => r === item.id);
+    if (stackIsInRedux) {
       dispatch(stackAction.setStack2(item.id));
     } else {
       dispatch(stackAction.getStack2(item.id));
-    }
-  };
-
-  const arrStack = (item) => {
-    const nowStack = props.stacks;
-    const alreadyChecked = nowStack.find((p) => p === item.id);
-
-    if (!alreadyChecked) {
-      props.setStacks(nowStack.concat(item.id));
-    }
-    if (alreadyChecked) {
-      const deleteCheck = nowStack.filter((p) => p !== alreadyChecked);
-      props.setStacks(deleteCheck);
     }
   };
 
@@ -163,7 +176,7 @@ const Stack = (props) => {
       alignItems="center"
       maxWidth="1400px"
     >
-      {arr.map((item) => {
+      {stackArr.map((item) => {
         return (
           <LogoButton
             item={item}
@@ -171,7 +184,7 @@ const Stack = (props) => {
             onClick={() => {
               if (props.do === "StacksComponent") {
                 Filter(item);
-                arrStack(item);
+                // arrStack(item);
               }
             }}
           ></LogoButton>

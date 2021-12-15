@@ -12,10 +12,9 @@ import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight";
 import "tui-color-picker/dist/tui-color-picker.css";
 import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
 import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
-import React, { useState, useRef, createRef } from "react";
-import { Grid, Image, Text, Button } from "../elements/Index";
+import React, { useState, useRef } from "react";
+import { Grid, Button } from "../elements/Index";
 import { apis } from "../lib/axios";
-import { result } from "lodash";
 
 import { useSelector, useDispatch } from "react-redux";
 import { history } from "../redux/configureStore";

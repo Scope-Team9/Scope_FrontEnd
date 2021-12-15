@@ -6,7 +6,7 @@ import { postActions } from "../redux/modules/post";
 import styled from "styled-components";
 // import { useInView } from "react-intersection-observer";
 
-import { Grid, Image, Text, Button } from "../elements/Index";
+import { Grid } from "../elements/Index";
 import Spinner from "../shared/Spinner";
 
 const PostList = (props) => {
@@ -19,27 +19,24 @@ const PostList = (props) => {
   let paging = props.paging;
   let reBook = useSelector((state) => state.rebook.reBook);
   let sort = useSelector((state) => state.sort.sort);
-  let post_list = useSelector((state) => state.post.posts);
   let stacks = useSelector((state) => state.stack.stacks);
   let Render = props.Render;
   let isLogin = props.isLogin;
 
-  const findStack = (item) => {
-    const itemStack = item.techStack;
-    if (stacks) {
-      for (let i = 0; i < stacks.length; i++) {
-        for (let j = 0; j < itemStack.length; j++) {
-          if (stacks[i] === itemStack[j]) {
-            return true;
+  // let post_list = props.post;
+  React.useLayoutEffect(() => {
+    const findStack = (item) => {
+      const itemStack = item.techStack;
+      if (stacks) {
+        for (let i = 0; i < stacks.length; i++) {
+          for (let j = 0; j < itemStack.length; j++) {
+            if (stacks[i] === itemStack[j]) {
+              return true;
+            }
           }
         }
       }
-    }
-  };
-
-  // let post_list = props.post;
-  React.useEffect(() => {
-    setPost();
+    };
     if (stacks.length !== 0) {
       const postList = props.post.filter(findStack);
       let posts = postList.slice(0, paging);
