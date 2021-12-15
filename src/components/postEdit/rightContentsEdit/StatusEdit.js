@@ -37,6 +37,7 @@ const StatusEdit = (props) => {
   );
 };
 
+// styled-components
 const StatusMedia = styled.div`
   @media screen and (max-width: 600px) {
     display: flex;

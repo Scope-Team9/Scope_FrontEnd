@@ -26,6 +26,7 @@ const DateDetail = (props) => {
   );
 };
 
+// styled-components
 const DateBox = styled.div`
   color: black;
   font-size: 11px;

@@ -244,7 +244,6 @@ const BtnFeedback = styled.img`
 
   @media screen and (max-width: 767px) {
     position: fixed;
-
     width: 50px;
     height: 50px;
     text-align: center;
@@ -266,16 +265,13 @@ const SpinnerLocation = styled.div`
 const Scrollup = styled.div`
   background-color: transparent;
   border-radius: 50px;
-
   position: fixed;
   bottom: 150px;
-
   width: 60px;
   height: 60px;
   text-align: center;
   right: 50px;
   margin: auto;
-
   cursor: pointer;
   z-index: 999;
 

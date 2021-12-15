@@ -40,6 +40,7 @@ const totalMemberEdit = (props) => {
   );
 };
 
+// styled-components
 const TotalMemberMedia = styled.div`
   @media screen and (max-width: 600px) {
     display: flex;

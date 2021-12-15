@@ -1,13 +1,13 @@
 // ApplicantButton.js
 /* eslint-disable */
 
-// import를 한다.
+// import를 한다
 import React from "react";
 import styled from "styled-components";
 import { Grid, Button } from "../../../elements/Index";
 import ApplyUserModal from "../../ApplyUserModal";
 
-// ApplicantButton의 함수형 컴포넌트를 만든다.
+// ApplicantButton의 함수형 컴포넌트를 만든다
 const ApplicantButton = (props) => {
   return (
     <React.Fragment>
@@ -59,19 +59,6 @@ const ApplicantButton = (props) => {
         {props.passedData?.projectStatus === "모집중" &&
           props.passedUserStatus === "member" && (
             <Grid>
-              {/* <Button
-                common
-                width="120px"
-                isValue="memberLiked"
-                _onClick={(e) => {
-                  props.applyUserModalOpen(e.target.value);
-                }}
-                margin="auto 10px"
-                border="1px solid #554475"
-                borderRadius="50px"
-              >
-                지원신청
-              </Button> */}
               {props.isme === "member" && (
                 <Button
                   common
@@ -91,6 +78,7 @@ const ApplicantButton = (props) => {
   );
 };
 
+// styled-components
 const ContentMedia = styled.div`
   @media screen and (max-width: 360px) {
     width: 325px;
@@ -102,5 +90,5 @@ const ContentMedia = styled.div`
   }
 `;
 
-// export를 통해 밖에서도 사용할 수 있도록 설정한다.
+// export를 통해 밖에서도 사용할 수 있도록 설정한다
 export default ApplicantButton;

@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { Grid, Text } from "../../../elements/Index";
 
 // StatusDetail의 함수형 컴포넌트를 만든다.
-const StatusDetail = props => {
+const StatusDetail = (props) => {
   return (
     <React.Fragment>
       <Grid display="flex">
@@ -57,6 +57,7 @@ const StatusDetail = props => {
   );
 };
 
+// styled-components
 const StatusMedia = styled.div`
   @media screen and (max-width: 600px) {
     font-size: 12px;

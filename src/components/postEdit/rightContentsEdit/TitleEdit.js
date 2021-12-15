@@ -36,6 +36,7 @@ const TitleEdit = (props) => {
   );
 };
 
+// styled-components
 const TitleMedia = styled.div`
   @media screen and (max-width: 600px) {
     display: flex;
@@ -46,5 +47,5 @@ const TitleMedia = styled.div`
   }
 `;
 
-// export
+// export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default TitleEdit;

@@ -6,7 +6,6 @@ import { Dialog } from "@material-ui/core";
 import styled from "styled-components";
 
 import { Grid, Text, Button } from "../elements/Index";
-
 import { apis } from "../lib/axios";
 import ImgType from "../shared/ImgType";
 import { applyCreators } from "../redux/modules/applyProject";
@@ -163,14 +162,6 @@ const ApplyStatusModal = props => {
                           display="flex"
                           justifyContent="space-between"
                         >
-                          {/* <Grid height="100%" textAlign="center">
-                            <Grid bg="#eee" height="50%">
-                              닉네임
-                            </Grid>
-                            <Grid bg="#aaa" height="50%">
-                              성향
-                            </Grid>
-                          </Grid> */}
                           <ModalMedia>
                             <Grid height="100%">
                               <Grid
@@ -307,14 +298,6 @@ const CommentBubble = styled.div`
     width: 120px;
     margin: 0 auto 0 5px;
   } ;
-`;
-
-const UserImg = styled.img`
-  object-fit: cover;
-  width: 80%;
-  border-radius: 20px;
-  background-color: #ececec;
-  cursor: pointer;
 `;
 
 const Wrap = styled.div`
