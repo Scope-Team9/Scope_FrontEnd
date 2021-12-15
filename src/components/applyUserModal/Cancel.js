@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from "react";
-import { Grid, Input, Text, Button } from "../../elements/Index";
+import { Grid, Text, Button } from "../../elements/Index";
 import { useDispatch } from "react-redux";
 import { applyCreators } from "../../redux/modules/applyProject";
 import styled from "styled-components";

@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { Grid, Text } from "../../elements/Index";
 
-const Progress = (props) => {
+const Progress = props => {
   let count = 10;
   let currentStep = props.page;
 
@@ -20,13 +20,13 @@ const Progress = (props) => {
         position="absolute"
         left={(currentStep / count) * 100 - 8 + "%"}
       >
-        <ArrowBubbleTwo>
+        <ArrowBubble>
           <Grid display="flex" justifyContent="center" alignItems="center">
             <Text bold size="12px">
               {(currentStep / count) * 100 + "%"}
             </Text>
           </Grid>
-        </ArrowBubbleTwo>
+        </ArrowBubble>
       </Grid>
       <ProgressBar>
         <HighLight width={(currentStep / count) * 100 + "%"} />
@@ -48,11 +48,11 @@ const HighLight = styled.div`
   border: none;
   background: #17334a;
   transition: 1s;
-  width: ${(props) => props.width};
+  width: ${props => props.width};
   height: 15px;
 `;
 
-const ArrowBubbleTwo = styled.div`
+const ArrowBubble = styled.div`
   position: relative;
   width: 100%;
   height: 25px;
