@@ -36,15 +36,7 @@ export const getPostAPI = () => {
     let sort = getState().sort.sort;
     let _paging = getState().infinity.paging;
     let reBook = getState().rebook.reBook;
-    let mainPage = getState().post.mainpage;
-    let whatPages = getState().post.whatPage;
 
-    // if (whatPages.now !== whatPages.pre) {
-    //   console.log(whatPages.now, whatPages.pre);
-    //   console.log("끊겠음2");
-    //   dispatch(whatPage("mainPage"));
-    //   return;
-    // }
     apis
       .getPost(stack, sort, reBook)
       .then((res) => {
@@ -57,7 +49,6 @@ export const getPostAPI = () => {
       })
       .catch((err) => {
         console.log(err.response);
-        // Swal.fire(`${err.response}`, "간단한 테스트를 진행해 주세요.", "info");
       });
   };
 };
