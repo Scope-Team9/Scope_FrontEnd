@@ -31,46 +31,6 @@ export default function Writer(props) {
   const [text, setText] = React.useState();
   const [mydata, setMydata] = React.useState();
 
-  // React.useEffect(() => {
-  //   if (editorRef.current) {
-  //     editorRef.current.getInstance().removeHook("addImageBlobHook");
-  //     editorRef.current
-  //       .getInstance()
-  //       .addHook("addImageBlobHook", (blob, callback) => {
-  //         (async () => {
-  //           try {
-  //             // console.log(blob);
-  //             let reader = new FileReader();
-  //             reader.readAsDataURL(blob); // 1. 파일을 읽어 버퍼에 저장합니다.
-  //             // 파일 상태 업데이트
-  //             reader.onloadend = () => {
-  //               // 2. 읽기가 완료되면 아래코드가 실행됩니다.
-  //               const base64 = reader.result;
-
-  //               //await이 중괄호 안에 쓰일 수 없기 때문에 async사용
-  //               const upload = async () => {
-  //                 // console.log("2차 관문", base64);
-  //                 // 서버로부터 이미지 주소 받아옴
-  //                 const url = await apis.addMyImage(base64);
-  //                 const resulturl = `http://15.165.159.211${url.data.data.imageUrl}`;
-  //                 setImgurl(resulturl);
-  //                 // console.log(resulturl);
-  //                 callback(resulturl, "alt text");
-  //                 return resulturl;
-  //               };
-  //               upload();
-  //               // callback(resulturl, "alt text");
-  //             };
-  //           } catch (err) {
-  //             console.log(err.response);
-  //           }
-  //         })();
-  //         return false;
-  //       });
-  //   }
-  //   return () => {};
-  // }, [editorRef]);
-
   const uploadImage = (blob, callback) => {
     let reader = new FileReader();
     reader.readAsDataURL(blob); // 1. 파일을 읽어 버퍼에 저장합니다.
