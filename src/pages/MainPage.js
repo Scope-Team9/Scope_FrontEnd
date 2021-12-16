@@ -38,20 +38,6 @@ const MainPage = () => {
   const isLoginUser = useSelector((state) => state.user.userId);
   const isLogin = useSelector((state) => state.user.isLogin);
 
-  // let container = React.useRef();
-  // React.useLayoutEffect(() => {
-  //   setPost();
-  //   dispatch(postActions.whatPage("mainPage"));
-
-  //   const fetchData = async () => {
-  //     try {
-  //       const result = await apis.getPost(stack, sortC, reBookC);
-  //       setPost(result.data.data);
-  //     } catch (err) {}
-  //   };
-  //   fetchData();
-  // }, [sortC, reBookC, Render, isToken, Render, isLogin]);
-
   React.useEffect(() => {
     if (inView === true) {
       setPPaging(pPaging + 12);
