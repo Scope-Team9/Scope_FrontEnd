@@ -30,5 +30,6 @@ const SideBarImg = styled.img`
     display: none;
   }
 `;
+
 // export를 통해 밖에서도 사용할 수 있도록 설정한다.
 export default LeftBanner;

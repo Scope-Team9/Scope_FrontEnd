@@ -19,7 +19,6 @@ instance.interceptors.request.use(
     }
 
     const cookieSplit = cookie.split("=")[1];
-
     config.headers = {
       "content-type": "application/json;charset=UTF-8",
       accept: "application/json",
@@ -42,7 +41,7 @@ export const apis = {
     instance.get(`/api/login/nickname?nickname=${nickName}`, nickName),
   signup: (registerInfo) => instance.post("/api/signup", registerInfo),
 
-  // 유저 관련 api
+  // 유저 관련 api.
   myUser: () => instance.get("/api/myuser"),
   editTest: (userId, testInfo) =>
     instance.post(`/api/test/${userId}`, testInfo),

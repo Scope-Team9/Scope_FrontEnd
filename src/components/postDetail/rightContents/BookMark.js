@@ -4,7 +4,6 @@
 // import를 한다.
 import React from "react";
 import styled from "styled-components";
-import { Grid } from "../../../elements/Index";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 
@@ -29,6 +28,7 @@ const Bookmark = (props) => {
   );
 };
 
+// styled-components
 const BookMarkMedia = styled.div`
   @media screen and (max-width: 600px) {
     width: 10px;

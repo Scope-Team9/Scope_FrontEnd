@@ -56,7 +56,6 @@ const Liked = (props) => {
       modalClose("종료");
       return;
     }
-    // console.log("여기4");
 
     dispatch(applyCreators.starterLikeAPI(postId, likeUsers));
     toggleModal();

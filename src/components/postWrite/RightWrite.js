@@ -68,7 +68,6 @@ const RightWrite = (props) => {
       chatUrl: chatUrl,
       contents: contents,
     };
-    // console.log(card);
     dispatch(postAddActions.addPostAPI(card));
   };
 
@@ -114,9 +113,7 @@ const RightWrite = (props) => {
           />
           <TotalMember setTotalmember={setTotalmember} styles={styles} />
           <UrlWrite setChatUrl={setChatUrl} />
-
           <ContentWrite setContents={setContents} />
-
           <GenerateButton submitHandler={submitHandler} />
         </Grid>
       </Grid>

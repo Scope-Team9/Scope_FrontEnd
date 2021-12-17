@@ -4,13 +4,14 @@
 // import SockJS from "sockjs-client";
 // import { actionCreators } from "../../redux/modules/user";
 
+// // Bell
 // const Bell = (props) => {
 //   const dispatch = useDispatch();
 //   const userId = useSelector((state) => state.user.user.userId);
-//   console.log("유저 아이디", userId);
 //   const token = document.cookie.includes("USER_TOKEN");
 //   const sock = new SockJS(``);
 //   const ws = StompJs.over(sock);
+
 //   ws.connect({}, () => {
 //     if (!token) {
 //       return null;
@@ -26,6 +27,7 @@
 //       { token }
 //     );
 //   });
+
 //   return (
 //     <React.Fragment>
 //       <div></div>

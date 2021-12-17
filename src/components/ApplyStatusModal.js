@@ -6,13 +6,12 @@ import { Dialog } from "@material-ui/core";
 import styled from "styled-components";
 
 import { Grid, Text, Button } from "../elements/Index";
-
 import { apis } from "../lib/axios";
 import ImgType from "../shared/ImgType";
 import { applyCreators } from "../redux/modules/applyProject";
 import CloseIcon from "@mui/icons-material/Close";
 
-const ApplyStatusModal = (props) => {
+const ApplyStatusModal = props => {
   const dispatch = useDispatch();
   const [applyedUsers, setApplyUsers] = React.useState();
   const [acceptButton, setAcceptButton] = React.useState();
@@ -23,7 +22,7 @@ const ApplyStatusModal = (props) => {
     setApplyStatusModal(false);
   };
 
-  const goToMypage = (userId) => {
+  const goToMypage = userId => {
     history.push(`/mypage/${userId}`);
   };
 
@@ -37,7 +36,7 @@ const ApplyStatusModal = (props) => {
     fetchData();
   }, [applyStatusModal, acceptButton]);
 
-  const acceptOffer = (acceptUser) => {
+  const acceptOffer = acceptUser => {
     const acceptInfo = {
       userId: acceptUser,
       accept: true,
@@ -53,13 +52,20 @@ const ApplyStatusModal = (props) => {
     fetchData();
   };
 
-  const cancelOffer = (cancelUser) => {
+  const cancelOffer = cancelUser => {
     const acceptInfo = {
       userId: cancelUser,
       accept: false,
     };
 
-    dispatch(applyCreators.acceptOfferAPI(postId, acceptInfo));
+    const fetchData = async () => {
+      try {
+        const result = await apis.aceeptOffer(postId, acceptInfo);
+
+        setAcceptButton(result);
+      } catch (err) {}
+    };
+    fetchData();
   };
 
   return (
@@ -156,14 +162,6 @@ const ApplyStatusModal = (props) => {
                           display="flex"
                           justifyContent="space-between"
                         >
-                          {/* <Grid height="100%" textAlign="center">
-                            <Grid bg="#eee" height="50%">
-                              닉네임
-                            </Grid>
-                            <Grid bg="#aaa" height="50%">
-                              성향
-                            </Grid>
-                          </Grid> */}
                           <ModalMedia>
                             <Grid height="100%">
                               <Grid
@@ -208,8 +206,9 @@ const ApplyStatusModal = (props) => {
                               <Button
                                 height="40px"
                                 common
+                                isId="accept"
                                 isValue={applyedUsers[idx].userId}
-                                _onClick={(e) => {
+                                _onClick={e => {
                                   acceptOffer(e.target.value);
                                 }}
                               >
@@ -224,8 +223,9 @@ const ApplyStatusModal = (props) => {
                               <Button
                                 height="40px"
                                 common
+                                isId="cancel"
                                 isValue={applyedUsers[idx].userId}
-                                _onClick={(e) => {
+                                _onClick={e => {
                                   cancelOffer(e.target.value);
                                 }}
                               >
@@ -298,14 +298,6 @@ const CommentBubble = styled.div`
     width: 120px;
     margin: 0 auto 0 5px;
   } ;
-`;
-
-const UserImg = styled.img`
-  object-fit: cover;
-  width: 80%;
-  border-radius: 20px;
-  background-color: #ececec;
-  cursor: pointer;
 `;
 
 const Wrap = styled.div`

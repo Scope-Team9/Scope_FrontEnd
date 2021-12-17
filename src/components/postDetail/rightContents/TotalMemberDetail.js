@@ -22,6 +22,7 @@ const TotalMemberDetail = (props) => {
   );
 };
 
+// styled-components
 const TotalMedia = styled.div`
   @media screen and (max-width: 600px) {
     width: 100px;

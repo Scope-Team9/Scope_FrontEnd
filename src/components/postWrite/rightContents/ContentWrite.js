@@ -13,7 +13,6 @@ const ContentWrite = (props) => {
       <ContentMedia>
         <Grid margin="10px auto">
           <Text color="#4e442d">프로젝트 내용적기</Text>
-
           <TextArea
             placeholder="프로젝트 내용을 입력해주세요."
             onChange={(e) => {

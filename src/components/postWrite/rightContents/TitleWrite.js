@@ -35,16 +35,11 @@ const TitleWrite = (props) => {
   );
 };
 
+// styled-components
 const TitleMedia = styled.div`
   @media screen and (max-width: 600px) {
     width: 350px;
     margin: auto;
-    font-size: 10px;
-  }
-`;
-
-const InputMedia = styled.input`
-  @media screen and (max-width: 600px) {
     font-size: 10px;
   }
 `;

@@ -3,18 +3,15 @@
 
 // import를 한다.
 import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { Grid, Text } from "../../../elements/Index";
+import { Grid } from "../../../elements/Index";
 
 // TitleDetail의 함수형 컴포넌트를 만든다.
 const TitleDetail = (props) => {
   return (
     <React.Fragment>
       <Grid margin="20px auto 0px">
-        {/* <TitleMedia> */}
         <TitleText>{props.passedData?.title}</TitleText>
-        {/* </TitleMedia> */}
         <Line />
       </Grid>
     </React.Fragment>
@@ -27,12 +24,6 @@ const Line = styled.hr`
   margin: 0 0 5px 0;
   background-color: #172d40;
   height: 1px;
-`;
-
-const TitleMedia = styled.p`
-  @media screen and (max-width: 376px) {
-    font-size: 10px;
-  }
 `;
 
 const TitleText = styled.p`

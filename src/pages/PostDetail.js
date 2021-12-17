@@ -6,9 +6,8 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { apis } from "../lib/axios";
 import { postActions } from "../redux/modules/post";
-import { Grid, Button, Text } from "../elements/Index";
+import { Grid, Text } from "../elements/Index";
 import Swal from "sweetalert2";
-import { pageCheckAction } from "../redux/modules/pageCheck";
 
 import ApplyStatusModal from "../components/ApplyStatusModal";
 import LeftBanner from "../components/postDetail/leftBanner";
@@ -27,13 +26,13 @@ import TotalMemberDetail from "../components/postDetail/rightContents/TotalMembe
 import Spinner from "../shared/Spinner";
 
 // PostDetail의 함수형 컴포넌트를 만든다
-const PostDetail = props => {
+const PostDetail = (props) => {
   const dispatch = useDispatch();
   const [checkPost, setCheckPost] = React.useState();
   const [bookmark, setBookmark] = React.useState(false);
-  const [applyStatusModal, setApplyStatusModal] = React.useState(false); //신청현황
-  const [applyUserModal, setApplyUserModal] = React.useState(false); //지원취소/팀탈퇴/프로젝트마감
-  const [exileStatusModal, setExileStatusModal] = React.useState(false); //강퇴
+  const [applyStatusModal, setApplyStatusModal] = React.useState(false); // 신청현황
+  const [applyUserModal, setApplyUserModal] = React.useState(false); // 지원취소/팀탈퇴/프로젝트마감
+  const [exileStatusModal, setExileStatusModal] = React.useState(false); // 강퇴
   const [recruitmentFinish, setRecruitmentFinish] = React.useState(); // 모집완료 체크 for리렌더링
   const [projectStatus, setProjectStatus] = React.useState();
   const [applyValue, setApplyValue] = React.useState();
@@ -41,23 +40,19 @@ const PostDetail = props => {
   const [loading, setLoading] = React.useState(true);
   const applyStatusModalOpen = () => {
     setApplyStatusModal(true);
-    // setApplyStatusModal(!applyStatusModal);
   };
 
   const exileStatusModalOpen = () => {
     setExileStatusModal(true);
   };
 
-  const applyUserModalOpen = value => {
+  const applyUserModalOpen = (value) => {
     setApplyValue(value);
     setApplyUserModal(true);
-    // setApplyUserModal(!applyUserModal);
   };
 
-  const statusCheck = value => {
-    // console.log(value);
+  const statusCheck = (value) => {
     setProjectStatus(value);
-    // console.log(value);
   };
 
   const goFrontPage = () => {
@@ -73,7 +68,7 @@ const PostDetail = props => {
   };
 
   // 상태변경
-  const edit_status = data => {
+  const edit_status = (data) => {
     const editstatus = {
       projectStatus: data,
     };
@@ -90,7 +85,7 @@ const PostDetail = props => {
   };
 
   let post_id = props.match.params.id;
-  const userId = useSelector(state => state.user.userId); //로그인 유저아이디
+  const userId = useSelector((state) => state.user.userId); //로그인 유저아이디
   const postUserId = checkPost?.data.data.post.userId;
   const passedData = checkPost?.data["data"].post;
   const passedUserStatus = checkPost?.data["data"].userStatus;
@@ -103,7 +98,6 @@ const PostDetail = props => {
       try {
         const result = await apis.detailPost(post_id);
         setCheckPost(result);
-        // console.log(result);
         setIsme(result.data.data.userStatus);
         setProjectStatus(result.data.data.post.projectStatus);
         setLoading(false);
@@ -129,7 +123,6 @@ const PostDetail = props => {
         const result = await apis.bookMarkChecked(post_id);
         setBookmark(!bookmark);
       } catch (err) {
-        console.log(err.response);
         Swal.fire("로그인이 필요합니다!", "", "warning");
       }
     };
@@ -277,17 +270,7 @@ const PostDetail = props => {
 
                     <Grid>
                       {userId === postUserId ? (
-                        <PosterButton
-                          passedData={passedData}
-                          applyUserModalOpen={applyUserModalOpen}
-                          applyUserModal={applyUserModal}
-                          setApplyUserModal={setApplyUserModal}
-                          applyValue={applyValue}
-                          post_id={post_id}
-                          passdedMenber={passdedMenber}
-                          edit_status={edit_status}
-                          statusCheck={statusCheck}
-                        />
+                        <PosterButton />
                       ) : (
                         <Grid textAlign="center">
                           <ApplicantButton
@@ -360,14 +343,6 @@ const FlexMedia = styled.div`
   @media screen and (max-width: 600px) {
     flex-direction: column;
     font-size: 2px;
-  }
-`;
-
-const UrlMedia = styled.div`
-  display: flex;
-  @media screen and (max-width: 600px) {
-    font-size: 2px;
-    width: 120px;
   }
 `;
 

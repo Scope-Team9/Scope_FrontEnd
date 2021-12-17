@@ -40,7 +40,6 @@ const FilterDiv = styled.div`
     -moz-transform: scale(1.05);
     -ms-transform: scale(1.05);
     -o-transform: scale(1.05);
-    /* text-decoration: underline; */
     color: #737373;
   }
 `;
