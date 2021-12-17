@@ -38,6 +38,7 @@ const MainPage = () => {
   const isLoginUser = useSelector((state) => state.user.userId);
   const isLogin = useSelector((state) => state.user.isLogin);
 
+  //Intersection ObserverAPI
   React.useEffect(() => {
     if (inView === true) {
       setPPaging(pPaging + 12);
@@ -48,6 +49,7 @@ const MainPage = () => {
     } // 옵저버를 좀 더 위로
   }, [inView]);
 
+  //각종 필터
   React.useLayoutEffect(() => {
     setPost();
     dispatch(postActions.whatPage("mainPage"));
@@ -67,7 +69,7 @@ const MainPage = () => {
       "_blank"
     );
   };
-
+  // 위로가기 버튼
   const ScrollTop = () => {
     window.scrollTo({
       behavior: "smooth",
