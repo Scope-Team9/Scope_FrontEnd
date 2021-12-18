@@ -48,13 +48,14 @@ export default function Writer(props) {
         // 서버로부터 이미지 주소 받아옴
         const url = await apis.addMyImage(base64);
 
-        const resulturl = `https://scopewith.com${url.data.data.imageUrl}`;
+        // const resulturl = `https://scopewith.com${url.data.data.imageUrl}`;
+        const resulturl = url.data.data.imageUrl;
         callback(resulturl, "alt text");
       };
       upload();
     };
   };
-
+  // http://15.165.159.211
   React.useEffect(() => {
     const userId = props.location.state.userId;
     const fetchData = async () => {
