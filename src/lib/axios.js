@@ -32,7 +32,7 @@ instance.interceptors.request.use(
 );
 
 export const apis = {
-  //회원가입 및 로그인 관련 api
+  // 회원가입 및 로그인 관련 api
   kakaoLogin: (code) => instance.get(`/api/login/kakao?code=${code}`),
   githubLogin: (code) => instance.get(`/api/login/github?code=${code}`),
   register: (registerInfo) => instance.post("/api/signup", registerInfo),
