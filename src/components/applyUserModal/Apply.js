@@ -5,7 +5,7 @@ import { applyCreators } from "../../redux/modules/applyProject";
 import styled from "styled-components";
 import CloseIcon from "@mui/icons-material/Close";
 
-const Apply = (props) => {
+const Apply = props => {
   const dispatch = useDispatch();
   const [comment, setComment] = React.useState();
   const { modalClose, postId } = props;
@@ -44,7 +44,7 @@ const Apply = (props) => {
               height="100%"
               backgroundColor="#fff"
               placeholder="간단한 본인의 기술스택 및 자기소개"
-              _onChange={(e) => {
+              _onChange={e => {
                 setComment(e.target.value);
               }}
             ></Input>

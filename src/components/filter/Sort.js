@@ -59,7 +59,7 @@ const Sort = (props) => {
     if (clickCheck === getItem.id) {
       return;
     }
-    const checked = arr.find((e) => e.active === true);
+
     setArr((state) => {
       return state.map((stateItem) => {
         if (stateItem.id === getItem.id) {

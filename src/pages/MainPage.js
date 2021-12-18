@@ -24,36 +24,21 @@ const MainPage = () => {
   const pageCheck = useSelector((state) => state.post.pageCheck);
   const infinity = useSelector((state) => state.infinity.paging);
   const Render = useSelector((state) => state.post.render);
-  const [ref, inView] = useInView();
+
   const [paging, setPaging] = React.useState(infinity.next);
   const [pPaging, setPPaging] = React.useState(12);
   const [nowFilter, setNowFilter] = React.useState("최신");
   const [post, setPost] = React.useState();
 
+  const [ref, inView] = useInView();
   //프론트쪽에서 필터
   const [stacks, setStacks] = React.useState([]);
-  const [sorts, setSrots] = React.useState();
-  const [reBooks, setReBookss] = React.useState();
 
   const postList = useSelector((state) => state.post.posts);
   const isLoginUser = useSelector((state) => state.user.userId);
   const isLogin = useSelector((state) => state.user.isLogin);
 
-  // let container = React.useRef();
-  React.useLayoutEffect(() => {
-    console.log(process.env.REACT_APP_BASEURL_LOCAL);
-    setPost();
-    dispatch(postActions.whatPage("mainPage"));
-
-    const fetchData = async () => {
-      try {
-        const result = await apis.getPost(stack, sortC, reBookC);
-        setPost(result.data.data);
-      } catch (err) {}
-    };
-    fetchData();
-  }, [sortC, reBookC, Render, isToken, Render, isLogin]);
-
+  //Intersection ObserverAPI
   React.useEffect(() => {
     if (inView === true) {
       setPPaging(pPaging + 12);
@@ -64,6 +49,7 @@ const MainPage = () => {
     } // 옵저버를 좀 더 위로
   }, [inView]);
 
+  //각종 필터
   React.useLayoutEffect(() => {
     setPost();
     dispatch(postActions.whatPage("mainPage"));
@@ -83,7 +69,7 @@ const MainPage = () => {
       "_blank"
     );
   };
-
+  // 위로가기 버튼
   const ScrollTop = () => {
     window.scrollTo({
       behavior: "smooth",
@@ -117,17 +103,9 @@ const MainPage = () => {
                 ></PostList>
               </InsideCard>
 
-              {nowFilter !== "bookmark" && (
-                <Grid margin="-550px 0 0 0">
-                  <div
-                    ref={ref}
-                    style={{
-                      height: "500px",
-                      backgroundColor: "white",
-                    }}
-                  ></div>
-                </Grid>
-              )}
+              <Grid margin="-550px 0 0 0">
+                <div ref={ref}></div>
+              </Grid>
             </>
           )}
           {!post && (

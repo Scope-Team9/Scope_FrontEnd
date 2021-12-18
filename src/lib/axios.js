@@ -2,7 +2,9 @@
 import axios from "axios";
 
 export const instance = axios.create({
+  //최종주소
   // baseURL: process.env.REACT_APP_BASEURL_SCOPE,
+  //로컬
   baseURL: process.env.REACT_APP_BASEURL_LOCAL,
   headers: {
     "content-type": "application/json; charset=UTF-8",
