@@ -146,7 +146,7 @@ const MainPage = () => {
             }}
           ></BtnFeedback>
         </Inside>
-        <Grid height="600px"></Grid>
+        <Grid height="800px"></Grid>
       </Grid>
     </OutWrap>
   );
