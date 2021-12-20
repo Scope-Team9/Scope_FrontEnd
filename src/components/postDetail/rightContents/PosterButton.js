@@ -105,7 +105,7 @@ const PosterButton = (props) => {
             height="35px"
             _onClick={() => {
               DeletePost();
-              // window.alert("삭제되었습니다.");
+              window.alert("삭제되었습니다.");
             }}
           >
             포스트삭제
