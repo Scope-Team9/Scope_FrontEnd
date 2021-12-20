@@ -7,22 +7,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userCreators } from "../redux/modules/user";
 
-// import MainPage from "../pages/MainPage";
-// import KakaoRedirect from "./kakaoRedirect";
-// import GitHubRedirect from "./GitHubRedirect";
-
-// import MyPageInfo from "../components/MyPageInfo";
-// import PostWrite from "../pages/PostWrite";
-// import PostEdit from "../pages/PostEdit";
-// import PostDetail from "../pages/PostDetail";
-// import Markdown from "../components/Markdown";
-// import MarkdownRead from "../components/MarkdownRead";
-// import Header from "../components/Header";
-// import Message from "../components/headerFunction/Message";
-// import Footer from "../components/Footer";
-// import NotFound from "../shared/NotFound";
-// import { ContactSupportOutlined } from "@material-ui/icons";
-
 function App() {
   const MainPage = lazy(() => import("../pages/MainPage"));
   const KakaoRedirect = lazy(() => import("./kakaoRedirect"));
@@ -32,7 +16,6 @@ function App() {
   const PostEdit = lazy(() => import("../pages/PostEdit"));
   const PostDetail = lazy(() => import("../pages/PostDetail"));
   const Markdown = lazy(() => import("../components/Markdown"));
-  const MarkdownRead = lazy(() => import("../components/MarkdownRead"));
   const Header = lazy(() => import("../components/Header"));
   const Footer = lazy(() => import("../components/Footer"));
   const NotFound = lazy(() => import("../shared/NotFound"));
