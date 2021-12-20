@@ -1,7 +1,6 @@
 /* eslint-disable */
 import React, { useState } from "react";
 import "./MainSlide.css";
-import { history } from "../../redux/configureStore";
 import styled from "styled-components";
 import Slider from "react-slick";
 
@@ -13,7 +12,7 @@ import EmailAuth from "../EmailAuth";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import { useHistory } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const MainSlide = () => {
   const [imageIndex, setImageIndex] = useState(0);
