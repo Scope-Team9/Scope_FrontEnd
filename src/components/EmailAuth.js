@@ -99,6 +99,7 @@ const ModalWrap = styled.div`
     height: 280px;
   } ;
 `;
+
 const Dec = styled.p`
   color: #08061d;
   font-size: 14px;

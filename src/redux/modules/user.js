@@ -9,9 +9,7 @@ const FIRST_USER = "FIRST_USER";
 const TEST_USER = "TEST_USER";
 const SET_USER = "SET_USER";
 const LOG_OUT = "LOG_OUT";
-
 const EMAIL = "EMAIL";
-
 const MODAL = "MODAL";
 
 //액션생성
@@ -19,10 +17,9 @@ const firstUser = createAction(FIRST_USER, (user) => ({ user }));
 const testUser = createAction(TEST_USER, (user) => ({ user }));
 export const setUser = createAction(SET_USER, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
-
 export const email = createAction(EMAIL, (user) => ({ user }));
-
 export const modal = createAction(MODAL, (user) => ({ user }));
+
 //초기값
 const initialState = {
   nickname: "guest",
@@ -38,12 +35,11 @@ const initialState = {
   memberPropensityType: null,
   isEmail: false,
 };
+
 //카카오 로그인
 const kakaologinMiddleware = (code, pageGo) => {
   return function (dispatch, getState, { history }) {
     let goPage = pageGo;
-    // console.log(goPage);
-    // console.log("카카오에서 받아온 코드", code);
 
     apis
       .kakaoLogin(code)
@@ -143,6 +139,7 @@ const githubLoginMiddleware = (code) => {
       });
   };
 };
+
 // 이메일 중복체크 미들웨어
 const emailCheckMiddleWare = (email) => {
   return () => {

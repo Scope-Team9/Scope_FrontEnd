@@ -270,7 +270,19 @@ const PostDetail = (props) => {
 
                     <Grid>
                       {userId === postUserId ? (
-                        <PosterButton />
+                        <PosterButton
+                          passedData={passedData}
+                          isme={isme}
+                          applyUserModalOpen={applyUserModalOpen}
+                          applyUserModal={applyUserModal}
+                          setApplyUserModal={setApplyUserModal}
+                          applyValue={applyValue}
+                          post_id={post_id}
+                          passdedMenber={passdedMenber}
+                          passedUserStatus={passedUserStatus}
+                          statusCheck={statusCheck}
+                          edit_status={edit_status}
+                        />
                       ) : (
                         <Grid textAlign="center">
                           <ApplicantButton
