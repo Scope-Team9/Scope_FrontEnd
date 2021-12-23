@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from "react";
 import styled from "styled-components";
-import { Grid } from "../elements/Index";
+import { Grid, Input, Button, Text } from "../elements/Index";
 import Stack from "../components/Stack";
 import PostList from "../components/PostList";
 import { postActions } from "../redux/modules/post";
@@ -13,30 +13,33 @@ import Sort from "../components/filter/Sort";
 import { apis } from "../lib/axios";
 import Spinner from "../shared/Spinner";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import FeedbackBox from "../components/Feedback";
+
 const MainPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const stack = useSelector((state) => state.stack.stack);
-  const sortC = useSelector((state) => state.sort.sort);
+  const stack = useSelector(state => state.stack.stack);
+  const sortC = useSelector(state => state.sort.sort);
   const isToken = document.cookie;
 
-  const reBookC = useSelector((state) => state.rebook.reBook);
-  const pageCheck = useSelector((state) => state.post.pageCheck);
-  const infinity = useSelector((state) => state.infinity.paging);
-  const Render = useSelector((state) => state.post.render);
+  const reBookC = useSelector(state => state.rebook.reBook);
+  const pageCheck = useSelector(state => state.post.pageCheck);
+  const infinity = useSelector(state => state.infinity.paging);
+  const Render = useSelector(state => state.post.render);
 
   const [paging, setPaging] = React.useState(infinity.next);
   const [pPaging, setPPaging] = React.useState(12);
   const [nowFilter, setNowFilter] = React.useState("최신");
   const [post, setPost] = React.useState();
+  const [feedback, setFeedback] = React.useState(false);
 
   const [ref, inView] = useInView();
   //프론트쪽에서 필터
   const [stacks, setStacks] = React.useState([]);
 
-  const postList = useSelector((state) => state.post.posts);
-  const isLoginUser = useSelector((state) => state.user.userId);
-  const isLogin = useSelector((state) => state.user.isLogin);
+  const postList = useSelector(state => state.post.posts);
+  const isLoginUser = useSelector(state => state.user.userId);
+  const isLogin = useSelector(state => state.user.isLogin);
 
   //Intersection ObserverAPI
   React.useEffect(() => {
@@ -65,10 +68,13 @@ const MainPage = () => {
 
   const goPage = () => {
     window.open(
-      "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfl6t0O_P5mXR6wo1cqIZ7TWkYduTkZiNlx0r5HynoArgS9Tg/formResponse",
+      // "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfl6t0O_P5mXR6wo1cqIZ7TWkYduTkZiNlx0r5HynoArgS9Tg/formResponse",
+      // "_blank"
+      "https://scopewith.notion.site/MEMBER-4113e65749054b14a623c098c569d819",
       "_blank"
     );
   };
+
   // 위로가기 버튼
   const ScrollTop = () => {
     window.scrollTo({
@@ -76,6 +82,10 @@ const MainPage = () => {
       left: 0,
       top: 0,
     });
+  };
+
+  const ToggleFeedback = () => {
+    setFeedback(!feedback);
   };
 
   return (
@@ -139,12 +149,14 @@ const MainPage = () => {
             </Btn>
           )}
 
-          <BtnFeedback
-            src="/img/FeedbackBox.png"
-            onClick={() => {
-              goPage();
-            }}
-          ></BtnFeedback>
+          {feedback ? (
+            <FeedbackBox ToggleFeedback={ToggleFeedback}></FeedbackBox>
+          ) : (
+            <BtnFeedback
+              src="/img/FeedbackBox.png"
+              onClick={ToggleFeedback}
+            ></BtnFeedback>
+          )}
         </Inside>
         <Grid height="800px"></Grid>
       </Grid>
@@ -217,8 +229,8 @@ const BtnFeedback = styled.img`
   position: fixed;
   bottom: 70px;
 
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   text-align: center;
   left: 50px;
   margin: auto;
@@ -227,7 +239,7 @@ const BtnFeedback = styled.img`
   z-index: 999;
   transition: all ease 0.3s;
   &:hover {
-    transform: rotate(45deg);
+    transform: rotate(10deg);
   }
 
   @media screen and (max-width: 767px) {

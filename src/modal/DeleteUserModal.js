@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 import { userCreators } from "../redux/modules/user";
 import { deleteCookie } from "../shared/Cookie";
 import { useHistory } from "react-router";
-const EmailAuth = (props) => {
+const EmailAuth = props => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { modal, setModal } = props;

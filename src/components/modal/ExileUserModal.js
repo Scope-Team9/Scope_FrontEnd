@@ -9,9 +9,9 @@ import ImgType from "../../shared/ImgType";
 import CloseIcon from "@mui/icons-material/Close";
 import { apis } from "../../lib/axios";
 
-const ExileUserModal = (props) => {
+const ExileUserModal = props => {
   const dispatch = useDispatch();
-  const applyUsers = useSelector((state) => state.apply.applyUsers);
+  const applyUsers = useSelector(state => state.apply.applyUsers);
   const [applyedUsers, setApplyUsers] = React.useState();
   const [acceptButton, setAcceptButton] = React.useState();
   const { applyStatusModal, setApplyStatusModal, postId, postUserId } = props;
@@ -30,7 +30,7 @@ const ExileUserModal = (props) => {
     fetchData();
   }, [applyStatusModal, acceptButton]);
 
-  const exile = (userId) => {
+  const exile = userId => {
     const fetchData = async () => {
       try {
         const result = await apis.exileUser(postId, userId);
@@ -180,7 +180,7 @@ const ExileUserModal = (props) => {
                                 height="70px"
                                 common
                                 isValue={applyedUsers[idx].userId}
-                                _onClick={(e) => {
+                                _onClick={e => {
                                   window.confirm("추방하시겠습니까?");
                                   exile(e.target.value);
                                 }}

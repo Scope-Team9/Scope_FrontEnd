@@ -42,6 +42,7 @@
   src: url("../styles/fonts/GmarketSansLight.otf") format("truetype");
   font-weight: normal;
   font-style: normal;
+  display: auto;
 }
 
 @font-face {
@@ -49,6 +50,7 @@
   src: url("../styles/fonts/GmarketSansBold.otf") format("truetype");
   font-weight: bold;
   font-style: normal;
+  display: auto;
 }
 
 @font-face {
@@ -56,4 +58,5 @@
   src: url("../styles/fonts/GmarketSansMedium.otf") format("truetype");
   font-weight: 500;
   font-style: normal;
+  display: auto;
 }

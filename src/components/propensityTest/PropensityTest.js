@@ -10,6 +10,7 @@ import TestResult from "./TestResult";
 import Test from "./Test";
 import TestData from "./Testdata.json";
 import Progress from "./Progress";
+import SocialButtonGroup from "./SocialButtonGroup";
 
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -147,12 +148,10 @@ const PropensityTest = props => {
           </Text>
         </Grid>
       </Header>
-
       {/* 프로그래스바 */}
       <Grid width="70%" margin="15px auto" height="10%">
         <Progress page={page} />
       </Grid>
-
       {/* 이미지결과 */}
       <StepImgBox>
         {TestData.teststep.map(step => {
@@ -167,7 +166,6 @@ const PropensityTest = props => {
             }
           })}
       </StepImgBox>
-
       {/* 컨텐츠자리 */}
       <Grid width="90%" margin="auto" height="42%">
         {page <= 9 && (
@@ -179,13 +177,18 @@ const PropensityTest = props => {
         )}
         {page === 10 && <TestResult userType={userType} />}
       </Grid>
-
+      {/* 소셜공유버튼 */}
+      {page == 10 && (
+        <Grid>
+          <SocialButtonGroup />
+        </Grid>
+      )}
       {/* 버튼 */}
       <Grid
         display="flex"
         width="90%"
         justifyContent="center"
-        height="8%"
+        height="6%"
         margin="30px auto"
       >
         {/* 페이지에따른 버튼렌더링 */}

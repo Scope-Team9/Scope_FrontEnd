@@ -7,14 +7,14 @@ import CloseIcon from "@mui/icons-material/Close";
 import { apis } from "../lib/axios";
 import Swal from "sweetalert2";
 
-const EmailAuth = (props) => {
+const EmailAuth = props => {
   const [email, setEmail] = React.useState();
   const { modal, setModal } = props;
   const modalClose = () => {
     setModal(false);
   };
 
-  const EmailInput = (data) => {
+  const EmailInput = data => {
     setEmail(data);
   };
 
@@ -68,7 +68,7 @@ const EmailAuth = (props) => {
               borderRadius="8px"
               width="70%"
               height="40px"
-              _onChange={(e) => {
+              _onChange={e => {
                 EmailInput(e.target.value);
               }}
             ></Input>
