@@ -8,7 +8,7 @@ import styled from "styled-components";
 import LeftBanner from "../components/postWrite/LeftBanner";
 import RightWrite from "../components/postWrite/RightWrite";
 
-// WritePost의 함수형 컴포넌트를 만든다
+// Add의 함수형 컴포넌트를 만든다
 const WritePost = (props) => {
   return (
     <React.Fragment>

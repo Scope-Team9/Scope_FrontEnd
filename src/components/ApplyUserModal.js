@@ -1,4 +1,7 @@
+// ApplyUserModal.js
 /* eslint-disable */
+
+// import를 한다
 import React from "react";
 import { Dialog } from "@material-ui/core";
 import { Grid, Input, Text, Button } from "../elements/Index";
@@ -10,6 +13,8 @@ import {
   SubmitUrl,
   Liked,
 } from "./applyUserModal/ApplyIndex";
+
+// ApplyUserModal의 함수형 컴포넌트를 만든다
 const ApplyUserModal = (props) => {
   const {
     applyUserModal,
@@ -112,4 +117,5 @@ const ApplyUserModal = (props) => {
   );
 };
 
+// export를 통해 밖에서도 사용할 수 있도록 설정한다
 export default React.memo(ApplyUserModal);

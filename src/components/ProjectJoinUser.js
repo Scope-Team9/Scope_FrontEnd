@@ -1,17 +1,17 @@
 // ProjectJoinUser.js
 /* eslint-disable */
 
-// import를 한다.
+// import를 한다
 import React from "react";
 import { Grid, Text } from "../elements/Index";
 import { useHistory } from "react-router";
 import ImgType from "../shared/ImgType";
 import styled from "styled-components";
 
-// ProjectJoinUser의 함수형 컴포넌트를 만든다.
-const ProjectJoinUser = props => {
+// ProjectJoinUser의 함수형 컴포넌트를 만든다
+const ProjectJoinUser = (props) => {
   const history = useHistory();
-  const goToMypage = userId => {
+  const goToMypage = (userId) => {
     history.push(`/mypage/${userId}`);
   };
   return (
@@ -55,8 +55,9 @@ const ProjectJoinUser = props => {
   );
 };
 
+// styled-components
 const Writer = styled.p`
-  opacity: ${props => (props.number === 0 ? 1 : 0)};
+  opacity: ${(props) => (props.number === 0 ? 1 : 0)};
   width: 60px;
   margin: 0 auto 12px 0;
   height: 10px;
@@ -71,5 +72,5 @@ const JoinUserMedia = styled.div`
   }
 `;
 
-// export를 통해 밖에서도 사용할 수 있도록 설정한다.
+// export를 통해 밖에서도 사용할 수 있도록 설정한다
 export default ProjectJoinUser;
