@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { Grid, Button } from "../../../elements/Index";
 import ApplyUserModal from "../../ApplyUserModal";
 
-// ApplicantButton의 함수형 컴포넌트를 만든다
+// ApplicantButton의 함수형 컴포넌트를 만든다.
 const ApplicantButton = (props) => {
   return (
     <React.Fragment>
