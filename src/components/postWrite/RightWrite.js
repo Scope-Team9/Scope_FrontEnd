@@ -1,7 +1,7 @@
 // RightWrite.js
 /* eslint-disable */
 
-// import를 한다.
+// import를 한다
 import React from "react";
 import styled from "styled-components";
 import { Grid } from "../../elements/Index";
@@ -17,7 +17,7 @@ import ContentWrite from "./rightContents/ContentWrite";
 import GenerateButton from "./rightContents/GenerateButton";
 import UrlWrite from "./rightContents/UrlWrite";
 
-// RightWrite의 함수형 컴포넌트를 만든다.
+// RightWrite의 함수형 컴포넌트를 만든다
 const RightWrite = (props) => {
   React.useEffect(() => {
     dispatch(postActions.isMainPage(false));
@@ -139,5 +139,5 @@ const TitleMedia = styled.div`
   }
 `;
 
-// export를 통해 밖에서도 사용할 수 있도록 설정한다.
+// export를 통해 밖에서도 사용할 수 있도록 설정한다
 export default RightWrite;
