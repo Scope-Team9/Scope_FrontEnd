@@ -1,0 +1,484 @@
+{
+  "userquestion": [
+    {
+      "question": "1",
+      "text": "Q1. 팀 회의할 때 당신의 모습은?"
+    },
+    {
+      "question": "2",
+      "text": "Q2. 스터디장을 뽑을때 당신의 행동은?"
+    },
+    {
+      "question": "3",
+      "text": "Q3.내가 선호하는것은?"
+    },
+    {
+      "question": "4",
+      "text": "Q4. 프로젝트 진행 시 당신의 생각은?"
+    },
+    {
+      "question": "5",
+      "text": "Q5. 당신의 이상적인 회의는?"
+    },
+    {
+      "question": "6",
+      "text": "Q6. 당신이 생각하는 좋은 팀은?"
+    },
+    {
+      "question": "7",
+      "text": "Q7. 당신과 어울리는 문장은?"
+    },
+    {
+      "question": "8",
+      "text": "Q8. 당신의 문제 해결방법은?"
+    },
+    {
+      "question": "9",
+      "text": "Q9. 당신이 프로젝트에서 중요하다고 생각하는것은?"
+    }
+  ],
+  "memberquestion": [
+    {
+      "question": "1",
+      "text": "Q1. 팀 회의할 때 선호하는 팀원의 모습은?"
+    },
+    {
+      "question": "2",
+      "text": "Q2. 스터디장을 뽑을때 선호하는 팀원의 행동은?"
+    },
+    {
+      "question": "3",
+      "text": "Q3. 당신의 팀원이 선호했으면 하는것은?"
+    },
+    {
+      "question": "4",
+      "text": "Q4. 당신의 팀원의 생각에 더 가까웠으면 하는 것은?"
+    },
+    {
+      "question": "5",
+      "text": "Q5. 당신의 팀원이 바라는 회의모습은?"
+    },
+    {
+      "question": "6",
+      "text": "Q6. 당신의 팀원이 바라는 좋은 팀은?"
+    },
+    {
+      "question": "7",
+      "text": "Q7. 좋은 팀원의 모습과 어울리는 문장은?"
+    },
+    {
+      "question": "8",
+      "text": "Q8. 팀원에게 바라는 문제 해결방법은?"
+    },
+    {
+      "question": "9",
+      "text": "Q9. 팀원이 원했으면 하는 프로젝트 결과는?"
+    }
+  ],
+  "userbtn": [
+    {
+      "question": "1",
+      "id": "UL",
+      "text": "내 주장을 펼치며 회의 분위기를 탄탄하게 이끌기",
+      "value": "L",
+      "active": false
+    },
+    {
+      "question": "1",
+      "id": "UF",
+      "text": "다른 사람들의 의견을 들으며 뭘 맡아 해야할지 파악",
+      "value": "F",
+      "active": false
+    },
+    {
+      "question": "2",
+      "id": "UL",
+      "text": "스터디를 어떻게 운영할지 생각해보고 스터디장을 맡는다.",
+      "value": "L",
+      "active": false
+    },
+    {
+      "question": "2",
+      "id": "UF",
+      "text": "누가 스터디를 잘 이끌 사람인지 살핀다.",
+      "value": "F",
+      "active": false
+    },
+    {
+      "question": "3",
+      "id": "UL",
+      "text": "큰 보상과 무거운책임",
+      "value": "L",
+      "active": false
+    },
+    {
+      "question": "3",
+      "id": "UF",
+      "text": "평범한 보상과 평범한 책임",
+      "value": "F",
+      "active": false
+    },
+    {
+      "question": "4",
+      "id": "UV",
+      "text": "팀장의 존재는 프로젝트를 진행함에 있어 필수적이다",
+      "value": "V",
+      "active": false
+    },
+    {
+      "question": "4",
+      "id": "UH",
+      "text": "소통이 원활하게만 잘 된다면 팀장이 없어도 문제없이 프로젝트를 진행할수 있다.",
+      "value": "H",
+      "active": false
+    },
+    {
+      "question": "5",
+      "id": "UV",
+      "text": "능력에 따른 적절한 권한의 분배 하에 진행되는 회의",
+      "value": "V",
+      "active": false
+    },
+    {
+      "question": "5",
+      "id": "UH",
+      "text": "모두 동등한 권한을 가지고 진행되는 회의",
+      "value": "H",
+      "active": false
+    },
+    {
+      "question": "6",
+      "id": "UV",
+      "text": "직책에 따라 책임이 분배되는 팀",
+      "value": "V",
+      "active": false
+    },
+    {
+      "question": "6",
+      "id": "UH",
+      "text": "책임이 균등하게 나누어진 팀",
+      "value": "H",
+      "active": false
+    },
+    {
+      "question": "7",
+      "id": "UP",
+      "text": "문제해결과정에서 얻는 성취감이 있다면 보상이 적더라도 만족한다.",
+      "value": "P",
+      "active": false
+    },
+    {
+      "question": "7",
+      "id": "UG",
+      "text": "결과를 위해서라면 과정에서 만족감은 내려놓을 수도 있다.",
+      "value": "G",
+      "active": false
+    },
+    {
+      "question": "8",
+      "id": "UP",
+      "text": "문제가 발생한 원인을 찾고 문제 해결 과정에서 얻은 지식과 노하우에 대해 생각한다.",
+      "value": "P",
+      "active": false
+    },
+    {
+      "question": "8",
+      "id": "UG",
+      "text": "문제를 해결할 수 있는 방안을 찾고 그 방안이 이끌어 낼 결과에 대해 생각한다.",
+      "value": "G",
+      "active": false
+    },
+    {
+      "question": "9",
+      "id": "UP",
+      "text": "프로젝트 과정에서 얻은 지식과 그에 따른 성취감",
+      "value": "P",
+      "active": false
+    },
+    {
+      "question": "9",
+      "id": "UG",
+      "text": "프로젝트가 이끌어낸 결과와 그에 따른 성취감",
+      "value": "G",
+      "active": false
+    }
+  ],
+  "memberbtn": [
+    {
+      "question": "1",
+      "id": "ML",
+      "text": "내 주장을 펼치며 회의 분위기를 탄탄하게 이끌기",
+      "value": "L",
+      "active": false
+    },
+    {
+      "question": "1",
+      "id": "MF",
+      "text": "다른 사람들의 의견을 들으며 뭘 맡아 해야할지 파악",
+      "value": "F",
+      "active": false
+    },
+    {
+      "question": "2",
+      "id": "ML",
+      "text": "스터디를 어떻게 운영할지 생각해보고 스터디장을 맡는다.",
+      "value": "L",
+      "active": false
+    },
+    {
+      "question": "2",
+      "id": "MF",
+      "text": "누가 스터디를 잘 이끌 사람인지 살핀다.",
+      "value": "F",
+      "active": false
+    },
+    {
+      "question": "3",
+      "id": "ML",
+      "text": "큰 보상과 무거운책임",
+      "value": "L",
+      "active": false
+    },
+    {
+      "question": "3",
+      "id": "MF",
+      "text": "평범한 보상과 평범한 책임",
+      "value": "F",
+      "active": false
+    },
+    {
+      "question": "4",
+      "id": "MV",
+      "text": "팀장의 존재는 프로젝트를 진행함에 있어 필수적이다",
+      "value": "V",
+      "active": false
+    },
+    {
+      "question": "4",
+      "id": "MH",
+      "text": "소통이 원활하게만 잘 된다면 팀장이 없어도 문제없이 프로젝트를 진행할수 있다.",
+      "value": "H",
+      "active": false
+    },
+    {
+      "question": "5",
+      "id": "MV",
+      "text": "능력에 따른 적절한 권한의 분배 하에 진행되는 회의",
+      "value": "V",
+      "active": false
+    },
+    {
+      "question": "5",
+      "id": "MH",
+      "text": "모두 동등한 권한을 가지고 진행되는 회의",
+      "value": "H",
+      "active": false
+    },
+    {
+      "question": "6",
+      "id": "MV",
+      "text": "직책에 따라 책임이 분배되는 팀",
+      "value": "V",
+      "active": false
+    },
+    {
+      "question": "6",
+      "id": "MH",
+      "text": "책임이 균등하게 나누어진 팀",
+      "value": "H",
+      "active": false
+    },
+    {
+      "question": "7",
+      "id": "MP",
+      "text": "문제해결과정에서 얻는 성취감이 있다면 보상이 적더라도 만족한다.",
+      "value": "P",
+      "active": false
+    },
+    {
+      "question": "7",
+      "id": "MG",
+      "text": "결과를 위해서라면 과정에서 만족감은 내려놓을 수도 있다.",
+      "value": "G",
+      "active": false
+    },
+    {
+      "question": "8",
+      "id": "MP",
+      "text": "문제가 발생한 원인을 찾고 문제 해결 과정에서 얻은 지식과 노하우에 대해 생각한다.",
+      "value": "P",
+      "active": false
+    },
+    {
+      "question": "8",
+      "id": "MG",
+      "text": "문제를 해결할 수 있는 방안을 찾고 그 방안이 이끌어 낼 결과에 대해 생각한다.",
+      "value": "G",
+      "active": false
+    },
+    {
+      "question": "9",
+      "id": "MP",
+      "text": "프로젝트 과정에서 얻은 지식과 그에 따른 성취감",
+      "value": "P",
+      "active": false
+    },
+    {
+      "question": "9",
+      "id": "MG",
+      "text": "프로젝트가 이끌어낸 결과와 그에 따른 성취감",
+      "value": "G",
+      "active": false
+    }
+  ],
+  "usertype": [
+    {
+      "userType": "LVG",
+      "title": "LVG - 리더 / 수직 / 결과 - 호랑이",
+      "text1": "호랑이는 팀을 이끄는 리더형입니다!",
+      "text2": "상하관계가 없는 수평적인 조직보다",
+      "text3": "조직적으로 움직이는 수직적인 조직에 잘 어울려요!",
+      "text4": "일을 수행함에 있어 과정보다 결과를 중요하게 생각하시네요!"
+    },
+    {
+      "userType": "LVP",
+      "title": "LVP - 리더 / 수직 / 과정 - 늑대",
+      "text1": "늑대는 팀을 이끄는 리더형입니다!",
+      "text2": "상하관계가 없는 수평적인 조직보다",
+      "text3": "조직적으로 움직이는 수직적인 조직에 잘 어울려요!",
+      "text4": "일을 수행함에 있어 결과보다 과정을 중요하게 생각하시네요!"
+    },
+    {
+      "userType": "LHG",
+      "title": "LHG - 리더 / 수평 / 결과 - 여우",
+      "text1": "여우는 팀을 이끄는 리더형입니다!",
+      "text2": "상하관계가 없는 수평적인 조직보다",
+      "text3": "조직적으로 움직이는 수직적인 조직에 잘 어울려요!",
+      "text4": "일을 수행함에 있어 과정보다 결과를 중요하게 생각하시네요!"
+    },
+    {
+      "userType": "LHP",
+      "title": "LHP - 리더 / 수평 / 과정 - 판다",
+      "text1": "판다는 팀을 이끄는 리더형입니다!",
+      "text2": "상하관계가 있는 수직적인 조직보다",
+      "text3": "자유로운 수평적인 조직에 잘 어울려요!",
+      "text4": "일을 수행함에 있어 결과보다 과정을 중요하게 생각하시네요!"
+    },
+    {
+      "userType": "FVG",
+      "title": "FVG - 팔로잉 / 수직 / 결과 - 토끼",
+      "text1": "토끼는 팀의 원동력인 팔로잉형입니다",
+      "text2": "상하관계가 없는 수평적인 조직보다",
+      "text3": "조직적으로 움직이는 수직적인 조직에 잘 어울려요!",
+      "text4": "일을 수행함에 있어 과정보다 결과를 중요하게 생각하시네요!"
+    },
+    {
+      "userType": "FVP",
+      "title": "FVP - 팔로잉 / 수직 / 과정 - 시바",
+      "text1": "시바는 팀의 원동력인 팔로잉형입니다!",
+      "text2": "상하관계가 없는 수평적인 조직보다",
+      "text3": "조직적으로 움직이는 수직적인 조직에 잘 어울려요!",
+      "text4": "일을 수행함에 있어 결과보다 과정을 중요하게 생각하시네요!"
+    },
+    {
+      "userType": "FHG",
+      "title": "FHG - 팔로잉 / 수평 / 결과 - 고양이",
+      "text1": "고양이는 팀의 원동력인 팔로잉형입니다!",
+      "text2": "상하관계가 없는 수평적인 조직보다",
+      "text3": "조직적으로 움직이는 수직적인 조직에 잘 어울려요!",
+      "text4": "일을 수행함에 있어 과정보다 결과를 중요하게 생각하시네요!"
+    },
+    {
+      "userType": "FHP",
+      "title": "FHP - 팔로잉 / 수평 / 과정 - 물개",
+      "text1": "물개는 팀의 원동력인 팔로잉형입니다!",
+      "text2": "상하관계가 있는 수직적인 조직보다",
+      "text3": "자유로운 수평적인 조직에 잘 어울려요!",
+      "text4": "일을 수행함에 있어 결과보다 과정을 중요하게 생각하시네요!"
+    },
+    {
+      "userType": "RHP",
+      "title": "RHP - 팔로잉 / 수평 / 과정 - 너구리",
+      "text1": "너구리는 팀의 원동력인 팔로잉형입니다!",
+      "text2": "상하관계가 있는 수직적인 조직보다",
+      "text3": "자유로운 수평적인 조직에 잘 어울려요!",
+      "text4": "일을 수행함에 있어 결과보다 과정을 중요하게 생각하시네요!"
+    }
+  ],
+  "teststep": [
+    {
+      "step": 1,
+      "img": "/img/step1.png"
+    },
+    {
+      "step": 2,
+      "img": "/img/step2.png"
+    },
+    {
+      "step": 3,
+      "img": "/img/step3.png"
+    },
+    {
+      "step": 4,
+      "img": "/img/step4.png"
+    },
+    {
+      "step": 5,
+      "img": "/img/step5.png"
+    },
+    {
+      "step": 6,
+      "img": "/img/step6.png"
+    },
+    {
+      "step": 7,
+      "img": "/img/step7.png"
+    },
+    {
+      "step": 8,
+      "img": "/img/step8.png"
+    },
+    {
+      "step": 9,
+      "img": "/img/step9.png"
+    }
+  ],
+  "testresult": [
+    {
+      "type": "LVG",
+      "img": "/img/호랑이결과.png"
+    },
+    {
+      "type": "LVP",
+      "img": "/img/늑대결과.png"
+    },
+    {
+      "type": "LHG",
+      "img": "/img/여우결과.png"
+    },
+    {
+      "type": "LHP",
+      "img": "/img/판다결과.png"
+    },
+    {
+      "type": "FVG",
+      "img": "/img/토끼결과.png"
+    },
+    {
+      "type": "FVP",
+      "img": "/img/개결과.png"
+    },
+    {
+      "type": "FHG",
+      "img": "/img/고양이결과.png"
+    },
+    {
+      "type": "FHP",
+      "img": "/img/물개결과.png"
+    },
+    {
+      "type": "RHP",
+      "img": "/img/너구리결과.png"
+    }
+  ]
+}
