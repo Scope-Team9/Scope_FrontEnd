@@ -6,7 +6,7 @@ import React from "react";
 import styled from "styled-components";
 import { Grid } from "../../../elements/Index";
 
-// GenerateButton의 함수형 컴포넌트를 만든다..
+// GenerateButton의 함수형 컴포넌트를 만든다.
 const GenerateButton = (props) => {
   return (
     <React.Fragment>

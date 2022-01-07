@@ -30,6 +30,7 @@ const WritePost = (props) => {
   );
 };
 
+// styled-components
 const AddMedia = styled.div`
   @media screen and (max-width: 600px) {
     width: 98%;
