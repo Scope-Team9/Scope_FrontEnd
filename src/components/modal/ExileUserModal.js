@@ -1,4 +1,7 @@
+// ExileUserModal.js
 /* eslint-disable */
+
+// import를 한다
 import React from "react";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +12,7 @@ import ImgType from "../../shared/ImgType";
 import CloseIcon from "@mui/icons-material/Close";
 import { apis } from "../../lib/axios";
 
+// ExileUserModal의 함수형 컴포넌트를 만든다
 const ExileUserModal = (props) => {
   const dispatch = useDispatch();
   const applyUsers = useSelector((state) => state.apply.applyUsers);
@@ -203,6 +207,7 @@ const ExileUserModal = (props) => {
   );
 };
 
+// styled-components
 const ModalMedia = styled.div`
   height: 80%;
   margin: auto auto auto 0;
@@ -276,4 +281,5 @@ const Wrap = styled.div`
   } ;
 `;
 
+// export를 통해 밖에서도 사용할 수 있도록 설정한다
 export default ExileUserModal;
