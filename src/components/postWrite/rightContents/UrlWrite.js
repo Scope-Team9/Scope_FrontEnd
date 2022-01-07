@@ -6,7 +6,7 @@ import React from "react";
 import styled from "styled-components";
 import { Grid, Input, Text } from "../../../elements/Index";
 
-// TitleWrite의 함수형 컴포넌트를 만든다..
+// TitleWrite의 함수형 컴포넌트를 만든다.
 const UrlWrite = (props) => {
   return (
     <React.Fragment>
