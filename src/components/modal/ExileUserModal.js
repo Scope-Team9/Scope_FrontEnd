@@ -4,20 +4,18 @@ import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { Dialog } from "@material-ui/core";
 import styled from "styled-components";
-
-import { Grid, Input, Text, Button, Image } from "../../elements/Index";
-
+import { Grid, Text, Button } from "../../elements/Index";
 import ImgType from "../../shared/ImgType";
 import CloseIcon from "@mui/icons-material/Close";
 import { apis } from "../../lib/axios";
-const ExileUserModal = props => {
+
+const ExileUserModal = (props) => {
   const dispatch = useDispatch();
-  const applyUsers = useSelector(state => state.apply.applyUsers);
+  const applyUsers = useSelector((state) => state.apply.applyUsers);
   const [applyedUsers, setApplyUsers] = React.useState();
   const [acceptButton, setAcceptButton] = React.useState();
   const { applyStatusModal, setApplyStatusModal, postId, postUserId } = props;
   const history = useHistory();
-
   const modalClose = () => {
     setApplyStatusModal(false);
   };
@@ -32,7 +30,7 @@ const ExileUserModal = props => {
     fetchData();
   }, [applyStatusModal, acceptButton]);
 
-  const exile = userId => {
+  const exile = (userId) => {
     const fetchData = async () => {
       try {
         const result = await apis.exileUser(postId, userId);
@@ -167,8 +165,7 @@ const ExileUserModal = props => {
                               borderRadius="0 0 10px 10px"
                             >
                               <Text size="12px">
-                                성향타입 |{" "}
-                                {applyedUsers[idx].userPropensityType}
+                                성향타입 |{applyedUsers[idx].userPropensityType}
                               </Text>
                             </Grid>
                           </Grid>
@@ -183,7 +180,7 @@ const ExileUserModal = props => {
                                 height="70px"
                                 common
                                 isValue={applyedUsers[idx].userId}
-                                _onClick={e => {
+                                _onClick={(e) => {
                                   window.confirm("추방하시겠습니까?");
                                   exile(e.target.value);
                                 }}
@@ -205,6 +202,7 @@ const ExileUserModal = props => {
     </>
   );
 };
+
 const ModalMedia = styled.div`
   height: 80%;
   margin: auto auto auto 0;

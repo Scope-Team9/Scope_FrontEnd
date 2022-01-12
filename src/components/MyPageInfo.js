@@ -44,11 +44,11 @@ const MyPageInfo = (props) => {
 
   const [loading, setLoading] = React.useState(true);
 
+  //사용자 추천 모달 열기/닫기
   const doSetAssessment = () => {
-    // console.log("실행됨");
     setAssessment(!assessment);
   };
-
+  //필터
   const SetFilter = (data) => {
     setFilter(data);
   };
@@ -57,8 +57,8 @@ const MyPageInfo = (props) => {
     setMydata(null);
   };
 
+  //모달 관련
   React.useEffect(() => {
-    // console.log("뭐고");
     setMydata(null);
     setEndProject(null);
     setMyType(null);
@@ -80,6 +80,7 @@ const MyPageInfo = (props) => {
     fetchData();
   }, [assessment, testmodal, checkApply]);
 
+  //프로필 수정 관련
   React.useLayoutEffect(() => {
     const fetchData = async () => {
       try {
@@ -88,8 +89,6 @@ const MyPageInfo = (props) => {
         setNickName(result.data.data.user.nickname);
         setEmail(result.data.data.user.email);
         setTeckstack(result.data.data.user.techStackList);
-
-        // setLoading(false);
       } catch (err) {
         // console.log(err);
       }
@@ -97,6 +96,7 @@ const MyPageInfo = (props) => {
     fetchData();
   }, [editMyProfile]);
 
+  //필터 및 포스트 관련
   React.useLayoutEffect(() => {
     const fetchData = async () => {
       try {
@@ -116,15 +116,15 @@ const MyPageInfo = (props) => {
     };
     fetchData();
   }, [filter]);
-
+  //이메일 모달
   const EmailConfirm = () => {
     setModal(true);
   };
-
+  //테스트 모달
   const EditTest = () => {
     setTestModal(true);
   };
-
+  //테스트 모달 close
   const TestClose = () => {
     setTestModal(false);
   };
@@ -136,7 +136,7 @@ const MyPageInfo = (props) => {
   const editProfileCancle = () => {
     setEditMyProfile(false);
   };
-
+  //마이페이지에서 마이페이지 이동
   React.useLayoutEffect(() => {}, [props.goMypage]);
 
   return (

@@ -101,6 +101,7 @@ const StackEdit = (props) => {
   );
 };
 
+// styled-components
 const StackMedia = styled.div`
   @media screen and (max-width: 600px) {
     display: flex;

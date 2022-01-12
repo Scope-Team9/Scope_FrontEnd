@@ -1,15 +1,12 @@
 /* eslint-disable */
 import React from "react";
-// import MypagePost from "./MypagePost";
 import Post from "../Post";
-import { Grid, Image } from "../../elements/Index";
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+
 const MypagePostList = (props) => {
   const userId = useParams();
   const mypage = true;
-
   const myCards = props.post;
   const newMyCards = Object.values(myCards);
 

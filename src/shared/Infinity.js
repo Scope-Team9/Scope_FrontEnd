@@ -7,7 +7,6 @@ import { useSelector, useDispatch } from "react-redux";
 const Infinity = (props) => {
   const { children, callNext, paging, isLoading, isNext } = props;
   const isMainPage = useSelector((state) => state.post.mainpage);
-  // console.log("이거 확인좀 해봐야겠네", props);
 
   const _handleScroll = _.throttle(() => {
     const { innerHeight } = window;
@@ -33,7 +32,6 @@ const Infinity = (props) => {
         handleScroll();
       });
     } else {
-      // console.log("여기서 막힘?");
       window.removeEventListener("scroll", handleScroll);
     }
     return () => window.removeEventListener("scroll", handleScroll);

@@ -38,6 +38,7 @@ const MainPage = () => {
   const isLoginUser = useSelector((state) => state.user.userId);
   const isLogin = useSelector((state) => state.user.isLogin);
 
+  //Intersection ObserverAPI
   React.useEffect(() => {
     if (inView === true) {
       setPPaging(pPaging + 12);
@@ -48,6 +49,7 @@ const MainPage = () => {
     } // 옵저버를 좀 더 위로
   }, [inView]);
 
+  //각종 필터
   React.useLayoutEffect(() => {
     setPost();
     dispatch(postActions.whatPage("mainPage"));
@@ -67,7 +69,7 @@ const MainPage = () => {
       "_blank"
     );
   };
-
+  // 위로가기 버튼
   const ScrollTop = () => {
     window.scrollTo({
       behavior: "smooth",
@@ -144,7 +146,7 @@ const MainPage = () => {
             }}
           ></BtnFeedback>
         </Inside>
-        <Grid height="600px"></Grid>
+        <Grid height="800px"></Grid>
       </Grid>
     </OutWrap>
   );
@@ -230,7 +232,6 @@ const BtnFeedback = styled.img`
 
   @media screen and (max-width: 767px) {
     position: fixed;
-
     width: 50px;
     height: 50px;
     text-align: center;
@@ -252,16 +253,13 @@ const SpinnerLocation = styled.div`
 const Scrollup = styled.div`
   background-color: transparent;
   border-radius: 50px;
-
   position: fixed;
   bottom: 150px;
-
   width: 60px;
   height: 60px;
   text-align: center;
   right: 50px;
   margin: auto;
-
   cursor: pointer;
   z-index: 999;
 

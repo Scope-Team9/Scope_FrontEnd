@@ -2,7 +2,9 @@
 import axios from "axios";
 
 export const instance = axios.create({
+  //최종주소
   // baseURL: process.env.REACT_APP_BASEURL_SCOPE,
+  //로컬
   baseURL: process.env.REACT_APP_BASEURL_LOCAL,
   headers: {
     "content-type": "application/json; charset=UTF-8",
@@ -19,7 +21,6 @@ instance.interceptors.request.use(
     }
 
     const cookieSplit = cookie.split("=")[1];
-
     config.headers = {
       "content-type": "application/json;charset=UTF-8",
       accept: "application/json",
@@ -33,7 +34,7 @@ instance.interceptors.request.use(
 );
 
 export const apis = {
-  //회원가입 및 로그인 관련 api
+  // 회원가입 및 로그인 관련 api
   kakaoLogin: (code) => instance.get(`/api/login/kakao?code=${code}`),
   githubLogin: (code) => instance.get(`/api/login/github?code=${code}`),
   register: (registerInfo) => instance.post("/api/signup", registerInfo),
@@ -42,7 +43,7 @@ export const apis = {
     instance.get(`/api/login/nickname?nickname=${nickName}`, nickName),
   signup: (registerInfo) => instance.post("/api/signup", registerInfo),
 
-  // 유저 관련 api
+  // 유저 관련 api.
   myUser: () => instance.get("/api/myuser"),
   editTest: (userId, testInfo) =>
     instance.post(`/api/test/${userId}`, testInfo),

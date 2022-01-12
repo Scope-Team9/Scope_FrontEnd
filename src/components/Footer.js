@@ -81,7 +81,7 @@ const Wrap = styled.div`
   @media screen and (max-width: 767px) {
     width: 100vw;
     margin: auto;
-    height: 7%;
+    height: 8%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -92,8 +92,8 @@ const Wrap = styled.div`
 `;
 
 const FooterHomeBtn = styled.div`
-  width: 55px;
-  height: 55px;
+  width: 50px;
+  height: 50px;
   margin: auto;
   display: flex;
   justify-content: center;

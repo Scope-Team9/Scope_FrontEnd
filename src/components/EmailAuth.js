@@ -10,7 +10,6 @@ import Swal from "sweetalert2";
 const EmailAuth = (props) => {
   const [email, setEmail] = React.useState();
   const { modal, setModal } = props;
-  // console.log(props);
   const modalClose = () => {
     setModal(false);
   };
@@ -100,6 +99,7 @@ const ModalWrap = styled.div`
     height: 280px;
   } ;
 `;
+
 const Dec = styled.p`
   color: #08061d;
   font-size: 14px;

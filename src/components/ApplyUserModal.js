@@ -79,9 +79,6 @@ const ApplyUserModal = (props) => {
             checkMydata={props.checkMydata}
           />
         )}
-        {/* {applyValue === "end" && page === 2 && (
-          <SubmitUrl modalClose={modalClose} postId={postId} />
-        )} */}
         {applyValue === "submit" && passdedMenber[0].userId === isMe && (
           <SubmitUrl modalClose={modalClose} postId={postId} />
         )}
