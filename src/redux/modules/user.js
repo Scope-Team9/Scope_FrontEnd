@@ -217,7 +217,7 @@ const signupMiddleware = (signupInfo) => {
     apis
       .signup(signupInfo)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         let userCookie = res.data.data.token;
         setCookie("ScopeUser", userCookie, 30);
 
