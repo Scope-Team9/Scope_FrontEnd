@@ -1,7 +1,7 @@
 // ApplicantDetail.js
 /* eslint-disable */
 
-// import를 한다.
+// import를 한다
 import React from "react";
 import { Grid } from "../../../elements/Index";
 import ProjectJoinUser from "../../ProjectJoinUser";
@@ -25,5 +25,5 @@ const ApplicantDetail = (props) => {
   );
 };
 
-// export를 통해 밖에서도 사용할 수 있도록 설정한다.
+// export를 통해 밖에서도 사용할 수 있도록 설정한다
 export default ApplicantDetail;

@@ -1,13 +1,13 @@
-// TitleDetail.js
+// ContentDetail.js
 /* eslint-disable */
 
-// import를 한다.
+// import를 한다
 import React from "react";
 import styled from "styled-components";
 import Linkify from "react-linkify";
 import { Grid, Text } from "../../../elements/Index";
 
-// ContentDetail의 함수형 컴포넌트를 만든다.
+// ContentDetail의 함수형 컴포넌트를 만든다
 const ContentDetail = (props) => {
   return (
     <React.Fragment>

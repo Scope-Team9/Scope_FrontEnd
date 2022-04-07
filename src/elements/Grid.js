@@ -1,3 +1,4 @@
+// Grid.js(element 공통 컴포넌트)
 /* eslint-disable */
 import React from "react";
 import styled from "styled-components";
@@ -204,4 +205,5 @@ const GridBox = styled.div`
   }
 `;
 
+// export를 통해 밖에서도 사용할 수 있도록 설정한다
 export default Grid;

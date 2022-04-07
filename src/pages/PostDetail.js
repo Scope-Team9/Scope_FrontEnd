@@ -1,6 +1,7 @@
 // PostDetail.js
 /* eslint-disable */
-// import를 한다.
+
+// import를 한다
 import React from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
@@ -310,6 +311,8 @@ const PostDetail = (props) => {
     </React.Fragment>
   );
 };
+
+// styled-components
 const DetailMedia = styled.div`
   @media screen and (max-width: 500px) {
     width: 97%;
@@ -373,5 +376,5 @@ const UrlButton = styled.button`
   cursor: pointer;
 `;
 
-// export를 통해 밖에서도 사용할 수 있도록 설정한다.
+// export를 통해 밖에서도 사용할 수 있도록 설정한다
 export default PostDetail;

@@ -1,12 +1,12 @@
 // DateDetail.js
 /* eslint-disable */
 
-// import를 한다.
+// import를 한다
 import React from "react";
 import styled from "styled-components";
 import { Grid, Text } from "../../../elements/Index";
 
-// DateDetail의 함수형 컴포넌트를 만든다.
+// DateDetail의 함수형 컴포넌트를 만든다
 const DateDetail = (props) => {
   return (
     <React.Fragment>
@@ -44,5 +44,5 @@ const DateMedia = styled.div`
   }
 `;
 
-// export를 통해 밖에서도 사용할 수 있도록 설정한다.
+// export를 통해 밖에서도 사용할 수 있도록 설정한다
 export default DateDetail;

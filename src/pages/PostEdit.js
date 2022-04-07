@@ -1,7 +1,7 @@
 //PostEdit.js
 /* eslint-disable */
 
-// import를 한다.
+// import를 한다
 import React from "react";
 import styled from "styled-components";
 import { Grid } from "../elements/Index";
@@ -22,7 +22,7 @@ import EditButton from "../components/postEdit/rightContentsEdit/EditButton";
 import Swal from "sweetalert2";
 import Spinner from "../shared/Spinner";
 
-// PostEdit의 함수형 컴포넌트를 만든다.
+// PostEdit의 함수형 컴포넌트를 만든다
 const PostEdit = (props) => {
   const dispatch = useDispatch();
   const animatedComponents = makeAnimated();
@@ -198,7 +198,7 @@ const EditMedia = styled.div`
   }
 `;
 
-// styled-components를 사용한다.
+// styled-components를 사용한다
 const Title = styled.div`
   color: #4c4759;
   font-size: 32px;
@@ -216,5 +216,5 @@ const TitleMedia = styled.div`
   }
 `;
 
-// export를 통해 밖에서도 사용할 수 있도록 설정한다.
+// export를 통해 밖에서도 사용할 수 있도록 설정한다
 export default PostEdit;

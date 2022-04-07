@@ -1,7 +1,7 @@
 // PosterButton.js
 /* eslint-disable */
 
-// import를 한다.
+// import를 한다
 import React from "react";
 import styled from "styled-components";
 import { Grid, Button } from "../../../elements/Index";
@@ -9,7 +9,7 @@ import ApplyUserModal from "../../ApplyUserModal";
 import { useHistory } from "react-router";
 import { apis } from "../../../lib/axios";
 
-// PosterButton의 함수형 컴포넌트를 만든다..
+// PosterButton의 함수형 컴포넌트를 만든다
 const PosterButton = (props) => {
   const history = useHistory();
   const DeletePost = async () => {
@@ -131,5 +131,5 @@ const ContentMedia = styled.div`
   }
 `;
 
-// export를 통해 밖에서도 사용할 수 있도록 설정한다.
+// export를 통해 밖에서도 사용할 수 있도록 설정한다
 export default PosterButton;

@@ -1,17 +1,20 @@
+// ApplyStatusModal.js
 /* eslint-disable */
+
+// import를 한다
 import React from "react";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { Dialog } from "@material-ui/core";
 import styled from "styled-components";
-
 import { Grid, Text, Button } from "../elements/Index";
 import { apis } from "../lib/axios";
 import ImgType from "../shared/ImgType";
 import { applyCreators } from "../redux/modules/applyProject";
 import CloseIcon from "@mui/icons-material/Close";
 
-const ApplyStatusModal = props => {
+// ApplyStatusModal의 함수형 컴포넌트를 만든다
+const ApplyStatusModal = (props) => {
   const dispatch = useDispatch();
   const [applyedUsers, setApplyUsers] = React.useState();
   const [acceptButton, setAcceptButton] = React.useState();
@@ -22,7 +25,7 @@ const ApplyStatusModal = props => {
     setApplyStatusModal(false);
   };
 
-  const goToMypage = userId => {
+  const goToMypage = (userId) => {
     history.push(`/mypage/${userId}`);
   };
 
@@ -36,7 +39,7 @@ const ApplyStatusModal = props => {
     fetchData();
   }, [applyStatusModal, acceptButton]);
 
-  const acceptOffer = acceptUser => {
+  const acceptOffer = (acceptUser) => {
     const acceptInfo = {
       userId: acceptUser,
       accept: true,
@@ -52,7 +55,7 @@ const ApplyStatusModal = props => {
     fetchData();
   };
 
-  const cancelOffer = cancelUser => {
+  const cancelOffer = (cancelUser) => {
     const acceptInfo = {
       userId: cancelUser,
       accept: false,
@@ -208,7 +211,7 @@ const ApplyStatusModal = props => {
                                 common
                                 isId="accept"
                                 isValue={applyedUsers[idx].userId}
-                                _onClick={e => {
+                                _onClick={(e) => {
                                   acceptOffer(e.target.value);
                                 }}
                               >
@@ -225,7 +228,7 @@ const ApplyStatusModal = props => {
                                 common
                                 isId="cancel"
                                 isValue={applyedUsers[idx].userId}
-                                _onClick={e => {
+                                _onClick={(e) => {
                                   cancelOffer(e.target.value);
                                 }}
                               >
@@ -252,6 +255,7 @@ const ApplyStatusModal = props => {
   );
 };
 
+// styled-components
 const ModalMedia = styled.div`
   @media screen and (max-width: 600px) {
   } ;
@@ -273,6 +277,7 @@ const ModalWrap = styled.div`
     width: 300px;
   } ;
 `;
+
 const CommentBubble = styled.div`
   color: #17334a;
   position: relative;
@@ -323,4 +328,5 @@ const ImageWrap = styled.div`
   } ;
 `;
 
+// export를 통해 밖에서도 사용할 수 있도록 설정한다
 export default ApplyStatusModal;
